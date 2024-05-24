@@ -1,0 +1,22 @@
+{
+    "date": "2024-04-22",
+    "sample_bank": "sfx_env",
+    "envelopes": {
+        "envelope0": [
+            [2, 32700],
+            [1, 32700],
+            [32700, 29430],
+            "hang"
+        ]
+    },
+    "instruments": {
+        "inst0": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "00_timed_star"
+        }
+    },
+    "instrument_list": [
+        "inst0"
+    ]
+}
