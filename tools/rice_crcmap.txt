@@ -304,7 +304,6 @@
 0xd1f883f5, textures/mountain/ttm_textures.0C000.rgba16.png
 0xd1c5de12, levels/ttm/8.rgba16.png
 0xd1c5de12, textures/mountain/ttm_textures.0A800.rgba16.png
-0xd17f99c6, actors/exclamation_box_outline/exclamation_point.rgba16.png
 0xd13a97c9, textures/skybox_tiles/wdw.13.rgba16.png
 0xd135687e, levels/menu/main_menu_seg7.0D1A8.rgba16.png
 0xd10d7b85, textures/inside/inside_castle_textures.08800.rgba16.png
@@ -1363,7 +1362,6 @@
 0x1f4cdab4, actors/snufit/snufit_mask_strap.rgba16.png
 0x1f3b7abc, textures/mountain/ttm_textures.05000.rgba16.png
 0x1f31633f, textures/intro_raw/red_star_0.rgba16.png
-0x1f04daf4, actors/exclamation_box_outline/exclamation_box_outline.rgba16.png
 0x1effd4e0, textures/grass/wf_textures.07800.rgba16.png
 0x1eed9296, textures/skybox_tiles/water.36.rgba16.png
 0x1ecb06af, levels/lll/6.rgba16.png

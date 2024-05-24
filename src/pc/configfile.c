@@ -106,6 +106,7 @@ bool configHUD = true;
 bool configWallslide = true;
 unsigned int configDash = 2;
 bool configDive = true;
+bool configGlobalCapBlocks = false;
 
 static const struct ConfigOption options[] = {
 #ifndef TARGET_PORT_CONSOLE
@@ -156,6 +157,7 @@ static const struct ConfigOption options[] = {
     {.name = "wallslide",            .type = CONFIG_TYPE_BOOL, .boolValue = &configWallslide},
     {.name = "y_to_dash",            .type = CONFIG_TYPE_BOOL, .boolValue = &configDash},
     {.name = "dive",                 .type = CONFIG_TYPE_BOOL, .boolValue = &configDive},
+    {.name = "globalcapblocks",      .type = CONFIG_TYPE_BOOL, .boolValue = &configGlobalCapBlocks},
 };
 
 // Reads an entire line from a file (excluding the newline character) and returns an allocated string

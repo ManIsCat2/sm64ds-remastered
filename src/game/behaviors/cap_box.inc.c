@@ -1,4 +1,4 @@
-// exclamation_box.inc.c
+// cap_box.inc.c
 
 struct ObjectHitbox sExclamationBoxHitbox = {
     /* interactType:      */ INTERACT_BREAKABLE,
@@ -39,13 +39,13 @@ struct ExclamationBoxContents sExclamationBoxContents[] = {
     { EXCLAMATION_BOX_BP_END,              0,                0, MODEL_NONE,             NULL                     },
 };
 
-void bhv_rotating_exclamation_box_loop(void) {
+void bhv_rotating_cap_box_loop(void) {
     if (o->parentObj->oAction != 1) {
         obj_mark_for_deletion(o);
     }
 }
 
-void exclamation_box_act_0(void) {
+void cap_box_act_0(void) {
     if (o->oBhvParams2ndByte <= EXCLAMATION_BOX_BP_SPECIAL_CAP_END) {
         o->oAnimState = o->oBhvParams2ndByte;
         if ((save_file_get_flags() & sCapSaveFlags[o->oBhvParams2ndByte])
@@ -60,22 +60,22 @@ void exclamation_box_act_0(void) {
     }
 }
 
-void exclamation_box_act_1(void) {
+void cap_box_act_1(void) {
     cur_obj_become_intangible();
 
     if (o->oTimer == 0) {
         spawn_object(o, MODEL_EXCLAMATION_POINT, bhvRotatingExclamationMark);
-        cur_obj_set_model(MODEL_EXCLAMATION_BOX_OUTLINE);
+        cur_obj_set_model(MODEL_CAP_BOX_OUTLINE);
     }
 
     if ((save_file_get_flags() & sCapSaveFlags[o->oBhvParams2ndByte])
         || ((o->oBhvParams >> 24) & 0xFF)) {
         o->oAction = 2;
-        cur_obj_set_model(MODEL_EXCLAMATION_BOX);
+        cur_obj_set_model(MODEL_CAP_BOX);
     }
 }
 
-void exclamation_box_act_2(void) {
+void cap_box_act_2(void) {
     obj_set_hitbox(o, &sExclamationBoxHitbox);
 
     if (o->oTimer == 0) {
@@ -101,7 +101,7 @@ void exclamation_box_act_2(void) {
     load_object_collision_model();
 }
 
-void exclamation_box_act_3(void) {
+void cap_box_act_3(void) {
     UNUSED u8 filler[4];
 
     cur_obj_move_using_fvel_and_gravity();
@@ -123,7 +123,7 @@ void exclamation_box_act_3(void) {
     }
 }
 
-void exclamation_box_spawn_contents(struct ExclamationBoxContents *contentsList, u8 boxType) {
+void cap_box_spawn_contents(struct ExclamationBoxContents *contentsList, u8 boxType) {
     struct ExclamationBoxContents *contents = &contentsList[boxType];
     struct Object *contentsObj = NULL;
 
@@ -143,8 +143,8 @@ void exclamation_box_spawn_contents(struct ExclamationBoxContents *contentsList,
 #endif
 }
 
-void exclamation_box_act_4(void) {
-    exclamation_box_spawn_contents(sExclamationBoxContents, o->oBhvParams2ndByte);
+void cap_box_act_4(void) {
+    cap_box_spawn_contents(sExclamationBoxContents, o->oBhvParams2ndByte);
     spawn_mist_particles_variable(0, 0, 46.0f);
     spawn_triangle_break_particles(20, MODEL_CARTOON_STAR, 0.3f, o->oAnimState);
     create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
@@ -157,22 +157,22 @@ void exclamation_box_act_4(void) {
     }
 }
 
-void exclamation_box_act_5(void) {
+void cap_box_act_5(void) {
     if (o->oTimer > 300) {
         o->oAction = 2;
     }
 }
 
 void (*sExclamationBoxActions[])(void) = {
-    exclamation_box_act_0,
-    exclamation_box_act_1,
-    exclamation_box_act_2,
-    exclamation_box_act_3,
-    exclamation_box_act_4,
-    exclamation_box_act_5,
+    cap_box_act_0,
+    cap_box_act_1,
+    cap_box_act_2,
+    cap_box_act_3,
+    cap_box_act_4,
+    cap_box_act_5,
 };
 
-void bhv_exclamation_box_loop(void) {
+void bhv_cap_box_loop(void) {
     cur_obj_scale(2.0f);
     cur_obj_call_action_function(sExclamationBoxActions);
 }

@@ -245,7 +245,7 @@ s32 set_obj_anim_with_accel_and_sound(s16 a0, s16 a1, s32 a2) {
 #include "behaviors/fish.inc.c"
 #include "behaviors/express_elevator.inc.c"
 #include "behaviors/bub.inc.c"
-#include "behaviors/exclamation_box.inc.c"
+#include "behaviors/cap_box.inc.c"
 #include "behaviors/sound_spawner.inc.c"
 #include "behaviors/ddd_sub.inc.c"
 #include "behaviors/sushi.inc.c"

@@ -137,8 +137,6 @@
 0x84ae4f62, actors/dorrie/dorrie_eye.rgba16.png
 0x566ceea7, actors/dorrie/dorrie_skin.rgba16.png
 0x2cc7d027, actors/dorrie/dorrie_tongue.rgba16.png
-0x86c1470d, actors/exclamation_box_outline/exclamation_box_outline.rgba16.png
-0x380f4109, actors/exclamation_box_outline/exclamation_point.rgba16.png
 0x33181fa0, actors/explosion/explosion_0.rgba16.png
 0xf9b0adc0, actors/explosion/explosion_1.rgba16.png
 0x60ed7b14, actors/explosion/explosion_2.rgba16.png

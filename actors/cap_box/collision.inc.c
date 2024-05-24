@@ -1,4 +1,4 @@
-const Collision exclamation_box_collision[] = {
+const Collision cap_box_collision[] = {
 	COL_INIT(),
 	COL_VERTEX_INIT(8),
 	COL_VERTEX(-37, 3, -37),

@@ -110,6 +110,7 @@ static const u8 optsDsSettingsStr[][32] = {
     { TEXT_OPT_DS_SLIDE },
     { TEXT_OPT_DS_DASH },
     { TEXT_OPT_DS_DIVE },
+    { TEXT_OPT_DS_BLOCK },
     { TEXT_OPT_DS_SWALK },
     { TEXT_OPT_DS_SRUN },
 };
@@ -153,8 +154,8 @@ static const u8 *filterChoices[] = {
 
 static const u8 *movementChoices[] = {
     toggleStr[0],
-    optsDsSettingsStr[3],
     optsDsSettingsStr[4],
+    optsDsSettingsStr[5],
 };
 
 /* button action functions */
@@ -241,6 +242,7 @@ static struct Option optsDsSettings[] = {
     DEF_OPT_CHOICE( optsDsSettingsStr[1], &configDash, movementChoices ),
     DEF_OPT_TOGGLE( optsDsSettingsStr[0], &configWallslide ),
     DEF_OPT_TOGGLE( optsDsSettingsStr[2], &configDive ),
+    DEF_OPT_TOGGLE( optsDsSettingsStr[3], &configGlobalCapBlocks ),
 };
 
 /* submenu definitions */

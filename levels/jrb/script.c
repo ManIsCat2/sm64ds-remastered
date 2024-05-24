@@ -97,7 +97,7 @@ static const LevelScript script_func_local_3[] = {
 #if defined(VERSION_SH)
     OBJECT_WITH_ACTS(/*model*/ MODEL_STAR,             /*pos*/  1540,  2160,  2130, /*angle*/ 0,  0, 0, /*bhvParam*/ BPARAM1(STAR_INDEX_ACT_5), /*bhv*/ bhvStar,                 /*acts*/ ALL_ACTS),
 #else
-    OBJECT_WITH_ACTS(/*model*/ MODEL_EXCLAMATION_BOX,  /*pos*/  1540,  2160,  2130, /*angle*/ 0,  0, 0, /*bhvParam*/ BPARAM1(STAR_INDEX_ACT_5) | BPARAM2(EXCLAMATION_BOX_BP_STAR_ACT_1), /*bhv*/ bhvExclamationBox,      /*acts*/ ALL_ACTS),
+    OBJECT_WITH_ACTS(/*model*/ MODEL_CAP_BOX,  /*pos*/  1540,  2160,  2130, /*angle*/ 0,  0, 0, /*bhvParam*/ BPARAM1(STAR_INDEX_ACT_5) | BPARAM2(EXCLAMATION_BOX_BP_STAR_ACT_1), /*bhv*/ bhvExclamationBox,      /*acts*/ ALL_ACTS),
 #endif
     OBJECT_WITH_ACTS(/*model*/ MODEL_STAR,             /*pos*/  5000, -4800,  2500, /*angle*/ 0,  0, 0, /*bhvParam*/ BPARAM1(STAR_INDEX_ACT_6), /*bhv*/ bhvStar,                 /*acts*/ ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6),
     OBJECT_WITH_ACTS(/*model*/ MODEL_STAR_SWITCH,       /*pos*/   -50, -2966, -7100, /*angle*/ 0, 90, 0, /*behParam*/ BPARAM2(0x07), /*bhv*/ bhvStarSwitch,         /*acts*/ ALL_ACTS),

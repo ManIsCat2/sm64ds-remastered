@@ -1228,7 +1228,7 @@
     #define HIDDEN_OBJECT_BP_UNBREAKABLE_BOX_UNUSED_1 1
     #define HIDDEN_OBJECT_BP_UNBREAKABLE_BOX_UNUSED_2 2
 
-/* Exclamation Box */
+/* Cap Box */
     /* oAnimState */
     #define EXCLAMATION_BOX_ANIM_STATE_WING_CAP   0
     #define EXCLAMATION_BOX_ANIM_STATE_METAL_CAP  1

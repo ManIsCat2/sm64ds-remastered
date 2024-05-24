@@ -449,7 +449,7 @@
 #define /*0x0FC*/ oElevatorUnkFC  OBJECT_FIELD_F32(0x1D)
 #define /*0x100*/ oElevatorUnk100 OBJECT_FIELD_S32(0x1E)
 
-/* Exclamation Box */
+/* Cap Box */
 #define /*0x0F4*/ oExclamationBoxUnkF4 OBJECT_FIELD_F32(0x1B) // scale?
 #define /*0x0F8*/ oExclamationBoxUnkF8 OBJECT_FIELD_F32(0x1C) // scale?
 #define /*0x0FC*/ oExclamationBoxUnkFC OBJECT_FIELD_S32(0x1D) // angle?
