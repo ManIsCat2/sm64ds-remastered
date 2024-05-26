@@ -1,9 +1,9 @@
 #include <PR/ultratypes.h>
 
 #include "sm64.h"
-#include "mario_actions_object.h"
+#include "player_actions_object.h"
 #include "types.h"
-#include "mario_step.h"
+#include "player_step.h"
 #include "player.h"
 #include "audio/external.h"
 #include "interaction.h"

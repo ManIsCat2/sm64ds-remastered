@@ -10,7 +10,7 @@
 #include "ingame_menu.h"
 #include "screen_transition.h"
 #include "player.h"
-#include "mario_actions_cutscene.h"
+#include "player_actions_cutscene.h"
 #include "print.h"
 #include "hud.h"
 #include "audio/external.h"

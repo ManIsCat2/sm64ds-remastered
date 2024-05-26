@@ -2,11 +2,11 @@
 
 #include "sm64.h"
 #include "behavior_data.h"
-#include "mario_actions_automatic.h"
+#include "player_actions_automatic.h"
 #include "audio/external.h"
 #include "area.h"
 #include "player.h"
-#include "mario_step.h"
+#include "player_step.h"
 #include "engine/math_util.h"
 #include "memory.h"
 #include "engine/graph_node.h"

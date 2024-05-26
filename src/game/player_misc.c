@@ -15,8 +15,8 @@
 #include "interaction.h"
 #include "level_update.h"
 #include "player.h"
-#include "mario_actions_cutscene.h"
-#include "mario_misc.h"
+#include "player_actions_cutscene.h"
+#include "player_misc.h"
 #include "memory.h"
 #include "object_helpers.h"
 #include "object_list_processor.h"
@@ -581,7 +581,7 @@ Gfx *geo_switch_mario_hand_grab_pos(s32 callContext, struct GraphNode *b, Mat4 *
  * Geo node that creates a clone of Mario's geo node and updates it to becomes
  * a mirror image of the player.
  */
-Gfx *geo_render_mirror_mario(s32 callContext, struct GraphNode *node, UNUSED Mat4 *c) {
+Gfx *geo_render_mirror_player(s32 callContext, struct GraphNode *node, UNUSED Mat4 *c) {
     f32 mirroredX;
     struct Object *mario = gMarioStates[0].marioObj;
 

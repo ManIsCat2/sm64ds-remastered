@@ -10,7 +10,7 @@
 #include "interaction.h"
 #include "level_update.h"
 #include "player.h"
-#include "mario_step.h"
+#include "player_step.h"
 #include "rumble_init.h"
 #include "save_file.h"
 #ifdef CHEATS_ACTIONS

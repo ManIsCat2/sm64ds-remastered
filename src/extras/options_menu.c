@@ -10,7 +10,7 @@
 #include "game/print.h"
 #include "game/segment2.h"
 #include "game/save_file.h"
-#include "game/mario_misc.h"
+#include "game/player_misc.h"
 #include "game/game_init.h"
 #include "game/ingame_menu.h"
 

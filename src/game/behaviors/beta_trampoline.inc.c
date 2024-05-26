@@ -79,10 +79,10 @@ void bhv_beta_trampoline_top_loop(void) {
         o->oPosY = o->oHomeY;
     }
 
-    // This function is from mario_step.c, and is empty.
+    // This function is from player_step.c, and is empty.
     // It was probably intended to be used to "let the game know"
     // that the trampoline is currently in use. This potential
-    // trampoline infrastructure is found in mario_step.c. See
+    // trampoline infrastructure is found in player_step.c. See
     // that file for more details.
-    stub_mario_step_2();
+    stub_player_step_2();
 }

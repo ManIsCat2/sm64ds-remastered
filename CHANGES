@@ -93,7 +93,7 @@ Refresh 13
 Refresh 12
 
 1.) Debug box improvements (#1066)
-2.) Improve 'geo_render_mirror_mario' (#1064)
+2.) Improve 'geo_render_mirror_player' (#1064)
 3.) Cleanup and small labeling (#1063)
 4.) Anim renames and other related renames (#1062)
 5.) remove do while 0 and make one line comments consistent (#1061)
@@ -265,7 +265,7 @@ Refresh #7
 
 Refresh #6
 1.) Make tools work on MinGW (#804) 
-2.) Document mario_misc (#628) 
+2.) Document player_misc (#628) 
 3.) add patch_libmalloc.py script to work around compiler crashes (#811) 
 4.) Label the coffins file. (#829) 
 5.) Convert enhancements into patches (#827) 

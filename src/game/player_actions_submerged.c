@@ -10,7 +10,7 @@
 #include "engine/surface_collision.h"
 #include "interaction.h"
 #include "player.h"
-#include "mario_step.h"
+#include "player_step.h"
 #include "camera.h"
 #include "audio/external.h"
 #include "behavior_data.h"

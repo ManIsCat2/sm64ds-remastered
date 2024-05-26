@@ -9,7 +9,7 @@
 
 #include "behavior_data.h"
 #include "game/level_update.h"
-#include "game/mario_misc.h"
+#include "game/player_misc.h"
 
 /**
  * An array consisting of all the hardcoded rectangle shadows in the game.

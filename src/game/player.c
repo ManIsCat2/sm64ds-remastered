@@ -15,15 +15,15 @@
 #include "level_update.h"
 #include "main.h"
 #include "player.h"
-#include "mario_actions_airborne.h"
-#include "mario_actions_automatic.h"
-#include "mario_actions_cutscene.h"
-#include "mario_actions_moving.h"
-#include "mario_actions_object.h"
-#include "mario_actions_stationary.h"
-#include "mario_actions_submerged.h"
-#include "mario_misc.h"
-#include "mario_step.h"
+#include "player_actions_airborne.h"
+#include "player_actions_automatic.h"
+#include "player_actions_cutscene.h"
+#include "player_actions_moving.h"
+#include "player_actions_object.h"
+#include "player_actions_stationary.h"
+#include "player_actions_submerged.h"
+#include "player_misc.h"
+#include "player_step.h"
 #include "memory.h"
 #include "object_fields.h"
 #include "object_helpers.h"
@@ -1534,7 +1534,7 @@ print_text_fmt_int(210, 120, "Character - %d", curChar);
 
     // This function is located near other unused trampoline functions,
     // perhaps logically grouped here with the timers.
-    stub_mario_step_1(m);
+    stub_player_step_1(m);
 
     if (m->wallKickTimer > 0) {
         m->wallKickTimer--;
