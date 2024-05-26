@@ -16,7 +16,7 @@ void bhv_small_piranha_flame_loop(void) {
         cur_obj_update_floor_and_walls();
 
         if (approach_f32_ptr(&o->oSmallPiranhaFlameStartSpeed, o->oSmallPiranhaFlameEndSpeed, 0.6f)) {
-            cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x200);
+            cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 0x200);
         }
 
         obj_compute_vel_from_move_pitch(o->oSmallPiranhaFlameStartSpeed);

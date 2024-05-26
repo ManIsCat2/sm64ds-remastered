@@ -1027,7 +1027,7 @@ s32 obj_is_in_view(struct GraphNodeObject *node, Mat4 matrix) {
 
     //! This makes the HOLP not update when the camera is far away, and it
     //  makes PU travel safe when the camera is locked on the main map.
-    //  If Mario were rendered with a depth over 65536 it would cause overflow
+    //  If Player were rendered with a depth over 65536 it would cause overflow
     //  when converting the transformation matrix to a fixed point matrix.
     if (matrix[3][2] < -20000.0f - cullingRadius) {
         return FALSE;

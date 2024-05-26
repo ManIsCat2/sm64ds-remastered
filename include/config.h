@@ -24,9 +24,9 @@
 #define BUGFIX_PIRANHA_PLANT_SLEEP_DAMAGE (0 || VERSION_US || VERSION_SH || QOL_FIXES)
 /// Fixes bug where it shows a star when you grab a key in bowser battle stages
 #define BUGFIX_STAR_BOWSER_KEY (0 || VERSION_US || VERSION_EU || VERSION_SH || QOL_FIXES)
-/// Fixes bug that enables Mario in time stop even if is not ready to speak
+/// Fixes bug that enables the player in time stop even if is not ready to speak
 #define BUGFIX_DIALOG_TIME_STOP (0 || VERSION_US || VERSION_EU || VERSION_SH || QOL_FIXES)
-/// Fixes bug that causes Mario to still collide with Bowser in BitS after his defeat
+/// Fixes bug that causes the player to still collide with Bowser in BitS after his defeat
 #define BUGFIX_BOWSER_COLLIDE_BITS_DEAD (0 || VERSION_US || VERSION_EU || VERSION_SH || QOL_FIXES)
 /// Fixes bug where Bowser wouldn't reset his speed when fallen off (and adds missing checks)
 #define BUGFIX_BOWSER_FALLEN_OFF_STAGE (0 || VERSION_US || VERSION_EU || VERSION_SH || QOL_FIXES)

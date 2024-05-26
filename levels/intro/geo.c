@@ -51,7 +51,7 @@ const GeoLayout intro_geo_0002D0[] = {
             GEO_OPEN_NODE(),
                 GEO_CAMERA(0, 0, 0, 3200, 0, 0, 0, 0x00000000),
                 GEO_OPEN_NODE(),
-                    GEO_ASM(0, geo_intro_super_mario_64_logo),
+                    GEO_ASM(0, geo_intro_super_player_64_logo),
                 GEO_CLOSE_NODE(),
             GEO_CLOSE_NODE(),
         GEO_CLOSE_NODE(),

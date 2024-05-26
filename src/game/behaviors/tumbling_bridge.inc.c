@@ -23,7 +23,7 @@ struct TumblingBridgeData sTumblingBridgeData[] = {
 void bhv_tumbling_bridge_platform_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (gMarioObject->platform == o) {
+            if (gPlayerObject->platform == o) {
                 o->oAction++;
                 o->oTumblingBridgeUnkF4 = random_sign() * 0x80;
             }

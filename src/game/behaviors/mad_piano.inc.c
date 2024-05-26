@@ -24,7 +24,7 @@ static void mad_piano_act_wait(void) {
         o->oTimer = 0;
     }
 
-    cur_obj_push_mario_away_from_cylinder(280.0f, 150.0f);
+    cur_obj_push_player_away_from_cylinder(280.0f, 150.0f);
 }
 
 static void mad_piano_act_attack(void) {
@@ -51,7 +51,7 @@ static void mad_piano_act_attack(void) {
             o->oPosZ = o->oHomeZ + dz * distToHome;
         }
 
-        cur_obj_rotate_yaw_toward(o->oAngleToMario, 400);
+        cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 400);
         o->oForwardVel = 5.0f;
     }
 

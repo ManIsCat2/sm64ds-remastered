@@ -147,7 +147,7 @@ u8 sSoundRequestCount = 0;
 // channels of a sequence (I think?), and different parts of a level can have
 // different dynamics. Each table below specifies first the sequence to apply
 // the dynamics to, then a bunch of conditions for when each dynamic applies
-// (e.g. "only if Mario's X position is between 100 and 300"), and finally a
+// (e.g. "only if Player's X position is between 100 and 300"), and finally a
 // fallback dynamic. Due to the encoding of the tables, the conditions must
 // come in the same order as the macros.
 // TODO: dynamic isn't a great term for this, it means other things in music...
@@ -1879,7 +1879,7 @@ void process_level_music_dynamics(void) {
                     break;
                 }
                 case MARIO_IS_IN_ROOM: {
-                    if (gMarioCurrentRoom != conditionValues[j]) {
+                    if (gPlayerCurrentRoom != conditionValues[j]) {
                         j = condIndex + 1;
                     }
                     break;

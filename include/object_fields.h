@@ -108,7 +108,7 @@
 #define /*0x154*/ oTimer                      OBJECT_FIELD_S32(0x33)
 #define /*0x158*/ oBounciness                 OBJECT_FIELD_F32(0x34)
 #define /*0x15C*/ oDistanceToPlayer            OBJECT_FIELD_F32(0x35)
-#define /*0x160*/ oAngleToMario               OBJECT_FIELD_S32(0x36)
+#define /*0x160*/ oAngleToPlayer               OBJECT_FIELD_S32(0x36)
 #define /*0x164*/ oHomeX                      OBJECT_FIELD_F32(0x37)
 #define /*0x168*/ oHomeY                      OBJECT_FIELD_F32(0x38)
 #define /*0x16C*/ oHomeZ                      OBJECT_FIELD_F32(0x39)
@@ -146,23 +146,23 @@
 #define /*0x10C*/ oMacroUnk10C OBJECT_FIELD_F32(0x21)
 #define /*0x110*/ oMacroUnk110 OBJECT_FIELD_F32(0x22)
 
-/* Mario */
-#define /*0x0F4*/ oMarioParticleFlags    OBJECT_FIELD_S32(0x1B)
-#define /*0x108*/ oMarioPoleUnk108       OBJECT_FIELD_S32(0x20)
-#define /*0x108*/ oMarioReadingSignDYaw  OBJECT_FIELD_S32(0x20)
-#define /*0x10C*/ oMarioPoleYawVel       OBJECT_FIELD_S32(0x21)
-#define /*0x10C*/ oMarioCannonObjectYaw  OBJECT_FIELD_S32(0x21)
-#define /*0x10C*/ oMarioTornadoYawVel    OBJECT_FIELD_S32(0x21)
-#define /*0x10C*/ oMarioReadingSignDPosX OBJECT_FIELD_F32(0x21)
-#define /*0x110*/ oMarioPolePos          OBJECT_FIELD_F32(0x22)
-#define /*0x110*/ oMarioCannonInputYaw   OBJECT_FIELD_S32(0x22)
-#define /*0x110*/ oMarioTornadoPosY      OBJECT_FIELD_F32(0x22)
-#define /*0x110*/ oMarioReadingSignDPosZ OBJECT_FIELD_F32(0x22)
-#define /*0x110*/ oMarioWhirlpoolPosY    OBJECT_FIELD_F32(0x22)
-#define /*0x110*/ oMarioBurnTimer        OBJECT_FIELD_S32(0x22)
-#define /*0x110*/ oMarioLongJumpIsSlow   OBJECT_FIELD_S32(0x22)
-#define /*0x110*/ oMarioSteepJumpYaw     OBJECT_FIELD_S32(0x22)
-#define /*0x110*/ oMarioWalkingPitch     OBJECT_FIELD_S32(0x22)
+/* Player */
+#define /*0x0F4*/ oPlayerParticleFlags    OBJECT_FIELD_S32(0x1B)
+#define /*0x108*/ oPlayerPoleUnk108       OBJECT_FIELD_S32(0x20)
+#define /*0x108*/ oPlayerReadingSignDYaw  OBJECT_FIELD_S32(0x20)
+#define /*0x10C*/ oPlayerPoleYawVel       OBJECT_FIELD_S32(0x21)
+#define /*0x10C*/ oPlayerCannonObjectYaw  OBJECT_FIELD_S32(0x21)
+#define /*0x10C*/ oPlayerTornadoYawVel    OBJECT_FIELD_S32(0x21)
+#define /*0x10C*/ oPlayerReadingSignDPosX OBJECT_FIELD_F32(0x21)
+#define /*0x110*/ oPlayerPolePos          OBJECT_FIELD_F32(0x22)
+#define /*0x110*/ oPlayerCannonInputYaw   OBJECT_FIELD_S32(0x22)
+#define /*0x110*/ oPlayerTornadoPosY      OBJECT_FIELD_F32(0x22)
+#define /*0x110*/ oPlayerReadingSignDPosZ OBJECT_FIELD_F32(0x22)
+#define /*0x110*/ oPlayerWhirlpoolPosY    OBJECT_FIELD_F32(0x22)
+#define /*0x110*/ oPlayerBurnTimer        OBJECT_FIELD_S32(0x22)
+#define /*0x110*/ oPlayerLongJumpIsSlow   OBJECT_FIELD_S32(0x22)
+#define /*0x110*/ oPlayerSteepJumpYaw     OBJECT_FIELD_S32(0x22)
+#define /*0x110*/ oPlayerWalkingPitch     OBJECT_FIELD_S32(0x22)
 
 /* Hidden 1-Up */
 #define /*0x0F4*/ oHidden1UpNumTouchedTriggers OBJECT_FIELD_S32(0x1B)
@@ -215,7 +215,7 @@
 
 /* Bob-omb Buddy */
 #define /*0x0F4*/ oBobombBuddyBlinkTimer       OBJECT_FIELD_S32(0x1B)
-#define /*0x0F8*/ oBobombBuddyHasTalkedToMario OBJECT_FIELD_S32(0x1C)
+#define /*0x0F8*/ oBobombBuddyHasTalkedToPlayer OBJECT_FIELD_S32(0x1C)
 #define /*0x0FC*/ oBobombBuddyRole             OBJECT_FIELD_S32(0x1D)
 #define /*0x100*/ oBobombBuddyCannonStatus     OBJECT_FIELD_S32(0x1E)
 #define /*0x108*/ oBobombBuddyPosXCopy         OBJECT_FIELD_F32(0x20)
@@ -331,7 +331,7 @@
 #define /*0x0FC*/ oBullyPrevY                     OBJECT_FIELD_F32(0x1D)
 #define /*0x100*/ oBullyPrevZ                     OBJECT_FIELD_F32(0x1E)
 #define /*0x104*/ oBullyKBTimerAndMinionKOCounter OBJECT_FIELD_S32(0x1F)
-#define /*0x108*/ oBullyMarioCollisionAngle       OBJECT_FIELD_S32(0x20)
+#define /*0x108*/ oBullyPlayerCollisionAngle       OBJECT_FIELD_S32(0x20)
 
 /* Butterfly */
 #define /*0x0F4*/ oButterflyYPhase OBJECT_FIELD_S32(0x1B)
@@ -435,9 +435,9 @@
 #define /*0x0F4*/ oDorrieDistToHome         OBJECT_FIELD_F32(0x1B)
 #define /*0x0F8*/ oDorrieOffsetY            OBJECT_FIELD_F32(0x1C)
 #define /*0x0FC*/ oDorrieVelY               OBJECT_FIELD_F32(0x1D)
-#define /*0x100*/ oDorrieForwardDistToMario OBJECT_FIELD_F32(0x1E)
+#define /*0x100*/ oDorrieForwardDistToPlayer OBJECT_FIELD_F32(0x1E)
 #define /*0x104*/ oDorrieYawVel             OBJECT_FIELD_S32(0x1F)
-#define /*0x10C*/ oDorrieLiftingMario       OBJECT_FIELD_S32(0x21)
+#define /*0x10C*/ oDorrieLiftingPlayer       OBJECT_FIELD_S32(0x21)
 #define /*0x1AC*/ oDorrieGroundPounded      OBJECT_FIELD_S16(0x49, 0)
 #define /*0x1AE*/ oDorrieAngleToHome        OBJECT_FIELD_S16(0x49, 1)
 #define /*0x1B0*/ oDorrieNeckAngle          OBJECT_FIELD_S16(0x4A, 0)
@@ -570,7 +570,7 @@
 
 /* Hoot */
 #define /*0x0F4*/ oHootAvailability     OBJECT_FIELD_S32(0x1B)
-#define /*0x110*/ oHootMarioReleaseTime OBJECT_FIELD_S32(0x22)
+#define /*0x110*/ oHootPlayerReleaseTime OBJECT_FIELD_S32(0x22)
 
 /* Horizontal Movement */
 #define /*0x0F4*/ oHorizontalMovementUnkF4  OBJECT_FIELD_S32(0x1B)
@@ -614,8 +614,8 @@
 #define /*0x0FC*/ oKoopaTargetYaw                   OBJECT_FIELD_S32(0x1D)
 #define /*0x100*/ oKoopaUnshelledTimeUntilTurn      OBJECT_FIELD_S32(0x1E)
 #define /*0x104*/ oKoopaTurningAwayFromWall         OBJECT_FIELD_S32(0x1F)
-#define /*0x108*/ oKoopaDistanceToMario             OBJECT_FIELD_F32(0x20)
-#define /*0x10C*/ oKoopaAngleToMario                OBJECT_FIELD_S32(0x21)
+#define /*0x108*/ oKoopaDistanceToPlayer             OBJECT_FIELD_F32(0x20)
+#define /*0x10C*/ oKoopaAngleToPlayer                OBJECT_FIELD_S32(0x21)
 #define /*0x110*/ oKoopaBlinkTimer                  OBJECT_FIELD_S32(0x22)
 #define /*0x1AC*/ oKoopaCountdown                   OBJECT_FIELD_S16(0x49, 0)
 #define /*0x1AE*/ oKoopaTheQuickRaceIndex           OBJECT_FIELD_S16(0x49, 1)
@@ -674,7 +674,7 @@
 /* Merry-Go-Round */
 #define /*0x088*/ oMerryGoRoundStopped         OBJECT_FIELD_S32(0x00)
 #define /*0x0F8*/ oMerryGoRoundMusicShouldPlay OBJECT_FIELD_S32(0x1C)
-#define /*0x0FC*/ oMerryGoRoundMarioIsOutside  OBJECT_FIELD_S32(0x1D)
+#define /*0x0FC*/ oMerryGoRoundPlayerIsOutside  OBJECT_FIELD_S32(0x1D)
 
 /* Merry-Go-Round Boo Manager */
 #define /*0x088*/ oMerryGoRoundBooManagerNumBoosKilled  OBJECT_FIELD_S32(0x00)
@@ -735,9 +735,9 @@
 // 0x1D-0x21 reserved for pathing
 #define /*0x110*/ oRacingPenguinWeightedNewTargetSpeed OBJECT_FIELD_F32(0x22)
 #define /*0x1AC*/ oRacingPenguinFinalTextbox           OBJECT_FIELD_S16(0x49, 0)
-#define /*0x1AE*/ oRacingPenguinMarioWon               OBJECT_FIELD_S16(0x49, 1)
+#define /*0x1AE*/ oRacingPenguinPlayerWon               OBJECT_FIELD_S16(0x49, 1)
 #define /*0x1B0*/ oRacingPenguinReachedBottom          OBJECT_FIELD_S16(0x4A, 0)
-#define /*0x1B2*/ oRacingPenguinMarioCheated           OBJECT_FIELD_S16(0x4A, 1)
+#define /*0x1B2*/ oRacingPenguinPlayerCheated           OBJECT_FIELD_S16(0x4A, 1)
 
 /* Small Penguin */
 #define /*0x088*/ oSmallPenguinUnk88  OBJECT_FIELD_S32(0x00)
@@ -1020,7 +1020,7 @@
 #define /*0x0F8*/ oTTCChangeDirTimer OBJECT_FIELD_S32(0x1C)
 
 /* Beta Trampoline */
-#define /*0x110*/ oBetaTrampolineMarioOnTrampoline OBJECT_FIELD_S32(0x1B)
+#define /*0x110*/ oBetaTrampolinePlayerOnTrampoline OBJECT_FIELD_S32(0x1B)
 #define /*0x114*/ oBetaTrampolineAdditiveYVel      OBJECT_FIELD_F32(0x1C)
 
 /* Treasure Chest */
@@ -1101,7 +1101,7 @@
 #define /*0x100*/ oWaterRingNormalX          OBJECT_FIELD_F32(0x1E)
 #define /*0x104*/ oWaterRingNormalY          OBJECT_FIELD_F32(0x1F)
 #define /*0x108*/ oWaterRingNormalZ          OBJECT_FIELD_F32(0x20)
-#define /*0x10C*/ oWaterRingMarioDistInFront OBJECT_FIELD_F32(0x21)
+#define /*0x10C*/ oWaterRingPlayerDistInFront OBJECT_FIELD_F32(0x21)
 #define /*0x110*/ oWaterRingIndex            OBJECT_FIELD_S32(0x22)
 #define /*0x1AC*/ oWaterRingAvgScale         OBJECT_FIELD_F32(0x49)
 
@@ -1145,10 +1145,10 @@
 #define /*0x0F4*/ oLLLWoodPieceOscillationTimer OBJECT_FIELD_S32(0x1B)
 
 /* Wooden Post */
-#define /*0x0F4*/ oWoodenPostTotalMarioAngle  OBJECT_FIELD_S32(0x1B)
-#define /*0x0F8*/ oWoodenPostPrevAngleToMario OBJECT_FIELD_S32(0x1C)
+#define /*0x0F4*/ oWoodenPostTotalPlayerAngle  OBJECT_FIELD_S32(0x1B)
+#define /*0x0F8*/ oWoodenPostPrevAngleToPlayer OBJECT_FIELD_S32(0x1C)
 #define /*0x0FC*/ oWoodenPostSpeedY           OBJECT_FIELD_F32(0x1D)
-#define /*0x100*/ oWoodenPostMarioPounding    OBJECT_FIELD_S32(0x1E)
+#define /*0x100*/ oWoodenPostPlayerPounding    OBJECT_FIELD_S32(0x1E)
 #define /*0x104*/ oWoodenPostOffsetY          OBJECT_FIELD_F32(0x1F)
 
 #endif // OBJECT_FIELDS_H

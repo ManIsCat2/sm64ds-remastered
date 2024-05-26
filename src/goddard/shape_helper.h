@@ -6,7 +6,7 @@
 #include "gd_types.h"
 
 // data
-extern struct ObjGroup *gMarioFaceGrp;
+extern struct ObjGroup *gPlayerFaceGrp;
 extern struct ObjShape *gSpotShape;
 extern struct ObjShape *gShapeRedSpark;
 extern struct ObjShape *gShapeSilverSpark;

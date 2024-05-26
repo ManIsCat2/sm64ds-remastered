@@ -583,9 +583,9 @@ struct GraphNode *geo_remove_child(struct GraphNode *graphNode) {
 
 /**
  * Reorders the given node so it's the first child of its parent.
- * This is called on the Mario object when he is spawned. That's why Mario's
+ * This is called on the Player object when he is spawned. That's why Player's
  * object is always drawn before any other objects. (Note that the geo order
- * is independent from processing group order, where Mario is not first.)
+ * is independent from processing group order, where Player is not first.)
  */
 struct GraphNode *geo_make_first_child(struct GraphNode *newFirstChild) {
     struct GraphNode *lastSibling;

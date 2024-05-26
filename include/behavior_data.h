@@ -369,7 +369,7 @@ extern const BehaviorScript bhvStrongWindParticle[];
 extern const BehaviorScript bhvSLSnowmanWind[];
 extern const BehaviorScript bhvSLWalkingPenguin[];
 extern const BehaviorScript bhvYellowBall[];
-extern const BehaviorScript bhvMario[];
+extern const BehaviorScript bhvPlayer[];
 extern const BehaviorScript bhvToadMessage[];
 extern const BehaviorScript bhvUnlockDoorStar[];
 extern const BehaviorScript bhvInstantActiveWarp[];

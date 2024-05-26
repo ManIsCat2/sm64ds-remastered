@@ -85,8 +85,8 @@ static s32 linearly_interpolate_negative(u8 initialSolidity, s16 curr, s16 start
  * Change a player shadow's solidity based on the current animation frame.
  */
 s32 set_player_shadow_scale_solidity(Vec3f scaleVec, f32 distToShadow, s16 shadowScale, u8 solidity) {
-    // Set the shadow solidity manually for certain Mario animations.
-    struct AnimInfo *animInfo = &gMarioObject->header.gfx.animInfo;
+    // Set the shadow solidity manually for certain Player animations.
+    struct AnimInfo *animInfo = &gPlayerObject->header.gfx.animInfo;
     s16 animFrame = animInfo->animFrame;
 
     shadowScale = scale_shadow_with_distance(shadowScale, distToShadow);
@@ -111,7 +111,7 @@ s32 set_player_shadow_scale_solidity(Vec3f scaleVec, f32 distToShadow, s16 shado
  * Change an object shadow's solidity and scale
  */
 s32 set_object_shadow_scale_solidity(Vec3f scaleVec, f32 distToShadow, s16 shadowScale, s8 shadowType, u8 solidity) {
-    // No shadow if the non-Mario object is too high.
+    // No shadow if the non-Player object is too high.
     if (distToShadow > 1024) {
         return 0;
     }
@@ -207,11 +207,11 @@ f32 get_shadow_floor(f32 x, f32 y, f32 z, struct Surface** floor, struct Object*
 
     // Attempt to use existing floors before finding a new one.
     if (notHeldObj && isPlayer && m->floor) {
-        // The object is Mario and has a referenced floor.
+        // The object is Player and has a referenced floor.
         *floor      = m->floor;
         floorHeight = m->floorHeight;
-    } else if (notHeldObj && (gCurGraphNodeObject != &gMirrorMario) && obj->oFloor) {
-        // The object is not Mario but has a referenced floor.
+    } else if (notHeldObj && (gCurGraphNodeObject != &gMirrorPlayer) && obj->oFloor) {
+        // The object is not Player but has a referenced floor.
         //! Some objects only get their oFloor from bhv_init_room, which skips dynamic floors.
         *floor      = obj->oFloor;
         floorHeight = obj->oFloorHeight;
@@ -254,7 +254,7 @@ Gfx *create_shadow_below_xyz(Vec3f pos, Vec3f floorNormal, Vec3f scaleVec, s16 s
     f32 x = pos[0];
     f32 y = pos[1];
     f32 z = pos[2];
-    s8 isPlayer = (obj == gMarioObject);
+    s8 isPlayer = (obj == gPlayerObject);
 
     // The y-position of the floor (or water or lava) underneath the object.
     f32 floorHeight = get_shadow_floor(x, y, z, &floor, obj, isPlayer, &shifted);

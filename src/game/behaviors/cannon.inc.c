@@ -105,7 +105,7 @@ void opened_cannon_act_1(void) {
     cur_obj_disable_rendering();
 
     o->oCannonUnk10C = FALSE;
-    gMarioShotFromCannon = TRUE;
+    gPlayerShotFromCannon = TRUE;
 }
 
 void opened_cannon_act_2(void) {

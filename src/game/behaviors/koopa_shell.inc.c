@@ -91,9 +91,9 @@ void bhv_koopa_shell_loop(void) {
             break;
 
         case 1:
-            obj_copy_pos(o, gMarioObject);
+            obj_copy_pos(o, gPlayerObject);
             // ex-alo change
-            // copy Mario's floor and floorHeight as well
+            // copy Player's floor and floorHeight as well
             o->oFloor       = gPlayerState->floor;
             o->oFloorHeight = gPlayerState->floorHeight;
 
@@ -109,7 +109,7 @@ void bhv_koopa_shell_loop(void) {
                 koopa_shell_spawn_sparkles(10.0f);
             }
 
-            o->oFaceAngleYaw = gMarioObject->oMoveAngleYaw;
+            o->oFaceAngleYaw = gPlayerObject->oMoveAngleYaw;
 
             if (o->oInteractStatus & INT_STATUS_STOP_RIDING) {
                 SWAP_PARTICLE_CALL(obj_mark_for_deletion(o), spawn_mist_particles());

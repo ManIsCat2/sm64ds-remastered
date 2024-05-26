@@ -44,14 +44,14 @@
 
 // Damaging interactions
 #define INT_SUBTYPE_DELAY_INVINCIBILITY 0x00000002
-#define INT_SUBTYPE_BIG_KNOCKBACK 0x00000008 /* Used by Bowser, sets Mario's forward velocity to 40 on hit */
+#define INT_SUBTYPE_BIG_KNOCKBACK 0x00000008 /* Used by Bowser, sets Player's forward velocity to 40 on hit */
 
 // INTERACT_GRABBABLE
 #define INT_SUBTYPE_GRABS_MARIO 0x00000004 /* Also makes the object heavy */
 #define INT_SUBTYPE_HOLDABLE_NPC 0x00000010 /* Allows the object to be gently dropped, and sets vertical speed to 0 when dropped with no forwards velocity */
-#define INT_SUBTYPE_DROP_IMMEDIATELY 0x00000040 /* This gets set by grabbable NPCs that talk to Mario to make him drop them after the dialog is finished */
+#define INT_SUBTYPE_DROP_IMMEDIATELY 0x00000040 /* This gets set by grabbable NPCs that talk to Player to make him drop them after the dialog is finished */
 #define INT_SUBTYPE_KICKABLE 0x00000100
-#define INT_SUBTYPE_NOT_GRABBABLE 0x00000200 /* Used by Heavy-Ho to allow it to throw Mario, without Mario being able to pick it up */
+#define INT_SUBTYPE_NOT_GRABBABLE 0x00000200 /* Used by Heavy-Ho to allow it to throw Player, without Player being able to pick it up */
 
 // INTERACT_DOOR
 #define INT_SUBTYPE_STAR_DOOR 0x00000020
@@ -80,7 +80,7 @@
 
 #define INT_STATUS_ATTACK_MASK 0x000000FF
 
-// Mario Interaction Status
+// Player Interaction Status
 #define INT_STATUS_MARIO_STUNNED         (1 <<  0) /* 0x00000001 */
 #define INT_STATUS_MARIO_KNOCKBACK_DMG   (1 <<  1) /* 0x00000002 */
 #define INT_STATUS_MARIO_UNK2            (1 <<  2) /* 0x00000004 */

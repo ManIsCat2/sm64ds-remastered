@@ -157,11 +157,11 @@ void bhv_blue_coin_sliding_jumping_init(void) {
     obj_set_hitbox(o, &sMovingBlueCoinHitbox);
 }
 
-void blue_coin_sliding_away_from_mario(void) {
+void blue_coin_sliding_away_from_player(void) {
     s16 collisionFlags;
 
     o->oForwardVel = 15.0;
-    o->oMoveAngleYaw = o->oAngleToMario + 0x8000;
+    o->oMoveAngleYaw = o->oAngleToPlayer + 0x8000;
 
     if (coin_step(&collisionFlags)) {
         o->oVelY += 18.0f;
@@ -203,7 +203,7 @@ void bhv_blue_coin_sliding_loop(void) {
             break;
 
         case 1:
-            blue_coin_sliding_away_from_mario();
+            blue_coin_sliding_away_from_player();
             break;
 
         case 2:
@@ -260,7 +260,7 @@ void bhv_blue_coin_jumping_loop(void) {
             break;
 
         case 1:
-            blue_coin_sliding_away_from_mario();
+            blue_coin_sliding_away_from_player();
             break;
 
         case 2:

@@ -4,26 +4,26 @@
  * Main loop of the hour and minute hands of the Tick Tock Clock painting.
  */
 void bhv_rotating_clock_arm_loop(void) {
-    struct Surface *marioSurface;
+    struct Surface *playerSurface;
     u16 rollAngle = o->oFaceAngleRoll;
 
     o->oFloorHeight =
-        find_floor(gMarioObject->oPosX, gMarioObject->oPosY, gMarioObject->oPosZ, &marioSurface);
+        find_floor(gPlayerObject->oPosX, gPlayerObject->oPosY, gPlayerObject->oPosZ, &playerSurface);
 
-    // Seems to make sure Mario is on a default surface & 4 frames pass before
+    // Seems to make sure Player is on a default surface & 4 frames pass before
     //   allowing him to change the Tick Tock Clock speed setting.
     // Probably a safety check for when you leave the level through the painting
     //   to make sure the setting isn't accidentally locked in as you fly out.
     if (o->oAction == 0) {
-        if (marioSurface->type == SURFACE_DEFAULT && o->oTimer >= 4) {
+        if (playerSurface->type == SURFACE_DEFAULT && o->oTimer >= 4) {
             o->oAction++;
         }
     } else if (o->oAction == 1) {
-        // If Mario is touching the Tick Tock Clock painting...
-        if (marioSurface != NULL
-            && (marioSurface->type == SURFACE_TTC_PAINTING_1
-                || marioSurface->type == SURFACE_TTC_PAINTING_2
-                || marioSurface->type == SURFACE_TTC_PAINTING_3)) {
+        // If Player is touching the Tick Tock Clock painting...
+        if (playerSurface != NULL
+            && (playerSurface->type == SURFACE_TTC_PAINTING_1
+                || playerSurface->type == SURFACE_TTC_PAINTING_2
+                || playerSurface->type == SURFACE_TTC_PAINTING_3)) {
             // And this is the minute hand...
             if (cur_obj_has_behavior(bhvClockMinuteHand)) {
                 // Set Tick Tick Clock's speed based on the angle of the hand.
@@ -48,7 +48,7 @@ void bhv_rotating_clock_arm_loop(void) {
         }
     }
 
-    // Only rotate the hands until Mario enters the painting.
+    // Only rotate the hands until Player enters the painting.
     if (o->oAction < 2) {
         cur_obj_rotate_face_angle_using_vel();
     }

@@ -5,7 +5,7 @@ void bhv_Spring_loop(void) {
 	u32 CarmackMeme;
 	u32 Tmp;
 	if (o->oAction == 0) {
-		if (obj_check_if_collided_with_object(o,gMarioObject)) {
+		if (obj_check_if_collided_with_object(o,gPlayerObject)) {
 			set_player_action(gPlayerState, ACT_DOUBLE_JUMP, 0);
 			gPlayerStates[0].faceAngle[1] = o->oFaceAngleYaw;
 			CarmackMeme = *(u32 *) &Yspd;

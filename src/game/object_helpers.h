@@ -127,7 +127,7 @@ s32 count_unimportant_objects(void);
 s32 count_objects_with_behavior(const BehaviorScript *behavior);
 struct Object *cur_obj_find_nearby_held_actor(const BehaviorScript *behavior, f32 maxDist);
 void cur_obj_change_action(s32 action);
-void cur_obj_set_vel_from_mario_vel(f32 objBaseForwardVel, f32 multiplier);
+void cur_obj_set_vel_from_player_vel(f32 objBaseForwardVel, f32 multiplier);
 BAD_RETURN(s16) cur_obj_reverse_animation(void);
 BAD_RETURN(s32) cur_obj_extend_animation_if_at_end(void);
 s32 cur_obj_check_if_near_animation_end(void);
@@ -163,13 +163,13 @@ void cur_obj_set_behavior(const BehaviorScript *behavior);
 void obj_set_behavior(struct Object *obj, const BehaviorScript *behavior);
 s32 cur_obj_has_behavior(const BehaviorScript *behavior);
 s32 obj_has_behavior(struct Object *obj, const BehaviorScript *behavior);
-f32 cur_obj_lateral_dist_from_mario_to_home(void);
+f32 cur_obj_lateral_dist_from_player_to_home(void);
 f32 cur_obj_lateral_dist_to_home(void);
 void cur_obj_set_pos_to_home(void);
 void cur_obj_set_pos_to_home_and_stop(void);
 void cur_obj_shake_y(f32 amount);
 void cur_obj_start_cam_event(UNUSED struct Object *obj, s32 cameraEvent);
-void set_mario_interact_true_if_in_range(UNUSED s32 arg0, UNUSED s32 arg1, f32 range);
+void set_player_interact_true_if_in_range(UNUSED s32 arg0, UNUSED s32 arg1, f32 range);
 void obj_set_billboard(struct Object *obj);
 void cur_obj_set_hitbox_radius_and_height(f32 radius, f32 height);
 void cur_obj_set_hurtbox_radius_and_height(f32 radius, f32 height);
@@ -211,7 +211,7 @@ enum PathStatus {
     PATH_REACHED_WAYPOINT,
 };
 
-enum MarioRoomStates {
+enum PlayerRoomStates {
     MARIO_ROOM_UNDEFINED = -1,
     MARIO_OUTSIDE_ROOM,
     MARIO_INSIDE_ROOM
@@ -222,8 +222,8 @@ s32 cur_obj_wait_then_blink(s32 timeUntilBlinking, s32 numBlinks);
 s32 cur_obj_is_player_ground_pounding_platform(void);
 void spawn_mist_particles(void);
 void spawn_mist_particles_with_sound(u32 soundMagic);
-void cur_obj_push_mario_away(f32 radius);
-void cur_obj_push_mario_away_from_cylinder(f32 radius, f32 extentY);
+void cur_obj_push_player_away(f32 radius);
+void cur_obj_push_player_away_from_cylinder(f32 radius, f32 extentY);
 s32 cur_obj_set_action_table(s8 *actionTable);
 s32 cur_obj_progress_action_table(void);
 void stub_obj_helpers_3(UNUSED s32 arg0, UNUSED s32 arg1);
@@ -233,7 +233,7 @@ s32 cur_obj_is_player_on_platform(void);
 s32 jiggle_bbh_stair(s32 a0);
 void cur_obj_call_action_function(void (*actionFunctions[])(void));
 void spawn_base_star_with_no_lvl_exit(void);
-s32 cur_obj_mario_far_away(void);
+s32 cur_obj_player_far_away(void);
 s32 is_player_moving_fast_or_in_air(s32 speedThreshold);
 s32 is_item_in_array(s8 item, s8 *array);
 s32 cur_obj_is_player_in_room(void);
@@ -251,8 +251,8 @@ void enable_time_stop(void);
 void disable_time_stop(void);
 void set_time_stop_flags(s32 flags);
 void clear_time_stop_flags(s32 flags);
-s32 cur_obj_can_mario_activate_textbox(f32 radius, f32 height, UNUSED s32 unused);
-s32 cur_obj_can_mario_activate_textbox_2(f32 radius, f32 height);
+s32 cur_obj_can_player_activate_textbox(f32 radius, f32 height, UNUSED s32 unused);
+s32 cur_obj_can_player_activate_textbox_2(f32 radius, f32 height);
 s32 cur_obj_update_dialog(s32 actionArg, s32 dialogFlags, s32 dialogID, UNUSED s32 unused);
 s32 cur_obj_update_dialog_with_cutscene(s32 actionArg, s32 dialogFlags, s32 cutsceneTable, s32 dialogID);
 s32 cur_obj_has_model(ModelID16 modelID);
@@ -265,10 +265,10 @@ void obj_copy_behavior_params(struct Object *dst, struct Object *src);
 void cur_obj_init_animation_and_anim_frame(s32 animIndex, s32 animFrame);
 s32 cur_obj_init_animation_and_check_if_near_end(s32 animIndex);
 void cur_obj_init_animation_and_extend_if_at_end(s32 animIndex);
-s32 cur_obj_check_grabbed_mario(void);
+s32 cur_obj_check_grabbed_player(void);
 s32 player_performed_grab_escape_action(void);
 void cur_obj_unused_play_footstep_sound(s32 animFrame1, s32 animFrame2, s32 sound);
-void enable_time_stop_including_mario(void);
+void enable_time_stop_including_player(void);
 void disable_time_stop_including_player(void);
 s32 cur_obj_check_interacted(void);
 void cur_obj_spawn_loot_blue_coin(void);

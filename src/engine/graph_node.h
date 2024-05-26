@@ -139,7 +139,7 @@ struct GraphNodeStart {
 /** GraphNode that only renders its children if the current transformation matrix
  *  has a z-translation (in camera space) greater than minDistance and less than
  *  maxDistance.
- *  Usage examples: Mario has three level's of detail: Normal, low-poly arms only, and fully low-poly
+ *  Usage examples: Player has three level's of detail: Normal, low-poly arms only, and fully low-poly
  *  The tower in Whomp's fortress has two levels of detail.
  */
 struct GraphNodeLevelOfDetail {
@@ -151,7 +151,7 @@ struct GraphNodeLevelOfDetail {
 /** GraphNode that renders exactly one of its children.
  *  Which one is rendered is determined by the field 'selectedCase'
  *  which is set in the node's function.
- *  Usage examples: room visibility, coin animation, blinking, Mario's power-up / hand pose / cap
+ *  Usage examples: room visibility, coin animation, blinking, Player's power-up / hand pose / cap
  */
 struct GraphNodeSwitchCase {
     /*0x00*/ struct FnGraphNode fnNode;
@@ -212,7 +212,7 @@ struct GraphNodeTranslation {
 };
 
 /** GraphNode that rotates itself and its children.
- *  Usage example: Mario torso / head rotation. Its parameters are dynamically
+ *  Usage example: Player torso / head rotation. Its parameters are dynamically
  *  set by a parent script node in that case.
  *  The display list can be null, in which case it won't draw anything itself.
  */
@@ -230,7 +230,7 @@ struct GraphNodeRotation {
  *  data. This animation data is not stored in the node itself but in global
  *  variables that are set when object nodes are processed if the object has
  *  animation.
- *  Used for Mario, enemies and anything else with animation data.
+ *  Used for Player, enemies and anything else with animation data.
  *  The display list can be null, in which case it won't draw anything itself.
  */
 struct GraphNodeAnimatedPart {
@@ -259,7 +259,7 @@ struct GraphNodeDisplayList {
 };
 
 /** GraphNode part that scales itself and its children.
- *  Usage example: Mario's fist or shoe, which grows when attacking. This can't
+ *  Usage example: Player's fist or shoe, which grows when attacking. This can't
  *  be done with an animated part sine animation data doesn't support scaling.
  *  Note that many scaling animations (like a goomba getting stomped) happen on
  *  the entire object. This node is only used when a single part needs to be scaled.
@@ -319,7 +319,7 @@ struct GraphNodeBackground {
 #endif
 };
 
-/** Renders the object that Mario is holding.
+/** Renders the object that Player is holding.
  */
 struct GraphNodeHeldObject {
     /*0x00*/ struct FnGraphNode fnNode;

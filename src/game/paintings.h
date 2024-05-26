@@ -39,11 +39,11 @@ struct Painting {
     /// Either PAINTING_IMAGE or PAINTING_ENV_MAP
     s8 textureType;
 
-    /// The floor Mario was on last frame
+    /// The floor Player was on last frame
     s8 lastFloor;
-    /// The floor Mario is currently on
+    /// The floor Player is currently on
     s8 currFloor;
-    /// The floor Mario just entered
+    /// The floor Player just entered
     s8 floorEntered;
 
     /// The painting's state, see top of paintings.c
@@ -104,12 +104,12 @@ struct Painting {
     /// The painting's transparency. Determines what layer the painting is in.
     u8 alpha;
 
-    /// True if Mario was under the painting's y coordinate last frame
-    s8 marioWasUnder;
-    /// True if Mario is currently under the painting's y coordinate
-    s8 marioIsUnder;
-    /// True if Mario just went under the painting's y coordinate on this frame
-    s8 marioWentUnder;
+    /// True if Player was under the painting's y coordinate last frame
+    s8 playerWasUnder;
+    /// True if Player is currently under the painting's y coordinate
+    s8 playerIsUnder;
+    /// True if Player just went under the painting's y coordinate on this frame
+    s8 playerWentUnder;
 
     /// Uniformly scales the painting to a multiple of PAINTING_SIZE.
     /// By default a painting is 614.0 x 614.0
@@ -124,10 +124,10 @@ struct PaintingMeshVertex {
     /*0x06*/ s8 norm[3];
 };
 
-extern s16 gPaintingMarioFloorType;
-extern f32 gPaintingMarioXPos;
-extern f32 gPaintingMarioYPos;
-extern f32 gPaintingMarioZPos;
+extern s16 gPaintingPlayerFloorType;
+extern f32 gPaintingPlayerXPos;
+extern f32 gPaintingPlayerYPos;
+extern f32 gPaintingPlayerZPos;
 
 extern struct PaintingMeshVertex *gPaintingMesh;
 extern Vec3f *gPaintingTriNorms;

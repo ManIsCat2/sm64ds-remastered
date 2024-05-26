@@ -181,7 +181,7 @@ void bhv_generic_bowling_ball_spawner_loop(void) {
     }
 
     if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1000)
-        || o->oPosY < gMarioObject->header.gfx.pos[1]) {
+        || o->oPosY < gPlayerObject->header.gfx.pos[1]) {
         return;
     }
 
@@ -200,7 +200,7 @@ void bhv_thi_bowling_ball_spawner_loop(void) {
     }
 
     if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 800)
-        || o->oPosY < gMarioObject->header.gfx.pos[1]) {
+        || o->oPosY < gPlayerObject->header.gfx.pos[1]) {
         return;
     }
 

@@ -28,7 +28,7 @@
 /// Fixes slideVel position being slightly off/asymmetric.
 #define FIX_SLIDE_VEL_UPDATE_SLIDING (0 || QOL_FIXES)
 
-/// Fixes cutscenes where Mario goes out of camera view on moving platforms (PD2 already has this).
+/// Fixes cutscenes where the player goes out of camera view on moving platforms (PD2 already has this).
 #define FIX_CAMERA_CUTSCENE_MOVING_PLATFORMS (0 || QOL_FIXES)
 
 /// Fixes find_floor_slope so it handles OOB slopes.
@@ -46,7 +46,7 @@
 /// Adds more air steps to special triple jump such as wallkick and grabbing.
 #define SPECIAL_TRIPLE_JUMP_AIR_STEPS (0 || QOL_FEATURES)
 
-/// Makes Mario grab hangable ceilings while in the air more freely.
+/// Makes the player grab hangable ceilings while in the air more freely.
 #define HANGABLE_SURFACE_AIR_FREELY (0 || QOL_FEATURES)
 
 /// Improves hanging so you don't need to hold A to stay on the ceiling.
@@ -58,22 +58,22 @@
 /// Makes turning walking speed based of velocity.
 #define VELOCITY_BASED_TURN_SPEED (0 || QOL_FEATURES)
 
-// If A and Z are pressed on the same frame while running, Mario will long jump instead of ground pound.
+// If A and Z are pressed on the same frame while running, the player will long jump instead of ground pound.
 #define EASIER_LONG_JUMPS (0 || QOL_FEATURES)
 
-// Makes Mario be able to jump kick when you hold the opposite direction of where you go.
+// Makes the player be able to jump kick when you hold the opposite direction of where you go.
 #define EASIER_JUMP_KICKS (0 || QOL_FEATURES)
 
-// Allows Mario to grab a ledge after a triple jump and a rollout.
+// Allows the player to grab a ledge after a triple jump and a rollout.
 #define LEDGE_GRAB_MORE_ACTIONS (0 || QOL_FEATURES)
 
-// Allows Mario to walking after a dive at lower speed and a rollout.
+// Allows the player to walking after a dive at lower speed and a rollout.
 #define WALL_KICK_MORE_ACTIONS (0 || QOL_FEATURES)
 
-// Allows Mario to still held an object while twirling.
+// Allows the player to still hold an object while twirling.
 #define TWIRL_WITH_OBJECT (0 || QOL_FEATURES)
 
-// Allows Mario to use the B button to rollout while on a kick slide.
+// Allows the player to use the B button to rollout while on a kick slide.
 #define SLIDE_KICK_SLIDE_BUTTON (0 || QOL_FEATURES)
 
 /// Makes rollout possible on a dive slide while going forward.
@@ -89,13 +89,13 @@
 /// Fixes surface wind detection (avoid grabbed star wind softlock).
 #define FIX_SURFACE_WIND_DETECTION (0 || QOL_FIXES)
 
-/// Fixes Mario's interaction with lava so it detects regardless of action.
+/// Fixes the players interaction with lava so it detects regardless of action.
 #define FIX_LAVA_INTERACTION (0 || QOL_FIXES)
 
-/// Makes Mario's squish scale smooth rather than being instantly set.
+/// Makes the players squish scale smooth rather than being instantly set.
 #define SMOOTH_SQUISH (0 || QOL_FEATURES)
 
-/// When Mario hits a floor underwater, his pitch approaches the floor pitch instead of instantly snapping to it.
+/// When the player hits a floor underwater, their pitch approaches the floor pitch instead of instantly snapping to it.
 #define SMOOTH_PITCH_WHEN_HITTING_FLOOR_UNDERWATER (0 || QOL_FEATURES)
 
 /// Makes it slightly easier to stay on narrow platforms.

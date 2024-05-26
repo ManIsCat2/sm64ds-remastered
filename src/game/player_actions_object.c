@@ -11,20 +11,20 @@
 #include "rumble_init.h"
 
 /**
- * Used by act_punching() to determine Mario's forward velocity during each
+ * Used by act_punching() to determine Player's forward velocity during each
  * animation frame.
  */
 s8 sPunchingForwardVelocities[8] = { 0, 1, 1, 2, 3, 5, 7, 10 };
 
 void animated_stationary_ground_step(struct PlayerState *m, s32 animation, u32 endAction) {
     stationary_ground_step(m);
-    set_mario_animation(m, animation);
+    set_player_animation(m, animation);
     if (is_anim_at_end(m)) {
         set_player_action(m, endAction, 0);
     }
 }
 
-s32 mario_update_punch_sequence(struct PlayerState *m) {
+s32 player_update_punch_sequence(struct PlayerState *m) {
     u32 endAction, crouchEndAction;
     s32 animFrame;
 
@@ -39,7 +39,7 @@ s32 mario_update_punch_sequence(struct PlayerState *m) {
             play_sound(SOUND_MARIO_PUNCH_YAH, m->playerObj->header.gfx.cameraToObject);
             // fallthrough
         case 1:
-            set_mario_animation(m, MARIO_ANIM_FIRST_PUNCH);
+            set_player_animation(m, MARIO_ANIM_FIRST_PUNCH);
             if (is_anim_past_end(m)) {
                 m->actionArg = 2;
             } else {
@@ -60,7 +60,7 @@ s32 mario_update_punch_sequence(struct PlayerState *m) {
             break;
 
         case 2:
-            set_mario_animation(m, MARIO_ANIM_FIRST_PUNCH_FAST);
+            set_player_animation(m, MARIO_ANIM_FIRST_PUNCH_FAST);
 
             if (m->playerObj->header.gfx.animInfo.animFrame <= 0) {
                 m->flags |= MARIO_PUNCHING;
@@ -79,7 +79,7 @@ s32 mario_update_punch_sequence(struct PlayerState *m) {
             play_sound(SOUND_MARIO_PUNCH_WAH, m->playerObj->header.gfx.cameraToObject);
             // fallthrough
         case 4:
-            set_mario_animation(m, MARIO_ANIM_SECOND_PUNCH);
+            set_player_animation(m, MARIO_ANIM_SECOND_PUNCH);
             if (is_anim_past_end(m)) {
                 m->actionArg = 5;
             } else {
@@ -96,7 +96,7 @@ s32 mario_update_punch_sequence(struct PlayerState *m) {
             break;
 
         case 5:
-            set_mario_animation(m, MARIO_ANIM_SECOND_PUNCH_FAST);
+            set_player_animation(m, MARIO_ANIM_SECOND_PUNCH_FAST);
             if (m->playerObj->header.gfx.animInfo.animFrame <= 0) {
                 m->flags |= MARIO_PUNCHING;
             }
@@ -112,7 +112,7 @@ s32 mario_update_punch_sequence(struct PlayerState *m) {
 
         case 6:
             play_player_action_sound(m, SOUND_MARIO_PUNCH_HOO, 1);
-            animFrame = set_mario_animation(m, MARIO_ANIM_GROUND_KICK);
+            animFrame = set_player_animation(m, MARIO_ANIM_GROUND_KICK);
             if (animFrame == 0) {
                 m->playerBodyState->punchState = (2 << 6) | 6;
             }
@@ -128,7 +128,7 @@ s32 mario_update_punch_sequence(struct PlayerState *m) {
 
         case 9:
             play_player_action_sound(m, SOUND_MARIO_PUNCH_HOO, 1);
-            set_mario_animation(m, MARIO_ANIM_BREAKDANCE);
+            set_player_animation(m, MARIO_ANIM_BREAKDANCE);
             animFrame = m->playerObj->header.gfx.animInfo.animFrame;
 
             if (animFrame >= 2 && animFrame < 8) {
@@ -167,7 +167,7 @@ s32 act_punching(struct PlayerState *m) {
         m->actionTimer--;
     }
 
-    mario_update_punch_sequence(m);
+    player_update_punch_sequence(m);
     perform_ground_step(m);
     return FALSE;
 }
@@ -193,13 +193,13 @@ s32 act_picking_up(struct PlayerState *m) {
     if (m->actionState == 1) {
         if (m->heldObj->oInteractionSubtype & INT_SUBTYPE_GRABS_MARIO) {
             m->playerBodyState->grabPos = GRAB_POS_HEAVY_OBJ;
-            set_mario_animation(m, MARIO_ANIM_GRAB_HEAVY_OBJECT);
+            set_player_animation(m, MARIO_ANIM_GRAB_HEAVY_OBJECT);
             if (is_anim_at_end(m)) {
                 set_player_action(m, ACT_HOLD_HEAVY_IDLE, 0);
             }
         } else {
             m->playerBodyState->grabPos = GRAB_POS_LIGHT_OBJ;
-            set_mario_animation(m, MARIO_ANIM_PICK_UP_LIGHT_OBJ);
+            set_player_animation(m, MARIO_ANIM_PICK_UP_LIGHT_OBJ);
             if (is_anim_at_end(m)) {
                 set_player_action(m, ACT_HOLD_IDLE, 0);
             }
@@ -216,7 +216,7 @@ s32 act_dive_picking_up(struct PlayerState *m) {
     }
 
     //! Hands-free holding. Landing on a slope or being pushed off a ledge while
-    // landing from a dive grab sets Mario's action to a non-holding action
+    // landing from a dive grab sets Player's action to a non-holding action
     // without dropping the object, causing the hands-free holding glitch.
     if (m->input & INPUT_OFF_FLOOR) {
         return set_player_action(m, ACT_FREEFALL, 0);
@@ -324,7 +324,7 @@ s32 act_picking_up_bowser(struct PlayerState *m) {
         play_sound(SOUND_MARIO_HRMM, m->playerObj->header.gfx.cameraToObject);
     }
 
-    set_mario_animation(m, MARIO_ANIM_GRAB_BOWSER);
+    set_player_animation(m, MARIO_ANIM_GRAB_BOWSER);
     if (is_anim_at_end(m)) {
         set_player_action(m, ACT_HOLDING_BOWSER, 0);
     }
@@ -350,10 +350,10 @@ s32 act_holding_bowser(struct PlayerState *m) {
             return set_player_action(m, ACT_RELEASING_BOWSER, 1);
         }
 
-        set_mario_animation(m, MARIO_ANIM_HOLDING_BOWSER);
+        set_player_animation(m, MARIO_ANIM_HOLDING_BOWSER);
     } else {
         m->actionTimer = 0;
-        set_mario_animation(m, MARIO_ANIM_SWINGING_BOWSER);
+        set_player_animation(m, MARIO_ANIM_SWINGING_BOWSER);
     }
 
     if (m->intendedMag > 20.0f) {
@@ -451,14 +451,14 @@ s32 check_common_object_cancels(struct PlayerState *m) {
     return FALSE;
 }
 
-s32 mario_execute_object_action(struct PlayerState *m) {
+s32 player_execute_object_action(struct PlayerState *m) {
     s32 cancel = FALSE;
 
     if (check_common_object_cancels(m)) {
         return TRUE;
     }
 
-    if (mario_update_quicksand(m, 0.5f)) {
+    if (player_update_quicksand(m, 0.5f)) {
         return TRUE;
     }
 

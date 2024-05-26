@@ -19,7 +19,7 @@ void bhv_heave_ho_throw_player_loop(void) {
             break;
         case 2:
             cur_obj_play_sound_2(SOUND_OBJ_HEAVEHO_TOSSED);
-            gMarioObject->oInteractStatus |= INT_STATUS_MARIO_UNK2;
+            gPlayerObject->oInteractStatus |= INT_STATUS_MARIO_UNK2;
             gPlayerStates[0].forwardVel = -45.0f;
             gPlayerStates[0].vel[1] = 95.0f;
             o->parentObj->oHeaveHoUnk88 = 0;
@@ -52,8 +52,8 @@ void heave_ho_act_2(void) {
     UNUSED u8 filler[4];
     s16 angleVel;
 
-    if (cur_obj_lateral_dist_from_mario_to_home() > 1000.0f) {
-        o->oAngleToMario = cur_obj_angle_to_home();
+    if (cur_obj_lateral_dist_from_player_to_home() > 1000.0f) {
+        o->oAngleToPlayer = cur_obj_angle_to_home();
     }
 
     if (o->oTimer > 150) {
@@ -70,7 +70,7 @@ void heave_ho_act_2(void) {
 
     o->oForwardVel = o->oHeaveHoUnkF4 * 10.0f;
     angleVel = o->oHeaveHoUnkF4 * 0x400;
-    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, angleVel);
+    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToPlayer, angleVel);
 }
 
 void heave_ho_act_3(void) {

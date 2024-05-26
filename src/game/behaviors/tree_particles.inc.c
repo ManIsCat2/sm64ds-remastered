@@ -48,7 +48,7 @@ void bhv_snow_leaf_particle_spawn_init(void) {
     s32 isSnow;
     f32 scale;
 
-    gMarioObject->oActiveParticleFlags &= ~ACTIVE_PARTICLE_LEAF;
+    gPlayerObject->oActiveParticleFlags &= ~ACTIVE_PARTICLE_LEAF;
 
 #if FIX_HARDCODED_TREE_PARTICLES
     struct Object *nearestTree = cur_obj_nearest_object_with_behavior(bhvTree);

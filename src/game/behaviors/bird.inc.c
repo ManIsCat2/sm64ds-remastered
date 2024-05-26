@@ -1,9 +1,9 @@
 
 /**
  * Behavior for bhvBird. These are the birds in the castle grounds
- * that fly away and scatter when Mario comes near them. There are
+ * that fly away and scatter when Player comes near them. There are
  * 2 types of birds; spawner birds and spawned birds. Spawner birds
- * are loaded by the level, and are inactive until Mario comes within
+ * are loaded by the level, and are inactive until Player comes within
  * 2000 units of them, when they spawn 6 spawned birds and start flying.
  * Spawned birds are only spawned by a spawner bird, and start flying
  * immediately after spawning.
@@ -11,11 +11,11 @@
 
 /**
  * If the object is a spawned bird, start flying; if it's a spawner bird,
- * spawn spawned birds if Mario comes within 2000 units of it.
+ * spawn spawned birds if Player comes within 2000 units of it.
  */
 static void bird_act_inactive(void) {
     // Start flying if the object is a spawned bird or if it's a spawner bird
-    // and Mario is within 2000 units.
+    // and Player is within 2000 units.
     if (o->oBhvParams2ndByte == BIRD_BP_SPAWNED || o->oDistanceToPlayer < 2000.0f) {
         // If the object is a spawner bird, play the sound of birds flying away,
         // and spawn 6 spawned birds (which will start flying on the next frame).

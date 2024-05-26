@@ -145,7 +145,7 @@ static inline GLenum texenv_set_texture_color(struct ShaderProgram *prg) {
     // HACK: lord forgive me for this, but this is easier
 
     switch (prg->shader_id) {
-        case 0x0000038D: // mario's eyes
+        case 0x0000038D: // player's eyes
         case 0x01045A00: // peach letter
         case 0x01200A00: // intro copyright fade in
             mode = GL_DECAL;
@@ -192,7 +192,7 @@ static void gfx_opengl_apply_shader(struct ShaderProgram *prg) {
     if (prg->num_inputs) {
         // have colors
         // TODO: more than one color (maybe glSecondaryColorPointer?)
-        // HACK: if there's a texture and two colors, one of them is likely for speculars or some shit (see mario head)
+        // HACK: if there's a texture and two colors, one of them is likely for speculars or some shit (see player head)
         //       if there's two colors but no texture, the real color is likely the second one
         // HACKHACK: alpha is 0 in the transition shader (0x01A00045), maybe figure out the flags instead
         const int vlen = (prg->cc.opt_alpha && prg->shader_id != 0x01A00045) ? 4 : 3;

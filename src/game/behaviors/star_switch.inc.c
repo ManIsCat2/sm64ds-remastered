@@ -4,8 +4,8 @@ void bhv_star_switch_loop(void) {
     switch (o->oAction) {
         case SWITCH_ACT_IDLE: {
             cur_obj_scale(1.5f);
-            if (gMarioObject->platform == o && !(gPlayerStates->action & MARIO_UNKNOWN_13)) {
-                if (lateral_dist_between_objects(o, gMarioObject) < 80.f) {
+            if (gPlayerObject->platform == o && !(gPlayerStates->action & MARIO_UNKNOWN_13)) {
+                if (lateral_dist_between_objects(o, gPlayerObject) < 80.f) {
                     o->oAction = SWITCH_ACT_PRESSED;
                 }
             }

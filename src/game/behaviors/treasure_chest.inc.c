@@ -68,7 +68,7 @@ void bhv_treasure_chest_bottom_init(void) {
 void bhv_treasure_chest_bottom_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (obj_check_if_facing_toward_angle(o->oMoveAngleYaw, gMarioObject->header.gfx.angle[1] + 0x8000, 0x3000)
+            if (obj_check_if_facing_toward_angle(o->oMoveAngleYaw, gPlayerObject->header.gfx.angle[1] + 0x8000, 0x3000)
                 && is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 150)
                 && !o->parentObj->oTreasureChestUnkF8) {
                 if (o->parentObj->oTreasureChestUnkF4 == o->oBhvParams2ndByte) {
@@ -99,7 +99,7 @@ void bhv_treasure_chest_bottom_loop(void) {
             }
     }
 
-    cur_obj_push_mario_away_from_cylinder(150.0f, 150.0f);
+    cur_obj_push_player_away_from_cylinder(150.0f, 150.0f);
     o->oInteractStatus = 0;
 }
 

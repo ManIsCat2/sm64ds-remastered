@@ -26,7 +26,7 @@ void bhv_alpha_boo_key_loop(void) {
     o->oFaceAngleRoll += 0x200;
     o->oFaceAngleYaw += 0x200;
 
-    if (obj_check_if_collided_with_object(o, gMarioObject)) {
+    if (obj_check_if_collided_with_object(o, gPlayerObject)) {
         // This line makes the object inside the key's parent boo drop.
         // Was this intended to make the boo die when the key is collected?
         // Boos don't read from oBooDeathStatus, they only set it to let the
@@ -85,7 +85,7 @@ static void beta_boo_key_dropped_loop(void) {
     if (o->oTimer > 90 || o->oMoveFlags & OBJ_MOVE_LANDED) {
         cur_obj_become_tangible();
 
-        if (obj_check_if_collided_with_object(o, gMarioObject)) {
+        if (obj_check_if_collided_with_object(o, gPlayerObject)) {
             // This interaction status is 0x01, the first interaction status flag.
             // It was only used for Hoot in the final game, but it seems it could've
             // treated as a TRUE/FALSE statement or held some special meaning in beta.
@@ -125,9 +125,9 @@ static void beta_boo_key_drop(void) {
 
         o->oAction = BETA_BOO_KEY_ACT_DROPPED;
 
-        // Make the key move laterally away from Mario at 3 units/frame
+        // Make the key move laterally away from Player at 3 units/frame
         // (as if he transferred kinetic energy to it)
-        velocityDirection = gMarioObject->oMoveAngleYaw;
+        velocityDirection = gPlayerObject->oMoveAngleYaw;
         velocityMagnitude = 3.0f;
 
         o->oVelX = sins(velocityDirection) * velocityMagnitude;

@@ -185,8 +185,8 @@ static s32 find_wall_collisions_from_list(struct SurfaceNode *surfaceNode, struc
                     continue;
                 }
 
-                // If Mario has a vanish cap, pass through the vanish cap wall.
-                if (gCurrentObject == gMarioObject && (gPlayerState->flags & MARIO_VANISH_CAP)) {
+                // If Player has a vanish cap, pass through the vanish cap wall.
+                if (gCurrentObject == gPlayerObject && (gPlayerState->flags & MARIO_VANISH_CAP)) {
                     continue;
                 }
             }
@@ -591,9 +591,9 @@ static struct Surface *find_floor_from_list(struct SurfaceNode *surfaceNode, s32
     while (surfaceNode != NULL) {
         surf = surfaceNode->surface;
         surfaceNode = surfaceNode->next;
-        // To prevent the Merry-Go-Round room from loading when Mario passes above the hole that leads
+        // To prevent the Merry-Go-Round room from loading when Player passes above the hole that leads
         // there, SURFACE_INTANGIBLE is used. This prevent the wrong room from loading, but can also allow
-        // Mario to pass through.
+        // Player to pass through.
         if (!(gCollisionFlags & COLLISION_FLAG_INCLUDE_INTANGIBLE) && (surf->type == SURFACE_INTANGIBLE)) {
             continue;
         }
@@ -631,7 +631,7 @@ static struct Surface *find_floor_from_list(struct SurfaceNode *surfaceNode, s32
 #endif
 
 #ifdef CHEATS_ACTIONS
-        // Set floor height cheats for Mario.
+        // Set floor height cheats for Player.
         height = cheats_walk_on_environment(height, x, z);
 #endif
 
@@ -673,7 +673,7 @@ struct Surface *find_water_bottom_from_list(struct SurfaceNode *surfaceNode, s32
     struct SurfaceNode *currSurfaceNode = surfaceNode;
     struct Surface *surf, *waterBottom = NULL;
     f32 height, lowest = *pheight;
-    f32 bufferY = (y + 160.0f); // Mario's hitbox height
+    f32 bufferY = (y + 160.0f); // Player's hitbox height
 
     while (currSurfaceNode != NULL) {
         surf = currSurfaceNode->surface;
@@ -1166,7 +1166,7 @@ s32 ray_surface_intersect(Vec3f orig, Vec3f dir, f32 dir_length, struct Surface 
         || surface->type == SURFACE_VANISH_CAP_WALLS || surface->flags & SURFACE_FLAG_NO_CAM_COLLISION)
         return FALSE;
 
-    //Ignore hangable surface if Mario is hanging
+    //Ignore hangable surface if Player is hanging
     if (surface->type == SURFACE_HANGABLE && gPlayerState->action & ACT_FLAG_HANGING)
         return FALSE;
 

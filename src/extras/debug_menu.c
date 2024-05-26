@@ -85,7 +85,7 @@ static void opt_debug_warp_1(UNUSED struct Option *self, s32 arg) {
     if (!arg) {
         force_quit_pause_debug();
         // Ensure medium water level in WDW credits cutscene
-        gPaintingMarioYEntry = 1500.0f;
+        gPaintingPlayerYEntry = 1500.0f;
         // Define credits sequence (if not then crashes)
         if (gCurrCreditsEntry == NULL) {
             gCurrCreditsEntry = &sCreditsSequence[0];

@@ -18,21 +18,21 @@ void elevator_starting_shake(void) {
 void elevator_act_0(void) {
     o->oVelY = 0;
     if (o->oElevatorUnk100 == 2) {
-        if (gMarioObject->platform == o) {
+        if (gPlayerObject->platform == o) {
             if (o->oPosY > o->oElevatorUnkFC) {
                 o->oAction = 2;
             } else {
                 o->oAction = 1;
             }
         }
-    } else if (gMarioObject->oPosY > o->oElevatorUnkFC || o->oElevatorUnk100 == 1) {
+    } else if (gPlayerObject->oPosY > o->oElevatorUnkFC || o->oElevatorUnk100 == 1) {
         o->oPosY = o->oElevatorUnkF8;
-        if (gMarioObject->platform == o) {
+        if (gPlayerObject->platform == o) {
             o->oAction = 2;
         }
     } else {
         o->oPosY = o->oElevatorUnkF4;
-        if (gMarioObject->platform == o) {
+        if (gPlayerObject->platform == o) {
             o->oAction = 1;
         }
     }
@@ -49,7 +49,7 @@ void elevator_act_1(void) {
         o->oPosY = o->oElevatorUnkF8;
         if (o->oElevatorUnk100 == 2 || o->oElevatorUnk100 == 1) {
             o->oAction = 3;
-        } else if (gMarioObject->oPosY < o->oElevatorUnkFC) {
+        } else if (gPlayerObject->oPosY < o->oElevatorUnkFC) {
             o->oAction = 2;
         } else {
             o->oAction = 3;
@@ -70,7 +70,7 @@ void elevator_act_2(void) {
             o->oAction = 4;
         } else if (o->oElevatorUnk100 == 2) {
             o->oAction = 3;
-        } else if (gMarioObject->oPosY > o->oElevatorUnkFC) {
+        } else if (gPlayerObject->oPosY > o->oElevatorUnkFC) {
             o->oAction = 1;
         } else {
             o->oAction = 3;

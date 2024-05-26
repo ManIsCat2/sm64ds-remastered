@@ -1,6 +1,6 @@
 // water_splashes_and_waves.inc.c
 
-// Water droplets from Mario jumping in a pool of water.
+// Water droplets from Player jumping in a pool of water.
 struct WaterDropletParams sWaterSplashDropletParams = {
     /* Flags */ WATER_DROPLET_FLAG_RAND_ANGLE,
     /* Model */ MODEL_WHITE_PARTICLE_SMALL,
@@ -11,7 +11,7 @@ struct WaterDropletParams sWaterSplashDropletParams = {
     /* Random size offset, scale */ 0.5f, 1.0f
 };
 
-// Water droplets from Mario jumping in shallow water.
+// Water droplets from Player jumping in shallow water.
 struct WaterDropletParams gShallowWaterSplashDropletParams = {
     /* Flags */ WATER_DROPLET_FLAG_RAND_ANGLE | WATER_DROPLET_FLAG_SET_Y_TO_WATER_LEVEL,
     /* Model */ MODEL_WHITE_PARTICLE_SMALL,
@@ -22,7 +22,7 @@ struct WaterDropletParams gShallowWaterSplashDropletParams = {
     /* Random size offset, scale */ 0.5f, 1.0f
 };
 
-// The fish particle easter egg from Mario jumping in shallow water.
+// The fish particle easter egg from Player jumping in shallow water.
 struct WaterDropletParams sWaterDropletFishParams = {
     /* Flags */ WATER_DROPLET_FLAG_RAND_ANGLE | WATER_DROPLET_FLAG_SET_Y_TO_WATER_LEVEL,
     /* Model */ MODEL_FISH,
@@ -33,7 +33,7 @@ struct WaterDropletParams sWaterDropletFishParams = {
     /* Random size offset, scale */ 1.0f, 0.0f
 };
 
-// Water droplets from Mario running in shallow water.
+// Water droplets from Player running in shallow water.
 struct WaterDropletParams gShallowWaterWaveDropletParams = {
     /* Flags */ WATER_DROPLET_FLAG_RAND_ANGLE_INCR_PLUS_8000 | WATER_DROPLET_FLAG_RAND_ANGLE | WATER_DROPLET_FLAG_SET_Y_TO_WATER_LEVEL,
     /* Model */ MODEL_WHITE_PARTICLE_SMALL,
@@ -90,10 +90,10 @@ void bhv_water_droplet_loop(void) {
 }
 
 void bhv_idle_water_wave_loop(void) {
-    obj_copy_pos(o, gMarioObject);
+    obj_copy_pos(o, gPlayerObject);
     o->oPosY = gPlayerStates[0].waterLevel + 5;
-    if (!(gMarioObject->oMarioParticleFlags & ACTIVE_PARTICLE_IDLE_WATER_WAVE)) {
-        gMarioObject->oActiveParticleFlags &= (u16) ~ACTIVE_PARTICLE_IDLE_WATER_WAVE;
+    if (!(gPlayerObject->oPlayerParticleFlags & ACTIVE_PARTICLE_IDLE_WATER_WAVE)) {
+        gPlayerObject->oActiveParticleFlags &= (u16) ~ACTIVE_PARTICLE_IDLE_WATER_WAVE;
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
 }

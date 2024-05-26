@@ -31,7 +31,7 @@ enum WarpOperation {
     WARP_OP_DEMO_END
 };
 
-enum MarioSpawnType {
+enum PlayerSpawnType {
     MARIO_SPAWN_NONE,
     MARIO_SPAWN_DOOR_WARP,
     MARIO_SPAWN_IDLE,

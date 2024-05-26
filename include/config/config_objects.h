@@ -4,7 +4,7 @@
  * INTERACTION SETTINGS *
  ***********************/
 
-/// Fixes cap cloning when Mario takes a fade warp
+/// Fixes cap cloning when the player takes a fade warp
 #define FIX_HAT_CLONE_FADE (0 || QOL_FIXES)
 
 /// Fixes fake pole grab on the bottom of it, allowing to be properly grabbed
@@ -13,7 +13,7 @@
 /// Fixes missing surface wind in obj_check_floor_death
 #define FIX_OBJ_FLOOR_WIND_DEATH (0 || QOL_FIXES)
 
-/// Fixes Mario interact shell start action while in air
+/// Fixes the player interact shell start action while in air
 #define FIX_MARIO_KOOPA_SHELL_ACTION (0 || QOL_FIXES)
 
 /// Hold A when bouncing on an enemy to go higher like in classic games
@@ -56,7 +56,7 @@
 /// Fixes one frame timer when bully backs up
 #define FIX_BULLY_BACK_UP_TIMER (0 || QOL_FIXES)
 
-/// Properly adjusts Mario's head to look at bosses
+/// Properly adjusts the players head to look at bosses
 #define FIX_MARIO_LOOK_HEAD_BOSSES (0 || QOL_FIXES)
 
 /// Fixes mist and purple particles not being spawned after specific objects are deleted
@@ -119,7 +119,7 @@
 /// Makes Tiny Goombas (from THI) always drop their coin
 #define TINY_GOOMBA_DROP_COIN (0 || QOL_FEATURES)
 
-/// Clams don't hurt Mario unless they are moving (opening/closing)
+/// Clams don't hurt the player unless they are moving (opening/closing)
 #define CLAMS_ONLY_HURT_WHEN_MOVING (0 || QOL_FEATURES)
 
 /// Makes speed of a platform on a track be controlled by standing near the front or back of it

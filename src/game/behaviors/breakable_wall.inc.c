@@ -3,7 +3,7 @@
 void bhv_wf_breakable_wall_loop(void) {
     if (gPlayerStates[0].action == ACT_SHOT_FROM_CANNON) {
         cur_obj_become_tangible();
-        if (obj_check_if_collided_with_object(o, gMarioObject)) {
+        if (obj_check_if_collided_with_object(o, gPlayerObject)) {
             if (cur_obj_has_behavior(bhvWFBreakableWallRight)) {
                 play_puzzle_jingle();
 #if BETTER_WF_BREAKEABLE_WALL

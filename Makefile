@@ -651,7 +651,7 @@ ifeq ($(WINDOWS_BUILD),1)
   RC_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.rc))
 endif
 
-GENERATED_C_FILES := $(BUILD_DIR)/assets/mario_anim_data.c $(BUILD_DIR)/assets/demo_data.c
+GENERATED_C_FILES := $(BUILD_DIR)/assets/player_anim_data.c $(BUILD_DIR)/assets/demo_data.c
 
 ifneq ($(TARGET_N64),1)
 GENERATED_C_FILES += $(addprefix $(BUILD_DIR)/bin/,$(addsuffix _skybox.c,$(notdir $(basename $(wildcard textures/skyboxes/*.png)))))
@@ -1561,9 +1561,9 @@ $(BUILD_DIR)/%.inc.c: $(BUILD_DIR)/%
 	$(V)echo >> $@
 
 # Generate animation data
-$(BUILD_DIR)/assets/mario_anim_data.c: $(wildcard assets/anims/*.inc.c)
+$(BUILD_DIR)/assets/player_anim_data.c: $(wildcard assets/anims/*.inc.c)
 	@$(PRINT) "$(RED)Generating animation data $(NO_COL)\n"
-	$(V)$(PYTHON) tools/mario_anims_converter.py > $@
+	$(V)$(PYTHON) tools/player_anims_converter.py > $@
 
 # Generate demo input data
 $(BUILD_DIR)/assets/demo_data.c: assets/demo_data.json $(wildcard assets/demos/*.bin)

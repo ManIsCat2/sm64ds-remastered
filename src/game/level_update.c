@@ -57,7 +57,7 @@ const char *credits08[] = { "2COURSE DESIGNERS", "KENTA USUI", "NAOKI MORI" };
 const char *credits09[] = { "3COURSE DESIGNERS", "YOSHIKI HARUHANA", "MAKOTO MIYANAGA", "KATSUHIKO KANNO" };
 const char *credits10[] = { "1SOUND COMPOSER", "KOJI KONDO" };
 
-// Shindou combines sound effects and sound programmer in order to make room for Mario voice and Peach voice
+// Shindou combines sound effects and sound programmer in order to make room for Player voice and Peach voice
 const char *credits11[] = { "4SOUND EFFECTS", "SOUND PROGRAMMER", "YOJI INAGAKI", "HIDEAKI SHIMIZU" };
 const char *credits12[] = { "23D ANIMATORS", "YOSHIAKI KOIZUMI", "SATORU TAKIZAWA" };
 const char *credits13[] = { "1CG DESIGNER", "MASANAO ARIMOTO" };
@@ -66,7 +66,7 @@ const char *credits15[] = { "1TECHNICAL SUPPORT", "SGI. 64PROJECT STAFF" };
 const char *credits16[] = { "2PROGRESS MANAGEMENT", "KIMIYOSHI FUKUI", "KEIZO KATO" };
 
 #else // VERSION_US || VERSION_EU
-// US and EU combine camera programmer and Mario face programmer...
+// US and EU combine camera programmer and Player face programmer...
 const char *credits05[] = { "4CAMERA PROGRAMMER", "MARIO FACE PROGRAMMER", "TAKUMI KAWAGOE", "GILES GODDARD" };
 const char *credits06[] = { "2COURSE DIRECTORS", "YOICHI YAMADA", "YASUHISA YAMAMURA" };
 const char *credits07[] = { "2COURSE DESIGNERS", "KENTA USUI", "NAOKI MORI" };
@@ -74,7 +74,7 @@ const char *credits08[] = { "3COURSE DESIGNERS", "YOSHIKI HARUHANA", "MAKOTO MIY
 
 #ifdef VERSION_US
 const char *credits09[] = { "1SOUND COMPOSER", "KOJI KONDO" };
-// ...as well as sound effects and sound programmer in order to make room for screen text writer, Mario voice, and Peach voice
+// ...as well as sound effects and sound programmer in order to make room for screen text writer, Player voice, and Peach voice
 const char *credits10[] = { "4SOUND EFFECTS", "SOUND PROGRAMMER", "YOJI INAGAKI", "HIDEAKI SHIMIZU" };
 const char *credits11[] = { "23-D ANIMATORS", "YOSHIAKI KOIZUMI", "SATORU TAKIZAWA" };
 const char *credits12[] = { "1ADDITIONAL GRAPHICS", "MASANAO ARIMOTO" };
@@ -85,7 +85,7 @@ const char *credits16[] = { "5SCREEN TEXT WRITER", "TRANSLATION", "LESLIE SWAN",
 #else // VERSION_EU
 // ...as well as sound composer, sound effects, and sound programmer, and...
 const char *credits09[] = { "7SOUND COMPOSER", "SOUND EFFECTS", "SOUND PROGRAMMER", "KOJI KONDO", "YOJI INAGAKI", "HIDEAKI SHIMIZU" };
-// ...3D animators and additional graphics in order to make room for screen text writer(s), Mario voice, and Peach voice
+// ...3D animators and additional graphics in order to make room for screen text writer(s), Player voice, and Peach voice
 const char *credits10[] = { "63-D ANIMATORS", "ADDITIONAL GRAPHICS", "YOSHIAKI KOIZUMI", "SATORU TAKIZAWA", "MASANAO ARIMOTO" };
 const char *credits11[] = { "3TECHNICAL SUPPORT", "TAKAO SAWANO", "HIROHITO YOSHIMOTO", "HIROTO YADA" };
 const char *credits12[] = { "1TECHNICAL SUPPORT", "SGI N64 PROJECT STAFF" };
@@ -379,12 +379,12 @@ void init_player_after_warp(void) {
             load_player_area();
         }
 
-        // Don't reset Mario on the same warp area, preserves cap powerup like in SM64DS
+        // Don't reset Player on the same warp area, preserves cap powerup like in SM64DS
         if (sWarpDest.type != WARP_TYPE_SAME_AREA) {
             init_player();
         } else {
-            vec3s_copy(gPlayerState->faceAngle, gMarioSpawnInfo->startAngle);
-            vec3s_to_vec3f(gPlayerState->pos, gMarioSpawnInfo->startPos);
+            vec3s_copy(gPlayerState->faceAngle, gPlayerSpawnInfo->startAngle);
+            vec3s_to_vec3f(gPlayerState->pos, gPlayerSpawnInfo->startPos);
         }
 
         set_player_initial_action(gPlayerState, playerSpawnType, sWarpDest.arg);
@@ -556,9 +556,9 @@ void check_instant_warp(void) {
                 gPlayerState->playerObj->oPosZ = gPlayerState->pos[2];
 
             #if QOL_FIX_INSTANT_WARP_OFFSET
-                gMarioObject->header.gfx.pos[0] = gPlayerState->pos[0];
-                gMarioObject->header.gfx.pos[1] = gPlayerState->pos[1];
-                gMarioObject->header.gfx.pos[2] = gPlayerState->pos[2];
+                gPlayerObject->header.gfx.pos[0] = gPlayerState->pos[0];
+                gPlayerObject->header.gfx.pos[1] = gPlayerState->pos[1];
+                gPlayerObject->header.gfx.pos[2] = gPlayerState->pos[2];
             #endif
 
                 cameraAngle = gPlayerState->area->camera->yaw;
@@ -629,7 +629,7 @@ void initiate_warp(s16 destLevel, s16 destArea, s16 destWarpNode, s32 warpFlags)
 #define PAINTING_WARP_INDEX_END 0x2D   // Value less than Surface 0xFD
 
 /**
- * Check if Mario is above and close to a painting warp floor, and return the
+ * Check if Player is above and close to a painting warp floor, and return the
  * corresponding warp node.
  */
 struct WarpNode *get_painting_warp_node(void) {
@@ -647,7 +647,7 @@ struct WarpNode *get_painting_warp_node(void) {
 }
 
 /**
- * Check is Mario has entered a painting, and if so, initiate a warp.
+ * Check is Player has entered a painting, and if so, initiate a warp.
  */
 void initiate_painting_warp(void) {
     if (gCurrentArea->paintingWarpNodes != NULL && gPlayerState->floor != NULL) {
@@ -687,7 +687,7 @@ void initiate_painting_warp(void) {
 
 /**
  * If there is not already a delayed warp, schedule one. The source node is
- * based on the warp operation and sometimes Mario's used object.
+ * based on the warp operation and sometimes Player's used object.
  * Return the time left until the delayed warp is initiated.
  */
 s16 level_trigger_warp(struct PlayerState *m, s32 warpOp) {

@@ -307,7 +307,7 @@ void envfx_update_snow_blizzard(s32 snowCylinderX, s32 snowCylinderY, s32 snowCy
 
 /*! Unused function. Checks whether a position is laterally within 3000 units
  *  to the point (x: 3380, z: -520). Considering there is an unused blizzard
- *  snow mode, this could have been used to check whether Mario is in a
+ *  snow mode, this could have been used to check whether Player is in a
  *  'blizzard area'. In Cool, Cool Mountain and Snowman's Land the area lies
  *  near the starting point and doesn't seem meaningful. Notably, the point is
  *  close to the entrance of SL, so maybe there were plans for an extra hint to
@@ -442,7 +442,7 @@ void append_snowflake_vertex_buffer(Gfx *gfx, s32 index, Vec3s vertex1, Vec3s ve
 #if NO_ENV_SNOW_CEILING
 /**
  * Makes snow particles disappear if there's a ceiling 
- * on top of Mario and the camera
+ * on top of Player and the camera
  */
 void envfx_update_ceiling_count(void) {
     struct Surface *ceil;

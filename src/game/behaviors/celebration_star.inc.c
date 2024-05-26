@@ -1,10 +1,10 @@
 // celebration_star.inc.c
 
 void bhv_celebration_star_init(void) {
-    o->oHomeX = gMarioObject->header.gfx.pos[0];
-    o->oPosY = gMarioObject->header.gfx.pos[1] + 30.0f;
-    o->oHomeZ = gMarioObject->header.gfx.pos[2];
-    o->oMoveAngleYaw = gMarioObject->header.gfx.angle[1] + 0x8000;
+    o->oHomeX = gPlayerObject->header.gfx.pos[0];
+    o->oPosY = gPlayerObject->header.gfx.pos[1] + 30.0f;
+    o->oHomeZ = gPlayerObject->header.gfx.pos[2];
+    o->oMoveAngleYaw = gPlayerObject->header.gfx.angle[1] + 0x8000;
     o->oCelebStarDiameterOfRotation = 100;
 #if BUGFIX_STAR_BOWSER_KEY
     #if OBJ_HOLD_TRANSPARENT_STAR
@@ -39,7 +39,7 @@ void bhv_celebration_star_init(void) {
 #endif
 }
 
-void celeb_star_act_spin_around_mario(void) {
+void celeb_star_act_spin_around_player(void) {
     o->oPosX = o->oHomeX + sins(o->oMoveAngleYaw) * (f32)(o->oCelebStarDiameterOfRotation / 2);
     o->oPosZ = o->oHomeZ + coss(o->oMoveAngleYaw) * (f32)(o->oCelebStarDiameterOfRotation / 2);
     o->oPosY += 5.0f;
@@ -71,7 +71,7 @@ void celeb_star_act_face_camera(void) {
 #endif
         o->oFaceAngleYaw += 0x1000;
     } else {
-        o->oFaceAngleYaw = gMarioObject->header.gfx.angle[1];
+        o->oFaceAngleYaw = gPlayerObject->header.gfx.angle[1];
     }
 
     if (o->oTimer == 59) {
@@ -82,7 +82,7 @@ void celeb_star_act_face_camera(void) {
 void bhv_celebration_star_loop(void) {
     switch (o->oAction) {
         case CELEB_STAR_ACT_SPIN_AROUND_MARIO:
-            celeb_star_act_spin_around_mario();
+            celeb_star_act_spin_around_player();
             break;
 
         case CELEB_STAR_ACT_FACE_CAMERA:

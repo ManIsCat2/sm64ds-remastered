@@ -12,7 +12,7 @@ static void fire_spitter_act_idle(void) {
 static void fire_spitter_act_spit_fire(void) {
     s32 scaleStatus;
 
-    o->oMoveAngleYaw = o->oAngleToMario;
+    o->oMoveAngleYaw = o->oAngleToPlayer;
 
     // Increase scale by 0.05, 0.04, ..., -0.03. Then wait ~8 frames, then
     // starting moving scale by 0.05 each frame toward 0.1. The first time

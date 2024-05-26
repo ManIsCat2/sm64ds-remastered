@@ -1650,7 +1650,7 @@ u8 *gEndCutsceneStringsEn[] = {
     gEndCutsceneStrEn7,
     // This [8] string is actually unused. In the cutscene handler, the developers do not
     // set the 8th one, but use the first string again at the very end, so Peach ends up
-    // saying "Mario!" twice. It is likely that she was originally meant to say "Mario?" at
+    // saying "Player!" twice. It is likely that she was originally meant to say "Player?" at
     // the end but the developers changed their mind, possibly because the line recorded
     // sounded more like an exclamation than a question.
     gEndCutsceneStrEn8,
@@ -2059,7 +2059,7 @@ void do_cutscene_handler(void) {
     #define STR_Y 142
 #endif
 
-// "Dear Mario" message handler
+// "Dear Player" message handler
 void print_peach_letter_message(void) {
     void **dialogTable;
     struct DialogEntry *dialog;
@@ -2127,7 +2127,7 @@ void print_peach_letter_message(void) {
 }
 
 /**
- * Renders the cannon reticle when Mario is inside a cannon.
+ * Renders the cannon reticle when Player is inside a cannon.
  * Formed by four triangles.
  */
 void render_hud_cannon_reticle(void) {
@@ -2348,7 +2348,7 @@ void render_pause_my_score_coins(void) {
 #endif
 
 void render_pause_camera_options(s16 x, s16 y, s8 *index, s16 xIndex) {
-    u8 textLakituMario[] = { TEXT_LAKITU_MARIO };
+    u8 textLakituPlayer[] = { TEXT_LAKITU_MARIO };
     u8 textLakituStop[] = { TEXT_LAKITU_STOP };
 #ifdef VERSION_EU
     u8 textNormalUpClose[][20] = {
@@ -2371,7 +2371,7 @@ void render_pause_camera_options(s16 x, s16 y, s8 *index, s16 xIndex) {
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gMenuTextAlpha);
 
-    print_generic_string(x + 14, y + 2, textLakituMario);
+    print_generic_string(x + 14, y + 2, textLakituPlayer);
     print_generic_string(x + TXT1_X, y - 13, LANGUAGE_ARRAY(textNormalUpClose));
     print_generic_string(x + 124, y + 2, textLakituStop);
     print_generic_string(x + TXT2_X, y - 13, LANGUAGE_ARRAY(textNormalFixed));
@@ -3145,7 +3145,7 @@ s16 render_menus_and_dialogs(void) {
 
         gMenuTextColorTransTimer = (s16) gMenuTextColorTransTimer + 0x1000;
     } else if (gDialogID != DIALOG_NONE) {
-        // The Peach "Dear Mario" message needs to be repositioned separately
+        // The Peach "Dear Player" message needs to be repositioned separately
         if (gDialogID == DIALOG_020) {
             print_peach_letter_message();
             return index;

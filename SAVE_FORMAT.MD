@@ -47,8 +47,8 @@ This section contains all main game flags (walkthought milestones).
 | vanish_cap | **Blue Switch** is pressed. 
 | key_1 | Key is found in **Bowser in the Dark World**
 | key_2 | Key is found in **Bowser in the Fire Sea**
-| basement_door | Mario unlocked castle's basement door
-| upstairs_door | Mario unlocked castle's upper floors
+| basement_door | Player unlocked castle's basement door
+| upstairs_door | Player unlocked castle's upper floors
 | ddd_moved_back | **Dire Dire Docks** painting is moved back 
 | moat_drained | Water is drained in the moat of the castle
 | pps_door | **Princess's Secret Slide** window is unlocked
@@ -70,7 +70,7 @@ key_2 = 1
 ```
 ___
 ## Main Courses Section - [courses]
-This section contains all stars and coins that Mario collected in each main course.
+This section contains all stars and coins that the player collected in each main course.
 
 The first value stores the number of coins collected.
 > **Warning!**: Make sure that coins count will not exceed 255!
@@ -107,7 +107,7 @@ ccm = "1, 1111111"
 ```
 ___
 ## Bonus Section - [bonus]
-This section contains all bonus stars that Mario collected in the castle and all bonus courses.
+This section contains all bonus stars that the player collected in the castle and all bonus courses.
 > **Note**: The game takes into account only the number of bonus stars collected, the order of stars flags can be arbitrary
 
 | Flag | Stars | Description |
@@ -134,10 +134,10 @@ pss = 10
 ```
 ___
 ## Cap Section - [cap]
-This section contains information about where Mario lost his cap and who take it.
+This section contains information about where the player lost their cap and who take it.
 | Flag | Value | Description |
 |---|---|---|
-| type | ground, klepto, ukiki, mrblizzard | The one who or what took the cap from Mario. Default flag is **"ground"**
+| type | ground, klepto, ukiki, mrblizzard | The one who or what took the cap from the player. Default flag is **"ground"**
 | level | ssl, sl, ttm, none | Specifies the course where the cap is located. Default flag is **"none"**.
 | area | 1, 2 | Specifies the area in the course.
 

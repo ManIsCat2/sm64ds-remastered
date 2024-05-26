@@ -1,9 +1,9 @@
 // water_ring.inc.c
 
 f32 water_ring_calc_player_dist(void) {
-    f32 playerDistX = o->oPosX - gMarioObject->header.gfx.pos[0];
-    f32 playerDistY = o->oPosY - (gMarioObject->header.gfx.pos[1] + 80.0f);
-    f32 playerDistZ = o->oPosZ - gMarioObject->header.gfx.pos[2];
+    f32 playerDistX = o->oPosX - gPlayerObject->header.gfx.pos[0];
+    f32 playerDistY = o->oPosY - (gPlayerObject->header.gfx.pos[1] + 80.0f);
+    f32 playerDistZ = o->oPosZ - gPlayerObject->header.gfx.pos[2];
     f32 playerDistInFront = playerDistX * o->oWaterRingNormalX + playerDistY * o->oWaterRingNormalY
                            + playerDistZ * o->oWaterRingNormalZ;
 
@@ -24,13 +24,13 @@ void water_ring_init(void) {
     //! This normal calculation assumes a facing yaw of 0, which is not the case
     //  for the manta ray rings. It also errs by multiplying the normal X by -1.
     //  This cause the ring's orientation for the purposes of collision to be
-    //  different than the graphical orientation, which means that Mario won't
+    //  different than the graphical orientation, which means that Player won't
     //  necessarily collect a ring even if he appears to swim through it.
     o->oWaterRingNormalX = coss(o->oFaceAnglePitch) * sins(o->oFaceAngleRoll) * -1.0f;
     o->oWaterRingNormalY = coss(o->oFaceAnglePitch) * coss(o->oFaceAngleRoll);
     o->oWaterRingNormalZ = sins(o->oFaceAnglePitch);
 #endif
-    o->oWaterRingMarioDistInFront = water_ring_calc_player_dist();
+    o->oWaterRingPlayerDistInFront = water_ring_calc_player_dist();
 }
 
 void bhv_jet_stream_water_ring_init(void) {
@@ -43,14 +43,14 @@ void bhv_jet_stream_water_ring_init(void) {
 void water_ring_check_collection(f32 avgScale, struct Object *ringManager) {
     f32 playerDistInFront = water_ring_calc_player_dist();
 
-    if (!is_point_close_to_object(o, gMarioObject->header.gfx.pos[0],
-                                  gMarioObject->header.gfx.pos[1] + 80.0f,
-                                  gMarioObject->header.gfx.pos[2], (avgScale + 0.2) * 120.0)) {
-        o->oWaterRingMarioDistInFront = playerDistInFront;
+    if (!is_point_close_to_object(o, gPlayerObject->header.gfx.pos[0],
+                                  gPlayerObject->header.gfx.pos[1] + 80.0f,
+                                  gPlayerObject->header.gfx.pos[2], (avgScale + 0.2) * 120.0)) {
+        o->oWaterRingPlayerDistInFront = playerDistInFront;
         return;
     }
 
-    if (o->oWaterRingMarioDistInFront * playerDistInFront < 0.0f) {
+    if (o->oWaterRingPlayerDistInFront * playerDistInFront < 0.0f) {
         struct Object *ringSpawner = o->parentObj;
 
         if (ringSpawner != NULL) {
@@ -72,7 +72,7 @@ void water_ring_check_collection(f32 avgScale, struct Object *ringManager) {
         o->oAction = WATER_RING_ACT_COLLECTED;
     }
 
-    o->oWaterRingMarioDistInFront = playerDistInFront;
+    o->oWaterRingPlayerDistInFront = playerDistInFront;
 }
 
 void water_ring_set_scale(f32 avgScale) {

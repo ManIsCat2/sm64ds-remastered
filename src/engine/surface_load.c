@@ -353,7 +353,7 @@ static struct Surface *read_surface_data(TerrainData *vertexData, TerrainData **
 }
 
 /**
- * Returns whether a surface has exertion/moves Mario
+ * Returns whether a surface has exertion/moves Player
  * based on the surface type.
  */
 static s32 surface_has_force(TerrainData surfaceType) {
@@ -813,9 +813,9 @@ void load_object_collision_model(void) {
     TerrainData *collisionData = obj->collisionData;
 
     f32 sqrLateralDist;
-    vec3f_get_lateral_dist_squared(&obj->oPosX, &gMarioObject->oPosX, &sqrLateralDist);
+    vec3f_get_lateral_dist_squared(&obj->oPosX, &gPlayerObject->oPosX, &sqrLateralDist);
 
-    f32 verticalMarioDiff = (gMarioObject->oPosY - obj->oPosY);
+    f32 verticalPlayerDiff = (gPlayerObject->oPosY - obj->oPosY);
 
     f32 colDist;
     if (collisionData == NULL) {
@@ -853,8 +853,8 @@ void load_object_collision_model(void) {
     // A value higher than 500.0f causes crashes with surfaces
     s32 inColRadius = (
            (sqrLateralDist < sqr(colDist))
-        && (verticalMarioDiff > 0 || verticalMarioDiff > -colDist)
-        && (verticalMarioDiff < 0 || verticalMarioDiff < (colDist + 500.0f))
+        && (verticalPlayerDiff > 0 || verticalPlayerDiff > -colDist)
+        && (verticalPlayerDiff < 0 || verticalPlayerDiff < (colDist + 500.0f))
     );
 
     // Update if no Time Stop, in range, and in the current room.
@@ -872,7 +872,7 @@ void load_object_collision_model(void) {
     // On an object's first frame, the distance is set to F32_MAX.
     // If the distance hasn't been updated, update it now.
     if (isInit) {
-        playerDist = dist_between_objects(obj, gMarioObject);
+        playerDist = dist_between_objects(obj, gPlayerObject);
     }
 
 #ifndef NODRAWINGDISTANCE

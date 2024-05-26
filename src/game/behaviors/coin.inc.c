@@ -330,7 +330,7 @@ void coin_inside_boo_act_0(void) {
 
     if (parent->oBooDeathStatus == BOO_DEATH_STATUS_DYING) {
         o->oAction = 1;
-        sp26 = gMarioObject->oMoveAngleYaw;
+        sp26 = gPlayerObject->oMoveAngleYaw;
         sp20 = 3.0f;
         o->oVelX = sins(sp26) * sp20;
         o->oVelZ = coss(sp26) * sp20;

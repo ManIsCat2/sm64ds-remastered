@@ -3,7 +3,7 @@
  * Behavior for bhvUnusedPoundablePlatform.
  *
  * This unused behavior controls a platform that shatters into small triangles
- * if Mario ground pounds it.
+ * if Player ground pounds it.
  *
  * Its collision model perfectly aligns with the hole leading to In the
  * Deep Freeze in Snowman's Land. It is likely that players early in development

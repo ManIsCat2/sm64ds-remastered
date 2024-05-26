@@ -49,7 +49,7 @@ void bhv_beta_trampoline_spring_loop(void) {
 /**
  * Update function for bhvBetaTrampolineTop.
  * This spawns the other 2 trampoline parts when initialized,
- * and sets a boolean for whether Mario's on or off the trampoline.
+ * and sets a boolean for whether Player's on or off the trampoline.
  * The trampoline top never actually moves, so the spring will never
  * do anything.
  */
@@ -67,15 +67,15 @@ void bhv_beta_trampoline_top_loop(void) {
         trampolinePart->oPosY -= 150.0f;
     }
 
-    // Update o->oBetaTrampolineMarioOnTrampoline, and reset
-    // the trampoline's position if Mario's not on it.
+    // Update o->oBetaTrampolinePlayerOnTrampoline, and reset
+    // the trampoline's position if Player's not on it.
     // Since the trampoline never moves, this doesn't do anything.
     // Maybe they intended to decrease the trampoline's position
-    // when Mario's on it in this if statement?
-    if (gMarioObject->platform == o) {
-        o->oBetaTrampolineMarioOnTrampoline = TRUE;
+    // when Player's on it in this if statement?
+    if (gPlayerObject->platform == o) {
+        o->oBetaTrampolinePlayerOnTrampoline = TRUE;
     } else {
-        o->oBetaTrampolineMarioOnTrampoline = FALSE;
+        o->oBetaTrampolinePlayerOnTrampoline = FALSE;
         o->oPosY = o->oHomeY;
     }
 

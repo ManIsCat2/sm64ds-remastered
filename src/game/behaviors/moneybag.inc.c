@@ -32,12 +32,12 @@ void bhv_moneybag_init(void) {
     o->oOpacity = 0;
 }
 
-void moneybag_check_mario_collision(void) {
+void moneybag_check_player_collision(void) {
     obj_set_hitbox(o, &sMoneybagHitbox);
 
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         if (o->oInteractStatus & INT_STATUS_ATTACKED_MARIO) {
-            o->oMoveAngleYaw = o->oAngleToMario + 0x8000;
+            o->oMoveAngleYaw = o->oAngleToPlayer + 0x8000;
             o->oVelY = 30.0f;
         }
 
@@ -120,7 +120,7 @@ void moneybag_act_move_around(void) {
     }
 
     moneybag_jump(collisionFlags);
-    moneybag_check_mario_collision();
+    moneybag_check_player_collision();
 
     if (!is_point_within_radius_of_player(o->oHomeX, o->oHomeY, o->oHomeZ, 800)
         && ((collisionFlags & OBJ_COL_FLAGS_LANDED) == OBJ_COL_FLAGS_LANDED)) {
@@ -143,7 +143,7 @@ void moneybag_act_return_home(void) {
     }
 
     moneybag_jump(collisionFlags);
-    moneybag_check_mario_collision();
+    moneybag_check_player_collision();
 
     if (is_point_close_to_object(o, o->oHomeX, o->oHomeY, o->oHomeZ, 100)) {
         spawn_object(o, MODEL_YELLOW_COIN, bhvMoneybagHidden);

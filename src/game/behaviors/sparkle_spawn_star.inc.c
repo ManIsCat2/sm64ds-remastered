@@ -39,7 +39,7 @@ void set_y_home_to_pos(void) {
     o->oHomeY = o->oPosY;
 }
 
-void set_home_to_mario(void) {
+void set_home_to_player(void) {
 #if FIX_STARS_ON_CEILINGS
     // Force y home to pos to prevent star clipping inside the ceiling
     if (player_is_close_to_a_ceiling()) {
@@ -47,9 +47,9 @@ void set_home_to_mario(void) {
         return;
     }
 #endif
-    o->oHomeX = gMarioObject->oPosX;
-    o->oHomeZ = gMarioObject->oPosZ;
-    o->oHomeY = gMarioObject->oPosY;
+    o->oHomeX = gPlayerObject->oPosX;
+    o->oHomeZ = gPlayerObject->oPosZ;
+    o->oHomeY = gPlayerObject->oPosY;
     o->oHomeY += 250.0f;
     o->oPosY = o->oHomeY;
 
@@ -79,7 +79,7 @@ void bhv_spawned_star_loop(void) {
             o->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
             o->oAngleVelYaw = 0x800;
             if (o->oBhvParams2ndByte == 0) {
-                set_home_to_mario();
+                set_home_to_player();
             } else {
                 set_y_home_to_pos();
             }

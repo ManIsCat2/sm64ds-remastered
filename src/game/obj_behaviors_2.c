@@ -91,9 +91,9 @@ static s16 obj_get_pitch_from_vel(void) {
 
 /**
  * Show dialog proposing a race.
- * If the player accepts the race, then leave time stop enabled and Mario in the
+ * If the player accepts the race, then leave time stop enabled and Player in the
  * text action so that the racing object can wait before starting the race.
- * If the player declines the race, then disable time stop and allow Mario to
+ * If the player declines the race, then disable time stop and allow Player to
  * move again.
  */
 static s32 obj_update_race_proposition_dialog(s16 dialogID) {
@@ -116,7 +116,7 @@ static void obj_set_dist_from_home(f32 distFromHome) {
 
 static s32 obj_is_near_to_and_facing_player(f32 maxDist, s16 maxAngleDiff) {
     if (o->oDistanceToPlayer < maxDist
-        && abs_angle_diff(o->oMoveAngleYaw, o->oAngleToMario) < maxAngleDiff) {
+        && abs_angle_diff(o->oMoveAngleYaw, o->oAngleToPlayer) < maxAngleDiff) {
         return TRUE;
     }
     return FALSE;
@@ -385,7 +385,7 @@ static s16 obj_turn_pitch_toward_player(f32 targetOffsetY, s16 turnAmount) {
     s16 targetPitch;
 
     o->oPosY -= targetOffsetY;
-    targetPitch = obj_turn_toward_object(o, gMarioObject, O_MOVE_ANGLE_PITCH_INDEX, turnAmount);
+    targetPitch = obj_turn_toward_object(o, gPlayerObject, O_MOVE_ANGLE_PITCH_INDEX, turnAmount);
     o->oPosY += targetOffsetY;
 
     return targetPitch;
@@ -571,7 +571,7 @@ static s32 obj_resolve_object_collisions(s32 *targetYaw) {
     if (o->numCollidedObjs != 0) {
         for (i = 0; i < o->numCollidedObjs; i++) {
             otherObject = o->collidedObjs[i];
-            if (otherObject == gMarioObject) continue;
+            if (otherObject == gPlayerObject) continue;
             if (otherObject->oInteractType & INTERACT_MASK_NO_OBJ_COLLISIONS) continue;
             dx             = (o->oPosX - otherObject->oPosX);
             dz             = (o->oPosZ - otherObject->oPosZ);
@@ -593,7 +593,7 @@ static s32 obj_resolve_object_collisions(s32 *targetYaw) {
 
     if (o->numCollidedObjs != 0) {
         otherObject = o->collidedObjs[0];
-        if (otherObject != gMarioObject) {
+        if (otherObject != gPlayerObject) {
             //! If one object moves after collisions are detected and this code
             //  runs, the objects can move toward each other (transport cloning)
 
@@ -697,7 +697,7 @@ static void obj_set_knockback_action(s32 attackType) {
     }
 
     o->oFlags &= ~OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
-    o->oMoveAngleYaw = obj_angle_to_object(gMarioObject, o);
+    o->oMoveAngleYaw = obj_angle_to_object(gPlayerObject, o);
 }
 
 static void obj_set_squished_action(void) {
@@ -726,7 +726,7 @@ static s32 obj_die_if_above_lava_and_health_non_positive(void) {
     return TRUE;
 }
 
-static s32 obj_handle_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioAction,
+static s32 obj_handle_attacks(struct ObjectHitbox *hitbox, s32 attackedPlayerAction,
                               u8 *attackHandlers) {
     s32 attackType;
 
@@ -737,8 +737,8 @@ static s32 obj_handle_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioActi
         return 1;
     } else if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         if (o->oInteractStatus & INT_STATUS_ATTACKED_MARIO) {
-            if (o->oAction != attackedMarioAction) {
-                o->oAction = attackedMarioAction;
+            if (o->oAction != attackedPlayerAction) {
+                o->oAction = attackedPlayerAction;
                 o->oTimer = 0;
             }
         } else {
@@ -850,7 +850,7 @@ static s32 obj_update_standard_actions(f32 scale) {
     }
 }
 
-static s32 obj_check_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioAction) {
+static s32 obj_check_attacks(struct ObjectHitbox *hitbox, s32 attackedPlayerAction) {
     s32 attackType;
 
     obj_set_hitbox(o, hitbox);
@@ -860,8 +860,8 @@ static s32 obj_check_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioActio
         return 1;
     } else if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         if (o->oInteractStatus & INT_STATUS_ATTACKED_MARIO) {
-            if (o->oAction != attackedMarioAction) {
-                o->oAction = attackedMarioAction;
+            if (o->oAction != attackedPlayerAction) {
+                o->oAction = attackedPlayerAction;
                 o->oTimer = 0;
             }
         } else {
@@ -890,21 +890,21 @@ static s32 obj_move_for_one_second(s32 endAction) {
 }
 
 /**
- * If we are far from home (> threshold away), then set oAngleToMario to the
+ * If we are far from home (> threshold away), then set oAngleToPlayer to the
  * angle to home and oDistanceToPlayer to 25000.
- * If we are close to home, but Mario is far from us (> threshold away), then
- * keep oAngleToMario the same and set oDistanceToPlayer to 20000.
- * If we are close to both home and Mario, then keep both oAngleToMario and
+ * If we are close to home, but Player is far from us (> threshold away), then
+ * keep oAngleToPlayer the same and set oDistanceToPlayer to 20000.
+ * If we are close to both home and Player, then keep both oAngleToPlayer and
  * oDistanceToPlayer the same.
  *
  * The point of this function is to avoid having to write extra code to get
- * the object to return to home. When Mario is far away and the object is far
- * from home, it could theoretically re-use the "approach Mario" logic to approach
+ * the object to return to home. When Player is far away and the object is far
+ * from home, it could theoretically re-use the "approach Player" logic to approach
  * its home instead.
  * However, most objects that use this function handle the far-from-home case
  * separately anyway.
  * This function causes seemingly erroneous behavior in some objects that try to
- * attack Mario (e.g. fly guy shooting fire or lunging), especially when combined
+ * attack Player (e.g. fly guy shooting fire or lunging), especially when combined
  * with partial updates.
  */
 static void treat_far_home_as_player(f32 threshold) {
@@ -914,12 +914,12 @@ static void treat_far_home_as_player(f32 threshold) {
     f32 distance = sqrtf(dx * dx + dy * dy + dz * dz);
 
     if (distance > threshold) {
-        o->oAngleToMario = atan2s(dz, dx);
+        o->oAngleToPlayer = atan2s(dz, dx);
         o->oDistanceToPlayer = 25000.0f;
     } else {
-        dx = o->oHomeX - gMarioObject->oPosX;
-        dy = o->oHomeY - gMarioObject->oPosY;
-        dz = o->oHomeZ - gMarioObject->oPosZ;
+        dx = o->oHomeX - gPlayerObject->oPosX;
+        dy = o->oHomeY - gPlayerObject->oPosY;
+        dz = o->oHomeZ - gPlayerObject->oPosZ;
         distance = sqrtf(dx * dx + dy * dy + dz * dz);
 
         if (distance > threshold) {

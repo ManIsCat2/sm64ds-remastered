@@ -54,7 +54,7 @@ void bhv_flamethrower_loop(void) {
     ModelID32 model;
 
     if (o->oAction == 0) {
-        if ((gCurrLevelNum != LEVEL_BBH || gMarioOnMerryGoRound == TRUE)
+        if ((gCurrLevelNum != LEVEL_BBH || gPlayerOnMerryGoRound == TRUE)
             && o->oDistanceToPlayer < 2000.0f) {
             o->oAction++;
         }

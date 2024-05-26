@@ -225,7 +225,7 @@
     #define BOBOMB_BUDDY_CANNON_OPENED       2
     #define BOBOMB_BUDDY_CANNON_STOP_TALKING 3
 
-    /* oBobombBuddyHasTalkedToMario */
+    /* oBobombBuddyHasTalkedToPlayer */
     #define BOBOMB_BUDDY_HAS_NOT_TALKED 0
     #define BOBOMB_BUDDY_HAS_TALKED     2
 
@@ -568,7 +568,7 @@
     #define HAUNTED_BOOKSHELF_ACT_RECEDE 1
 
 /* BBH Merry-Go-Round */
-    /* gMarioCurrentRoom */
+    /* gPlayerCurrentRoom */
     #define BBH_NEAR_MERRY_GO_ROUND_ROOM 10
     #define BBH_DYNAMIC_SURFACE_ROOM     0
     #define BBH_OUTSIDE_ROOM             13
@@ -1136,11 +1136,11 @@
     /* oAction */
     // Loading
     #define WATER_LEVEL_DIAMOND_ACT_INIT               0
-    // Idling when Mario isn't inside its hitbox
+    // Idling when the player isn't inside its hitbox
     #define WATER_LEVEL_DIAMOND_ACT_IDLE               1
     // While the water level is changing
     #define WATER_LEVEL_DIAMOND_ACT_CHANGE_WATER_LEVEL 2
-    // After the water level has changed but Mario hasn't left its hitbox yet
+    // After the water level has changed but the player hasn't left its hitbox yet
     #define WATER_LEVEL_DIAMOND_ACT_IDLE_SPINNING      3
 
 /* Mips */

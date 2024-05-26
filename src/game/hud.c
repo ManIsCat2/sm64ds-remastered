@@ -246,7 +246,7 @@ void handle_power_meter_actions(s16 numHealthWedges) {
     // Update to match health value
     sPowerMeterStoredHealth = numHealthWedges;
 
-    // If Mario is swimming, keep power meter visible
+    // If Player is swimming, keep power meter visible
     if (gPlayerCameraState->action & ACT_FLAG_SWIMMING) {
         if (sPowerMeterHUD.animation == POWER_METER_HIDDEN
             || sPowerMeterHUD.animation == POWER_METER_EMPHASIZED) {
@@ -258,7 +258,7 @@ void handle_power_meter_actions(s16 numHealthWedges) {
 }
 
 /**
- * Renders the power meter that shows when Mario is in underwater
+ * Renders the power meter that shows when Player is in underwater
  * or has taken damage and has less than 8 health segments.
  * And calls a power meter animation function depending of the value defined.
  */
@@ -293,7 +293,7 @@ void render_hud_power_meter(void) {
 }
 
 /**
- * Renders the amount of lives and red coinsMario has.
+ * Renders the amount of lives and red coinsPlayer has.
  */
 void render_red_coins(void) {
     s8 x;
@@ -303,7 +303,7 @@ void render_red_coins(void) {
 }
 
 void render_hud_player_lives(void) {
-    print_text(set_hud_auto_x_pos(HUD_LIVES_MARIO_X), HUD_LIVES_MARIO_Y, ","); // 'Mario Head' glyph
+    print_text(set_hud_auto_x_pos(HUD_LIVES_MARIO_X), HUD_LIVES_MARIO_Y, ","); // 'Player Head' glyph
     print_text(set_hud_auto_x_pos(HUD_LIVES_CROSS_X), HUD_LIVES_CROSS_Y, "*"); // 'X' glyph
     print_text_fmt_int(set_hud_auto_x_pos(HUD_LIVES_NUM_X), HUD_LIVES_NUM_Y, "%d", gHudDisplay.lives);
     render_red_coins();
@@ -320,7 +320,7 @@ void render_hud_coins(void) {
 
 /**
  * Renders the amount of stars collected.
- * Disables "X" glyph when Mario has 100 stars or more.
+ * Disables "X" glyph when Player has 100 stars or more.
  */
 void render_hud_stars(void) {
     s8 showX = 0;
@@ -353,7 +353,7 @@ void render_hud_keys(void) {
 }
 
 /**
- * Renders the timer when Mario start sliding in PSS.
+ * Renders the timer when Player start sliding in PSS.
  */
 void render_hud_timer(void) {
     u8 *(*hudLUT)[58] = segmented_to_virtual(&main_hud_lut);

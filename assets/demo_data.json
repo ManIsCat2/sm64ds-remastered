@@ -41,7 +41,7 @@
         
         /* Might be an unused demo, but it doesn't define a header,
            so it can't be normally called. Speculation: "blooper" take for CCM.
-           Mario runs into the sign and aligns himself as if it were a mistake. */
+           The player runs into the sign and aligns themself as if it were a mistake. */
         {"name":"unused"},
         
         {"name":"bitdw", "ifdef":["VERSION_US", "VERSION_SH"]}

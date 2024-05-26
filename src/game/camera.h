@@ -289,7 +289,7 @@
  */
 struct PlayerCameraState {
     /**
-     * Mario's action on this frame.
+     * Player's action on this frame.
      */
     /*0x00*/ u32 action;
     /*0x04*/ Vec3f pos;
@@ -346,18 +346,18 @@ typedef BAD_RETURN(s32) (*CameraEvent)(struct Camera *c);
 typedef CameraEvent CutsceneShot;
 
 /**
- * Defines a bounding box which activates an event while Mario is inside
+ * Defines a bounding box which activates an event while Player is inside
  */
 struct CameraTrigger {
     /**
      * The area this should be checked in, or -1 if it should run in every area of the level.
      *
-     * Triggers with area set to -1 are run by default, they don't care if Mario is inside their bounds.
-     * However, they are only active if Mario is not already inside an area-specific trigger's
+     * Triggers with area set to -1 are run by default, they don't care if Player is inside their bounds.
+     * However, they are only active if Player is not already inside an area-specific trigger's
      * boundaries.
      */
     s8 area;
-    /// A function that gets called while Mario is in the trigger bounds
+    /// A function that gets called while Player is in the trigger bounds
     CameraEvent event;
     // The (x,y,z) position of the center of the bounding box
     s16 centerX;
@@ -368,7 +368,7 @@ struct CameraTrigger {
     s16 boundsX;
     s16 boundsY;
     s16 boundsZ;
-    /// This angle rotates Mario's offset from the box's origin, before it is checked for being inside.
+    /// This angle rotates Player's offset from the box's origin, before it is checked for being inside.
     s16 boundsYaw;
 };
 
@@ -473,9 +473,9 @@ struct ParallelTrackingPoint {
     s16 startOfPath;
     /// Point used to define a line segment to follow
     Vec3f pos;
-    /// The distance Mario can move along the line before the camera should move
+    /// The distance Player can move along the line before the camera should move
     f32 distThresh;
-    /// The percentage that the camera should move from the line to Mario
+    /// The percentage that the camera should move from the line to Player
     f32 zoom;
 };
 
@@ -513,7 +513,7 @@ struct Camera {
     /*0x00*/ u8 mode; // What type of mode the camera uses (see defines above)
     /*0x01*/ u8 defMode;
     /**
-     * Determines what direction Mario moves in when the analog stick is moved.
+     * Determines what direction Player moves in when the analog stick is moved.
      *
      * @warning This is NOT the camera's xz-rotation in world space. This is the angle calculated from the
      *          camera's focus TO the camera's position, instead of the other way around like it should
@@ -628,7 +628,7 @@ struct LakituState {
 
     /// The roll offset applied during part of the key dance cutscene
     /*0xB4*/ s16 keyDanceRoll;
-    /// Mario's action from the previous frame. Only used to determine if Mario just finished a dive.
+    /// Player's action from the previous frame. Only used to determine if Player just finished a dive.
     /*0xB8*/ u32 lastFrameAction;
     /*0xBC*/ s16 unused;
 #ifdef HIGH_FPS_PC
@@ -659,7 +659,7 @@ void set_camera_shake_from_hit(s16 shake);
 void set_environmental_camera_shake(s16 shake);
 void set_camera_shake_from_point(s16 shake, f32 posX, f32 posY, f32 posZ);
 BAD_RETURN(f32) calc_y_to_curr_floor(f32 *posOff, f32 posMul, f32 posBound, f32 *focOff, f32 focMul, f32 focBound);
-void move_player_head_c_up(UNUSED struct Camera *c);
+void move_mario_head_c_up(UNUSED struct Camera *c);
 void transition_next_state(UNUSED struct Camera *c, s16 frames);
 void set_camera_mode(struct Camera *c, s16 mode, s16 frames);
 void update_camera(struct Camera *c);

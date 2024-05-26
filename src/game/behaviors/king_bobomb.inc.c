@@ -30,7 +30,7 @@ void king_bobomb_act_0(void) {
         cur_obj_set_pos_to_home();
         o->oHealth = KING_BOMB_HEALTH;
 
-        if (cur_obj_can_mario_activate_textbox_2(500.0f, 100.0f)) {
+        if (cur_obj_can_player_activate_textbox_2(500.0f, 100.0f)) {
             o->oSubAction++;
             seq_player_lower_volume(SEQ_PLAYER_LEVEL, 60, 40);
         }
@@ -42,7 +42,7 @@ void king_bobomb_act_0(void) {
 }
 
 s32 player_is_far_below_object(f32 arg0) {
-    if (arg0 < o->oPosY - gMarioObject->oPosY) {
+    if (arg0 < o->oPosY - gPlayerObject->oPosY) {
         return TRUE;
     } else {
         return FALSE;
@@ -75,14 +75,14 @@ void king_bobomb_act_2(void) {
 
         if (o->oKingBobombUnk108 == 0) {
             o->oForwardVel = KING_BOMB_FVEL;
-            cur_obj_rotate_yaw_toward(o->oAngleToMario, KING_BOMB_YAWVEL);
+            cur_obj_rotate_yaw_toward(o->oAngleToPlayer, KING_BOMB_YAWVEL);
         } else {
             o->oForwardVel = 0.0f;
             o->oKingBobombUnk108--;
         }
     }
 
-    if (cur_obj_check_grabbed_mario()) {
+    if (cur_obj_check_grabbed_player()) {
         o->oAction = 3;
     }
 
@@ -146,7 +146,7 @@ void king_bobomb_act_1(void) {
 
     cur_obj_init_animation_with_sound(11);
 
-    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x200);
+    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToPlayer, 0x200);
 
     if (o->oDistanceToPlayer < 2500.0f) {
         o->oAction = 2;
@@ -190,7 +190,7 @@ void king_bobomb_act_6(void) {
     } else {
         cur_obj_init_animation_with_sound(11);
 
-        if (cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x800) == TRUE) {
+        if (cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 0x800) == TRUE) {
             o->oAction = 2;
         }
     }
@@ -324,7 +324,7 @@ void king_bobomb_act_5(void) { // bobomb returns home
                 o->oAction = 0;
                 stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
             }
-            if (cur_obj_can_mario_activate_textbox_2(500.0f, 100.0f)) {
+            if (cur_obj_can_player_activate_textbox_2(500.0f, 100.0f)) {
                 o->oSubAction++;
             }
             break;

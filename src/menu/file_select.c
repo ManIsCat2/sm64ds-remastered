@@ -123,7 +123,7 @@ static s8 sEraseYesNoHoverState = MENU_ERASE_HOVER_NONE;
 static s8 sAllFilesExist = FALSE;
 
 // Defines the value of the save slot selected in the menu.
-// Mario A: 1 | Mario B: 2 | Mario C: 3 | Mario D: 4
+// Player A: 1 | Player B: 2 | Player C: 3 | Player D: 4
 static s8 sSelectedFileNum = 0;
 
 // Which coin score mode to use when scoring files. 0 for local
@@ -163,10 +163,10 @@ static unsigned char textEraseFileButton[][16] = { {TEXT_ERASE_FILE}, {TEXT_ERAS
 static unsigned char textSoundModes[][8] = { { TEXT_STEREO }, { TEXT_MONO }, { TEXT_HEADSET } };
 #endif
 
-static unsigned char textMarioA[] = { TEXT_FILE_MARIO_A };
-static unsigned char textMarioB[] = { TEXT_FILE_MARIO_B };
-static unsigned char textMarioC[] = { TEXT_FILE_MARIO_C };
-static unsigned char textMarioD[] = { TEXT_FILE_MARIO_D };
+static unsigned char textPlayerA[] = { TEXT_FILE_MARIO_A };
+static unsigned char textPlayerB[] = { TEXT_FILE_MARIO_B };
+static unsigned char textPlayerC[] = { TEXT_FILE_MARIO_C };
+static unsigned char textPlayerD[] = { TEXT_FILE_MARIO_D };
 
 #ifndef VERSION_EU
 static unsigned char textNew[] = { TEXT_NEW };
@@ -266,7 +266,7 @@ static unsigned char textEraseFile[][17] = {
     { TEXT_ERASE_FILE_BUTTON }, { TEXT_ERASE_FILE_BUTTON_FR }, { TEXT_ERASE_FILE_BUTTON_DE }
 };
 static unsigned char textSure[][8] = {{ TEXT_SURE }, { TEXT_SURE_FR }, { TEXT_SURE_DE }};
-static unsigned char textMarioAJustErased[][20] = {
+static unsigned char textPlayerAJustErased[][20] = {
     { TEXT_FILE_MARIO_A_JUST_ERASED }, { TEXT_FILE_MARIO_A_JUST_ERASED_FR }, { TEXT_FILE_MARIO_A_JUST_ERASED_DE }
 };
 
@@ -286,7 +286,7 @@ static unsigned char textSoundModes[][10] = {
 
 static unsigned char textLanguage[][9] = {{ TEXT_ENGLISH }, { TEXT_FRENCH }, { TEXT_GERMAN }};
 
-static unsigned char textMario[] = { TEXT_MARIO };
+static unsigned char textPlayer[] = { TEXT_MARIO };
 static unsigned char textHiScore[][15] = {{ TEXT_HI_SCORE }, { TEXT_HI_SCORE_FR }, { TEXT_HI_SCORE_DE }};
 static unsigned char textMyScore[][10] = {{ TEXT_MY_SCORE }, { TEXT_MY_SCORE_FR }, { TEXT_MY_SCORE_DE }};
 
@@ -596,7 +596,7 @@ void exit_score_file_to_score_menu(struct Object *scoreFileButton, s8 scoreButto
 
 /**
  * Render buttons for the score menu.
- * Also check if the save file exists to render a different Mario button.
+ * Also check if the save file exists to render a different Player button.
  */
 void render_score_menu_buttons(struct Object *scoreButton) {
     // File A
@@ -719,7 +719,7 @@ void check_score_menu_clicked_buttons(struct Object *scoreButton) {
 
 /**
  * Render buttons for the copy menu.
- * Also check if the save file exists to render a different Mario button.
+ * Also check if the save file exists to render a different Player button.
  */
 void render_copy_menu_buttons(struct Object *copyButton) {
     // File A
@@ -908,7 +908,7 @@ void check_copy_menu_clicked_buttons(struct Object *copyButton) {
 
 /**
  * Render buttons for the erase menu.
- * Also check if the save file exists to render a different Mario button.
+ * Also check if the save file exists to render a different Player button.
  */
 void render_erase_menu_buttons(struct Object *eraseButton) {
     // File A
@@ -1353,7 +1353,7 @@ void load_erase_menu_from_submenu(s16 prevMenuButtonID, struct Object *sourceBut
 
 /**
  * Menu Buttons Menu Manager Initial Action
- * Creates models of the buttons in the menu. For the Mario buttons it
+ * Creates models of the buttons in the menu. For the Player buttons it
  * checks if a save file exists to render an specific button model for it.
  * Unlike buttons on submenus, these are never hidden or recreated.
  */
@@ -1755,7 +1755,7 @@ if (!gMouseHasFreeControl) {
 }
 
 /**
- * Prints the cursor (Mario Hand, different to the one in the Mario screen)
+ * Prints the cursor (Player Hand, different to the one in the Player screen)
  * and loads it's controller inputs in handle_controller_cursor_input
  * to be usable on the file select.
  */
@@ -1912,10 +1912,10 @@ void print_main_menu_strings(void) {
     // Print file names
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
-    print_menu_generic_string(MARIOTEXT_X1, 65, textMarioA);
-    print_menu_generic_string(MARIOTEXT_X2, 65, textMarioB);
-    print_menu_generic_string(MARIOTEXT_X1, 105, textMarioC);
-    print_menu_generic_string(MARIOTEXT_X2, 105, textMarioD);
+    print_menu_generic_string(MARIOTEXT_X1, 65, textPlayerA);
+    print_menu_generic_string(MARIOTEXT_X2, 65, textPlayerB);
+    print_menu_generic_string(MARIOTEXT_X1, 105, textPlayerC);
+    print_menu_generic_string(MARIOTEXT_X2, 105, textPlayerD);
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);
 }
 
@@ -2063,10 +2063,10 @@ void print_score_menu_strings(void) {
     // Print file names
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
-    print_menu_generic_string(89, 62, textMarioA);
-    print_menu_generic_string(211, 62, textMarioB);
-    print_menu_generic_string(89, 105, textMarioC);
-    print_menu_generic_string(211, 105, textMarioD);
+    print_menu_generic_string(89, 62, textPlayerA);
+    print_menu_generic_string(211, 62, textPlayerB);
+    print_menu_generic_string(89, 105, textPlayerC);
+    print_menu_generic_string(211, 105, textPlayerD);
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);
 #endif
 }
@@ -2245,10 +2245,10 @@ void print_copy_menu_strings(void) {
     // Print file names
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
-    print_menu_generic_string(89, 62, textMarioA);
-    print_menu_generic_string(211, 62, textMarioB);
-    print_menu_generic_string(89, 105, textMarioC);
-    print_menu_generic_string(211, 105, textMarioD);
+    print_menu_generic_string(89, 62, textPlayerA);
+    print_menu_generic_string(211, 62, textPlayerB);
+    print_menu_generic_string(89, 105, textPlayerC);
+    print_menu_generic_string(211, 105, textPlayerD);
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);
 #endif
 }
@@ -2377,7 +2377,7 @@ void erase_menu_display_message(s8 messageID) {
     unsigned char textEraseFile[] = { TEXT_ERASE_FILE };
     unsigned char textSure[] = { TEXT_SURE };
     unsigned char textNoSavedDataExists[] = { TEXT_NO_SAVED_DATA_EXISTS };
-    unsigned char textMarioAJustErased[] = { TEXT_FILE_MARIO_A_JUST_ERASED };
+    unsigned char textPlayerAJustErased[] = { TEXT_FILE_MARIO_A_JUST_ERASED };
     unsigned char textSavedDataExists[] = { TEXT_SAVED_DATA_EXISTS };
 #endif
 
@@ -2399,11 +2399,11 @@ void erase_menu_display_message(s8 messageID) {
             print_generic_string_fade(NOSAVE_DATA_X3, 190, LANGUAGE_ARRAY(textNoSavedDataExists));
             break;
         case ERASE_MSG_MARIO_ERASED:
-            LANGUAGE_ARRAY(textMarioAJustErased)[MARIO_ERASED_VAR] = sSelectedFileIndex + 10;
+            LANGUAGE_ARRAY(textPlayerAJustErased)[MARIO_ERASED_VAR] = sSelectedFileIndex + 10;
 #ifdef VERSION_EU
-            centeredX = get_str_x_pos_from_center(160, textMarioAJustErased[sLanguageMode], 10.0f);
+            centeredX = get_str_x_pos_from_center(160, textPlayerAJustErased[sLanguageMode], 10.0f);
 #endif
-            print_generic_string_fade(MARIO_ERASED_X, 190, LANGUAGE_ARRAY(textMarioAJustErased));
+            print_generic_string_fade(MARIO_ERASED_X, 190, LANGUAGE_ARRAY(textPlayerAJustErased));
             break;
         case ERASE_MSG_SAVE_EXISTS: // unused
 #ifdef VERSION_EU
@@ -2513,10 +2513,10 @@ void print_erase_menu_strings(void) {
     // Print file names
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
-    print_menu_generic_string(89, 62, textMarioA);
-    print_menu_generic_string(211, 62, textMarioB);
-    print_menu_generic_string(89, 105, textMarioC);
-    print_menu_generic_string(211, 105, textMarioD);
+    print_menu_generic_string(89, 62, textPlayerA);
+    print_menu_generic_string(211, 62, textPlayerB);
+    print_menu_generic_string(89, 105, textPlayerC);
+    print_menu_generic_string(211, 105, textPlayerD);
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);
 #endif
 }
@@ -2736,7 +2736,7 @@ void print_save_file_scores(s8 fileIndex) {
     s8 tensDigPad;
 
 #ifndef VERSION_EU
-    unsigned char textMario[] = { TEXT_MARIO };
+    unsigned char textPlayer[] = { TEXT_MARIO };
     unsigned char textHiScore[] = { TEXT_HI_SCORE };
     unsigned char textMyScore[] = { TEXT_MY_SCORE };
 #if defined(VERSION_US) || defined(VERSION_SH)
@@ -2770,7 +2770,7 @@ void print_save_file_scores(s8 fileIndex) {
     // Print file name at top
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
-    print_hud_lut_string(HUD_LUT_DIFF, GFX_DIMENSIONS_FROM_LEFT_EDGE(MARIO_X), 15, textMario);
+    print_hud_lut_string(HUD_LUT_DIFF, GFX_DIMENSIONS_FROM_LEFT_EDGE(MARIO_X), 15, textPlayer);
     print_hud_lut_string(HUD_LUT_GLOBAL, GFX_DIMENSIONS_FROM_LEFT_EDGE(FILE_LETTER_X), 15, textFileLetter);
 
     // Print save file star count at top
@@ -3005,8 +3005,8 @@ Gfx *geo_file_select_strings_and_menu_cursor(s32 callContext, UNUSED struct Grap
 }
 
 /**
- * Initiates file select values after Mario Screen.
- * Relocates cursor position of the last save if the game goes back to the Mario Screen
+ * Initiates file select values after Player Screen.
+ * Relocates cursor position of the last save if the game goes back to the Player Screen
  * either completing a course choosing "SAVE & QUIT" or having a game over.
  */
 s32 lvl_init_menu_values_and_cursor_pos(UNUSED s32 arg, UNUSED s32 unused) {
@@ -3018,7 +3018,7 @@ s32 lvl_init_menu_values_and_cursor_pos(UNUSED s32 arg, UNUSED s32 unused) {
     sTextBaseAlpha = 0;
     // Place the cursor over the save file that was being played.
     // gCurrSaveFileNum is 1 by default when the game boots, as such
-    // the cursor will point on Mario A save file.
+    // the cursor will point on Player A save file.
     switch (gCurrSaveFileNum) {
         case 1: // File A
             sCursorPos[0] = -94.0f;

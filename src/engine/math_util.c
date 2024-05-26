@@ -804,7 +804,7 @@ static void find_floor_at_relative_angle(Vec3f point, Vec3f pos, s32 yaw, s32 an
 /**
  * Set 'mtx' to a transformation matrix that aligns an object with the terrain
  * based on 3 height samples in an equilateral triangle around the object.
- * Used for Mario when crawling or sliding.
+ * Used for Player when crawling or sliding.
  * 'yaw' is the angle which it should face
  * 'pos' is the object's position in the world
  * 'radius' is the distance from each triangle vertex to the center
@@ -1074,7 +1074,7 @@ void vec3f_world_pos_to_local_pos(Vec3f destLocalPos, Vec3f srcWorldPos, Vec3f o
 /**
  * Extract a position given an object's transformation matrix and a camera matrix.
  * This is used for determining the world position of the held object: since objMtx
- * inherits the transformation from both the camera and Mario, it calculates this
+ * inherits the transformation from both the camera and Player, it calculates this
  * by taking the camera matrix and inverting its transformation by first rotating
  * objMtx back from screen orientation to world orientation, and then subtracting
  * the camera position.

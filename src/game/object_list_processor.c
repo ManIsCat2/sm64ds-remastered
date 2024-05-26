@@ -81,9 +81,9 @@ struct ObjectNode *gObjectLists;
 struct ObjectNode gFreeObjectList;
 
 /**
- * The object representing Mario.
+ * The object representing Player.
  */
-struct Object *gMarioObject;
+struct Object *gPlayerObject;
 
 /**
  * An object variable that may have been used to represent the planned
@@ -142,17 +142,17 @@ s16 gCollisionFlags = COLLISION_FLAGS_NONE;
 TerrainData *gEnvironmentRegions;
 s32 gEnvironmentLevels[20];
 struct TransitionRoomData gDoorAdjacentRooms[MAX_NUM_TRANSITION_ROOMS];
-s16 gMarioCurrentRoom;
+s16 gPlayerCurrentRoom;
 s16 D_8035FEE2;
 s16 gNumDoorRenderCount;
 s16 gTHIWaterDrained;
 s16 gTTCSpeedSetting;
-s16 gMarioShotFromCannon;
+s16 gPlayerShotFromCannon;
 s16 gCCMEnteredSlide;
-s16 gNumRoomedObjectsInMarioRoom;
-s16 gNumRoomedObjectsNotInMarioRoom;
+s16 gNumRoomedObjectsInPlayerRoom;
+s16 gNumRoomedObjectsNotInPlayerRoom;
 s16 gWDWWaterLevelChanging;
-s16 gMarioOnMerryGoRound;
+s16 gPlayerOnMerryGoRound;
 
 /**
  * Nodes used to represent the doubly linked object lists.
@@ -211,13 +211,13 @@ struct ParticleProperties sParticleTypes[] = {
 };
 
 /**
- * Copy position, velocity, and angle variables from PlayerState to the Mario
+ * Copy position, velocity, and angle variables from PlayerState to the Player
  * object.
  */
-void copy_mario_state_to_object(void) {
+void copy_player_state_to_object(void) {
     s32 i = 0;
     // L is real
-    if (gCurrentObject != gMarioObject) {
+    if (gCurrentObject != gPlayerObject) {
         i++;
     }
 
@@ -255,18 +255,18 @@ void spawn_particle(u32 activeParticleFlag, ModelID16 model, const BehaviorScrip
 }
 
 /**
- * Mario's primary behavior update function.
+ * Player's primary behavior update function.
  */
 void bhv_player_update(void) {
     u32 particleFlags = 0;
     s32 i;
 
     particleFlags = execute_player_action(gCurrentObject);
-    gCurrentObject->oMarioParticleFlags = particleFlags;
+    gCurrentObject->oPlayerParticleFlags = particleFlags;
 
-    // Mario code updates PlayerState's versions of position etc, so we need
-    // to sync it with the Mario object
-    copy_mario_state_to_object();
+    // Player code updates PlayerState's versions of position etc, so we need
+    // to sync it with the Player object
+    copy_player_state_to_object();
 
     i = 0;
     while (sParticleTypes[i].particleFlag != 0) {
@@ -301,7 +301,7 @@ s32 update_objects_starting_at(struct ObjectNode *objList, struct ObjectNode *fi
 
 /**
  * Update objects in objList starting with firstObj while time stop is active.
- * This means that only certain select objects will be updated, such as Mario,
+ * This means that only certain select objects will be updated, such as Player,
  * doors, unimportant objects, and the object that initiated time stop.
  * The exact set of objects that are updated depends on which flags are set
  * in gTimeStopState.
@@ -319,7 +319,7 @@ s32 update_objects_during_time_stop(struct ObjectNode *objList, struct ObjectNod
 
         // Selectively unfreeze certain objects
         if (!(gTimeStopState & TIME_STOP_ALL_OBJECTS)) {
-            if (gCurrentObject == gMarioObject && !(gTimeStopState & TIME_STOP_MARIO_AND_DOORS)) {
+            if (gCurrentObject == gPlayerObject && !(gTimeStopState & TIME_STOP_MARIO_AND_DOORS)) {
                 unfrozen = TRUE;
             }
 
@@ -435,10 +435,10 @@ void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo) {
     gTimeStopState = 0;
 
     gWDWWaterLevelChanging = FALSE;
-    gMarioOnMerryGoRound = FALSE;
+    gPlayerOnMerryGoRound = FALSE;
 
-    //! (Spawning Displacement) On the Japanese version, Mario's platform object
-    //  isn't cleared when transitioning between areas. This can cause Mario to
+    //! (Spawning Displacement) On the Japanese version, Player's platform object
+    //  isn't cleared when transitioning between areas. This can cause Player to
     //  receive displacement after spawning.
 
     if (gCurrAreaIndex == 2) {
@@ -472,9 +472,9 @@ void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo) {
             object->respawnInfoPointer = &spawnInfo->respawnInfo;
             
             // ex-alo change
-            // Checks for Mario behavior so bparam4 can be used by any object
-            if (object->behavior == segmented_to_virtual(bhvMario)) {
-                gMarioObject = object;
+            // Checks for Player behavior so bparam4 can be used by any object
+            if (object->behavior == segmented_to_virtual(bhvPlayer)) {
+                gPlayerObject = object;
                 geo_make_first_child(&object->header.gfx.node);
             }
 
@@ -535,8 +535,8 @@ void clear_objects(void) {
 
     gTHIWaterDrained = 0;
     gTimeStopState = 0;
-    gMarioObject = NULL;
-    gMarioCurrentRoom = 0;
+    gPlayerObject = NULL;
+    gPlayerCurrentRoom = 0;
 
     bzero(gDoorAdjacentRooms, sizeof(gDoorAdjacentRooms));
 
@@ -636,8 +636,8 @@ void update_objects(UNUSED s32 unused) {
 
     gTimeStopState &= ~TIME_STOP_MARIO_OPENED_DOOR;
 
-    gNumRoomedObjectsInMarioRoom = 0;
-    gNumRoomedObjectsNotInMarioRoom = 0;
+    gNumRoomedObjectsInPlayerRoom = 0;
+    gNumRoomedObjectsNotInPlayerRoom = 0;
     gCollisionFlags &= ~COLLISION_FLAG_CAMERA;
 
     reset_debug_objectinfo();
@@ -653,7 +653,7 @@ void update_objects(UNUSED s32 unused) {
     cycleCounts[2] = get_clock_difference(cycleCounts[0]);
     update_terrain_objects();
 
-    // If Mario was touching a moving platform at the end of last frame, apply
+    // If Player was touching a moving platform at the end of last frame, apply
     // displacement now
     //! If the platform object unloaded and a different object took its place,
     //  displacement could be applied incorrectly
@@ -671,7 +671,7 @@ void update_objects(UNUSED s32 unused) {
     cycleCounts[5] = get_clock_difference(cycleCounts[0]);
     unload_deactivated_objects();
 
-    // Check if Mario is on a platform object and save this object
+    // Check if Player is on a platform object and save this object
     cycleCounts[6] = get_clock_difference(cycleCounts[0]);
     update_player_platform();
 

@@ -33,11 +33,11 @@ void bhv_pushable_loop(void) {
     obj_set_hitbox(o, &sMetalBoxHitbox);
     o->oForwardVel = 0.0f;
 
-    if (obj_check_if_collided_with_object(o, gMarioObject)
+    if (obj_check_if_collided_with_object(o, gPlayerObject)
         && (gPlayerStates[0].flags & MARIO_UNKNOWN_31)) {
-        s16 sp1C = obj_angle_to_object(o, gMarioObject);
-        if (abs_angle_diff(sp1C, gMarioObject->oMoveAngleYaw) > 0x4000) {
-            o->oMoveAngleYaw = (s16)((gMarioObject->oMoveAngleYaw + 0x2000) & 0xC000);
+        s16 sp1C = obj_angle_to_object(o, gPlayerObject);
+        if (abs_angle_diff(sp1C, gPlayerObject->oMoveAngleYaw) > 0x4000) {
+            o->oMoveAngleYaw = (s16)((gPlayerObject->oMoveAngleYaw + 0x2000) & 0xC000);
             if (check_if_moving_over_floor(8.0f, 150.0f)) {
                 o->oForwardVel = 4.0f;
                 cur_obj_play_sound_1(SOUND_ENV_METAL_BOX_PUSH);

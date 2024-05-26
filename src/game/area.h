@@ -155,7 +155,7 @@ extern s16 gMenuOptSelectIndex;
 extern s16 gSaveOptSelectIndex;
 extern s16 gGlobalGameSkips;
 
-extern struct SpawnInfo *gMarioSpawnInfo;
+extern struct SpawnInfo *gPlayerSpawnInfo;
 
 extern struct Area *gAreas;
 extern struct Area *gCurrentArea;

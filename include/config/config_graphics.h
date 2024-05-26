@@ -30,7 +30,7 @@
 /// Makes trees use actual shadows, recommended to use with optimized shadows.
 #define PROPER_TREE_SHADOWS (0 || QOL_FEATURES)
 
-/// Makes Mario show a proper graphic of a special collectable (Transparent stars are now properly shown).
+/// Makes the player show a proper graphic of a special collectable (Transparent stars are now properly shown).
 #define SHOW_INTERACT_OBJ_COLLECTABLE (0 || QOL_FEATURES)
 
 /// Correctly changes star model to be transparent when (Klepto and Unagi) stars are collected.

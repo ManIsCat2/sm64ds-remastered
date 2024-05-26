@@ -63,7 +63,7 @@ void whomp_turn(void) {
 }
 
 void whomp_patrol(void) {
-    s16 playerAngle = abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw);
+    s16 playerAngle = abs_angle_diff(o->oAngleToPlayer, o->oMoveAngleYaw);
     f32 distWalked = cur_obj_lateral_dist_to_home();
     f32 patrolDist;
 
@@ -94,10 +94,10 @@ void whomp_patrol(void) {
 void king_whomp_chase(void) {
     cur_obj_init_animation_with_accel_and_sound(0, 1.0f);
     o->oForwardVel = 3.0f;
-    cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x200);
+    cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 0x200);
 
     if (o->oTimer > 30) {
-        s16 playerAngle = abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw);
+        s16 playerAngle = abs_angle_diff(o->oAngleToPlayer, o->oMoveAngleYaw);
         if (playerAngle < 0x2000) {
             if (o->oDistanceToPlayer < 1500.0f) {
                 o->oForwardVel = 9.0f;
@@ -166,7 +166,7 @@ void king_whomp_on_ground(void) {
                 o->oAction = 8;
             } else {
                 vec3f_copy_2(pos, &o->oPosX);
-                vec3f_copy_2(&o->oPosX, &gMarioObject->oPosX);
+                vec3f_copy_2(&o->oPosX, &gPlayerObject->oPosX);
                 spawn_mist_particles_variable(0, 0, 100.0f);
                 spawn_triangle_break_particles(20, MODEL_DIRT_ANIMATION, 3.0f, 4);
                 cur_obj_shake_screen(SHAKE_POS_SMALL);
@@ -191,7 +191,7 @@ void king_whomp_on_ground(void) {
 
 void whomp_on_ground(void) {
     if (o->oSubAction == 0) {
-        if (gMarioObject->platform == o) {
+        if (gPlayerObject->platform == o) {
             if (cur_obj_is_player_ground_pounding_platform()) {
                 o->oNumLootCoins = 5;
                 obj_spawn_loot_yellow_coins(o, 5, 20.0f);

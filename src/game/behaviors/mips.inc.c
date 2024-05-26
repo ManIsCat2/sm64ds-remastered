@@ -37,14 +37,14 @@ void bhv_mips_init(void) {
 
 /**
  * Helper function that finds the waypoint that is both within 800 units of MIPS
- * and furthest from Mario's current location.
+ * and furthest from Player's current location.
  */
-s16 bhv_mips_find_furthest_waypoint_to_mario(void) {
+s16 bhv_mips_find_furthest_waypoint_to_player(void) {
     s8 i;
     s16 x, y, z;
     s16 furthestWaypointIndex = -1;
     f32 furthestWaypointDistance = -10000.0f;
-    f32 distanceToMario;
+    f32 distanceToPlayer;
     struct Waypoint **pathBase = segmented_to_virtual(&inside_castle_seg7_trajectory_mips);
 
     // For each waypoint in MIPS path...
@@ -56,34 +56,34 @@ s16 bhv_mips_find_furthest_waypoint_to_mario(void) {
 
         // Is the waypoint within 800 units of MIPS?
         if (is_point_close_to_object(o, x, y, z, 800)) {
-            // Is this further from Mario than the last waypoint?
-            distanceToMario =
-                sqr(x - gMarioObject->header.gfx.pos[0]) + sqr(z - gMarioObject->header.gfx.pos[2]);
-            if (furthestWaypointDistance < distanceToMario) {
+            // Is this further from Player than the last waypoint?
+            distanceToPlayer =
+                sqr(x - gPlayerObject->header.gfx.pos[0]) + sqr(z - gPlayerObject->header.gfx.pos[2]);
+            if (furthestWaypointDistance < distanceToPlayer) {
                 furthestWaypointIndex = i;
-                furthestWaypointDistance = distanceToMario;
+                furthestWaypointDistance = distanceToPlayer;
             }
         }
     }
 
-    // Set MIPS' next waypoint to be the closest waypoint to Mario.
+    // Set MIPS' next waypoint to be the closest waypoint to Player.
     o->oMipsStartWaypointIndex = furthestWaypointIndex;
     return (s16) o->oMipsStartWaypointIndex;
 }
 
 /**
- * Wait until Mario comes close, then resume following our path.
+ * Wait until Player comes close, then resume following our path.
  */
-void bhv_mips_act_wait_for_nearby_mario(void) {
+void bhv_mips_act_wait_for_nearby_player(void) {
     UNUSED s16 collisionFlags = 0;
 
     o->oForwardVel = 0.0f;
     collisionFlags = object_step();
 
-    // If Mario is within 500 units...
+    // If Player is within 500 units...
     if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 500)) {
         // If we fail to find a suitable waypoint...
-        if (bhv_mips_find_furthest_waypoint_to_mario() == -1) {
+        if (bhv_mips_find_furthest_waypoint_to_player() == -1) {
             // Call it quits.
             o->oAction = MIPS_ACT_WAIT_FOR_ANIMATION_DONE;
         } else {
@@ -111,7 +111,7 @@ void bhv_mips_act_follow_path(void) {
     o->oMoveAngleYaw = o->oPathedTargetYaw;
     s16 collisionFlags = object_step();
 
-    // If we are at the end of the path, do idle animation and wait for Mario.
+    // If we are at the end of the path, do idle animation and wait for Player.
     if (followStatus == PATH_REACHED_END) {
         cur_obj_init_animation(0);
         o->oAction = MIPS_ACT_WAIT_FOR_NEARBY_MARIO;
@@ -179,7 +179,7 @@ void bhv_mips_act_idle(void) {
 void bhv_mips_free(void) {
     switch (o->oAction) {
         case MIPS_ACT_WAIT_FOR_NEARBY_MARIO:
-            bhv_mips_act_wait_for_nearby_mario();
+            bhv_mips_act_wait_for_nearby_player();
             break;
 
         case MIPS_ACT_FOLLOW_PATH:
@@ -201,14 +201,14 @@ void bhv_mips_free(void) {
 }
 
 /**
- * Handles MIPS being held by Mario.
+ * Handles MIPS being held by Player.
  */
 void bhv_mips_held(void) {
     s16 dialogID;
 
     o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
     cur_obj_init_animation(4); // Held animation.
-    cur_obj_set_pos_relative(gMarioObject, 0, 60.0f, 100.0f);
+    cur_obj_set_pos_relative(gPlayerObject, 0, 60.0f, 100.0f);
     cur_obj_become_intangible();
 
     // If MIPS hasn't spawned his star yet...
@@ -233,7 +233,7 @@ void bhv_mips_held(void) {
 }
 
 /**
- * Handles MIPS being dropped by Mario.
+ * Handles MIPS being dropped by Player.
  */
 void bhv_mips_dropped(void) {
     cur_obj_get_dropped();
@@ -246,7 +246,7 @@ void bhv_mips_dropped(void) {
 }
 
 /**
- * Handles MIPS being thrown by Mario.
+ * Handles MIPS being thrown by Player.
  */
 void bhv_mips_thrown(void) {
     cur_obj_enable_rendering_2();

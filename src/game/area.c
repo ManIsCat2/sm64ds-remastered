@@ -37,7 +37,7 @@ s16 gSavedCourseNum;
 s16 gMenuOptSelectIndex;
 s16 gSaveOptSelectIndex;
 
-struct SpawnInfo *gMarioSpawnInfo = &gPlayerSpawnInfos[0];
+struct SpawnInfo *gPlayerSpawnInfo = &gPlayerSpawnInfos[0];
 struct GraphNode **gLoadedGraphNodes = gGraphNodePointers;
 struct Area *gAreas = gAreaData;
 struct Area *gCurrentArea = NULL;
@@ -194,7 +194,7 @@ void clear_areas(void) {
     gCurrentArea = NULL;
     gWarpTransition.isActive = FALSE;
     gWarpTransition.pauseRendering = FALSE;
-    gMarioSpawnInfo->areaIndex = -1;
+    gPlayerSpawnInfo->areaIndex = -1;
 
     for (i = 0; i < 8; i++) {
         gAreaData[i].index = i;
@@ -246,7 +246,7 @@ void load_area(s32 index) {
         main_pool_push_state();
 
 #if BETTER_ROOM_CHECKS
-        gMarioCurrentRoom = 0;
+        gPlayerCurrentRoom = 0;
 #endif
 
 #if FIX_DOOR_NO_ROOM_VISIBLE
@@ -282,17 +282,17 @@ void unload_area(void) {
 
 void load_player_area(void) {
     stop_sounds_in_continuous_banks();
-    load_area(gMarioSpawnInfo->areaIndex);
+    load_area(gPlayerSpawnInfo->areaIndex);
 
-    if (gCurrentArea->index == gMarioSpawnInfo->areaIndex) {
+    if (gCurrentArea->index == gPlayerSpawnInfo->areaIndex) {
         gCurrentArea->flags |= 0x01;
-        spawn_objects_from_info(0, gMarioSpawnInfo);
+        spawn_objects_from_info(0, gPlayerSpawnInfo);
     }
 }
 
 void unload_player_area(void) {
     if (gCurrentArea != NULL && (gCurrentArea->flags & 0x01)) {
-        unload_objects_from_area(0, gMarioSpawnInfo->activeAreaIndex);
+        unload_objects_from_area(0, gPlayerSpawnInfo->activeAreaIndex);
 
         gCurrentArea->flags &= ~0x01;
         if (gCurrentArea->flags == 0) {
@@ -309,11 +309,11 @@ void change_area(s32 index) {
         load_area(index);
 
         gCurrentArea->flags = areaFlags;
-        gMarioObject->oActiveParticleFlags = 0;
+        gPlayerObject->oActiveParticleFlags = 0;
     }
 
     if (areaFlags & 0x01) {
-        gMarioObject->header.gfx.areaIndex = index, gMarioSpawnInfo->areaIndex = index;
+        gPlayerObject->header.gfx.areaIndex = index, gPlayerSpawnInfo->areaIndex = index;
     }
 }
 

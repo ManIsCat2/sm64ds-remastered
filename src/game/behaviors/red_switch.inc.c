@@ -3,21 +3,21 @@
  * Behavior for bhvFloorSwitchHardcodedModel, bhvFloorSwitchGrills, and
  * bhvFloorSwitchAnimatesObject.
  *
- * This controls the red switches that Mario can step on to affect parts of
+ * This controls the red switches that Player can step on to affect parts of
  * the environment.
  */
 
 void bhv_red_switch_loop(void) {
     switch (o->oAction) {
         /**
-         * Set the switch's model and scale. If Mario is standing near the
+         * Set the switch's model and scale. If Player is standing near the
          * switch's middle section, transition to the pressed state.
          */
         case SWITCH_ACT_IDLE:
             cur_obj_set_model(MODEL_RED_SWITCH);
             cur_obj_scale(1.5f);
-            if (gMarioObject->platform == o && !(gPlayerStates[0].action & MARIO_UNKNOWN_13)) {
-                if (lateral_dist_between_objects(o, gMarioObject) < 127.5) {
+            if (gPlayerObject->platform == o && !(gPlayerStates[0].action & MARIO_UNKNOWN_13)) {
+                if (lateral_dist_between_objects(o, gPlayerObject) < 127.5) {
                     o->oAction = SWITCH_ACT_PRESSED;
                 }
             }
@@ -45,7 +45,7 @@ void bhv_red_switch_loop(void) {
          */
         case SWITCH_ACT_TICKING:
             if (o->oBhvParams2ndByte != 0) {
-                if (o->oBhvParams2ndByte == 1 && gMarioObject->platform != o) {
+                if (o->oBhvParams2ndByte == 1 && gPlayerObject->platform != o) {
                     o->oAction++;
                 } else {
                     if (o->oTimer < 360) {
@@ -72,7 +72,7 @@ void bhv_red_switch_loop(void) {
             break;
 
         /**
-         * Mario is standing on the switch, but time has expired. Wait for
+         * Player is standing on the switch, but time has expired. Wait for
          * him to get off the switch, and when he does so, transition to the
          * unpressed state.
          */

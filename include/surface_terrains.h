@@ -7,8 +7,8 @@
 #define SURFACE_NEW_WATER                    0x0002 // Custom water surface (Used when NEW_WATER_SURFACES is set)
 #define SURFACE_NEW_WATER_BOTTOM             0x0003 // Custom water surface bottom marker (Used when NEW_WATER_SURFACES is set)
 #define SURFACE_0004                         0x0004 // Unused, has no function and has parameters
-#define SURFACE_HANGABLE                     0x0005 // Ceiling that Mario can climb on
-#define SURFACE_SLOW                         0x0009 // Slow down Mario, unused
+#define SURFACE_HANGABLE                     0x0005 // Ceiling that the player can climb on
+#define SURFACE_SLOW                         0x0009 // Slow down the player, unused
 #define SURFACE_DEATH_PLANE                  0x000A // Death floor
 #define SURFACE_CLOSE_CAMERA                 0x000B // Close camera
 #define SURFACE_WATER                        0x000D // Water, has no action, used on some waterboxes below

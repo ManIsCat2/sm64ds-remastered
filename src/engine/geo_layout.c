@@ -63,10 +63,10 @@ UNUSED s32 D_8038BCA8;
  *
  * When creating a root node, room for (2 + cmd+0x02) pointers is allocated in
  * gGeoViews. Except for the title screen, cmd+0x02 is 10. The 2 default ones
- * might be for Mario and Luigi, and the other 10 could be different cameras for
+ * might be for Player and Luigi, and the other 10 could be different cameras for
  * different rooms / boss fights. An area might be structured like this:
  *
- * geo_camera mode_player //Mario cam
+ * geo_camera mode_player //Player cam
  * geo_open_node
  *   geo_render_obj
  *   geo_assign_as_view 1   // currently unused geo command
@@ -83,7 +83,7 @@ UNUSED s32 D_8038BCA8;
  * geo_assign_as_view 3
  * ...
  *
- * There might also be specific geo nodes for Mario or Luigi only. Or a fixed camera
+ * There might also be specific geo nodes for Player or Luigi only. Or a fixed camera
  * might not have display list nodes of parts of the level that are out of view.
  * In the end Luigi got scrapped and the multiple-camera design did not pan out,
  * so everything was reduced to a single ObjectParent with a single group, and
@@ -210,7 +210,7 @@ void geo_layout_cmd_node_root(void) {
 
     // number of entries to allocate for gGeoViews array
     // at least 2 are allocated by default
-    // cmd+0x02 = 0x00: Mario face, 0x0A: all other levels
+    // cmd+0x02 = 0x00: Player face, 0x0A: all other levels
     gGeoNumViews = cur_geo_cmd_s16(0x02) + 2;
 
     graphNode = init_graph_node_root(gGraphNodePool, NULL, 0, x, y, width, height);

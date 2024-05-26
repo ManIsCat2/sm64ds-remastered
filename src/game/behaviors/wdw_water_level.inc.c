@@ -26,7 +26,7 @@ void bhv_water_level_diamond_loop(void) {
                 break;
 
             case WATER_LEVEL_DIAMOND_ACT_IDLE:
-                if (obj_check_if_collided_with_object(o, gMarioObject) && !gWDWWaterLevelChanging) {
+                if (obj_check_if_collided_with_object(o, gPlayerObject) && !gWDWWaterLevelChanging) {
                     o->oAction++; // Sets to WATER_LEVEL_DIAMOND_ACT_CHANGE_WATER_LEVEL
                     gWDWWaterLevelChanging = TRUE;
                 }
@@ -59,7 +59,7 @@ void bhv_water_level_diamond_loop(void) {
                 break;
 
             case WATER_LEVEL_DIAMOND_ACT_IDLE_SPINNING:
-                if (!obj_check_if_collided_with_object(o, gMarioObject)) {
+                if (!obj_check_if_collided_with_object(o, gPlayerObject)) {
                     gWDWWaterLevelChanging = FALSE;
                     o->oAction = WATER_LEVEL_DIAMOND_ACT_IDLE;
                     o->oAngleVelYaw = 0;

@@ -1,9 +1,9 @@
 #ifndef MARIO_GEO_SWITCH_CASE_IDS_H
 #define MARIO_GEO_SWITCH_CASE_IDS_H
 
-/* Mario Geo-Switch-Case IDs */
+/* Player Geo-Switch-Case IDs */
 
-enum MarioEyesGSCId {
+enum PlayerEyesGSCId {
     /*0x00*/ MARIO_EYES_BLINK,
     /*0x01*/ MARIO_EYES_OPEN,
     /*0x02*/ MARIO_EYES_HALF_CLOSED,
@@ -15,7 +15,7 @@ enum MarioEyesGSCId {
     /*0x08*/ MARIO_EYES_DEAD
 };
 
-enum MarioHandGSCId {
+enum PlayerHandGSCId {
     /*0x00*/ MARIO_HAND_FISTS,
     /*0x01*/ MARIO_HAND_OPEN,
     /*0x02*/ MARIO_HAND_PEACE_SIGN,
@@ -24,14 +24,14 @@ enum MarioHandGSCId {
     /*0x05*/ MARIO_HAND_RIGHT_OPEN
 };
 
-enum MarioCapGSCId {
+enum PlayerCapGSCId {
     /*0x00*/ MARIO_HAS_DEFAULT_CAP_ON,
     /*0x01*/ MARIO_HAS_DEFAULT_CAP_OFF,
     /*0x02*/ MARIO_HAS_WING_CAP_ON,
     /*0x03*/ MARIO_HAS_WING_CAP_OFF // unused
 };
 
-enum MarioGrabPosGSCId {
+enum PlayerGrabPosGSCId {
     /*0x00*/ GRAB_POS_NULL,
     /*0x01*/ GRAB_POS_LIGHT_OBJ,
     /*0x02*/ GRAB_POS_HEAVY_OBJ,

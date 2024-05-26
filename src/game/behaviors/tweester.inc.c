@@ -2,7 +2,7 @@
 /**
  * Behavior file for bhvTweester and bhvTweesterSandParticle
  * Tweester swaps between twhree action- an idle action, a chasing
- * Mario action, and an action that hides it. At certain times the
+ * Player action, and an action that hides it. At certain times the
  * Tweester spawns the sand particles also in this file.
  */
 
@@ -39,7 +39,7 @@ void tweester_scale_and_move(f32 preScale) {
 }
 
 /**
- * Tweester's idle action. Basically stays in active until Mario enters a 1500
+ * Tweester's idle action. Basically stays in active until Player enters a 1500
  * radius, at which point it appears and grows for 60 frames at which point it
  * it enters the chasing action.
  */
@@ -52,7 +52,7 @@ void tweester_act_idle(void) {
         // Hard to have any idea of this purpose, only set here.
         o->oTweesterUnused = 0;
 
-        // If Mario is within range, change to the growth sub-action.
+        // If Player is within range, change to the growth sub-action.
         if (o->oDistanceToPlayer < 1500.0f) {
             o->oSubAction++;
         }
@@ -68,8 +68,8 @@ void tweester_act_idle(void) {
 }
 
 /**
- * Action where the tweester "chases" Mario.
- * After Mario is twirling, then return home.
+ * Action where the tweester "chases" Player.
+ * After Player is twirling, then return home.
  */
 void tweester_act_chase(void) {
     f32 activationRadius = o->oBhvParams2ndByte * 100;
@@ -77,11 +77,11 @@ void tweester_act_chase(void) {
     o->oAngleToHome = cur_obj_angle_to_home();
     cur_obj_play_sound_1(SOUND_ENV_WIND1);
 
-    if (cur_obj_lateral_dist_from_mario_to_home() < activationRadius
+    if (cur_obj_lateral_dist_from_player_to_home() < activationRadius
         && o->oSubAction == TWEESTER_SUB_ACT_CHASE) {
 
         o->oForwardVel = 20.0f;
-        cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x200);
+        cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 0x200);
         print_debug_top_down_objectinfo("off ", 0);
 
         if (gPlayerStates[0].action == ACT_TWIRLING) {
@@ -112,7 +112,7 @@ void tweester_act_chase(void) {
 
 /**
  * Shrinks the tweester until it is invisible, then returns to the idle
- * action if Mario is 2500 units away or 12 seconds passed.
+ * action if Player is 2500 units away or 12 seconds passed.
  */
 void tweester_act_hide(void) {
     f32 shrinkTimer = 60.0f - o->oTimer;
@@ -121,7 +121,7 @@ void tweester_act_hide(void) {
         tweester_scale_and_move(shrinkTimer / 60.0f);
     } else {
         cur_obj_become_intangible();
-        if (cur_obj_lateral_dist_from_mario_to_home() > 2500.0f) {
+        if (cur_obj_lateral_dist_from_player_to_home() > 2500.0f) {
             o->oAction = TWEESTER_ACT_IDLE;
         }
         if (o->oTimer > 360) {

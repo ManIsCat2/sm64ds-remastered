@@ -10,9 +10,9 @@ void dorrie_raise_head(void) {
 
     vec3f_set(
         gPlayerState->pos,
-        gMarioObject->oPosX + (xzDisp * sins(o->oMoveAngleYaw)),
-        gMarioObject->oPosY - yDisp,
-        gMarioObject->oPosZ + (xzDisp * coss(o->oMoveAngleYaw))
+        gPlayerObject->oPosX + (xzDisp * sins(o->oMoveAngleYaw)),
+        gPlayerObject->oPosY - yDisp,
+        gPlayerObject->oPosZ + (xzDisp * coss(o->oMoveAngleYaw))
     );
 }
 
@@ -24,15 +24,15 @@ void dorrie_act_move(void) {
     o->oDorrieNeckAngle = -0x26F4;
     cur_obj_init_animation_with_sound(1);
 
-    if (o->oDorrieForwardDistToMario < 320.0f && o->oDorrieGroundPounded) {
+    if (o->oDorrieForwardDistToPlayer < 320.0f && o->oDorrieGroundPounded) {
         cur_obj_play_sound_2(SOUND_OBJ_DORRIE);
         o->collisionData = segmented_to_virtual(dorrie_seg6_collision_0600FBB8);
         o->oAction = DORRIE_ACT_LOWER_HEAD;
         o->oForwardVel = 0.0f;
         o->oDorrieYawVel = 0;
     } else {
-        if (gMarioObject->platform == o) {
-            targetYaw = gMarioObject->oFaceAngleYaw;
+        if (gPlayerObject->platform == o) {
+            targetYaw = gPlayerObject->oFaceAngleYaw;
             targetSpeed = 10;
         } else {
             s16 circularTurn = 0x4000 - atan2s(2000.0f, o->oDorrieDistToHome - 2000.0f);
@@ -53,8 +53,8 @@ void dorrie_act_move(void) {
     o->oAngleVelYaw = o->oMoveAngleYaw - startYaw;
 }
 
-void dorrie_begin_head_raise(s32 liftingMario) {
-    o->oDorrieLiftingMario = liftingMario;
+void dorrie_begin_head_raise(s32 liftingPlayer) {
+    o->oDorrieLiftingPlayer = liftingPlayer;
     o->oAction = DORRIE_ACT_RAISE_HEAD;
     o->oDorrieHeadRaiseSpeed = 0;
 }
@@ -63,11 +63,11 @@ void dorrie_act_lower_head(void) {
     if (cur_obj_init_anim_check_frame(2, 35)) {
         cur_obj_reverse_animation();
 
-        if (gMarioObject->platform == o) {
-            if (o->oDorrieOffsetY == -17.0f && o->oDorrieForwardDistToMario > 780.0f
+        if (gPlayerObject->platform == o) {
+            if (o->oDorrieOffsetY == -17.0f && o->oDorrieForwardDistToPlayer > 780.0f
                 && set_player_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_START) {
                 dorrie_begin_head_raise(TRUE);
-            } else if (o->oDorrieForwardDistToMario > 320.0f) {
+            } else if (o->oDorrieForwardDistToPlayer > 320.0f) {
                 o->oTimer = 0;
             }
         } else if (o->oTimer > 150) {
@@ -83,7 +83,7 @@ void dorrie_act_raise_head(void) {
     o->collisionData = segmented_to_virtual(dorrie_seg6_collision_0600F644);
     if (cur_obj_check_if_near_animation_end()) {
         o->oAction = DORRIE_ACT_MOVE;
-    } else if (o->oDorrieLiftingMario && o->header.gfx.animInfo.animFrame < 74) {
+    } else if (o->oDorrieLiftingPlayer && o->header.gfx.animInfo.animFrame < 74) {
         if (set_player_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_SPEAK) {
             o->oDorrieHeadRaiseSpeed += 0x1CC;
             if (cur_obj_check_anim_frame(73)) {
@@ -102,7 +102,7 @@ void bhv_dorrie_update(void) {
     f32 maxOffsetY;
 
     if (!(o->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM)) {
-        o->oDorrieForwardDistToMario = o->oDistanceToPlayer * coss(o->oAngleToMario - o->oMoveAngleYaw);
+        o->oDorrieForwardDistToPlayer = o->oDistanceToPlayer * coss(o->oAngleToPlayer - o->oMoveAngleYaw);
 
         obj_perform_position_op(0);
         cur_obj_move_using_fvel_and_gravity();
@@ -121,7 +121,7 @@ void bhv_dorrie_update(void) {
 
         o->oDorrieGroundPounded = cur_obj_is_player_ground_pounding_platform();
 
-        if (gMarioObject->platform == o) {
+        if (gPlayerObject->platform == o) {
             maxOffsetY = -17.0f;
             if (o->oDorrieOffsetY >= 0.0f) {
                 if (o->oDorrieGroundPounded) {

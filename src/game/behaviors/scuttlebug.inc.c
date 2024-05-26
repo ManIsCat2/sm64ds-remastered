@@ -54,13 +54,13 @@ void bhv_scuttlebug_loop(void) {
 
         case 1:
             o->oForwardVel = 5.0f;
-            if (cur_obj_lateral_dist_from_mario_to_home() > 1000.0f) {
-                o->oAngleToMario = cur_obj_angle_to_home();
+            if (cur_obj_lateral_dist_from_player_to_home() > 1000.0f) {
+                o->oAngleToPlayer = cur_obj_angle_to_home();
             } else {
                 if (o->oScuttlebugUnkF8 == 0) {
                     o->oScuttlebugUnkFC = 0;
-                    o->oAngleToMario = obj_angle_to_object(o, gMarioObject);
-                    if (abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw) < 0x800) {
+                    o->oAngleToPlayer = obj_angle_to_object(o, gPlayerObject);
+                    if (abs_angle_diff(o->oAngleToPlayer, o->oMoveAngleYaw) < 0x800) {
                         o->oScuttlebugUnkF8 = 1;
                         o->oVelY = 20.0f;
                         cur_obj_play_sound_2(SOUND_OBJ2_SCUTTLEBUG_ALERT);
@@ -73,21 +73,21 @@ void bhv_scuttlebug_loop(void) {
                     }
                 }
             }
-            if (update_angle_from_move_flags(&o->oAngleToMario)) {
+            if (update_angle_from_move_flags(&o->oAngleToPlayer)) {
                 o->oSubAction = 2;
             }
-            cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x200);
+            cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 0x200);
             break;
 
         case 2:
             o->oForwardVel = 5.0f;
-            if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
+            if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToPlayer) {
                 o->oSubAction = 1;
             }
             if (o->oPosY - o->oHomeY < -200.0f) {
                 obj_mark_for_deletion(o);
             }
-            cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x400);
+            cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 0x400);
             break;
 
         case 3:

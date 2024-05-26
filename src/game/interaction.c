@@ -136,7 +136,7 @@ static u8 sJustTeleported = FALSE;
 u8 gPSSSlideStarted = FALSE;
 
 /**
- * Returns the type of cap Mario is wearing.
+ * Returns the type of cap Player is wearing.
  */
 u32 get_player_cap_flag(struct Object *capObject) {
     const BehaviorScript *script = virtual_to_segmented(0x13, capObject->behavior);
@@ -156,14 +156,14 @@ u32 get_player_cap_flag(struct Object *capObject) {
 
 /**
  * Returns true if the passed in object has a moving angle yaw
- * in the angular range given towards Mario.
+ * in the angular range given towards Player.
  */
 u32 object_facing_player(struct PlayerState *m, struct Object *o, s16 angleRange) {
     f32 dx = m->pos[0] - o->oPosX;
     f32 dz = m->pos[2] - o->oPosZ;
 
-    s16 angleToMario = atan2s(dz, dx);
-    s16 dAngle = angleToMario - o->oMoveAngleYaw;
+    s16 angleToPlayer = atan2s(dz, dx);
+    s16 dAngle = angleToPlayer - o->oMoveAngleYaw;
 
     if (-angleRange <= dAngle && dAngle <= angleRange) {
         return TRUE;
@@ -180,7 +180,7 @@ s16 player_obj_angle_to_object(struct PlayerState *m, struct Object *o) {
 }
 
 /**
- * Determines Mario's interaction with a given object depending on their proximity,
+ * Determines Player's interaction with a given object depending on their proximity,
  * action, speed, and position.
  */
 u32 determine_interaction(struct PlayerState *m, struct Object *o) {
@@ -214,7 +214,7 @@ u32 determine_interaction(struct PlayerState *m, struct Object *o) {
                 interaction = INT_GROUND_POUND_OR_TWIRL;
             }
         } else if (action == ACT_GROUND_POUND_LAND || action == ACT_TWIRL_LAND) {
-            // Neither ground pounding nor twirling change Mario's vertical speed on landing.,
+            // Neither ground pounding nor twirling change Player's vertical speed on landing.,
             // so the speed check is nearly always true (perhaps not if you land while going upwards?)
             // Additionally, actionState it set on each first thing in their action, so this is
             // only true prior to the very first frame (i.e. active 1 frame prior to it run).
@@ -304,7 +304,7 @@ void player_drop_held_object(struct PlayerState *m) {
 
         obj_set_held_state(m->heldObj, bhvCarrySomething4);
 
-        // ! When dropping an object instead of throwing it, it will be put at Mario's
+        // ! When dropping an object instead of throwing it, it will be put at Player's
         // y-positon instead of the HOLP's y-position. This fact is often exploited when
         // cloning objects.
         m->heldObj->oPosX = m->playerBodyState->heldObjLastPosition[0];
@@ -341,7 +341,7 @@ void player_stop_riding_and_holding(struct PlayerState *m) {
 
     if (m->action == ACT_RIDING_HOOT) {
         m->usedObj->oInteractStatus = FALSE;
-        m->usedObj->oHootMarioReleaseTime = gGlobalTimer;
+        m->usedObj->oHootPlayerReleaseTime = gGlobalTimer;
     }
 }
 
@@ -454,7 +454,7 @@ u32 player_check_object_grab(struct PlayerState *m) {
 u32 bully_knock_back_player(struct PlayerState *player) {
     struct BullyCollisionData playerData;
     struct BullyCollisionData bullyData;
-    s16 newMarioYaw;
+    s16 newPlayerYaw;
     s16 newBullyYaw;
     s16 playerDYaw;
     UNUSED s16 bullyDYaw;
@@ -465,11 +465,11 @@ u32 bully_knock_back_player(struct PlayerState *player) {
 
     //! Conversion ratios multiply to more than 1 (could allow unbounded speed
     // with bonk cancel - but this isn't important for regular bully battery)
-    f32 bullyToMarioRatio = bully->hitboxRadius * 3 / 53;
+    f32 bullyToPlayerRatio = bully->hitboxRadius * 3 / 53;
     f32 playerToBullyRatio = 53.0f / bully->hitboxRadius;
 
     init_bully_collision_data(&playerData, player->pos[0], player->pos[2], player->forwardVel,
-                              player->faceAngle[1], bullyToMarioRatio, 52.0f);
+                              player->faceAngle[1], bullyToPlayerRatio, 52.0f);
 
     init_bully_collision_data(&bullyData, bully->oPosX, bully->oPosZ, bully->oForwardVel,
                               bully->oMoveAngleYaw, playerToBullyRatio, bully->hitboxRadius + 2.0f);
@@ -480,13 +480,13 @@ u32 bully_knock_back_player(struct PlayerState *player) {
         transfer_bully_speed(&bullyData, &playerData);
     }
 
-    newMarioYaw = atan2s(playerData.velZ, playerData.velX);
+    newPlayerYaw = atan2s(playerData.velZ, playerData.velX);
     newBullyYaw = atan2s(bullyData.velZ, bullyData.velX);
 
-    playerDYaw = newMarioYaw - player->faceAngle[1];
+    playerDYaw = newPlayerYaw - player->faceAngle[1];
     bullyDYaw = newBullyYaw - bully->oMoveAngleYaw;
 
-    player->faceAngle[1] = newMarioYaw;
+    player->faceAngle[1] = newPlayerYaw;
     player->forwardVel = sqrtf(playerData.velX * playerData.velX + playerData.velZ * playerData.velZ);
     player->pos[0] = playerData.posX;
     player->pos[2] = playerData.posZ;
@@ -627,8 +627,8 @@ void push_player_out_of_object(struct PlayerState *m, struct Object *o, f32 padd
     if (distance < minDistance) {
         struct Surface *floor;
         s16 pushAngle;
-        f32 newMarioX;
-        f32 newMarioZ;
+        f32 newPlayerX;
+        f32 newPlayerZ;
 
         if (distance == 0.0f) {
             pushAngle = m->faceAngle[1];
@@ -636,20 +636,20 @@ void push_player_out_of_object(struct PlayerState *m, struct Object *o, f32 padd
             pushAngle = atan2s(offsetZ, offsetX);
         }
 
-        newMarioX = o->oPosX + minDistance * sins(pushAngle);
-        newMarioZ = o->oPosZ + minDistance * coss(pushAngle);
+        newPlayerX = o->oPosX + minDistance * sins(pushAngle);
+        newPlayerZ = o->oPosZ + minDistance * coss(pushAngle);
 
-        f32_find_wall_collision(&newMarioX, &m->pos[1], &newMarioZ, 60.0f, 50.0f);
+        f32_find_wall_collision(&newPlayerX, &m->pos[1], &newPlayerZ, 60.0f, 50.0f);
 
 #if FIX_PUSH_MARIO_OUT_OF_OBJECT_FLOOR
         f32 floorHeight =
 #endif
-        find_floor(newMarioX, m->pos[1], newMarioZ, &floor);
+        find_floor(newPlayerX, m->pos[1], newPlayerZ, &floor);
         if (floor != NULL) {
-            //! Doesn't update Mario's referenced floor (allows oob death when
+            //! Doesn't update Player's referenced floor (allows oob death when
             // an object pushes you into a steep slope while in a ground action)
-            m->pos[0] = newMarioX;
-            m->pos[2] = newMarioZ;
+            m->pos[0] = newPlayerX;
+            m->pos[2] = newPlayerZ;
 #if FIX_PUSH_MARIO_OUT_OF_OBJECT_FLOOR
             m->floor       = floor;
             m->floorHeight = floorHeight;
@@ -1095,8 +1095,8 @@ u32 interact_tornado(struct PlayerState *m, UNUSED u32 interactType, struct Obje
         m->interactObj = o;
         m->usedObj = o;
 
-        playerObj->oMarioTornadoYawVel = 0x400;
-        playerObj->oMarioTornadoPosY = m->pos[1] - o->oPosY;
+        playerObj->oPlayerTornadoYawVel = 0x400;
+        playerObj->oPlayerTornadoPosY = m->pos[1] - o->oPosY;
 
         play_sound(SOUND_MARIO_WAAAOOOW, m->playerObj->header.gfx.cameraToObject);
 #ifdef RUMBLE_FEEDBACK  
@@ -1120,7 +1120,7 @@ u32 interact_whirlpool(struct PlayerState *m, UNUSED u32 interactType, struct Ob
 
         m->forwardVel = 0.0f;
 
-        playerObj->oMarioWhirlpoolPosY = m->pos[1] - o->oPosY;
+        playerObj->oPlayerWhirlpoolPosY = m->pos[1] - o->oPosY;
 
         play_sound(SOUND_MARIO_WAAAOOOW, m->playerObj->header.gfx.cameraToObject);
 #ifdef RUMBLE_FEEDBACK  
@@ -1170,7 +1170,7 @@ u32 interact_flame(struct PlayerState *m, UNUSED u32 interactType, struct Object
             || m->waterLevel - m->pos[1] > 50.0f) {
             play_sound(SOUND_GENERAL_FLAME_OUT, m->playerObj->header.gfx.cameraToObject);
         } else {
-            m->playerObj->oMarioBurnTimer = 0;
+            m->playerObj->oPlayerBurnTimer = 0;
             update_player_sound_and_camera(m);
             play_sound(SOUND_MARIO_ON_FIRE, m->playerObj->header.gfx.cameraToObject);
 
@@ -1481,7 +1481,7 @@ u32 interact_koopa_shell(struct PlayerState *m, UNUSED u32 interactType, struct 
 #if FIX_MARIO_KOOPA_SHELL_ACTION
             return set_player_action(m, (m->action & ACT_FLAG_AIR) ? ACT_RIDING_SHELL_FALL : ACT_RIDING_SHELL_GROUND, 0);
 #else            
-            //! Puts Mario in ground action even when in air, making it easy to
+            //! Puts Player in ground action even when in air, making it easy to
             // escape air actions into crouch slide (shell cancel)
             return set_player_action(m, ACT_RIDING_SHELL_GROUND, 0);
 #endif
@@ -1526,9 +1526,9 @@ u32 interact_pole(struct PlayerState *m, UNUSED u32 interactType, struct Object 
             //! @bug Using m->forwardVel here is assumed to be 0.0f due to the set from earlier.
             //       This is fixed in the Shindou version. 
 #if BUGFIX_PRESERVE_VEL_POLE
-            m->playerObj->oMarioPoleYawVel = (s32)(m->forwardVel * 0x100 + 0x1000);
+            m->playerObj->oPlayerPoleYawVel = (s32)(m->forwardVel * 0x100 + 0x1000);
 #else
-            m->playerObj->oMarioPoleYawVel = 0x1000;
+            m->playerObj->oPlayerPoleYawVel = 0x1000;
 #endif
 
             player_stop_riding_and_holding(m);
@@ -1542,19 +1542,19 @@ u32 interact_pole(struct PlayerState *m, UNUSED u32 interactType, struct Object 
             // Check for a floor on the pole.
             f32 height = find_floor(o->oPosX, m->pos[1], o->oPosZ, &o->oFloor);
             o->oFloorHeight = height;
-            // Mario's original Y position when grabbing the pole, above the floor.
+            // Player's original Y position when grabbing the pole, above the floor.
             height = MAX(m->pos[1], height);
             if (height < o->oPosY) {
-                // If Mario is beneath the pole, clamp player's position to the relative pole bottom (pole fix).
-                m->playerObj->oMarioPolePos = -o->hitboxDownOffset - 100.0f;
+                // If Player is beneath the pole, clamp player's position to the relative pole bottom (pole fix).
+                m->playerObj->oPlayerPolePos = -o->hitboxDownOffset - 100.0f;
             } else {
                 // Otherwise, use the relative height on the pole.
-                m->playerObj->oMarioPolePos = height - o->oPosY;
+                m->playerObj->oPlayerPolePos = height - o->oPosY;
             }
 #else
-            m->playerObj->oMarioPoleUnk108 = 0;
-            m->playerObj->oMarioPoleYawVel = 0;
-            m->playerObj->oMarioPolePos = m->pos[1] - o->oPosY;
+            m->playerObj->oPlayerPoleUnk108 = 0;
+            m->playerObj->oPlayerPoleYawVel = 0;
+            m->playerObj->oPlayerPolePos = m->pos[1] - o->oPosY;
 #endif
 
             if (lowSpeed) {
@@ -1578,7 +1578,7 @@ u32 interact_hoot(struct PlayerState *m, UNUSED u32 interactType, struct Object 
     //! Can pause to advance the global timer without falling too far, allowing
     // you to regrab after letting go.
     if (actionId >= 0x080 && actionId < 0x098
-        && (gGlobalTimer - m->usedObj->oHootMarioReleaseTime > 30)) {
+        && (gGlobalTimer - m->usedObj->oHootPlayerReleaseTime > 30)) {
         player_stop_riding_and_holding(m);
 
         o->oInteractStatus = TRUE; //! Note: Not a flag, treated as a TRUE/FALSE statement
@@ -1717,9 +1717,9 @@ u32 check_read_sign(struct PlayerState *m, struct Object *o) {
             f32 targetX = o->oPosX + 105.0f * sins(o->oMoveAngleYaw);
             f32 targetZ = o->oPosZ + 105.0f * coss(o->oMoveAngleYaw);
 
-            m->playerObj->oMarioReadingSignDYaw = facingDYaw;
-            m->playerObj->oMarioReadingSignDPosX = targetX - m->pos[0];
-            m->playerObj->oMarioReadingSignDPosZ = targetZ - m->pos[2];
+            m->playerObj->oPlayerReadingSignDYaw = facingDYaw;
+            m->playerObj->oPlayerReadingSignDPosX = targetX - m->pos[0];
+            m->playerObj->oPlayerReadingSignDPosZ = targetZ - m->pos[2];
 
             m->interactObj = o;
             m->usedObj = o;
@@ -1813,7 +1813,7 @@ void player_process_interactions(struct PlayerState *m) {
         m->invincTimer--;
     }
 
-    //! If the kick/punch flags are set and an object collision changes Mario's
+    //! If the kick/punch flags are set and an object collision changes Player's
     // action, he will get the kick/punch wall speed anyway.
     check_kick_or_punch_wall(m);
     m->flags &= ~MARIO_PUNCHING & ~MARIO_KICKING & ~MARIO_TRIPPING;
@@ -1913,7 +1913,7 @@ void player_handle_special_floors(struct PlayerState *m) {
                 break;
 
             // ex-alo change
-            // Cleans up Mario lava action checks
+            // Cleans up Player lava action checks
             case SURFACE_BURNING:
                 check_lava_boost(m);
                 break;

@@ -3,7 +3,7 @@
 
 #include <PR/ultratypes.h>
 
-// Sfx for Mario Head Screen
+// Sfx for Player Head Screen
 enum GdSfx {
     GD_SFX_NONE           = 0x00,
     GD_SFX_HAND_APPEAR    = 0x01,

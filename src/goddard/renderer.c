@@ -132,17 +132,17 @@ static s16 sVtxCvrtTCBuf[2];            // @ 801BB0A0
 static s32 sCarGdDlNum;                 // @ 801BB0A4
 static struct ObjGroup *sYoshiSceneGrp; // @ 801BB0A8
 static s32 unusedDl801BB0AC;                  // unused DL number
-static struct ObjGroup *sMarioSceneGrp; // @ 801BB0B0
+static struct ObjGroup *sPlayerSceneGrp; // @ 801BB0B0
 static s32 D_801BB0B4;                  // second offset into sTriangleBuf
 static struct ObjGroup *sCarSceneGrp;   // @ 801BB0B8
 static s32 sVertexBufCount; // vtx's to load into RPD? Vtx len in GD Dl and in the lower bank (AF30)
 static struct ObjView *sYoshiSceneView; // @ 801BB0C0
 static s32 sTriangleBufCount;                  // number of triangles in sTriangleBuf
-static struct ObjView *sMSceneView;     // @ 801BB0C8; Mario scene view
+static struct ObjView *sMSceneView;     // @ 801BB0C8; Player scene view
 static s32 sVertexBufStartIndex;                  // Vtx start in GD Dl
 static struct ObjView *sCarSceneView;   // @ 801BB0D0
 static s32 sUpdateYoshiScene;           // @ 801BB0D4; update dl Vtx from ObjVertex?
-static s32 sUpdateMarioScene;           // @ 801BB0D8; update dl Vtx from ObjVertex?
+static s32 sUpdatePlayerScene;           // @ 801BB0D8; update dl Vtx from ObjVertex?
 UNUSED static u32 unref_801bb0dc;
 static s32 sUpdateCarScene; // @ 801BB0E0; guess, not really used
 UNUSED static u32 unref_801bb0e4;
@@ -234,7 +234,7 @@ static u32 sGdDlCount = 0;                        // @ 801A8700
 static struct DynListBankInfo sDynLists[] = {     // @ 801A8704
     { STD_LIST_BANK, dynlist_test_cube },
     { STD_LIST_BANK, dynlist_spot_shape },
-    { STD_LIST_BANK, dynlist_mario_master },
+    { STD_LIST_BANK, dynlist_player_master },
     { TABLE_END, NULL }
 };
 
@@ -1207,16 +1207,16 @@ void gdm_init(void *blockpool, u32 size) {
 #endif
 
 /**
- * Initializes the Mario head demo
+ * Initializes the Player head demo
  */
 void gdm_setup(void) {
     UNUSED u8 filler[4];
 
     imin("gdm_setup");
     sYoshiSceneGrp = NULL;
-    sMarioSceneGrp = NULL;
+    sPlayerSceneGrp = NULL;
     sUpdateYoshiScene = FALSE;
-    sUpdateMarioScene = FALSE;
+    sUpdatePlayerScene = FALSE;
     sCarGdDlNum = 0;
     osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
     osCreateMesgQueue(&sGdDMAQueue, sGdMesgBuf, ARRAY_COUNT(sGdMesgBuf));
@@ -1261,21 +1261,21 @@ void gdm_maketestdl(s32 id) {
         case 1:
             reset_nets_and_gadgets(sYoshiSceneGrp);
             break;
-        case 2: // normal Mario head
-            if (sMarioSceneGrp == NULL) {
+        case 2: // normal Player head
+            if (sPlayerSceneGrp == NULL) {
                 load_mario_head(animate_mario_head_normal);
-                sMarioSceneGrp = gMarioFaceGrp; // gMarioFaceGrp set by load_mario_head
+                sPlayerSceneGrp = gPlayerFaceGrp; // gPlayerFaceGrp set by load_mario_head
                 gd_setup_cursor(NULL);
             }
-            sMSceneView = make_view_withgrp("mscene", sMarioSceneGrp);
+            sMSceneView = make_view_withgrp("mscene", sPlayerSceneGrp);
             break;
-        case 3: // game over Mario head
-            if (sMarioSceneGrp == NULL) {
+        case 3: // game over Player head
+            if (sPlayerSceneGrp == NULL) {
                 load_mario_head(animate_mario_head_gameover);
-                sMarioSceneGrp = gMarioFaceGrp;
+                sPlayerSceneGrp = gPlayerFaceGrp;
                 gd_setup_cursor(NULL);
             }
-            sMSceneView = make_view_withgrp("mscene", sMarioSceneGrp);
+            sMSceneView = make_view_withgrp("mscene", sPlayerSceneGrp);
             break;
         case 4:
             sCarSceneView = make_view_withgrp("car_scene", sCarSceneGrp);
@@ -1308,11 +1308,11 @@ void gd_vblank(void) {
     if (sUpdateYoshiScene) {
         apply_to_obj_types_in_group(OBJ_TYPE_NETS, (applyproc_t) convert_net_verts, sYoshiSceneGrp);
     }
-    if (sUpdateMarioScene) {
-        apply_to_obj_types_in_group(OBJ_TYPE_NETS, (applyproc_t) convert_net_verts, sMarioSceneGrp);
+    if (sUpdatePlayerScene) {
+        apply_to_obj_types_in_group(OBJ_TYPE_NETS, (applyproc_t) convert_net_verts, sPlayerSceneGrp);
     }
     sUpdateYoshiScene = FALSE;
-    sUpdateMarioScene = FALSE;
+    sUpdatePlayerScene = FALSE;
     gGdFrameBufNum ^= 1;
     reset_cur_dl_indices();
     parse_p1_controller();
@@ -1382,7 +1382,7 @@ Gfx *gdm_gettestdl(s32 id) {
             sCurrentGdDl = sMHeadMainDls[gGdFrameBufNum];
             gSPEndDisplayList(next_gfx());
             gddl = sCurrentGdDl;
-            sUpdateMarioScene = TRUE;
+            sUpdatePlayerScene = TRUE;
             break;
         case 4:
             if (sCarSceneView == NULL) {

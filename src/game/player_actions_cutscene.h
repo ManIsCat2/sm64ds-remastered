@@ -21,8 +21,8 @@ void print_displaying_credits_entry(void);
 void bhv_end_peach_loop(void);
 void bhv_end_toad_loop(void);
 s32 geo_switch_peach_eyes(s32 run, struct GraphNode *node, UNUSED s32 a2);
-s32 mario_ready_to_speak(void);
+s32 player_ready_to_speak(void);
 s32 set_player_npc_dialog(s32 actionArg);
-s32 mario_execute_cutscene_action(struct PlayerState *m);
+s32 player_execute_cutscene_action(struct PlayerState *m);
 
 #endif // MARIO_ACTIONS_CUTSCENE_H

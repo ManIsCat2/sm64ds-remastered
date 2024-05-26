@@ -50,7 +50,7 @@ void patch_title_screen_scales(void) {
 /**
  * Geo callback to render the "Super Mario 64" logo on the title screen
  */
-Gfx *geo_intro_super_mario_64_logo(s32 state, struct GraphNode *node, UNUSED void *context) {
+Gfx *geo_intro_super_player_64_logo(s32 state, struct GraphNode *node, UNUSED void *context) {
     struct GraphNode *graphNode = node;
     Gfx *dl = NULL;
     Gfx *dlIter = NULL;

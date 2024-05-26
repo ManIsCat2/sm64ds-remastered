@@ -29,7 +29,7 @@ void bhv_controllable_platform_sub_loop(void) {
                 break;
             }
 
-            if (gMarioObject->platform == o) {
+            if (gPlayerObject->platform == o) {
                 D_80331694 = o->oBhvParams2ndByte;
 #if BUGFIX_HMC_VISIBLE_CONTROL_PLATFORM
                 o->parentObj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
@@ -137,12 +137,12 @@ void controllable_platform_shake_on_wall_hit(void) {
     }
 }
 
-void controllable_platform_tilt_from_mario(void) {
-    s16 sp1E = gMarioObject->header.gfx.pos[0] - o->oPosX;
-    s16 sp1C = gMarioObject->header.gfx.pos[2] - o->oPosZ;
+void controllable_platform_tilt_from_player(void) {
+    s16 sp1E = gPlayerObject->header.gfx.pos[0] - o->oPosX;
+    s16 sp1C = gPlayerObject->header.gfx.pos[2] - o->oPosZ;
 
-    if (gMarioObject->platform == o
-        || gMarioObject->platform == cur_obj_nearest_object_with_behavior(bhvControllablePlatformSub)) {
+    if (gPlayerObject->platform == o
+        || gPlayerObject->platform == cur_obj_nearest_object_with_behavior(bhvControllablePlatformSub)) {
         o->oFaceAnglePitch = sp1C * 4;
         o->oFaceAngleRoll = -sp1E * 4;
         if (D_80331694 == 6) {
@@ -220,7 +220,7 @@ void bhv_controllable_platform_loop(void) {
             break;
     }
 
-    controllable_platform_tilt_from_mario();
+    controllable_platform_tilt_from_player();
     o->oPosX += o->oVelX;
     o->oPosZ += o->oVelZ;
     if (D_80331694 != 0 && D_80331694 != 6) {

@@ -42,11 +42,11 @@ struct Surface gWaterSurfacePseudoFloor = {
 /**
  * Always returns zero. This may have been intended
  * to be used for the beta trampoline. Its return value
- * is used by set_mario_y_vel_based_on_fspeed as a constant
- * addition to Mario's Y velocity. Given the closeness of
+ * is used by set_player_y_vel_based_on_fspeed as a constant
+ * addition to Player's Y velocity. Given the closeness of
  * this function to stub_player_step_2, it is probable that this
  * was intended to check whether a trampoline had made itself
- * known through stub_player_step_2 and whether Mario was on it,
+ * known through stub_player_step_2 and whether Player was on it,
  * and if so return a higher value than 0.
  */
 f32 get_additive_y_vel_for_jumps(void) {
@@ -55,11 +55,11 @@ f32 get_additive_y_vel_for_jumps(void) {
 
 /**
  * Does nothing, but takes in a PlayerState. This is only ever
- * called by update_player_inputs, which is called as part of Mario's
+ * called by update_player_inputs, which is called as part of Player's
  * update routine. Due to its proximity to stub_player_step_2, an
  * incomplete trampoline function, and get_additive_y_vel_for_jumps,
  * a potentially trampoline-related function, it is plausible that
- * this could be used for checking if Mario was on the trampoline.
+ * this could be used for checking if Player was on the trampoline.
  * It could, for example, make him bounce.
  */
 void stub_player_step_1(UNUSED struct PlayerState *x) {
@@ -109,7 +109,7 @@ BAD_RETURN(s32) init_bully_collision_data(struct BullyCollisionData *data, f32 p
     data->velZ = forwardVel * coss(yaw);
 }
 
-void mario_bonk_reflection(struct PlayerState *m, u32 negateSpeed) {
+void player_bonk_reflection(struct PlayerState *m, u32 negateSpeed) {
     if (m->wall != NULL) {
         s16 wallAngle = atan2s(m->wall->normal.z, m->wall->normal.x);
         m->faceAngle[1] = wallAngle - (s16)(m->faceAngle[1] - wallAngle);
@@ -127,7 +127,7 @@ void mario_bonk_reflection(struct PlayerState *m, u32 negateSpeed) {
     }
 }
 
-u32 mario_update_quicksand(struct PlayerState *m, f32 sinkingSpeed) {
+u32 player_update_quicksand(struct PlayerState *m, f32 sinkingSpeed) {
 #ifdef CHEATS_ACTIONS
     if (Cheats.EnableCheats && Cheats.WalkOn.Quicksand) {
         m->quicksandDepth = 0.0f;
@@ -185,7 +185,7 @@ u32 mario_update_quicksand(struct PlayerState *m, f32 sinkingSpeed) {
     return FALSE;
 }
 
-u32 mario_push_off_steep_floor(struct PlayerState *m, u32 action, u32 actionArg) {
+u32 player_push_off_steep_floor(struct PlayerState *m, u32 action, u32 actionArg) {
     s16 floorDYaw = m->floorAngle - m->faceAngle[1];
 
     if (floorDYaw > -0x4000 && floorDYaw < 0x4000) {
@@ -199,7 +199,7 @@ u32 mario_push_off_steep_floor(struct PlayerState *m, u32 action, u32 actionArg)
     return set_player_action(m, action, actionArg);
 }
 
-u32 mario_update_moving_sand(struct PlayerState *m) {
+u32 player_update_moving_sand(struct PlayerState *m) {
     struct Surface *floor = m->floor;
     s32 floorType = floor->type;
 
@@ -217,7 +217,7 @@ u32 mario_update_moving_sand(struct PlayerState *m) {
     return FALSE;
 }
 
-u32 mario_update_windy_ground(struct PlayerState *m) {
+u32 player_update_windy_ground(struct PlayerState *m) {
     struct Surface *floor = m->floor;
 
     if (floor->type == SURFACE_HORIZONTAL_WIND) {
@@ -263,8 +263,8 @@ void stop_and_set_height_to_floor(struct PlayerState *m) {
 s32 stationary_ground_step(struct PlayerState *m) {
 #if FIX_STATIONARY_GROUND_STEPS
     player_set_forward_vel(m, 0.0f);
-    mario_update_moving_sand(m);
-    mario_update_windy_ground(m);
+    player_update_moving_sand(m);
+    player_update_windy_ground(m);
     return perform_ground_step(m);
 #else
     u32 takeStep;
@@ -273,8 +273,8 @@ s32 stationary_ground_step(struct PlayerState *m) {
 
     player_set_forward_vel(m, 0.0f);
 
-    takeStep = mario_update_moving_sand(m);
-    takeStep |= mario_update_windy_ground(m);
+    takeStep = player_update_moving_sand(m);
+    takeStep |= player_update_windy_ground(m);
     if (takeStep) {
         stepResult = perform_ground_step(m);
     } else {
@@ -363,7 +363,7 @@ static s32 perform_ground_quarter_step(struct PlayerState *m, Vec3f nextPos) {
     {
         if (nextPos[1] > floorHeight) {
             nextPos[1] = (ceilHeight - hitboxHeight);
-            // Set Mario's position and floor
+            // Set Player's position and floor
             vec3f_copy(m->pos, nextPos);
             m->ceil = ceil;
             m->ceilHeight = ceilHeight;
@@ -382,7 +382,7 @@ static s32 perform_ground_quarter_step(struct PlayerState *m, Vec3f nextPos) {
     }
 #else
     // ex-alo change
-    // Changed 160.0f to Mario's hitboxHeight value
+    // Changed 160.0f to Player's hitboxHeight value
     if (floorHeight + m->playerObj->hitboxHeight >= ceilHeight) {
         return GROUND_STEP_HIT_WALL_STOP_QSTEPS;
     }
@@ -491,7 +491,7 @@ struct Surface *check_ledge_grab(struct PlayerState *m, struct WallCollisionData
     s16 wallDYaw = 0x0;
     s16 oldWallDYaw = 0x0;
 
-    // Only ledge grab if the wall displaced Mario in the opposite direction of his velocity.
+    // Only ledge grab if the wall displaced Player in the opposite direction of his velocity.
     // hdot(displacement, vel).
     if ((displacementX * m->vel[0]) + (displacementZ * m->vel[2]) > 0.0f) {
         return NULL;
@@ -511,10 +511,10 @@ struct Surface *check_ledge_grab(struct PlayerState *m, struct WallCollisionData
         nx = wall->normal.x;
         nz = wall->normal.z;
 
-        // Get the difference between the wall's yaw' and Mario's yaw.
+        // Get the difference between the wall's yaw' and Player's yaw.
         wallDYaw = abs_angle_diff(atan2s(nz, nx), m->faceAngle[1]);
 
-        // Skip the wall if it is farther from the ideal yaw (opposite Mario's yaw) than a previous wall.
+        // Skip the wall if it is farther from the ideal yaw (opposite Player's yaw) than a previous wall.
         if (wallDYaw < oldWallDYaw) {
             continue;
         }
@@ -529,7 +529,7 @@ struct Surface *check_ledge_grab(struct PlayerState *m, struct WallCollisionData
             continue;
         }
 
-        // Move the ledge grab position if there are walls above the floor where Mario's hitbox would be after grabbing the ledge.
+        // Move the ledge grab position if there are walls above the floor where Player's hitbox would be after grabbing the ledge.
         resolve_and_return_wall_collisions_data(nextPos, 30.0f, 24.0f, &lowerWall);
         resolve_and_return_wall_collisions_data(nextPos, 60.0f, 50.0f, &upperWall);
 
@@ -588,7 +588,7 @@ u32 check_ledge_grab(struct PlayerState *m, struct Surface *wall, Vec3f intended
     f32 displacementX = nextPos[0] - intendedPos[0];
     f32 displacementZ = nextPos[2] - intendedPos[2];
 
-    // Only ledge grab if the wall displaced Mario in the opposite direction of
+    // Only ledge grab if the wall displaced Player in the opposite direction of
     // his velocity.
     if (displacementX * m->vel[0] + displacementZ * m->vel[2] > 0.0f) {
         return FALSE;
@@ -682,7 +682,7 @@ s32 perform_air_quarter_step(struct PlayerState *m, Vec3f intendedPos, u32 stepA
 
     if (nextPos[1] <= floorHeight) {
         // ex-alo change
-        // Changed 160.0f to Mario's hitboxHeight value
+        // Changed 160.0f to Player's hitboxHeight value
         if (ceilHeight - floorHeight > m->playerObj->hitboxHeight) {
             m->pos[0] = nextPos[0];
             m->pos[2] = nextPos[2];
@@ -696,7 +696,7 @@ s32 perform_air_quarter_step(struct PlayerState *m, Vec3f intendedPos, u32 stepA
         m->floorHeight = floorHeight;
 #else
         //! When ceilHeight - floorHeight <= 160, the step result says that
-        // Mario landed, but his movement is cancelled and his referenced floor
+        // Player landed, but his movement is cancelled and his referenced floor
         // isn't updated (pedro spots)
 #endif
         return AIR_STEP_LANDED;
@@ -780,7 +780,7 @@ s32 perform_air_quarter_step(struct PlayerState *m, Vec3f intendedPos, u32 stepA
 
     //! When the wall is not completely vertical or there is a slight wall
     // misalignment, you can activate these conditions in unexpected situations
-    // Check if Mario can grab a wall.
+    // Check if Player can grab a wall.
 #if BETTER_RESOLVE_WALL_COLLISION
     if (m->vel[1] <= 0.0f && (stepArg & AIR_STEP_CHECK_LEDGE_GRAB) && upperWall.numWalls == 0 && lowerWall.numWalls > 0) {
         // Check if any walls are grabbable.
