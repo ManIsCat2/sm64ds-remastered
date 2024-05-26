@@ -2637,7 +2637,7 @@ const BehaviorScript bhvBub[] = {
     END_LOOP(),
 };
 
-const BehaviorScript bhvExclamationBox[] = {
+const BehaviorScript bhvCapBox[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(cap_box_collision),
