@@ -158,7 +158,13 @@ void cap_box_spawn_contents(struct CapBoxContents *contentsList, u8 boxType) {
 
 void cap_box_act_4(void) {
     if (!configGlobalCapBlocks && (o->oBhvParams2ndByte <= CAP_BOX_BP_SPECIAL_CAP_END)) {
-        cap_box_spawn_contents(sCapBoxContents, 2);
+        if (curChar == 2) {
+            cap_box_spawn_contents(sCapBoxContents, CAP_BOX_BP_VANISH_CAP);
+        } else if (curChar == 3) {
+            cap_box_spawn_contents(sCapBoxContents, CAP_BOX_BP_METAL_CAP);
+        } else {
+            cap_box_spawn_contents(sCapBoxContents, CAP_BOX_BP_WING_CAP);
+        }
     } else {
         cap_box_spawn_contents(sCapBoxContents, o->oBhvParams2ndByte);
     }

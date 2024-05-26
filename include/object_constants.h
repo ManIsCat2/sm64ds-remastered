@@ -595,16 +595,6 @@
     #define ARROW_LIFT_NOT_DONE_MOVING 0
     #define ARROW_LIFT_DONE_MOVING     1
 
-/* Yoshi */
-    /* oAction */
-    #define YOSHI_ACT_IDLE                       0
-    #define YOSHI_ACT_WALK                       1
-    #define YOSHI_ACT_TALK                       2
-    #define YOSHI_ACT_WALK_JUMP_OFF_ROOF         3
-    #define YOSHI_ACT_FINISH_JUMPING_AND_DESPAWN 4
-    #define YOSHI_ACT_GIVE_PRESENT               5
-    #define YOSHI_ACT_CREDITS                    10
-
 /* Koopa */
     /* oAction */
     #define KOOPA_UNSHELLED_ACT_RUN     0

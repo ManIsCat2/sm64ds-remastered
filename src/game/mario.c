@@ -45,6 +45,14 @@
 u32 unused80339F10;
 u8 unused80339F1C[20];
 
+int curChar = 1;
+
+#define YOSHI   0
+#define MARIO   1
+#define LUIGI   2
+#define WARIO   3
+#define WALUIGI 4
+
 /**************************************************
  *                    ANIMATIONS                  *
  **************************************************/
@@ -1369,6 +1377,25 @@ void update_mario_button_inputs(struct MarioState *m) {
         }
     }
 
+    if (m->controller->buttonPressed & L_TRIG) {
+        if (curChar >= 4) {
+            curChar = -1;
+        }
+        curChar = curChar + 1;
+    }
+
+    if (curChar == MARIO) {
+        m->marioObj->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_MARIO];
+    } else if (curChar == LUIGI) {
+        m->marioObj->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_MARIO]; // Todo: Make "MODEL_MARIO" MODEL_LUIGI
+    } else if (curChar == WARIO) {
+        m->marioObj->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_MARIO]; // Todo: Make "MODEL_MARIO" MODEL_WARIO
+    } else if (curChar == WALUIGI) {
+        m->marioObj->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_MARIO]; // Todo: Make "MODEL_MARIO" MODEL_WALUIGI
+    } else {
+        m->marioObj->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_MARIO]; // Todo: Make "MODEL_MARIO" MODEL_YOSHI
+    }
+
     if (m->input & INPUT_A_PRESSED) {
         m->framesSinceA = 0;
     } else if (m->framesSinceA < 0xFF) {
@@ -1476,6 +1503,13 @@ void update_mario_inputs(struct MarioState *m) {
     update_mario_geometry_inputs(m);
 
     debug_print_speed_action_normal(m);
+
+#ifdef DEV
+print_text_fmt_int(210, 92, "1 %d", m->marioObj->oPosX);
+print_text_fmt_int(210, 72, "2 %d", m->marioObj->oPosY);
+print_text_fmt_int(210, 52, "3 %d", m->marioObj->oPosZ);
+print_text_fmt_int(210, 120, "Character - %d", curChar);
+#endif
 #ifdef CHEATS_ACTIONS
     cheats_mario_inputs(m);
 #endif

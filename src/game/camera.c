@@ -206,7 +206,6 @@ s16 sHandheldShakeRoll;
 u32 gCutsceneObjSpawn;
 /**
  * Controls when an object-based cutscene should end. It's only used in the star spawn cutscenes, but
- * Yoshi also toggles this.
  */
 s32 gObjCutsceneDone;
 
