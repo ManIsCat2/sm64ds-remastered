@@ -112,7 +112,7 @@ void spawn_wf_platform_group(void) {
 void bhv_tower_platform_group_loop(void) {
     f32 marioY = gMarioObject->oPosY;
 
-    o->oDistanceToMario = dist_between_objects(o, gMarioObject);
+    o->oDistanceToPlayer = dist_between_objects(o, gMarioObject);
 
     switch (o->oAction) {
         case 0:

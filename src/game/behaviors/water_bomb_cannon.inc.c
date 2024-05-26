@@ -39,7 +39,7 @@ void bhv_bubble_cannon_barrel_loop(void) {
 
 void water_bomb_cannon_act_0(void) {
 #ifndef NODRAWINGDISTANCE
-    if (o->oDistanceToMario < 2000.0f) {
+    if (o->oDistanceToPlayer < 2000.0f) {
 #endif
         spawn_object(o, MODEL_CANNON_BARREL, bhvCannonBarrelBubbles);
         cur_obj_unhide();
@@ -53,7 +53,7 @@ void water_bomb_cannon_act_0(void) {
 
 void water_bomb_cannon_act_1(void) {
 #ifndef NODRAWINGDISTANCE
-    if (o->oDistanceToMario > 2500.0f) {
+    if (o->oDistanceToPlayer > 2500.0f) {
         o->oAction = 2;
     } else if (o->oBhvParams2ndByte == 0) {
 #else

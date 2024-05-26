@@ -54,7 +54,7 @@ void butterfly_calculate_angle(void) {
 }
 
 void butterfly_act_rest(void) {
-    if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
+    if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
         cur_obj_init_animation(0);
 
         o->oAction = BUTTERFLY_ACT_FOLLOW_MARIO;
@@ -67,7 +67,7 @@ void butterfly_act_follow_mario(void) {
 
     butterfly_step(7);
 
-    if (!is_point_within_radius_of_mario(o->oHomeX, o->oHomeY, o->oHomeZ, 1200)) {
+    if (!is_point_within_radius_of_player(o->oHomeX, o->oHomeY, o->oHomeZ, 1200)) {
         o->oAction = BUTTERFLY_ACT_RETURN_HOME;
     }
 }

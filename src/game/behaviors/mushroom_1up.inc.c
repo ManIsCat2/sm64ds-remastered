@@ -5,7 +5,7 @@ void bhv_1up_interact(void) {
 
     if (obj_check_if_collided_with_object(o, gMarioObject) == TRUE) {
         play_sound(SOUND_GENERAL_COLLECT_1UP, gGlobalSoundSource);
-        gMarioState->numLives++;
+        gPlayerState->numLives++;
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
 #ifdef RUMBLE_FEEDBACK
         queue_rumble_data(5, 80);
@@ -69,7 +69,7 @@ void one_up_move_away_from_mario(s16 collisionFlags) {
         o->oAction = 2;
     }
 
-    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 3000)) {
+    if (!is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 3000)) {
         o->oAction = 2;
     }
 }
@@ -163,7 +163,7 @@ void sliding_1up_move(void) {
         o->oForwardVel = 40.0f;
     }
 
-    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 5000)) {
+    if (!is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 5000)) {
         o->oAction = 2;
     }
 }
@@ -172,7 +172,7 @@ void bhv_1up_sliding_loop(void) {
     switch (o->oAction) {
         case 0:
             set_object_visibility(o, 3000);
-            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
+            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
                 o->oAction = 1;
             }
             break;
@@ -201,7 +201,7 @@ void bhv_1up_jump_on_approach_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
+            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
                 o->oVelY = 40.0f;
                 o->oAction = 1;
             }
@@ -325,7 +325,7 @@ void bhv_1up_hidden_in_pole_trigger_loop(void) {
 }
 
 void bhv_1up_hidden_in_pole_spawner_loop(void) {
-    if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 700)) {
+    if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 700)) {
         s8 i;
         spawn_object_relative(2, 0, 50, 0, o, MODEL_1UP, bhvHidden1UpInPole);
         for (i = 0; i <= 1; i++) {

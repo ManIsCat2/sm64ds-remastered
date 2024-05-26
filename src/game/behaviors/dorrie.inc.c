@@ -9,7 +9,7 @@ void dorrie_raise_head(void) {
     f32 yDisp = 440.0f * (sins(o->oDorrieNeckAngle) - sins(startAngle));
 
     vec3f_set(
-        gMarioState->pos,
+        gPlayerState->pos,
         gMarioObject->oPosX + (xzDisp * sins(o->oMoveAngleYaw)),
         gMarioObject->oPosY - yDisp,
         gMarioObject->oPosZ + (xzDisp * coss(o->oMoveAngleYaw))
@@ -65,7 +65,7 @@ void dorrie_act_lower_head(void) {
 
         if (gMarioObject->platform == o) {
             if (o->oDorrieOffsetY == -17.0f && o->oDorrieForwardDistToMario > 780.0f
-                && set_mario_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_START) {
+                && set_player_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_START) {
                 dorrie_begin_head_raise(TRUE);
             } else if (o->oDorrieForwardDistToMario > 320.0f) {
                 o->oTimer = 0;
@@ -84,10 +84,10 @@ void dorrie_act_raise_head(void) {
     if (cur_obj_check_if_near_animation_end()) {
         o->oAction = DORRIE_ACT_MOVE;
     } else if (o->oDorrieLiftingMario && o->header.gfx.animInfo.animFrame < 74) {
-        if (set_mario_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_SPEAK) {
+        if (set_player_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_SPEAK) {
             o->oDorrieHeadRaiseSpeed += 0x1CC;
             if (cur_obj_check_anim_frame(73)) {
-                set_mario_npc_dialog(MARIO_DIALOG_STOP);
+                set_player_npc_dialog(MARIO_DIALOG_STOP);
             }
             dorrie_raise_head();
         } else {
@@ -102,7 +102,7 @@ void bhv_dorrie_update(void) {
     f32 maxOffsetY;
 
     if (!(o->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM)) {
-        o->oDorrieForwardDistToMario = o->oDistanceToMario * coss(o->oAngleToMario - o->oMoveAngleYaw);
+        o->oDorrieForwardDistToMario = o->oDistanceToPlayer * coss(o->oAngleToMario - o->oMoveAngleYaw);
 
         obj_perform_position_op(0);
         cur_obj_move_using_fvel_and_gravity();
@@ -119,7 +119,7 @@ void bhv_dorrie_update(void) {
             o->oPosZ = o->oHomeZ - o->oDorrieDistToHome * coss(o->oDorrieAngleToHome);
         }
 
-        o->oDorrieGroundPounded = cur_obj_is_mario_ground_pounding_platform();
+        o->oDorrieGroundPounded = cur_obj_is_player_ground_pounding_platform();
 
         if (gMarioObject->platform == o) {
             maxOffsetY = -17.0f;

@@ -27,7 +27,7 @@ void handle_cap_ukiki_reset(void) {
  */
 s32 is_cap_ukiki_and_mario_has_normal_cap_on_head(void) {
     if (o->oBhvParams2ndByte == UKIKI_BP_CAP
-        && does_mario_have_normal_cap_on_head(gMarioState)) {
+        && does_player_have_normal_cap_on_head(gPlayerState)) {
         return TRUE;
     }
 
@@ -120,14 +120,14 @@ void ukiki_act_idle(void) {
     idle_ukiki_taunt();
 
     if (is_cap_ukiki_and_mario_has_normal_cap_on_head()) {
-        if (o->oDistanceToMario > 700.0f && o->oDistanceToMario < 1000.0f) {
+        if (o->oDistanceToPlayer > 700.0f && o->oDistanceToPlayer < 1000.0f) {
             o->oAction = UKIKI_ACT_RUN;
-        } else if (o->oDistanceToMario <= 700.0f && o->oDistanceToMario > 200.0f) {
+        } else if (o->oDistanceToPlayer <= 700.0f && o->oDistanceToPlayer > 200.0f) {
             if (abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw) > 0x1000) {
                 o->oAction = UKIKI_ACT_TURN_TO_MARIO;
             }
         }
-    } else if (o->oDistanceToMario < 300.0f) {
+    } else if (o->oDistanceToPlayer < 300.0f) {
         o->oAction = UKIKI_ACT_RUN;
     }
 
@@ -228,10 +228,10 @@ void ukiki_act_turn_to_mario(void) {
     }
 
     if (is_cap_ukiki_and_mario_has_normal_cap_on_head()) {
-        if (o->oDistanceToMario > 500.0f) {
+        if (o->oDistanceToPlayer > 500.0f) {
             o->oAction = UKIKI_ACT_RUN;
         }
-    } else if (o->oDistanceToMario < 300.0f) {
+    } else if (o->oDistanceToPlayer < 300.0f) {
         o->oAction = UKIKI_ACT_RUN;
     }
 }
@@ -260,20 +260,20 @@ void ukiki_act_run(void) {
     cur_obj_set_vel_from_mario_vel(20.0f, 0.9f);
 
     if (fleeMario) {
-        if (o->oDistanceToMario > o->oUkikiChaseFleeRange) {
+        if (o->oDistanceToPlayer > o->oUkikiChaseFleeRange) {
             o->oAction = UKIKI_ACT_TURN_TO_MARIO;
         }
-    } else if (o->oDistanceToMario < o->oUkikiChaseFleeRange) {
+    } else if (o->oDistanceToPlayer < o->oUkikiChaseFleeRange) {
         o->oAction = UKIKI_ACT_TURN_TO_MARIO;
     }
 
-    if (fleeMario && o->oDistanceToMario < 200.0f) {
+    if (fleeMario && o->oDistanceToPlayer < 200.0f) {
         if ((o->oMoveFlags & OBJ_MOVE_HIT_WALL)
-            && is_mario_moving_fast_or_in_air(10)) {
+            && is_player_moving_fast_or_in_air(10)) {
             o->oAction = UKIKI_ACT_JUMP;
             o->oMoveAngleYaw = o->oWallAngle;
         } else if ((o->oMoveFlags & OBJ_MOVE_HIT_EDGE)
-                   && is_mario_moving_fast_or_in_air(10)) {
+                   && is_player_moving_fast_or_in_air(10)) {
             o->oAction = UKIKI_ACT_JUMP;
             o->oMoveAngleYaw += 0x8000;
         }
@@ -510,7 +510,7 @@ void cage_ukiki_held_loop(void) {
     if (o->oPosY - o->oHomeY > -100.0f) {
         switch (o->oUkikiTextState) {
             case UKIKI_TEXT_DEFAULT:
-                if (set_mario_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_SPEAK) {
+                if (set_player_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_SPEAK) {
                     create_dialog_box_with_response(DIALOG_079);
                     o->oUkikiTextState = UKIKI_TEXT_CAGE_TEXTBOX;
                 }
@@ -518,7 +518,7 @@ void cage_ukiki_held_loop(void) {
 
             case UKIKI_TEXT_CAGE_TEXTBOX:
                 if (gDialogResponse != DIALOG_RESPONSE_NONE) {
-                    set_mario_npc_dialog(MARIO_DIALOG_STOP);
+                    set_player_npc_dialog(MARIO_DIALOG_STOP);
                     if (gDialogResponse == DIALOG_RESPONSE_YES) {
                         o->oInteractionSubtype |= INT_SUBTYPE_DROP_IMMEDIATELY;
                         o->oUkikiTextState = UKIKI_TEXT_GO_TO_CAGE;
@@ -554,7 +554,7 @@ void cage_ukiki_held_loop(void) {
 void cap_ukiki_held_loop(void) {
     switch (o->oUkikiTextState) {
         case UKIKI_TEXT_DEFAULT:
-            if (mario_lose_cap_to_enemy(2)) {
+            if (player_lose_cap_to_enemy(2)) {
                 o->oUkikiTextState = UKIKI_TEXT_STEAL_CAP;
                 o->oUkikiHasCap = TRUE;
             } else {
@@ -574,8 +574,8 @@ void cap_ukiki_held_loop(void) {
         case UKIKI_TEXT_HAS_CAP:
             if (cur_obj_update_dialog(MARIO_DIALOG_LOOK_UP,
                 (DIALOG_FLAG_TEXT_DEFAULT | DIALOG_FLAG_TIME_STOP_ENABLED), DIALOG_101, 0)) {
-                mario_retrieve_cap();
-                set_mario_npc_dialog(MARIO_DIALOG_STOP);
+                player_retrieve_cap();
+                set_player_npc_dialog(MARIO_DIALOG_STOP);
                 o->oUkikiHasCap = FALSE;
                 o->oUkikiTextState = UKIKI_TEXT_GAVE_CAP_BACK;
             }

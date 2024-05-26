@@ -4,10 +4,10 @@
 #include "types.h"
 
 // geo
-extern const GeoLayout geo_menu_mario_save_button[];
-extern const GeoLayout geo_menu_mario_save_button_fade[];
-extern const GeoLayout geo_menu_mario_new_button[];
-extern const GeoLayout geo_menu_mario_new_button_fade[];
+extern const GeoLayout geo_menu_player_save_button[];
+extern const GeoLayout geo_menu_player_save_button_fade[];
+extern const GeoLayout geo_menu_player_new_button[];
+extern const GeoLayout geo_menu_player_new_button_fade[];
 extern const GeoLayout geo_menu_erase_button[];
 extern const GeoLayout geo_menu_copy_button[];
 extern const GeoLayout geo_menu_file_button[];
@@ -18,8 +18,8 @@ extern const GeoLayout geo_menu_file_select_strings_and_menu_cursor[];
 extern const GeoLayout geo_menu_act_selector_strings[];
 
 // leveldata
-extern const Gfx dl_menu_mario_save_button_base[];
-extern const Gfx dl_menu_mario_new_button_base[];
+extern const Gfx dl_menu_player_save_button_base[];
+extern const Gfx dl_menu_player_new_button_base[];
 extern const Gfx dl_menu_save_button_back[];
 extern const Gfx dl_menu_save_button_fade_back[];
 

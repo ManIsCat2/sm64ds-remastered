@@ -5,7 +5,7 @@ s16 D_8032F460[][2] = {
     { 86, 1 }, { 96, 0 }, { 108, 1 }, { 118, 0 }, { -1, 0 },
 };
 
-void bhv_heave_ho_throw_mario_loop(void) {
+void bhv_heave_ho_throw_player_loop(void) {
     o->oParentRelativePosX = 200.0f;
     o->oParentRelativePosY = -50.0f;
     o->oParentRelativePosZ = 0.0f;
@@ -20,8 +20,8 @@ void bhv_heave_ho_throw_mario_loop(void) {
         case 2:
             cur_obj_play_sound_2(SOUND_OBJ_HEAVEHO_TOSSED);
             gMarioObject->oInteractStatus |= INT_STATUS_MARIO_UNK2;
-            gMarioStates[0].forwardVel = -45.0f;
-            gMarioStates[0].vel[1] = 95.0f;
+            gPlayerStates[0].forwardVel = -45.0f;
+            gPlayerStates[0].vel[1] = 95.0f;
             o->parentObj->oHeaveHoUnk88 = 0;
             break;
     }
@@ -92,7 +92,7 @@ void heave_ho_act_3(void) {
 
 void heave_ho_act_0(void) {
 #ifndef NODRAWINGDISTANCE
-    if (find_water_level(o->oPosX, o->oPosZ) < o->oPosY && o->oDistanceToMario < 4000.0f) {
+    if (find_water_level(o->oPosX, o->oPosZ) < o->oPosY && o->oDistanceToPlayer < 4000.0f) {
 #else
     if (find_water_level(o->oPosX, o->oPosZ) < (o->oPosY - 50.0f)) {
 #endif

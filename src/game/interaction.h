@@ -106,20 +106,20 @@
 
 extern u8 gPSSSlideStarted;
 
-s16 mario_obj_angle_to_object(struct MarioState *m, struct Object *o);
-void mario_stop_riding_object(struct MarioState *m);
-void mario_grab_used_object(struct MarioState *m);
-void mario_drop_held_object(struct MarioState *m);
-void mario_throw_held_object(struct MarioState *m);
-void mario_stop_riding_and_holding(struct MarioState *m);
-u32 does_mario_have_normal_cap_on_head(struct MarioState *m);
-void mario_blow_off_cap(struct MarioState *m, f32 capSpeed);
-u32 mario_lose_cap_to_enemy(u32 arg);
-void mario_retrieve_cap(void);
-struct Object *mario_get_collided_object(struct MarioState *m, u32 interactType);
-u32 mario_check_object_grab(struct MarioState *m);
+s16 player_obj_angle_to_object(struct PlayerState *m, struct Object *o);
+void player_stop_riding_object(struct PlayerState *m);
+void player_grab_used_object(struct PlayerState *m);
+void player_drop_held_object(struct PlayerState *m);
+void player_throw_held_object(struct PlayerState *m);
+void player_stop_riding_and_holding(struct PlayerState *m);
+u32 does_player_have_normal_cap_on_head(struct PlayerState *m);
+void player_blow_off_cap(struct PlayerState *m, f32 capSpeed);
+u32 player_lose_cap_to_enemy(u32 arg);
+void player_retrieve_cap(void);
+struct Object *player_get_collided_object(struct PlayerState *m, u32 interactType);
+u32 player_check_object_grab(struct PlayerState *m);
 u32 get_door_save_file_flag(struct Object *door);
-void mario_process_interactions(struct MarioState *m);
-void mario_handle_special_floors(struct MarioState *m);
+void player_process_interactions(struct PlayerState *m);
+void player_handle_special_floors(struct PlayerState *m);
 
 #endif // INTERACTION_H

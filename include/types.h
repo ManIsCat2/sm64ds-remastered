@@ -305,7 +305,7 @@ struct Surface {
     /*0x2C*/ struct Object *object;
 };
 
-struct MarioBodyState {
+struct PlayerBodyState {
     /*0x00*/ u32 action;
     /*0x04*/ s8 capState; /// see MarioCapGSCId
     /*0x05*/ s8 eyeState;
@@ -320,7 +320,7 @@ struct MarioBodyState {
     u8 filler[4];
 };
 
-struct MarioState {
+struct PlayerState {
     /*0x00*/ u16 unk00;
     /*0x02*/ u16 input;
     /*0x04*/ u32 flags;
@@ -358,11 +358,11 @@ struct MarioState {
     /*0x7C*/ struct Object *heldObj;
     /*0x80*/ struct Object *usedObj;
     /*0x84*/ struct Object *riddenObj;
-    /*0x88*/ struct Object *marioObj;
+    /*0x88*/ struct Object *playerObj;
     /*0x8C*/ struct SpawnInfo *spawnInfo;
     /*0x90*/ struct Area *area;
     /*0x94*/ struct PlayerCameraState *statusForCamera;
-    /*0x98*/ struct MarioBodyState *marioBodyState;
+    /*0x98*/ struct PlayerBodyState *playerBodyState;
     /*0x9C*/ struct Controller *controller;
     /*0xA0*/ struct DmaHandlerList *animList;
     /*0xA4*/ u32 collidedObjInteractTypes;

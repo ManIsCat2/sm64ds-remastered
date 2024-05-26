@@ -16,7 +16,7 @@ void bhv_red_switch_loop(void) {
         case SWITCH_ACT_IDLE:
             cur_obj_set_model(MODEL_RED_SWITCH);
             cur_obj_scale(1.5f);
-            if (gMarioObject->platform == o && !(gMarioStates[0].action & MARIO_UNKNOWN_13)) {
+            if (gMarioObject->platform == o && !(gPlayerStates[0].action & MARIO_UNKNOWN_13)) {
                 if (lateral_dist_between_objects(o, gMarioObject) < 127.5) {
                     o->oAction = SWITCH_ACT_PRESSED;
                 }
@@ -77,7 +77,7 @@ void bhv_red_switch_loop(void) {
          * unpressed state.
          */
         case SWITCH_ACT_WAIT_FOR_MARIO_TO_GET_OFF:
-            if (!cur_obj_is_mario_on_platform()) {
+            if (!cur_obj_is_player_on_platform()) {
                 o->oAction = SWITCH_ACT_UNPRESSED;
             }
             break;

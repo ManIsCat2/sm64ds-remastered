@@ -8,7 +8,7 @@ void bhv_celebration_star_init(void) {
     o->oCelebStarDiameterOfRotation = 100;
 #if BUGFIX_STAR_BOWSER_KEY
     #if OBJ_HOLD_TRANSPARENT_STAR
-    if (gMarioState->interactObj->header.gfx.sharedChild == gLoadedGraphNodes[MODEL_BOWSER_KEY])
+    if (gPlayerState->interactObj->header.gfx.sharedChild == gLoadedGraphNodes[MODEL_BOWSER_KEY])
     #else
     if (gCurrLevelNum == LEVEL_BOWSER_1 || gCurrLevelNum == LEVEL_BOWSER_2)
     #endif

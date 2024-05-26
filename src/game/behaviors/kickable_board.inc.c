@@ -3,22 +3,22 @@
 s32 check_mario_attacking(UNUSED s32 unused) {
     if (obj_check_if_collided_with_object(o, gMarioObject)
         && abs_angle_diff(o->oMoveAngleYaw, gMarioObject->oMoveAngleYaw) > 0x6000) {
-        if (gMarioStates[0].action == ACT_SLIDE_KICK) {
+        if (gPlayerStates[0].action == ACT_SLIDE_KICK) {
             return 1;
         }
-        if (gMarioStates[0].action == ACT_PUNCHING) {
+        if (gPlayerStates[0].action == ACT_PUNCHING) {
             return 1;
         }
-        if (gMarioStates[0].action == ACT_MOVE_PUNCHING) {
+        if (gPlayerStates[0].action == ACT_MOVE_PUNCHING) {
             return 1;
         }
-        if (gMarioStates[0].action == ACT_SLIDE_KICK_SLIDE) {
+        if (gPlayerStates[0].action == ACT_SLIDE_KICK_SLIDE) {
             return 1;
         }
-        if (gMarioStates[0].action == ACT_JUMP_KICK) {
+        if (gPlayerStates[0].action == ACT_JUMP_KICK) {
             return 2;
         }
-        if (gMarioStates[0].action == ACT_WALL_KICK_AIR) {
+        if (gPlayerStates[0].action == ACT_WALL_KICK_AIR) {
             return 2;
         }
     }

@@ -34,7 +34,7 @@ static void eyerok_boss_act_sleep(void) {
     if (o->oTimer == 0) {
         eyerok_spawn_hand(-1, MODEL_EYEROK_LEFT_HAND, bhvEyerokHand);
         eyerok_spawn_hand(1, MODEL_EYEROK_RIGHT_HAND, bhvEyerokHand);
-    } else if (o->oDistanceToMario < 500.0f) {
+    } else if (o->oDistanceToPlayer < 500.0f) {
         cur_obj_play_sound_2(SOUND_OBJ_EYEROK_EXPLODE);
         o->oAction = EYEROK_BOSS_ACT_WAKE_UP;
     }
@@ -398,7 +398,7 @@ static void eyerok_hand_act_smash(void) {
                 o->oGravity = -4.0f;
             } else {
                 s16 sp1E = abs_angle_diff(o->oFaceAngleYaw, o->oAngleToMario);
-                if (o->oDistanceToMario < 300.0f && sp1E > 0x2000 && sp1E < 0x6000) {
+                if (o->oDistanceToPlayer < 300.0f && sp1E > 0x2000 && sp1E < 0x6000) {
                     o->oAction = EYEROK_HAND_ACT_FIST_SWEEP;
                     if ((s16)(o->oFaceAngleYaw - o->oAngleToMario) < 0) {
                         o->oMoveAngleYaw = 0x4000;

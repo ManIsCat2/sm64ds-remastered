@@ -42,7 +42,7 @@ void set_y_home_to_pos(void) {
 void set_home_to_mario(void) {
 #if FIX_STARS_ON_CEILINGS
     // Force y home to pos to prevent star clipping inside the ceiling
-    if (mario_is_close_to_a_ceiling()) {
+    if (player_is_close_to_a_ceiling()) {
         set_y_home_to_pos();
         return;
     }

@@ -191,7 +191,7 @@ static void platform_on_track_act_move_along_track(void) {
                 obj_forward_vel_approach(10.0, 0.1f);
             } else {
 #if CONTROLLABLE_PLATFORM_SPEED
-                targetVel = ((gMarioObject->platform == o) ? ((o->oDistanceToMario * coss(o->oAngleToMario - o->oMoveAngleYaw)) - 10.0f) : 10.0f);
+                targetVel = ((gMarioObject->platform == o) ? ((o->oDistanceToPlayer * coss(o->oAngleToMario - o->oMoveAngleYaw)) - 10.0f) : 10.0f);
                 if (targetVel < 10.0f) {
                     targetVel = 10.0f;
                 } else if (targetVel > 16.0f) {
@@ -293,7 +293,7 @@ static void platform_on_track_rock_ski_lift(void) {
     // Tilt away from the moving direction and toward mario
     if (gMarioObject->platform == o) {
         targetRoll = o->oForwardVel * sins(o->oMoveAngleYaw) * -50.0f
-                     + (s32)(o->oDistanceToMario * sins(o->oAngleToMario - o->oFaceAngleYaw) * -4.0f);
+                     + (s32)(o->oDistanceToPlayer * sins(o->oAngleToMario - o->oFaceAngleYaw) * -4.0f);
     }
 
     oscillate_toward(
@@ -340,7 +340,7 @@ void bhv_platform_on_track_update(void) {
                 o->oPlatformOnTrackOffsetY    = -8.0f;
                 o->oPlatformOnTrackWasStoodOn = TRUE;
             }
-            targetRoll = (o->oDistanceToMario * coss(o->oAngleToMario - o->oMoveAngleYaw) * 0x4);
+            targetRoll = (o->oDistanceToPlayer * coss(o->oAngleToMario - o->oMoveAngleYaw) * 0x4);
         } else {
             targetRoll = 0x0;
         }

@@ -12,7 +12,7 @@ static struct RacingPenguinData sRacingPenguinData[] = {
 };
 
 void bhv_racing_penguin_init(void) {
-    if (gMarioState->numStars == 120) {
+    if (gPlayerState->numStars == 120) {
         cur_obj_scale(8.0f);
         o->header.gfx.scale[1] = 5.0f;
         o->oBhvParams2ndByte = RACING_PENGUIN_BP_FAT;
@@ -96,7 +96,7 @@ static void racing_penguin_act_race(void) {
         }
     }
 
-    if (mario_is_in_air_action()) {
+    if (player_is_in_air_action()) {
         if (o->oTimer > 60) {
             o->oRacingPenguinMarioCheated = TRUE;
         }
@@ -190,14 +190,14 @@ void bhv_racing_penguin_update(void) {
 
 void bhv_penguin_race_finish_line_update(void) {
     if ((o->parentObj->oRacingPenguinReachedBottom
-         || (o->oDistanceToMario < 1000.0f && gMarioObject->oPosZ - o->oPosZ < 0.0f))
+         || (o->oDistanceToPlayer < 1000.0f && gMarioObject->oPosZ - o->oPosZ < 0.0f))
         && !o->parentObj->oRacingPenguinReachedBottom) {
         o->parentObj->oRacingPenguinMarioWon = TRUE;
     }
 }
 
 void bhv_penguin_race_shortcut_check_update(void) {
-    if (o->oDistanceToMario < 500.0f) {
+    if (o->oDistanceToPlayer < 500.0f) {
         o->parentObj->oRacingPenguinMarioCheated = TRUE;
     }
 }

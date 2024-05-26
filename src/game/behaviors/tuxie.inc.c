@@ -47,7 +47,7 @@ void tuxies_mother_act_1(void) {
     switch (o->oSubAction) {
         case 0:
             cur_obj_init_animation_with_sound(3);
-            if (!cur_obj_is_mario_on_platform()) {
+            if (!cur_obj_is_player_on_platform()) {
                 s32 sp2C = (o->oBhvParams >> 16) & 0xFF;
                 s32 sp28 = (o->prevObj->oBhvParams >> 16) & 0xFF;
                 s32 dialogID;
@@ -124,7 +124,7 @@ void tuxies_mother_act_0(void) {
                 }
                 break;
             case 2:
-                if (o->oDistanceToMario > 450.0f) {
+                if (o->oDistanceToPlayer > 450.0f) {
                     o->oSubAction = 0;
                 }
                 break;
@@ -152,7 +152,7 @@ void bhv_tuxies_mother_loop(void) {
 }
 
 void small_penguin_dive_with_mario(void) {
-    if (mario_is_dive_sliding()) {
+    if (player_is_dive_sliding()) {
         o->oSmallPenguinUnk100 = o->oAction;
         o->oAction = 3;
     }
@@ -168,7 +168,7 @@ void small_penguin_act_2(void) {
     cur_obj_init_animation_with_sound(0);
     o->oForwardVel = o->oSmallPenguinUnk104 + 3.0f;
     cur_obj_rotate_yaw_toward(o->oAngleToMario + 0x8000, o->oSmallPenguinUnk110 + 0x600);
-    if (o->oDistanceToMario > o->oSmallPenguinUnk108 + 500.0f) {
+    if (o->oDistanceToPlayer > o->oSmallPenguinUnk108 + 500.0f) {
         o->oAction = 0;
     }
     small_penguin_dive_with_mario();
@@ -181,10 +181,10 @@ void small_penguin_act_1(void) {
     cur_obj_init_animation_with_sound(0);
     o->oForwardVel = o->oSmallPenguinUnk104 + 3.0f;
     cur_obj_rotate_yaw_toward(o->oAngleToMario, o->oSmallPenguinUnk110 + 0x600);
-    if (o->oDistanceToMario < o->oSmallPenguinUnk108 + 300.0f) {
+    if (o->oDistanceToPlayer < o->oSmallPenguinUnk108 + 300.0f) {
         o->oAction = 0;
     }
-    if (o->oDistanceToMario > 1100.0f) {
+    if (o->oDistanceToPlayer > 1100.0f) {
         o->oAction = 0;
     }
     small_penguin_dive_with_mario();
@@ -196,7 +196,7 @@ void small_penguin_act_3(void) {
             cur_obj_play_sound_2(SOUND_OBJ_BABY_PENGUIN_DIVE);
         }
         cur_obj_init_animation_with_sound(1);
-        if (o->oTimer > 25 && !mario_is_dive_sliding()) {
+        if (o->oTimer > 25 && !player_is_dive_sliding()) {
             o->oAction = 4;
         }
     }
@@ -225,9 +225,9 @@ void small_penguin_act_0(void) {
             sp1C = TRUE;
         }
     }
-    if (o->oDistanceToMario < 1000.0f && o->oDistanceToMario > o->oSmallPenguinUnk108 + 600.0f) {
+    if (o->oDistanceToPlayer < 1000.0f && o->oDistanceToPlayer > o->oSmallPenguinUnk108 + 600.0f) {
         o->oAction = 1;
-    } else if (o->oDistanceToMario < o->oSmallPenguinUnk108 + 300.0f) {
+    } else if (o->oDistanceToPlayer < o->oSmallPenguinUnk108 + 300.0f) {
         o->oAction = 2;
     }
     if (sp1C) {
@@ -244,7 +244,7 @@ void small_penguin_act_5(void) {
     struct Object *sp1C = cur_obj_nearest_object_with_behavior(bhvTuxiesMother);
 
     if (sp1C != NULL) {
-        if (o->oDistanceToMario < 1000.0f) {
+        if (o->oDistanceToPlayer < 1000.0f) {
             o->oForwardVel = 2.0f;
         } else {
             o->oForwardVel = 0.0f;

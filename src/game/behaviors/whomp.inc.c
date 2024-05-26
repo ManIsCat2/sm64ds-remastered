@@ -25,7 +25,7 @@ void whomp_init(void) {
         gSecondCameraFocus = o;
         cur_obj_scale(2.0f);
         if (o->oSubAction == 0) {
-            if (o->oDistanceToMario < 600.0f) {
+            if (o->oDistanceToPlayer < 600.0f) {
                 o->oSubAction++;
                 seq_player_lower_volume(SEQ_PLAYER_LEVEL, 60, 40);
             } else {
@@ -36,7 +36,7 @@ void whomp_init(void) {
             DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, DIALOG_114)) {
             o->oAction = 2;
         }
-    } else if (o->oDistanceToMario < 500.0f) {
+    } else if (o->oDistanceToPlayer < 500.0f) {
         o->oAction = 1;
     }
 
@@ -63,7 +63,7 @@ void whomp_turn(void) {
 }
 
 void whomp_patrol(void) {
-    s16 marioAngle = abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw);
+    s16 playerAngle = abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw);
     f32 distWalked = cur_obj_lateral_dist_to_home();
     f32 patrolDist;
 
@@ -78,12 +78,12 @@ void whomp_patrol(void) {
 
     if (distWalked > patrolDist) {
         o->oAction = 7;
-    } else if (marioAngle < 0x2000) {
-        if (o->oDistanceToMario < 1500.0f) {
+    } else if (playerAngle < 0x2000) {
+        if (o->oDistanceToPlayer < 1500.0f) {
             o->oForwardVel = 9.0f;
             cur_obj_init_animation_with_accel_and_sound(0, 3.0f);
         }
-        if (o->oDistanceToMario < 300.0f) {
+        if (o->oDistanceToPlayer < 300.0f) {
             o->oAction = 3;
         }
     }
@@ -97,13 +97,13 @@ void king_whomp_chase(void) {
     cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x200);
 
     if (o->oTimer > 30) {
-        s16 marioAngle = abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw);
-        if (marioAngle < 0x2000) {
-            if (o->oDistanceToMario < 1500.0f) {
+        s16 playerAngle = abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw);
+        if (playerAngle < 0x2000) {
+            if (o->oDistanceToPlayer < 1500.0f) {
                 o->oForwardVel = 9.0f;
                 cur_obj_init_animation_with_accel_and_sound(0, 3.0f);
             }
-            if (o->oDistanceToMario < 300.0f) {
+            if (o->oDistanceToPlayer < 300.0f) {
                 o->oAction = 3;
             }
         }
@@ -111,7 +111,7 @@ void king_whomp_chase(void) {
 
     whomp_play_sfx_from_pound_animation();
 
-    if (mario_is_far_below_object(1000.0f)) {
+    if (player_is_far_below_object(1000.0f)) {
         o->oAction = 0;
         stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
     }
@@ -157,7 +157,7 @@ void whomp_land(void) {
 
 void king_whomp_on_ground(void) {
     if (o->oSubAction == 0) {
-        if (cur_obj_is_mario_ground_pounding_platform()) {
+        if (cur_obj_is_player_ground_pounding_platform()) {
             Vec3f pos;
             o->oHealth--;
             cur_obj_play_sound_2(SOUND_OBJ2_WHOMP_SOUND_SHORT);
@@ -192,16 +192,16 @@ void king_whomp_on_ground(void) {
 void whomp_on_ground(void) {
     if (o->oSubAction == 0) {
         if (gMarioObject->platform == o) {
-            if (cur_obj_is_mario_ground_pounding_platform()) {
+            if (cur_obj_is_player_ground_pounding_platform()) {
                 o->oNumLootCoins = 5;
                 obj_spawn_loot_yellow_coins(o, 5, 20.0f);
                 o->oAction = 8;
             } else {
-                cur_obj_spawn_loot_coin_at_mario_pos();
+                cur_obj_spawn_loot_coin_at_player_pos();
                 o->oSubAction++;
             }
         }
-    } else if (!cur_obj_is_mario_on_platform()) {
+    } else if (!cur_obj_is_player_on_platform()) {
         o->oSubAction = 0;
     }
 }
@@ -218,7 +218,7 @@ void whomp_on_ground_general(void) {
         } else {
             whomp_on_ground();
         }
-        if (o->oTimer > 100 || (gMarioState->action == ACT_SQUISHED && o->oTimer > 30)) {
+        if (o->oTimer > 100 || (gPlayerState->action == ACT_SQUISHED && o->oTimer > 30)) {
             o->oSubAction = 10;
         }
     } else if (o->oFaceAnglePitch > 0) {
@@ -298,9 +298,9 @@ void bhv_whomp_loop(void) {
         // o->oBhvParams2ndByte here seems to be a flag
         // indicating whether this is a normal or king whomp
         if (o->oBhvParams2ndByte != WHOMP_BP_SMALL) {
-            cur_obj_hide_if_mario_far_away_y(2000.0f);
+            cur_obj_hide_if_player_far_away_y(2000.0f);
         } else {
-            cur_obj_hide_if_mario_far_away_y(1000.0f);
+            cur_obj_hide_if_player_far_away_y(1000.0f);
         }
 #endif
         load_object_collision_model();

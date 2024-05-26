@@ -4,7 +4,7 @@ void bhv_star_switch_loop(void) {
     switch (o->oAction) {
         case SWITCH_ACT_IDLE: {
             cur_obj_scale(1.5f);
-            if (gMarioObject->platform == o && !(gMarioStates->action & MARIO_UNKNOWN_13)) {
+            if (gMarioObject->platform == o && !(gPlayerStates->action & MARIO_UNKNOWN_13)) {
                 if (lateral_dist_between_objects(o, gMarioObject) < 80.f) {
                     o->oAction = SWITCH_ACT_PRESSED;
                 }
@@ -47,7 +47,7 @@ void bhv_star_switch_loop(void) {
         } break;
 
         case SWITCH_ACT_WAIT_FOR_MARIO_TO_GET_OFF: {
-            if (!cur_obj_is_mario_on_platform()) {
+            if (!cur_obj_is_player_on_platform()) {
                 o->oAction = SWITCH_ACT_UNPRESSED;
             }
         } break;

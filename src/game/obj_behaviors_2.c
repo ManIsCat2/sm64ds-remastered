@@ -102,8 +102,8 @@ static s32 obj_update_race_proposition_dialog(s16 dialogID) {
         (DIALOG_FLAG_TURN_TO_MARIO | DIALOG_FLAG_TIME_STOP_ENABLED), CUTSCENE_RACE_DIALOG, dialogID);
 
     if (dialogResponse == DIALOG_RESPONSE_NO) {
-        set_mario_npc_dialog(MARIO_DIALOG_STOP);
-        disable_time_stop_including_mario();
+        set_player_npc_dialog(MARIO_DIALOG_STOP);
+        disable_time_stop_including_player();
     }
 
     return dialogResponse;
@@ -114,8 +114,8 @@ static void obj_set_dist_from_home(f32 distFromHome) {
     o->oPosZ = o->oHomeZ + distFromHome * sins(o->oMoveAngleYaw);
 }
 
-static s32 obj_is_near_to_and_facing_mario(f32 maxDist, s16 maxAngleDiff) {
-    if (o->oDistanceToMario < maxDist
+static s32 obj_is_near_to_and_facing_player(f32 maxDist, s16 maxAngleDiff) {
+    if (o->oDistanceToPlayer < maxDist
         && abs_angle_diff(o->oMoveAngleYaw, o->oAngleToMario) < maxAngleDiff) {
         return TRUE;
     }
@@ -381,7 +381,7 @@ static s32 cur_obj_play_sound_at_anim_range(s8 arg0, s8 arg1, u32 sound) {
     return FALSE;
 }
 
-static s16 obj_turn_pitch_toward_mario(f32 targetOffsetY, s16 turnAmount) {
+static s16 obj_turn_pitch_toward_player(f32 targetOffsetY, s16 turnAmount) {
     s16 targetPitch;
 
     o->oPosY -= targetOffsetY;
@@ -891,11 +891,11 @@ static s32 obj_move_for_one_second(s32 endAction) {
 
 /**
  * If we are far from home (> threshold away), then set oAngleToMario to the
- * angle to home and oDistanceToMario to 25000.
+ * angle to home and oDistanceToPlayer to 25000.
  * If we are close to home, but Mario is far from us (> threshold away), then
- * keep oAngleToMario the same and set oDistanceToMario to 20000.
+ * keep oAngleToMario the same and set oDistanceToPlayer to 20000.
  * If we are close to both home and Mario, then keep both oAngleToMario and
- * oDistanceToMario the same.
+ * oDistanceToPlayer the same.
  *
  * The point of this function is to avoid having to write extra code to get
  * the object to return to home. When Mario is far away and the object is far
@@ -907,7 +907,7 @@ static s32 obj_move_for_one_second(s32 endAction) {
  * attack Mario (e.g. fly guy shooting fire or lunging), especially when combined
  * with partial updates.
  */
-static void treat_far_home_as_mario(f32 threshold) {
+static void treat_far_home_as_player(f32 threshold) {
     f32 dx = o->oHomeX - o->oPosX;
     f32 dy = o->oHomeY - o->oPosY;
     f32 dz = o->oHomeZ - o->oPosZ;
@@ -915,7 +915,7 @@ static void treat_far_home_as_mario(f32 threshold) {
 
     if (distance > threshold) {
         o->oAngleToMario = atan2s(dz, dx);
-        o->oDistanceToMario = 25000.0f;
+        o->oDistanceToPlayer = 25000.0f;
     } else {
         dx = o->oHomeX - gMarioObject->oPosX;
         dy = o->oHomeY - gMarioObject->oPosY;
@@ -923,7 +923,7 @@ static void treat_far_home_as_mario(f32 threshold) {
         distance = sqrtf(dx * dx + dy * dy + dz * dz);
 
         if (distance > threshold) {
-            o->oDistanceToMario = 20000.0f;
+            o->oDistanceToPlayer = 20000.0f;
         }
     }
 }

@@ -20,8 +20,8 @@ void bhv_flip_block_loop(void) {
             o->oAction = 1;
         }
 
-        if (flip_block_sqrtf_diff(o) && !(o->oPosY < gMarioObject->oPosY) && !(gMarioState[0].vel[1] < 15.0f)) {
-            gMarioState[0].vel[1] = 0.0f;
+        if (flip_block_sqrtf_diff(o) && !(o->oPosY < gMarioObject->oPosY) && !(gPlayerState[0].vel[1] < 15.0f)) {
+            gPlayerState[0].vel[1] = 0.0f;
             o->oAction = 1;
         }
     } else {

@@ -8,7 +8,7 @@ void bub_spawner_act_0(void) {
     s32 i;
     s32 sp18 = o->oBirdChirpChirpUnkF4;
 #ifndef NODRAWINGDISTANCE
-    if (o->oDistanceToMario < 1500.0f) {
+    if (o->oDistanceToPlayer < 1500.0f) {
 #endif
         for (i = 0; i < sp18; i++) {
             spawn_object(o, MODEL_BUB, bhvBub);
@@ -93,7 +93,7 @@ void bub_act_1(void) {
 
     cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x100);
 
-    if (o->oDistanceToMario < 200.0f) {
+    if (o->oDistanceToPlayer < 200.0f) {
         if (o->oCheepCheepUnk108 < 0.5) {
             o->oAction = 2;
         }
@@ -149,7 +149,7 @@ void bub_act_2(void) {
 
     cur_obj_rotate_yaw_toward(o->oAngleToMario + 0x8000, 0x400);
 
-    if (o->oTimer > 200 && o->oDistanceToMario > 600.0f) {
+    if (o->oTimer > 200 && o->oDistanceToPlayer > 600.0f) {
         o->oAction = 1;
     }
 }

@@ -57,9 +57,9 @@ extern struct CheatList Cheats;
 
 extern struct SubMenu menuCheats;
 
-extern void cheats_mario_inputs(struct MarioState *m);
-extern void cheats_mario_action(struct MarioState *m);
-extern void cheats_mario_size(struct MarioState *m);
+extern void cheats_player_inputs(struct PlayerState *m);
+extern void cheats_player_action(struct PlayerState *m);
+extern void cheats_player_size(struct PlayerState *m);
 extern f32 cheats_walk_on_environment(f32 height, f32 x, f32 z);
 
 #endif // CHEATS_H

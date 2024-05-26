@@ -302,7 +302,7 @@ void render_red_coins(void) {
     }
 }
 
-void render_hud_mario_lives(void) {
+void render_hud_player_lives(void) {
     print_text(set_hud_auto_x_pos(HUD_LIVES_MARIO_X), HUD_LIVES_MARIO_Y, ","); // 'Mario Head' glyph
     print_text(set_hud_auto_x_pos(HUD_LIVES_CROSS_X), HUD_LIVES_CROSS_Y, "*"); // 'X' glyph
     print_text_fmt_int(set_hud_auto_x_pos(HUD_LIVES_NUM_X), HUD_LIVES_NUM_Y, "%d", gHudDisplay.lives);
@@ -479,7 +479,7 @@ void render_hud(void) {
 #endif
 #if SHOW_LIVES
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_LIVES) {
-            render_hud_mario_lives();
+            render_hud_player_lives();
         }
 #endif
 #if SHOW_COINS

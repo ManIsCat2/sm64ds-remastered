@@ -19,7 +19,7 @@ void opened_cannon_act_0(void) {
     }
     cur_obj_become_tangible();
     cur_obj_enable_rendering();
-    if (o->oDistanceToMario < 500.0f) {
+    if (o->oDistanceToPlayer < 500.0f) {
 #ifndef NODRAWINGDISTANCE 
         cur_obj_become_tangible();
         cur_obj_enable_rendering();

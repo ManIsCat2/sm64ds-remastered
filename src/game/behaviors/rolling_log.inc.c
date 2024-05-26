@@ -123,7 +123,7 @@ void volcano_act_3(void) {
 void bhv_volcano_trap_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
+            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
                 o->oAction = 1;
                 cur_obj_play_sound_2(SOUND_GENERAL_VOLCANO_TRAP_FALL);
             }

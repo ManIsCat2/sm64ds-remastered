@@ -53,7 +53,7 @@ void tweester_act_idle(void) {
         o->oTweesterUnused = 0;
 
         // If Mario is within range, change to the growth sub-action.
-        if (o->oDistanceToMario < 1500.0f) {
+        if (o->oDistanceToPlayer < 1500.0f) {
             o->oSubAction++;
         }
 
@@ -84,7 +84,7 @@ void tweester_act_chase(void) {
         cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x200);
         print_debug_top_down_objectinfo("off ", 0);
 
-        if (gMarioStates[0].action == ACT_TWIRLING) {
+        if (gPlayerStates[0].action == ACT_TWIRLING) {
             o->oSubAction++;
         }
     } else {
@@ -96,7 +96,7 @@ void tweester_act_chase(void) {
         }
     }
 
-    if (o->oDistanceToMario > 3000.0f) {
+    if (o->oDistanceToPlayer > 3000.0f) {
         o->oAction = TWEESTER_ACT_HIDE;
     }
 

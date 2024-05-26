@@ -41,7 +41,7 @@ static void fish_spawner_act_spawn(void) {
     // or the stage is Secret Aquarium.
     // Fish moves randomly within a range of 700.0f.
 #ifndef NODRAWINGDISTANCE
-    if (o->oDistanceToMario < minDistToMario || gCurrLevelNum == LEVEL_SA) {
+    if (o->oDistanceToPlayer < minDistToMario || gCurrLevelNum == LEVEL_SA) {
 #endif
         for (i = 0; i < schoolQuantity; i++) {
             struct Object *fishObject = spawn_object(o, model, bhvFish);
@@ -154,7 +154,7 @@ static void fish_act_roam(void) {
     }
 
     // Flee from Mario if the fish gets too close.
-    if (o->oDistanceToMario < o->oFishRoamDistance + 150.0f) {
+    if (o->oDistanceToPlayer < o->oFishRoamDistance + 150.0f) {
         o->oAction = FISH_ACT_FLEE;
     }
 }
@@ -174,10 +174,10 @@ static void fish_act_flee(void) {
         o->oFishYawVel = random_float() * 1024.0f + 1024.0f;
         o->oFishGoalVel = random_float() * 4.0f + 8.0f + 5.0f;
 
-        if (o->oDistanceToMario < 600.0f) {
+        if (o->oDistanceToPlayer < 600.0f) {
             distance = 1;
         } else {
-            distance = (s32)(1.0 / (o->oDistanceToMario / 600.0));
+            distance = (s32)(1.0 / (o->oDistanceToPlayer / 600.0));
         }
 
         distance *= 127;
@@ -222,7 +222,7 @@ static void fish_act_flee(void) {
     }
 
     // If distance to Mario is too great, then set fish to active.
-    if (o->oDistanceToMario > o->oFishActiveDistance + 500.0f) {
+    if (o->oDistanceToPlayer > o->oFishActiveDistance + 500.0f) {
         o->oAction = FISH_ACT_ROAM;
     }
 }

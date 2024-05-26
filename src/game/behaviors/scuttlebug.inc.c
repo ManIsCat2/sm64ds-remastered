@@ -144,7 +144,7 @@ void bhv_scuttlebug_loop(void) {
 
 void bhv_scuttlebug_spawn_loop(void) {
     if (o->oAction == 0) {
-        if (o->oTimer > 30 && 500.0f < o->oDistanceToMario && o->oDistanceToMario < 1500.0f) {
+        if (o->oTimer > 30 && 500.0f < o->oDistanceToPlayer && o->oDistanceToPlayer < 1500.0f) {
             struct Object *scuttlebug;
             cur_obj_play_sound_2(SOUND_OBJ2_SCUTTLEBUG_ALERT);
             scuttlebug = spawn_object(o, MODEL_SCUTTLEBUG, bhvScuttlebug);

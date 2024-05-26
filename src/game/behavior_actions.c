@@ -136,7 +136,7 @@ void spawn_mist_particles_variable(s32 count, s32 offsetY, f32 size) {
 #include "behaviors/flamethrower.inc.c"
 #include "behaviors/bouncing_fireball.inc.c"
 #include "behaviors/shock_wave.inc.c"
-#include "behaviors/flame_mario.inc.c"
+#include "behaviors/flame_player.inc.c"
 #include "behaviors/beta_fish_splash_spawner.inc.c"
 #include "behaviors/spindrift.inc.c"
 #include "behaviors/tower_platform.inc.c"
@@ -152,7 +152,7 @@ void spawn_mist_particles_variable(s32 count, s32 offsetY, f32 size) {
 #include "behaviors/breakable_box.inc.c"
 
 // not sure what this is doing here. not in a behavior file.
-Gfx *geo_move_mario_part_from_parent(s32 run, UNUSED struct GraphNode *node, Mat4 mtx) {
+Gfx *geo_move_player_part_from_parent(s32 run, UNUSED struct GraphNode *node, Mat4 mtx) {
     if (run == TRUE) {
         Mat4 sp20;
         struct Object *obj = (struct Object *) gCurGraphNodeObject;

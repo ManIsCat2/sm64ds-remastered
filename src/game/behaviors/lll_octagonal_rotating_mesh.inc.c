@@ -11,7 +11,7 @@ s32 lll_octagonal_mesh_move(s16 *a0, s32 a1) {
         case 4:
             o->oMoveAngleYaw = a0[a1 + 2];
             o->oForwardVel = a0[a1 + 3] / 100.0f;
-            if (cur_obj_is_mario_on_platform()) {
+            if (cur_obj_is_player_on_platform()) {
                 a1 += 4;
                 o->oTimer = 0;
             }
@@ -44,7 +44,7 @@ s32 lll_octagonal_mesh_move(s16 *a0, s32 a1) {
 }
 
 s32 lll_octagonal_mesh_find_y_offset(s32 *a0, f32 *a1, s32 a2, s32 a3) {
-    if (cur_obj_is_mario_on_platform()) {
+    if (cur_obj_is_player_on_platform()) {
         if (a0[0] < 0x4000) {
             a0[0] += a2;
         } else {

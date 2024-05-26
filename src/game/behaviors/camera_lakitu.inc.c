@@ -31,7 +31,7 @@ static void camera_lakitu_intro_act_trigger_cutscene(void) {
     if (gMarioObject->oPosX > -544.0f && gMarioObject->oPosX < 545.0f
         && gMarioObject->oPosY > 800.0f && gMarioObject->oPosZ > -2000.0f
         && gMarioObject->oPosZ < -177.0f && gMarioObject->oPosZ < -177.0f // always double check your conditions
-        && set_mario_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_START) {
+        && set_player_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_START) {
         o->oAction = CAMERA_LAKITU_INTRO_ACT_SPAWN_CLOUD;
     }
 }
@@ -40,7 +40,7 @@ static void camera_lakitu_intro_act_trigger_cutscene(void) {
  * Warp up into the air and spawn cloud, then enter the TODO action.
  */
 static void camera_lakitu_intro_act_spawn_cloud(void) {
-    if (set_mario_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_SPEAK) {
+    if (set_player_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_SPEAK) {
         o->oAction = CAMERA_LAKITU_INTRO_ACT_UNK2;
 
         o->oPosX = 1800.0f;
@@ -65,13 +65,13 @@ static void camera_lakitu_intro_act_show_dialog(void) {
     cur_obj_play_sound_1(SOUND_AIR_LAKITU_FLY);
 
     // Face toward mario
-    o->oFaceAnglePitch = obj_turn_pitch_toward_mario(120.0f, 0);
+    o->oFaceAnglePitch = obj_turn_pitch_toward_player(120.0f, 0);
     o->oFaceAngleYaw = o->oAngleToMario;
 
     // After finishing dialog, fly away and despawn
     if (o->oCameraLakituFinishedDialog) {
         approach_f32_ptr(&o->oCameraLakituSpeed, 60.0f, 3.0f);
-        if (o->oDistanceToMario > 6000.0f) {
+        if (o->oDistanceToPlayer > 6000.0f) {
             obj_mark_for_deletion(o);
         }
 
@@ -79,14 +79,14 @@ static void camera_lakitu_intro_act_show_dialog(void) {
         targetMoveYaw = -0x6000;
     } else {
         if (o->oCameraLakituSpeed != 0.0f) {
-            if (o->oDistanceToMario > 5000.0f) {
+            if (o->oDistanceToPlayer > 5000.0f) {
                 targetMovePitch = o->oMoveAnglePitch;
                 targetMoveYaw = o->oAngleToMario;
             } else {
                 // Stay moving in a circle around mario
                 s16 turnAmount = 0x4000
                                  - atan2s(o->oCameraLakituCircleRadius,
-                                          o->oDistanceToMario - o->oCameraLakituCircleRadius);
+                                          o->oDistanceToPlayer - o->oCameraLakituCircleRadius);
                 if ((s16)(o->oMoveAngleYaw - o->oAngleToMario) < 0) {
                     turnAmount = -turnAmount;
                 }
@@ -95,14 +95,14 @@ static void camera_lakitu_intro_act_show_dialog(void) {
                 targetMovePitch = o->oFaceAnglePitch;
 
                 approach_f32_ptr(&o->oCameraLakituCircleRadius, 200.0f, 50.0f);
-                if (o->oDistanceToMario < 1000.0f) {
+                if (o->oDistanceToPlayer < 1000.0f) {
                     if (!o->oCameraLakituUnk104) {
                         play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_EVENT_CUTSCENE_LAKITU), 0);
                         o->oCameraLakituUnk104 = TRUE;
                     }
                     // Once within 1000 units, slow down
                     approach_f32_ptr(&o->oCameraLakituSpeed, 20.0f, 1.0f);
-                    if (o->oDistanceToMario < 500.0f
+                    if (o->oDistanceToPlayer < 500.0f
                         && abs_angle_diff(gMarioObject->oFaceAngleYaw, o->oFaceAngleYaw) > 0x7000) {
                         // Once within 500 units and facing toward mario, come
                         // to a stop

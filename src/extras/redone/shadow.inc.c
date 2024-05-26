@@ -201,7 +201,7 @@ static Gfx *shadow_display_list(s8 shadowType, u8 solidity, s8 isDecal) {
 }
 
 f32 get_shadow_floor(f32 x, f32 y, f32 z, struct Surface** floor, struct Object* obj, s8 isPlayer, s8* shifted) {
-    struct MarioState *m = gMarioState;
+    struct PlayerState *m = gPlayerState;
     f32 floorHeight = FLOOR_LOWER_LIMIT_MISC;
     s8 notHeldObj = (gCurGraphNodeHeldObject == NULL);
 

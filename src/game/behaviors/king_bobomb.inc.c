@@ -1,7 +1,7 @@
 // king_bobomb.inc.c
 
 // Copy of geo_update_projectile_pos_from_parent
-Gfx *geo_update_held_mario_pos(s32 run, UNUSED struct GraphNode *node, Mat4 mtx) {
+Gfx *geo_update_held_player_pos(s32 run, UNUSED struct GraphNode *node, Mat4 mtx) {
     if (run == TRUE) {
         Mat4 sp20;
         struct Object *obj = (struct Object *) gCurGraphNodeObject;
@@ -15,8 +15,8 @@ Gfx *geo_update_held_mario_pos(s32 run, UNUSED struct GraphNode *node, Mat4 mtx)
     return NULL;
 }
 
-void bhv_bobomb_anchor_mario_loop(void) {
-    common_anchor_mario_behavior(50.0f, 50.0f, INT_STATUS_MARIO_UNK6);
+void bhv_bobomb_anchor_player_loop(void) {
+    common_anchor_player_behavior(50.0f, 50.0f, INT_STATUS_MARIO_UNK6);
 }
 
 void king_bobomb_act_0(void) {
@@ -41,7 +41,7 @@ void king_bobomb_act_0(void) {
     }
 }
 
-s32 mario_is_far_below_object(f32 arg0) {
+s32 player_is_far_below_object(f32 arg0) {
     if (arg0 < o->oPosY - gMarioObject->oPosY) {
         return TRUE;
     } else {
@@ -86,7 +86,7 @@ void king_bobomb_act_2(void) {
         o->oAction = 3;
     }
 
-    if (mario_is_far_below_object(1200.0f)) {
+    if (player_is_far_below_object(1200.0f)) {
         o->oAction = 0;
         stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
     }
@@ -148,11 +148,11 @@ void king_bobomb_act_1(void) {
 
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x200);
 
-    if (o->oDistanceToMario < 2500.0f) {
+    if (o->oDistanceToPlayer < 2500.0f) {
         o->oAction = 2;
     }
 
-    if (mario_is_far_below_object(1200.0f)) {
+    if (player_is_far_below_object(1200.0f)) {
         o->oAction = 0;
         stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
     }
@@ -262,7 +262,7 @@ void king_bobomb_act_4(void) { // bobomb been thrown
         o->oSubAction++;
 
 #if FIX_KING_BOBOMB_MUSIC_THROWN_OFF
-        if (o->oDistanceToMario > 2000.0f) {
+        if (o->oDistanceToPlayer > 2000.0f) {
             stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
         }
 #endif
@@ -316,9 +316,9 @@ void king_bobomb_act_5(void) { // bobomb returns home
 
         case 3:
 #if FIX_KING_BOBOMB_MUSIC_THROWN_OFF
-            if (o->oDistanceToMario > 2000.0f)
+            if (o->oDistanceToPlayer > 2000.0f)
 #else
-            if (mario_is_far_below_object(1200.0f))
+            if (player_is_far_below_object(1200.0f))
 #endif
             {
                 o->oAction = 0;
@@ -376,7 +376,7 @@ void king_bobomb_move(void) {
     cur_obj_call_action_function(sKingBobombActions);
     exec_anim_sound_state(sKingBobombSoundStates);
 #ifndef NODRAWINGDISTANCE
-    if (o->oDistanceToMario < 5000.0f) {
+    if (o->oDistanceToPlayer < 5000.0f) {
 #endif
         cur_obj_enable_rendering();
 #ifndef NODRAWINGDISTANCE

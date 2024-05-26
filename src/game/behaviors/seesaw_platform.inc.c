@@ -43,7 +43,7 @@ void bhv_seesaw_platform_update(void) {
 
     if (gMarioObject->platform == o) {
         // Rotate toward mario
-        f32 rotation = o->oDistanceToMario * coss(o->oAngleToMario - o->oMoveAngleYaw);
+        f32 rotation = o->oDistanceToPlayer * coss(o->oAngleToMario - o->oMoveAngleYaw);
         UNUSED u8 filler[4];
 
         // Deceleration is faster than acceleration

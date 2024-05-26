@@ -148,7 +148,7 @@ static void homing_amp_chase_loop(void) {
     check_amp_attack();
 
     // Give up if Mario goes further than 1500 units from the amp's original position
-    if (!is_point_within_radius_of_mario(o->oHomeX, o->oHomeY, o->oHomeZ, 1500)) {
+    if (!is_point_within_radius_of_player(o->oHomeX, o->oHomeY, o->oHomeZ, 1500)) {
         o->oAction = HOMING_AMP_ACT_GIVE_UP;
     }
 }
@@ -202,7 +202,7 @@ static void amp_attack_cooldown_loop(void) {
 void bhv_homing_amp_loop(void) {
     switch (o->oAction) {
         case HOMING_AMP_ACT_INACTIVE:
-            if (is_point_within_radius_of_mario(o->oHomeX, o->oHomeY, o->oHomeZ, 800) == TRUE) {
+            if (is_point_within_radius_of_player(o->oHomeX, o->oHomeY, o->oHomeZ, 800) == TRUE) {
                 // Make the amp start to appear, and un-hide it.
                 o->oAction = HOMING_AMP_ACT_APPEAR;
                 o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;

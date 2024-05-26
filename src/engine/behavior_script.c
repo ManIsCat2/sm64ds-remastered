@@ -883,7 +883,7 @@ void cur_obj_update(void) {
     BhvCommandProc bhvCmdProc;
     s32 bhvProcResult;
 
-    s32 inRoom = cur_obj_is_mario_in_room();
+    s32 inRoom = cur_obj_is_player_in_room();
 
 #if PROCESS_ONLY_ON_ROOM_PARENT
     // Activates objects only if is inside a room associated with it.
@@ -895,8 +895,8 @@ void cur_obj_update(void) {
 
     // Calculate the distance from the object to Mario.
     if (objFlags & OBJ_FLAG_COMPUTE_DIST_TO_MARIO) {
-        gCurrentObject->oDistanceToMario = dist_between_objects(gCurrentObject, gMarioObject);
-        distanceFromMario = gCurrentObject->oDistanceToMario;
+        gCurrentObject->oDistanceToPlayer = dist_between_objects(gCurrentObject, gMarioObject);
+        distanceFromMario = gCurrentObject->oDistanceToPlayer;
     } else {
         distanceFromMario = 0.0f;
     }

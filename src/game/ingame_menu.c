@@ -2670,7 +2670,7 @@ s16 render_pause_screen(void) {
 
 #if !EXIT_COURSE_ANYWHERE
 /* Added support for the "Exit course at any time" cheat */
-            if ((gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT) 
+            if ((gPlayerStates[0].action & ACT_FLAG_PAUSE_EXIT) 
 #ifdef CHEATS_ACTIONS
                 || (Cheats.EnableCheats && Cheats.ExitAnywhere)
 #endif
@@ -2811,7 +2811,7 @@ void print_hud_course_complete_coins(s16 x, s16 y) {
 #endif
             {
                 play_sound(SOUND_GENERAL_COLLECT_1UP, gGlobalSoundSource);
-                gMarioState->numLives++;
+                gPlayerState->numLives++;
             }
         }
 

@@ -113,7 +113,7 @@ void controllable_platform_check_walls(s8 sp1B, s8 sp1C[3], Vec3f sp20, UNUSED V
         }
     }
 
-    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 400)) {
+    if (!is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 400)) {
         D_80331694 = 6;
         o->oControllablePlatformUnk100 = 1;
         o->oTimer = 0;

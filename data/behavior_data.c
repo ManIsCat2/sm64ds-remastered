@@ -473,7 +473,7 @@ const BehaviorScript bhvKingBobomb[] = {
     SET_INT(oIntangibleTimer, 0),
     DROP_TO_FLOOR(),
     SET_HOME(),
-    SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvBobombAnchorMario),
+    SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvBobombAnchorPlayer),
     SET_INT(oHealth, 3),
     SET_INT(oDamageOrCoinValue, 1),
     BEGIN_LOOP(),
@@ -481,14 +481,14 @@ const BehaviorScript bhvKingBobomb[] = {
     END_LOOP(),
 };
 
-const BehaviorScript bhvBobombAnchorMario[] = {
+const BehaviorScript bhvBobombAnchorPlayer[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     BILLBOARD(),
     SET_FLOAT(oParentRelativePosX, 100),
     SET_FLOAT(oParentRelativePosZ, 150),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_bobomb_anchor_mario_loop),
+        CALL_NATIVE(bhv_bobomb_anchor_player_loop),
     END_LOOP(),
 };
 
@@ -676,7 +676,7 @@ const BehaviorScript bhvChuckya[] = {
     SET_INT(oInteractType, INTERACT_GRABBABLE),
     SET_HITBOX(/*Radius*/ 150, /*Height*/ 100),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
-    SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvChuckyaAnchorMario),
+    SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvChuckyaAnchorPlayer),
     SET_INT(oNumLootCoins, 5),
     SET_INT(oIntangibleTimer, 0),
     SET_HOME(),
@@ -685,14 +685,14 @@ const BehaviorScript bhvChuckya[] = {
     END_LOOP(),
 };
 
-const BehaviorScript bhvChuckyaAnchorMario[] = {
+const BehaviorScript bhvChuckyaAnchorPlayer[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     BILLBOARD(),
     SET_FLOAT(oParentRelativePosY, -60),
     SET_FLOAT(oParentRelativePosZ, 150),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_chuckya_anchor_mario_loop),
+        CALL_NATIVE(bhv_chuckya_anchor_player_loop),
     END_LOOP(),
 };
 
@@ -1540,11 +1540,11 @@ const BehaviorScript bhvFireParticleSpawner[] = {
     SET_INT(oAnimState, -1),
     BEGIN_LOOP(),
         ADD_INT(oAnimState, 1),
-        CALL_NATIVE(bhv_flame_mario_loop),
+        CALL_NATIVE(bhv_flame_player_loop),
     END_LOOP(),
 };
 
-const BehaviorScript bhvBlackSmokeMario[] = {
+const BehaviorScript bhvBlackSmokePlayer[] = {
     BEGIN(OBJ_LIST_UNIMPORTANT),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     BILLBOARD(),
@@ -1552,16 +1552,16 @@ const BehaviorScript bhvBlackSmokeMario[] = {
 #if FIX_BURN_SMOKE
     SET_INT(oOpacity, 255),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_black_smoke_mario_loop),
+        CALL_NATIVE(bhv_black_smoke_player_loop),
     END_LOOP(),
 #else
     SET_INT(oAnimState, 4),
     BEGIN_REPEAT(8),
-        CALL_NATIVE(bhv_black_smoke_mario_loop),
+        CALL_NATIVE(bhv_black_smoke_player_loop),
         DELAY(1),
-        CALL_NATIVE(bhv_black_smoke_mario_loop),
+        CALL_NATIVE(bhv_black_smoke_player_loop),
         DELAY(1),
-        CALL_NATIVE(bhv_black_smoke_mario_loop),
+        CALL_NATIVE(bhv_black_smoke_player_loop),
     END_REPEAT(),
     DEACTIVATE(),
 #endif
@@ -1804,7 +1804,7 @@ const BehaviorScript bhvHeaveHo[] = {
     LOAD_ANIMATIONS(oAnimations, heave_ho_seg5_anims_0501534C),
     ANIMATE(0),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 200, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
-    SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvHeaveHoThrowMario),
+    SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvHeaveHoThrowPlayer),
     SET_INT(oInteractType, INTERACT_GRABBABLE),
     SET_INT(oInteractionSubtype, INT_SUBTYPE_NOT_GRABBABLE | INT_SUBTYPE_GRABS_MARIO),
     SET_HITBOX(/*Radius*/ 120, /*Height*/ 100),
@@ -1815,12 +1815,12 @@ const BehaviorScript bhvHeaveHo[] = {
     END_LOOP(),
 };
 
-const BehaviorScript bhvHeaveHoThrowMario[] = {
+const BehaviorScript bhvHeaveHoThrowPlayer[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     BILLBOARD(),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_heave_ho_throw_mario_loop),
+        CALL_NATIVE(bhv_heave_ho_throw_player_loop),
     END_LOOP(),
 };
 
@@ -3517,9 +3517,9 @@ const BehaviorScript bhvMario[] = {
     OR_INT(oUnk94, 0x0001),
     SET_HITBOX(/*Radius*/ 37, /*Height*/ 160),
     BEGIN_LOOP(),
-        CALL_NATIVE(try_print_debug_mario_level_info),
-        CALL_NATIVE(bhv_mario_update),
-        CALL_NATIVE(try_do_mario_debug_object_spawn),
+        CALL_NATIVE(try_print_debug_player_level_info),
+        CALL_NATIVE(bhv_player_update),
+        CALL_NATIVE(try_do_player_debug_object_spawn),
     END_LOOP(),
 };
 

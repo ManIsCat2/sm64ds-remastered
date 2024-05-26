@@ -15,8 +15,8 @@ void bhv_castle_floor_trap_init(void) {
 }
 
 void bhv_castle_floor_trap_open_detect(void) {
-    if (gMarioStates[0].action == ACT_SPECIAL_EXIT_AIRBORNE
-        || gMarioStates[0].action == ACT_SPECIAL_DEATH_EXIT) {
+    if (gPlayerStates[0].action == ACT_SPECIAL_EXIT_AIRBORNE
+        || gPlayerStates[0].action == ACT_SPECIAL_DEATH_EXIT) {
         o->oAction = 4; // rotates trapdoor so it looks always open
     } else {
         o->oAngleVelRoll = 0x400;
@@ -45,7 +45,7 @@ void bhv_castle_floor_trap_open(void) {
 }
 
 void bhv_castle_floor_trap_close_detect(void) {
-    if (o->oDistanceToMario > 1000.0f) {
+    if (o->oDistanceToPlayer > 1000.0f) {
         o->oAction = 3; // close trapdoor
     }
 }

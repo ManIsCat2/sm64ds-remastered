@@ -22,8 +22,8 @@ void bhv_tilting_inverted_pyramid_loop(void) {
     s32 marioOnPlatform = (gMarioObject->platform == o);
 
     if (marioOnPlatform) {
-        targetNormal[0] = gMarioStates[0].pos[0] - o->oPosX;
-        targetNormal[2] = gMarioStates[0].pos[2] - o->oPosZ;
+        targetNormal[0] = gPlayerStates[0].pos[0] - o->oPosX;
+        targetNormal[2] = gPlayerStates[0].pos[2] - o->oPosZ;
         targetNormal[1] = 500.0f;
         vec3f_normalize(targetNormal);
     } else {

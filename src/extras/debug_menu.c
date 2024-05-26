@@ -35,7 +35,7 @@ extern s8 gMenuState;
 extern struct CreditsEntry sCreditsSequence[];
 extern void try_modify_debug_controls(void);
 extern void try_change_debug_page(void);
-extern void debug_update_mario_cap(u16 button, s32 flags, u16 capTimer, u16 capMusic);
+extern void debug_update_player_cap(u16 button, s32 flags, u16 capTimer, u16 capMusic);
 extern void set_play_mode(s16 playMode);
 
 struct DebugOptList DebugOpt;
@@ -77,7 +77,7 @@ static void force_quit_pause_debug(void) {
 static void opt_debug_warp_0(UNUSED struct Option *self, s32 arg) {
     if (!arg) {
         force_quit_pause_debug();
-        level_trigger_warp(gMarioState, WARP_OP_CREDITS_START);
+        level_trigger_warp(gPlayerState, WARP_OP_CREDITS_START);
     }
 }
 
@@ -94,7 +94,7 @@ static void opt_debug_warp_1(UNUSED struct Option *self, s32 arg) {
         seq_player_unlower_volume(SEQ_PLAYER_LEVEL, 60);
         play_cutscene_music(SEQUENCE_ARGS(15, SEQ_EVENT_CUTSCENE_CREDITS));
 
-        level_trigger_warp(gMarioState, WARP_OP_CREDITS_NEXT);
+        level_trigger_warp(gPlayerState, WARP_OP_CREDITS_NEXT);
     }
 }
 
@@ -105,14 +105,14 @@ static void opt_debug_warp_2(UNUSED struct Option *self, s32 arg) {
         gLastCompletedCourseNum = gCurrCourseNum;
         gLastCompletedStarNum = gCurrActNum;
 
-        level_trigger_warp(gMarioState, WARP_OP_STAR_EXIT);
+        level_trigger_warp(gPlayerState, WARP_OP_STAR_EXIT);
     }
 }
 
 static void opt_debug_warp_3(UNUSED struct Option *self, s32 arg) {
     if (!arg) {
         force_quit_pause_debug();
-        level_trigger_warp(gMarioState, WARP_OP_DEATH);
+        level_trigger_warp(gPlayerState, WARP_OP_DEATH);
     }
 }
 
@@ -149,7 +149,7 @@ void activate_complex_debug_display(void) {
     }
 }
 
-void set_debug_free_move_action(struct MarioState *m) {
+void set_debug_free_move_action(struct PlayerState *m) {
     if (m->action == ACT_DEBUG_FREE_MOVE) {
         if (m->controller->buttonPressed & L_TRIG) {
             DebugOpt.FreeMoveActFlags ^= ACT_DEBUG_STATE_CHECK_FLOOR;
@@ -161,15 +161,15 @@ void set_debug_free_move_action(struct MarioState *m) {
     } else {
         DebugOpt.FreeMoveActFlags = ACT_DEBUG_STATE_CHECK_FLOOR;
         if (m->controller->buttonPressed & L_TRIG) {
-            set_mario_action(m, ACT_DEBUG_FREE_MOVE, 0);
+            set_player_action(m, ACT_DEBUG_FREE_MOVE, 0);
         }
     }
 }
 
 void set_debug_cap_changer(void) {
-    debug_update_mario_cap(CONT_LEFT, MARIO_WING_CAP, 1800, SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP));
-    debug_update_mario_cap(CONT_UP, MARIO_METAL_CAP, 600, SEQUENCE_ARGS(4, SEQ_EVENT_METAL_CAP));
-    debug_update_mario_cap(CONT_RIGHT, MARIO_VANISH_CAP, 600, SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP));
+    debug_update_player_cap(CONT_LEFT, MARIO_WING_CAP, 1800, SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP));
+    debug_update_player_cap(CONT_UP, MARIO_METAL_CAP, 600, SEQUENCE_ARGS(4, SEQ_EVENT_METAL_CAP));
+    debug_update_player_cap(CONT_RIGHT, MARIO_VANISH_CAP, 600, SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP));
 }
 
 #ifdef TARGET_N64
@@ -213,7 +213,7 @@ void debug_calculate_and_print_fps(void) {
 }
 #endif
 
-void set_debug_mario_action(struct MarioState *m) {
+void set_debug_player_action(struct PlayerState *m) {
     if (DebugOpt.FreeMoveAct) {
         set_debug_free_move_action(m);
     }
@@ -231,7 +231,7 @@ void set_debug_main_action(void) {
     // Ensure we aren't on pause menu and update star hud
     if (DebugOpt.CompleteSave && gMenuMode == -1) {
         get_complete_save_file(gCurrSaveFileNum);
-        gMarioState->numStars = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
+        gPlayerState->numStars = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
     }
 }
 

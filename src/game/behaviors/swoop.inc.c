@@ -26,7 +26,7 @@ static struct ObjectHitbox sSwoopHitbox = {
 static void swoop_act_idle(void) {
     cur_obj_init_animation_with_sound(1);
 
-    if (approach_f32_ptr(&o->header.gfx.scale[0], 1.0f, 0.05f) && o->oDistanceToMario < 1500.0f) {
+    if (approach_f32_ptr(&o->header.gfx.scale[0], 1.0f, 0.05f) && o->oDistanceToPlayer < 1500.0f) {
         if (cur_obj_rotate_yaw_toward(o->oAngleToMario, 800)) {
             cur_obj_play_sound_2(SOUND_OBJ2_SWOOP_WAKE_UP);
             o->oAction = SWOOP_ACT_MOVE;

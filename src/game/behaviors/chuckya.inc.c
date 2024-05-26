@@ -14,7 +14,7 @@ struct UnusedChuckyaData sUnusedChuckyaData[] = {
     { 8, 10.f, 1.f },
 };
 
-void common_anchor_mario_behavior(f32 sp28, f32 sp2C, s32 sp30) {
+void common_anchor_player_behavior(f32 sp28, f32 sp2C, s32 sp30) {
     switch (o->parentObj->oChuckyaUnk88) {
         case 0:
             break;
@@ -25,15 +25,15 @@ void common_anchor_mario_behavior(f32 sp28, f32 sp2C, s32 sp30) {
 
         case 2:
             gMarioObject->oInteractStatus |= (INT_STATUS_MARIO_UNK2 + sp30);
-            gMarioStates[0].forwardVel = sp28;
-            gMarioStates[0].vel[1] = sp2C;
+            gPlayerStates[0].forwardVel = sp28;
+            gPlayerStates[0].vel[1] = sp2C;
             o->parentObj->oChuckyaUnk88 = 0;
             break;
 
         case 3:
             gMarioObject->oInteractStatus |= (INT_STATUS_MARIO_UNK2 | INT_STATUS_MARIO_UNK6);
-            gMarioStates[0].forwardVel = 10.0f;
-            gMarioStates[0].vel[1] = 10.0f;
+            gPlayerStates[0].forwardVel = 10.0f;
+            gPlayerStates[0].vel[1] = 10.0f;
             o->parentObj->oChuckyaUnk88 = 0;
             break;
     }
@@ -45,8 +45,8 @@ void common_anchor_mario_behavior(f32 sp28, f32 sp2C, s32 sp30) {
     }
 }
 
-void bhv_chuckya_anchor_mario_loop(void) {
-    common_anchor_mario_behavior(40.0f, 40.0f, INT_STATUS_MARIO_UNK6);
+void bhv_chuckya_anchor_player_loop(void) {
+    common_anchor_player_behavior(40.0f, 40.0f, INT_STATUS_MARIO_UNK6);
 }
 
 s32 unknown_chuckya_function(s32 sp20, f32 sp24, f32 sp28, s16 sp2C) {
@@ -60,7 +60,7 @@ s32 unknown_chuckya_function(s32 sp20, f32 sp24, f32 sp28, s16 sp2C) {
                 sp1C = 1;
                 o->oAngleToMario = cur_obj_angle_to_home();
             }
-        } else if (o->oDistanceToMario > sp28) {
+        } else if (o->oDistanceToPlayer > sp28) {
             if (gGlobalTimer % sp2C == 0) {
                 o->oAngleToMario = obj_angle_to_object(o, gMarioObject);
             }

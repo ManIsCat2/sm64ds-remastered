@@ -91,7 +91,7 @@ void bully_act_chase_mario(void) {
         }
     }
 
-    if (!is_point_within_radius_of_mario(homeX, posY, homeZ, 1000)) {
+    if (!is_point_within_radius_of_player(homeX, posY, homeZ, 1000)) {
         o->oAction = BULLY_ACT_PATROL;
         cur_obj_init_animation(0);
     }

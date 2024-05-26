@@ -317,7 +317,7 @@ void bowser_bitdw_actions(void) {
     // Set attacks when Bowser Reacts
     if (!o->oBowserIsReacting) {
         if (o->oBowserStatus & BOWSER_STATUS_ANGLE_MARIO) {
-            if (o->oDistanceToMario < 1500.0f) { // nearby
+            if (o->oDistanceToPlayer < 1500.0f) { // nearby
                 o->oAction = BOWSER_ACT_BREATH_FIRE;
             } else { // far away
                 o->oAction = BOWSER_ACT_QUICK_JUMP;
@@ -352,7 +352,7 @@ void bowser_bitfs_actions(void) {
     // Set attacks when Bowser Reacts
     if (!o->oBowserIsReacting) {
         if (o->oBowserStatus & BOWSER_STATUS_ANGLE_MARIO) {
-            if (o->oDistanceToMario < 1300.0f) {  // nearby
+            if (o->oDistanceToPlayer < 1300.0f) {  // nearby
                 if (rand < 0.5) { // 50% chance
                     o->oAction = BOWSER_ACT_TELEPORT;
                 } else {
@@ -383,7 +383,7 @@ void bowser_bitfs_actions(void) {
 void bowser_bits_action_list(void) {
     f32 rand = random_float();
     if (o->oBowserStatus & BOWSER_STATUS_ANGLE_MARIO) {
-        if (o->oDistanceToMario < 1000.0f) { // nearby
+        if (o->oDistanceToPlayer < 1000.0f) { // nearby
             if (rand < 0.4) {
                 o->oAction = BOWSER_ACT_SPIT_FIRE_ONTO_FLOOR; // 40% chance
             } else if (rand < 0.8) {
@@ -577,7 +577,7 @@ void bowser_act_teleport(void) {
             }
 
             if (abs_angle_diff(o->oMoveAngleYaw, o->oAngleToMario) > 0x4000) {
-                if (o->oDistanceToMario > 500.0f) {
+                if (o->oDistanceToPlayer > 500.0f) {
                     o->oSubAction = BOWSER_SUB_ACT_TELEPORT_STOP;
                     o->oMoveAngleYaw = o->oAngleToMario; // update angle
                     cur_obj_play_sound_2(SOUND_OBJ2_BOWSER_TELEPORT);
@@ -695,7 +695,7 @@ s32 bowser_land(void) {
         // Set status attacks in BitDW since the other levels
         // have different attacks defined
         if (o->oBhvParams2ndByte == BOWSER_BP_BITDW) {
-            if (o->oDistanceToMario < 850.0f) {
+            if (o->oDistanceToPlayer < 850.0f) {
                 gMarioObject->oInteractStatus |= INT_STATUS_MARIO_KNOCKBACK_DMG;
             } else {
                 gMarioObject->oInteractStatus |= INT_STATUS_MARIO_STUNNED;
@@ -1205,7 +1205,7 @@ void bowser_dead_bounce(void) {
 s32 bowser_dead_wait_for_mario(void) {
     s32 ret = FALSE;
     cur_obj_become_intangible();
-    if (cur_obj_init_animation_and_check_if_near_end(BOWSER_ANIM_LAY_DOWN) && o->oDistanceToMario < 700.0f
+    if (cur_obj_init_animation_and_check_if_near_end(BOWSER_ANIM_LAY_DOWN) && o->oDistanceToPlayer < 700.0f
         && abs_angle_diff(gMarioObject->oMoveAngleYaw, o->oAngleToMario) > 0x6000) {
         ret = TRUE;
     }
@@ -1292,7 +1292,7 @@ s32 bowser_dead_default_stage_ending(void) {
         bowser_dead_hide();
         spawn_triangle_break_particles(20, MODEL_YELLOW_COIN, 1.0f, 0);
         bowser_spawn_collectable();
-        set_mario_npc_dialog(MARIO_DIALOG_STOP);
+        set_player_npc_dialog(MARIO_DIALOG_STOP);
         ret = TRUE;
     }
 
@@ -1711,7 +1711,7 @@ void bhv_bowser_loop(void) {
     if (o->oBowserDistToCenter < 1000.0f) {
         o->oBowserStatus |= BOWSER_STATUS_DIST_CENTER; // unused
     }
-    if (o->oDistanceToMario < 850.0f) {
+    if (o->oDistanceToPlayer < 850.0f) {
         o->oBowserStatus |= BOWSER_STATUS_DIST_MARIO; // unused
     }
 

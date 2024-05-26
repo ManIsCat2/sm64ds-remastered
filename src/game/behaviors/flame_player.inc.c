@@ -17,7 +17,7 @@ void bhv_black_smoke_bowser_loop(void) {
     o->oPosY += o->oVelY;
 }
 
-void bhv_black_smoke_mario_loop(void) {
+void bhv_black_smoke_player_loop(void) {
     if (o->oTimer == 0) {
         cur_obj_set_pos_relative(gMarioObject, 0, 0, -30.0f);
 
@@ -37,11 +37,11 @@ void bhv_black_smoke_mario_loop(void) {
 #endif
 }
 
-void bhv_flame_mario_loop(void) {
+void bhv_flame_player_loop(void) {
     cur_obj_scale(2.0f);
 
     if (o->oTimer & 1) {
-        spawn_object(o, MODEL_BURN_SMOKE, bhvBlackSmokeMario);
+        spawn_object(o, MODEL_BURN_SMOKE, bhvBlackSmokePlayer);
     }
 
     gMarioObject->prevObj = o; // weird?

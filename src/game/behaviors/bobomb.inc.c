@@ -241,7 +241,7 @@ void curr_obj_random_blink(s32 *blinkTimer) {
 void bhv_bobomb_loop(void) {
     s8 dustPeriodMinus1;
 
-    if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 4000)) {
+    if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 4000)) {
         switch (o->oHeldState) {
             case HELD_FREE:
                 bobomb_free_loop();
@@ -310,7 +310,7 @@ void bobomb_buddy_act_idle(void) {
         cur_obj_play_sound_2(SOUND_OBJ_BOBOMB_WALK);
     }
 
-    if (o->oDistanceToMario < 1000.0f) {
+    if (o->oDistanceToPlayer < 1000.0f) {
         o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x140);
     }
 
@@ -360,7 +360,7 @@ void bobomb_buddy_cannon_dialog(s16 dialogFirstText, s16 dialogSecondText) {
             break;
 
         case BOBOMB_BUDDY_CANNON_STOP_TALKING:
-            set_mario_npc_dialog(MARIO_DIALOG_STOP);
+            set_player_npc_dialog(MARIO_DIALOG_STOP);
 
             o->activeFlags &= ~ACTIVE_FLAG_INITIATED_TIME_STOP;
             o->oBobombBuddyHasTalkedToMario = BOBOMB_BUDDY_HAS_TALKED;
@@ -372,14 +372,14 @@ void bobomb_buddy_cannon_dialog(s16 dialogFirstText, s16 dialogSecondText) {
 }
 
 void bobomb_buddy_act_talk(void) {
-    if (set_mario_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
+    if (set_player_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
         o->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
 
         switch (o->oBobombBuddyRole) {
             case BOBOMB_BUDDY_ROLE_ADVICE:
                 if (cutscene_object_with_dialog(CUTSCENE_DIALOG, o, o->oBhvParams2ndByte)
                     != BOBOMB_BUDDY_BP_STYPE_GENERIC) {
-                    set_mario_npc_dialog(MARIO_DIALOG_STOP);
+                    set_player_npc_dialog(MARIO_DIALOG_STOP);
 
                     o->activeFlags &= ~ACTIVE_FLAG_INITIATED_TIME_STOP;
                     o->oBobombBuddyHasTalkedToMario = BOBOMB_BUDDY_HAS_TALKED;

@@ -21,16 +21,16 @@ extern Vec3s gVec3sOne;
 // Common cos values for degrees, often used for surface Y normals.
 // This is different than coss(), which uses s16 angles.
 #define COS0    1.0f
-#define COS1    0.99984770f // mario_floor_is_slippery, mario_floor_is_slope
-#define COS5    0.99619470f // mario_floor_is_slope
-#define COS10   0.98480775f // act_butt_slide_air, act_hold_butt_slide_air, mario_floor_is_slippery, mario_floor_is_slope
-#define COS15   0.96592583f // mario_floor_is_slope
-#define COS20   0.93969262f // mario_floor_is_slippery, mario_floor_is_slope, mario_floor_is_steep
+#define COS1    0.99984770f // player_floor_is_slippery, player_floor_is_slope
+#define COS5    0.99619470f // player_floor_is_slope
+#define COS10   0.98480775f // act_butt_slide_air, act_hold_butt_slide_air, player_floor_is_slippery, player_floor_is_slope
+#define COS15   0.96592583f // player_floor_is_slope
+#define COS20   0.93969262f // player_floor_is_slippery, player_floor_is_slope, player_floor_is_steep
 #define COS25   0.90630779f // ledge grabs
-#define COS30   0.86602540f // should_get_stuck_in_ground, mario_floor_is_steep
+#define COS30   0.86602540f // should_get_stuck_in_ground, player_floor_is_steep
 #define COS35   0.81915204f
 #define COS36   0.80901699f
-#define COS38   0.78801075f // mario_floor_is_slippery default
+#define COS38   0.78801075f // player_floor_is_slippery default
 #define COS40   0.76604444f
 #define COS45   0.70710678f // SURFACE_FLAG_X_PROJECTION
 #define COS50   0.64278761f

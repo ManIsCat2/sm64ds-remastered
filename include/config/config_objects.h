@@ -22,7 +22,7 @@
 /// Changes obj_resolve_object_collisions to work consistently
 #define BETTER_RESOLVE_OBJ_COLLISIONS (0 || QOL_FEATURES)
 
-/// Fixes missing floor update in push_mario_out_of_object
+/// Fixes missing floor update in push_player_out_of_object
 #define FIX_PUSH_MARIO_OUT_OF_OBJECT_FLOOR (0 || QOL_FIXES || COLLISION_FIXES)
 
 /// Makes rooms code use room ids to check for a room rather than a floor

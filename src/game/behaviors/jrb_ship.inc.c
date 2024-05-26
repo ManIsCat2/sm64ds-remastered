@@ -13,10 +13,10 @@ struct ObjectHitbox sSkullSlidingBoxHitbox = {
 };
 
 void bhv_sunken_ship_part_loop(void) {
-    if (o->oDistanceToMario > 10000.0f) {
+    if (o->oDistanceToPlayer > 10000.0f) {
         o->oOpacity = 140;
     } else {
-        o->oOpacity = o->oDistanceToMario * 140.0f / 10000.0;
+        o->oOpacity = o->oDistanceToPlayer * 140.0f / 10000.0;
     }
 
     cur_obj_disable_rendering();

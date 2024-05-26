@@ -55,7 +55,7 @@ void bhv_flamethrower_loop(void) {
 
     if (o->oAction == 0) {
         if ((gCurrLevelNum != LEVEL_BBH || gMarioOnMerryGoRound == TRUE)
-            && o->oDistanceToMario < 2000.0f) {
+            && o->oDistanceToPlayer < 2000.0f) {
             o->oAction++;
         }
     } else if (o->oAction == 1) {

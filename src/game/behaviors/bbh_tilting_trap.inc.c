@@ -22,7 +22,7 @@ void bhv_bbh_tilting_trap_platform_loop(void) {
     }
 
     if (o->oAction == BBH_TILTING_TRAP_PLATFORM_ACT_MARIO_ON) {
-        o->oAngleVelPitch = (s32)(o->oDistanceToMario * coss(o->oAngleToMario));
+        o->oAngleVelPitch = (s32)(o->oDistanceToPlayer * coss(o->oAngleToMario));
         o->oFaceAnglePitch += o->oAngleVelPitch;
     } else
         if ((absi(o->oFaceAnglePitch) < 3000) || (o->oTimer > 15))

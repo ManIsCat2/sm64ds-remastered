@@ -5,7 +5,7 @@ void water_level_pillar_undrained(void) {
 
     switch (o->oAction) {
         case 0:
-            if (cur_obj_is_mario_ground_pounding_platform()) {
+            if (cur_obj_is_player_ground_pounding_platform()) {
                 o->oAction++;
                 spawn_mist_particles();
             }

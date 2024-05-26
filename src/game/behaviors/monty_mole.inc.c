@@ -58,7 +58,7 @@ static struct Object *monty_mole_select_available_hole(f32 minDistToMario) {
 
     while (hole != NULL) {
         if (hole->oMontyMoleHoleCooldown == 0) {
-            if (hole->oDistanceToMario < 1500.0f && hole->oDistanceToMario > minDistToMario) {
+            if (hole->oDistanceToPlayer < 1500.0f && hole->oDistanceToPlayer > minDistToMario) {
                 numAvailableHoles++;
             }
         }
@@ -74,7 +74,7 @@ static struct Object *monty_mole_select_available_hole(f32 minDistToMario) {
 
         while (hole != NULL) {
             if (hole->oMontyMoleHoleCooldown == 0) {
-                if (hole->oDistanceToMario < 1500.0f && hole->oDistanceToMario > minDistToMario) {
+                if (hole->oDistanceToPlayer < 1500.0f && hole->oDistanceToPlayer > minDistToMario) {
                     if (numAvailableHoles == selectedHole) {
                         return hole;
                     }
@@ -144,7 +144,7 @@ static void monty_mole_act_select_hole(void) {
 
     if (o->oBhvParams2ndByte != MONTY_MOLE_BP_NO_ROCK) {
         minDistToMario = 200.0f;
-    } else if (gMarioStates[0].forwardVel < 8.0f) {
+    } else if (gPlayerStates[0].forwardVel < 8.0f) {
         minDistToMario = 100.0f;
     } else {
         minDistToMario = 500.0f;
@@ -165,7 +165,7 @@ static void monty_mole_act_select_hole(void) {
         o->oFaceAnglePitch = 0;
         o->oMoveAngleYaw = o->oMontyMoleCurrentHole->oAngleToMario;
 
-        if (o->oDistanceToMario > 500.0f || minDistToMario > 100.0f || random_sign() < 0) {
+        if (o->oDistanceToPlayer > 500.0f || minDistToMario > 100.0f || random_sign() < 0) {
             o->oAction = MONTY_MOLE_ACT_RISE_FROM_HOLE;
             o->oVelY = 3.0f;
             o->oGravity = 0.0f;
@@ -222,7 +222,7 @@ static void monty_mole_act_spawn_rock(void) {
  * into hole action.
  */
 static void monty_mole_act_begin_jump_into_hole(void) {
-    if (cur_obj_init_anim_and_check_if_end(3) || obj_is_near_to_and_facing_mario(1000.0f, 0x4000)) {
+    if (cur_obj_init_anim_and_check_if_end(3) || obj_is_near_to_and_facing_player(1000.0f, 0x4000)) {
         o->oAction = MONTY_MOLE_ACT_JUMP_INTO_HOLE;
         o->oVelY = 40.0f;
         o->oGravity = -6.0f;
@@ -417,7 +417,7 @@ static void monty_mole_rock_act_held(void) {
     o->oParentRelativePosZ = 0.0f;
 
     if (o->parentObj->prevObj == NULL) {
-        f32 distToMario = o->oDistanceToMario;
+        f32 distToMario = o->oDistanceToPlayer;
         if (distToMario > 600.0f) {
             distToMario = 600.0f;
         }

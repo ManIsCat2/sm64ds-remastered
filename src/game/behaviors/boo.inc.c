@@ -67,11 +67,11 @@ static s32 boo_should_be_active(void) {
             return FALSE;
         }
     } else if (o->oRoom == -1) {
-        if (o->oDistanceToMario < activationRadius) {
+        if (o->oDistanceToPlayer < activationRadius) {
             return TRUE;
         }
     } else if (!boo_should_be_stopped()) {
-        if (o->oDistanceToMario < activationRadius
+        if (o->oDistanceToPlayer < activationRadius
             && (o->oRoom == gMarioCurrentRoom || gMarioCurrentRoom == 0)) {
             return TRUE;
         }
@@ -337,7 +337,7 @@ static void boo_chase_mario(f32 a0, s16 turnSpeed, f32 velMultiplier) {
         cur_obj_rotate_yaw_toward(targetYaw, turnSpeed);
         o->oVelY = 0.0f;
 
-        if (!mario_is_in_air_action()) {
+        if (!player_is_in_air_action()) {
             dy = o->oPosY - gMarioObject->oPosY;
             if (a0 < dy && dy < 500.0f) {
                 o->oVelY = increment_velocity_toward_range(
@@ -640,7 +640,7 @@ static void big_boo_act_4(void) {
     if (o->oBhvParams2ndByte == BIG_BOO_BP_GHOST_HUNT) {
         obj_set_pos(o, 973, 0, 626);
 
-        if (o->oTimer > 60 && o->oDistanceToMario < 600.0f) {
+        if (o->oTimer > 60 && o->oDistanceToPlayer < 600.0f) {
             obj_set_pos(o, 973, 0, 717);
 
             spawn_object_relative(0, 0, 0,    0, o, MODEL_BBH_STAIRCASE_STEP, bhvBooStaircase);
@@ -754,7 +754,7 @@ void bhv_boo_with_cage_loop(void) {
 void bhv_merry_go_round_boo_manager_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oDistanceToMario < 1000.0f) {
+            if (o->oDistanceToPlayer < 1000.0f) {
                 if (o->oMerryGoRoundBooManagerNumBoosKilled < 5) {
                     if (o->oMerryGoRoundBooManagerNumBoosSpawned != 5) {
                         if (o->oMerryGoRoundBooManagerNumBoosSpawned
@@ -823,7 +823,7 @@ void bhv_boo_in_castle_loop(void) {
             cur_obj_scale(o->oBooBaseScale);
         }
 
-        if (o->oDistanceToMario < 1000.0f) {
+        if (o->oDistanceToPlayer < 1000.0f) {
             o->oAction++;
             cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
         }

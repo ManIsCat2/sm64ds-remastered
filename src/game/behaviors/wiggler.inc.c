@@ -205,9 +205,9 @@ void wiggler_init_segments(void) {
 }
 
 /**
- * Show text if necessary. Then walk toward mario if not at full health, and
+ * Show text if necessary. Then walk toward the player if not at full health, and
  * otherwise wander in random directions.
- * If attacked by mario, enter either the jumped on or knockback action.
+ * If attacked by the player, enter either the jumped on or knockback action.
  */
 static void wiggler_act_walk(void) {
     s16 yawTurnSpeed;
@@ -237,14 +237,14 @@ static void wiggler_act_walk(void) {
         if (o->oWigglerWalkAwayFromWallTimer != 0) {
             o->oWigglerWalkAwayFromWallTimer--;
         } else {
-            if (o->oDistanceToMario >= 25000.0f) {
+            if (o->oDistanceToPlayer >= 25000.0f) {
                 // If >1200 away from home, turn to home
                 o->oWigglerTargetYaw = o->oAngleToMario;
             }
 
             if (obj_bounce_off_walls_edges_objects(&o->oWigglerTargetYaw)) {
                 //! If the wiggler could self-intersect, or intersect a different
-                //  non-mario object, this could potentially be used to force
+                //  non-player object, this could potentially be used to force
                 //  the wiggler to walk straight - past his usual radius
                 o->oWigglerWalkAwayFromWallTimer = random_linear_offset(30, 30);
             } else {
@@ -408,7 +408,7 @@ void bhv_wiggler_update(void) {
         if (o->oAction == WIGGLER_ACT_FALL_THROUGH_FLOOR) {
             wiggler_act_fall_through_floor();
         } else {
-            treat_far_home_as_mario(1200.0f);
+            treat_far_home_as_player(1200.0f);
 
             // Walking animation and sound
             cur_obj_init_animation_with_accel_and_sound(0, o->oWigglerWalkAnimSpeed);

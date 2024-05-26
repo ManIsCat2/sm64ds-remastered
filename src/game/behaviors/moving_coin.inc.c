@@ -118,7 +118,7 @@ void bhv_moving_blue_coin_loop(void) {
 
     switch (o->oAction) {
         case MOV_BCOIN_ACT_STILL:
-            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1500)) {
+            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1500)) {
                 o->oAction = MOV_BCOIN_ACT_MOVING;
             }
             break;
@@ -171,7 +171,7 @@ void blue_coin_sliding_away_from_mario(void) {
         o->oAction = 3;
     }
 
-    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
+    if (!is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
         o->oAction = 2;
     }
 }
@@ -181,7 +181,7 @@ void blue_coin_sliding_slow_down(void) {
 
     coin_step(&collisionFlags);
 
-    if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 500) == TRUE) {
+    if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 500) == TRUE) {
         o->oAction = 1;
     }
 
@@ -195,7 +195,7 @@ void bhv_blue_coin_sliding_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 500) == TRUE) {
+            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 500) == TRUE) {
                 o->oAction = 1;
             }
 

@@ -89,7 +89,7 @@ static void mr_blizzard_act_spawn_snowball(void) {
  * Handler for Mario entering or exiting Mr. Blizzard's range.
  */
 static void mr_blizzard_act_hide_unhide(void) {
-    if (o->oDistanceToMario < 1000.0f) {
+    if (o->oDistanceToPlayer < 1000.0f) {
         // If Mario is in range, move to rising action, make Mr. Blizzard visible,
         // make Mr. Blizzard tangible, and initialize GraphYVel.
         cur_obj_play_sound_2(SOUND_OBJ_SNOW_SAND2);
@@ -182,7 +182,7 @@ static void mr_blizzard_act_rotate(void) {
             }
         }
         // If Mario gets too far away, move to burrow action and delete the snowball.
-        else if (o->oDistanceToMario > 1500.0f) {
+        else if (o->oDistanceToPlayer > 1500.0f) {
             o->oAction = MR_BLIZZARD_ACT_BURROW;
             o->oMrBlizzardChangeInDizziness = 300.0f;
             o->prevObj = o->oMrBlizzardHeldObj = NULL;
@@ -246,7 +246,7 @@ static void mr_blizzard_act_death(void) {
             }
         }
         // Reset Mr. Blizzard if Mario leaves its radius.
-        else if (o->oDistanceToMario > 1000.0f) {
+        else if (o->oDistanceToPlayer > 1000.0f) {
             cur_obj_init_animation_with_sound(1);
 
             o->oAction = MR_BLIZZARD_ACT_SPAWN_SNOWBALL;
@@ -398,7 +398,7 @@ static void mr_blizzard_snowball_act_0(void) {
 static void mr_blizzard_snowball_act_1(void) {
     if (o->parentObj->prevObj == NULL) {
         if (o->parentObj->oAction == MR_BLIZZARD_ACT_THROW_SNOWBALL) {
-            f32 marioDist = o->oDistanceToMario;
+            f32 marioDist = o->oDistanceToPlayer;
             if (marioDist > 800.0f) {
                 marioDist = 800.0f;
             }

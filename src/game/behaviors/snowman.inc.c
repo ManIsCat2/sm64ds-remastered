@@ -119,13 +119,13 @@ void snowmans_bottom_act_3(void) {
 void bhv_snowmans_bottom_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 400) == 1
-                && set_mario_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
+            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 400) == 1
+                && set_player_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
                 s16 response = cutscene_object_with_dialog(CUTSCENE_DIALOG, o, DIALOG_110);
                 if (response != DIALOG_RESPONSE_NONE) {
                     o->oForwardVel = 10.0f;
                     o->oAction = 1;
-                    set_mario_npc_dialog(MARIO_DIALOG_STOP);
+                    set_player_npc_dialog(MARIO_DIALOG_STOP);
                 }
             }
             break;
@@ -221,7 +221,7 @@ void bhv_snowmans_head_loop(void) {
 }
 
 void bhv_snowmans_body_checkpoint_loop(void) {
-    if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 800)) {
+    if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 800)) {
         o->parentObj->oSnowmansBottomUnk1AC++;
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }

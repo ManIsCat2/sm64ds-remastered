@@ -25,7 +25,7 @@ static struct ObjectHitbox sEnemyLakituHitbox = {
  */
 static void enemy_lakitu_act_uninitialized(void) {
 #ifndef NODRAWINGDISTANCE
-    if (o->oDistanceToMario < 2000.0f) {
+    if (o->oDistanceToPlayer < 2000.0f) {
 #endif
         spawn_object_relative_with_scale(CLOUD_BP_LAKITU_CLOUD, 0, 0, 0, 2.0f, o, MODEL_MIST, bhvCloud);
 
@@ -64,13 +64,13 @@ static void enemy_lakitu_update_speed_and_angle(void) {
     f32 minSpeed;
     s16 turnSpeed;
 
-    f32 distToMario = o->oDistanceToMario;
+    f32 distToMario = o->oDistanceToPlayer;
     if (distToMario > 500.0f) {
         distToMario = 500.0f;
     }
 
     // Move faster the farther away mario is and the faster mario is moving
-    if ((minSpeed = 1.2f * gMarioStates[0].forwardVel) < 8.0f) {
+    if ((minSpeed = 1.2f * gPlayerStates[0].forwardVel) < 8.0f) {
         minSpeed = 8.0f;
     }
     o->oForwardVel = distToMario * 0.04f;
@@ -101,7 +101,7 @@ static void enemy_lakitu_sub_act_no_spiny(void) {
 
     if (o->oEnemyLakituSpinyCooldown != 0) {
         o->oEnemyLakituSpinyCooldown--;
-    } else if (o->oEnemyLakituNumSpinies < 3 && o->oDistanceToMario < 800.0f
+    } else if (o->oEnemyLakituNumSpinies < 3 && o->oDistanceToPlayer < 800.0f
                && abs_angle_diff(o->oAngleToMario, o->oFaceAngleYaw) < 0x4000) {
         struct Object *spiny = spawn_object(o, MODEL_SPINY_BALL, bhvSpiny);
         if (spiny != NULL) {
@@ -127,8 +127,8 @@ static void enemy_lakitu_sub_act_hold_spiny(void) {
         o->oEnemyLakituSpinyCooldown--;
     }
     // TODO: Check if anything interesting happens if we bypass this with speed
-    else if (o->oDistanceToMario > o->oDrawingDistance - 100.0f
-             || (o->oDistanceToMario < 500.0f
+    else if (o->oDistanceToPlayer > o->oDrawingDistance - 100.0f
+             || (o->oDistanceToPlayer < 500.0f
                  && abs_angle_diff(o->oAngleToMario, o->oFaceAngleYaw) < 0x2000)) {
         o->oSubAction = ENEMY_LAKITU_SUB_ACT_THROW_SPINY;
         o->oEnemyLakituFaceForwardCountdown = 20;
@@ -192,7 +192,7 @@ static void enemy_lakitu_act_main(void) {
 void bhv_enemy_lakitu_update(void) {
     // PARTIAL_UPDATE
 
-    treat_far_home_as_mario(2000.0f);
+    treat_far_home_as_player(2000.0f);
 
     switch (o->oAction) {
         case ENEMY_LAKITU_ACT_UNINITIALIZED:

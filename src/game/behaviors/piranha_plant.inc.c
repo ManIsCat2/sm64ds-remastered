@@ -23,7 +23,7 @@ void piranha_plant_act_idle(void) {
     cur_obj_scale(1.0f);
 #endif
 
-    if (o->oDistanceToMario < 1200.0f) {
+    if (o->oDistanceToPlayer < 1200.0f) {
         o->oAction = PIRANHA_PLANT_ACT_SLEEPING;
     }
 }
@@ -88,11 +88,11 @@ void piranha_plant_act_sleeping(void) {
     o->oDamageOrCoinValue = 3;
 #endif
 
-    if (o->oDistanceToMario < 400.0f) {
-        if (mario_moving_fast_enough_to_make_piranha_plant_bite()) {
+    if (o->oDistanceToPlayer < 400.0f) {
+        if (player_moving_fast_enough_to_make_piranha_plant_bite()) {
             o->oAction = PIRANHA_PLANT_ACT_WOKEN_UP;
         }
-    } else if (o->oDistanceToMario < 1000.0f) {
+    } else if (o->oDistanceToPlayer < 1000.0f) {
         play_secondary_music(SEQ_EVENT_PIRANHA_PLANT, 0, 255, 1000);
         o->oPiranhaPlantSleepMusicState = PIRANHA_PLANT_SLEEP_MUSIC_PLAYING;
     } else if (o->oPiranhaPlantSleepMusicState == PIRANHA_PLANT_SLEEP_MUSIC_PLAYING) {
@@ -199,7 +199,7 @@ void piranha_plant_act_shrink_and_die(void) {
  * Wait for Mario to move far away, then respawn the Piranha Plant.
  */
 void piranha_plant_act_wait_to_respawn(void) {
-    if (o->oDistanceToMario > 1200.0f) {
+    if (o->oDistanceToPlayer > 1200.0f) {
         o->oAction = PIRANHA_PLANT_ACT_RESPAWN;
     }
 }
@@ -262,13 +262,13 @@ void piranha_plant_act_biting(void) {
     // Move to face the player.
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
 
-    if (o->oDistanceToMario > 500.0f && cur_obj_check_if_near_animation_end()) {
+    if (o->oDistanceToPlayer > 500.0f && cur_obj_check_if_near_animation_end()) {
         o->oAction = PIRANHA_PLANT_ACT_STOPPED_BITING;
     }
 
     // If the player is wearing the Metal Cap and interacts with the Piranha
     // Plant, the Piranha Plant will die.
-    if ((o->oInteractStatus & INT_STATUS_INTERACTED) && (gMarioState->flags & MARIO_METAL_CAP)) {
+    if ((o->oInteractStatus & INT_STATUS_INTERACTED) && (gPlayerState->flags & MARIO_METAL_CAP)) {
         o->oAction = PIRANHA_PLANT_ACT_ATTACKED;
     }
 }
@@ -279,11 +279,11 @@ void piranha_plant_act_biting(void) {
  *
  * This is called from both the "stopped biting" state and the "sleeping" state.
  */
-s32 mario_moving_fast_enough_to_make_piranha_plant_bite(void) {
-    if (gMarioStates[0].vel[1] > 10.0f) {
+s32 player_moving_fast_enough_to_make_piranha_plant_bite(void) {
+    if (gPlayerStates[0].vel[1] > 10.0f) {
         return TRUE;
     }
-    if (gMarioStates[0].forwardVel > 10.0f) {
+    if (gPlayerStates[0].forwardVel > 10.0f) {
         return TRUE;
     }
     return FALSE;
@@ -309,7 +309,7 @@ void piranha_plant_act_stopped_biting(void) {
      * of the Piranha Plant during the short time the Piranha Plant's nod
      * animation plays.
      */
-    if (o->oDistanceToMario < 400.0f && mario_moving_fast_enough_to_make_piranha_plant_bite()) {
+    if (o->oDistanceToPlayer < 400.0f && player_moving_fast_enough_to_make_piranha_plant_bite()) {
         o->oAction = PIRANHA_PLANT_ACT_BITING;
     }
 }

@@ -152,7 +152,7 @@ static void pokey_act_uninitialized(void) {
     ModelID16 partModel;
 
 #ifndef NODRAWINGDISTANCE
-    if (o->oDistanceToMario < 2000.0f) {
+    if (o->oDistanceToPlayer < 2000.0f) {
 #endif
         partModel = MODEL_POKEY_HEAD;
 
@@ -189,12 +189,12 @@ static void pokey_act_wander(void) {
     if (o->oPokeyNumAliveBodyParts == 0) {
         obj_mark_for_deletion(o);
 #ifndef NODRAWINGDISTANCE
-    } else if (o->oDistanceToMario > 2500.0f) {
+    } else if (o->oDistanceToPlayer > 2500.0f) {
         o->oAction = POKEY_ACT_UNLOAD_PARTS;
         o->oForwardVel = 0.0f;
 #endif
     } else {
-        treat_far_home_as_mario(1000.0f);
+        treat_far_home_as_player(1000.0f);
         cur_obj_update_floor_and_walls();
 
         if (o->oPokeyHeadWasKilled) {
@@ -233,7 +233,7 @@ static void pokey_act_wander(void) {
                     obj_resolve_collisions_and_turn(o->oPokeyTargetYaw, 0x200);
             } else {
                 // If far from home, turn back toward home
-                if (o->oDistanceToMario >= 25000.0f) {
+                if (o->oDistanceToPlayer >= 25000.0f) {
                     o->oPokeyTargetYaw = o->oAngleToMario;
                 }
 
@@ -241,7 +241,7 @@ static void pokey_act_wander(void) {
                           obj_bounce_off_walls_edges_objects(&o->oPokeyTargetYaw))) {
                     if (o->oPokeyChangeTargetTimer != 0) {
                         o->oPokeyChangeTargetTimer--;
-                    } else if (o->oDistanceToMario > 2000.0f) {
+                    } else if (o->oDistanceToPlayer > 2000.0f) {
                         o->oPokeyTargetYaw = obj_random_fixed_turn(0x2000);
                         o->oPokeyChangeTargetTimer = random_linear_offset(30, 50);
                     } else {
@@ -251,7 +251,7 @@ static void pokey_act_wander(void) {
 
                         // targetAngleOffset is 0 when distance to mario is >= 1838.4
                         // and 0x4000 when distance to mario is <= 200
-                        targetAngleOffset = (s32)(0x4000 - (o->oDistanceToMario - 200.0f) * 10.0f);
+                        targetAngleOffset = (s32)(0x4000 - (o->oDistanceToPlayer - 200.0f) * 10.0f);
                         if (targetAngleOffset < 0) {
                             targetAngleOffset = 0;
                         } else if (targetAngleOffset > 0x4000) {

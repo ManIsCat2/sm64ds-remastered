@@ -139,15 +139,15 @@ struct CreditsEntry {
     u8 areaIndex;
     u8 posVpAndText;
     u8 actNum;
-    s8 marioAngle;
-    Vec3s marioPos;
+    s8 playerAngle;
+    Vec3s playerPos;
     const char **string;
 };
 
 extern struct CreditsEntry *gCurrCreditsEntry;
 
-extern struct MarioState gMarioStates[];
-extern struct MarioState *gMarioState;
+extern struct PlayerState gPlayerStates[];
+extern struct PlayerState *gPlayerState;
 
 extern s16 sCurrPlayMode;
 extern u16 D_80339ECA;
@@ -219,7 +219,7 @@ enum WarpTypes {
 u16 level_control_timer(s32 timerOp);
 void fade_into_special_warp(u32 arg, u32 color);
 void load_level_init_text(u32 arg);
-s16 level_trigger_warp(struct MarioState *m, s32 warpOp);
+s16 level_trigger_warp(struct PlayerState *m, s32 warpOp);
 void level_set_transition(s16 length, void (*updateFunction)(s16 *));
 
 s32 lvl_init_or_update(s16 initOrUpdate, UNUSED s32 unused);

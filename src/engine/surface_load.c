@@ -846,9 +846,9 @@ void load_object_collision_model(void) {
         drawDist = colDist;
     }
 
-    f32 marioDist = obj->oDistanceToMario;
+    f32 playerDist = obj->oDistanceToPlayer;
 
-    int isInit = (marioDist == F32_MAX);
+    int isInit = (playerDist == F32_MAX);
 
     // A value higher than 500.0f causes crashes with surfaces
     s32 inColRadius = (
@@ -872,11 +872,11 @@ void load_object_collision_model(void) {
     // On an object's first frame, the distance is set to F32_MAX.
     // If the distance hasn't been updated, update it now.
     if (isInit) {
-        marioDist = dist_between_objects(obj, gMarioObject);
+        playerDist = dist_between_objects(obj, gMarioObject);
     }
 
 #ifndef NODRAWINGDISTANCE
-    if (marioDist < drawDist) {
+    if (playerDist < drawDist) {
         obj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
     } else {
         obj->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;

@@ -211,7 +211,7 @@ struct ParticleProperties sParticleTypes[] = {
 };
 
 /**
- * Copy position, velocity, and angle variables from MarioState to the Mario
+ * Copy position, velocity, and angle variables from PlayerState to the Mario
  * object.
  */
 void copy_mario_state_to_object(void) {
@@ -221,13 +221,13 @@ void copy_mario_state_to_object(void) {
         i++;
     }
 
-    gCurrentObject->oVelX = gMarioStates[i].vel[0];
-    gCurrentObject->oVelY = gMarioStates[i].vel[1];
-    gCurrentObject->oVelZ = gMarioStates[i].vel[2];
+    gCurrentObject->oVelX = gPlayerStates[i].vel[0];
+    gCurrentObject->oVelY = gPlayerStates[i].vel[1];
+    gCurrentObject->oVelZ = gPlayerStates[i].vel[2];
 
-    gCurrentObject->oPosX = gMarioStates[i].pos[0];
-    gCurrentObject->oPosY = gMarioStates[i].pos[1];
-    gCurrentObject->oPosZ = gMarioStates[i].pos[2];
+    gCurrentObject->oPosX = gPlayerStates[i].pos[0];
+    gCurrentObject->oPosY = gPlayerStates[i].pos[1];
+    gCurrentObject->oPosZ = gPlayerStates[i].pos[2];
 
     gCurrentObject->oMoveAnglePitch = gCurrentObject->header.gfx.angle[0];
     gCurrentObject->oMoveAngleYaw = gCurrentObject->header.gfx.angle[1];
@@ -237,9 +237,9 @@ void copy_mario_state_to_object(void) {
     gCurrentObject->oFaceAngleYaw = gCurrentObject->header.gfx.angle[1];
     gCurrentObject->oFaceAngleRoll = gCurrentObject->header.gfx.angle[2];
 
-    gCurrentObject->oAngleVelPitch = gMarioStates[i].angleVel[0];
-    gCurrentObject->oAngleVelYaw = gMarioStates[i].angleVel[1];
-    gCurrentObject->oAngleVelRoll = gMarioStates[i].angleVel[2];
+    gCurrentObject->oAngleVelPitch = gPlayerStates[i].angleVel[0];
+    gCurrentObject->oAngleVelYaw = gPlayerStates[i].angleVel[1];
+    gCurrentObject->oAngleVelRoll = gPlayerStates[i].angleVel[2];
 }
 
 /**
@@ -257,14 +257,14 @@ void spawn_particle(u32 activeParticleFlag, ModelID16 model, const BehaviorScrip
 /**
  * Mario's primary behavior update function.
  */
-void bhv_mario_update(void) {
+void bhv_player_update(void) {
     u32 particleFlags = 0;
     s32 i;
 
-    particleFlags = execute_mario_action(gCurrentObject);
+    particleFlags = execute_player_action(gCurrentObject);
     gCurrentObject->oMarioParticleFlags = particleFlags;
 
-    // Mario code updates MarioState's versions of position etc, so we need
+    // Mario code updates PlayerState's versions of position etc, so we need
     // to sync it with the Mario object
     copy_mario_state_to_object();
 
@@ -657,7 +657,7 @@ void update_objects(UNUSED s32 unused) {
     // displacement now
     //! If the platform object unloaded and a different object took its place,
     //  displacement could be applied incorrectly
-    apply_mario_platform_displacement();
+    apply_player_platform_displacement();
 
     // Detect which objects are intersecting
     cycleCounts[3] = get_clock_difference(cycleCounts[0]);
@@ -673,12 +673,12 @@ void update_objects(UNUSED s32 unused) {
 
     // Check if Mario is on a platform object and save this object
     cycleCounts[6] = get_clock_difference(cycleCounts[0]);
-    update_mario_platform();
+    update_player_platform();
 
     cycleCounts[7] = get_clock_difference(cycleCounts[0]);
 
     cycleCounts[0] = 0;
-    try_print_debug_mario_object_info();
+    try_print_debug_player_object_info();
 
     // If time stop was enabled this frame, activate it now so that it will
     // take effect next frame

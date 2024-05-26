@@ -32,7 +32,7 @@ static void fly_guy_act_idle(void) {
 
     if (approach_f32_ptr(&o->header.gfx.scale[0], 1.5f, 0.02f)) {
         // If we are >2000 units from home or Mario is <2000 units from us
-        if (o->oDistanceToMario >= 25000.0f || o->oDistanceToMario < 2000.0f) {
+        if (o->oDistanceToPlayer >= 25000.0f || o->oDistanceToPlayer < 2000.0f) {
             // Turn toward home or Mario
             obj_face_yaw_approach(o->oAngleToMario, 0x300);
 
@@ -59,7 +59,7 @@ static void fly_guy_act_idle(void) {
  */
 static void fly_guy_act_approach_mario(void) {
     // If we are >2000 units from home or Mario is <2000 units from us
-    if (o->oDistanceToMario >= 25000.0f || o->oDistanceToMario < 2000.0f) {
+    if (o->oDistanceToPlayer >= 25000.0f || o->oDistanceToPlayer < 2000.0f) {
         obj_forward_vel_approach(10.0f, 0.5f);
 
         // Turn toward home or Mario
@@ -69,14 +69,14 @@ static void fly_guy_act_approach_mario(void) {
         // If facing toward mario and we are either near mario laterally or
         // far above him
         if (abs_angle_diff(o->oAngleToMario, o->oFaceAngleYaw) < 0x2000
-            && (o->oPosY - gMarioObject->oPosY > 400.0f || o->oDistanceToMario < 400.0f)) {
+            && (o->oPosY - gMarioObject->oPosY > 400.0f || o->oDistanceToPlayer < 400.0f)) {
             // Either shoot fire or lunge
             if (o->oBhvParams2ndByte != FLY_GUY_BP_GENERIC && random_u16() % 2) {
                 o->oAction = FLY_GUY_ACT_SHOOT_FIRE;
                 o->oFlyGuyScaleVel = 0.06f;
             } else {
                 o->oAction = FLY_GUY_ACT_LUNGE;
-                o->oFlyGuyLungeTargetPitch = obj_turn_pitch_toward_mario(-200.0f, 0);
+                o->oFlyGuyLungeTargetPitch = obj_turn_pitch_toward_player(-200.0f, 0);
 
                 o->oForwardVel = 25.0f * coss(o->oFlyGuyLungeTargetPitch);
                 o->oVelY = 25.0f * -sins(o->oFlyGuyLungeTargetPitch);
@@ -150,7 +150,7 @@ static void fly_guy_act_shoot_fire(void) {
                 o->oAction = FLY_GUY_ACT_IDLE;
             } else {
                 // We have reached below scale 1.2 in the shrinking portion
-                s16 fireMovePitch = obj_turn_pitch_toward_mario(0.0f, 0);
+                s16 fireMovePitch = obj_turn_pitch_toward_player(0.0f, 0);
 
                 cur_obj_play_sound_2(SOUND_OBJ_FLAME_BLOWN);
                 clamp_s16(&fireMovePitch, 0x800, 0x3000);
@@ -183,7 +183,7 @@ void bhv_fly_guy_update(void) {
         o->oDeathSound = SOUND_OBJ_KOOPA_FLYGUY_DEATH;
 
         cur_obj_scale(o->header.gfx.scale[0]);
-        treat_far_home_as_mario(2000.0f);
+        treat_far_home_as_player(2000.0f);
         cur_obj_update_floor_and_walls();
 
         if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
