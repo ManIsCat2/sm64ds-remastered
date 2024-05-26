@@ -16,7 +16,7 @@
 #include "area.h"
 #include "save_file.h"
 #include "sound_init.h"
-#include "mario.h"
+#include "player.h"
 #include "camera.h"
 #include "object_list_processor.h"
 #include "ingame_menu.h"

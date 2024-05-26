@@ -9,7 +9,7 @@
 #include "sound_init.h"
 #include "engine/surface_collision.h"
 #include "interaction.h"
-#include "mario.h"
+#include "player.h"
 #include "mario_step.h"
 #include "camera.h"
 #include "audio/external.h"

@@ -27,7 +27,7 @@
 #include "levels/castle_inside/header.h"
 #include "levels/hmc/header.h"
 #include "main.h"
-#include "mario.h"
+#include "player.h"
 #include "mario_actions_cutscene.h"
 #include "mario_step.h"
 #include "obj_behaviors.h"

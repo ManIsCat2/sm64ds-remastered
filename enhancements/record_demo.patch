@@ -24,7 +24,7 @@ index b961ca52..adfde049 100644
 + *
 +*/
 +
-+#include "mario.h"
++#include "player.h"
 +
 +#define DEMOREC_STATUS_NOT_RECORDING 0
 +#define DEMOREC_STATUS_PREPARING 1

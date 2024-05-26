@@ -20,7 +20,7 @@
 #include "level_update.h"
 #include "levels/bob/header.h"
 #include "levels/ttm/header.h"
-#include "mario.h"
+#include "player.h"
 #include "mario_actions_cutscene.h"
 #include "mario_misc.h"
 #include "memory.h"

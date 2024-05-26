@@ -9,7 +9,7 @@
 #include "game/object_helpers.h"
 #include "game/macro_special_objects.h"
 #include "surface_collision.h"
-#include "game/mario.h"
+#include "game/player.h"
 #include "game/object_list_processor.h"
 #include "surface_load.h"
 #include "game/game_init.h"

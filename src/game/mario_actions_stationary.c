@@ -8,7 +8,7 @@
 #include "engine/math_util.h"
 #include "interaction.h"
 #include "level_update.h"
-#include "mario.h"
+#include "player.h"
 #include "mario_actions_stationary.h"
 #include "mario_step.h"
 #include "memory.h"

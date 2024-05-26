@@ -5,7 +5,7 @@
 #include "mario_actions_automatic.h"
 #include "audio/external.h"
 #include "area.h"
-#include "mario.h"
+#include "player.h"
 #include "mario_step.h"
 #include "engine/math_util.h"
 #include "memory.h"

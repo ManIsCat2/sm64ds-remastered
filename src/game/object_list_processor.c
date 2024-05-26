@@ -11,7 +11,7 @@
 #include "engine/surface_load.h"
 #include "interaction.h"
 #include "level_update.h"
-#include "mario.h"
+#include "player.h"
 #include "memory.h"
 #include "object_collision.h"
 #include "object_helpers.h"

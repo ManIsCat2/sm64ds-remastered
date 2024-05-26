@@ -6,7 +6,7 @@
 #include "game/area.h"
 #include "game/behavior_actions.h"
 #include "game/game_init.h"
-#include "game/mario.h"
+#include "game/player.h"
 #include "game/memory.h"
 #include "game/obj_behaviors_2.h"
 #include "game/object_helpers.h"

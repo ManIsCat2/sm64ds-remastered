@@ -2460,7 +2460,7 @@ void store_lakitu_cam_info_for_c_up(struct Camera *c) {
 }
 
 /**
- * Start C-Up mode. The actual mode change is handled in update_mario_inputs() in mario.c
+ * Start C-Up mode. The actual mode change is handled in update_mario_inputs() in player.c
  *
  * @see update_mario_inputs
  */

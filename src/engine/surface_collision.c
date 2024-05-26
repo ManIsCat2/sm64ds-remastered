@@ -4,7 +4,7 @@
 #include "game/debug.h"
 #include "game/game_init.h"
 #include "game/level_update.h"
-#include "game/mario.h"
+#include "game/player.h"
 #include "game/object_helpers.h"
 #include "game/object_list_processor.h"
 #include "math_util.h"

@@ -708,6 +708,7 @@ s16 length_sins(s16 length, s16 direction);
 s16 length_coss(s16 length, s16 direction);
 float smooth_step(float edge0, float edge1, float x);
 float soft_clamp(float x, float a, float b);
+void mtxf_cylboard(Mat4 dest, Mat4 src, Vec3f position, Vec3f scale, s32 roll);
 
 ALWAYS_INLINE f32 remap(f32 x, f32 fromA, f32 toA, f32 fromB, f32 toB) {
     return (x - fromA) / (toA - fromA) * (toB - fromB) + fromB;
