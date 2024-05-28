@@ -33,7 +33,7 @@ const GeoLayout cap_box_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_CULLING_RADIUS(269),
 		GEO_OPEN_NODE(),
-			GEO_SHADOW(10, 180, 70),
+			GEO_SHADOW(10, 180, 72),
 			GEO_OPEN_NODE(),
 				GEO_SWITCH_CASE(5, geo_switch_anim_state),
 				GEO_OPEN_NODE(),

@@ -1250,6 +1250,7 @@
     #define CAP_BOX_BP_STAR_ACT_4       12
     #define CAP_BOX_BP_STAR_ACT_5       13
     #define CAP_BOX_BP_STAR_ACT_6       14
+    #define CAP_BOX_BP_POWER_FLOWER     15
     #define CAP_BOX_BP_END              99
 
 /* Cap Switch */

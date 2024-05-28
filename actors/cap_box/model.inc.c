@@ -1253,30 +1253,30 @@ u8 cap_box_question_pal_rgba16[] = {
 };
 
 Vtx cap_box_displaylist_mesh_layer_1_vtx_0[24] = {
-	{{ {-37, 0, -37}, 0, {-1040, 7152}, {129, 0, 0, 255} }},
-	{{ {-37, 0, 37}, 0, {-16, 7152}, {129, 0, 0, 255} }},
-	{{ {-37, 73, 37}, 0, {-16, 6128}, {129, 0, 0, 255} }},
-	{{ {-37, 73, -37}, 0, {-1040, 6128}, {129, 0, 0, 255} }},
-	{{ {-37, 0, -37}, 0, {-16, 2032}, {0, 129, 0, 255} }},
-	{{ {37, 0, -37}, 0, {1008, 2032}, {0, 129, 0, 255} }},
-	{{ {37, 0, 37}, 0, {1008, 1008}, {0, 129, 0, 255} }},
-	{{ {-37, 0, 37}, 0, {-16, 1008}, {0, 129, 0, 255} }},
-	{{ {-37, 73, -37}, 0, {1008, 2032}, {0, 0, 129, 255} }},
-	{{ {37, 0, -37}, 0, {-16, 3056}, {0, 0, 129, 255} }},
-	{{ {-37, 0, -37}, 0, {1008, 3056}, {0, 0, 129, 255} }},
-	{{ {37, 73, -37}, 0, {-16, 2032}, {0, 0, 129, 255} }},
-	{{ {-37, 0, 37}, 0, {-16, 7152}, {0, 0, 127, 255} }},
-	{{ {37, 0, 37}, 0, {1008, 7152}, {0, 0, 127, 255} }},
-	{{ {37, 73, 37}, 0, {1008, 6128}, {0, 0, 127, 255} }},
-	{{ {-37, 73, 37}, 0, {-16, 6128}, {0, 0, 127, 255} }},
-	{{ {-37, 73, 37}, 0, {-16, 6128}, {0, 127, 0, 255} }},
-	{{ {37, 73, 37}, 0, {1008, 6128}, {0, 127, 0, 255} }},
-	{{ {37, 73, -37}, 0, {1008, 5104}, {0, 127, 0, 255} }},
-	{{ {-37, 73, -37}, 0, {-16, 5104}, {0, 127, 0, 255} }},
-	{{ {37, 0, 37}, 0, {1008, 7152}, {127, 0, 0, 255} }},
-	{{ {37, 0, -37}, 0, {2032, 7152}, {127, 0, 0, 255} }},
-	{{ {37, 73, -37}, 0, {2032, 6128}, {127, 0, 0, 255} }},
-	{{ {37, 73, 37}, 0, {1008, 6128}, {127, 0, 0, 255} }},
+	{{ {-33, 0, -33}, 0, {-1040, 7152}, {129, 0, 0, 255} }},
+	{{ {-33, 0, 33}, 0, {-16, 7152}, {129, 0, 0, 255} }},
+	{{ {-33, 66, 33}, 0, {-16, 6128}, {129, 0, 0, 255} }},
+	{{ {-33, 66, -33}, 0, {-1040, 6128}, {129, 0, 0, 255} }},
+	{{ {-33, 0, -33}, 0, {-16, 2032}, {0, 129, 0, 255} }},
+	{{ {33, 0, -33}, 0, {1008, 2032}, {0, 129, 0, 255} }},
+	{{ {33, 0, 33}, 0, {1008, 1008}, {0, 129, 0, 255} }},
+	{{ {-33, 0, 33}, 0, {-16, 1008}, {0, 129, 0, 255} }},
+	{{ {-33, 66, -33}, 0, {1008, 2032}, {0, 0, 129, 255} }},
+	{{ {33, 0, -33}, 0, {-16, 3056}, {0, 0, 129, 255} }},
+	{{ {-33, 0, -33}, 0, {1008, 3056}, {0, 0, 129, 255} }},
+	{{ {33, 66, -33}, 0, {-16, 2032}, {0, 0, 129, 255} }},
+	{{ {-33, 0, 33}, 0, {-16, 7152}, {0, 0, 127, 255} }},
+	{{ {33, 0, 33}, 0, {1008, 7152}, {0, 0, 127, 255} }},
+	{{ {33, 66, 33}, 0, {1008, 6128}, {0, 0, 127, 255} }},
+	{{ {-33, 66, 33}, 0, {-16, 6128}, {0, 0, 127, 255} }},
+	{{ {-33, 66, 33}, 0, {-16, 6128}, {0, 127, 0, 255} }},
+	{{ {33, 66, 33}, 0, {1008, 6128}, {0, 127, 0, 255} }},
+	{{ {33, 66, -33}, 0, {1008, 5104}, {0, 127, 0, 255} }},
+	{{ {-33, 66, -33}, 0, {-16, 5104}, {0, 127, 0, 255} }},
+	{{ {33, 0, 33}, 0, {1008, 7152}, {127, 0, 0, 255} }},
+	{{ {33, 0, -33}, 0, {2032, 7152}, {127, 0, 0, 255} }},
+	{{ {33, 66, -33}, 0, {2032, 6128}, {127, 0, 0, 255} }},
+	{{ {33, 66, 33}, 0, {1008, 6128}, {127, 0, 0, 255} }},
 };
 
 Gfx cap_box_displaylist_mesh_layer_1_tri_0[] = {
@@ -1292,11 +1292,11 @@ Gfx cap_box_displaylist_mesh_layer_1_tri_0[] = {
 
 
 Gfx mat_cap_box_wing[] = {
+	gsSPSetLights1(cap_box_wing_lights),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(cap_box_wing_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, cap_box_wing_pal_rgba16),
 	gsDPSetTile(0, 0, 0, 256, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
 	gsDPLoadTLUTCmd(5, 21),
@@ -1315,11 +1315,11 @@ Gfx mat_revert_cap_box_wing[] = {
 };
 
 Gfx mat_cap_box_metal[] = {
+	gsSPSetLights1(cap_box_metal_lights),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(cap_box_metal_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, cap_box_metal_pal_rgba16),
 	gsDPSetTile(0, 0, 0, 256, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
 	gsDPLoadTLUTCmd(5, 29),
@@ -1338,11 +1338,11 @@ Gfx mat_revert_cap_box_metal[] = {
 };
 
 Gfx mat_cap_box_vanish[] = {
+	gsSPSetLights1(cap_box_vanish_lights),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(cap_box_vanish_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, cap_box_vanish_pal_rgba16),
 	gsDPSetTile(0, 0, 0, 256, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
 	gsDPLoadTLUTCmd(5, 29),
@@ -1361,11 +1361,11 @@ Gfx mat_revert_cap_box_vanish[] = {
 };
 
 Gfx mat_cap_box_normal[] = {
+	gsSPSetLights1(cap_box_normal_lights),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(cap_box_normal_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, cap_box_regular_pal_rgba16),
 	gsDPSetTile(0, 0, 0, 256, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
 	gsDPLoadTLUTCmd(5, 35),
@@ -1384,11 +1384,11 @@ Gfx mat_revert_cap_box_normal[] = {
 };
 
 Gfx mat_cap_box_question[] = {
+	gsSPSetLights1(cap_box_question_lights),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(cap_box_question_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, cap_box_question_pal_rgba16),
 	gsDPSetTile(0, 0, 0, 256, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
 	gsDPLoadTLUTCmd(5, 15),

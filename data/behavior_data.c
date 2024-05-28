@@ -4612,6 +4612,15 @@ const BehaviorScript bhvVanishCap[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvPowerFlower[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_power_flower_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_power_flower_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvStar[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
