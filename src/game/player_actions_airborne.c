@@ -687,8 +687,16 @@ s32 act_backflip(struct PlayerState *m) {
         return set_player_action(m, ACT_GROUND_POUND, 0);
     }
 
+    if (configJHeight) {
+        m->vel[1] += 0.3f;
+    }
+
     if (curChar == 2) {
-        m->vel[1] += 1.75;
+        if (configJHeight) {
+            m->vel[1] += 1.45;
+        } else {
+            m->vel[1] += 1.75;
+        }
 
         if(m->playerObj->header.gfx.animInfo.animFrame > 17.5f) {
             return set_player_action(m, ACT_TWIRLING, 0);
