@@ -21,6 +21,7 @@
 #include "pc/configfile.h"
 #else
 int configDive = TRUE;
+int configJHeight = TRUE;
 int configWallslide = TRUE;
 #endif
 #endif
@@ -630,6 +631,10 @@ s32 act_double_jump(struct PlayerState *m) {
         return set_player_action(m, ACT_GROUND_POUND, 0);
     }
 
+    if (configJHeight) {
+        m->vel[1] += 0.4f;
+    }
+
     act_scuttle(m);
 
     play_player_sound(m, SOUND_ACTION_TERRAIN_JUMP, SOUND_MARIO_MUH);
@@ -655,6 +660,10 @@ s32 act_triple_jump(struct PlayerState *m) {
 
     if (m->input & INPUT_Z_PRESSED) {
         return set_player_action(m, ACT_GROUND_POUND, 0);
+    }
+
+    if (configJHeight) {
+        m->vel[1] += 0.6f;
     }
 
     play_player_sound(m, SOUND_ACTION_TERRAIN_JUMP, 0);

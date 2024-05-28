@@ -106,6 +106,7 @@ bool configHUD = true;
 bool configWallslide = true;
 unsigned int configDash = 2;
 bool configDive = true;
+bool configJHeight = true;
 bool configGlobalCapBlocks = false;
 
 static const struct ConfigOption options[] = {
@@ -157,6 +158,7 @@ static const struct ConfigOption options[] = {
     {.name = "wallslide",            .type = CONFIG_TYPE_BOOL, .boolValue = &configWallslide},
     {.name = "y_to_dash",            .type = CONFIG_TYPE_BOOL, .boolValue = &configDash},
     {.name = "dive",                 .type = CONFIG_TYPE_BOOL, .boolValue = &configDive},
+    {.name = "ds_jump_height",       .type = CONFIG_TYPE_BOOL, .boolValue = &configJHeight},
     {.name = "globalcapblocks",      .type = CONFIG_TYPE_BOOL, .boolValue = &configGlobalCapBlocks},
 };
 
