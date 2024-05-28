@@ -531,7 +531,19 @@ u32 common_air_action_step(struct PlayerState *m, u32 landAction, s32 animation,
     stepResult = perform_air_step(m, stepArg);
     switch (stepResult) {
         case AIR_STEP_NONE:
-            set_player_animation(m, animation);
+            if (((animation == MARIO_ANIM_SINGLE_JUMP || animation == MARIO_ANIM_DOUBLE_JUMP_FALL) && (m->vel[1] < 0) && (m->input & INPUT_A_DOWN) && (curChar == 2) && !(m->flags & PLAYER_WING_CAP)) && (m->playerObj->header.gfx.animInfo.animID == LUIGI_ANIM_RUNNING || is_anim_at_end(m))) {
+                set_player_anim_with_accel(m, LUIGI_ANIM_RUNNING, 0x00095000);
+                if (is_anim_at_end(m)) {
+                    set_anim_to_frame(m, 0);
+                }
+            } else if (((animation == MARIO_ANIM_JUMP_WITH_LIGHT_OBJ) && (m->vel[1] < 0) && (m->input & INPUT_A_DOWN) && (curChar == 2) && !(m->flags & PLAYER_WING_CAP)) && (m->playerObj->header.gfx.animInfo.animID == MARIO_ANIM_RUN_WITH_LIGHT_OBJ || is_anim_at_end(m))) {
+                set_player_anim_with_accel(m, MARIO_ANIM_RUN_WITH_LIGHT_OBJ, 0x00095000);
+                if (is_anim_at_end(m)) {
+                    set_anim_to_frame(m, 0);
+                }
+            }
+            else
+                set_player_animation(m, animation);
             break;
 
         case AIR_STEP_LANDED:
@@ -576,7 +588,7 @@ u32 common_air_action_step(struct PlayerState *m, u32 landAction, s32 animation,
 }
 
 void act_scuttle(struct PlayerState *m) {
-    if (m->vel[1] < 0 && m->input & INPUT_A_DOWN && (curChar == 2) && !(m->flags & MARIO_WING_CAP)) {
+    if (m->vel[1] < 0 && m->input & INPUT_A_DOWN && (curChar == 2) && !(m->flags & PLAYER_WING_CAP)) {
     
         m->vel[1] += 2.3;
 
@@ -606,15 +618,9 @@ s32 act_jump(struct PlayerState *m) {
 s32 act_double_jump(struct PlayerState *m) {
     s32 animation = 0;
 
-    if (curChar == 2) {
-        animation = MARIO_ANIM_DOUBLE_JUMP_FALL;
-    } else {
-
     animation = (m->vel[1] >= 0.0f)
         ? MARIO_ANIM_DOUBLE_JUMP_RISE
         : MARIO_ANIM_DOUBLE_JUMP_FALL;
-
-    }
 
     if (check_kick_or_dive_in_air(m)) {
         return TRUE;
@@ -1287,15 +1293,7 @@ u32 common_air_knockback_step(struct PlayerState *m, u32 landAction, u32 hardFal
     stepResult = perform_air_step(m, 0);
     switch (stepResult) {
         case AIR_STEP_NONE:
-            if (((animation == MARIO_ANIM_SINGLE_JUMP || animation == MARIO_ANIM_DOUBLE_JUMP_FALL) && m->vel[1] < 0 && m->input & INPUT_A_DOWN && (curChar == 2) && !(m->flags & MARIO_WING_CAP)) && (m->playerObj->header.gfx.animInfo.animID == MARIO_ANIM_RUNNING_UNUSED || is_anim_at_end(m))) {
-                set_player_animation(m, MARIO_ANIM_RUNNING_UNUSED);
-                if (is_anim_at_end(m)) {
-                    set_anim_to_frame(m, 0);
-                }
-            }
-            else
-                set_player_animation(m, animation);
-            break;
+            set_player_animation(m, animation);
 
         case AIR_STEP_LANDED:
 #ifdef RUMBLE_FEEDBACK
@@ -1892,7 +1890,7 @@ s32 act_shot_from_cannon(struct PlayerState *m) {
             break;
     }
 
-    if ((m->flags & MARIO_WING_CAP) && m->vel[1] < 0.0f) {
+    if ((m->flags & PLAYER_WING_CAP) && m->vel[1] < 0.0f) {
         set_player_action(m, ACT_FLYING, 0);
     }
 
@@ -1919,7 +1917,7 @@ s32 act_flying(struct PlayerState *m) {
         return set_player_action(m, ACT_GROUND_POUND, 1);
     }
 
-    if (!(m->flags & MARIO_WING_CAP)) {
+    if (!(m->flags & PLAYER_WING_CAP)) {
         if (m->area->camera->mode == CAMERA_MODE_BEHIND_MARIO) {
             set_camera_mode(m->area->camera, m->area->camera->defMode, 1);
         }

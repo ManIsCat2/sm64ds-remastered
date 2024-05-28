@@ -1121,7 +1121,7 @@ s32 set_jump_from_landing(struct PlayerState *m) {
                 case ACT_DOUBLE_JUMP_LAND:
                     // If Player has a wing cap, he ignores the typical speed
                     // requirement for a triple jump.
-                    if (m->flags & MARIO_WING_CAP) {
+                    if (m->flags & PLAYER_WING_CAP) {
                         set_player_action(m, ACT_FLYING_TRIPLE_JUMP, 0);
                     } else if (m->forwardVel > 20.0f) {
                         set_player_action(m, ACT_TRIPLE_JUMP, 0);
@@ -1378,8 +1378,8 @@ void update_player_button_inputs(struct PlayerState *m) {
     }
 
     if (m->controller->buttonPressed & L_TRIG) {
-        if (curChar >= 4) {
-            curChar = -1;
+        if (curChar > 1) {
+            curChar = 0;
         }
         curChar = curChar + 1;
     }
@@ -1387,7 +1387,7 @@ void update_player_button_inputs(struct PlayerState *m) {
     if (curChar == MARIO) {
         m->playerObj->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_MARIO];
     } else if (curChar == LUIGI) {
-        m->playerObj->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_MARIO]; // Todo: Make "MODEL_MARIO" MODEL_LUIGI
+        m->playerObj->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_LUIGI];
     } else if (curChar == WARIO) {
         m->playerObj->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_MARIO]; // Todo: Make "MODEL_MARIO" MODEL_WARIO
     } else if (curChar == WALUIGI) {
@@ -1770,7 +1770,7 @@ void player_update_hitbox_and_cap_model(struct PlayerState *m) {
     }
 
     if (flags & MARIO_CAP_IN_HAND) {
-        if (flags & MARIO_WING_CAP) {
+        if (flags & PLAYER_WING_CAP) {
             bodyState->handState = MARIO_HAND_HOLDING_WING_CAP;
         } else {
             bodyState->handState = MARIO_HAND_HOLDING_CAP;
@@ -1778,7 +1778,7 @@ void player_update_hitbox_and_cap_model(struct PlayerState *m) {
     }
 
     if (flags & MARIO_CAP_ON_HEAD) {
-        if (flags & MARIO_WING_CAP) {
+        if (flags & PLAYER_WING_CAP) {
             bodyState->capState = MARIO_HAS_WING_CAP_ON;
         } else {
             bodyState->capState = MARIO_HAS_DEFAULT_CAP_ON;

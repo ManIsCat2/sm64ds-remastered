@@ -282,7 +282,7 @@ void set_player_initial_cap_powerup(struct PlayerState *m) {
             break;
 
         case COURSE_TOTWC - COURSE_CAP_COURSES:
-            m->flags |= MARIO_WING_CAP | MARIO_CAP_ON_HEAD;
+            m->flags |= PLAYER_WING_CAP | MARIO_CAP_ON_HEAD;
             m->capTimer = WC_LEVEL_TIME;
             break;
 
@@ -442,7 +442,7 @@ void init_player_after_warp(void) {
                 play_cap_music(SEQUENCE_ARGS(4, SEQ_EVENT_METAL_CAP));
             }
 
-            if (gPlayerState->flags & (MARIO_VANISH_CAP | MARIO_WING_CAP)) {
+            if (gPlayerState->flags & (MARIO_VANISH_CAP | PLAYER_WING_CAP)) {
                 play_cap_music(SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP));
             }
         }

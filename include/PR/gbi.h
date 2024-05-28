@@ -45,7 +45,7 @@
  *
  * The command format is
  *
- *	|00xxxxxx| = DMA		0,..,127
+ *	|00xxxxxx| = DMA	    0,..,127
  *	|10xxxxxx| = Immediate Mode	-65,..,-128
  *	|11xxxxxx| = RDP cmds		-1,..,-64
  *
@@ -3584,7 +3584,7 @@ typedef union {
 {									\
 	gDPSetTextureImage(pkt, fmt, siz##_LOAD_BLOCK, 1, timg);	\
 	gDPSetTile(pkt, fmt, siz##_LOAD_BLOCK, 0, tmem, G_TX_LOADTILE,  \
-		0, cmt, maskt, shiftt, cms, masks, shifts);		\
+	    0, cmt, maskt, shiftt, cms, masks, shifts);		\
 	gDPLoadSync(pkt);						\
 	gDPLoadBlock(pkt, G_TX_LOADTILE, 0, 0, 				\
 		(((width)*(height) + siz##_INCR) >> siz##_SHIFT)-1,	\

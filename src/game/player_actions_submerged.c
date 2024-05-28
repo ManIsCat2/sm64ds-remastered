@@ -1253,7 +1253,12 @@ static s32 act_metal_water_walking(struct PlayerState *m) {
         val04 = 0x1000;
     }
 
-    set_player_anim_with_accel(m, MARIO_ANIM_WALKING, val04);
+    if (curChar == 1) {
+        set_player_anim_with_accel(m, MARIO_ANIM_WALKING, val04);
+    } else if (curChar == 2) {
+        set_player_anim_with_accel(m, LUIGI_ANIM_WALKING, val04);
+    }
+
     play_metal_water_walking_sound(m);
     update_metal_water_walking_speed(m);
 

@@ -2594,7 +2594,7 @@ s32 update_c_up(UNUSED struct Camera *c, Vec3f focus, Vec3f pos) {
 /**
  * Make Player's head move in C-Up mode.
  */
-void move_mario_head_c_up(UNUSED struct Camera *c) {
+void move_player_head_c_up(UNUSED struct Camera *c) {
     sCUpCameraPitch += (s16)(gPlayer1Controller->stickY * 10.f);
     sModeOffsetYaw -= (s16)(gPlayer1Controller->stickX * 10.f);
 
@@ -2688,7 +2688,7 @@ s32 mode_c_up_camera(struct Camera *c) {
 
     if (!(gCameraMovementFlags & CAM_MOVE_STARTED_EXITING_C_UP)) {
         // Normal update
-        move_mario_head_c_up(c);
+        move_player_head_c_up(c);
         update_c_up(c, c->focus, c->pos);
     } else {
         // Exiting C-Up
@@ -8566,7 +8566,7 @@ BAD_RETURN(s32) cutscene_read_message(struct Camera *c) {
             break;
         // Leave the dialog.
         case 1:
-            move_mario_head_c_up(c);
+            move_player_head_c_up(c);
             update_c_up(c, c->focus, c->pos);
 
             // This could cause softlocks. If a message starts one frame after another one closes, the

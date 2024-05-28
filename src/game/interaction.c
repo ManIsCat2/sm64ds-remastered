@@ -146,7 +146,7 @@ u32 get_player_cap_flag(struct Object *capObject) {
     } else if (script == bhvMetalCap) {
         return MARIO_METAL_CAP;
     } else if (script == bhvWingCap) {
-        return MARIO_WING_CAP;
+        return PLAYER_WING_CAP;
     } else if (script == bhvVanishCap) {
         return MARIO_VANISH_CAP;
     }
@@ -1617,7 +1617,7 @@ u32 interact_cap(struct PlayerState *m, UNUSED u32 interactType, struct Object *
                 capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_METAL_CAP);
                 break;
 
-            case MARIO_WING_CAP:
+            case PLAYER_WING_CAP:
                 capTime = WC_TIME;
                 capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP);
                 break;

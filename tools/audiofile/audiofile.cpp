@@ -6805,7 +6805,7 @@ static const _AFfilesetup aiffDefaultFileSetup =
 	NULL,			/* tracks */
 	1,			/* instrumentCount */
 	NULL,			/* instruments */
-	0,			/* miscellaneousCount */
+    0,			/* miscellaneousCount */
 	NULL			/* miscellaneous */
 };
 
@@ -9981,9 +9981,9 @@ static const _AFfilesetup rawDefaultFileSetup =
 	true,	// miscellaneousSet
 	1,		// trackCount
 	NULL,	// tracks
-	0,		// instrumentCount
+    0,		// instrumentCount
 	NULL,	// instruments
-	0,		// miscellaneousCount
+    0,		// miscellaneousCount
 	NULL	// miscellaneous
 };
 
@@ -10172,13 +10172,13 @@ static const _AFfilesetup _af_default_file_setup =
 	NULL,		/* tracks */
 	1,		/* instrumentCount */
 	NULL,		/* instruments */
-	0,		/* miscellaneousCount */
+    0,		/* miscellaneousCount */
 	NULL		/* miscellaneous */
 };
 
 static const InstrumentSetup _af_default_instrumentsetup =
 {
-	0,		/* id */
+    0,		/* id */
 	2,		/* loopCount */
 	NULL,		/* loops */
 	false		/* loopSet */
@@ -10186,7 +10186,7 @@ static const InstrumentSetup _af_default_instrumentsetup =
 
 static const TrackSetup _af_default_tracksetup =
 {
-	0,
+    0,
 	{
         // ex-alo note: Originally 44100.0 (44.1 kHz), since we are using audiofile
         // on an old game (Super Mario 64), 32 kHz should be enough by default.
@@ -10212,7 +10212,7 @@ static const TrackSetup _af_default_tracksetup =
 
 	4,		/* markerCount */
 	NULL,		/* markers */
-	0,		/* dataOffset */
+    0,		/* dataOffset */
 	0		/* frameCount */
 };
 
@@ -11029,9 +11029,9 @@ static const _AFfilesetup waveDefaultFileSetup =
 	true,			/* miscellaneousSet  */
 	1,			/* trackCount */
 	NULL,			/* tracks */
-	0,			/* instrumentCount */
+    0,			/* instrumentCount */
 	NULL,			/* instruments */
-	0,			/* miscellaneousCount */
+    0,			/* miscellaneousCount */
 	NULL			/* miscellaneous */
 };
 
@@ -15441,10 +15441,10 @@ const Unit _af_units[_AF_NUM_UNITS] =
 		AF_SAMPFMT_TWOSCOMP, 16,
 		_AF_RAW_NUM_COMPTYPES,
 		_af_raw_compression_types,
-		0,	/* maximum marker count */
-		0,	/* maximum instrument count */
-		0,	/* maxium number of loops per instrument */
-		0, NULL,
+	    0,	/* maximum marker count */
+	    0,	/* maximum instrument count */
+	    0,	/* maxium number of loops per instrument */
+	    0, NULL,
 	},
 	{
 		AF_FILE_AIFFC,
@@ -15468,7 +15468,7 @@ const Unit _af_units[_AF_NUM_UNITS] =
 		AIFFFile::completeSetup,
 		AIFFFile::recognizeAIFF,
 		AF_SAMPFMT_TWOSCOMP, 16,
-		0,	/* supported compression types */
+	    0,	/* supported compression types */
 		NULL,
 		65535,	/* maximum marker count */
 		1,	/* maximum instrument count */
