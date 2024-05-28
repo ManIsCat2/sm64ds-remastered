@@ -608,6 +608,10 @@ s32 act_jump(struct PlayerState *m) {
         return set_player_action(m, ACT_GROUND_POUND, 0);
     }
 
+    if (configJHeight) {
+        m->vel[1] += 0.3f;
+    }
+
     act_scuttle(m);
 
     play_player_sound(m, SOUND_ACTION_TERRAIN_JUMP, 0);
@@ -663,7 +667,7 @@ s32 act_triple_jump(struct PlayerState *m) {
     }
 
     if (configJHeight) {
-        m->vel[1] += 0.6f;
+        m->vel[1] += 0.75f;
     }
 
     play_player_sound(m, SOUND_ACTION_TERRAIN_JUMP, 0);
