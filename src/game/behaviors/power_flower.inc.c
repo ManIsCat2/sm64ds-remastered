@@ -14,7 +14,7 @@ static struct ObjectHitbox sPowerFlowerHitbox = {
 };
 
 void bhv_power_flower_init(void) {
-    o->oGravity = 0.85f;
+    o->oGravity = 0.65f;
     o->oFriction = 0.2f;
 }
 
@@ -29,7 +29,7 @@ void bhv_power_flower_loop(struct PlayerState *m) {
             break;
 
         case 1:
-            if (o->oTimer < 55) o->oAngleVelYaw += 0xC0;
+            if (o->oTimer < 55) o->oAngleVelYaw += 0xC0/1.5f;
             o->oFaceAngleYaw += o->oAngleVelYaw;
             if (object_step() & OBJ_COL_FLAG_GROUNDED) {
                 o->oFaceAngleYaw = calculate_yaw(o->header.gfx.pos, gCamera->pos);
