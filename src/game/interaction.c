@@ -935,8 +935,8 @@ u32 interact_warp_door(struct PlayerState *m, UNUSED u32 interactType, struct Ob
             doorAction = ACT_UNLOCKING_KEY_DOOR;
         }
 
-        if (warpDoorId == 3 && !(saveFlags & SAVE_FLAG_UNLOCKED_BASEMENT_DOOR)) {
-            if (!(saveFlags & SAVE_FLAG_HAVE_KEY_1)) {
+        if (warpDoorId == 3 && !(saveFlags & SAVE_FLAG_UNLOCKED_CASTLE_DOOR)) {
+            if (!(saveFlags & SAVE_FLAG_HAVE_KEY_BUNNY)) {
                 if (!sDisplayingDoorText) {
                     castleKeyRead = TRUE;
                     set_player_action(m, ACT_READING_AUTOMATIC_DIALOG,
