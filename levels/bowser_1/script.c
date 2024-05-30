@@ -3,6 +3,7 @@
 #include "behavior_data.h"
 #include "model_ids.h"
 #include "seq_ids.h"
+#include "dialog_ids.h"
 #include "segment_symbols.h"
 #include "level_commands.h"
 
@@ -17,31 +18,41 @@
 #include "levels/bowser_1/header.h"
 
 const LevelScript level_bowser_1_entry[] = {
-    INIT_LEVEL(),
-    LOAD_MIO0(/*seg*/ 0x07, _bowser_1_segment_7SegmentRomStart, _bowser_1_segment_7SegmentRomEnd),
-    LOAD_MIO0(/*seg*/ 0x0A, _bidw_skybox_mio0SegmentRomStart, _bidw_skybox_mio0SegmentRomEnd),
-    LOAD_MIO0(/*seg*/ 0x06, _group12_mio0SegmentRomStart, _group12_mio0SegmentRomEnd),
-    LOAD_RAW (/*seg*/ 0x0D, _group12_geoSegmentRomStart, _group12_geoSegmentRomEnd),
-    ALLOC_LEVEL_POOL(),
-    MARIO(/*model*/ MODEL_MARIO, /*bhvParam*/ BPARAM4(0x01), /*bhv*/ bhvPlayer),
-    JUMP_LINK(script_func_global_13),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_03, bowser_1_yellow_sphere_geo),
+	INIT_LEVEL(),
+	LOAD_MIO0(0x07, _bowser_1_segment_7SegmentRomStart, _bowser_1_segment_7SegmentRomEnd), 
+	LOAD_MIO0(0x0A, _bidw_skybox_mio0SegmentRomStart, _bidw_skybox_mio0SegmentRomEnd), 
+	LOAD_MIO0(0x06, _group12_mio0SegmentRomStart, _group12_mio0SegmentRomEnd), 
+	ALLOC_LEVEL_POOL(),
+	MARIO(MODEL_MARIO, BPARAM4(0x01), bhvPlayer),
+	JUMP_LINK(script_func_global_13), 
+	LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_03, bowser_1_yellow_sphere_geo),
 
-    AREA(/*index*/ 1, bowser_1_geo_0000D0),
-        OBJECT(/*model*/ MODEL_NONE, /*pos*/ 0, 1307, 0, /*angle*/ 0, 180, 0, /*bhvParam*/ BPARAM2(WARP_NODE_0A), /*bhv*/ bhvSpinAirborneCircleWarp),
-        WARP_NODE(/*id*/ WARP_NODE_0A,      /*destLevel*/ LEVEL_BOWSER_1, /*destArea*/ 1, /*destNode*/ WARP_NODE_0A,  /*flags*/ WARP_NO_CHECKPOINT),
-        WARP_NODE(/*id*/ WARP_NODE_SUCCESS, /*destLevel*/ LEVEL_CASTLE,   /*destArea*/ 1, /*destNode*/ WARP_NODE_24,  /*flags*/ WARP_NO_CHECKPOINT),
-        WARP_NODE(/*id*/ WARP_NODE_DEATH,   /*destLevel*/ LEVEL_BITDW,    /*destArea*/ 1, /*destNode*/ WARP_NODE_0C,  /*flags*/ WARP_NO_CHECKPOINT),
-        TERRAIN(/*terrainData*/ bowser_1_seg7_collision_level),
-        SET_BACKGROUND_MUSIC(/*settingsPreset*/ 0x0002, /*seq*/ SEQ_LEVEL_BOSS_KOOPA),
-        TERRAIN_TYPE(/*terrainType*/ TERRAIN_STONE),
-    END_AREA(),
+	AREA(1, bowser_1_area_1),
+		WARP_NODE(0x0A, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF0, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF1, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_BOWSER_BOMB, 0, -408, -3154, 0, 0, 0, 0x00000000, bhvBowserBomb),
+		OBJECT(MODEL_BOWSER_BOMB, 3154, -408, 0, 0, 0, 0, 0x00000000, bhvBowserBomb),
+		OBJECT(MODEL_BOWSER_BOMB, -3154, -408, 0, 0, 0, 0, 0x00000000, bhvBowserBomb),
+		OBJECT(MODEL_BOWSER_BOMB, -2208, -408, -2208, 0, 0, 0, 0x00000000, bhvBowserBomb),
+		OBJECT(MODEL_BOWSER_BOMB, 2229, -408, -2229, 0, 0, 0, 0x00000000, bhvBowserBomb),
+		OBJECT(MODEL_BOWSER_BOMB, 2229, -408, 2229, 0, 0, 0, 0x00000000, bhvBowserBomb),
+		OBJECT(MODEL_BOWSER_BOMB, -2229, -408, 2229, 0, 0, 0, 0x00000000, bhvBowserBomb),
+		OBJECT(MODEL_BOWSER_BOMB, 0, -408, 3154, 0, 0, 0, 0x00000000, bhvBowserBomb),
+		OBJECT(MODEL_BOWSER, -14, -741, -1537, 0, 0, 0, 0x00000000, bhvBowser),
+		OBJECT(MODEL_NONE, 0, 78, 0, 0, 180, 0, 0x000A0000, bhvSpinAirborneWarp),
+		MARIO_POS(0x01, 180, 0, 78, 0),
+		TERRAIN(bowser_1_area_1_collision),
+		MACRO_OBJECTS(bowser_1_area_1_macro_objs),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_BOSS_KOOPA),
+		TERRAIN_TYPE(TERRAIN_STONE),
+	END_AREA(),
 
-    FREE_LEVEL_POOL(),
-    MARIO_POS(/*area*/ 1, /*yaw*/ 180, /*pos*/ 0, 307, 0),
-    CALL(/*arg*/ 0, /*func*/ lvl_init_or_update),
-    CALL_LOOP(/*arg*/ 1, /*func*/ lvl_init_or_update),
-    CLEAR_LEVEL(),
-    SLEEP_BEFORE_EXIT(/*frames*/ 1),
-    EXIT(),
+	FREE_LEVEL_POOL(),
+	MARIO_POS(0x01, 180, 0, 78, 0),
+	CALL(0, lvl_init_or_update),
+	CALL_LOOP(1, lvl_init_or_update),
+	CLEAR_LEVEL(),
+	SLEEP_BEFORE_EXIT(1),
+	EXIT(),
 };
