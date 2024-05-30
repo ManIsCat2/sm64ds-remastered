@@ -63,7 +63,9 @@ static const LevelScript script_func_local_2[] = {
     OBJECT(/*model*/ MODEL_BIRDS,                       /*pos*/  5774,  913, -1114, /*angle*/ 0,   0, 0, /*bhvParam*/ BPARAM2(BIRD_BP_SPAWNER), /*bhv*/ bhvBird),
     OBJECT(/*model*/ MODEL_NONE,                        /*pos*/ -1328,  260,  4664, /*angle*/ 0, 180, 0, /*bhvParam*/ BPARAM2(0x28), /*bhv*/ bhvIntroScene),
     OBJECT(/*model*/ MODEL_CASTLE_GROUNDS_CANNON_GRILL, /*pos*/     0,    0,     0, /*angle*/ 0,   0, 0, /*bhvParam*/ 0, /*bhv*/ bhvHiddenAt120Stars),
-    OBJECT(/*model*/ MODEL_LAKITU,                      /*pos*/    11,  803, -3015, /*angle*/ 0,   0, 0, /*bhvParam*/ BPARAM2(CAMERA_LAKITU_BP_INTRO), /*bhv*/ bhvCameraLakitu),
+    OBJECT(/*model*/ MODEL_CASTLE_KEY_DOOR,             /*pos*/   -76,  803, -3155, /*angle*/ 0,   0, 0, /*bhvParam*/ BPARAM1(0x03) | BPARAM2(0), bhvDoorWarp),
+    OBJECT(/*model*/ MODEL_CASTLE_KEY_DOOR,             /*pos*/    77,  803, -3155, /*angle*/ 0, 180, 0, /*bhvParam*/ BPARAM1(0x03) | BPARAM2(1), bhvDoorWarp),
+    OBJECT(/*model*/ MODEL_LAKITU,                      /*pos*/    11,  770, -3015, /*angle*/ 0,   0, 0, /*bhvParam*/ BPARAM2(CAMERA_LAKITU_BP_INTRO), /*bhv*/ bhvCameraLakitu),
     RETURN(),
 };
 
@@ -115,6 +117,7 @@ const LevelScript level_castle_grounds_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_VCUTM_GRILL,  castle_grounds_geo_00070C),
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_FLAG,         castle_grounds_geo_000660),
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_CANNON_GRILL, castle_grounds_geo_000724),
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_KEY_DOOR,             key_door_geo),
 
     AREA(/*index*/ 1, castle_grounds_geo_00073C),
         WARP_NODE(/*id*/ WARP_NODE_DEATH, /*destLevel*/ LEVEL_CASTLE_GROUNDS, /*destArea*/ 1, /*destNode*/ WARP_NODE_03, /*flags*/ WARP_NO_CHECKPOINT),
