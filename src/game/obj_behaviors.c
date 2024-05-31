@@ -70,6 +70,7 @@ s16 sPrevCheckPlayerRoom = 0;
 
 extern void *ccm_seg7_trajectory_snowman;
 extern void *inside_castle_seg7_trajectory_mips;
+extern void *castle_grounds_trajectory_mips;
 
 /**
  * An unused geo function. Bears strong similarity to geo_bits_bowser_coloring, and relates something
