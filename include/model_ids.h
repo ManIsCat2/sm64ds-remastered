@@ -557,6 +557,7 @@
 
 // DS Specific
 #define MODEL_POWER_FLOWER                0xE2        // power_flower_geo
+#define MODEL_MIPS_KEY_CUTSCENE           0xE3        // mips_key_cutscene_geo
 
 // Menu Models (overwrites Level Geometry IDs)
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0

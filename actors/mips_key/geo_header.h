@@ -1,0 +1,16 @@
+extern const GeoLayout mips_key_cutscene_geo[];
+extern Lights1 mips_key_key_1_lights;
+extern Lights1 mips_key_key_2_lights;
+extern u8 mips_key__1_ci8[];
+extern u8 mips_key__1_pal_rgba16[];
+extern u8 mips_key__2_ci8[];
+extern u8 mips_key__2_pal_rgba16[];
+extern Vtx mips_key_key_mesh_layer_1_vtx_0[135];
+extern Gfx mips_key_key_mesh_layer_1_tri_0[];
+extern Vtx mips_key_key_mesh_layer_1_vtx_1[74];
+extern Gfx mips_key_key_mesh_layer_1_tri_1[];
+extern Gfx mat_mips_key_key_1[];
+extern Gfx mat_revert_mips_key_key_1[];
+extern Gfx mat_mips_key_key_2[];
+extern Gfx mat_revert_mips_key_key_2[];
+extern Gfx mips_key_key_mesh_layer_1[];

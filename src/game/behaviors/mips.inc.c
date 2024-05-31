@@ -13,7 +13,7 @@ void bhv_mips_init(void) {
     u8 starFlags = save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(COURSE_NONE));
 
     // If the player has talked to lakitu and hasn't collected the key...
-    if (save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) == 0) {
+    if (!(save_file_get_flags() & SAVE_FLAG_UNLOCKED_CASTLE_DOOR)) {
         o->oBhvParams2ndByte = MIPS_BP_CASTLE_KEY;
         o->oMipsForwardVelocity = 25.0f;
     }

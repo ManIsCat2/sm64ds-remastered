@@ -588,7 +588,7 @@
 #define /*0x0F8*/ oKingBobombUnkF8  OBJECT_FIELD_S32(0x1C)
 #define /*0x0FC*/ oKingBobombUnkFC  OBJECT_FIELD_S32(0x1D)
 #define /*0x100*/ oKingBobombUnk100 OBJECT_FIELD_S32(0x1E)
-#define /*0x104*/ oKingBobombUnk104 OBJECT_FIELD_S32(0x1F)
+#define /*0x104*/ oKingBobombHitCount OBJECT_FIELD_S32(0x1F)
 #define /*0x108*/ oKingBobombUnk108 OBJECT_FIELD_S32(0x20)
 #if KING_BOBOMB_BLINK_EYES
 #define /*0x108*/ oKingBobombBlinkTimer OBJECT_FIELD_S32(0x21)
