@@ -137,4 +137,8 @@ extern const Gfx yellow_sphere_seg6_dl_0601F3C0[];
 
 #include "bomb/geo_header.h"
 
+#include "bowser/geo_header.h"
+
+
+#include "bowser/anim_header.h"
 #endif
