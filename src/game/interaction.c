@@ -28,6 +28,14 @@
 #include "extras/cheats.h"
 #endif
 
+#ifdef EXT_OPTIONS_MENU
+#ifndef TARGET_N64
+#include "pc/configfile.h"
+#else
+extern int configGlobalCapBlocks = FALSE;
+#endif
+#endif
+
 #define INT_GROUND_POUND_OR_TWIRL (1 << 0) // 0x01
 #define INT_PUNCH                 (1 << 1) // 0x02
 #define INT_KICK                  (1 << 2) // 0x04
@@ -143,20 +151,20 @@ u32 get_player_cap_flag(struct Object *capObject) {
     const BehaviorScript *script = virtual_to_segmented(0x13, capObject->behavior);
 
     if (script == bhvNormalCap) {
-        return MARIO_NORMAL_CAP;
+        return PLAYER_NORMAL_CAP;
     } else if (script == bhvMetalCap) {
-        return MARIO_METAL_CAP;
+        return PLAYER_METAL_CAP;
     } else if (script == bhvWingCap) {
         return PLAYER_WING_CAP;
     } else if (script == bhvVanishCap) {
-        return MARIO_VANISH_CAP;
+        return PLAYER_VANISH_CAP;
     } else if (script == bhvPowerFlower) {
         if (curChar == 1) {
-            return MARIO_NORMAL_CAP;
+            return PLAYER_WING_CAP;
         } else if (curChar == 2) {
-            return MARIO_VANISH_CAP;
+            return PLAYER_VANISH_CAP;
         } else if (curChar == 3) {
-            return MARIO_METAL_CAP;
+            return PLAYER_METAL_CAP;
         } else {
             return PLAYER_WING_CAP;
         }
@@ -357,7 +365,7 @@ void player_stop_riding_and_holding(struct PlayerState *m) {
 }
 
 u32 does_player_have_normal_cap_on_head(struct PlayerState *m) {
-    return (m->flags & (MARIO_CAPS | MARIO_CAP_ON_HEAD)) == (MARIO_NORMAL_CAP | MARIO_CAP_ON_HEAD);
+    return (m->flags & (MARIO_CAPS | MARIO_CAP_ON_HEAD)) == (PLAYER_NORMAL_CAP | MARIO_CAP_ON_HEAD);
 }
 
 void player_blow_off_cap(struct PlayerState *m, f32 capSpeed) {
@@ -366,7 +374,7 @@ void player_blow_off_cap(struct PlayerState *m, f32 capSpeed) {
     if (does_player_have_normal_cap_on_head(m)) {
         save_file_set_cap_pos(m->pos[0], m->pos[1], m->pos[2]);
 
-        m->flags &= ~(MARIO_NORMAL_CAP | MARIO_CAP_ON_HEAD);
+        m->flags &= ~(PLAYER_NORMAL_CAP | MARIO_CAP_ON_HEAD);
 
         capObject = spawn_object(m->playerObj, MODEL_MARIOS_CAP, bhvNormalCap);
 
@@ -385,7 +393,7 @@ u32 player_lose_cap_to_enemy(u32 arg) {
 
     if (does_player_have_normal_cap_on_head(gPlayerState)) {
         save_file_set_flags(arg == 1 ? SAVE_FLAG_CAP_ON_KLEPTO : SAVE_FLAG_CAP_ON_UKIKI);
-        gPlayerState->flags &= ~(MARIO_NORMAL_CAP | MARIO_CAP_ON_HEAD);
+        gPlayerState->flags &= ~(PLAYER_NORMAL_CAP | MARIO_CAP_ON_HEAD);
         wasWearingCap = TRUE;
     }
 
@@ -396,7 +404,7 @@ void player_retrieve_cap(void) {
     player_drop_held_object(gPlayerState);
     save_file_clear_flags(SAVE_FLAG_CAP_ON_KLEPTO | SAVE_FLAG_CAP_ON_UKIKI);
     gPlayerState->flags &= ~MARIO_CAP_ON_HEAD;
-    gPlayerState->flags |= MARIO_NORMAL_CAP | MARIO_CAP_IN_HAND;
+    gPlayerState->flags |= PLAYER_NORMAL_CAP | MARIO_CAP_IN_HAND;
 }
 
 u32 able_to_grab_object(struct PlayerState *m, UNUSED struct Object *o) {
@@ -715,7 +723,7 @@ u32 take_damage_from_interact_object(struct PlayerState *m) {
         damage += (damage + 1) / 2;
     }
 
-    if (m->flags & MARIO_METAL_CAP) {
+    if (m->flags & PLAYER_METAL_CAP) {
         damage = 0;
     }
 
@@ -731,7 +739,7 @@ u32 take_damage_from_interact_object(struct PlayerState *m) {
 u32 take_damage_and_knock_back(struct PlayerState *m, struct Object *o) {
     u32 damage;
 
-    if (!sInvulnerable && !(m->flags & MARIO_VANISH_CAP)
+    if (!sInvulnerable && !(m->flags & PLAYER_VANISH_CAP)
         && !(o->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
         o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_ATTACKED_MARIO;
         m->interactObj = o;
@@ -1184,7 +1192,7 @@ u32 interact_strong_wind(struct PlayerState *m, UNUSED u32 interactType, struct 
 u32 interact_flame(struct PlayerState *m, UNUSED u32 interactType, struct Object *o) {
     u32 burningAction = ACT_BURNING_JUMP;
 
-    if (!sInvulnerable && !(m->flags & MARIO_METAL_CAP) && !(m->flags & MARIO_VANISH_CAP)
+    if (!sInvulnerable && !(m->flags & PLAYER_METAL_CAP) && !(m->flags & PLAYER_VANISH_CAP)
         && !(o->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
 #ifdef RUMBLE_FEEDBACK
         queue_rumble_data(5, 80);
@@ -1212,8 +1220,8 @@ u32 interact_flame(struct PlayerState *m, UNUSED u32 interactType, struct Object
 }
 
 u32 interact_snufit_bullet(struct PlayerState *m, UNUSED u32 interactType, struct Object *o) {
-    if (!sInvulnerable && !(m->flags & MARIO_VANISH_CAP)) {
-        if (m->flags & MARIO_METAL_CAP) {
+    if (!sInvulnerable && !(m->flags & PLAYER_VANISH_CAP)) {
+        if (m->flags & PLAYER_METAL_CAP) {
             o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_WAS_ATTACKED;
             play_sound(SOUND_ACTION_SNUFFIT_BULLET_HIT_METAL, m->playerObj->header.gfx.cameraToObject);
         } else {
@@ -1256,7 +1264,7 @@ u32 interact_bully(struct PlayerState *m, UNUSED u32 interactType, struct Object
     UNUSED u8 filler[4];
 
     u32 interaction;
-    if (m->flags & MARIO_METAL_CAP) {
+    if (m->flags & PLAYER_METAL_CAP) {
         interaction = INT_FAST_ATTACK_OR_SHELL;
     } else {
         interaction = determine_interaction(m, o);
@@ -1279,7 +1287,7 @@ u32 interact_bully(struct PlayerState *m, UNUSED u32 interactType, struct Object
         return TRUE;
     }
 
-    else if (!sInvulnerable && !(m->flags & MARIO_VANISH_CAP)
+    else if (!sInvulnerable && !(m->flags & PLAYER_VANISH_CAP)
              && !(o->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
         o->oInteractStatus = INT_STATUS_INTERACTED;
         m->invincTimer = 2;
@@ -1300,7 +1308,7 @@ u32 interact_bully(struct PlayerState *m, UNUSED u32 interactType, struct Object
 }
 
 u32 interact_shock(struct PlayerState *m, UNUSED u32 interactType, struct Object *o) {
-    if (!sInvulnerable && !(m->flags & MARIO_VANISH_CAP)
+    if (!sInvulnerable && !(m->flags & PLAYER_VANISH_CAP)
         && !(o->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
         u32 actionArg = (m->action & (ACT_FLAG_AIR | ACT_FLAG_ON_POLE | ACT_FLAG_HANGING)) == 0;
 
@@ -1359,7 +1367,7 @@ u32 interact_mr_blizzard(struct PlayerState *m, UNUSED u32 interactType, struct 
 #endif
 u32 interact_hit_from_below(struct PlayerState *m, UNUSED u32 interactType, struct Object *o) {
     u32 interaction;
-    if (m->flags & MARIO_METAL_CAP) {
+    if (m->flags & PLAYER_METAL_CAP) {
         interaction = INT_FAST_ATTACK_OR_SHELL;
     } else {
         interaction = determine_interaction(m, o);
@@ -1399,7 +1407,7 @@ u32 interact_hit_from_below(struct PlayerState *m, UNUSED u32 interactType, stru
 
 u32 interact_bounce_top(struct PlayerState *m, UNUSED u32 interactType, struct Object *o) {
     u32 interaction;
-    if (m->flags & MARIO_METAL_CAP) {
+    if (m->flags & PLAYER_METAL_CAP) {
         interaction = INT_FAST_ATTACK_OR_SHELL;
     } else {
         interaction = determine_interaction(m, o);
@@ -1633,12 +1641,12 @@ u32 interact_cap(struct PlayerState *m, UNUSED u32 interactType, struct Object *
         m->flags |= capFlag;
 
         switch (capFlag) {
-            case MARIO_VANISH_CAP:
+            case PLAYER_VANISH_CAP:
                 capTime = VC_TIME;
                 capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP);
                 break;
 
-            case MARIO_METAL_CAP:
+            case PLAYER_METAL_CAP:
                 capTime = MC_TIME;
                 capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_METAL_CAP);
                 break;
@@ -1655,7 +1663,11 @@ u32 interact_cap(struct PlayerState *m, UNUSED u32 interactType, struct Object *
 
         if ((m->action & ACT_FLAG_IDLE) || m->action == ACT_WALKING) {
             m->flags |= MARIO_CAP_IN_HAND;
-            set_player_action(m, ACT_PUTTING_ON_CAP, 0);
+            if (configGlobalCapBlocks) {
+                set_player_action(m, ACT_PUTTING_ON_CAP, 0);
+            } else {
+                cutscene_put_cap_on(m);
+            }
         } else {
             m->flags |= MARIO_CAP_ON_HEAD;
         }
@@ -1876,7 +1888,7 @@ void check_lava_boost(struct PlayerState *m) {
 #endif
 
     if (!(m->action & ACT_FLAG_GROUP_NO_LAVA_BOOST) && m->pos[1] < m->floorHeight + 10.0f) {
-        if (!(m->flags & MARIO_METAL_CAP)) {
+        if (!(m->flags & PLAYER_METAL_CAP)) {
             m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
         }
         

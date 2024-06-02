@@ -68,7 +68,7 @@ s32 lava_boost_on_wall(struct PlayerState *m) {
         m->forwardVel = 24.0f;
     }
 
-    if (!(m->flags & MARIO_METAL_CAP)) {
+    if (!(m->flags & PLAYER_METAL_CAP)) {
         m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
     }
 
@@ -1731,7 +1731,7 @@ s32 act_lava_boost(struct PlayerState *m) {
 #endif
             ) {
                 m->actionState = 0;
-                if (!(m->flags & MARIO_METAL_CAP)) {
+                if (!(m->flags & PLAYER_METAL_CAP)) {
                     m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
                 }
                 m->vel[1] = 84.0f;
@@ -1761,7 +1761,7 @@ s32 act_lava_boost(struct PlayerState *m) {
     }
 
     set_player_animation(m, MARIO_ANIM_FIRE_LAVA_BURN);
-    if ((m->area->terrainType & TERRAIN_MASK) != TERRAIN_SNOW && !(m->flags & MARIO_METAL_CAP)
+    if ((m->area->terrainType & TERRAIN_MASK) != TERRAIN_SNOW && !(m->flags & PLAYER_METAL_CAP)
         && m->vel[1] > 0.0f) {
         m->particleFlags |= PARTICLE_FIRE;
         if (m->actionState == 0) {
@@ -1999,7 +1999,7 @@ s32 act_flying(struct PlayerState *m) {
                     m->vel[1] = 0.0f;
                 }
 
-                play_sound((m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_BONK
+                play_sound((m->flags & PLAYER_METAL_CAP) ? SOUND_ACTION_METAL_BONK
                                                         : SOUND_ACTION_BONK,
                            m->playerObj->header.gfx.cameraToObject);
 

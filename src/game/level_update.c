@@ -277,7 +277,7 @@ void set_player_initial_cap_powerup(struct PlayerState *m) {
 
     switch (capCourseIndex) {
         case COURSE_COTMC - COURSE_CAP_COURSES:
-            m->flags |= MARIO_METAL_CAP | MARIO_CAP_ON_HEAD;
+            m->flags |= PLAYER_METAL_CAP | MARIO_CAP_ON_HEAD;
             m->capTimer = MC_LEVEL_TIME;
             break;
 
@@ -287,7 +287,7 @@ void set_player_initial_cap_powerup(struct PlayerState *m) {
             break;
 
         case COURSE_VCUTM - COURSE_CAP_COURSES:
-            m->flags |= MARIO_VANISH_CAP | MARIO_CAP_ON_HEAD;
+            m->flags |= PLAYER_VANISH_CAP | MARIO_CAP_ON_HEAD;
             m->capTimer = VC_LEVEL_TIME;
             break;
     }
@@ -438,11 +438,11 @@ void init_player_after_warp(void) {
         {
             set_background_music(gCurrentArea->musicParam, gCurrentArea->musicParam2, 0);
 
-            if (gPlayerState->flags & MARIO_METAL_CAP) {
+            if (gPlayerState->flags & PLAYER_METAL_CAP) {
                 play_cap_music(SEQUENCE_ARGS(4, SEQ_EVENT_METAL_CAP));
             }
 
-            if (gPlayerState->flags & (MARIO_VANISH_CAP | PLAYER_WING_CAP)) {
+            if (gPlayerState->flags & (PLAYER_VANISH_CAP | PLAYER_WING_CAP)) {
                 play_cap_music(SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP));
             }
         }

@@ -36,6 +36,14 @@
 #include "extras/debug_menu.h"
 #endif
 
+#ifdef EXT_OPTIONS_MENU
+#ifndef TARGET_N64
+#include "pc/configfile.h"
+#else
+extern int configGlobalCapBlocks = FALSE;
+#endif
+#endif
+
 static Vp sEndCutsceneVp = { { { 640, 480, 511, 0 }, { 640, 480, 511, 0 } } };
 static struct CreditsEntry *sDispCreditsEntry = NULL;
 
@@ -435,7 +443,11 @@ s32 act_reading_npc_dialog(struct PlayerState *m) {
         m->actionTimer -= headTurnAmount;
     } else if (m->actionState == 23) {
         if (m->flags & MARIO_CAP_IN_HAND) {
-            set_player_action(m, ACT_PUTTING_ON_CAP, 0);
+            if (configGlobalCapBlocks) {
+                set_player_action(m, ACT_PUTTING_ON_CAP, 0);
+            } else {
+                cutscene_put_cap_on(m);
+            }
         } else {
             set_player_action(m, m->heldObj == NULL ? ACT_IDLE : ACT_HOLD_IDLE, 0);
         }
@@ -1529,7 +1541,7 @@ s32 act_bbh_enter_jump(struct PlayerState *m) {
     f32 cageDist;
 
     play_player_action_sound(
-        m, m->flags & MARIO_METAL_CAP ? SOUND_ACTION_METAL_JUMP : SOUND_ACTION_TERRAIN_JUMP, 1);
+        m, m->flags & PLAYER_METAL_CAP ? SOUND_ACTION_METAL_JUMP : SOUND_ACTION_TERRAIN_JUMP, 1);
     play_player_jump_sound(m);
 
     if (m->actionState == 0) {
@@ -1673,7 +1685,7 @@ s32 act_squished(struct PlayerState *m) {
                 vec3f_set(m->playerObj->header.gfx.scale, 2.0f - squishAmount, squishAmount, 2.0f - squishAmount);
 #endif
             } else {
-                if (!(m->flags & MARIO_METAL_CAP) && m->invincTimer == 0) {
+                if (!(m->flags & PLAYER_METAL_CAP) && m->invincTimer == 0) {
                     // cap on: 3 units; cap off: 4.5 units
                     m->hurtCounter += m->flags & MARIO_CAP_ON_HEAD ? 12 : 18;
                     play_sound_if_no_flag(m, SOUND_MARIO_ATTACKED, MARIO_MARIO_SOUND_PLAYED);
@@ -1767,18 +1779,18 @@ s32 act_squished(struct PlayerState *m) {
 s32 act_putting_on_cap(struct PlayerState *m) {
     s32 animFrame = set_player_animation(m, MARIO_ANIM_PUT_CAP_ON);
 
-    if (animFrame == 0) {
-        enable_time_stop();
-    }
+        if (animFrame == 0) {
+            enable_time_stop();
+        }
 
-    if (animFrame == 28) {
-        cutscene_put_cap_on(m);
-    }
+        if (animFrame == 28) {
+            cutscene_put_cap_on(m);
+        }
 
-    if (is_anim_at_end(m)) {
-        set_player_action(m, ACT_IDLE, 0);
-        disable_time_stop();
-    }
+        if (is_anim_at_end(m)) {
+            set_player_action(m, ACT_IDLE, 0);
+            disable_time_stop();
+        }
 
     stationary_ground_step(m);
     return FALSE;

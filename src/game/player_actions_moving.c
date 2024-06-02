@@ -81,7 +81,7 @@ s16 tilt_body_running(struct PlayerState *m) {
 
 void play_step_sound(struct PlayerState *m, s16 frame1, s16 frame2) {
     if (is_anim_past_frame(m, frame1) || is_anim_past_frame(m, frame2)) {
-        if (m->flags & MARIO_METAL_CAP) {
+        if (m->flags & PLAYER_METAL_CAP) {
             if (m->playerObj->header.gfx.animInfo.animID == MARIO_ANIM_TIPTOE) {
                 play_sound_and_spawn_particles(m, SOUND_ACTION_METAL_STEP_TIPTOE, 0);
             } else {
@@ -1374,7 +1374,7 @@ s32 act_riding_shell_ground(struct PlayerState *m) {
 
         case GROUND_STEP_HIT_WALL:
             player_stop_riding_object(m);
-            play_sound(m->flags & MARIO_METAL_CAP ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
+            play_sound(m->flags & PLAYER_METAL_CAP ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
                        m->playerObj->header.gfx.cameraToObject);
             m->particleFlags |= PARTICLE_VERTICAL_STAR;
             set_player_action(m, ACT_BACKWARD_GROUND_KB, 0);

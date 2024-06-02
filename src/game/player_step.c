@@ -114,7 +114,7 @@ void player_bonk_reflection(struct PlayerState *m, u32 negateSpeed) {
         s16 wallAngle = atan2s(m->wall->normal.z, m->wall->normal.x);
         m->faceAngle[1] = wallAngle - (s16)(m->faceAngle[1] - wallAngle);
 
-        play_sound((m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
+        play_sound((m->flags & PLAYER_METAL_CAP) ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
                    m->playerObj->header.gfx.cameraToObject);
     } else {
         play_sound(SOUND_ACTION_HIT, m->playerObj->header.gfx.cameraToObject);
