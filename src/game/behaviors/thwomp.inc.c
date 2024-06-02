@@ -1,6 +1,7 @@
 // thwomp.inc.c
 
 void grindel_thwomp_act_idle_at_bottom(void) {
+    o->oAnimState = 2;
     if (o->oTimer == 0) {
         o->oGrindelThwompRandomTimer = random_float() * 10.0f + 20.0f; // [20, 29]
     }
@@ -10,6 +11,7 @@ void grindel_thwomp_act_idle_at_bottom(void) {
 }
 
 void grindel_thwomp_act_lower(void) {
+    o->oAnimState = 2;
     o->oVelY += -4.0f;
     o->oPosY += o->oVelY;
     if (o->oPosY < o->oHomeY) {
@@ -20,6 +22,7 @@ void grindel_thwomp_act_lower(void) {
 }
 
 void grindel_thwomp_act_land(void) {
+    o->oAnimState = 2;
     if (o->oTimer == 0) {
         if (o->oDistanceToPlayer < 1500.0f) {
             cur_obj_shake_screen(SHAKE_POS_SMALL);
@@ -32,6 +35,7 @@ void grindel_thwomp_act_land(void) {
 }
 
 void grindel_thwomp_act_idle_at_top(void) {
+    o->oAnimState = 1;
     if (o->oTimer == 0) {
         o->oGrindelThwompRandomTimer = random_float() * 30.0f + 10.0f; // [10, 39]
     }
@@ -41,6 +45,7 @@ void grindel_thwomp_act_idle_at_top(void) {
 }
 
 void grindel_thwomp_act_raise(void) {
+    o->oAnimState = 0;
     if (o->oTimer > o->oBhvParams2ndByte + 40) {
         o->oAction = GRINDEL_THWOMP_ACT_IDLE_AT_TOP;
         o->oPosY += 5.0f;
