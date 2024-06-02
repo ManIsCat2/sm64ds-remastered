@@ -150,6 +150,16 @@ u32 get_player_cap_flag(struct Object *capObject) {
         return PLAYER_WING_CAP;
     } else if (script == bhvVanishCap) {
         return MARIO_VANISH_CAP;
+    } else if (script == bhvPowerFlower) {
+        if (curChar == 1) {
+            return MARIO_NORMAL_CAP;
+        } else if (curChar == 2) {
+            return MARIO_VANISH_CAP;
+        } else if (curChar == 3) {
+            return MARIO_METAL_CAP;
+        } else {
+            return PLAYER_WING_CAP;
+        }
     }
 
     return 0;
