@@ -75,7 +75,7 @@ s32 check_common_hold_idle_cancels(struct PlayerState *m) {
     }
 
     if (m->input & INPUT_A_PRESSED) {
-        return set_jumping_action(m, ACT_HOLD_JUMP, 0);
+        return set_jumping_action(m, ACT_HOLD_JUMP, 0); 
     }
 
     if (m->input & INPUT_OFF_FLOOR) {

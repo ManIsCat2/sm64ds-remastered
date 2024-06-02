@@ -703,7 +703,7 @@ s32 act_backflip(struct PlayerState *m) {
         }
     }
 
-    play_player_sound(m, SOUND_ACTION_TERRAIN_JUMP, SOUND_MARIO_YAH_WAH_HOO);
+    play_player_sound(m, SOUND_ACTION_TERRAIN_JUMP, SOUND_MARIO_YAH);
     common_air_action_step(m, ACT_BACKFLIP_LAND, MARIO_ANIM_BACKFLIP, 0);
 #ifdef RUMBLE_FEEDBACK
     if (m->action == ACT_BACKFLIP_LAND) {
@@ -817,6 +817,8 @@ s32 act_side_flip(struct PlayerState *m) {
 }
 
 s32 act_wall_kick_air(struct PlayerState *m) {
+    s32 animFrame;
+
     if (m->input & INPUT_B_PRESSED) {
         return set_player_action(m, ACT_DIVE, 0);
     }
@@ -825,7 +827,7 @@ s32 act_wall_kick_air(struct PlayerState *m) {
         return set_player_action(m, ACT_GROUND_POUND, 0);
     }
 
-    play_player_jump_sound(m);
+    play_player_sound(m, SOUND_ACTION_TERRAIN_JUMP, SOUND_MARIO_YAHOO);
     common_air_action_step(m, ACT_JUMP_LAND, MARIO_ANIM_SLIDEJUMP, AIR_STEP_CHECK_LEDGE_GRAB);
     return FALSE;
 }
@@ -931,12 +933,7 @@ s32 act_twirling(struct PlayerState *m) {
 #undef ANIM_TWIRL
 
 s32 act_dive(struct PlayerState *m) {
-    if (m->actionArg == 0) {
-        play_player_sound(m, SOUND_ACTION_THROW, SOUND_MARIO_MUH);
-    } else {
-        play_player_sound(m, SOUND_ACTION_TERRAIN_JUMP, 0);
-    }
-
+    play_player_sound(m, SOUND_ACTION_TERRAIN_JUMP, 0);
     set_player_animation(m, MARIO_ANIM_DIVE);
     if (player_check_object_grab(m)) {
         player_grab_used_object(m);

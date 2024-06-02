@@ -261,16 +261,32 @@ void play_sound_if_no_flag(struct PlayerState *m, u32 soundBits, u32 flags) {
     }
 }
 
+int yahOrWah;
+int yahooOrYippe;
+
 /**
  * Plays a jump sound if one has not been played since the last action change.
  */
 void play_player_jump_sound(struct PlayerState *m) {
     if (!(m->flags & MARIO_MARIO_SOUND_PLAYED)) {
         if (m->action == ACT_TRIPLE_JUMP) {
-            play_sound(SOUND_MARIO_YAHOO_WAHA_YIPPEE + ((gAudioRandom % 5) << 16),
-                       m->playerObj->header.gfx.cameraToObject);
+            if (yahOrWah == 0) {
+                play_sound(SOUND_MARIO_YAHOO, m->playerObj->header.gfx.cameraToObject);
+                yahooOrYippe++;
+            } else {
+                play_sound((SOUND_MARIO_YAHOO_WAHA_YIPPEE), m->playerObj->header.gfx.cameraToObject);
+                yahooOrYippe--;
+            }
+        } else if ((m->action == ACT_JUMP) || (m->action == ACT_DIVE)) {
+            if (yahOrWah == 0) {
+                play_sound(SOUND_MARIO_YAH, m->playerObj->header.gfx.cameraToObject);
+                yahOrWah++;
+            } else {
+                play_sound(SOUND_MARIO_WAH, m->playerObj->header.gfx.cameraToObject);
+                yahOrWah--;
+            }
         } else {
-            play_sound(SOUND_MARIO_YAH_WAH_HOO + ((gAudioRandom % 3) << 16),
+            play_sound(SOUND_MARIO_YAH + ((gAudioRandom % 3) << 16),
                        m->playerObj->header.gfx.cameraToObject);
         }
         m->flags |= MARIO_MARIO_SOUND_PLAYED;
@@ -1508,7 +1524,7 @@ void update_player_inputs(struct PlayerState *m) {
 print_text_fmt_int(210, 92, "1 %d", m->playerObj->oPosX);
 print_text_fmt_int(210, 72, "2 %d", m->playerObj->oPosY);
 print_text_fmt_int(210, 52, "3 %d", m->playerObj->oPosZ);
-print_text_fmt_int(210, 120, "Character - %d", curChar);
+print_text_fmt_int(210, 120, "Jump Sound - %d", yahOrWah);
 #endif
 #ifdef CHEATS_ACTIONS
     cheats_player_inputs(m);

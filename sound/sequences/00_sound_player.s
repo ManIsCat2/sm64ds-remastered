@@ -2106,7 +2106,7 @@ chan_setlayer 0, .layer_C6C
 chan_end
 
 .layer_C6C:
-layer_note1 39, 0xc8, 127
+layer_note1 39, 0x30, 97
 layer_end
 
 .sound_mario_yahoo:
