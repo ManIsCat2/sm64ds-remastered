@@ -1315,6 +1315,7 @@ u32 common_air_knockback_step(struct PlayerState *m, u32 landAction, u32 hardFal
     switch (stepResult) {
         case AIR_STEP_NONE:
             set_player_animation(m, animation);
+            break;
 
         case AIR_STEP_LANDED:
 #ifdef RUMBLE_FEEDBACK
