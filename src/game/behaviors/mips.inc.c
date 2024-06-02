@@ -52,6 +52,12 @@ s16 bhv_mips_find_furthest_waypoint_to_player(void) {
     f32 furthestWaypointDistance = -10000.0f;
     f32 distanceToPlayer;
     struct Waypoint **pathBase = segmented_to_virtual(&castle_grounds_trajectory_mips);
+    if (gCurrLevelNum == LEVEL_CASTLE) {
+        pathBase = segmented_to_virtual(&inside_castle_seg7_trajectory_mips);
+    } else {
+        pathBase = segmented_to_virtual(&castle_grounds_trajectory_mips);
+    }
+
 
     // For each waypoint in MIPS path...
     for (i = 0; i < 10; i++) {
@@ -100,6 +106,8 @@ void bhv_mips_act_wait_for_nearby_player(void) {
     }
 }
 
+extern s16 gCurrLevelNum;
+
 /**
  * Continue to follow our path around the basement area.
  */
@@ -107,6 +115,12 @@ void bhv_mips_act_follow_path(void) {
     // Retrieve current waypoint.
     struct Waypoint **pathBase = segmented_to_virtual(&castle_grounds_trajectory_mips);
     struct Waypoint *waypoint = segmented_to_virtual(*(pathBase + o->oMipsStartWaypointIndex));
+
+    if (gCurrLevelNum == LEVEL_CASTLE) {
+        pathBase = segmented_to_virtual(&inside_castle_seg7_trajectory_mips);
+    } else {
+        pathBase = segmented_to_virtual(&castle_grounds_trajectory_mips);
+    }
 
     // Set start waypoint and follow the path from there.
     o->oPathedStartWaypoint = waypoint;
