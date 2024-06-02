@@ -1020,7 +1020,7 @@ s32 act_entering_star_door(struct PlayerState *m) {
         if (curChar == 1) {
             set_player_anim_with_accel(m, MARIO_ANIM_WALKING, 0x00028000);
         } else if (curChar == 2) {
-            set_player_anim_with_accel(m, LUIGI_ANIM_WALKING, 0x00018000);
+            set_player_anim_with_accel(m, LUIGI_ANIM_WALKING, 0x00028000);
         }
     }
 
