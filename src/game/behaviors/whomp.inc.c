@@ -17,8 +17,6 @@ void whomp_play_sfx_from_pound_animation(void) {
     }
 }
 
-// this is literally just a snippet of decomp code it isnt even mine
-
 void whomp_init(void) {
     cur_obj_init_animation_with_accel_and_sound(0, 1.0f);
     cur_obj_set_pos_to_home();

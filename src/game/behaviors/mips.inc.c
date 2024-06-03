@@ -1,5 +1,3 @@
-extern int castleKeyRead;
-
 /**
  * Behavior for MIPS (everyone's favorite yellow rabbit).
  */
@@ -12,13 +10,8 @@ void bhv_mips_init(void) {
     // Retrieve star flags for Castle Secret Stars on current save file.
     u8 starFlags = save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(COURSE_NONE));
 
-    // If the player has talked to lakitu and hasn't collected the key...
-    if (!(save_file_get_flags() & SAVE_FLAG_UNLOCKED_CASTLE_DOOR)) {
-        o->oBhvParams2ndByte = MIPS_BP_CASTLE_KEY;
-        o->oMipsForwardVelocity = 25.0f;
-    }
     // If the player has >= 15 stars and hasn't collected first MIPS star...
-    else if (save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= MIPS1_STAR_REQ
+    if (save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= MIPS1_STAR_REQ
         && !(starFlags & SAVE_FLAG_TO_STAR_FLAG(SAVE_FLAG_COLLECTED_MIPS_STAR_1))) {
         o->oBhvParams2ndByte = MIPS_BP_15_STARS;
         o->oMipsForwardVelocity = 40.0f;
@@ -51,13 +44,7 @@ s16 bhv_mips_find_furthest_waypoint_to_player(void) {
     s16 furthestWaypointIndex = -1;
     f32 furthestWaypointDistance = -10000.0f;
     f32 distanceToPlayer;
-    struct Waypoint **pathBase = segmented_to_virtual(&castle_grounds_trajectory_mips);
-    if (gCurrLevelNum == LEVEL_CASTLE) {
-        pathBase = segmented_to_virtual(&inside_castle_seg7_trajectory_mips);
-    } else {
-        pathBase = segmented_to_virtual(&castle_grounds_trajectory_mips);
-    }
-
+    struct Waypoint **pathBase = segmented_to_virtual(&inside_castle_seg7_trajectory_mips);
 
     // For each waypoint in MIPS path...
     for (i = 0; i < 10; i++) {
@@ -113,14 +100,8 @@ extern s16 gCurrLevelNum;
  */
 void bhv_mips_act_follow_path(void) {
     // Retrieve current waypoint.
-    struct Waypoint **pathBase = segmented_to_virtual(&castle_grounds_trajectory_mips);
+    struct Waypoint **pathBase = segmented_to_virtual(&inside_castle_seg7_trajectory_mips);
     struct Waypoint *waypoint = segmented_to_virtual(*(pathBase + o->oMipsStartWaypointIndex));
-
-    if (gCurrLevelNum == LEVEL_CASTLE) {
-        pathBase = segmented_to_virtual(&inside_castle_seg7_trajectory_mips);
-    } else {
-        pathBase = segmented_to_virtual(&castle_grounds_trajectory_mips);
-    }
 
     // Set start waypoint and follow the path from there.
     o->oPathedStartWaypoint = waypoint;
@@ -187,7 +168,7 @@ void bhv_mips_act_idle(void) {
     collisionFlags = object_step();
 
     // Spawn a star if he was just picked up for the first time.
-    if ((o->oMipsStarStatus == MIPS_STAR_STATUS_SHOULD_SPAWN_STAR) && !(o->oBhvParams2ndByte == MIPS_BP_CASTLE_KEY)) {
+    if ((o->oMipsStarStatus == MIPS_STAR_STATUS_SHOULD_SPAWN_STAR)) {
         bhv_spawn_star_no_level_exit(STAR_INDEX_ACT_4 + o->oBhvParams2ndByte);
         o->oMipsStarStatus = MIPS_STAR_STATUS_ALREADY_SPAWNED_STAR;
     }
@@ -234,10 +215,7 @@ void bhv_mips_held(void) {
     // If MIPS hasn't spawned his star yet...
     if (o->oMipsStarStatus == MIPS_STAR_STATUS_HAVENT_SPAWNED_STAR) {
         // Choose dialog based on which MIPS encounter this is.
-        if (o->oBhvParams2ndByte == MIPS_BP_CASTLE_KEY) {
-            dialogID = DIALOG_171;
-            save_file_set_flags(SAVE_FLAG_HAVE_KEY_BUNNY);
-        } else if (o->oBhvParams2ndByte == MIPS_BP_15_STARS) {
+        if (o->oBhvParams2ndByte == MIPS_BP_15_STARS) {
             dialogID = DIALOG_084;
         } else { // MIPS_BP_50_STARS
             dialogID = DIALOG_162;

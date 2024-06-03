@@ -897,11 +897,7 @@ s32 act_unlocking_key_door(struct PlayerState *m) {
     }
 
     if (m->actionTimer == 0) {
-        if (m->usedObj->oBhvParams >> 24 == 3) {
-            spawn_obj_at_player_rel_yaw(m, MODEL_MIPS_KEY_CUTSCENE, bhvBowserKeyUnlockDoor, 0);
-        } else {
-            spawn_obj_at_player_rel_yaw(m, MODEL_BOWSER_KEY_CUTSCENE, bhvBowserKeyUnlockDoor, 0);
-        }
+        spawn_obj_at_player_rel_yaw(m, MODEL_BOWSER_KEY_CUTSCENE, bhvBowserKeyUnlockDoor, 0);
         set_player_animation(m, MARIO_ANIM_UNLOCK_DOOR);
     }
 
@@ -921,12 +917,9 @@ s32 act_unlocking_key_door(struct PlayerState *m) {
         if (m->usedObj->oBhvParams >> 24 == 1) {
             save_file_set_flags(SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR);
             save_file_clear_flags(SAVE_FLAG_HAVE_KEY_2);
-        } else if (m->usedObj->oBhvParams >> 24 == 2) {
+        } else {
             save_file_set_flags(SAVE_FLAG_UNLOCKED_BASEMENT_DOOR);
             save_file_clear_flags(SAVE_FLAG_HAVE_KEY_1);
-        } else {
-            save_file_set_flags(SAVE_FLAG_UNLOCKED_CASTLE_DOOR);
-            save_file_clear_flags(SAVE_FLAG_HAVE_KEY_BUNNY);
         }
         set_player_action(m, ACT_WALKING, 0);
     }
@@ -1284,11 +1277,7 @@ s32 act_exit_land_save_dialog(struct PlayerState *m) {
             animFrame = set_player_animation(m, MARIO_ANIM_THROW_CATCH_KEY);
             switch (animFrame) {
                 case -1:
-                    if (m->usedObj->oBhvParams >> 24 == 3) {
-                        spawn_obj_at_player_rel_yaw(m, MODEL_MIPS_KEY_CUTSCENE, bhvBowserKeyCourseExit, -32768);
-                    } else {
-                        spawn_obj_at_player_rel_yaw(m, MODEL_BOWSER_KEY_CUTSCENE, bhvBowserKeyCourseExit, -32768);
-                    }
+                    spawn_obj_at_player_rel_yaw(m, MODEL_BOWSER_KEY_CUTSCENE, bhvBowserKeyCourseExit, -32768);
                     BREAK;
                 case 67:
                     play_sound(SOUND_ACTION_KEY_SWISH, m->playerObj->header.gfx.cameraToObject);

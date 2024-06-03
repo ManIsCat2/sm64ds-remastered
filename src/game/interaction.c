@@ -87,7 +87,6 @@ u32 interact_hoot(struct PlayerState *, u32, struct Object *);
 u32 interact_cap(struct PlayerState *, u32, struct Object *);
 u32 interact_grabbable(struct PlayerState *, u32, struct Object *);
 u32 interact_text(struct PlayerState *, u32, struct Object *);
-int castleKeyRead = FALSE;
 
 struct InteractionHandler {
     u32 interactType;
@@ -944,21 +943,6 @@ u32 interact_warp_door(struct PlayerState *m, UNUSED u32 interactType, struct Ob
                     // Moat door skip was intended confirmed
                     set_player_action(m, ACT_READING_AUTOMATIC_DIALOG,
                                      (saveFlags & SAVE_FLAG_HAVE_KEY_2) ? DIALOG_023 : DIALOG_022);
-                }
-                sDisplayingDoorText = TRUE;
-
-                return FALSE;
-            }
-
-            doorAction = ACT_UNLOCKING_KEY_DOOR;
-        }
-
-        if (warpDoorId == 3 && !(saveFlags & SAVE_FLAG_UNLOCKED_CASTLE_DOOR)) {
-            if (!(saveFlags & SAVE_FLAG_HAVE_KEY_BUNNY)) {
-                if (!sDisplayingDoorText) {
-                    castleKeyRead = TRUE;
-                    set_player_action(m, ACT_READING_AUTOMATIC_DIALOG,
-                                     (saveFlags & SAVE_FLAG_HAVE_KEY_2) ? DIALOG_170 : DIALOG_170);
                 }
                 sDisplayingDoorText = TRUE;
 
