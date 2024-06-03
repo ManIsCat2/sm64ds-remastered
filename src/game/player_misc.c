@@ -304,7 +304,7 @@ static Gfx *make_gfx_player_alpha(struct GraphNodeGenerated *node, s16 alpha) {
         node->fnNode.node.flags = (node->fnNode.node.flags & 0xFF) | (LAYER_TRANSPARENT << 8);
         gfxHead = alloc_display_list(3 * sizeof(*gfxHead));
         gfx = gfxHead;
-        gDPSetAlphaCompare(gfx++, G_AC_DITHER);
+        gDPSetAlphaCompare(gfx++, G_AC_NONE);
     }
     gDPSetEnvColor(gfx++, 255, 255, 255, alpha);
     gSPEndDisplayList(gfx);

@@ -1767,7 +1767,7 @@ void player_update_hitbox_and_cap_model(struct PlayerState *m) {
     s32 flags = update_and_return_cap_flags(m);
 
     if (flags & PLAYER_VANISH_CAP) {
-        bodyState->modelState = MODEL_STATE_NOISE_ALPHA;
+        //bodyState->modelState = MODEL_STATE_NOISE_ALPHA;
     }
 
     if (flags & PLAYER_METAL_CAP) {
