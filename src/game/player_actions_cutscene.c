@@ -676,34 +676,16 @@ s32 act_debug_free_move(struct PlayerState *m) {
 
 void general_star_dance_handler(struct PlayerState *m, s32 isInWater) {
     s32 dialogID;
-#if OBJ_HOLD_TRANSPARENT_STAR
-    s16 i;
-    struct Object *initObj;
-    s16 modelForDances[] = { MODEL_TRANSPARENT_STAR, MODEL_STAR, MODEL_BOWSER_KEY_CUTSCENE, MODEL_BOWSER_KEY };
-#endif
+
     if (m->actionState == 0) {
         switch (++m->actionTimer) {
             case 1:
-                #if OBJ_HOLD_TRANSPARENT_STAR
-                initObj = spawn_object(m->playerObj, MODEL_STAR, bhvCelebrationStar);
-                for (i = 0; i < (s16) ARRAY_COUNT(modelForDances); i++) {
-                    if (gLoadedGraphNodes[modelForDances[i]] == m->interactObj->header.gfx.sharedChild) {
-                        initObj->header.gfx.sharedChild = m->interactObj->header.gfx.sharedChild;
-                    }
-                }
-                #else
                 spawn_object(m->playerObj, MODEL_STAR, bhvCelebrationStar);
-                #endif
                 disable_background_sound();
                 if (m->actionArg & 1) {
                     play_course_clear();
                 } else {
-                    #if OBJ_HOLD_TRANSPARENT_STAR
-                    if (gPlayerState->interactObj->header.gfx.sharedChild == gLoadedGraphNodes[MODEL_BOWSER_KEY])
-                    #else
-                    if (gCurrLevelNum == LEVEL_BOWSER_1 || gCurrLevelNum == LEVEL_BOWSER_2)
-                    #endif
-                    {
+                    if (gCurrLevelNum == LEVEL_BOWSER_1 || gCurrLevelNum == LEVEL_BOWSER_2) {
                         play_music(SEQ_PLAYER_ENV, SEQUENCE_ARGS(15, SEQ_EVENT_CUTSCENE_COLLECT_KEY), 0);
                     } else {
                         play_music(SEQ_PLAYER_ENV, SEQUENCE_ARGS(15, SEQ_EVENT_CUTSCENE_COLLECT_STAR), 0);
