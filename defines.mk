@@ -30,7 +30,7 @@ RM2C ?= 0
 # Quality of life fixes
 QOL_FIXES ?= 0
 # Quality of life features
-QOL_FEATURES ?= 0
+QOL_FEATURES ?= 1
 
 # --------------------------------------
 # Port Only Defines
