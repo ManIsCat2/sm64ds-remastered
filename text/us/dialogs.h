@@ -239,30 +239,25 @@ ride wherever you want to\n\
 go! Shred those enemies!"))
 
 DEFINE_DIALOG(DIALOG_017, 1, 4, 30, 200, _("\
-I'm the Big Bob-omb, lord\n\
-of all blasting matter,\n\
-king of ka-booms the\n\
-world over!\n\
-How dare you scale my\n\
-mountain? By what right\n\
-do you set foot on my\n\
-imperial mountaintop?\n\
-You may have eluded my\n\
-guards, but you'll never\n\
-escape my grasp...\n\
+I'm the Big Bob-omb,\n\
+baron of all blasting\n\
+matter, king of\n\
+ka-booms worldwide!\n\
+Look at my splendid\n\
+mustache. It's fit for\n\
+a king! Ho ho!\n\
 \n\
-...and you'll never take\n\
-away my Power Star. I\n\
-hereby challenge you,\n\
-Mario!\n\
-If you want the Star I\n\
-hold, you must prove\n\
-yourself in battle.\n\
-\n\
-Can you pick me up from\n\
-the back and hurl me to\n\
-this royal turf? I think\n\
-that you cannot!"))
+Your mustache makes\n\
+you look like the\n\
+peasant you are. What\n\
+a sad little thing.\n\
+If you want the Power\n\
+Star, you must defeat\n\
+me in battle.\n\
+Ha Ha Ha!\n\
+But there's no way I'd\n\
+ever lose to a puny\n\
+mustache like that."))
 
 DEFINE_DIALOG(DIALOG_018, 1, 4, 30, 200, _("\
 I'm sleeping because...\n\
@@ -2102,3 +2097,23 @@ DEFINE_DIALOG(DIALOG_173, 1, 5, 85, 200, _("\
 Give me a break. I\n\
 already gave\n\
 you back the key."))
+
+DEFINE_DIALOG(DIALOG_174, 1, 4, 30, 200, _("\
+The king refuses to be\n\
+dejected by a single\n\
+defeat. I'm back with a\n\
+new Star from Bowser!\n\
+I've also restyled my\n\
+mustache.\n\
+I'm unstoppable!\n\
+If you want the Power\n\
+Star, you'll have to\n\
+knock it out of me!\n\
+\n\
+\n\
+But the only way to\n\
+do that is to pick me\n\
+up from behind and\n\
+fling me down. And\n\
+that will never happen!\n\
+Bring it, shorty!"))

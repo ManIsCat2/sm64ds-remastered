@@ -143,6 +143,11 @@
 #define TTC_SPEED_RANDOM  2
 #define TTC_SPEED_STOPPED 3
 
+/* King Bob-omb */
+    /* oBhvParams2ndByte */
+    #define BOBOMB_KING_BP_TYPE_1 0
+    #define BOBOMB_KING_BP_TYPE_2 1
+
 /* Bob-omb */
     /* oBhvParams2ndByte */
     #define BOBOMB_BP_STYPE_GENERIC    0

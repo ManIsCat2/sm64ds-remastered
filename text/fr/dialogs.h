@@ -2295,3 +2295,23 @@ Cette caverne est très\n\
 dangereuse!!!\n\
 Alors... DE-HORS!\n\
 / -- Le capitaine --"))
+
+DEFINE_DIALOG(DIALOG_174, 1, 4, 30, 200, _("\
+The king refuses to be\n\
+dejected by a single\n\
+defeat. I'm back with a\n\
+new Star from Bowser!\n\
+I've also restyled my\n\
+mustache.\n\
+I'm unstoppable!\n\
+If you want the Power\n\
+Star, you'll have to\n\
+knock it out of me!\n\
+\n\
+\n\
+But the only way to\n\
+do that is to pick me\n\
+up from behind and\n\
+fling me down. And\n\
+that will never happen!\n\
+Bring it, shorty!"))

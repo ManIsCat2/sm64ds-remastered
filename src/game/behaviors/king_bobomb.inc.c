@@ -20,8 +20,16 @@ void bhv_bobomb_anchor_player_loop(void) {
 }
 
 void king_bobomb_act_0(void) {
+    s16 dialogID;
+
     o->oForwardVel = 0.0f;
     o->oVelY = 0.0f;
+
+    if (o->oBhvParams2ndByte == BOBOMB_KING_BP_TYPE_1) {
+        dialogID = DIALOG_017;
+    } else {
+        dialogID = DIALOG_174;
+    }
 
     if (o->oSubAction == 0) {
         cur_obj_become_intangible();
@@ -35,7 +43,7 @@ void king_bobomb_act_0(void) {
             seq_player_lower_volume(SEQ_PLAYER_LEVEL, 60, 40);
         }
     } else if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP,
-        DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, DIALOG_017)) {
+        DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, dialogID)) {
         o->oAction = 2;
         o->oFlags |= OBJ_FLAG_HOLDABLE;
     }
