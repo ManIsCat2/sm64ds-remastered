@@ -2937,7 +2937,7 @@ Gfx mat_luigi_eyes_2[] = {
 	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_8b_LOAD_BLOCK, 1, luigi_luigi_eye_2_ci8),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
 	gsDPLoadBlock(7, 0, 0, 255, 1024),
-	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
+	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_MIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 124),
 	gsSPEndDisplayList(),
 };
@@ -2960,7 +2960,7 @@ Gfx mat_luigi_eyes_3[] = {
 	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_8b_LOAD_BLOCK, 1, luigi_luigi_eye_3_ci8),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
 	gsDPLoadBlock(7, 0, 0, 255, 1024),
-	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
+	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_MIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 124),
 	gsSPEndDisplayList(),
 };
@@ -2983,7 +2983,7 @@ Gfx mat_luigi_eyes_4[] = {
 	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_8b_LOAD_BLOCK, 1, luigi_luigi_eye_4_ci8),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
 	gsDPLoadBlock(7, 0, 0, 255, 1024),
-	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
+	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_MIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 124),
 	gsSPEndDisplayList(),
 };
@@ -3129,9 +3129,9 @@ Gfx luigi_000_displaylist_cap_on_mesh_layer_1_mat_override_metal_mat_0[] = {
 };
 
 Gfx luigi_000_displaylist_cap_on_mesh_layer_1_mat_override_eyes_2_1[] = {
-	gsSPDisplayList(mat_luigi_eyes_1),
+	gsSPDisplayList(mat_luigi_eyes_2),
 	gsSPDisplayList(luigi_000_displaylist_cap_on_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_luigi_eyes_1),
+	gsSPDisplayList(mat_revert_luigi_eyes_2),
 	gsSPDisplayList(mat_luigi_face),
 	gsSPDisplayList(luigi_000_displaylist_cap_on_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_luigi_face),
@@ -3139,9 +3139,9 @@ Gfx luigi_000_displaylist_cap_on_mesh_layer_1_mat_override_eyes_2_1[] = {
 };
 
 Gfx luigi_000_displaylist_cap_on_mesh_layer_1_mat_override_eyes_3_2[] = {
-	gsSPDisplayList(mat_luigi_eyes_1),
+	gsSPDisplayList(mat_luigi_eyes_3),
 	gsSPDisplayList(luigi_000_displaylist_cap_on_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_luigi_eyes_1),
+	gsSPDisplayList(mat_revert_luigi_eyes_3),
 	gsSPDisplayList(mat_luigi_face),
 	gsSPDisplayList(luigi_000_displaylist_cap_on_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_luigi_face),
@@ -3159,9 +3159,9 @@ Gfx luigi_000_displaylist_cap_on_mesh_layer_1_mat_override_eyes_1_3[] = {
 };
 
 Gfx luigi_000_displaylist_cap_on_mesh_layer_1_mat_override_eyes_4_4[] = {
-	gsSPDisplayList(mat_luigi_eyes_1),
+	gsSPDisplayList(mat_luigi_eyes_4),
 	gsSPDisplayList(luigi_000_displaylist_cap_on_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_luigi_eyes_1),
+	gsSPDisplayList(mat_revert_luigi_eyes_4),
 	gsSPDisplayList(mat_luigi_face),
 	gsSPDisplayList(luigi_000_displaylist_cap_on_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_luigi_face),
