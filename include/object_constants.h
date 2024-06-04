@@ -133,6 +133,7 @@
 #define STAR_INDEX_ACT_4     3
 #define STAR_INDEX_ACT_5     4
 #define STAR_INDEX_ACT_6     5
+#define STAR_INDEX_ACT_7     6
 #define STAR_INDEX_100_COINS 7
 #define STAR_INDEX_CANNON    8
 
