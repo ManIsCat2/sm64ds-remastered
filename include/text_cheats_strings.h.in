@@ -10,7 +10,7 @@
 // TODO: Actually translate this to JP
 
 #define TEXT_OPT_CHEAT0    _("ENABLE CHEATS")
-#define TEXT_OPT_CHEAT1    _("MOON-JUMP (PRESS L)")
+#define TEXT_OPT_CHEAT1    _("MOON-JUMP (PRESS X)")
 #define TEXT_OPT_CHEAT2    _("INFINITE HEALTH")
 #define TEXT_OPT_CHEAT3    _("INFINITE LIVES")
 #define TEXT_OPT_CHEAT4    _("INVINCIBLE PLAYER")
@@ -43,7 +43,7 @@
 #else // VERSION
 
 #define TEXT_OPT_CHEAT0    _("Enable cheats")
-#define TEXT_OPT_CHEAT1    _("Moon-jump (Press L)")
+#define TEXT_OPT_CHEAT1    _("Moon-jump (Press X)")
 #define TEXT_OPT_CHEAT2    _("Infinite health")
 #define TEXT_OPT_CHEAT3    _("Infinite lives")
 #define TEXT_OPT_CHEAT4    _("Invincible player")
