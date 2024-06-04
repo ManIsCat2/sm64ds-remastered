@@ -383,7 +383,6 @@
 0xc3941398, textures/skybox_tiles/clouds.22.rgba16.png
 0xc3459917, textures/water/jrb_textures.07800.rgba16.png
 0xc30b4fe2, textures/skybox_tiles/bidw.40.rgba16.png
-0xc2e48c81, actors/tree/pine_tree.rgba16.png
 0xc20fc383, levels/wf/1.rgba16.png
 0xc2050f68, actors/bomb/bomb_right_side.rgba16.png
 0xc2050f68, actors/water_mine/water_mine_right_side_unused.rgba16.png
@@ -458,7 +457,6 @@
 0xb484b601, textures/skybox_tiles/cloud_floor.7.rgba16.png
 0xb45578dc, textures/skybox_tiles/bbh.34.rgba16.png
 0xb453cc4a, textures/skybox_tiles/bitfs.24.rgba16.png
-0xb452cbbe, actors/tree/tree_right_side.rgba16.png
 0xb416574c, textures/skybox_tiles/cloud_floor.24.rgba16.png
 0xb401e19f, levels/ttm/3.rgba16.png
 0xb3f25163, textures/skybox_tiles/bbh.24.rgba16.png
@@ -808,7 +806,6 @@
 0x7b84a495, actors/bowser/bowser_eye_left_0.rgba16.png
 0x7b7a6ad1, actors/chuckya/chuckya_hand_antenna.rgba16.png
 0x7af76431, textures/skybox_tiles/bidw.45.rgba16.png
-0x7af18328, actors/tree/palm_tree.rgba16.png
 0x7ae8e843, levels/lll/28.rgba16.png
 0x7ab277b8, textures/segment2/segment2.02A00.rgba16.png
 0x7a96785c, levels/menu/main_menu_seg7_us.0AD80.ia8.png
@@ -1169,7 +1166,6 @@
 0x4010bae8, levels/jrb/2.rgba16.png
 0x3ffa0be7, textures/skybox_tiles/ccm.59.rgba16.png
 0x3ff93da3, levels/ccm/11.rgba16.png
-0x3fb69c59, actors/tree/snowy_pine_tree.rgba16.png
 0x3f817c21, textures/fire/lll_textures.09000.rgba16.png
 0x3f817c21, textures/segment2/segment2.13C58.rgba16.png
 0x3ec818de, textures/skybox_tiles/wdw.11.rgba16.png
@@ -1387,7 +1383,6 @@
 0x19d0a651, textures/skybox_tiles/wdw.36.rgba16.png
 0x19cf329b, textures/skybox_tiles/ssl.57.rgba16.png
 0x19bb64c1, textures/machine/ttc_textures.03000.rgba16.png
-0x192fa726, actors/tree/tree_left_side.rgba16.png
 0x19132bcc, textures/skybox_tiles/water.6.rgba16.png
 0x18a7104c, textures/skybox_tiles/bits.19.rgba16.png
 0x188b6465, textures/intro_raw/white_star_6.rgba16.png

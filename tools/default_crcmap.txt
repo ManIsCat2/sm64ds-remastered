@@ -353,11 +353,6 @@
 0xfd64803f, actors/treasure_chest/treasure_chest_lock.rgba16.png
 0x3b9ab086, actors/treasure_chest/treasure_chest_lock_top.rgba16.png
 0xa002ac4e, actors/treasure_chest/treasure_chest_side.rgba16.png
-0x6f406bac, actors/tree/palm_tree.rgba16.png
-0x86a4406c, actors/tree/pine_tree.rgba16.png
-0xcaaf6a50, actors/tree/snowy_pine_tree.rgba16.png
-0x7b4ce4e0, actors/tree/tree_left_side.rgba16.png
-0xba697dbe, actors/tree/tree_right_side.rgba16.png
 0xe9132646, actors/ukiki/ukiki_butt.rgba16.png
 0x3fbbd9a5, actors/ukiki/ukiki_face.rgba16.png
 0xa3534f24, actors/ukiki/ukiki_face_blink.rgba16.png
