@@ -81,8 +81,8 @@ enum DialogBoxPageState {
 };
 
 enum DialogBoxType {
-    DIALOG_TYPE_ROTATE, // used in NPCs and level messages
-    DIALOG_TYPE_ZOOM    // used in signposts and wall signs and etc
+    DIALOG_TEXT_WHITE, // used in NPCs and level messages
+    DIALOG_TEXT_BLACK    // used in signposts and wall signs and etc
 };
 
 #define DIALOG_BOX_ANGLE_DEFAULT 90.0f
@@ -125,7 +125,7 @@ s8 gMenuState = MENU_STATE_DEFAULT;
 f32 gDialogBoxAngle = DIALOG_BOX_ANGLE_DEFAULT;
 f32 gDialogBoxScale = DIALOG_BOX_SCALE_DEFAULT;
 s16 gDialogScrollOffsetY = 0;
-s8 gDialogBoxType = DIALOG_TYPE_ROTATE;
+s8 gDialogBoxType = DIALOG_TEXT_WHITE;
 s16 gDialogID = DIALOG_NONE;
 s16 gNextDialogPageStartStrIndex = 0;
 s16 gDialogPageStartStrIndex = 0;
@@ -315,23 +315,9 @@ static u8 *convert_ia8_char(u8 c, u16 *tex, s16 w, s16 h) {
 void render_generic_char(u8 c) {
     void **fontLUT = segmented_to_virtual(main_font_lut);
     void *packedTexture = segmented_to_virtual(fontLUT[c]);
-#if defined(VERSION_SH)
-    void *unpackedTexture = convert_ia8_char(c, packedTexture, 8, 16);
-#endif
 
-#ifndef VERSION_EU
-    gDPPipeSync(gDisplayListHead++);
-#endif
-#if defined(VERSION_SH)
-    gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_IA, G_IM_SIZ_8b, 1, VIRTUAL_TO_PHYSICAL(unpackedTexture));
-#else
     gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_IA, G_IM_SIZ_16b, 1, VIRTUAL_TO_PHYSICAL(packedTexture));
-#endif
     gSPDisplayList(gDisplayListHead++, dl_ia_text_tex_settings);
-#ifdef VERSION_EU
-    gSPTextureRectangleFlip(gDisplayListHead++, gDialogX << 2, (gDialogY - 16) << 2,
-                            (gDialogX + 8) << 2, gDialogY << 2, G_TX_RENDERTILE, 8 << 6, 4 << 6, 1 << 10, 1 << 10);
-#endif
 }
 
 #ifdef VERSION_EU
@@ -953,7 +939,7 @@ s16 get_dialog_id(void) {
 void create_dialog_box(s16 dialog) {
     if (gDialogID == DIALOG_NONE) {
         gDialogID = dialog;
-        gDialogBoxType = DIALOG_TYPE_ROTATE;
+        gDialogBoxType = DIALOG_TEXT_WHITE;
     }
 }
 
@@ -961,21 +947,21 @@ void create_dialog_box_with_var(s16 dialog, s32 dialogVar) {
     if (gDialogID == DIALOG_NONE) {
         gDialogID = dialog;
         gDialogVariable = dialogVar;
-        gDialogBoxType = DIALOG_TYPE_ROTATE;
+        gDialogBoxType = DIALOG_TEXT_WHITE;
     }
 }
 
 void create_dialog_inverted_box(s16 dialog) {
     if (gDialogID == DIALOG_NONE) {
         gDialogID = dialog;
-        gDialogBoxType = DIALOG_TYPE_ZOOM;
+        gDialogBoxType = DIALOG_TEXT_BLACK;
     }
 }
 
 void create_dialog_box_with_response(s16 dialog) {
     if (gDialogID == DIALOG_NONE) {
         gDialogID = dialog;
-        gDialogBoxType = DIALOG_TYPE_ROTATE;
+        gDialogBoxType = DIALOG_TEXT_WHITE;
         gDialogWithChoice = TRUE;
     }
 }
@@ -983,7 +969,7 @@ void create_dialog_box_with_response(s16 dialog) {
 void reset_dialog_render_state(void) {
     level_set_transition(0, NULL);
 
-    if (gDialogBoxType == DIALOG_TYPE_ZOOM) {
+    if (gDialogBoxType == DIALOG_TEXT_BLACK) {
         trigger_cutscene_dialog(2);
     }
 
@@ -1012,39 +998,25 @@ void render_dialog_box_type(struct DialogEntry *dialog, s8 linesPerBox) {
 
     create_dl_translation_matrix(MENU_MTX_NOPUSH, dialog->leftOffset, dialog->width, 0);
 
-    switch (gDialogBoxType) {
-        case DIALOG_TYPE_ROTATE: // Renders a dialog black box with zoom and rotation
-            if (gMenuState == MENU_STATE_DIALOG_OPENING || gMenuState == MENU_STATE_DIALOG_CLOSING) {
+        if (gMenuState == MENU_STATE_DIALOG_OPENING || gMenuState == MENU_STATE_DIALOG_CLOSING) {
 #ifdef HIGH_FPS_PC
-                sInterpolatedDialogRotationPos = gDisplayListHead;
-                if (gMenuState == MENU_STATE_DIALOG_OPENING) {
-                    sInterpolatedDialogScale = gDialogBoxScale - 2 / 2;
-                    sInterpolatedDialogRotation = gDialogBoxAngle - 7.5f / 2;
-                } else {
-                    sInterpolatedDialogScale = gDialogBoxScale + 2 / 2;
-                    sInterpolatedDialogRotation = gDialogBoxAngle + 7.5f / 2;
-                }
-#endif
-                create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.0 / gDialogBoxScale, 1.0 / gDialogBoxScale, 1.0f);
-                // convert the speed into angle
-                create_dl_rotation_matrix(MENU_MTX_NOPUSH, gDialogBoxAngle * 4.0f, 0, 0, 1.0f);
+            sInterpolatedDialogZoomPos = gDisplayListHead;
+            if (gMenuState == MENU_STATE_DIALOG_OPENING) {
+                sInterpolatedDialogScale = gDialogBoxScale - 2 / 2;
+            } else {
+                sInterpolatedDialogScale = gDialogBoxScale + 2 / 2;
             }
+#endif
+            create_dl_translation_matrix(MENU_MTX_NOPUSH, 65.0 - (65.0 / gDialogBoxScale),
+                                        (40.0 / gDialogBoxScale) - 40, 0);
+            create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.0 / gDialogBoxScale, 1.0 / gDialogBoxScale, 1.0f);
+        }
+
+    switch (gDialogBoxType) {
+        case DIALOG_TEXT_WHITE: // Renders a dialog black box with zoom and rotation
             gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 150);
             break;
-        case DIALOG_TYPE_ZOOM: // Renders a dialog white box with zoom
-            if (gMenuState == MENU_STATE_DIALOG_OPENING || gMenuState == MENU_STATE_DIALOG_CLOSING) {
-#ifdef HIGH_FPS_PC
-                sInterpolatedDialogZoomPos = gDisplayListHead;
-                if (gMenuState == MENU_STATE_DIALOG_OPENING) {
-                    sInterpolatedDialogScale = gDialogBoxScale - 2 / 2;
-                } else {
-                    sInterpolatedDialogScale = gDialogBoxScale + 2 / 2;
-                }
-#endif
-                create_dl_translation_matrix(MENU_MTX_NOPUSH, 65.0 - (65.0 / gDialogBoxScale),
-                                              (40.0 / gDialogBoxScale) - 40, 0);
-                create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.0 / gDialogBoxScale, 1.0 / gDialogBoxScale, 1.0f);
-            }
+        case DIALOG_TEXT_BLACK: // Renders a dialog white box with zoom
             gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 150);
             break;
     }
@@ -1072,9 +1044,9 @@ void change_and_flash_dialog_text_color_lines(s8 colorMode, s8 lineNum) {
         }
     } else {
         switch (gDialogBoxType) {
-            case DIALOG_TYPE_ROTATE:
+            case DIALOG_TEXT_WHITE:
                 break;
-            case DIALOG_TYPE_ZOOM:
+            case DIALOG_TEXT_BLACK:
                 gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
                 break;
         }
@@ -1307,7 +1279,7 @@ void handle_dialog_text_and_pages(s8 colorMode, struct DialogEntry *dialog, s8 l
         gDialogY -= gDialogScrollOffsetY;
 #else
 #ifdef HIGH_FPS_PC
-        sInterpolatedDialogOffset = gDialogScrollOffsetY + dialog->linesPerBox;
+        sInterpolatedDialogOffset = gDialogScrollOffsetY + dialog->linesPerBox / 2;
         sInterpolatedDialogOffsetPos = gDisplayListHead;
 #endif
         create_dl_translation_matrix(MENU_MTX_NOPUSH, 0, (f32) gDialogScrollOffsetY, 0);
@@ -1533,7 +1505,7 @@ void render_dialog_triangle_choice(void) {
 
     create_dl_translation_matrix(MENU_MTX_NOPUSH, (gMenuLineNum * X_VAL4_1) - X_VAL4_2, Y_VAL4_1 - (gLastDialogLineNum * Y_VAL4_2), 0);
 
-    if (gDialogBoxType == DIALOG_TYPE_ROTATE) { // White Text
+    if (gDialogBoxType == DIALOG_TEXT_WHITE) { // White Text
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
     } else { // Black Text
         gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
@@ -1570,7 +1542,7 @@ void render_dialog_triangle_next(s8 linesPerBox) {
     create_dl_scale_matrix(MENU_MTX_NOPUSH, X_Y_VAL6, X_Y_VAL6, 1.0f);
     create_dl_rotation_matrix(MENU_MTX_NOPUSH, -90.0f, 0, 0, 1.0f);
 
-    if (gDialogBoxType == DIALOG_TYPE_ROTATE) { // White Text
+    if (gDialogBoxType == DIALOG_TEXT_WHITE) { // White Text
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
     } else { // Black Text
         gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
@@ -1771,13 +1743,8 @@ void render_dialog_entries(void) {
                 play_sound(SOUND_MENU_MESSAGE_APPEAR, gGlobalSoundSource);
             }
 
-            if (gDialogBoxType == DIALOG_TYPE_ROTATE) {
-                gDialogBoxAngle -= 7.5;
-                gDialogBoxScale -= 1.5;
-            } else {
-                gDialogBoxAngle -= 10.0;
-                gDialogBoxScale -= 2.0;
-            }
+            gDialogBoxAngle -= 10.0;
+            gDialogBoxScale -= 2.0;
 
             if (gDialogBoxAngle == 0.0f) {
                 gMenuState = MENU_STATE_DIALOG_OPEN;
@@ -1803,7 +1770,7 @@ void render_dialog_entries(void) {
             break;
 
         case MENU_STATE_DIALOG_SCROLLING:
-            gDialogScrollOffsetY += dialog->linesPerBox * 2;
+            gDialogScrollOffsetY += dialog->linesPerBox / 2;
 
             if (gDialogScrollOffsetY >= dialog->linesPerBox * DIAG_VAL1) {
                 gDialogPageStartStrIndex = gNextDialogPageStartStrIndex;
@@ -1818,7 +1785,7 @@ void render_dialog_entries(void) {
                 level_set_transition(0, NULL);
                 play_sound(SOUND_MENU_MESSAGE_DISAPPEAR, gGlobalSoundSource);
 
-                if (gDialogBoxType == DIALOG_TYPE_ZOOM) {
+                if (gDialogBoxType == DIALOG_TEXT_BLACK) {
                     trigger_cutscene_dialog(2);
                 }
 
