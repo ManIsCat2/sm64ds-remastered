@@ -71,7 +71,6 @@ static const u8 optMainStr[][32] = {
     { TEXT_OPT_AUDIO },
     { TEXT_OPT_SETTINGS },
     { TEXT_OPT_DS_SETTINGS },
-    { TEXT_EXIT_GAME },
 };
 
 const u8 optsCameraStr[][32] = {
@@ -279,10 +278,6 @@ static struct Option optsMain[] = {
 #ifdef EXT_DEBUG_MENU
     // NOTE: always keep cheats the last option here because of the half-assed way I toggle them
     DEF_OPT_SUBMENU( optDebugMenuStr[0], &menuDebug ),
-#endif
-
-#if !defined(TARGET_N64) && (defined(TARGET_SWITCH) || !defined(TARGET_PORT_CONSOLE))
-    DEF_OPT_BUTTON ( optMainStr[7], optmenu_act_exit ),
 #endif
 
 #ifdef CHEATS_ACTIONS
