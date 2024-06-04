@@ -1279,7 +1279,7 @@ void handle_dialog_text_and_pages(s8 colorMode, struct DialogEntry *dialog, s8 l
         gDialogY -= gDialogScrollOffsetY;
 #else
 #ifdef HIGH_FPS_PC
-        sInterpolatedDialogOffset = gDialogScrollOffsetY + dialog->linesPerBox / 2;
+        sInterpolatedDialogOffset = gDialogScrollOffsetY + dialog->linesPerBox / 1.7f;
         sInterpolatedDialogOffsetPos = gDisplayListHead;
 #endif
         create_dl_translation_matrix(MENU_MTX_NOPUSH, 0, (f32) gDialogScrollOffsetY, 0);
@@ -1770,7 +1770,7 @@ void render_dialog_entries(void) {
             break;
 
         case MENU_STATE_DIALOG_SCROLLING:
-            gDialogScrollOffsetY += dialog->linesPerBox / 2;
+            gDialogScrollOffsetY += dialog->linesPerBox / 1.7f;
 
             if (gDialogScrollOffsetY >= dialog->linesPerBox * DIAG_VAL1) {
                 gDialogPageStartStrIndex = gNextDialogPageStartStrIndex;

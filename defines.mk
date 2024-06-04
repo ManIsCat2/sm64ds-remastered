@@ -17,7 +17,7 @@ NODRAWINGDISTANCE ?= 0
 # Enable Goddard (Mario Face)
 GODDARD_MFACE ?= 1
 # Enable level vanilla checks
-VANILLA_CHECKS ?= 1
+VANILLA_CHECKS ?= 0
 # Enable extended bounds
 EXTENDED_BOUNDS ?= 0
 # Accept RM2C level folder output
