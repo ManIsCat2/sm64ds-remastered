@@ -680,6 +680,9 @@
 #define /*0x088*/ oMerryGoRoundBooManagerNumBoosKilled  OBJECT_FIELD_S32(0x00)
 #define /*0x0FC*/ oMerryGoRoundBooManagerNumBoosSpawned OBJECT_FIELD_S32(0x1D)
 
+/* Mips Castle*/
+#define /*0x0F4*/ oMipsKeyStatus          OBJECT_FIELD_S32(0x1B)
+
 /* Mips */
 #define /*0x0F4*/ oMipsStarStatus         OBJECT_FIELD_S32(0x1B)
 #define /*0x0F8*/ oMipsStartWaypointIndex OBJECT_FIELD_S32(0x1C)

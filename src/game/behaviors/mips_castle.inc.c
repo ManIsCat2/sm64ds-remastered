@@ -141,7 +141,7 @@ void bhv_mips_castle_act_idle(void) {
     collisionFlags = object_step();
 
     // Give key if picked up for the first time
-    if (o->oMipsStarStatus == MIPS_KEY_STATUS_SHOULD_GIVE_KEY) {
+    if (o->oMipsKeyStatus == MIPS_KEY_STATUS_SHOULD_GIVE_KEY) {
         save_file_set_flags(SAVE_FLAG_HAVE_KEY_BUNNY);
     }
 }
@@ -179,7 +179,7 @@ void bhv_mips_castle_held(void) {
     cur_obj_become_intangible();
 
     // If MIPS hasn't given the key yet
-    if (o->oMipsStarStatus == MIPS_KEY_STATUS_HAVENT_GIVEN_KEY) {
+    if (o->oMipsKeyStatus == MIPS_KEY_STATUS_HAVENT_GIVEN_KEY) {
         dialogID = DIALOG_171;
 
         if (set_player_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
@@ -187,7 +187,7 @@ void bhv_mips_castle_held(void) {
             if (cutscene_object_with_dialog(CUTSCENE_DIALOG, o, dialogID) != 0) {
                 o->oInteractionSubtype |= INT_SUBTYPE_DROP_IMMEDIATELY;
                 o->activeFlags &= ~ACTIVE_FLAG_INITIATED_TIME_STOP;
-                o->oMipsStarStatus = MIPS_KEY_STATUS_SHOULD_GIVE_KEY;
+                o->oMipsKeyStatus = MIPS_KEY_STATUS_SHOULD_GIVE_KEY;
                 set_player_npc_dialog(MARIO_DIALOG_STOP);
             }
         }
