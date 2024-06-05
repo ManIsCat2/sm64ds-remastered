@@ -1,6 +1,8 @@
 // mips_castle.inc.c
 
 void bhv_mips_castle_init(void) {
+    u32 saveFlags = save_file_get_flags();
+
     // If the player hasn't collected the castle key
     if (!(saveFlags & SAVE_FLAG_UNLOCKED_CASTLE_DOOR)) {
         o->oBhvParams2ndByte = MIPS_BP_CASTLE_KEY;
@@ -138,10 +140,9 @@ void bhv_mips_castle_act_idle(void) {
     o->oForwardVel = 0.0f;
     collisionFlags = object_step();
 
-    // Spawn a star if he was just picked up for the first time.
-    if ((o->oMipsStarStatus == MIPS_STAR_STATUS_SHOULD_SPAWN_STAR)) {
-        bhv_spawn_star_no_level_exit(STAR_INDEX_ACT_4 + o->oBhvParams2ndByte);
-        o->oMipsStarStatus = MIPS_STAR_STATUS_ALREADY_SPAWNED_STAR;
+    // Give key if picked up for the first time
+    if (o->oMipsStarStatus == MIPS_KEY_STATUS_SHOULD_GIVE_KEY) {
+        save_file_set_flags(SAVE_FLAG_HAVE_KEY_BUNNY);
     }
 }
 
@@ -178,7 +179,7 @@ void bhv_mips_castle_held(void) {
     cur_obj_become_intangible();
 
     // If MIPS hasn't given the key yet
-    if (o->oMipsStarStatus == MIPS_STAR_STATUS_HAVENT_SPAWNED_STAR) {
+    if (o->oMipsStarStatus == MIPS_KEY_STATUS_HAVENT_GIVEN_KEY) {
         dialogID = DIALOG_171;
 
         if (set_player_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
@@ -186,7 +187,7 @@ void bhv_mips_castle_held(void) {
             if (cutscene_object_with_dialog(CUTSCENE_DIALOG, o, dialogID) != 0) {
                 o->oInteractionSubtype |= INT_SUBTYPE_DROP_IMMEDIATELY;
                 o->activeFlags &= ~ACTIVE_FLAG_INITIATED_TIME_STOP;
-                o->oMipsStarStatus = MIPS_STAR_STATUS_SHOULD_SPAWN_STAR;
+                o->oMipsStarStatus = MIPS_KEY_STATUS_SHOULD_GIVE_KEY;
                 set_player_npc_dialog(MARIO_DIALOG_STOP);
             }
         }

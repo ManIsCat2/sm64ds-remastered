@@ -1149,6 +1149,10 @@
     // After the water level has changed but the player hasn't left its hitbox yet
     #define WATER_LEVEL_DIAMOND_ACT_IDLE_SPINNING      3
 /* Castle Mips */
+    /* oMipsKeyStatus*/
+    #define MIPS_KEY_STATUS_HAVENT_GIVEN_KEY    0
+    #define MIPS_KEY_STATUS_SHOULD_GIVE_KEY     1
+
     /* oBhvParams2ndByte */
     #define MIPS_BP_CASTLE_KEY 0
 

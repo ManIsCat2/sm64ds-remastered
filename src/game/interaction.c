@@ -952,6 +952,19 @@ u32 interact_warp_door(struct PlayerState *m, UNUSED u32 interactType, struct Ob
             doorAction = ACT_UNLOCKING_KEY_DOOR;
         }
 
+        if (warpDoorId == 3 && !(saveFlags & SAVE_FLAG_UNLOCKED_CASTLE_DOOR)) {
+            if (!(saveFlags & SAVE_FLAG_HAVE_KEY_BUNNY)) {
+                if (!sDisplayingDoorText) {
+                    set_player_action(m, ACT_READING_AUTOMATIC_DIALOG, (saveFlags & SAVE_FLAG_HAVE_KEY_2) ? DIALOG_170 : DIALOG_170);
+                }
+                sDisplayingDoorText = TRUE;
+
+                return FALSE;
+            }
+
+            doorAction = ACT_UNLOCKING_KEY_DOOR;
+        }
+
         if (m->action == ACT_WALKING || m->action == ACT_DECELERATING) {
             actionArg = should_push_or_pull_door(m, o) + WARP_FLAG_DOOR_IS_WARP;
 

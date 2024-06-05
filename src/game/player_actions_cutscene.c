@@ -917,9 +917,12 @@ s32 act_unlocking_key_door(struct PlayerState *m) {
         if (m->usedObj->oBhvParams >> 24 == 1) {
             save_file_set_flags(SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR);
             save_file_clear_flags(SAVE_FLAG_HAVE_KEY_2);
-        } else {
+        } else if (m->usedObj->oBhvParams >> 24 == 2) {
             save_file_set_flags(SAVE_FLAG_UNLOCKED_BASEMENT_DOOR);
             save_file_clear_flags(SAVE_FLAG_HAVE_KEY_1);
+        } else {
+            save_file_set_flags(SAVE_FLAG_UNLOCKED_CASTLE_DOOR);
+            save_file_clear_flags(SAVE_FLAG_HAVE_KEY_BUNNY);
         }
         set_player_action(m, ACT_WALKING, 0);
     }
