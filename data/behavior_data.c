@@ -5090,6 +5090,20 @@ const BehaviorScript bhvMips[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvMipsCastle[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_HOLDABLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, mips_seg6_anims_06015634),
+    SET_INT(oInteractType, INTERACT_GRABBABLE),
+    DROP_TO_FLOOR(),
+    SET_HITBOX(/*Radius*/ 50, /*Height*/ 75),
+    SET_INT(oIntangibleTimer, 0),
+    CALL_NATIVE(bhv_mips_castle_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_mips_castle_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvKoopa[] = {
     BEGIN(OBJ_LIST_PUSHABLE),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),

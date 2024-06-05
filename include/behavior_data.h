@@ -523,6 +523,7 @@ extern const BehaviorScript bhvTreasureChestsDDD[];
 extern const BehaviorScript bhvTreasureChestBottom[];
 extern const BehaviorScript bhvTreasureChestTop[];
 extern const BehaviorScript bhvMips[];
+extern const BehaviorScript bhvMipsCastle[];
 extern const BehaviorScript bhvKoopa[];
 extern const BehaviorScript bhvKoopaRaceEndpoint[];
 extern const BehaviorScript bhvKoopaFlag[];

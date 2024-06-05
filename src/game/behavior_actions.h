@@ -434,6 +434,8 @@ void bhv_treasure_chest_bottom_loop(void);
 void bhv_treasure_chest_top_loop(void);
 void bhv_mips_init(void);
 void bhv_mips_loop(void);
+void bhv_mips_castle_init(void);
+void bhv_mips_castle_loop(void);
 void bhv_koopa_init(void);
 void bhv_koopa_update(void);
 void bhv_koopa_race_endpoint_update(void);
