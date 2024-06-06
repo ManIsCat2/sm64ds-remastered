@@ -872,7 +872,6 @@ void pan_ahead_of_player(struct Camera *c) {
     vec3f_add(c->focus, pan);
 }
 
-#if CAMERA_VANILLA_DEFINES
 s16 find_in_bounds_yaw_wdw_bob_thi(Vec3f pos, Vec3f origin, s16 yaw) {
     switch (gCurrLevelArea) {
         case AREA_WDW_MAIN:
@@ -890,27 +889,6 @@ s16 find_in_bounds_yaw_wdw_bob_thi(Vec3f pos, Vec3f origin, s16 yaw) {
     }
     return yaw;
 }
-#endif
-
-#if CAMERA_VANILLA_DEFINES
-s16 find_in_bounds_yaw_wdw_bob_thi(Vec3f pos, Vec3f origin, s16 yaw) {
-    switch (gCurrLevelArea) {
-        case AREA_WDW_MAIN:
-            yaw = clamp_positions_and_find_yaw(pos, origin, 4508.f, -3739.f, 4508.f, -3739.f);
-            break;
-        case AREA_BOB:
-            yaw = clamp_positions_and_find_yaw(pos, origin, 8000.f, -8000.f, 7050.f, -8000.f);
-            break;
-        case AREA_THI_HUGE:
-            yaw = clamp_positions_and_find_yaw(pos, origin, 8192.f, -8192.f, 8192.f, -8192.f);
-            break;
-        case AREA_THI_TINY:
-            yaw = clamp_positions_and_find_yaw(pos, origin, 2458.f, -2458.f, 2458.f, -2458.f);
-            break;
-    }
-    return yaw;
-}
-#endif
 
 /**
  * Rotates the camera around the area's center point.
@@ -930,9 +908,7 @@ s32 update_radial_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     sAreaYaw = camYaw - sModeOffsetYaw;
     calc_y_to_curr_floor(&posY, 1.f, 200.f, &focusY, 0.9f, 200.f);
     focus_on_player(focus, pos, posY + yOff, focusY + yOff, sLakituDist + baseDist, pitch, camYaw);
-#if CAMERA_VANILLA_DEFINES
     camYaw = find_in_bounds_yaw_wdw_bob_thi(pos, focus, camYaw);
-#endif
 
     return camYaw;
 }
@@ -955,11 +931,10 @@ s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     calc_y_to_curr_floor(&posY, 1.f, 200.f, &focusY, 0.9f, 200.f);
     focus_on_player(focus, pos, posY + yOff, focusY + yOff, sLakituDist + baseDist, pitch, camYaw);
     pan_ahead_of_player(c);
-#if CAMERA_VANILLA_DEFINES
+
     if (gCurrLevelArea == AREA_DDD_SUB) {
         camYaw = clamp_positions_and_find_yaw(pos, focus, 6839.f, 995.f, 5994.f, -3945.f);
     }
-#endif
 
     return camYaw;
 }
@@ -2991,11 +2966,9 @@ void set_camera_mode(struct Camera *c, s16 mode, s16 frames) {
     struct LinearTransitionPoint *start = &sModeInfo.transitionStart;
     struct LinearTransitionPoint *end = &sModeInfo.transitionEnd;
 
-#if CAMERA_VANILLA_DEFINES
     if (mode == CAMERA_MODE_WATER_SURFACE || gCurrLevelArea == AREA_TTM_OUTSIDE) {
         return;
     }
-#endif
 
     // Clear movement flags that would affect the transition
     gCameraMovementFlags &= ~(CAM_MOVE_RESTRICT | CAM_MOVE_ROTATE);
@@ -3217,13 +3190,8 @@ void update_camera(struct Camera *c) {
     c->mode = gLakituState.mode;
     c->defMode = gLakituState.defMode;
 
-#if CAMERA_VANILLA_DEFINES
     camera_course_processing(c);
-#else
-    if (gCurrDemoInput != NULL) {
-        camera_course_processing(c);
-    }
-#endif
+
     stub_camera_3(c);
     sCButtonsPressed = find_c_buttons_pressed(sCButtonsPressed, gPlayer1Controller->buttonPressed,gPlayer1Controller->buttonDown);
 
@@ -3667,11 +3635,9 @@ void zoom_out_if_paused_and_outside(struct GraphNodeCamera *camera) {
                 camera->focus[2] = gCamera->areaCenZ;
                 vec3f_get_dist_and_angle(camera->focus, sPlayerCamState->pos, &dist, &pitch, &yaw);
                 vec3f_set_dist_and_angle(sPlayerCamState->pos, camera->pos, 6000.f, 0x1000, yaw);
-#if CAMERA_VANILLA_DEFINES
                 if (gCurrLevelNum != LEVEL_THI) {
                     find_in_bounds_yaw_wdw_bob_thi(camera->pos, camera->focus, 0);
                 }
-#endif
             }
         } else {
             sFramesPaused++;
@@ -5095,7 +5061,6 @@ u8 get_cutscene_from_mario_status(struct Camera *c) {
         cutscene = sObjectCutscene;
         sObjectCutscene = 0;
         if (sPlayerCamState->cameraEvent == CAM_EVENT_DOOR) {
-#if CAMERA_VANILLA_DEFINES
             switch (gCurrLevelArea) {
                 case AREA_CASTLE_LOBBY:
                     //! doorStatus is never DOOR_ENTER_LOBBY when cameraEvent == 6, because
@@ -5119,9 +5084,6 @@ u8 get_cutscene_from_mario_status(struct Camera *c) {
                     cutscene = open_door_cutscene(CUTSCENE_DOOR_PULL, CUTSCENE_DOOR_PUSH);
                     break;
             }
-#else
-            cutscene = open_door_cutscene(CUTSCENE_DOOR_PULL, CUTSCENE_DOOR_PUSH);
-#endif
         }
         if (sPlayerCamState->cameraEvent == CAM_EVENT_DOOR_WARP) {
             cutscene = CUTSCENE_DOOR_WARP;
@@ -6535,7 +6497,6 @@ s16 camera_course_processing(struct Camera *c) {
         }
     }
 
-#if CAMERA_VANILLA_DEFINES
     // Area-specific camera processing
     if (!(sStatusFlags & CAM_FLAG_BLOCK_AREA_PROCESSING)) {
         switch (gCurrLevelArea) {
@@ -6643,7 +6604,6 @@ s16 camera_course_processing(struct Camera *c) {
                 break;
         }
     }
-#endif
 
     sStatusFlags &= ~CAM_FLAG_BLOCK_AREA_PROCESSING;
     if (oldMode == CAMERA_MODE_C_UP) {
