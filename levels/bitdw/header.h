@@ -81,4 +81,10 @@ extern const LevelScript level_bitdw_entry[];
 
 #include "levels/bitdw/square_platform/geo_header.h"
 
+#include "levels/bitdw/ferris_wheel_axle/geo_header.h"
+
+#include "levels/bitdw/ferris_platform/geo_header.h"
+
+#include "levels/bitdw/sliding_platform/geo_header.h"
+
 #endif
