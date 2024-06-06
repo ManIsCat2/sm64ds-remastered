@@ -55,7 +55,7 @@ void bhv_bowser_course_red_coin_star_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (o->oHiddenStarTriggerCounter == REDS_BOWSER_REQ) {
+            if (o->oHiddenStarTriggerCounter == REDS_REQ) {
                 o->oAction = 1;
             }
             break;
