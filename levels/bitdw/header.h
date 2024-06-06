@@ -77,4 +77,8 @@ extern const LevelScript level_bitdw_entry[];
 
 #include "levels/bitdw/header.inc.h"
 
+#include "levels/bitdw/seesaw_platform/geo_header.h"
+
+#include "levels/bitdw/square_platform/geo_header.h"
+
 #endif
