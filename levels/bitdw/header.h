@@ -87,4 +87,14 @@ extern const LevelScript level_bitdw_entry[];
 
 #include "levels/bitdw/sliding_platform/geo_header.h"
 
+#include "levels/bitdw/collapsing_stairs_5/geo_header.h"
+
+#include "levels/bitdw/collapsing_stairs_1/geo_header.h"
+
+#include "levels/bitdw/collapsing_stairs_2/geo_header.h"
+
+#include "levels/bitdw/collapsing_stairs_3/geo_header.h"
+
+#include "levels/bitdw/collapsing_stairs_4/geo_header.h"
+
 #endif
