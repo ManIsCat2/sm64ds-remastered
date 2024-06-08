@@ -1,3 +1,5 @@
+#include "src/game/envfx_snow.h"
+
 // 0x0E000718
 const GeoLayout bits_geo_000718[] = {
     GEO_NODE_SCREEN_AREA(10, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, SCREEN_WIDTH/2, SCREEN_HEIGHT/2),
@@ -18,6 +20,7 @@ const GeoLayout bits_geo_000718[] = {
                     GEO_DISPLAY_LIST(LAYER_ALPHA, bits_seg7_dl_07002918),
                     GEO_RENDER_OBJ(),
                     GEO_ASM(0, geo_envfx_main),
+					GEO_ASM(0, sky_3d),
                 GEO_CLOSE_NODE(),
             GEO_CLOSE_NODE(),
         GEO_CLOSE_NODE(),
