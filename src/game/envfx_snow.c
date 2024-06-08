@@ -613,3 +613,38 @@ Gfx *envfx_update_particles(s32 mode, Vec3s playerPos, Vec3s camTo, Vec3s camFro
 
     return gfx;
 }
+
+// 3D Skybox
+extern skybox_skybox_mesh;
+
+#ifndef TARGET_N64
+#define DISTANCE 0.97f
+Gfx *sky_3d(s32 callContext, struct GraphNode *node, Mat4 mtxf) {
+    switch (callContext) {
+    case GEO_CONTEXT_RENDER:
+      {
+        struct GraphNodeGenerated *graphNode = (struct GraphNodeGenerated *) node;
+
+        Gfx *dlE = alloc_display_list(4 * sizeof(Gfx));
+        Gfx *dlS = dlE;
+        Mtx *mtx = alloc_display_list(sizeof(Mtx));
+
+        f32 x = (gCamera->pos[0] * DISTANCE);
+        f32 y = (gCamera->pos[1] * DISTANCE);
+        f32 z = (gCamera->pos[2] * DISTANCE);
+
+        guTranslate(mtx, x, y, z);
+        gSPMatrix(dlE++, mtx, G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
+        gSPDisplayList(dlE++, &skybox_skybox_mesh);
+        gSPPopMatrix(dlE++, G_MTX_MODELVIEW);
+        gSPEndDisplayList(dlE);
+
+        graphNode->fnNode.node.flags = (graphNode->fnNode.node.flags & 0xFF) | 0x000;
+        return dlS;
+      }
+    }
+
+    return NULL;
+}
+#undef DISTANCE
+#endif
