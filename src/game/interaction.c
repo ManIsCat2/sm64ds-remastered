@@ -32,7 +32,7 @@
 #ifndef TARGET_N64
 #include "pc/configfile.h"
 #else
-extern int configGlobalCapBlocks = FALSE;
+extern int configGlobalCapBlocks;
 #endif
 #endif
 
