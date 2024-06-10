@@ -50,7 +50,7 @@
 #define MODEL_SL_SNOW_TREE                     0x19        // snow_tree_geo
 #define MODEL_UNKNOWN_TREE_1A                  0x1A        // referenced in special presets, undefined
 #define MODEL_SSL_PALM_TREE                    0x1B        // palm_tree_geo
-#define MODEL_CASTLE_CASTLE_DOOR_UNUSED        0x1C        // castle_door_geo - unused, original id
+//#define MODEL_CASTLE_CASTLE_DOOR_UNUSED        0x1C        // castle_door_geo - unused, original id
 #define MODEL_CASTLE_WOODEN_DOOR_UNUSED        0x1D        // wooden_door_geo - unused, original id
 #define MODEL_BBH_HAUNTED_DOOR                 0x1D        // haunted_door_geo
 #define MODEL_HMC_WOODEN_DOOR                  0x1D        // wooden_door_geo
@@ -556,7 +556,7 @@
 #define MODEL_TRAJECTORY_MARKER_BALL      0xE1        // bowling_ball_track_geo - duplicate used in SSL Pyramid small sized and as a track ball
 
 // DS Specific
-#define MODEL_POWER_FLOWER                0xE2        // power_flower_geo
+#define MODEL_POWER_FLOWER                0x1C        // power_flower_geo
 
 // Menu Models (overwrites Level Geometry IDs)
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0
