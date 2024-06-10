@@ -84,7 +84,7 @@ static struct SpecialPreset sSpecialObjectPresets[] = {
     { special_snow_tree,                          SPTYPE_NO_YROT_OR_PARAMS,  0x00, MODEL_CCM_SNOW_TREE, bhvTree },
     { special_unknown_tree,                       SPTYPE_NO_YROT_OR_PARAMS,  0x00, MODEL_UNKNOWN_TREE_1A, bhvTree },
     { special_palm_tree,                          SPTYPE_NO_YROT_OR_PARAMS,  0x00, MODEL_SSL_PALM_TREE, bhvTree },
-    { special_castle_door,                        SPTYPE_YROT_NO_PARAMS,     0x00, MODEL_CASTLE_CASTLE_DOOR_UNUSED, bhvDoor },
+    { special_castle_door,                        SPTYPE_YROT_NO_PARAMS,     0x00, MODEL_CASTLE_CASTLE_DOOR, bhvDoor },
     { special_wooden_door,                        SPTYPE_YROT_NO_PARAMS,     0x00, MODEL_CASTLE_WOODEN_DOOR_UNUSED, bhvDoor },
     { special_unknown_door,                       SPTYPE_YROT_NO_PARAMS,     0x00, MODEL_UNKNOWN_DOOR_1E, bhvDoor },
     { special_metal_door,                         SPTYPE_YROT_NO_PARAMS,     0x00, MODEL_HMC_METAL_DOOR, bhvDoor },
