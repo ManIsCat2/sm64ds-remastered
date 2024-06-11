@@ -93,7 +93,7 @@ const LevelScript level_bitdw_entry[] = {
 		OBJECT(MODEL_BITDW_SLIDING_PLATFORM, -5728, 4481, -2151, 0, 0, 0, BPARAM1(0x03) | BPARAM2(0xCE), bhvSlidingPlatform2),
 		OBJECT(MODEL_BITDW_STAIRCASE, 5279, 5403, -6, 0, 0, 0, BPARAM2(0x01), bhvAnimatesOnFloorSwitchPress),
 		OBJECT(MODEL_STAR_SWITCH, 6810, 6528, -358, 0, 0, 0, BPARAM2(25), bhvStarSwitch),
-		OBJECT(MODEL_NONE, -998, 5761, -51, 0, 0, 0, BPARAM1(2), bhvStarSwitchSpawnCondition),
+		OBJECT(MODEL_NONE, -998, 5761, -51, 0, 0, 0, BPARAM1(2), bhvBitdwStarSwitchSpawnCondition),
 		OBJECT(MODEL_NONE, -7578, 1409, 3891, 0, 90, 0, BPARAM2(WARP_NODE_0A), bhvSpinAirborneWarp),
 		MARIO_POS(0x01, 90, -7578, 1409, 3891),
 		OBJECT(MODEL_BITDW_WARP_PIPE, 6815, 6529, -6, 0, 0, 0, BPARAM2(WARP_NODE_0B), bhvWarpPipe),

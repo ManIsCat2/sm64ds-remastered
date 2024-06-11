@@ -616,6 +616,7 @@ extern const BehaviorScript bhvIntroScene[];
 extern const BehaviorScript bhvUnusedFakeStar[];
 extern const BehaviorScript bhvStarSwitch[];
 extern const BehaviorScript bhvStarSwitchSpawnCondition[];
+extern const BehaviorScript bhvBitdwStarSwitchSpawnCondition[];
 
 extern const BehaviorScript bhv2DPhysics[];
 extern const BehaviorScript bhvLegacyScrollTexture[];

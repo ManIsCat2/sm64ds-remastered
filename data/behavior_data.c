@@ -1757,6 +1757,15 @@ const BehaviorScript bhvStarSwitchSpawnCondition[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvBitdwStarSwitchSpawnCondition[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_star_switch_spawn_condition_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_star_switch_spawn_condition_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvFloorSwitchHiddenObjects[] = {
     BEGIN(OBJ_LIST_SURFACE),
     SET_INT(oBhvParams2ndByte, 2),
