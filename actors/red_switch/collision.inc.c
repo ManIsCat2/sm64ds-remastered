@@ -9,7 +9,7 @@ const Collision red_switch_collision[] = {
 	COL_VERTEX(102, 0, 102),
 	COL_VERTEX(66, 33, -66),
 	COL_VERTEX(-66, 33, 66),
-	COL_TRI_INIT(SURFACE_DEFAULT, 10),
+	COL_TRI_INIT(SURFACE_NOT_SLIPPERY, 10),
 	COL_TRI(0, 1, 2),
 	COL_TRI(3, 4, 5),
 	COL_TRI(6, 2, 1),

@@ -21,7 +21,7 @@ const Collision star_switch_collision[] = {
 	COL_VERTEX(0, 0, -76),
 	COL_VERTEX(68, 0, -26),
 	COL_VERTEX(42, 0, 54),
-	COL_TRI_INIT(SURFACE_DEFAULT, 28),
+	COL_TRI_INIT(SURFACE_NOT_SLIPPERY, 28),
 	COL_TRI(0, 1, 2),
 	COL_TRI(3, 2, 1),
 	COL_TRI(2, 3, 4),
