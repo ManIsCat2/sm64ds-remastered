@@ -1003,5 +1003,7 @@ const Collision cotmc_area_1_collision[] = {
 	COL_TRI(98, 97, 99),
 	COL_TRI(98, 40, 97),
 	COL_TRI_STOP(),
+	COL_WATER_BOX_INIT(1),
+	COL_WATER_BOX(0x00, -1974, -8049, 1974, 3834, -1048),
 	COL_END()
 };
