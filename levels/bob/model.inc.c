@@ -8530,7 +8530,7 @@ Gfx mat_revert_bob_dl_bars[] = {
 };
 
 Gfx mat_bob_dl_fence[] = {
-	gsSPGeometryMode(G_LIGHTING, 0),
+	gsSPGeometryMode(G_CULL_BACK | G_LIGHTING, 0),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
@@ -8544,7 +8544,7 @@ Gfx mat_bob_dl_fence[] = {
 };
 
 Gfx mat_revert_bob_dl_fence[] = {
-	gsSPGeometryMode(0, G_LIGHTING),
+	gsSPGeometryMode(0, G_CULL_BACK | G_LIGHTING),
 	gsDPPipeSync(),
 	gsSPEndDisplayList(),
 };
@@ -8653,7 +8653,7 @@ Gfx mat_revert_bob_dl_rock_a_grass[] = {
 };
 
 Gfx mat_bob_dl_rock_b[] = {
-	gsSPGeometryMode(G_LIGHTING, 0),
+	gsSPGeometryMode(G_CULL_BACK | G_LIGHTING, 0),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
@@ -8666,7 +8666,7 @@ Gfx mat_bob_dl_rock_b[] = {
 };
 
 Gfx mat_revert_bob_dl_rock_b[] = {
-	gsSPGeometryMode(0, G_LIGHTING),
+	gsSPGeometryMode(0, G_CULL_BACK | G_LIGHTING),
 	gsDPPipeSync(),
 	gsSPEndDisplayList(),
 };
