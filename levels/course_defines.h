@@ -11,7 +11,7 @@
  *      4: Default, used for 100 coin stars, 8 red coin stars in bowser levels, and secret stars
  */
 DEFINE_COURSE(COURSE_NONE, 0x22222222) // (0)  Course Hub (Castle Grounds)
-DEFINE_COURSE(COURSE_BOB, 0x00022204) // (1)  Bob-omb Battlefield
+DEFINE_COURSE(COURSE_BOB, 0x00022240) // (1)  Bob-omb Battlefield
 DEFINE_COURSE(COURSE_WF, 0x00002004) // (2)  Whomp's Fortress
 DEFINE_COURSE(COURSE_JRB, 0x22222224) // (3)  Jolly Roger Bay
 DEFINE_COURSE(COURSE_CCM, 0x00220004) // (4)  Cool, Cool Mountain
