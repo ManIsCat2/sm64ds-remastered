@@ -43,12 +43,6 @@
 #include "pc/cliopts.h"
 #endif
 
-#ifdef EXT_OPTIONS_MENU
-#ifdef TARGET_N64
-extern int configGlobalCapBlocks;
-#endif
-#endif
-
 // TODO: Make these ifdefs better
 const char *credits01[] = { "1GAME DIRECTOR", "SHIGERU MIYAMOTO" };
 const char *credits02[] = { "2ASSISTANT DIRECTORS", "YOSHIAKI KOIZUMI", "TAKASHI TEZUKA" };
@@ -252,10 +246,6 @@ void load_level_init_text(u32 arg) {
 
         case DIALOG_131:
             gotAchievement = save_file_get_flags() & SAVE_FLAG_HAVE_WING_CAP;
-
-            if (configGlobalCapBlocks) {
-                gotAchievement = save_file_get_flags() & SAVE_FLAG_HAVE_POWER_FLOWER;
-            }
             break;
 
         case (u8)DIALOG_NONE: // 255, cast value to u8 to match (-1)
