@@ -15,14 +15,9 @@ const GeoLayout bob_geo_000488[] = {
             GEO_OPEN_NODE(),
                 GEO_CAMERA(1, 0, 2000, 6000, 3072, 0, -4608, geo_camera_main),
                 GEO_OPEN_NODE(),
-                    GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_seg7_dl_07004390),
-                    GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_seg7_dl_07009D80),
-                #if !PROPER_TREE_SHADOWS
-                    GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, bob_seg7_dl_0700A470),
-                #endif
-                    GEO_DISPLAY_LIST(LAYER_ALPHA, bob_seg7_dl_0700A920),
-                    GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_seg7_dl_0700DD18),
-                    GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_seg7_dl_0700E338),
+                    GEO_DISPLAY_LIST(LAYER_ALPHA, level_model_000_displaylist_mesh_layer_4),
+		            GEO_DISPLAY_LIST(LAYER_OPAQUE, level_model_000_displaylist_mesh_layer_1),
+		            GEO_DISPLAY_LIST(LAYER_TRANSPARENT, level_model_000_displaylist_mesh_layer_5),
                     GEO_RENDER_OBJ(),
                     GEO_ASM(0, geo_envfx_main),
                 GEO_CLOSE_NODE(),

@@ -20,7 +20,7 @@ static const LevelScript script_func_local_1[] = {
     OBJECT(/*model*/ MODEL_BOB_CHAIN_CHOMP_GATE,  /*pos*/  1456,   768,   446, /*angle*/ 0, 326, 0,  /*bhvParam*/ 0, /*bhv*/ bhvChainChompGate),
     OBJECT(/*model*/ MODEL_BOB_SEESAW_PLATFORM,   /*pos*/ -2303,   717,  1024, /*angle*/ 0, 45, 0,   /*bhvParam*/ BPARAM2(0x03), /*bhv*/ bhvSeesawPlatform),
     OBJECT(/*model*/ MODEL_NONE,                  /*pos*/ -2050,     0, -3069, /*angle*/ 0, 25, 0,   /*bhvParam*/ BPARAM2(OPENABLE_GRILL_BP_BOB), /*bhv*/ bhvOpenableGrill),
-    OBJECT(/*model*/ MODEL_PURPLE_SWITCH,         /*pos*/ -2283,     0, -3682, /*angle*/ 0, 27, 0,   /*bhvParam*/ 0, /*bhv*/ bhvFloorSwitchGrills),
+    OBJECT(/*model*/ MODEL_RED_SWITCH,            /*pos*/ -2283,     0, -3682, /*angle*/ 0, 27, 0,   /*bhvParam*/ 0, /*bhv*/ bhvFloorSwitchGrills),
     OBJECT(/*model*/ MODEL_CHECKERBOARD_PLATFORM, /*pos*/  1612,   300,  4611, /*angle*/ 0, 0, 0,    /*bhvParam*/ BPARAM1(0) | BPARAM2(40), /*bhv*/ bhvCheckerboardElevatorGroup),
 #ifdef PORT_MOP_OBJS
     OBJECT(/*model*/ MODEL_MOP_CHECKPOINT_FLAG,   /*pos*/  3495,  2984, -1978, /*angle*/ 0, 0, 0,    /*bhvParam*/ 0, /*bhv*/ bhvCheckpoint_Flag_MOP),
@@ -29,10 +29,10 @@ static const LevelScript script_func_local_1[] = {
 };
 
 static const LevelScript script_func_local_2[] = {
-    OBJECT_WITH_ACTS(/*model*/ MODEL_NONE,                  /*pos*/  1535, 3840, -5561, /*angle*/ 0, 0, 0,   /*bhvParam*/ BPARAM2(BBALL_BP_STYPE_BOB_UPPER), /*bhv*/ bhvBoBBowlingBallSpawner,  /*acts*/ ACT_1 | ACT_2),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_NONE,                  /*pos*/  1535, 3840, -5561, /*angle*/ 0, 0, 0,   /*bhvParam*/ BPARAM2(BBALL_BP_STYPE_BOB_UPPER), /*bhv*/ bhvTTMBowlingBallSpawner,  /*acts*/ ACT_3 | ACT_4 | ACT_5 | ACT_6),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_NONE,                  /*pos*/   524, 2825, -5400, /*angle*/ 0, 0, 0,   /*bhvParam*/ BPARAM2(BBALL_BP_STYPE_BOB_LOWER), /*bhv*/ bhvBoBBowlingBallSpawner,  /*acts*/ ACT_1 | ACT_2),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_NONE,                  /*pos*/   524, 2825, -5400, /*angle*/ 0, 0, 0,   /*bhvParam*/ BPARAM2(BBALL_BP_STYPE_BOB_LOWER), /*bhv*/ bhvTTMBowlingBallSpawner,  /*acts*/ ACT_3 | ACT_4 | ACT_5 | ACT_6),
+    OBJECT_WITH_ACTS(/*model*/ MODEL_NONE,                  /*pos*/  1535, 3840, -5561, /*angle*/ 0, 0, 0,   /*bhvParam*/ BPARAM2(BBALL_BP_STYPE_BOB_UPPER), /*bhv*/ bhvBobBowlingBallSpawner,  /*acts*/ ACT_1 | ACT_2),
+    OBJECT_WITH_ACTS(/*model*/ MODEL_NONE,                  /*pos*/  1535, 3840, -5561, /*angle*/ 0, 0, 0,   /*bhvParam*/ BPARAM2(BBALL_BP_STYPE_BOB_UPPER), /*bhv*/ bhvTtmBowlingBallSpawner,  /*acts*/ ACT_3 | ACT_4 | ACT_5 | ACT_6),
+    OBJECT_WITH_ACTS(/*model*/ MODEL_NONE,                  /*pos*/   524, 2825, -5400, /*angle*/ 0, 0, 0,   /*bhvParam*/ BPARAM2(BBALL_BP_STYPE_BOB_LOWER), /*bhv*/ bhvBobBowlingBallSpawner,  /*acts*/ ACT_1 | ACT_2),
+    OBJECT_WITH_ACTS(/*model*/ MODEL_NONE,                  /*pos*/   524, 2825, -5400, /*angle*/ 0, 0, 0,   /*bhvParam*/ BPARAM2(BBALL_BP_STYPE_BOB_LOWER), /*bhv*/ bhvTtmBowlingBallSpawner,  /*acts*/ ACT_3 | ACT_4 | ACT_5 | ACT_6),
     OBJECT          (/*model*/ MODEL_BOWLING_BALL,          /*pos*/  -993,  886, -3565, /*angle*/ 0, 0, 0,   /*bhvParam*/ 0, /*bhv*/ bhvPitBowlingBall),
     OBJECT          (/*model*/ MODEL_BOWLING_BALL,          /*pos*/  -785,  886, -4301, /*angle*/ 0, 0, 0,   /*bhvParam*/ 0, /*bhv*/ bhvPitBowlingBall),
     OBJECT_WITH_ACTS(/*model*/ MODEL_BOWLING_BALL,          /*pos*/   -93,  886, -3414, /*angle*/ 0, 0, 0,   /*bhvParam*/ 0, /*bhv*/ bhvPitBowlingBall,         /*acts*/ ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6),
@@ -68,7 +68,7 @@ const LevelScript level_bob_entry[] = {
     LOAD_MIO0        (/*seg*/ 0x08, _common0_mio0SegmentRomStart, _common0_mio0SegmentRomEnd),
     LOAD_RAW         (/*seg*/ 0x0F, _common0_geoSegmentRomStart,  _common0_geoSegmentRomEnd),
     ALLOC_LEVEL_POOL(),
-    MARIO(/*model*/ MODEL_MARIO, /*bhvParam*/ BPARAM4(0x01), /*bhv*/ bhvMario),
+    MARIO(/*model*/ MODEL_MARIO, /*bhvParam*/ BPARAM4(0x01), /*bhv*/ bhvPlayer),
     JUMP_LINK(script_func_global_1),
     JUMP_LINK(script_func_global_4),
     JUMP_LINK(script_func_global_15),

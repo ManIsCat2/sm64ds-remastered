@@ -1,5 +1,4 @@
-// 0x0700E958 - 0x0701104C
-const Collision bob_seg7_collision_level[] = {
+const Collision collision_bob[] = {
 	COL_INIT(),
 	COL_VERTEX_INIT(556),
 	COL_VERTEX(-6245, 128, 5384),
