@@ -533,18 +533,22 @@ void bhv_wooden_post_update(void) {
  * Init function for chain chomp gate.
  */
 void bhv_chain_chomp_gate_init(void) {
-    o->parentObj = cur_obj_nearest_object_with_behavior(bhvChainChomp);
+    if (o->oBhvParams2ndByte != 2) {
+        o->parentObj = cur_obj_nearest_object_with_behavior(bhvChainChomp);
+    }
 }
 
 /**
  * Update function for chain chomp gate
  */
 void bhv_chain_chomp_gate_update(void) {
-    if (o->parentObj->oChainChompHitGate) {
-        spawn_mist_particles_with_sound(SOUND_GENERAL_WALL_EXPLOSION);
-        set_camera_shake_from_point(SHAKE_POS_SMALL, o->oPosX, o->oPosY, o->oPosZ);
-        spawn_mist_particles_variable(0, 127, 200.0f);
-        spawn_triangle_break_particles(30, MODEL_DIRT_ANIMATION, 3.0f, 4);
-        obj_mark_for_deletion(o);
+    if (o->oBhvParams2ndByte != 2) {
+        if (o->parentObj->oChainChompHitGate) {
+            spawn_mist_particles_with_sound(SOUND_GENERAL_WALL_EXPLOSION);
+            set_camera_shake_from_point(SHAKE_POS_SMALL, o->oPosX, o->oPosY, o->oPosZ);
+            spawn_mist_particles_variable(0, 127, 200.0f);
+            spawn_triangle_break_particles(30, MODEL_DIRT_ANIMATION, 3.0f, 4);
+            obj_mark_for_deletion(o);
+        }
     }
 }
