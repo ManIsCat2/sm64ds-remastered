@@ -140,7 +140,6 @@ const MacroObject bob_seg7_macro_objs[] = {
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_wooden_signpost, 60, 4064, 3484, -6950, DIALOG_112),
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_wooden_signpost, -90, 38, 2, 6998, DIALOG_113),
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_wooden_signpost, 45, -3539, 769, 299, DIALOG_050),
-	MACRO_OBJECT(macro_chain_chomp, 0, 410, 770, 1946),
 	MACRO_OBJECT(macro_bobomb_stationary, -18, 1149, 2902, -2472),
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_water_bomb_spawner, 0, 3622, 4001, 4800, 15),
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_water_bomb_spawner, 0, -5139, 3765, -743, 25),

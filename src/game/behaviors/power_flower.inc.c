@@ -42,7 +42,7 @@ void bhv_power_flower_loop(struct PlayerState *m) {
         // Idle State
         case 2:
             o->oAnimState = 1;
-            Vec3f *scale = &m->playerObj->header.gfx.scale; //btw I replaced most instances of "mario" with "player"
+            Vec3f *scale = &m->playerObj->header.gfx.scale;
             if (cur_obj_wait_then_blink(200, 20)) {
                 obj_mark_for_deletion(o);
             }

@@ -843,3 +843,4 @@ UNUSED s8 debug_sequence_tracker(s16 debugInputSequence[]) {
 #include "behaviors/mips.inc.c"
 #include "behaviors/mips_castle.inc.c"
 #include "behaviors/power_flower.inc.c"
+#include "behaviors/silver_star.inc.c"

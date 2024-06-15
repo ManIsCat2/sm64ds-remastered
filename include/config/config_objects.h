@@ -110,9 +110,6 @@
 /// Changes WF breakable wall by safely landing back if the proper wall is broken
 #define BETTER_WF_BREAKEABLE_WALL (0 || QOL_FEATURES)
 
-/// Changes blue coin switch to respawn instead of disappearing
-#define RESPAWN_BLUE_COIN_SWITCH (0 || QOL_FEATURES)
-
 /// Makes leaf particles occasionally fall from trees which contain Hoot 
 #define HOOT_TREE_PARTICLES (0 || QOL_FEATURES)
 

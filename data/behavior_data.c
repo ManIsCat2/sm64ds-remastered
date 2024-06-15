@@ -4640,6 +4640,21 @@ const BehaviorScript bhvStar[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvSilverStar[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_silver_star_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_silver_star_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvSilverStarHandler[] = {
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_silver_star_handler_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvStarSpawnCoordinates[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
