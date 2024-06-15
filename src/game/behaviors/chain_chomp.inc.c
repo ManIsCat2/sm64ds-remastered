@@ -502,10 +502,14 @@ void bhv_wooden_post_update(void) {
         // Once pounded, if this is the chain chomp's post, release the chain
         // chomp
         o->oWoodenPostOffsetY = -190.0f;
+
         if (o->parentObj != o) {
             play_puzzle_jingle();
             o->parentObj->oChainChompReleaseStatus = CHAIN_CHOMP_RELEASED_TRIGGER_CUTSCENE;
             o->parentObj = o;
+        } else {
+            obj_spawn_loot_yellow_coins(o, 5, 20.0f);
+            set_object_respawn_info_bits(o, 1);
         }
     }
 
