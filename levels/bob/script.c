@@ -108,6 +108,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT_WITH_ACTS(MODEL_BREAKABLE_BOX, -2511, 977, -4983, 0, 27, 0, 0, bhvBreakableBox, ACT_4),
         OBJECT_WITH_ACTS(MODEL_BREAKABLE_BOX, -4404, 1026, -662, 0, 45, 0, 0, bhvBreakableBox, ACT_4 | ACT_7),
 		OBJECT_WITH_ACTS(MODEL_BREAKABLE_BOX, -4961, 1026, -768, 0, 0, 0, 0, bhvBreakableBox, ACT_4 | ACT_7),
+		OBJECT_WITH_ACTS(MODEL_CHAIN_CHOMP, 410, 770, 1946, 0, 0, 0, 0, bhvChainChomp, ACT_1 | ACT_2 | ACT_4 | ACT_5 | ACT_6 | ACT_7),
 		OBJECT_WITH_ACTS(MODEL_KING_BOBOMB, 3072, 4295, -4710, 0, -146, 0, BPARAM1(STAR_INDEX_ACT_4) | BPARAM2(BOBOMB_KING_BP_TYPE_2), bhvKingBobomb, ACT_4),
 		TERRAIN(bob_seg7_collision_level),
 		MACRO_OBJECTS(bob_seg7_macro_objs),
