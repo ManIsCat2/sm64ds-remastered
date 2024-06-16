@@ -85,7 +85,11 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_WATER_SPLASH,            water_splash_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WAVE_TRAIL,              wave_trail_geo),
     LOAD_MODEL_FROM_GEO(MODEL_YELLOW_COIN,             yellow_coin_geo),
+#ifndef TARGET_N64
     LOAD_MODEL_FROM_GEO(MODEL_POWER_FLOWER,            power_flower_geo),
+#else
+    LOAD_MODEL_FROM_GEO(MODEL_POWER_FLOWER,            yellow_coin_geo), // not sure what causes pf model to crash game
+#endif
     LOAD_MODEL_FROM_GEO(MODEL_STAR,                    star_geo),
     LOAD_MODEL_FROM_GEO(MODEL_TRANSPARENT_STAR,        transparent_star_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WOODEN_SIGNPOST,         wooden_signpost_geo),
