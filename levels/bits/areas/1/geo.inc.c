@@ -20,9 +20,7 @@ const GeoLayout bits_geo_000718[] = {
                     GEO_DISPLAY_LIST(LAYER_ALPHA, bits_seg7_dl_07002918),
                     GEO_RENDER_OBJ(),
                     GEO_ASM(0, geo_envfx_main),
-#ifndef TARGET_N64
 					GEO_ASM(0, sky_3d),
-#endif
                 GEO_CLOSE_NODE(),
             GEO_CLOSE_NODE(),
         GEO_CLOSE_NODE(),

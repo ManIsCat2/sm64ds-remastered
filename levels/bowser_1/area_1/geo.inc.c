@@ -26,9 +26,7 @@ const GeoLayout bowser_1_area_1[] = {
 					GEO_BRANCH(1, bowser_1_area_1_geo),
 					GEO_RENDER_OBJ(),
 					GEO_ASM(ENVFX_MODE_NONE, geo_envfx_main),
-#ifndef TARGET_N64
 					GEO_ASM(ENVFX_MODE_NONE, sky_3d),
-#endif
 				GEO_CLOSE_NODE(),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
