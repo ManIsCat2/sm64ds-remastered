@@ -618,7 +618,6 @@ Gfx *envfx_update_particles(s32 mode, Vec3s playerPos, Vec3s camTo, Vec3s camFro
 extern skybox_skybox_mesh;
 extern skybox_bits_skybox_mesh;
 
-#ifndef TARGET_N64
 #define DISTANCE 0.97f
 Gfx *sky_3d(s32 callContext, struct GraphNode *node, Mat4 mtxf) {
     switch (callContext) {
@@ -654,4 +653,3 @@ Gfx *sky_3d(s32 callContext, struct GraphNode *node, Mat4 mtxf) {
     return NULL;
 }
 #undef DISTANCE
-#endif

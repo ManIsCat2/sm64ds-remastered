@@ -37,9 +37,7 @@ extern Vec3i gSnowCylinderLastPos;
 extern s16 gSnowParticleCount;
 extern s16 gSnowParticleMaxCount;
 
-#ifndef TARGET_N64
 Gfx *sky_3d(s32 callContext, struct GraphNode *node, Mat4 mtxf);
-#endif
 Gfx *envfx_update_particles(s32 mode, Vec3s playerPos, Vec3s camTo, Vec3s camFrom);
 void orbit_from_positions(Vec3s from, Vec3s to, s16 *radius, s16 *pitch, s16 *yaw);
 void rotate_triangle_vertices(Vec3s vertex1, Vec3s vertex2, Vec3s vertex3, s16 pitch, s16 yaw);
