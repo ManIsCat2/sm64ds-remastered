@@ -2327,7 +2327,7 @@ u8 castle_lobby_part_1_geo_matsu_rgba16[] = {
 	
 };
 
-Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_cull[8] = {
+Vtx castle_lobby_part_1_geo_vtx_cull[8] = {
 	{{ {-3123, -51, -1639}, 0, {0, 0}, {0, 0, 0, 0} }},
 	{{ {-3123, -51, 2739}, 0, {0, 0}, {0, 0, 0, 0} }},
 	{{ {-3123, 1024, 2739}, 0, {0, 0}, {0, 0, 0, 0} }},
@@ -2338,7 +2338,7 @@ Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_cull[8] = {
 	{{ {1075, 1024, -1639}, 0, {0, 0}, {0, 0, 0, 0} }},
 };
 
-Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_0[375] = {
+Vtx castle_lobby_part_1_geo_vtx_0[375] = {
 	{{ {-2765, 205, 307}, 0, {-9744, 2544}, {232, 232, 232, 255} }},
 	{{ {-2457, 205, 0}, 0, {-8208, 1008}, {248, 248, 248, 255} }},
 	{{ {-3072, 205, 0}, 0, {-11280, 1008}, {248, 248, 248, 255} }},
@@ -2716,8 +2716,8 @@ Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_0[375] = {
 	{{ {-2656, 103, 416}, 0, {4084, -1972}, {224, 224, 224, 255} }},
 };
 
-Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_0[] = {
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_0 + 0, 32, 0),
+Gfx castle_lobby_part_1_geo_tri_0[] = {
+	gsSPVertex(castle_lobby_part_1_geo_vtx_0 + 0, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(2, 3, 4, 0, 5, 4, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
@@ -2731,7 +2731,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_0[] = {
 	gsSP2Triangles(25, 26, 24, 0, 25, 27, 26, 0),
 	gsSP2Triangles(28, 26, 27, 0, 24, 29, 20, 0),
 	gsSP2Triangles(30, 20, 29, 0, 30, 29, 31, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_0 + 32, 31, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_0 + 32, 31, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
 	gsSP2Triangles(6, 5, 4, 0, 7, 8, 9, 0),
 	gsSP2Triangles(10, 9, 8, 0, 11, 12, 13, 0),
@@ -2740,7 +2740,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_0[] = {
 	gsSP2Triangles(22, 21, 20, 0, 23, 24, 25, 0),
 	gsSP2Triangles(26, 25, 24, 0, 27, 28, 29, 0),
 	gsSP1Triangle(30, 29, 28, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_0 + 63, 32, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_0 + 63, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
 	gsSP2Triangles(8, 9, 10, 0, 11, 10, 9, 0),
@@ -2749,7 +2749,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_0[] = {
 	gsSP2Triangles(20, 21, 22, 0, 23, 22, 21, 0),
 	gsSP2Triangles(24, 25, 26, 0, 27, 26, 25, 0),
 	gsSP2Triangles(28, 29, 30, 0, 31, 30, 29, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_0 + 95, 32, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_0 + 95, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
 	gsSP2Triangles(8, 9, 10, 0, 11, 10, 9, 0),
@@ -2758,7 +2758,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_0[] = {
 	gsSP2Triangles(20, 21, 22, 0, 23, 22, 21, 0),
 	gsSP2Triangles(24, 25, 26, 0, 27, 26, 25, 0),
 	gsSP2Triangles(28, 29, 30, 0, 31, 30, 29, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_0 + 127, 32, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_0 + 127, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
 	gsSP2Triangles(8, 9, 10, 0, 11, 10, 9, 0),
@@ -2767,7 +2767,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_0[] = {
 	gsSP2Triangles(20, 21, 22, 0, 23, 22, 21, 0),
 	gsSP2Triangles(24, 25, 26, 0, 27, 26, 25, 0),
 	gsSP2Triangles(28, 29, 30, 0, 31, 30, 29, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_0 + 159, 32, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_0 + 159, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
 	gsSP2Triangles(8, 9, 10, 0, 11, 10, 9, 0),
@@ -2776,7 +2776,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_0[] = {
 	gsSP2Triangles(20, 21, 22, 0, 23, 22, 21, 0),
 	gsSP2Triangles(24, 25, 26, 0, 27, 26, 25, 0),
 	gsSP2Triangles(28, 29, 30, 0, 31, 30, 29, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_0 + 191, 32, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_0 + 191, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
 	gsSP2Triangles(8, 9, 10, 0, 11, 10, 9, 0),
@@ -2785,7 +2785,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_0[] = {
 	gsSP2Triangles(20, 21, 22, 0, 23, 22, 21, 0),
 	gsSP2Triangles(24, 25, 26, 0, 27, 26, 25, 0),
 	gsSP2Triangles(28, 29, 30, 0, 31, 30, 29, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_0 + 223, 32, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_0 + 223, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
 	gsSP2Triangles(8, 9, 10, 0, 11, 10, 9, 0),
@@ -2794,7 +2794,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_0[] = {
 	gsSP2Triangles(20, 21, 22, 0, 23, 22, 21, 0),
 	gsSP2Triangles(24, 25, 26, 0, 27, 26, 25, 0),
 	gsSP2Triangles(28, 29, 30, 0, 31, 30, 29, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_0 + 255, 32, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_0 + 255, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
 	gsSP2Triangles(4, 1, 3, 0, 5, 2, 1, 0),
 	gsSP2Triangles(2, 5, 6, 0, 6, 7, 2, 0),
@@ -2804,7 +2804,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_0[] = {
 	gsSP2Triangles(20, 21, 22, 0, 23, 22, 21, 0),
 	gsSP2Triangles(24, 25, 26, 0, 27, 26, 25, 0),
 	gsSP2Triangles(28, 29, 30, 0, 31, 30, 29, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_0 + 287, 32, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_0 + 287, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
 	gsSP2Triangles(8, 9, 10, 0, 11, 10, 9, 0),
@@ -2813,7 +2813,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_0[] = {
 	gsSP2Triangles(20, 21, 22, 0, 23, 22, 21, 0),
 	gsSP2Triangles(24, 25, 26, 0, 27, 26, 25, 0),
 	gsSP2Triangles(28, 29, 30, 0, 31, 30, 29, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_0 + 319, 32, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_0 + 319, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
 	gsSP2Triangles(8, 9, 10, 0, 11, 10, 9, 0),
@@ -2822,7 +2822,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_0[] = {
 	gsSP2Triangles(20, 21, 22, 0, 23, 22, 21, 0),
 	gsSP2Triangles(24, 25, 26, 0, 27, 26, 25, 0),
 	gsSP2Triangles(28, 29, 30, 0, 31, 30, 29, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_0 + 351, 24, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_0 + 351, 24, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
 	gsSP2Triangles(8, 9, 10, 0, 11, 10, 9, 0),
@@ -2832,7 +2832,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_1[110] = {
+Vtx castle_lobby_part_1_geo_vtx_1[110] = {
 	{{ {-1229, 0, 205}, 0, {-16, 2032}, {248, 248, 248, 255} }},
 	{{ {-1229, 0, 103}, 0, {-16, 1520}, {240, 240, 240, 255} }},
 	{{ {-1536, 0, 512}, 0, {-1552, 3568}, {248, 248, 248, 255} }},
@@ -2945,8 +2945,8 @@ Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_1[110] = {
 	{{ {-819, 0, 205}, 0, {2032, 1008}, {200, 200, 200, 255} }},
 };
 
-Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_1[] = {
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_1 + 0, 32, 0),
+Gfx castle_lobby_part_1_geo_tri_1[] = {
+	gsSPVertex(castle_lobby_part_1_geo_vtx_1 + 0, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(2, 3, 4, 0, 5, 4, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
@@ -2962,7 +2962,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_1[] = {
 	gsSP2Triangles(25, 26, 27, 0, 28, 27, 26, 0),
 	gsSP2Triangles(28, 29, 27, 0, 29, 28, 30, 0),
 	gsSP1Triangle(31, 30, 28, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_1 + 32, 31, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_1 + 32, 31, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(2, 3, 4, 0, 5, 4, 3, 0),
 	gsSP2Triangles(5, 3, 6, 0, 7, 6, 3, 0),
@@ -2976,7 +2976,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_1[] = {
 	gsSP2Triangles(24, 23, 20, 0, 25, 26, 27, 0),
 	gsSP2Triangles(28, 27, 26, 0, 28, 26, 29, 0),
 	gsSP1Triangle(30, 29, 26, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_1 + 63, 32, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_1 + 63, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(1, 4, 3, 0, 5, 3, 4, 0),
 	gsSP2Triangles(4, 6, 5, 0, 7, 5, 6, 0),
@@ -2986,7 +2986,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_1[] = {
 	gsSP2Triangles(20, 21, 22, 0, 23, 22, 21, 0),
 	gsSP2Triangles(24, 25, 26, 0, 27, 26, 25, 0),
 	gsSP2Triangles(28, 29, 30, 0, 31, 30, 29, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_1 + 95, 15, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_1 + 95, 15, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(2, 3, 4, 0, 5, 4, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
@@ -2997,7 +2997,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_1[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_2[13] = {
+Vtx castle_lobby_part_1_geo_vtx_2[13] = {
 	{{ {-2272, 702, 2201}, 0, {802, -186}, {248, 248, 248, 255} }},
 	{{ {-1550, 702, 2739}, 0, {-222, -186}, {248, 248, 248, 255} }},
 	{{ {-2272, 241, 2201}, 0, {802, 472}, {248, 248, 248, 255} }},
@@ -3013,8 +3013,8 @@ Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_2[13] = {
 	{{ {-529, 702, 2739}, 0, {802, -186}, {248, 248, 248, 255} }},
 };
 
-Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_2[] = {
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_2 + 0, 13, 0),
+Gfx castle_lobby_part_1_geo_tri_2[] = {
+	gsSPVertex(castle_lobby_part_1_geo_vtx_2 + 0, 13, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(2, 3, 4, 0, 5, 6, 7, 0),
 	gsSP2Triangles(8, 7, 6, 0, 7, 8, 9, 0),
@@ -3022,7 +3022,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_2[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_3[91] = {
+Vtx castle_lobby_part_1_geo_vtx_3[91] = {
 	{{ {520, 936, -1470}, 0, {4104, -366}, {248, 248, 248, 255} }},
 	{{ {532, 918, -1458}, 0, {3870, -94}, {200, 200, 200, 255} }},
 	{{ {545, 953, -1444}, 0, {4098, 204}, {248, 248, 248, 255} }},
@@ -3116,8 +3116,8 @@ Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_3[91] = {
 	{{ {610, 938, -1379}, 0, {3930, 1658}, {128, 128, 128, 255} }},
 };
 
-Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_3[] = {
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_3 + 0, 32, 0),
+Gfx castle_lobby_part_1_geo_tri_3[] = {
+	gsSPVertex(castle_lobby_part_1_geo_vtx_3 + 0, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(2, 3, 4, 0, 5, 4, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
@@ -3132,7 +3132,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_3[] = {
 	gsSP2Triangles(21, 24, 25, 0, 26, 25, 24, 0),
 	gsSP2Triangles(21, 25, 27, 0, 12, 13, 28, 0),
 	gsSP1Triangle(29, 30, 31, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_3 + 32, 31, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_3 + 32, 31, 0),
 	gsSP2Triangles(0, 1, 2, 0, 1, 0, 3, 0),
 	gsSP2Triangles(4, 1, 3, 0, 5, 6, 7, 0),
 	gsSP2Triangles(8, 7, 6, 0, 9, 10, 11, 0),
@@ -3142,7 +3142,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_3[] = {
 	gsSP2Triangles(24, 23, 22, 0, 24, 25, 23, 0),
 	gsSP2Triangles(26, 23, 25, 0, 27, 28, 29, 0),
 	gsSP1Triangle(30, 29, 28, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_3 + 63, 28, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_3 + 63, 28, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
 	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
@@ -3159,7 +3159,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_3[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_4[71] = {
+Vtx castle_lobby_part_1_geo_vtx_4[71] = {
 	{{ {-1177, 512, -1024}, 0, {3772, 2032}, {184, 200, 224, 255} }},
 	{{ {-1177, 512, -1075}, 0, {3772, 2032}, {184, 200, 224, 255} }},
 	{{ {-1177, 768, -1024}, 0, {3772, 1008}, {184, 200, 224, 255} }},
@@ -3233,8 +3233,8 @@ Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_4[71] = {
 	{{ {-1229, 512, -461}, 0, {2032, 2032}, {248, 248, 248, 255} }},
 };
 
-Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_4[] = {
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_4 + 0, 32, 0),
+Gfx castle_lobby_part_1_geo_tri_4[] = {
+	gsSPVertex(castle_lobby_part_1_geo_vtx_4 + 0, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(2, 3, 4, 0, 5, 4, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
@@ -3248,7 +3248,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_4[] = {
 	gsSP2Triangles(22, 23, 24, 0, 25, 24, 23, 0),
 	gsSP2Triangles(25, 26, 24, 0, 27, 24, 26, 0),
 	gsSP2Triangles(28, 29, 30, 0, 31, 30, 29, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_4 + 32, 31, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_4 + 32, 31, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(3, 1, 4, 0, 5, 4, 1, 0),
 	gsSP2Triangles(6, 7, 8, 0, 9, 8, 7, 0),
@@ -3262,7 +3262,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_4[] = {
 	gsSP2Triangles(27, 30, 29, 0, 25, 29, 30, 0),
 	gsSP2Triangles(25, 30, 23, 0, 25, 26, 29, 0),
 	gsSP1Triangle(28, 29, 26, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_4 + 63, 8, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_4 + 63, 8, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(1, 4, 3, 0, 4, 1, 5, 0),
 	gsSP2Triangles(6, 4, 5, 0, 5, 7, 6, 0),
@@ -3271,7 +3271,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_4[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_5[257] = {
+Vtx castle_lobby_part_1_geo_vtx_5[257] = {
 	{{ {-2476, 179, 18}, 0, {-878, 1316}, {240, 240, 240, 255} }},
 	{{ {-2222, 0, 271}, 0, {-1660, 2032}, {240, 240, 240, 255} }},
 	{{ {-2476, 205, 18}, 0, {-878, 1212}, {232, 232, 232, 255} }},
@@ -3531,15 +3531,15 @@ Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_5[257] = {
 	{{ {-819, 0, -210}, 0, {1608, 2032}, {176, 176, 224, 255} }},
 };
 
-Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_5[] = {
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_5 + 0, 30, 0),
+Gfx castle_lobby_part_1_geo_tri_5[] = {
+	gsSPVertex(castle_lobby_part_1_geo_vtx_5 + 0, 30, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
 	gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
 	gsSP2Triangles(12, 13, 14, 0, 12, 15, 16, 0),
 	gsSP2Triangles(17, 18, 19, 0, 20, 21, 22, 0),
 	gsSP2Triangles(20, 23, 24, 0, 25, 26, 27, 0),
 	gsSP1Triangle(28, 27, 29, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_5 + 30, 30, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_5 + 30, 30, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 4, 0),
 	gsSP2Triangles(5, 6, 7, 0, 8, 7, 6, 0),
 	gsSP2Triangles(6, 9, 8, 0, 10, 8, 9, 0),
@@ -3552,7 +3552,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_5[] = {
 	gsSP2Triangles(23, 24, 25, 0, 26, 25, 24, 0),
 	gsSP2Triangles(25, 26, 27, 0, 28, 27, 26, 0),
 	gsSP1Triangle(26, 29, 28, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_5 + 60, 32, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_5 + 60, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(1, 4, 3, 0, 5, 3, 4, 0),
 	gsSP2Triangles(6, 7, 8, 0, 9, 8, 7, 0),
@@ -3565,7 +3565,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_5[] = {
 	gsSP2Triangles(23, 24, 25, 0, 26, 25, 24, 0),
 	gsSP2Triangles(27, 28, 29, 0, 30, 29, 28, 0),
 	gsSP1Triangle(29, 30, 31, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_5 + 92, 32, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_5 + 92, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
 	gsSP2Triangles(7, 5, 8, 0, 6, 7, 9, 0),
@@ -3577,7 +3577,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_5[] = {
 	gsSP2Triangles(22, 20, 21, 0, 17, 18, 23, 0),
 	gsSP2Triangles(24, 25, 26, 0, 27, 26, 25, 0),
 	gsSP2Triangles(26, 27, 28, 0, 29, 30, 31, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_5 + 124, 32, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_5 + 124, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(1, 4, 3, 0, 5, 3, 4, 0),
 	gsSP2Triangles(6, 7, 8, 0, 7, 6, 9, 0),
@@ -3587,7 +3587,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_5[] = {
 	gsSP2Triangles(20, 19, 18, 0, 21, 22, 23, 0),
 	gsSP2Triangles(24, 23, 22, 0, 25, 26, 27, 0),
 	gsSP2Triangles(28, 27, 26, 0, 29, 30, 31, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_5 + 156, 31, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_5 + 156, 31, 0),
 	gsSP2Triangles(0, 1, 2, 0, 2, 3, 0, 0),
 	gsSP2Triangles(4, 0, 3, 0, 3, 5, 4, 0),
 	gsSP2Triangles(6, 4, 5, 0, 7, 8, 9, 0),
@@ -3597,7 +3597,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_5[] = {
 	gsSP2Triangles(22, 21, 20, 0, 23, 24, 25, 0),
 	gsSP2Triangles(26, 25, 24, 0, 27, 28, 29, 0),
 	gsSP1Triangle(30, 29, 28, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_5 + 187, 32, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_5 + 187, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(3, 1, 4, 0, 5, 4, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 6, 7, 4, 0),
@@ -3607,7 +3607,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_5[] = {
 	gsSP2Triangles(20, 21, 22, 0, 23, 22, 21, 0),
 	gsSP2Triangles(24, 25, 26, 0, 27, 26, 25, 0),
 	gsSP2Triangles(28, 29, 30, 0, 31, 30, 29, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_5 + 219, 30, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_5 + 219, 30, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
 	gsSP2Triangles(8, 9, 10, 0, 11, 10, 9, 0),
@@ -3617,13 +3617,13 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_5[] = {
 	gsSP2Triangles(19, 22, 21, 0, 23, 21, 22, 0),
 	gsSP2Triangles(24, 25, 11, 0, 6, 11, 25, 0),
 	gsSP2Triangles(26, 27, 28, 0, 29, 28, 27, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_5 + 249, 8, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_5 + 249, 8, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
 	gsSPEndDisplayList(),
 };
 
-Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_6[36] = {
+Vtx castle_lobby_part_1_geo_vtx_6[36] = {
 	{{ {-1331, 0, 1561}, 0, {-4122, 278}, {248, 248, 248, 255} }},
 	{{ {-1331, 410, 1561}, 0, {-4122, -1616}, {248, 248, 248, 255} }},
 	{{ {-1331, 0, 2150}, 0, {-9070, 278}, {176, 176, 224, 255} }},
@@ -3662,8 +3662,8 @@ Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_6[36] = {
 	{{ {-871, 256, 2201}, 0, {-4534, -906}, {176, 176, 224, 255} }},
 };
 
-Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_6[] = {
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_6 + 0, 32, 0),
+Gfx castle_lobby_part_1_geo_tri_6[] = {
+	gsSPVertex(castle_lobby_part_1_geo_vtx_6 + 0, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(1, 4, 3, 0, 5, 3, 4, 0),
 	gsSP2Triangles(6, 7, 8, 0, 9, 8, 7, 0),
@@ -3675,12 +3675,12 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_6[] = {
 	gsSP2Triangles(19, 20, 24, 0, 25, 24, 20, 0),
 	gsSP2Triangles(20, 26, 25, 0, 27, 25, 26, 0),
 	gsSP2Triangles(28, 29, 30, 0, 31, 30, 29, 0),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_6 + 32, 4, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_6 + 32, 4, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSPEndDisplayList(),
 };
 
-Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_7[19] = {
+Vtx castle_lobby_part_1_geo_vtx_7[19] = {
 	{{ {-819, 0, 1229}, 0, {-10738, 6128}, {248, 248, 248, 255} }},
 	{{ {-800, 0, 1248}, 0, {-10276, 6128}, {248, 248, 248, 255} }},
 	{{ {-512, 0, 921}, 0, {-10738, 1936}, {248, 248, 248, 255} }},
@@ -3702,8 +3702,8 @@ Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_7[19] = {
 	{{ {-1229, 0, 1229}, 0, {-8680, 5950}, {248, 248, 248, 255} }},
 };
 
-Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_7[] = {
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_7 + 0, 19, 0),
+Gfx castle_lobby_part_1_geo_tri_7[] = {
+	gsSPVertex(castle_lobby_part_1_geo_vtx_7 + 0, 19, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(2, 3, 4, 0, 5, 6, 7, 0),
 	gsSP2Triangles(8, 7, 6, 0, 7, 8, 9, 0),
@@ -3713,32 +3713,32 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_7[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_8[4] = {
+Vtx castle_lobby_part_1_geo_vtx_8[4] = {
 	{{ {-529, 702, 2739}, 0, {716, 6456}, {248, 248, 248, 255} }},
 	{{ {-1550, 702, 2739}, 0, {-6990, 6456}, {248, 248, 248, 255} }},
 	{{ {193, 702, 2201}, 0, {716, 3552}, {248, 248, 248, 255} }},
 	{{ {-2272, 702, 2201}, 0, {-6990, 3552}, {248, 248, 248, 255} }},
 };
 
-Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_8[] = {
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_8 + 0, 4, 0),
+Gfx castle_lobby_part_1_geo_tri_8[] = {
+	gsSPVertex(castle_lobby_part_1_geo_vtx_8 + 0, 4, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSPEndDisplayList(),
 };
 
-Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_9[3] = {
+Vtx castle_lobby_part_1_geo_vtx_9[3] = {
 	{{ {0, 614, -1045}, 0, {3658, -2064}, {248, 248, 248, 255} }},
 	{{ {0, 717, -1045}, 0, {3658, -3088}, {248, 248, 248, 255} }},
 	{{ {-15, 615, -1038}, 0, {3472, -2064}, {248, 248, 248, 255} }},
 };
 
-Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_9[] = {
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_9 + 0, 3, 0),
+Gfx castle_lobby_part_1_geo_tri_9[] = {
+	gsSPVertex(castle_lobby_part_1_geo_vtx_9 + 0, 3, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSPEndDisplayList(),
 };
 
-Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_10[18] = {
+Vtx castle_lobby_part_1_geo_vtx_10[18] = {
 	{{ {-1177, 0, 2201}, 0, {-7120, 14256}, {200, 200, 200, 255} }},
 	{{ {-2272, -15, 2201}, 0, {-13962, 14256}, {248, 248, 248, 255} }},
 	{{ {-1188, -5, 2411}, 0, {-7188, 15566}, {248, 248, 248, 255} }},
@@ -3759,8 +3759,8 @@ Vtx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_10[18] = {
 	{{ {-2272, 702, 2201}, 0, {-13962, -3888}, {248, 248, 248, 255} }},
 };
 
-Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_10[] = {
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_10 + 0, 18, 0),
+Gfx castle_lobby_part_1_geo_tri_10[] = {
+	gsSPVertex(castle_lobby_part_1_geo_vtx_10 + 0, 18, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(2, 3, 4, 0, 5, 4, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
@@ -3771,7 +3771,7 @@ Gfx castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_10[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_castle_lobby_part_1_geo_mat_carpet_f3d[] = {
+Gfx mat_castle_lobby_part_1_geo_mat_carpet[] = {
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
@@ -3784,13 +3784,13 @@ Gfx mat_castle_lobby_part_1_geo_mat_carpet_f3d[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_castle_lobby_part_1_geo_mat_carpet_f3d[] = {
+Gfx mat_revert_castle_lobby_part_1_geo_mat_carpet[] = {
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPPipeSync(),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_castle_lobby_part_1_geo_mat_checker_f3d[] = {
+Gfx mat_castle_lobby_part_1_geo_mat_checker[] = {
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
@@ -3803,13 +3803,13 @@ Gfx mat_castle_lobby_part_1_geo_mat_checker_f3d[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_castle_lobby_part_1_geo_mat_checker_f3d[] = {
+Gfx mat_revert_castle_lobby_part_1_geo_mat_checker[] = {
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPPipeSync(),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_castle_lobby_part_1_geo_mat_genkan_f3d[] = {
+Gfx mat_castle_lobby_part_1_geo_mat_genkan[] = {
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
@@ -3822,13 +3822,13 @@ Gfx mat_castle_lobby_part_1_geo_mat_genkan_f3d[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_castle_lobby_part_1_geo_mat_genkan_f3d[] = {
+Gfx mat_revert_castle_lobby_part_1_geo_mat_genkan[] = {
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPPipeSync(),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_castle_lobby_part_1_geo_mat_hashira_f3d[] = {
+Gfx mat_castle_lobby_part_1_geo_mat_hashira[] = {
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
@@ -3841,13 +3841,13 @@ Gfx mat_castle_lobby_part_1_geo_mat_hashira_f3d[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_castle_lobby_part_1_geo_mat_hashira_f3d[] = {
+Gfx mat_revert_castle_lobby_part_1_geo_mat_hashira[] = {
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPPipeSync(),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_castle_lobby_part_1_geo_mat_kabe_kumo1_f3d[] = {
+Gfx mat_castle_lobby_part_1_geo_mat_kabe_kumo1[] = {
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
@@ -3864,14 +3864,14 @@ Gfx mat_castle_lobby_part_1_geo_mat_kabe_kumo1_f3d[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_castle_lobby_part_1_geo_mat_kabe_kumo1_f3d[] = {
+Gfx mat_revert_castle_lobby_part_1_geo_mat_kabe_kumo1[] = {
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPPipeSync(),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_castle_lobby_part_1_geo_mat_kabe_yama_f3d[] = {
+Gfx mat_castle_lobby_part_1_geo_mat_kabe_yama[] = {
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
@@ -3888,14 +3888,14 @@ Gfx mat_castle_lobby_part_1_geo_mat_kabe_yama_f3d[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_castle_lobby_part_1_geo_mat_kabe_yama_f3d[] = {
+Gfx mat_revert_castle_lobby_part_1_geo_mat_kabe_yama[] = {
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPPipeSync(),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_castle_lobby_part_1_geo_mat_renga_b_f3d[] = {
+Gfx mat_castle_lobby_part_1_geo_mat_renga_b[] = {
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
@@ -3908,13 +3908,13 @@ Gfx mat_castle_lobby_part_1_geo_mat_renga_b_f3d[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_castle_lobby_part_1_geo_mat_renga_b_f3d[] = {
+Gfx mat_revert_castle_lobby_part_1_geo_mat_renga_b[] = {
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPPipeSync(),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_castle_lobby_part_1_geo_mat_side_f3d[] = {
+Gfx mat_castle_lobby_part_1_geo_mat_side[] = {
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
@@ -3927,13 +3927,13 @@ Gfx mat_castle_lobby_part_1_geo_mat_side_f3d[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_castle_lobby_part_1_geo_mat_side_f3d[] = {
+Gfx mat_revert_castle_lobby_part_1_geo_mat_side[] = {
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPPipeSync(),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_castle_lobby_part_1_geo_mat_sky_f3d[] = {
+Gfx mat_castle_lobby_part_1_geo_mat_sky[] = {
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
@@ -3946,13 +3946,13 @@ Gfx mat_castle_lobby_part_1_geo_mat_sky_f3d[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_castle_lobby_part_1_geo_mat_sky_f3d[] = {
+Gfx mat_revert_castle_lobby_part_1_geo_mat_sky[] = {
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPPipeSync(),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_castle_lobby_part_1_geo_mat_tesuri_f3d[] = {
+Gfx mat_castle_lobby_part_1_geo_mat_tesuri[] = {
 	gsSPGeometryMode(G_CULL_BACK | G_LIGHTING, 0),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0),
@@ -3966,13 +3966,13 @@ Gfx mat_castle_lobby_part_1_geo_mat_tesuri_f3d[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_castle_lobby_part_1_geo_mat_tesuri_f3d[] = {
+Gfx mat_revert_castle_lobby_part_1_geo_mat_tesuri[] = {
 	gsSPGeometryMode(0, G_CULL_BACK | G_LIGHTING),
 	gsDPPipeSync(),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_castle_lobby_part_1_geo_mat_tile_f3d[] = {
+Gfx mat_castle_lobby_part_1_geo_mat_tile[] = {
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
@@ -3985,7 +3985,7 @@ Gfx mat_castle_lobby_part_1_geo_mat_tile_f3d[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_castle_lobby_part_1_geo_mat_tile_f3d[] = {
+Gfx mat_revert_castle_lobby_part_1_geo_mat_tile[] = {
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPPipeSync(),
 	gsSPEndDisplayList(),
@@ -3993,42 +3993,42 @@ Gfx mat_revert_castle_lobby_part_1_geo_mat_tile_f3d[] = {
 
 Gfx castle_lobby_part_1_geo[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_vtx_cull + 0, 8, 0),
+	gsSPVertex(castle_lobby_part_1_geo_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_carpet_f3d),
-	gsSPDisplayList(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_0),
-	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_carpet_f3d),
-	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_checker_f3d),
-	gsSPDisplayList(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_1),
-	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_checker_f3d),
-	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_genkan_f3d),
-	gsSPDisplayList(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_2),
-	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_genkan_f3d),
-	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_hashira_f3d),
-	gsSPDisplayList(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_3),
-	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_hashira_f3d),
-	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_kabe_kumo1_f3d),
-	gsSPDisplayList(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_4),
-	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_kabe_kumo1_f3d),
-	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_kabe_yama_f3d),
-	gsSPDisplayList(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_5),
-	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_kabe_yama_f3d),
-	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_renga_b_f3d),
-	gsSPDisplayList(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_6),
-	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_renga_b_f3d),
-	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_side_f3d),
-	gsSPDisplayList(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_7),
-	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_side_f3d),
-	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_sky_f3d),
-	gsSPDisplayList(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_8),
-	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_sky_f3d),
-	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_tesuri_f3d),
-	gsSPDisplayList(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_9),
-	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_tesuri_f3d),
-	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_tile_f3d),
-	gsSPDisplayList(castle_lobby_part_1_geo__2__castle_lobby_part_1_geo_mesh_tri_10),
-	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_tile_f3d),
+	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_carpet),
+	gsSPDisplayList(castle_lobby_part_1_geo_tri_0),
+	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_carpet),
+	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_checker),
+	gsSPDisplayList(castle_lobby_part_1_geo_tri_1),
+	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_checker),
+	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_genkan),
+	gsSPDisplayList(castle_lobby_part_1_geo_tri_2),
+	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_genkan),
+	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_hashira),
+	gsSPDisplayList(castle_lobby_part_1_geo_tri_3),
+	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_hashira),
+	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_kabe_kumo1),
+	gsSPDisplayList(castle_lobby_part_1_geo_tri_4),
+	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_kabe_kumo1),
+	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_kabe_yama),
+	gsSPDisplayList(castle_lobby_part_1_geo_tri_5),
+	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_kabe_yama),
+	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_renga_b),
+	gsSPDisplayList(castle_lobby_part_1_geo_tri_6),
+	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_renga_b),
+	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_side),
+	gsSPDisplayList(castle_lobby_part_1_geo_tri_7),
+	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_side),
+	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_sky),
+	gsSPDisplayList(castle_lobby_part_1_geo_tri_8),
+	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_sky),
+	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_tesuri),
+	gsSPDisplayList(castle_lobby_part_1_geo_tri_9),
+	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_tesuri),
+	gsSPDisplayList(mat_castle_lobby_part_1_geo_mat_tile),
+	gsSPDisplayList(castle_lobby_part_1_geo_tri_10),
+	gsSPDisplayList(mat_revert_castle_lobby_part_1_geo_mat_tile),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),
