@@ -13170,7 +13170,7 @@ u8 skybox_bitdw_64_pal_rgba16[] = {
 	0x01, 0x4f, 0x01, 0x59, 0x01, 0x17, 
 };
 
-Vtx skybox_skybox_mesh_vtx_0[48] = {
+Vtx bitdw_skybox_vtx_0[48] = {
 	{{ {7663, 12771, 18501}, 0, {1008, 1008}, {182, 182, 182, 255} }},
 	{{ {0, 12771, 19758}, 0, {-16, 1008}, {182, 182, 182, 255} }},
 	{{ {0, 15422, 17175}, 0, {-16, -16}, {0, 0, 0, 255} }},
@@ -13221,8 +13221,8 @@ Vtx skybox_skybox_mesh_vtx_0[48] = {
 	{{ {0, 15422, -17175}, 0, {2035, 1008}, {0, 0, 0, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_0[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_0 + 0, 16, 0),
+Gfx bitdw_skybox_tri_0[] = {
+	gsSPVertex(bitdw_skybox_vtx_0 + 0, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13233,7 +13233,7 @@ Gfx skybox_skybox_mesh_tri_0[] = {
 	gsSP1Triangle(13, 12, 9, 0),
 	gsSP1Triangle(13, 9, 14, 0),
 	gsSP1Triangle(15, 14, 9, 0),
-	gsSPVertex(skybox_skybox_mesh_vtx_0 + 16, 16, 0),
+	gsSPVertex(bitdw_skybox_vtx_0 + 16, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(1, 3, 2, 0),
 	gsSP1Triangle(3, 1, 4, 0),
@@ -13245,7 +13245,7 @@ Gfx skybox_skybox_mesh_tri_0[] = {
 	gsSP1Triangle(11, 1, 10, 0),
 	gsSP1Triangle(12, 13, 14, 0),
 	gsSP1Triangle(15, 13, 12, 0),
-	gsSPVertex(skybox_skybox_mesh_vtx_0 + 32, 16, 0),
+	gsSPVertex(bitdw_skybox_vtx_0 + 32, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(1, 4, 3, 0),
@@ -13263,7 +13263,7 @@ Gfx skybox_skybox_mesh_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_1[8] = {
+Vtx bitdw_skybox_vtx_1[8] = {
 	{{ {7663, 12771, 18501}, 0, {-16, 1008}, {182, 182, 182, 255} }},
 	{{ {6072, 15422, 14659}, 0, {-16, -16}, {0, 0, 0, 255} }},
 	{{ {12144, 15422, 12144}, 0, {1008, -16}, {0, 0, 0, 255} }},
@@ -13274,8 +13274,8 @@ Vtx skybox_skybox_mesh_vtx_1[8] = {
 	{{ {-6072, 15422, -14659}, 0, {-16, -16}, {0, 0, 0, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_1[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_1 + 0, 8, 0),
+Gfx bitdw_skybox_tri_1[] = {
+	gsSPVertex(bitdw_skybox_vtx_1 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13283,7 +13283,7 @@ Gfx skybox_skybox_mesh_tri_1[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_2[8] = {
+Vtx bitdw_skybox_vtx_2[8] = {
 	{{ {18501, 12771, 7663}, 0, {1008, 1008}, {182, 182, 182, 255} }},
 	{{ {13971, 12771, 13971}, 0, {-16, 1008}, {182, 182, 182, 255} }},
 	{{ {12144, 15422, 12144}, 0, {-16, -16}, {0, 0, 0, 255} }},
@@ -13294,8 +13294,8 @@ Vtx skybox_skybox_mesh_vtx_2[8] = {
 	{{ {-13971, 12771, -13971}, 0, {-16, 1008}, {182, 182, 182, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_2[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_2 + 0, 8, 0),
+Gfx bitdw_skybox_tri_2[] = {
+	gsSPVertex(bitdw_skybox_vtx_2 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13303,7 +13303,7 @@ Gfx skybox_skybox_mesh_tri_2[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_3[8] = {
+Vtx bitdw_skybox_vtx_3[8] = {
 	{{ {17175, 15422, 0}, 0, {1008, -16}, {0, 0, 0, 255} }},
 	{{ {19758, 12771, 0}, 0, {1008, 1008}, {182, 182, 182, 255} }},
 	{{ {18501, 12771, 7663}, 0, {-16, 1008}, {182, 182, 182, 255} }},
@@ -13314,8 +13314,8 @@ Vtx skybox_skybox_mesh_vtx_3[8] = {
 	{{ {-18501, 12771, -7663}, 0, {-16, 1008}, {182, 182, 182, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_3[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_3 + 0, 8, 0),
+Gfx bitdw_skybox_tri_3[] = {
+	gsSPVertex(bitdw_skybox_vtx_3 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13323,7 +13323,7 @@ Gfx skybox_skybox_mesh_tri_3[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_4[8] = {
+Vtx bitdw_skybox_vtx_4[8] = {
 	{{ {-17175, 15422, 0}, 0, {-16, -16}, {0, 0, 0, 255} }},
 	{{ {-14659, 15422, 6072}, 0, {1008, -16}, {0, 0, 0, 255} }},
 	{{ {-18501, 12771, 7663}, 0, {1008, 1008}, {182, 182, 182, 255} }},
@@ -13334,8 +13334,8 @@ Vtx skybox_skybox_mesh_vtx_4[8] = {
 	{{ {17175, 15422, 0}, 0, {-16, -16}, {0, 0, 0, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_4[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_4 + 0, 8, 0),
+Gfx bitdw_skybox_tri_4[] = {
+	gsSPVertex(bitdw_skybox_vtx_4 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13343,7 +13343,7 @@ Gfx skybox_skybox_mesh_tri_4[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_5[8] = {
+Vtx bitdw_skybox_vtx_5[8] = {
 	{{ {-12144, 15422, 12144}, 0, {1008, -16}, {0, 0, 0, 255} }},
 	{{ {-13971, 12771, 13971}, 0, {1008, 1008}, {182, 182, 182, 255} }},
 	{{ {-18501, 12771, 7663}, 0, {-16, 1008}, {182, 182, 182, 255} }},
@@ -13354,8 +13354,8 @@ Vtx skybox_skybox_mesh_vtx_5[8] = {
 	{{ {14659, 15422, -6072}, 0, {-16, -16}, {0, 0, 0, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_5[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_5 + 0, 8, 0),
+Gfx bitdw_skybox_tri_5[] = {
+	gsSPVertex(bitdw_skybox_vtx_5 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13363,7 +13363,7 @@ Gfx skybox_skybox_mesh_tri_5[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_6[8] = {
+Vtx bitdw_skybox_vtx_6[8] = {
 	{{ {12144, 15422, -12144}, 0, {-16, -16}, {0, 0, 0, 255} }},
 	{{ {6072, 15422, -14659}, 0, {1008, -16}, {0, 0, 0, 255} }},
 	{{ {7663, 12771, -18501}, 0, {1008, 1008}, {182, 182, 182, 255} }},
@@ -13374,8 +13374,8 @@ Vtx skybox_skybox_mesh_vtx_6[8] = {
 	{{ {-13971, 12771, 13971}, 0, {-16, 1008}, {182, 182, 182, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_6[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_6 + 0, 8, 0),
+Gfx bitdw_skybox_tri_6[] = {
+	gsSPVertex(bitdw_skybox_vtx_6 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13383,7 +13383,7 @@ Gfx skybox_skybox_mesh_tri_6[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_7[8] = {
+Vtx bitdw_skybox_vtx_7[8] = {
 	{{ {7663, 12771, -18501}, 0, {-16, 1008}, {182, 182, 182, 255} }},
 	{{ {6072, 15422, -14659}, 0, {-16, -16}, {0, 0, 0, 255} }},
 	{{ {0, 15422, -17175}, 0, {1008, -16}, {0, 0, 0, 255} }},
@@ -13394,8 +13394,8 @@ Vtx skybox_skybox_mesh_vtx_7[8] = {
 	{{ {0, 12771, 19758}, 0, {1010, 1008}, {182, 182, 182, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_7[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_7 + 0, 8, 0),
+Gfx bitdw_skybox_tri_7[] = {
+	gsSPVertex(bitdw_skybox_vtx_7 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13403,7 +13403,7 @@ Gfx skybox_skybox_mesh_tri_7[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_8[8] = {
+Vtx bitdw_skybox_vtx_8[8] = {
 	{{ {9254, 10121, 22342}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 	{{ {0, 10121, 22342}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 	{{ {0, 12771, 19758}, 0, {-16, -16}, {182, 182, 182, 255} }},
@@ -13414,8 +13414,8 @@ Vtx skybox_skybox_mesh_vtx_8[8] = {
 	{{ {-7663, 12771, -18501}, 0, {-16, -16}, {182, 182, 182, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_8[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_8 + 0, 8, 0),
+Gfx bitdw_skybox_tri_8[] = {
+	gsSPVertex(bitdw_skybox_vtx_8 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13423,7 +13423,7 @@ Gfx skybox_skybox_mesh_tri_8[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_9[8] = {
+Vtx bitdw_skybox_vtx_9[8] = {
 	{{ {-13971, 12771, -13971}, 0, {1008, -16}, {182, 182, 182, 255} }},
 	{{ {-15798, 10121, -15798}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 	{{ {-9254, 10121, -22342}, 0, {-16, 1008}, {248, 248, 248, 255} }},
@@ -13434,8 +13434,8 @@ Vtx skybox_skybox_mesh_vtx_9[8] = {
 	{{ {15798, 10121, 15798}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_9[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_9 + 0, 8, 0),
+Gfx bitdw_skybox_tri_9[] = {
+	gsSPVertex(bitdw_skybox_vtx_9 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13443,7 +13443,7 @@ Gfx skybox_skybox_mesh_tri_9[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_10[8] = {
+Vtx bitdw_skybox_vtx_10[8] = {
 	{{ {22342, 10121, 9254}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 	{{ {15798, 10121, 15798}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 	{{ {13971, 12771, 13971}, 0, {-16, -16}, {182, 182, 182, 255} }},
@@ -13454,8 +13454,8 @@ Vtx skybox_skybox_mesh_vtx_10[8] = {
 	{{ {-15798, 10121, -15798}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_10[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_10 + 0, 8, 0),
+Gfx bitdw_skybox_tri_10[] = {
+	gsSPVertex(bitdw_skybox_vtx_10 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13463,7 +13463,7 @@ Gfx skybox_skybox_mesh_tri_10[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_11[8] = {
+Vtx bitdw_skybox_vtx_11[8] = {
 	{{ {-18501, 12771, -7663}, 0, {-16, -16}, {182, 182, 182, 255} }},
 	{{ {-19758, 12771, 0}, 0, {1008, -16}, {182, 182, 182, 255} }},
 	{{ {-22342, 10121, 0}, 0, {1008, 1008}, {248, 248, 248, 255} }},
@@ -13474,8 +13474,8 @@ Vtx skybox_skybox_mesh_vtx_11[8] = {
 	{{ {18501, 12771, 7663}, 0, {-16, -16}, {182, 182, 182, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_11[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_11 + 0, 8, 0),
+Gfx bitdw_skybox_tri_11[] = {
+	gsSPVertex(bitdw_skybox_vtx_11 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13483,7 +13483,7 @@ Gfx skybox_skybox_mesh_tri_11[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_12[8] = {
+Vtx bitdw_skybox_vtx_12[8] = {
 	{{ {18501, 12771, -7663}, 0, {1008, -16}, {182, 182, 182, 255} }},
 	{{ {22342, 10121, -9254}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 	{{ {22342, 10121, 0}, 0, {-16, 1008}, {248, 248, 248, 255} }},
@@ -13494,8 +13494,8 @@ Vtx skybox_skybox_mesh_vtx_12[8] = {
 	{{ {-22342, 10121, 0}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_12[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_12 + 0, 8, 0),
+Gfx bitdw_skybox_tri_12[] = {
+	gsSPVertex(bitdw_skybox_vtx_12 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13503,7 +13503,7 @@ Gfx skybox_skybox_mesh_tri_12[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_13[8] = {
+Vtx bitdw_skybox_vtx_13[8] = {
 	{{ {13971, 12771, -13971}, 0, {1008, -16}, {182, 182, 182, 255} }},
 	{{ {15798, 10121, -15798}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 	{{ {22342, 10121, -9254}, 0, {-16, 1008}, {248, 248, 248, 255} }},
@@ -13514,8 +13514,8 @@ Vtx skybox_skybox_mesh_vtx_13[8] = {
 	{{ {-18501, 12771, 7663}, 0, {-16, -16}, {182, 182, 182, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_13[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_13 + 0, 8, 0),
+Gfx bitdw_skybox_tri_13[] = {
+	gsSPVertex(bitdw_skybox_vtx_13 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13523,7 +13523,7 @@ Gfx skybox_skybox_mesh_tri_13[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_14[8] = {
+Vtx bitdw_skybox_vtx_14[8] = {
 	{{ {-13971, 12771, 13971}, 0, {-16, -16}, {182, 182, 182, 255} }},
 	{{ {-7663, 12771, 18501}, 0, {1008, -16}, {182, 182, 182, 255} }},
 	{{ {-9254, 10121, 22342}, 0, {1008, 1008}, {248, 248, 248, 255} }},
@@ -13534,8 +13534,8 @@ Vtx skybox_skybox_mesh_vtx_14[8] = {
 	{{ {15798, 10121, -15798}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_14[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_14 + 0, 8, 0),
+Gfx bitdw_skybox_tri_14[] = {
+	gsSPVertex(bitdw_skybox_vtx_14 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13543,7 +13543,7 @@ Gfx skybox_skybox_mesh_tri_14[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_15[8] = {
+Vtx bitdw_skybox_vtx_15[8] = {
 	{{ {-9254, 10121, 22342}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 	{{ {-7663, 12771, 18501}, 0, {-16, -16}, {182, 182, 182, 255} }},
 	{{ {0, 12771, 19758}, 0, {1010, -16}, {182, 182, 182, 255} }},
@@ -13554,8 +13554,8 @@ Vtx skybox_skybox_mesh_vtx_15[8] = {
 	{{ {0, 10121, -22342}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_15[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_15 + 0, 8, 0),
+Gfx bitdw_skybox_tri_15[] = {
+	gsSPVertex(bitdw_skybox_vtx_15 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -13563,7 +13563,7 @@ Gfx skybox_skybox_mesh_tri_15[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_16[11] = {
+Vtx bitdw_skybox_vtx_16[11] = {
 	{{ {9254, 10121, 22342}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {9840, 5060, 23757}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {4627, 5060, 25916}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -13577,8 +13577,8 @@ Vtx skybox_skybox_mesh_vtx_16[11] = {
 	{{ {0, 5060, -25916}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_16[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_16 + 0, 11, 0),
+Gfx bitdw_skybox_tri_16[] = {
+	gsSPVertex(bitdw_skybox_vtx_16 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 4, 0),
 	gsSP1Triangle(4, 2, 5, 0),
@@ -13588,7 +13588,7 @@ Gfx skybox_skybox_mesh_tri_16[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_17[11] = {
+Vtx bitdw_skybox_vtx_17[11] = {
 	{{ {-15053, 5060, -21597}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {-9840, 5060, -23757}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {-9254, 10121, -22342}, 0, {-16, -16}, {248, 248, 248, 255} }},
@@ -13602,8 +13602,8 @@ Vtx skybox_skybox_mesh_vtx_17[11] = {
 	{{ {9840, 5060, 23757}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_17[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_17 + 0, 11, 0),
+Gfx bitdw_skybox_tri_17[] = {
+	gsSPVertex(bitdw_skybox_vtx_17 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(4, 3, 2, 0),
@@ -13613,7 +13613,7 @@ Gfx skybox_skybox_mesh_tri_17[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_18[12] = {
+Vtx bitdw_skybox_vtx_18[12] = {
 	{{ {-22342, 10121, -9254}, 0, {1008, -16}, {248, 248, 248, 255} }},
 	{{ {-23757, 5060, -9840}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {-21597, 5060, -15053}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -13628,8 +13628,8 @@ Vtx skybox_skybox_mesh_vtx_18[12] = {
 	{{ {18325, 5060, 18325}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_18[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_18 + 0, 12, 0),
+Gfx bitdw_skybox_tri_18[] = {
+	gsSPVertex(bitdw_skybox_vtx_18 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(0, 6, 7, 0),
@@ -13639,7 +13639,7 @@ Gfx skybox_skybox_mesh_tri_18[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_19[12] = {
+Vtx bitdw_skybox_vtx_19[12] = {
 	{{ {-23757, 5060, -9840}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {-22342, 10121, -9254}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {-25916, 5060, -4627}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -13654,8 +13654,8 @@ Vtx skybox_skybox_mesh_vtx_19[12] = {
 	{{ {25916, 5060, 0}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_19[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_19 + 0, 12, 0),
+Gfx bitdw_skybox_tri_19[] = {
+	gsSPVertex(bitdw_skybox_vtx_19 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
@@ -13665,7 +13665,7 @@ Gfx skybox_skybox_mesh_tri_19[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_20[11] = {
+Vtx bitdw_skybox_vtx_20[11] = {
 	{{ {22342, 10121, -9254}, 0, {1008, -16}, {248, 248, 248, 255} }},
 	{{ {23757, 5060, -9840}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {25916, 5060, -4627}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -13679,8 +13679,8 @@ Vtx skybox_skybox_mesh_vtx_20[11] = {
 	{{ {25916, 5060, 0}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_20[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_20 + 0, 11, 0),
+Gfx bitdw_skybox_tri_20[] = {
+	gsSPVertex(bitdw_skybox_vtx_20 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(3, 5, 6, 0),
@@ -13690,7 +13690,7 @@ Gfx skybox_skybox_mesh_tri_20[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_21[11] = {
+Vtx bitdw_skybox_vtx_21[11] = {
 	{{ {22342, 10121, -9254}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {21597, 5060, -15053}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {23757, 5060, -9840}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -13704,8 +13704,8 @@ Vtx skybox_skybox_mesh_vtx_21[11] = {
 	{{ {18325, 5060, -18325}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_21[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_21 + 0, 11, 0),
+Gfx bitdw_skybox_tri_21[] = {
+	gsSPVertex(bitdw_skybox_vtx_21 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(4, 3, 6, 0),
@@ -13715,7 +13715,7 @@ Gfx skybox_skybox_mesh_tri_21[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_22[11] = {
+Vtx bitdw_skybox_vtx_22[11] = {
 	{{ {9254, 10121, -22342}, 0, {1008, -16}, {248, 248, 248, 255} }},
 	{{ {9840, 5060, -23757}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {15053, 5060, -21597}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -13729,8 +13729,8 @@ Vtx skybox_skybox_mesh_vtx_22[11] = {
 	{{ {18325, 5060, -18325}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_22[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_22 + 0, 11, 0),
+Gfx bitdw_skybox_tri_22[] = {
+	gsSPVertex(bitdw_skybox_vtx_22 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(3, 5, 6, 0),
@@ -13740,7 +13740,7 @@ Gfx skybox_skybox_mesh_tri_22[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_23[11] = {
+Vtx bitdw_skybox_vtx_23[11] = {
 	{{ {9254, 10121, -22342}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {4627, 5060, -25916}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {9840, 5060, -23757}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -13754,8 +13754,8 @@ Vtx skybox_skybox_mesh_vtx_23[11] = {
 	{{ {0, 5060, -25916}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_23[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_23 + 0, 11, 0),
+Gfx bitdw_skybox_tri_23[] = {
+	gsSPVertex(bitdw_skybox_vtx_23 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(4, 3, 6, 0),
@@ -13765,7 +13765,7 @@ Gfx skybox_skybox_mesh_tri_23[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_24[10] = {
+Vtx bitdw_skybox_vtx_24[10] = {
 	{{ {0, 0, -29491}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {0, 5060, -25916}, 0, {-16, -16}, {255, 255, 255, 255} }},
 	{{ {-4627, 5060, -25916}, 0, {496, -16}, {255, 255, 255, 255} }},
@@ -13778,8 +13778,8 @@ Vtx skybox_skybox_mesh_vtx_24[10] = {
 	{{ {9840, 5060, 23757}, 0, {1008, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_24[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_24 + 0, 10, 0),
+Gfx bitdw_skybox_tri_24[] = {
+	gsSPVertex(bitdw_skybox_vtx_24 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 0, 2, 0),
 	gsSP1Triangle(4, 3, 2, 0),
@@ -13789,7 +13789,7 @@ Gfx skybox_skybox_mesh_tri_24[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_25[12] = {
+Vtx bitdw_skybox_vtx_25[12] = {
 	{{ {15053, 5060, 21597}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {18325, 5060, 18325}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {20853, 0, 20853}, 0, {1008, 1008}, {255, 255, 255, 255} }},
@@ -13804,8 +13804,8 @@ Vtx skybox_skybox_mesh_vtx_25[12] = {
 	{{ {-10426, 0, -25172}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_25[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_25 + 0, 12, 0),
+Gfx bitdw_skybox_tri_25[] = {
+	gsSPVertex(bitdw_skybox_vtx_25 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 0, 0),
@@ -13815,7 +13815,7 @@ Gfx skybox_skybox_mesh_tri_25[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_26[13] = {
+Vtx bitdw_skybox_vtx_26[13] = {
 	{{ {21597, 5060, 15053}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {20853, 0, 20853}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {18325, 5060, 18325}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -13831,8 +13831,8 @@ Vtx skybox_skybox_mesh_vtx_26[13] = {
 	{{ {-23757, 5060, -9840}, 0, {1008, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_26[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_26 + 0, 13, 0),
+Gfx bitdw_skybox_tri_26[] = {
+	gsSPVertex(bitdw_skybox_vtx_26 + 0, 13, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
@@ -13842,7 +13842,7 @@ Gfx skybox_skybox_mesh_tri_26[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_27[12] = {
+Vtx bitdw_skybox_vtx_27[12] = {
 	{{ {25916, 5060, 4627}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {25916, 5060, 0}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {29491, 0, 0}, 0, {1008, 1008}, {255, 255, 255, 255} }},
@@ -13857,8 +13857,8 @@ Vtx skybox_skybox_mesh_vtx_27[12] = {
 	{{ {-25916, 5060, -4627}, 0, {496, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_27[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_27 + 0, 12, 0),
+Gfx bitdw_skybox_tri_27[] = {
+	gsSPVertex(bitdw_skybox_vtx_27 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
@@ -13868,7 +13868,7 @@ Gfx skybox_skybox_mesh_tri_27[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_28[11] = {
+Vtx bitdw_skybox_vtx_28[11] = {
 	{{ {25916, 5060, 0}, 0, {-16, -16}, {255, 255, 255, 255} }},
 	{{ {25916, 5060, -4627}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {29491, 0, 0}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -13882,8 +13882,8 @@ Vtx skybox_skybox_mesh_vtx_28[11] = {
 	{{ {-23757, 5060, 9840}, 0, {1008, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_28[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_28 + 0, 11, 0),
+Gfx bitdw_skybox_tri_28[] = {
+	gsSPVertex(bitdw_skybox_vtx_28 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 4, 0),
 	gsSP1Triangle(5, 3, 4, 0),
@@ -13893,7 +13893,7 @@ Gfx skybox_skybox_mesh_tri_28[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_29[11] = {
+Vtx bitdw_skybox_vtx_29[11] = {
 	{{ {21597, 5060, -15053}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {18325, 5060, -18325}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {20853, 0, -20853}, 0, {1008, 1008}, {255, 255, 255, 255} }},
@@ -13907,8 +13907,8 @@ Vtx skybox_skybox_mesh_vtx_29[11] = {
 	{{ {-18325, 5060, 18325}, 0, {1008, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_29[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_29 + 0, 11, 0),
+Gfx bitdw_skybox_tri_29[] = {
+	gsSPVertex(bitdw_skybox_vtx_29 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(2, 5, 4, 0),
@@ -13918,7 +13918,7 @@ Gfx skybox_skybox_mesh_tri_29[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_30[11] = {
+Vtx bitdw_skybox_vtx_30[11] = {
 	{{ {18325, 5060, -18325}, 0, {-16, -16}, {255, 255, 255, 255} }},
 	{{ {15053, 5060, -21597}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {20853, 0, -20853}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -13932,8 +13932,8 @@ Vtx skybox_skybox_mesh_vtx_30[11] = {
 	{{ {-9840, 5060, 23757}, 0, {1008, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_30[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_30 + 0, 11, 0),
+Gfx bitdw_skybox_tri_30[] = {
+	gsSPVertex(bitdw_skybox_vtx_30 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 4, 0),
 	gsSP1Triangle(5, 4, 3, 0),
@@ -13943,7 +13943,7 @@ Gfx skybox_skybox_mesh_tri_30[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_31[11] = {
+Vtx bitdw_skybox_vtx_31[11] = {
 	{{ {0, 0, -29491}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {4627, 5060, -25916}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {0, 5060, -25916}, 0, {1008, -16}, {255, 255, 255, 255} }},
@@ -13957,8 +13957,8 @@ Vtx skybox_skybox_mesh_vtx_31[11] = {
 	{{ {0, 5060, 25916}, 0, {1008, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_31[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_31 + 0, 11, 0),
+Gfx bitdw_skybox_tri_31[] = {
+	gsSPVertex(bitdw_skybox_vtx_31 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(5, 4, 0, 0),
@@ -13968,7 +13968,7 @@ Gfx skybox_skybox_mesh_tri_31[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_32[10] = {
+Vtx bitdw_skybox_vtx_32[10] = {
 	{{ {-10426, 0, -25172}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {-9840, -5060, -23757}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {-4627, -5060, -25916}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -13981,8 +13981,8 @@ Vtx skybox_skybox_mesh_vtx_32[10] = {
 	{{ {0, -5060, 25916}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_32[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_32 + 0, 10, 0),
+Gfx bitdw_skybox_tri_32[] = {
+	gsSPVertex(bitdw_skybox_vtx_32 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(3, 2, 4, 0),
@@ -13992,7 +13992,7 @@ Gfx skybox_skybox_mesh_tri_32[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_33[12] = {
+Vtx bitdw_skybox_vtx_33[12] = {
 	{{ {18325, -5060, 18325}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {15053, -5060, 21597}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {20853, 0, 20853}, 0, {1008, -16}, {255, 255, 255, 255} }},
@@ -14007,8 +14007,8 @@ Vtx skybox_skybox_mesh_vtx_33[12] = {
 	{{ {-9840, -5060, -23757}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_33[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_33 + 0, 12, 0),
+Gfx bitdw_skybox_tri_33[] = {
+	gsSPVertex(bitdw_skybox_vtx_33 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 1, 7, 0),
@@ -14018,7 +14018,7 @@ Gfx skybox_skybox_mesh_tri_33[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_34[13] = {
+Vtx bitdw_skybox_vtx_34[13] = {
 	{{ {21597, -5060, 15053}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {18325, -5060, 18325}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {20853, 0, 20853}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -14034,8 +14034,8 @@ Vtx skybox_skybox_mesh_vtx_34[13] = {
 	{{ {-23757, -5060, -9840}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_34[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_34 + 0, 13, 0),
+Gfx bitdw_skybox_tri_34[] = {
+	gsSPVertex(bitdw_skybox_vtx_34 + 0, 13, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
@@ -14045,7 +14045,7 @@ Gfx skybox_skybox_mesh_tri_34[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_35[12] = {
+Vtx bitdw_skybox_vtx_35[12] = {
 	{{ {25916, -5060, 0}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {25916, -5060, 4627}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {29491, 0, 0}, 0, {1008, -16}, {255, 255, 255, 255} }},
@@ -14060,8 +14060,8 @@ Vtx skybox_skybox_mesh_vtx_35[12] = {
 	{{ {-23757, -5060, -9840}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_35[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_35 + 0, 12, 0),
+Gfx bitdw_skybox_tri_35[] = {
+	gsSPVertex(bitdw_skybox_vtx_35 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(2, 6, 7, 0),
@@ -14071,7 +14071,7 @@ Gfx skybox_skybox_mesh_tri_35[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_36[11] = {
+Vtx bitdw_skybox_vtx_36[11] = {
 	{{ {25916, -5060, -4627}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {25916, -5060, 0}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {29491, 0, 0}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -14085,8 +14085,8 @@ Vtx skybox_skybox_mesh_vtx_36[11] = {
 	{{ {-25916, -5060, 0}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_36[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_36 + 0, 11, 0),
+Gfx bitdw_skybox_tri_36[] = {
+	gsSPVertex(bitdw_skybox_vtx_36 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(5, 4, 2, 0),
@@ -14096,7 +14096,7 @@ Gfx skybox_skybox_mesh_tri_36[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_37[11] = {
+Vtx bitdw_skybox_vtx_37[11] = {
 	{{ {18325, -5060, -18325}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {21597, -5060, -15053}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {20853, 0, -20853}, 0, {1008, -16}, {255, 255, 255, 255} }},
@@ -14110,8 +14110,8 @@ Vtx skybox_skybox_mesh_vtx_37[11] = {
 	{{ {-23757, -5060, 9840}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_37[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_37 + 0, 11, 0),
+Gfx bitdw_skybox_tri_37[] = {
+	gsSPVertex(bitdw_skybox_vtx_37 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 4, 0),
 	gsSP1Triangle(5, 4, 3, 0),
@@ -14121,7 +14121,7 @@ Gfx skybox_skybox_mesh_tri_37[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_38[11] = {
+Vtx bitdw_skybox_vtx_38[11] = {
 	{{ {15053, -5060, -21597}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {18325, -5060, -18325}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {20853, 0, -20853}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -14135,8 +14135,8 @@ Vtx skybox_skybox_mesh_vtx_38[11] = {
 	{{ {-18325, -5060, 18325}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_38[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_38 + 0, 11, 0),
+Gfx bitdw_skybox_tri_38[] = {
+	gsSPVertex(bitdw_skybox_vtx_38 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(5, 4, 2, 0),
@@ -14146,7 +14146,7 @@ Gfx skybox_skybox_mesh_tri_38[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_39[11] = {
+Vtx bitdw_skybox_vtx_39[11] = {
 	{{ {0, 0, -29491}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {0, -5060, -25916}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {4627, -5060, -25916}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -14160,8 +14160,8 @@ Vtx skybox_skybox_mesh_vtx_39[11] = {
 	{{ {-9840, -5060, 23757}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_39[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_39 + 0, 11, 0),
+Gfx bitdw_skybox_tri_39[] = {
+	gsSPVertex(bitdw_skybox_vtx_39 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 0, 4, 0),
 	gsSP1Triangle(3, 4, 5, 0),
@@ -14171,7 +14171,7 @@ Gfx skybox_skybox_mesh_tri_39[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_40[10] = {
+Vtx bitdw_skybox_vtx_40[10] = {
 	{{ {-4627, -5060, -25916}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {-9840, -5060, -23757}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {-9254, -10121, -22342}, 0, {1008, 1008}, {248, 248, 248, 255} }},
@@ -14184,8 +14184,8 @@ Vtx skybox_skybox_mesh_vtx_40[10] = {
 	{{ {0, -5060, 25916}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_40[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_40 + 0, 10, 0),
+Gfx bitdw_skybox_tri_40[] = {
+	gsSPVertex(bitdw_skybox_vtx_40 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 0, 0),
 	gsSP1Triangle(3, 4, 0, 0),
@@ -14195,7 +14195,7 @@ Gfx skybox_skybox_mesh_tri_40[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_41[11] = {
+Vtx bitdw_skybox_vtx_41[11] = {
 	{{ {-15053, -5060, -21597}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {-9254, -10121, -22342}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 	{{ {-9840, -5060, -23757}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -14209,8 +14209,8 @@ Vtx skybox_skybox_mesh_vtx_41[11] = {
 	{{ {9840, -5060, 23757}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_41[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_41 + 0, 11, 0),
+Gfx bitdw_skybox_tri_41[] = {
+	gsSPVertex(bitdw_skybox_vtx_41 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(4, 3, 1, 0),
@@ -14220,7 +14220,7 @@ Gfx skybox_skybox_mesh_tri_41[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_42[12] = {
+Vtx bitdw_skybox_vtx_42[12] = {
 	{{ {22342, -10121, 9254}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 	{{ {21597, -5060, 15053}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {23757, -5060, 9840}, 0, {1008, -16}, {255, 255, 255, 255} }},
@@ -14235,8 +14235,8 @@ Vtx skybox_skybox_mesh_vtx_42[12] = {
 	{{ {18325, -5060, 18325}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_42[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_42 + 0, 12, 0),
+Gfx bitdw_skybox_tri_42[] = {
+	gsSPVertex(bitdw_skybox_vtx_42 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
@@ -14246,7 +14246,7 @@ Gfx skybox_skybox_mesh_tri_42[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_43[12] = {
+Vtx bitdw_skybox_vtx_43[12] = {
 	{{ {25916, -5060, 4627}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {22342, -10121, 9254}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 	{{ {23757, -5060, 9840}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -14261,8 +14261,8 @@ Vtx skybox_skybox_mesh_vtx_43[12] = {
 	{{ {-25916, -5060, 0}, 0, {1008, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_43[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_43 + 0, 12, 0),
+Gfx bitdw_skybox_tri_43[] = {
+	gsSPVertex(bitdw_skybox_vtx_43 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
@@ -14272,7 +14272,7 @@ Gfx skybox_skybox_mesh_tri_43[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_44[11] = {
+Vtx bitdw_skybox_vtx_44[11] = {
 	{{ {25916, -5060, -4627}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {23757, -5060, -9840}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {22342, -10121, -9254}, 0, {1008, 1008}, {248, 248, 248, 255} }},
@@ -14286,8 +14286,8 @@ Vtx skybox_skybox_mesh_vtx_44[11] = {
 	{{ {-25916, -5060, 0}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_44[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_44 + 0, 11, 0),
+Gfx bitdw_skybox_tri_44[] = {
+	gsSPVertex(bitdw_skybox_vtx_44 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 4, 0),
 	gsSP1Triangle(5, 4, 3, 0),
@@ -14297,7 +14297,7 @@ Gfx skybox_skybox_mesh_tri_44[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_45[11] = {
+Vtx bitdw_skybox_vtx_45[11] = {
 	{{ {21597, -5060, -15053}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {22342, -10121, -9254}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 	{{ {23757, -5060, -9840}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -14311,8 +14311,8 @@ Vtx skybox_skybox_mesh_vtx_45[11] = {
 	{{ {-23757, -5060, 9840}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_45[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_45 + 0, 11, 0),
+Gfx bitdw_skybox_tri_45[] = {
+	gsSPVertex(bitdw_skybox_vtx_45 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(1, 4, 3, 0),
@@ -14322,7 +14322,7 @@ Gfx skybox_skybox_mesh_tri_45[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_46[12] = {
+Vtx bitdw_skybox_vtx_46[12] = {
 	{{ {15053, -5060, -21597}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {9840, -5060, -23757}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {9254, -10121, -22342}, 0, {1008, 1008}, {248, 248, 248, 255} }},
@@ -14337,8 +14337,8 @@ Vtx skybox_skybox_mesh_vtx_46[12] = {
 	{{ {-18325, -5060, 18325}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_46[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_46 + 0, 12, 0),
+Gfx bitdw_skybox_tri_46[] = {
+	gsSPVertex(bitdw_skybox_vtx_46 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 5, 4, 0),
@@ -14348,7 +14348,7 @@ Gfx skybox_skybox_mesh_tri_46[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_47[12] = {
+Vtx bitdw_skybox_vtx_47[12] = {
 	{{ {4627, -5060, -25916}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {9254, -10121, -22342}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 	{{ {9840, -5060, -23757}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -14363,8 +14363,8 @@ Vtx skybox_skybox_mesh_vtx_47[12] = {
 	{{ {-9840, -5060, 23757}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_47[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_47 + 0, 12, 0),
+Gfx bitdw_skybox_tri_47[] = {
+	gsSPVertex(bitdw_skybox_vtx_47 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 5, 4, 0),
@@ -14374,7 +14374,7 @@ Gfx skybox_skybox_mesh_tri_47[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_48[10] = {
+Vtx bitdw_skybox_vtx_48[10] = {
 	{{ {0, -10121, 22342}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {4627, -12771, 19758}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {0, -12771, 19758}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -14387,8 +14387,8 @@ Vtx skybox_skybox_mesh_vtx_48[10] = {
 	{{ {-7663, -12771, -18501}, 0, {1008, 1008}, {252, 252, 252, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_48[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_48 + 0, 10, 0),
+Gfx bitdw_skybox_tri_48[] = {
+	gsSPVertex(bitdw_skybox_vtx_48 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 1, 0, 0),
 	gsSP1Triangle(3, 4, 1, 0),
@@ -14398,7 +14398,7 @@ Gfx skybox_skybox_mesh_tri_48[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_49[10] = {
+Vtx bitdw_skybox_vtx_49[10] = {
 	{{ {7663, -12771, 18501}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {9254, -10121, 22342}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {10699, -12771, 17243}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -14411,8 +14411,8 @@ Vtx skybox_skybox_mesh_vtx_49[10] = {
 	{{ {-7663, -12771, -18501}, 0, {-16, 1008}, {252, 252, 252, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_49[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_49 + 0, 10, 0),
+Gfx bitdw_skybox_tri_49[] = {
+	gsSPVertex(bitdw_skybox_vtx_49 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(2, 3, 4, 0),
@@ -14422,7 +14422,7 @@ Gfx skybox_skybox_mesh_tri_49[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_50[10] = {
+Vtx bitdw_skybox_vtx_50[10] = {
 	{{ {15798, -10121, 15798}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {17243, -12771, 10699}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {13971, -12771, 13971}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -14435,8 +14435,8 @@ Vtx skybox_skybox_mesh_vtx_50[10] = {
 	{{ {-13971, -12771, -13971}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_50[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_50 + 0, 10, 0),
+Gfx bitdw_skybox_tri_50[] = {
+	gsSPVertex(bitdw_skybox_vtx_50 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 1, 0, 0),
 	gsSP1Triangle(3, 4, 1, 0),
@@ -14446,7 +14446,7 @@ Gfx skybox_skybox_mesh_tri_50[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_51[10] = {
+Vtx bitdw_skybox_vtx_51[10] = {
 	{{ {22342, -10121, 9254}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {19758, -12771, 4627}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {18501, -12771, 7663}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -14459,8 +14459,8 @@ Vtx skybox_skybox_mesh_vtx_51[10] = {
 	{{ {-18501, -12771, -7663}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_51[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_51 + 0, 10, 0),
+Gfx bitdw_skybox_tri_51[] = {
+	gsSPVertex(bitdw_skybox_vtx_51 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 3, 1, 0),
 	gsSP1Triangle(4, 1, 3, 0),
@@ -14470,7 +14470,7 @@ Gfx skybox_skybox_mesh_tri_51[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_52[10] = {
+Vtx bitdw_skybox_vtx_52[10] = {
 	{{ {22342, -10121, 0}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {19758, -12771, -4627}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {19758, -12771, 0}, 0, {-16, 1008}, {251, 251, 251, 255} }},
@@ -14483,8 +14483,8 @@ Vtx skybox_skybox_mesh_vtx_52[10] = {
 	{{ {-19758, -12771, 0}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_52[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_52 + 0, 10, 0),
+Gfx bitdw_skybox_tri_52[] = {
+	gsSPVertex(bitdw_skybox_vtx_52 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 3, 1, 0),
 	gsSP1Triangle(1, 3, 4, 0),
@@ -14494,7 +14494,7 @@ Gfx skybox_skybox_mesh_tri_52[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_53[10] = {
+Vtx bitdw_skybox_vtx_53[10] = {
 	{{ {22342, -10121, -9254}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {17243, -12771, -10699}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {18501, -12771, -7663}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -14507,8 +14507,8 @@ Vtx skybox_skybox_mesh_vtx_53[10] = {
 	{{ {-18501, -12771, 7663}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_53[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_53 + 0, 10, 0),
+Gfx bitdw_skybox_tri_53[] = {
+	gsSPVertex(bitdw_skybox_vtx_53 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 1, 0, 0),
 	gsSP1Triangle(4, 1, 3, 0),
@@ -14518,7 +14518,7 @@ Gfx skybox_skybox_mesh_tri_53[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_54[10] = {
+Vtx bitdw_skybox_vtx_54[10] = {
 	{{ {-15798, -10121, 15798}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {-10699, -12771, 17243}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {-13971, -12771, 13971}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -14531,8 +14531,8 @@ Vtx skybox_skybox_mesh_vtx_54[10] = {
 	{{ {7663, -12771, -18501}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_54[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_54 + 0, 10, 0),
+Gfx bitdw_skybox_tri_54[] = {
+	gsSPVertex(bitdw_skybox_vtx_54 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 1, 0, 0),
 	gsSP1Triangle(3, 4, 1, 0),
@@ -14542,7 +14542,7 @@ Gfx skybox_skybox_mesh_tri_54[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_55[10] = {
+Vtx bitdw_skybox_vtx_55[10] = {
 	{{ {-9254, -10121, 22342}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {-4627, -12771, 19758}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {-7663, -12771, 18501}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -14555,8 +14555,8 @@ Vtx skybox_skybox_mesh_vtx_55[10] = {
 	{{ {0, -12771, -19758}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_55[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_55 + 0, 10, 0),
+Gfx bitdw_skybox_tri_55[] = {
+	gsSPVertex(bitdw_skybox_vtx_55 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 3, 1, 0),
 	gsSP1Triangle(1, 3, 4, 0),
@@ -14566,7 +14566,7 @@ Gfx skybox_skybox_mesh_tri_55[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_56[10] = {
+Vtx bitdw_skybox_vtx_56[10] = {
 	{{ {-7663, -12771, -18501}, 0, {1008, -16}, {252, 252, 252, 255} }},
 	{{ {-6072, -15422, -14659}, 0, {1008, 1008}, {0, 0, 0, 255} }},
 	{{ {-4627, -12771, -19758}, 0, {496, -16}, {255, 255, 255, 255} }},
@@ -14579,8 +14579,8 @@ Vtx skybox_skybox_mesh_vtx_56[10] = {
 	{{ {0, -12771, 19758}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_56[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_56 + 0, 10, 0),
+Gfx bitdw_skybox_tri_56[] = {
+	gsSPVertex(bitdw_skybox_vtx_56 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(2, 3, 4, 0),
@@ -14590,7 +14590,7 @@ Gfx skybox_skybox_mesh_tri_56[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_57[10] = {
+Vtx bitdw_skybox_vtx_57[10] = {
 	{{ {-10699, -12771, -17243}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {-13971, -12771, -13971}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {-12144, -15422, -12144}, 0, {1008, 1008}, {0, 0, 0, 255} }},
@@ -14603,8 +14603,8 @@ Vtx skybox_skybox_mesh_vtx_57[10] = {
 	{{ {7663, -12771, 18501}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_57[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_57 + 0, 10, 0),
+Gfx bitdw_skybox_tri_57[] = {
+	gsSPVertex(bitdw_skybox_vtx_57 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 0, 0),
 	gsSP1Triangle(3, 4, 0, 0),
@@ -14614,7 +14614,7 @@ Gfx skybox_skybox_mesh_tri_57[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_58[10] = {
+Vtx bitdw_skybox_vtx_58[10] = {
 	{{ {18501, -12771, 7663}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {14659, -15422, 6072}, 0, {1008, 1008}, {0, 0, 0, 255} }},
 	{{ {17243, -12771, 10699}, 0, {496, -16}, {255, 255, 255, 255} }},
@@ -14627,8 +14627,8 @@ Vtx skybox_skybox_mesh_vtx_58[10] = {
 	{{ {-13971, -12771, -13971}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_58[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_58 + 0, 10, 0),
+Gfx bitdw_skybox_tri_58[] = {
+	gsSPVertex(bitdw_skybox_vtx_58 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(2, 3, 4, 0),
@@ -14638,7 +14638,7 @@ Gfx skybox_skybox_mesh_tri_58[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_59[10] = {
+Vtx bitdw_skybox_vtx_59[10] = {
 	{{ {19758, -12771, 4627}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {19758, -12771, 0}, 0, {1008, -16}, {251, 251, 251, 255} }},
 	{{ {17175, -15422, 0}, 0, {1008, 1008}, {2, 2, 2, 255} }},
@@ -14651,8 +14651,8 @@ Vtx skybox_skybox_mesh_vtx_59[10] = {
 	{{ {-18501, -12771, -7663}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_59[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_59 + 0, 10, 0),
+Gfx bitdw_skybox_tri_59[] = {
+	gsSPVertex(bitdw_skybox_vtx_59 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 0, 2, 0),
 	gsSP1Triangle(4, 0, 3, 0),
@@ -14662,7 +14662,7 @@ Gfx skybox_skybox_mesh_tri_59[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_60[10] = {
+Vtx bitdw_skybox_vtx_60[10] = {
 	{{ {18501, -12771, -7663}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {14659, -15422, -6072}, 0, {1008, 1008}, {59, 59, 59, 255} }},
 	{{ {19758, -12771, -4627}, 0, {496, -16}, {255, 255, 255, 255} }},
@@ -14675,8 +14675,8 @@ Vtx skybox_skybox_mesh_vtx_60[10] = {
 	{{ {-19758, -12771, 0}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_60[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_60 + 0, 10, 0),
+Gfx bitdw_skybox_tri_60[] = {
+	gsSPVertex(bitdw_skybox_vtx_60 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(2, 3, 4, 0),
@@ -14686,7 +14686,7 @@ Gfx skybox_skybox_mesh_tri_60[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_61[10] = {
+Vtx bitdw_skybox_vtx_61[10] = {
 	{{ {17243, -12771, -10699}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {13971, -12771, -13971}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {12144, -15422, -12144}, 0, {1008, 1008}, {0, 0, 0, 255} }},
@@ -14699,8 +14699,8 @@ Vtx skybox_skybox_mesh_vtx_61[10] = {
 	{{ {-18501, -12771, 7663}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_61[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_61 + 0, 10, 0),
+Gfx bitdw_skybox_tri_61[] = {
+	gsSPVertex(bitdw_skybox_vtx_61 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 0, 2, 0),
 	gsSP1Triangle(4, 0, 3, 0),
@@ -14710,7 +14710,7 @@ Gfx skybox_skybox_mesh_tri_61[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_62[10] = {
+Vtx bitdw_skybox_vtx_62[10] = {
 	{{ {7663, -12771, -18501}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {6072, -15422, -14659}, 0, {1008, 1008}, {0, 0, 0, 255} }},
 	{{ {10699, -12771, -17243}, 0, {496, -16}, {255, 255, 255, 255} }},
@@ -14723,8 +14723,8 @@ Vtx skybox_skybox_mesh_vtx_62[10] = {
 	{{ {-13971, -12771, 13971}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_62[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_62 + 0, 10, 0),
+Gfx bitdw_skybox_tri_62[] = {
+	gsSPVertex(bitdw_skybox_vtx_62 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(2, 3, 4, 0),
@@ -14734,7 +14734,7 @@ Gfx skybox_skybox_mesh_tri_62[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_skybox_mesh_vtx_63[10] = {
+Vtx bitdw_skybox_vtx_63[10] = {
 	{{ {4627, -12771, -19758}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {0, -12771, -19758}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {0, -15422, -17175}, 0, {1008, 1008}, {0, 0, 0, 255} }},
@@ -14747,8 +14747,8 @@ Vtx skybox_skybox_mesh_vtx_63[10] = {
 	{{ {-7663, -12771, 18501}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_skybox_mesh_tri_63[] = {
-	gsSPVertex(skybox_skybox_mesh_vtx_63 + 0, 10, 0),
+Gfx bitdw_skybox_tri_63[] = {
+	gsSPVertex(bitdw_skybox_vtx_63 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 0, 2, 0),
 	gsSP1Triangle(4, 0, 3, 0),
@@ -16294,198 +16294,198 @@ Gfx mat_revert_skybox__64[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx skybox_skybox_mesh[] = {
+Gfx bitdw_skybox[] = {
 	gsSPDisplayList(mat_skybox__1),
-	gsSPDisplayList(skybox_skybox_mesh_tri_0),
+	gsSPDisplayList(bitdw_skybox_tri_0),
 	gsSPDisplayList(mat_revert_skybox__1),
 	gsSPDisplayList(mat_skybox__2),
-	gsSPDisplayList(skybox_skybox_mesh_tri_1),
+	gsSPDisplayList(bitdw_skybox_tri_1),
 	gsSPDisplayList(mat_revert_skybox__2),
 	gsSPDisplayList(mat_skybox__3),
-	gsSPDisplayList(skybox_skybox_mesh_tri_2),
+	gsSPDisplayList(bitdw_skybox_tri_2),
 	gsSPDisplayList(mat_revert_skybox__3),
 	gsSPDisplayList(mat_skybox__4),
-	gsSPDisplayList(skybox_skybox_mesh_tri_3),
+	gsSPDisplayList(bitdw_skybox_tri_3),
 	gsSPDisplayList(mat_revert_skybox__4),
 	gsSPDisplayList(mat_skybox__5),
-	gsSPDisplayList(skybox_skybox_mesh_tri_4),
+	gsSPDisplayList(bitdw_skybox_tri_4),
 	gsSPDisplayList(mat_revert_skybox__5),
 	gsSPDisplayList(mat_skybox__6),
-	gsSPDisplayList(skybox_skybox_mesh_tri_5),
+	gsSPDisplayList(bitdw_skybox_tri_5),
 	gsSPDisplayList(mat_revert_skybox__6),
 	gsSPDisplayList(mat_skybox__7),
-	gsSPDisplayList(skybox_skybox_mesh_tri_6),
+	gsSPDisplayList(bitdw_skybox_tri_6),
 	gsSPDisplayList(mat_revert_skybox__7),
 	gsSPDisplayList(mat_skybox__8),
-	gsSPDisplayList(skybox_skybox_mesh_tri_7),
+	gsSPDisplayList(bitdw_skybox_tri_7),
 	gsSPDisplayList(mat_revert_skybox__8),
 	gsSPDisplayList(mat_skybox__9),
-	gsSPDisplayList(skybox_skybox_mesh_tri_8),
+	gsSPDisplayList(bitdw_skybox_tri_8),
 	gsSPDisplayList(mat_revert_skybox__9),
 	gsSPDisplayList(mat_skybox__10),
-	gsSPDisplayList(skybox_skybox_mesh_tri_9),
+	gsSPDisplayList(bitdw_skybox_tri_9),
 	gsSPDisplayList(mat_revert_skybox__10),
 	gsSPDisplayList(mat_skybox__11),
-	gsSPDisplayList(skybox_skybox_mesh_tri_10),
+	gsSPDisplayList(bitdw_skybox_tri_10),
 	gsSPDisplayList(mat_revert_skybox__11),
 	gsSPDisplayList(mat_skybox__12),
-	gsSPDisplayList(skybox_skybox_mesh_tri_11),
+	gsSPDisplayList(bitdw_skybox_tri_11),
 	gsSPDisplayList(mat_revert_skybox__12),
 	gsSPDisplayList(mat_skybox__13),
-	gsSPDisplayList(skybox_skybox_mesh_tri_12),
+	gsSPDisplayList(bitdw_skybox_tri_12),
 	gsSPDisplayList(mat_revert_skybox__13),
 	gsSPDisplayList(mat_skybox__14),
-	gsSPDisplayList(skybox_skybox_mesh_tri_13),
+	gsSPDisplayList(bitdw_skybox_tri_13),
 	gsSPDisplayList(mat_revert_skybox__14),
 	gsSPDisplayList(mat_skybox__15),
-	gsSPDisplayList(skybox_skybox_mesh_tri_14),
+	gsSPDisplayList(bitdw_skybox_tri_14),
 	gsSPDisplayList(mat_revert_skybox__15),
 	gsSPDisplayList(mat_skybox__16),
-	gsSPDisplayList(skybox_skybox_mesh_tri_15),
+	gsSPDisplayList(bitdw_skybox_tri_15),
 	gsSPDisplayList(mat_revert_skybox__16),
 	gsSPDisplayList(mat_skybox__17),
-	gsSPDisplayList(skybox_skybox_mesh_tri_16),
+	gsSPDisplayList(bitdw_skybox_tri_16),
 	gsSPDisplayList(mat_revert_skybox__17),
 	gsSPDisplayList(mat_skybox__18),
-	gsSPDisplayList(skybox_skybox_mesh_tri_17),
+	gsSPDisplayList(bitdw_skybox_tri_17),
 	gsSPDisplayList(mat_revert_skybox__18),
 	gsSPDisplayList(mat_skybox__19),
-	gsSPDisplayList(skybox_skybox_mesh_tri_18),
+	gsSPDisplayList(bitdw_skybox_tri_18),
 	gsSPDisplayList(mat_revert_skybox__19),
 	gsSPDisplayList(mat_skybox__20),
-	gsSPDisplayList(skybox_skybox_mesh_tri_19),
+	gsSPDisplayList(bitdw_skybox_tri_19),
 	gsSPDisplayList(mat_revert_skybox__20),
 	gsSPDisplayList(mat_skybox__21),
-	gsSPDisplayList(skybox_skybox_mesh_tri_20),
+	gsSPDisplayList(bitdw_skybox_tri_20),
 	gsSPDisplayList(mat_revert_skybox__21),
 	gsSPDisplayList(mat_skybox__22),
-	gsSPDisplayList(skybox_skybox_mesh_tri_21),
+	gsSPDisplayList(bitdw_skybox_tri_21),
 	gsSPDisplayList(mat_revert_skybox__22),
 	gsSPDisplayList(mat_skybox__23),
-	gsSPDisplayList(skybox_skybox_mesh_tri_22),
+	gsSPDisplayList(bitdw_skybox_tri_22),
 	gsSPDisplayList(mat_revert_skybox__23),
 	gsSPDisplayList(mat_skybox__24),
-	gsSPDisplayList(skybox_skybox_mesh_tri_23),
+	gsSPDisplayList(bitdw_skybox_tri_23),
 	gsSPDisplayList(mat_revert_skybox__24),
 	gsSPDisplayList(mat_skybox__25),
-	gsSPDisplayList(skybox_skybox_mesh_tri_24),
+	gsSPDisplayList(bitdw_skybox_tri_24),
 	gsSPDisplayList(mat_revert_skybox__25),
 	gsSPDisplayList(mat_skybox__26),
-	gsSPDisplayList(skybox_skybox_mesh_tri_25),
+	gsSPDisplayList(bitdw_skybox_tri_25),
 	gsSPDisplayList(mat_revert_skybox__26),
 	gsSPDisplayList(mat_skybox__27),
-	gsSPDisplayList(skybox_skybox_mesh_tri_26),
+	gsSPDisplayList(bitdw_skybox_tri_26),
 	gsSPDisplayList(mat_revert_skybox__27),
 	gsSPDisplayList(mat_skybox__28),
-	gsSPDisplayList(skybox_skybox_mesh_tri_27),
+	gsSPDisplayList(bitdw_skybox_tri_27),
 	gsSPDisplayList(mat_revert_skybox__28),
 	gsSPDisplayList(mat_skybox__29),
-	gsSPDisplayList(skybox_skybox_mesh_tri_28),
+	gsSPDisplayList(bitdw_skybox_tri_28),
 	gsSPDisplayList(mat_revert_skybox__29),
 	gsSPDisplayList(mat_skybox__30),
-	gsSPDisplayList(skybox_skybox_mesh_tri_29),
+	gsSPDisplayList(bitdw_skybox_tri_29),
 	gsSPDisplayList(mat_revert_skybox__30),
 	gsSPDisplayList(mat_skybox__31),
-	gsSPDisplayList(skybox_skybox_mesh_tri_30),
+	gsSPDisplayList(bitdw_skybox_tri_30),
 	gsSPDisplayList(mat_revert_skybox__31),
 	gsSPDisplayList(mat_skybox__32),
-	gsSPDisplayList(skybox_skybox_mesh_tri_31),
+	gsSPDisplayList(bitdw_skybox_tri_31),
 	gsSPDisplayList(mat_revert_skybox__32),
 	gsSPDisplayList(mat_skybox__33),
-	gsSPDisplayList(skybox_skybox_mesh_tri_32),
+	gsSPDisplayList(bitdw_skybox_tri_32),
 	gsSPDisplayList(mat_revert_skybox__33),
 	gsSPDisplayList(mat_skybox__34),
-	gsSPDisplayList(skybox_skybox_mesh_tri_33),
+	gsSPDisplayList(bitdw_skybox_tri_33),
 	gsSPDisplayList(mat_revert_skybox__34),
 	gsSPDisplayList(mat_skybox__35),
-	gsSPDisplayList(skybox_skybox_mesh_tri_34),
+	gsSPDisplayList(bitdw_skybox_tri_34),
 	gsSPDisplayList(mat_revert_skybox__35),
 	gsSPDisplayList(mat_skybox__36),
-	gsSPDisplayList(skybox_skybox_mesh_tri_35),
+	gsSPDisplayList(bitdw_skybox_tri_35),
 	gsSPDisplayList(mat_revert_skybox__36),
 	gsSPDisplayList(mat_skybox__37),
-	gsSPDisplayList(skybox_skybox_mesh_tri_36),
+	gsSPDisplayList(bitdw_skybox_tri_36),
 	gsSPDisplayList(mat_revert_skybox__37),
 	gsSPDisplayList(mat_skybox__38),
-	gsSPDisplayList(skybox_skybox_mesh_tri_37),
+	gsSPDisplayList(bitdw_skybox_tri_37),
 	gsSPDisplayList(mat_revert_skybox__38),
 	gsSPDisplayList(mat_skybox__39),
-	gsSPDisplayList(skybox_skybox_mesh_tri_38),
+	gsSPDisplayList(bitdw_skybox_tri_38),
 	gsSPDisplayList(mat_revert_skybox__39),
 	gsSPDisplayList(mat_skybox__40),
-	gsSPDisplayList(skybox_skybox_mesh_tri_39),
+	gsSPDisplayList(bitdw_skybox_tri_39),
 	gsSPDisplayList(mat_revert_skybox__40),
 	gsSPDisplayList(mat_skybox__41),
-	gsSPDisplayList(skybox_skybox_mesh_tri_40),
+	gsSPDisplayList(bitdw_skybox_tri_40),
 	gsSPDisplayList(mat_revert_skybox__41),
 	gsSPDisplayList(mat_skybox__42),
-	gsSPDisplayList(skybox_skybox_mesh_tri_41),
+	gsSPDisplayList(bitdw_skybox_tri_41),
 	gsSPDisplayList(mat_revert_skybox__42),
 	gsSPDisplayList(mat_skybox__43),
-	gsSPDisplayList(skybox_skybox_mesh_tri_42),
+	gsSPDisplayList(bitdw_skybox_tri_42),
 	gsSPDisplayList(mat_revert_skybox__43),
 	gsSPDisplayList(mat_skybox__44),
-	gsSPDisplayList(skybox_skybox_mesh_tri_43),
+	gsSPDisplayList(bitdw_skybox_tri_43),
 	gsSPDisplayList(mat_revert_skybox__44),
 	gsSPDisplayList(mat_skybox__45),
-	gsSPDisplayList(skybox_skybox_mesh_tri_44),
+	gsSPDisplayList(bitdw_skybox_tri_44),
 	gsSPDisplayList(mat_revert_skybox__45),
 	gsSPDisplayList(mat_skybox__46),
-	gsSPDisplayList(skybox_skybox_mesh_tri_45),
+	gsSPDisplayList(bitdw_skybox_tri_45),
 	gsSPDisplayList(mat_revert_skybox__46),
 	gsSPDisplayList(mat_skybox__47),
-	gsSPDisplayList(skybox_skybox_mesh_tri_46),
+	gsSPDisplayList(bitdw_skybox_tri_46),
 	gsSPDisplayList(mat_revert_skybox__47),
 	gsSPDisplayList(mat_skybox__48),
-	gsSPDisplayList(skybox_skybox_mesh_tri_47),
+	gsSPDisplayList(bitdw_skybox_tri_47),
 	gsSPDisplayList(mat_revert_skybox__48),
 	gsSPDisplayList(mat_skybox__49),
-	gsSPDisplayList(skybox_skybox_mesh_tri_48),
+	gsSPDisplayList(bitdw_skybox_tri_48),
 	gsSPDisplayList(mat_revert_skybox__49),
 	gsSPDisplayList(mat_skybox__50),
-	gsSPDisplayList(skybox_skybox_mesh_tri_49),
+	gsSPDisplayList(bitdw_skybox_tri_49),
 	gsSPDisplayList(mat_revert_skybox__50),
 	gsSPDisplayList(mat_skybox__51),
-	gsSPDisplayList(skybox_skybox_mesh_tri_50),
+	gsSPDisplayList(bitdw_skybox_tri_50),
 	gsSPDisplayList(mat_revert_skybox__51),
 	gsSPDisplayList(mat_skybox__52),
-	gsSPDisplayList(skybox_skybox_mesh_tri_51),
+	gsSPDisplayList(bitdw_skybox_tri_51),
 	gsSPDisplayList(mat_revert_skybox__52),
 	gsSPDisplayList(mat_skybox__53),
-	gsSPDisplayList(skybox_skybox_mesh_tri_52),
+	gsSPDisplayList(bitdw_skybox_tri_52),
 	gsSPDisplayList(mat_revert_skybox__53),
 	gsSPDisplayList(mat_skybox__54),
-	gsSPDisplayList(skybox_skybox_mesh_tri_53),
+	gsSPDisplayList(bitdw_skybox_tri_53),
 	gsSPDisplayList(mat_revert_skybox__54),
 	gsSPDisplayList(mat_skybox__55),
-	gsSPDisplayList(skybox_skybox_mesh_tri_54),
+	gsSPDisplayList(bitdw_skybox_tri_54),
 	gsSPDisplayList(mat_revert_skybox__55),
 	gsSPDisplayList(mat_skybox__56),
-	gsSPDisplayList(skybox_skybox_mesh_tri_55),
+	gsSPDisplayList(bitdw_skybox_tri_55),
 	gsSPDisplayList(mat_revert_skybox__56),
 	gsSPDisplayList(mat_skybox__57),
-	gsSPDisplayList(skybox_skybox_mesh_tri_56),
+	gsSPDisplayList(bitdw_skybox_tri_56),
 	gsSPDisplayList(mat_revert_skybox__57),
 	gsSPDisplayList(mat_skybox__58),
-	gsSPDisplayList(skybox_skybox_mesh_tri_57),
+	gsSPDisplayList(bitdw_skybox_tri_57),
 	gsSPDisplayList(mat_revert_skybox__58),
 	gsSPDisplayList(mat_skybox__59),
-	gsSPDisplayList(skybox_skybox_mesh_tri_58),
+	gsSPDisplayList(bitdw_skybox_tri_58),
 	gsSPDisplayList(mat_revert_skybox__59),
 	gsSPDisplayList(mat_skybox__60),
-	gsSPDisplayList(skybox_skybox_mesh_tri_59),
+	gsSPDisplayList(bitdw_skybox_tri_59),
 	gsSPDisplayList(mat_revert_skybox__60),
 	gsSPDisplayList(mat_skybox__61),
-	gsSPDisplayList(skybox_skybox_mesh_tri_60),
+	gsSPDisplayList(bitdw_skybox_tri_60),
 	gsSPDisplayList(mat_revert_skybox__61),
 	gsSPDisplayList(mat_skybox__62),
-	gsSPDisplayList(skybox_skybox_mesh_tri_61),
+	gsSPDisplayList(bitdw_skybox_tri_61),
 	gsSPDisplayList(mat_revert_skybox__62),
 	gsSPDisplayList(mat_skybox__63),
-	gsSPDisplayList(skybox_skybox_mesh_tri_62),
+	gsSPDisplayList(bitdw_skybox_tri_62),
 	gsSPDisplayList(mat_revert_skybox__63),
 	gsSPDisplayList(mat_skybox__64),
-	gsSPDisplayList(skybox_skybox_mesh_tri_63),
+	gsSPDisplayList(bitdw_skybox_tri_63),
 	gsSPDisplayList(mat_revert_skybox__64),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
@@ -28361,7 +28361,7 @@ u8 skybox_bits__1_pal_rgba16[] = {
 	0xed, 0xbd, 
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_0[28] = {
+Vtx bits_skybox_vtx_0[28] = {
 	{{ {2874, 4789, 6938}, 0, {1008, 1008}, {182, 182, 182, 255} }},
 	{{ {0, 4789, 7409}, 0, {-16, 1008}, {182, 182, 182, 255} }},
 	{{ {0, 5783, 6441}, 0, {-16, -16}, {0, 0, 0, 255} }},
@@ -28392,8 +28392,8 @@ Vtx skybox_bits_skybox_mesh_vtx_0[28] = {
 	{{ {0, 5783, -6441}, 0, {2035, 1008}, {0, 0, 0, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_0[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_0 + 0, 16, 0),
+Gfx bits_skybox_tri_0[] = {
+	gsSPVertex(bits_skybox_vtx_0 + 0, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28404,7 +28404,7 @@ Gfx skybox_bits_skybox_mesh_tri_0[] = {
 	gsSP1Triangle(13, 12, 8, 0),
 	gsSP1Triangle(8, 14, 13, 0),
 	gsSP1Triangle(15, 14, 8, 0),
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_0 + 16, 12, 0),
+	gsSPVertex(bits_skybox_vtx_0 + 16, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(4, 3, 1, 0),
@@ -28418,7 +28418,7 @@ Gfx skybox_bits_skybox_mesh_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_1[8] = {
+Vtx bits_skybox_vtx_1[8] = {
 	{{ {2874, 4789, 6938}, 0, {-16, 1008}, {182, 182, 182, 255} }},
 	{{ {2277, 5783, 5497}, 0, {-16, -16}, {0, 0, 0, 255} }},
 	{{ {4554, 5783, 4554}, 0, {1008, -16}, {0, 0, 0, 255} }},
@@ -28429,8 +28429,8 @@ Vtx skybox_bits_skybox_mesh_vtx_1[8] = {
 	{{ {-2277, 5783, -5497}, 0, {-16, -16}, {0, 0, 0, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_1[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_1 + 0, 8, 0),
+Gfx bits_skybox_tri_1[] = {
+	gsSPVertex(bits_skybox_vtx_1 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28438,7 +28438,7 @@ Gfx skybox_bits_skybox_mesh_tri_1[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_2[8] = {
+Vtx bits_skybox_vtx_2[8] = {
 	{{ {6938, 4789, 2874}, 0, {1008, 1008}, {182, 182, 182, 255} }},
 	{{ {5239, 4789, 5239}, 0, {-16, 1008}, {182, 182, 182, 255} }},
 	{{ {4554, 5783, 4554}, 0, {-16, -16}, {0, 0, 0, 255} }},
@@ -28449,8 +28449,8 @@ Vtx skybox_bits_skybox_mesh_vtx_2[8] = {
 	{{ {-5239, 4789, -5239}, 0, {-16, 1008}, {182, 182, 182, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_2[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_2 + 0, 8, 0),
+Gfx bits_skybox_tri_2[] = {
+	gsSPVertex(bits_skybox_vtx_2 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28458,7 +28458,7 @@ Gfx skybox_bits_skybox_mesh_tri_2[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_3[8] = {
+Vtx bits_skybox_vtx_3[8] = {
 	{{ {6441, 5783, 0}, 0, {1008, -16}, {0, 0, 0, 255} }},
 	{{ {7409, 4789, 0}, 0, {1008, 1008}, {182, 182, 182, 255} }},
 	{{ {6938, 4789, 2874}, 0, {-16, 1008}, {182, 182, 182, 255} }},
@@ -28469,8 +28469,8 @@ Vtx skybox_bits_skybox_mesh_vtx_3[8] = {
 	{{ {-6938, 4789, -2874}, 0, {-16, 1008}, {182, 182, 182, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_3[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_3 + 0, 8, 0),
+Gfx bits_skybox_tri_3[] = {
+	gsSPVertex(bits_skybox_vtx_3 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28478,7 +28478,7 @@ Gfx skybox_bits_skybox_mesh_tri_3[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_4[8] = {
+Vtx bits_skybox_vtx_4[8] = {
 	{{ {-6441, 5783, 0}, 0, {-16, -16}, {0, 0, 0, 255} }},
 	{{ {-5497, 5783, 2277}, 0, {1008, -16}, {0, 0, 0, 255} }},
 	{{ {-6938, 4789, 2874}, 0, {1008, 1008}, {182, 182, 182, 255} }},
@@ -28489,8 +28489,8 @@ Vtx skybox_bits_skybox_mesh_vtx_4[8] = {
 	{{ {6441, 5783, 0}, 0, {-16, -16}, {0, 0, 0, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_4[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_4 + 0, 8, 0),
+Gfx bits_skybox_tri_4[] = {
+	gsSPVertex(bits_skybox_vtx_4 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28498,7 +28498,7 @@ Gfx skybox_bits_skybox_mesh_tri_4[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_5[8] = {
+Vtx bits_skybox_vtx_5[8] = {
 	{{ {-4554, 5783, 4554}, 0, {1008, -16}, {0, 0, 0, 255} }},
 	{{ {-5239, 4789, 5239}, 0, {1008, 1008}, {182, 182, 182, 255} }},
 	{{ {-6938, 4789, 2874}, 0, {-16, 1008}, {182, 182, 182, 255} }},
@@ -28509,8 +28509,8 @@ Vtx skybox_bits_skybox_mesh_vtx_5[8] = {
 	{{ {5497, 5783, -2277}, 0, {-16, -16}, {0, 0, 0, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_5[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_5 + 0, 8, 0),
+Gfx bits_skybox_tri_5[] = {
+	gsSPVertex(bits_skybox_vtx_5 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28518,7 +28518,7 @@ Gfx skybox_bits_skybox_mesh_tri_5[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_6[8] = {
+Vtx bits_skybox_vtx_6[8] = {
 	{{ {4554, 5783, -4554}, 0, {-16, -16}, {0, 0, 0, 255} }},
 	{{ {2277, 5783, -5497}, 0, {1008, -16}, {0, 0, 0, 255} }},
 	{{ {2874, 4789, -6938}, 0, {1008, 1008}, {182, 182, 182, 255} }},
@@ -28529,8 +28529,8 @@ Vtx skybox_bits_skybox_mesh_vtx_6[8] = {
 	{{ {-5239, 4789, 5239}, 0, {-16, 1008}, {182, 182, 182, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_6[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_6 + 0, 8, 0),
+Gfx bits_skybox_tri_6[] = {
+	gsSPVertex(bits_skybox_vtx_6 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28538,7 +28538,7 @@ Gfx skybox_bits_skybox_mesh_tri_6[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_7[8] = {
+Vtx bits_skybox_vtx_7[8] = {
 	{{ {2874, 4789, -6938}, 0, {-16, 1008}, {182, 182, 182, 255} }},
 	{{ {2277, 5783, -5497}, 0, {-16, -16}, {0, 0, 0, 255} }},
 	{{ {0, 5783, -6441}, 0, {1008, -16}, {0, 0, 0, 255} }},
@@ -28549,8 +28549,8 @@ Vtx skybox_bits_skybox_mesh_vtx_7[8] = {
 	{{ {0, 4789, 7409}, 0, {1010, 1008}, {182, 182, 182, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_7[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_7 + 0, 8, 0),
+Gfx bits_skybox_tri_7[] = {
+	gsSPVertex(bits_skybox_vtx_7 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28558,7 +28558,7 @@ Gfx skybox_bits_skybox_mesh_tri_7[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_8[8] = {
+Vtx bits_skybox_vtx_8[8] = {
 	{{ {3470, 3795, 8378}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 	{{ {0, 3795, 8378}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 	{{ {0, 4789, 7409}, 0, {-16, -16}, {182, 182, 182, 255} }},
@@ -28569,8 +28569,8 @@ Vtx skybox_bits_skybox_mesh_vtx_8[8] = {
 	{{ {-2874, 4789, -6938}, 0, {1008, -16}, {182, 182, 182, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_8[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_8 + 0, 8, 0),
+Gfx bits_skybox_tri_8[] = {
+	gsSPVertex(bits_skybox_vtx_8 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28578,7 +28578,7 @@ Gfx skybox_bits_skybox_mesh_tri_8[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_9[8] = {
+Vtx bits_skybox_vtx_9[8] = {
 	{{ {-5239, 4789, -5239}, 0, {1008, -16}, {182, 182, 182, 255} }},
 	{{ {-5924, 3795, -5924}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 	{{ {-3470, 3795, -8378}, 0, {-16, 1008}, {248, 248, 248, 255} }},
@@ -28589,8 +28589,8 @@ Vtx skybox_bits_skybox_mesh_vtx_9[8] = {
 	{{ {5924, 3795, 5924}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_9[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_9 + 0, 8, 0),
+Gfx bits_skybox_tri_9[] = {
+	gsSPVertex(bits_skybox_vtx_9 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28598,7 +28598,7 @@ Gfx skybox_bits_skybox_mesh_tri_9[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_10[8] = {
+Vtx bits_skybox_vtx_10[8] = {
 	{{ {8378, 3795, 3470}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 	{{ {5924, 3795, 5924}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 	{{ {5239, 4789, 5239}, 0, {-16, -16}, {182, 182, 182, 255} }},
@@ -28609,8 +28609,8 @@ Vtx skybox_bits_skybox_mesh_vtx_10[8] = {
 	{{ {-5924, 3795, -5924}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_10[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_10 + 0, 8, 0),
+Gfx bits_skybox_tri_10[] = {
+	gsSPVertex(bits_skybox_vtx_10 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28618,7 +28618,7 @@ Gfx skybox_bits_skybox_mesh_tri_10[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_11[8] = {
+Vtx bits_skybox_vtx_11[8] = {
 	{{ {-6938, 4789, -2874}, 0, {-16, -16}, {182, 182, 182, 255} }},
 	{{ {-7409, 4789, 0}, 0, {1008, -16}, {182, 182, 182, 255} }},
 	{{ {-8378, 3795, 0}, 0, {1008, 1008}, {248, 248, 248, 255} }},
@@ -28629,8 +28629,8 @@ Vtx skybox_bits_skybox_mesh_vtx_11[8] = {
 	{{ {6938, 4789, 2874}, 0, {-16, -16}, {182, 182, 182, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_11[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_11 + 0, 8, 0),
+Gfx bits_skybox_tri_11[] = {
+	gsSPVertex(bits_skybox_vtx_11 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28638,7 +28638,7 @@ Gfx skybox_bits_skybox_mesh_tri_11[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_12[8] = {
+Vtx bits_skybox_vtx_12[8] = {
 	{{ {6938, 4789, -2874}, 0, {1008, -16}, {182, 182, 182, 255} }},
 	{{ {8378, 3795, -3470}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 	{{ {8378, 3795, 0}, 0, {-16, 1008}, {248, 248, 248, 255} }},
@@ -28649,8 +28649,8 @@ Vtx skybox_bits_skybox_mesh_vtx_12[8] = {
 	{{ {-8378, 3795, 0}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_12[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_12 + 0, 8, 0),
+Gfx bits_skybox_tri_12[] = {
+	gsSPVertex(bits_skybox_vtx_12 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28658,7 +28658,7 @@ Gfx skybox_bits_skybox_mesh_tri_12[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_13[8] = {
+Vtx bits_skybox_vtx_13[8] = {
 	{{ {5239, 4789, -5239}, 0, {1008, -16}, {182, 182, 182, 255} }},
 	{{ {5924, 3795, -5924}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 	{{ {8378, 3795, -3470}, 0, {-16, 1008}, {248, 248, 248, 255} }},
@@ -28669,8 +28669,8 @@ Vtx skybox_bits_skybox_mesh_vtx_13[8] = {
 	{{ {-6938, 4789, 2874}, 0, {-16, -16}, {182, 182, 182, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_13[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_13 + 0, 8, 0),
+Gfx bits_skybox_tri_13[] = {
+	gsSPVertex(bits_skybox_vtx_13 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28678,7 +28678,7 @@ Gfx skybox_bits_skybox_mesh_tri_13[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_14[8] = {
+Vtx bits_skybox_vtx_14[8] = {
 	{{ {-5239, 4789, 5239}, 0, {-16, -16}, {182, 182, 182, 255} }},
 	{{ {-2874, 4789, 6938}, 0, {1008, -16}, {182, 182, 182, 255} }},
 	{{ {-3470, 3795, 8378}, 0, {1008, 1008}, {248, 248, 248, 255} }},
@@ -28689,8 +28689,8 @@ Vtx skybox_bits_skybox_mesh_vtx_14[8] = {
 	{{ {5924, 3795, -5924}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_14[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_14 + 0, 8, 0),
+Gfx bits_skybox_tri_14[] = {
+	gsSPVertex(bits_skybox_vtx_14 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28698,7 +28698,7 @@ Gfx skybox_bits_skybox_mesh_tri_14[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_15[8] = {
+Vtx bits_skybox_vtx_15[8] = {
 	{{ {-3470, 3795, 8378}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 	{{ {-2874, 4789, 6938}, 0, {-16, -16}, {182, 182, 182, 255} }},
 	{{ {0, 4789, 7409}, 0, {1010, -16}, {182, 182, 182, 255} }},
@@ -28709,8 +28709,8 @@ Vtx skybox_bits_skybox_mesh_vtx_15[8] = {
 	{{ {0, 3795, -8378}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_15[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_15 + 0, 8, 0),
+Gfx bits_skybox_tri_15[] = {
+	gsSPVertex(bits_skybox_vtx_15 + 0, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -28718,7 +28718,7 @@ Gfx skybox_bits_skybox_mesh_tri_15[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_16[11] = {
+Vtx bits_skybox_vtx_16[11] = {
 	{{ {3470, 3795, 8378}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {3690, 1898, 8909}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {1735, 1898, 9719}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -28732,8 +28732,8 @@ Vtx skybox_bits_skybox_mesh_vtx_16[11] = {
 	{{ {0, 1898, -9719}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_16[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_16 + 0, 11, 0),
+Gfx bits_skybox_tri_16[] = {
+	gsSPVertex(bits_skybox_vtx_16 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 4, 0),
 	gsSP1Triangle(4, 2, 5, 0),
@@ -28743,7 +28743,7 @@ Gfx skybox_bits_skybox_mesh_tri_16[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_17[11] = {
+Vtx bits_skybox_vtx_17[11] = {
 	{{ {-5645, 1898, -8099}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {-3690, 1898, -8909}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {-3470, 3795, -8378}, 0, {-16, -16}, {248, 248, 248, 255} }},
@@ -28757,8 +28757,8 @@ Vtx skybox_bits_skybox_mesh_vtx_17[11] = {
 	{{ {3690, 1898, 8909}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_17[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_17 + 0, 11, 0),
+Gfx bits_skybox_tri_17[] = {
+	gsSPVertex(bits_skybox_vtx_17 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(4, 3, 2, 0),
@@ -28768,7 +28768,7 @@ Gfx skybox_bits_skybox_mesh_tri_17[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_18[12] = {
+Vtx bits_skybox_vtx_18[12] = {
 	{{ {-8378, 3795, -3470}, 0, {1008, -16}, {248, 248, 248, 255} }},
 	{{ {-8909, 1898, -3690}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {-8099, 1898, -5645}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -28783,8 +28783,8 @@ Vtx skybox_bits_skybox_mesh_vtx_18[12] = {
 	{{ {6872, 1898, 6872}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_18[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_18 + 0, 12, 0),
+Gfx bits_skybox_tri_18[] = {
+	gsSPVertex(bits_skybox_vtx_18 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(0, 6, 7, 0),
@@ -28794,7 +28794,7 @@ Gfx skybox_bits_skybox_mesh_tri_18[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_19[12] = {
+Vtx bits_skybox_vtx_19[12] = {
 	{{ {-8909, 1898, -3690}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {-8378, 3795, -3470}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {-9719, 1898, -1735}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -28809,8 +28809,8 @@ Vtx skybox_bits_skybox_mesh_vtx_19[12] = {
 	{{ {9719, 1898, 0}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_19[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_19 + 0, 12, 0),
+Gfx bits_skybox_tri_19[] = {
+	gsSPVertex(bits_skybox_vtx_19 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
@@ -28820,7 +28820,7 @@ Gfx skybox_bits_skybox_mesh_tri_19[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_20[11] = {
+Vtx bits_skybox_vtx_20[11] = {
 	{{ {8378, 3795, -3470}, 0, {1008, -16}, {248, 248, 248, 255} }},
 	{{ {8909, 1898, -3690}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {9719, 1898, -1735}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -28834,8 +28834,8 @@ Vtx skybox_bits_skybox_mesh_vtx_20[11] = {
 	{{ {9719, 1898, 0}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_20[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_20 + 0, 11, 0),
+Gfx bits_skybox_tri_20[] = {
+	gsSPVertex(bits_skybox_vtx_20 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(3, 5, 6, 0),
@@ -28845,7 +28845,7 @@ Gfx skybox_bits_skybox_mesh_tri_20[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_21[11] = {
+Vtx bits_skybox_vtx_21[11] = {
 	{{ {8378, 3795, -3470}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {8099, 1898, -5645}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {8909, 1898, -3690}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -28859,8 +28859,8 @@ Vtx skybox_bits_skybox_mesh_vtx_21[11] = {
 	{{ {6872, 1898, -6872}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_21[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_21 + 0, 11, 0),
+Gfx bits_skybox_tri_21[] = {
+	gsSPVertex(bits_skybox_vtx_21 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(4, 3, 6, 0),
@@ -28870,7 +28870,7 @@ Gfx skybox_bits_skybox_mesh_tri_21[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_22[11] = {
+Vtx bits_skybox_vtx_22[11] = {
 	{{ {3470, 3795, -8378}, 0, {1008, -16}, {248, 248, 248, 255} }},
 	{{ {3690, 1898, -8909}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {5645, 1898, -8099}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -28884,8 +28884,8 @@ Vtx skybox_bits_skybox_mesh_vtx_22[11] = {
 	{{ {6872, 1898, -6872}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_22[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_22 + 0, 11, 0),
+Gfx bits_skybox_tri_22[] = {
+	gsSPVertex(bits_skybox_vtx_22 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(3, 5, 6, 0),
@@ -28895,7 +28895,7 @@ Gfx skybox_bits_skybox_mesh_tri_22[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_23[11] = {
+Vtx bits_skybox_vtx_23[11] = {
 	{{ {3470, 3795, -8378}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {1735, 1898, -9719}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {3690, 1898, -8909}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -28909,8 +28909,8 @@ Vtx skybox_bits_skybox_mesh_vtx_23[11] = {
 	{{ {0, 1898, -9719}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_23[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_23 + 0, 11, 0),
+Gfx bits_skybox_tri_23[] = {
+	gsSPVertex(bits_skybox_vtx_23 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(4, 3, 6, 0),
@@ -28920,7 +28920,7 @@ Gfx skybox_bits_skybox_mesh_tri_23[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_24[10] = {
+Vtx bits_skybox_vtx_24[10] = {
 	{{ {0, 0, -11059}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {0, 1898, -9719}, 0, {-16, -16}, {255, 255, 255, 255} }},
 	{{ {-1735, 1898, -9719}, 0, {496, -16}, {255, 255, 255, 255} }},
@@ -28933,8 +28933,8 @@ Vtx skybox_bits_skybox_mesh_vtx_24[10] = {
 	{{ {3690, 1898, 8909}, 0, {1008, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_24[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_24 + 0, 10, 0),
+Gfx bits_skybox_tri_24[] = {
+	gsSPVertex(bits_skybox_vtx_24 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 0, 2, 0),
 	gsSP1Triangle(4, 3, 2, 0),
@@ -28944,7 +28944,7 @@ Gfx skybox_bits_skybox_mesh_tri_24[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_25[12] = {
+Vtx bits_skybox_vtx_25[12] = {
 	{{ {5645, 1898, 8099}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {6872, 1898, 6872}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {7820, 0, 7820}, 0, {1008, 1008}, {255, 255, 255, 255} }},
@@ -28959,8 +28959,8 @@ Vtx skybox_bits_skybox_mesh_vtx_25[12] = {
 	{{ {-3910, 0, -9439}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_25[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_25 + 0, 12, 0),
+Gfx bits_skybox_tri_25[] = {
+	gsSPVertex(bits_skybox_vtx_25 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 0, 0),
@@ -28970,7 +28970,7 @@ Gfx skybox_bits_skybox_mesh_tri_25[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_26[13] = {
+Vtx bits_skybox_vtx_26[13] = {
 	{{ {8099, 1898, 5645}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {7820, 0, 7820}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {6872, 1898, 6872}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -28986,8 +28986,8 @@ Vtx skybox_bits_skybox_mesh_vtx_26[13] = {
 	{{ {-8909, 1898, -3690}, 0, {1008, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_26[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_26 + 0, 13, 0),
+Gfx bits_skybox_tri_26[] = {
+	gsSPVertex(bits_skybox_vtx_26 + 0, 13, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
@@ -28997,7 +28997,7 @@ Gfx skybox_bits_skybox_mesh_tri_26[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_27[12] = {
+Vtx bits_skybox_vtx_27[12] = {
 	{{ {9719, 1898, 1735}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {9719, 1898, 0}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {11059, 0, 0}, 0, {1008, 1008}, {255, 255, 255, 255} }},
@@ -29012,8 +29012,8 @@ Vtx skybox_bits_skybox_mesh_vtx_27[12] = {
 	{{ {-9719, 1898, -1735}, 0, {496, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_27[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_27 + 0, 12, 0),
+Gfx bits_skybox_tri_27[] = {
+	gsSPVertex(bits_skybox_vtx_27 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
@@ -29023,7 +29023,7 @@ Gfx skybox_bits_skybox_mesh_tri_27[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_28[11] = {
+Vtx bits_skybox_vtx_28[11] = {
 	{{ {9719, 1898, 0}, 0, {-16, -16}, {255, 255, 255, 255} }},
 	{{ {9719, 1898, -1735}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {11059, 0, 0}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -29037,8 +29037,8 @@ Vtx skybox_bits_skybox_mesh_vtx_28[11] = {
 	{{ {-8909, 1898, 3690}, 0, {1008, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_28[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_28 + 0, 11, 0),
+Gfx bits_skybox_tri_28[] = {
+	gsSPVertex(bits_skybox_vtx_28 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 4, 0),
 	gsSP1Triangle(5, 3, 4, 0),
@@ -29048,7 +29048,7 @@ Gfx skybox_bits_skybox_mesh_tri_28[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_29[11] = {
+Vtx bits_skybox_vtx_29[11] = {
 	{{ {8099, 1898, -5645}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {6872, 1898, -6872}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {7820, 0, -7820}, 0, {1008, 1008}, {255, 255, 255, 255} }},
@@ -29062,8 +29062,8 @@ Vtx skybox_bits_skybox_mesh_vtx_29[11] = {
 	{{ {-6872, 1898, 6872}, 0, {1008, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_29[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_29 + 0, 11, 0),
+Gfx bits_skybox_tri_29[] = {
+	gsSPVertex(bits_skybox_vtx_29 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(2, 5, 4, 0),
@@ -29073,7 +29073,7 @@ Gfx skybox_bits_skybox_mesh_tri_29[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_30[11] = {
+Vtx bits_skybox_vtx_30[11] = {
 	{{ {6872, 1898, -6872}, 0, {-16, -16}, {255, 255, 255, 255} }},
 	{{ {5645, 1898, -8099}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {7820, 0, -7820}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -29087,8 +29087,8 @@ Vtx skybox_bits_skybox_mesh_vtx_30[11] = {
 	{{ {-3690, 1898, 8909}, 0, {1008, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_30[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_30 + 0, 11, 0),
+Gfx bits_skybox_tri_30[] = {
+	gsSPVertex(bits_skybox_vtx_30 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 4, 0),
 	gsSP1Triangle(5, 4, 3, 0),
@@ -29098,7 +29098,7 @@ Gfx skybox_bits_skybox_mesh_tri_30[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_31[11] = {
+Vtx bits_skybox_vtx_31[11] = {
 	{{ {0, 0, -11059}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {1735, 1898, -9719}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {0, 1898, -9719}, 0, {1008, -16}, {255, 255, 255, 255} }},
@@ -29112,8 +29112,8 @@ Vtx skybox_bits_skybox_mesh_vtx_31[11] = {
 	{{ {0, 1898, 9719}, 0, {1008, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_31[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_31 + 0, 11, 0),
+Gfx bits_skybox_tri_31[] = {
+	gsSPVertex(bits_skybox_vtx_31 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(5, 4, 0, 0),
@@ -29123,7 +29123,7 @@ Gfx skybox_bits_skybox_mesh_tri_31[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_32[10] = {
+Vtx bits_skybox_vtx_32[10] = {
 	{{ {-3910, 0, -9439}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {-3690, -1898, -8909}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {-1735, -1898, -9719}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -29136,8 +29136,8 @@ Vtx skybox_bits_skybox_mesh_vtx_32[10] = {
 	{{ {0, -1898, 9719}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_32[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_32 + 0, 10, 0),
+Gfx bits_skybox_tri_32[] = {
+	gsSPVertex(bits_skybox_vtx_32 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(3, 2, 4, 0),
@@ -29147,7 +29147,7 @@ Gfx skybox_bits_skybox_mesh_tri_32[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_33[12] = {
+Vtx bits_skybox_vtx_33[12] = {
 	{{ {6872, -1898, 6872}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {5645, -1898, 8099}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {7820, 0, 7820}, 0, {1008, -16}, {255, 255, 255, 255} }},
@@ -29162,8 +29162,8 @@ Vtx skybox_bits_skybox_mesh_vtx_33[12] = {
 	{{ {-3690, -1898, -8909}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_33[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_33 + 0, 12, 0),
+Gfx bits_skybox_tri_33[] = {
+	gsSPVertex(bits_skybox_vtx_33 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 1, 7, 0),
@@ -29173,7 +29173,7 @@ Gfx skybox_bits_skybox_mesh_tri_33[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_34[13] = {
+Vtx bits_skybox_vtx_34[13] = {
 	{{ {8099, -1898, 5645}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {6872, -1898, 6872}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {7820, 0, 7820}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -29189,8 +29189,8 @@ Vtx skybox_bits_skybox_mesh_vtx_34[13] = {
 	{{ {-8909, -1898, -3690}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_34[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_34 + 0, 13, 0),
+Gfx bits_skybox_tri_34[] = {
+	gsSPVertex(bits_skybox_vtx_34 + 0, 13, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
@@ -29200,7 +29200,7 @@ Gfx skybox_bits_skybox_mesh_tri_34[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_35[12] = {
+Vtx bits_skybox_vtx_35[12] = {
 	{{ {9719, -1898, 0}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {9719, -1898, 1735}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {11059, 0, 0}, 0, {1008, -16}, {255, 255, 255, 255} }},
@@ -29215,8 +29215,8 @@ Vtx skybox_bits_skybox_mesh_vtx_35[12] = {
 	{{ {-8909, -1898, -3690}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_35[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_35 + 0, 12, 0),
+Gfx bits_skybox_tri_35[] = {
+	gsSPVertex(bits_skybox_vtx_35 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(2, 6, 7, 0),
@@ -29226,7 +29226,7 @@ Gfx skybox_bits_skybox_mesh_tri_35[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_36[11] = {
+Vtx bits_skybox_vtx_36[11] = {
 	{{ {9719, -1898, -1735}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {9719, -1898, 0}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {11059, 0, 0}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -29240,8 +29240,8 @@ Vtx skybox_bits_skybox_mesh_vtx_36[11] = {
 	{{ {-9719, -1898, 0}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_36[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_36 + 0, 11, 0),
+Gfx bits_skybox_tri_36[] = {
+	gsSPVertex(bits_skybox_vtx_36 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(5, 4, 2, 0),
@@ -29251,7 +29251,7 @@ Gfx skybox_bits_skybox_mesh_tri_36[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_37[11] = {
+Vtx bits_skybox_vtx_37[11] = {
 	{{ {6872, -1898, -6872}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {8099, -1898, -5645}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {7820, 0, -7820}, 0, {1008, -16}, {255, 255, 255, 255} }},
@@ -29265,8 +29265,8 @@ Vtx skybox_bits_skybox_mesh_vtx_37[11] = {
 	{{ {-8909, -1898, 3690}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_37[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_37 + 0, 11, 0),
+Gfx bits_skybox_tri_37[] = {
+	gsSPVertex(bits_skybox_vtx_37 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 4, 0),
 	gsSP1Triangle(5, 4, 3, 0),
@@ -29276,7 +29276,7 @@ Gfx skybox_bits_skybox_mesh_tri_37[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_38[11] = {
+Vtx bits_skybox_vtx_38[11] = {
 	{{ {5645, -1898, -8099}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {6872, -1898, -6872}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {7820, 0, -7820}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -29290,8 +29290,8 @@ Vtx skybox_bits_skybox_mesh_vtx_38[11] = {
 	{{ {-6872, -1898, 6872}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_38[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_38 + 0, 11, 0),
+Gfx bits_skybox_tri_38[] = {
+	gsSPVertex(bits_skybox_vtx_38 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(5, 4, 2, 0),
@@ -29301,7 +29301,7 @@ Gfx skybox_bits_skybox_mesh_tri_38[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_39[11] = {
+Vtx bits_skybox_vtx_39[11] = {
 	{{ {0, 0, -11059}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {0, -1898, -9719}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {1735, -1898, -9719}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -29315,8 +29315,8 @@ Vtx skybox_bits_skybox_mesh_vtx_39[11] = {
 	{{ {-3690, -1898, 8909}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_39[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_39 + 0, 11, 0),
+Gfx bits_skybox_tri_39[] = {
+	gsSPVertex(bits_skybox_vtx_39 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 0, 4, 0),
 	gsSP1Triangle(3, 4, 5, 0),
@@ -29326,7 +29326,7 @@ Gfx skybox_bits_skybox_mesh_tri_39[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_40[10] = {
+Vtx bits_skybox_vtx_40[10] = {
 	{{ {-1735, -1898, -9719}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {-3690, -1898, -8909}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {-3470, -3795, -8378}, 0, {1008, 1008}, {248, 248, 248, 255} }},
@@ -29339,8 +29339,8 @@ Vtx skybox_bits_skybox_mesh_vtx_40[10] = {
 	{{ {0, -1898, 9719}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_40[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_40 + 0, 10, 0),
+Gfx bits_skybox_tri_40[] = {
+	gsSPVertex(bits_skybox_vtx_40 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 0, 0),
 	gsSP1Triangle(3, 4, 0, 0),
@@ -29350,7 +29350,7 @@ Gfx skybox_bits_skybox_mesh_tri_40[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_41[11] = {
+Vtx bits_skybox_vtx_41[11] = {
 	{{ {-5645, -1898, -8099}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {-3470, -3795, -8378}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 	{{ {-3690, -1898, -8909}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -29364,8 +29364,8 @@ Vtx skybox_bits_skybox_mesh_vtx_41[11] = {
 	{{ {3690, -1898, 8909}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_41[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_41 + 0, 11, 0),
+Gfx bits_skybox_tri_41[] = {
+	gsSPVertex(bits_skybox_vtx_41 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(4, 3, 1, 0),
@@ -29375,7 +29375,7 @@ Gfx skybox_bits_skybox_mesh_tri_41[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_42[12] = {
+Vtx bits_skybox_vtx_42[12] = {
 	{{ {8378, -3795, 3470}, 0, {1008, 1008}, {248, 248, 248, 255} }},
 	{{ {8099, -1898, 5645}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {8909, -1898, 3690}, 0, {1008, -16}, {255, 255, 255, 255} }},
@@ -29390,8 +29390,8 @@ Vtx skybox_bits_skybox_mesh_vtx_42[12] = {
 	{{ {6872, -1898, 6872}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_42[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_42 + 0, 12, 0),
+Gfx bits_skybox_tri_42[] = {
+	gsSPVertex(bits_skybox_vtx_42 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
@@ -29401,7 +29401,7 @@ Gfx skybox_bits_skybox_mesh_tri_42[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_43[12] = {
+Vtx bits_skybox_vtx_43[12] = {
 	{{ {9719, -1898, 1735}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {8378, -3795, 3470}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 	{{ {8909, -1898, 3690}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -29416,8 +29416,8 @@ Vtx skybox_bits_skybox_mesh_vtx_43[12] = {
 	{{ {-9719, -1898, 0}, 0, {1008, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_43[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_43 + 0, 12, 0),
+Gfx bits_skybox_tri_43[] = {
+	gsSPVertex(bits_skybox_vtx_43 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
@@ -29427,7 +29427,7 @@ Gfx skybox_bits_skybox_mesh_tri_43[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_44[11] = {
+Vtx bits_skybox_vtx_44[11] = {
 	{{ {9719, -1898, -1735}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {8909, -1898, -3690}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {8378, -3795, -3470}, 0, {1008, 1008}, {248, 248, 248, 255} }},
@@ -29441,8 +29441,8 @@ Vtx skybox_bits_skybox_mesh_vtx_44[11] = {
 	{{ {-9719, -1898, 0}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_44[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_44 + 0, 11, 0),
+Gfx bits_skybox_tri_44[] = {
+	gsSPVertex(bits_skybox_vtx_44 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 4, 0),
 	gsSP1Triangle(5, 4, 3, 0),
@@ -29452,7 +29452,7 @@ Gfx skybox_bits_skybox_mesh_tri_44[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_45[11] = {
+Vtx bits_skybox_vtx_45[11] = {
 	{{ {8099, -1898, -5645}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {8378, -3795, -3470}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 	{{ {8909, -1898, -3690}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -29466,8 +29466,8 @@ Vtx skybox_bits_skybox_mesh_vtx_45[11] = {
 	{{ {-8909, -1898, 3690}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_45[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_45 + 0, 11, 0),
+Gfx bits_skybox_tri_45[] = {
+	gsSPVertex(bits_skybox_vtx_45 + 0, 11, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(1, 4, 3, 0),
@@ -29477,7 +29477,7 @@ Gfx skybox_bits_skybox_mesh_tri_45[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_46[12] = {
+Vtx bits_skybox_vtx_46[12] = {
 	{{ {5645, -1898, -8099}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {3690, -1898, -8909}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {3470, -3795, -8378}, 0, {1008, 1008}, {248, 248, 248, 255} }},
@@ -29492,8 +29492,8 @@ Vtx skybox_bits_skybox_mesh_vtx_46[12] = {
 	{{ {-6872, -1898, 6872}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_46[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_46 + 0, 12, 0),
+Gfx bits_skybox_tri_46[] = {
+	gsSPVertex(bits_skybox_vtx_46 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 5, 4, 0),
@@ -29503,7 +29503,7 @@ Gfx skybox_bits_skybox_mesh_tri_46[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_47[12] = {
+Vtx bits_skybox_vtx_47[12] = {
 	{{ {1735, -1898, -9719}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {3470, -3795, -8378}, 0, {-16, 1008}, {248, 248, 248, 255} }},
 	{{ {3690, -1898, -8909}, 0, {-16, -16}, {255, 255, 255, 255} }},
@@ -29518,8 +29518,8 @@ Vtx skybox_bits_skybox_mesh_vtx_47[12] = {
 	{{ {-3690, -1898, 8909}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_47[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_47 + 0, 12, 0),
+Gfx bits_skybox_tri_47[] = {
+	gsSPVertex(bits_skybox_vtx_47 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 5, 4, 0),
@@ -29529,7 +29529,7 @@ Gfx skybox_bits_skybox_mesh_tri_47[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_48[10] = {
+Vtx bits_skybox_vtx_48[10] = {
 	{{ {0, -3795, 8378}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {1735, -4789, 7409}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {0, -4789, 7409}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -29542,8 +29542,8 @@ Vtx skybox_bits_skybox_mesh_vtx_48[10] = {
 	{{ {-2874, -4789, -6938}, 0, {1008, 1008}, {252, 252, 252, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_48[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_48 + 0, 10, 0),
+Gfx bits_skybox_tri_48[] = {
+	gsSPVertex(bits_skybox_vtx_48 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 1, 0, 0),
 	gsSP1Triangle(3, 4, 1, 0),
@@ -29553,7 +29553,7 @@ Gfx skybox_bits_skybox_mesh_tri_48[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_49[10] = {
+Vtx bits_skybox_vtx_49[10] = {
 	{{ {2874, -4789, 6938}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 	{{ {3470, -3795, 8378}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {4012, -4789, 6466}, 0, {496, 1008}, {255, 255, 255, 255} }},
@@ -29566,8 +29566,8 @@ Vtx skybox_bits_skybox_mesh_vtx_49[10] = {
 	{{ {-2874, -4789, -6938}, 0, {-16, 1008}, {252, 252, 252, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_49[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_49 + 0, 10, 0),
+Gfx bits_skybox_tri_49[] = {
+	gsSPVertex(bits_skybox_vtx_49 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(2, 3, 4, 0),
@@ -29577,7 +29577,7 @@ Gfx skybox_bits_skybox_mesh_tri_49[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_50[10] = {
+Vtx bits_skybox_vtx_50[10] = {
 	{{ {5924, -3795, 5924}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {6466, -4789, 4012}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {5239, -4789, 5239}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -29590,8 +29590,8 @@ Vtx skybox_bits_skybox_mesh_vtx_50[10] = {
 	{{ {-5239, -4789, -5239}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_50[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_50 + 0, 10, 0),
+Gfx bits_skybox_tri_50[] = {
+	gsSPVertex(bits_skybox_vtx_50 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 1, 0, 0),
 	gsSP1Triangle(3, 4, 1, 0),
@@ -29601,7 +29601,7 @@ Gfx skybox_bits_skybox_mesh_tri_50[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_51[10] = {
+Vtx bits_skybox_vtx_51[10] = {
 	{{ {8378, -3795, 3470}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {7409, -4789, 1735}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {6938, -4789, 2874}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -29614,8 +29614,8 @@ Vtx skybox_bits_skybox_mesh_vtx_51[10] = {
 	{{ {-6938, -4789, -2874}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_51[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_51 + 0, 10, 0),
+Gfx bits_skybox_tri_51[] = {
+	gsSPVertex(bits_skybox_vtx_51 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 3, 1, 0),
 	gsSP1Triangle(4, 1, 3, 0),
@@ -29625,7 +29625,7 @@ Gfx skybox_bits_skybox_mesh_tri_51[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_52[10] = {
+Vtx bits_skybox_vtx_52[10] = {
 	{{ {8378, -3795, 0}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {7409, -4789, -1735}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {7409, -4789, 0}, 0, {-16, 1008}, {251, 251, 251, 255} }},
@@ -29638,8 +29638,8 @@ Vtx skybox_bits_skybox_mesh_vtx_52[10] = {
 	{{ {-7409, -4789, 0}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_52[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_52 + 0, 10, 0),
+Gfx bits_skybox_tri_52[] = {
+	gsSPVertex(bits_skybox_vtx_52 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 3, 1, 0),
 	gsSP1Triangle(1, 3, 4, 0),
@@ -29649,7 +29649,7 @@ Gfx skybox_bits_skybox_mesh_tri_52[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_53[10] = {
+Vtx bits_skybox_vtx_53[10] = {
 	{{ {8378, -3795, -3470}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {6466, -4789, -4012}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {6938, -4789, -2874}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -29662,8 +29662,8 @@ Vtx skybox_bits_skybox_mesh_vtx_53[10] = {
 	{{ {-6938, -4789, 2874}, 0, {-16, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_53[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_53 + 0, 10, 0),
+Gfx bits_skybox_tri_53[] = {
+	gsSPVertex(bits_skybox_vtx_53 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 1, 0, 0),
 	gsSP1Triangle(4, 1, 3, 0),
@@ -29673,7 +29673,7 @@ Gfx skybox_bits_skybox_mesh_tri_53[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_54[10] = {
+Vtx bits_skybox_vtx_54[10] = {
 	{{ {-5924, -3795, 5924}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {-4012, -4789, 6466}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {-5239, -4789, 5239}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -29686,8 +29686,8 @@ Vtx skybox_bits_skybox_mesh_vtx_54[10] = {
 	{{ {2874, -4789, -6938}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_54[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_54 + 0, 10, 0),
+Gfx bits_skybox_tri_54[] = {
+	gsSPVertex(bits_skybox_vtx_54 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 1, 0, 0),
 	gsSP1Triangle(3, 4, 1, 0),
@@ -29697,7 +29697,7 @@ Gfx skybox_bits_skybox_mesh_tri_54[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_55[10] = {
+Vtx bits_skybox_vtx_55[10] = {
 	{{ {-3470, -3795, 8378}, 0, {-16, -16}, {248, 248, 248, 255} }},
 	{{ {-1735, -4789, 7409}, 0, {496, 1008}, {255, 255, 255, 255} }},
 	{{ {-2874, -4789, 6938}, 0, {-16, 1008}, {255, 255, 255, 255} }},
@@ -29710,8 +29710,8 @@ Vtx skybox_bits_skybox_mesh_vtx_55[10] = {
 	{{ {0, -4789, -7409}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_55[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_55 + 0, 10, 0),
+Gfx bits_skybox_tri_55[] = {
+	gsSPVertex(bits_skybox_vtx_55 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 3, 1, 0),
 	gsSP1Triangle(1, 3, 4, 0),
@@ -29721,7 +29721,7 @@ Gfx skybox_bits_skybox_mesh_tri_55[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_56[10] = {
+Vtx bits_skybox_vtx_56[10] = {
 	{{ {-2874, -4789, -6938}, 0, {1008, -16}, {252, 252, 252, 255} }},
 	{{ {-2277, -5783, -5497}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {-1735, -4789, -7409}, 0, {496, -16}, {255, 255, 255, 255} }},
@@ -29734,8 +29734,8 @@ Vtx skybox_bits_skybox_mesh_vtx_56[10] = {
 	{{ {0, -4789, 7409}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_56[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_56 + 0, 10, 0),
+Gfx bits_skybox_tri_56[] = {
+	gsSPVertex(bits_skybox_vtx_56 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(2, 3, 4, 0),
@@ -29745,7 +29745,7 @@ Gfx skybox_bits_skybox_mesh_tri_56[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_57[10] = {
+Vtx bits_skybox_vtx_57[10] = {
 	{{ {-4012, -4789, -6466}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {-5239, -4789, -5239}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {-4554, -5783, -4554}, 0, {1008, 1008}, {255, 255, 255, 255} }},
@@ -29758,8 +29758,8 @@ Vtx skybox_bits_skybox_mesh_vtx_57[10] = {
 	{{ {2874, -4789, 6938}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_57[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_57 + 0, 10, 0),
+Gfx bits_skybox_tri_57[] = {
+	gsSPVertex(bits_skybox_vtx_57 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 0, 0),
 	gsSP1Triangle(3, 4, 0, 0),
@@ -29769,7 +29769,7 @@ Gfx skybox_bits_skybox_mesh_tri_57[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_58[10] = {
+Vtx bits_skybox_vtx_58[10] = {
 	{{ {6938, -4789, 2874}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {5497, -5783, 2277}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {6466, -4789, 4012}, 0, {496, -16}, {255, 255, 255, 255} }},
@@ -29782,8 +29782,8 @@ Vtx skybox_bits_skybox_mesh_vtx_58[10] = {
 	{{ {-5239, -4789, -5239}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_58[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_58 + 0, 10, 0),
+Gfx bits_skybox_tri_58[] = {
+	gsSPVertex(bits_skybox_vtx_58 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(2, 3, 4, 0),
@@ -29793,7 +29793,7 @@ Gfx skybox_bits_skybox_mesh_tri_58[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_59[10] = {
+Vtx bits_skybox_vtx_59[10] = {
 	{{ {7409, -4789, 1735}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {7409, -4789, 0}, 0, {1008, -16}, {251, 251, 251, 255} }},
 	{{ {6441, -5783, 0}, 0, {1008, 1008}, {255, 255, 255, 255} }},
@@ -29806,8 +29806,8 @@ Vtx skybox_bits_skybox_mesh_vtx_59[10] = {
 	{{ {-6938, -4789, -2874}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_59[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_59 + 0, 10, 0),
+Gfx bits_skybox_tri_59[] = {
+	gsSPVertex(bits_skybox_vtx_59 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 0, 2, 0),
 	gsSP1Triangle(4, 0, 3, 0),
@@ -29817,7 +29817,7 @@ Gfx skybox_bits_skybox_mesh_tri_59[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_60[10] = {
+Vtx bits_skybox_vtx_60[10] = {
 	{{ {6938, -4789, -2874}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {5497, -5783, -2277}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {7409, -4789, -1735}, 0, {496, -16}, {255, 255, 255, 255} }},
@@ -29830,8 +29830,8 @@ Vtx skybox_bits_skybox_mesh_vtx_60[10] = {
 	{{ {-7409, -4789, 0}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_60[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_60 + 0, 10, 0),
+Gfx bits_skybox_tri_60[] = {
+	gsSPVertex(bits_skybox_vtx_60 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(2, 3, 4, 0),
@@ -29841,7 +29841,7 @@ Gfx skybox_bits_skybox_mesh_tri_60[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_61[10] = {
+Vtx bits_skybox_vtx_61[10] = {
 	{{ {6466, -4789, -4012}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {5239, -4789, -5239}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {4554, -5783, -4554}, 0, {1008, 1008}, {255, 255, 255, 255} }},
@@ -29854,8 +29854,8 @@ Vtx skybox_bits_skybox_mesh_vtx_61[10] = {
 	{{ {-6938, -4789, 2874}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_61[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_61 + 0, 10, 0),
+Gfx bits_skybox_tri_61[] = {
+	gsSPVertex(bits_skybox_vtx_61 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 0, 2, 0),
 	gsSP1Triangle(4, 0, 3, 0),
@@ -29865,7 +29865,7 @@ Gfx skybox_bits_skybox_mesh_tri_61[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_62[10] = {
+Vtx bits_skybox_vtx_62[10] = {
 	{{ {2874, -4789, -6938}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {2277, -5783, -5497}, 0, {1008, 1008}, {255, 255, 255, 255} }},
 	{{ {4012, -4789, -6466}, 0, {496, -16}, {255, 255, 255, 255} }},
@@ -29878,8 +29878,8 @@ Vtx skybox_bits_skybox_mesh_vtx_62[10] = {
 	{{ {-5239, -4789, 5239}, 0, {-16, -16}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_62[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_62 + 0, 10, 0),
+Gfx bits_skybox_tri_62[] = {
+	gsSPVertex(bits_skybox_vtx_62 + 0, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(2, 3, 4, 0),
@@ -29889,7 +29889,7 @@ Gfx skybox_bits_skybox_mesh_tri_62[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx skybox_bits_skybox_mesh_vtx_63[30] = {
+Vtx bits_skybox_vtx_63[30] = {
 	{{ {1735, -4789, -7409}, 0, {496, -16}, {255, 255, 255, 255} }},
 	{{ {0, -4789, -7409}, 0, {1008, -16}, {255, 255, 255, 255} }},
 	{{ {0, -5783, -6441}, 0, {1008, 1008}, {255, 255, 255, 255} }},
@@ -29922,8 +29922,8 @@ Vtx skybox_bits_skybox_mesh_vtx_63[30] = {
 	{{ {0, -5783, -6441}, 0, {14, 1049}, {255, 255, 255, 255} }},
 };
 
-Gfx skybox_bits_skybox_mesh_tri_63[] = {
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_63 + 0, 16, 0),
+Gfx bits_skybox_tri_63[] = {
+	gsSPVertex(bits_skybox_vtx_63 + 0, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 0, 2, 0),
 	gsSP1Triangle(4, 0, 3, 0),
@@ -29934,7 +29934,7 @@ Gfx skybox_bits_skybox_mesh_tri_63[] = {
 	gsSP1Triangle(12, 11, 13, 0),
 	gsSP1Triangle(13, 11, 14, 0),
 	gsSP1Triangle(15, 14, 11, 0),
-	gsSPVertex(skybox_bits_skybox_mesh_vtx_63 + 16, 14, 0),
+	gsSPVertex(bits_skybox_vtx_63 + 16, 14, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(3, 1, 4, 0),
@@ -31435,198 +31435,198 @@ Gfx mat_revert_skybox_bits__64[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx skybox_bits_skybox_mesh[] = {
+Gfx bits_skybox[] = {
 	gsSPDisplayList(mat_skybox_bits__1),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_0),
+	gsSPDisplayList(bits_skybox_tri_0),
 	gsSPDisplayList(mat_revert_skybox_bits__1),
 	gsSPDisplayList(mat_skybox_bits__2),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_1),
+	gsSPDisplayList(bits_skybox_tri_1),
 	gsSPDisplayList(mat_revert_skybox_bits__2),
 	gsSPDisplayList(mat_skybox_bits__3),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_2),
+	gsSPDisplayList(bits_skybox_tri_2),
 	gsSPDisplayList(mat_revert_skybox_bits__3),
 	gsSPDisplayList(mat_skybox_bits__4),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_3),
+	gsSPDisplayList(bits_skybox_tri_3),
 	gsSPDisplayList(mat_revert_skybox_bits__4),
 	gsSPDisplayList(mat_skybox_bits__5),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_4),
+	gsSPDisplayList(bits_skybox_tri_4),
 	gsSPDisplayList(mat_revert_skybox_bits__5),
 	gsSPDisplayList(mat_skybox_bits__6),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_5),
+	gsSPDisplayList(bits_skybox_tri_5),
 	gsSPDisplayList(mat_revert_skybox_bits__6),
 	gsSPDisplayList(mat_skybox_bits__7),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_6),
+	gsSPDisplayList(bits_skybox_tri_6),
 	gsSPDisplayList(mat_revert_skybox_bits__7),
 	gsSPDisplayList(mat_skybox_bits__8),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_7),
+	gsSPDisplayList(bits_skybox_tri_7),
 	gsSPDisplayList(mat_revert_skybox_bits__8),
 	gsSPDisplayList(mat_skybox_bits__9),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_8),
+	gsSPDisplayList(bits_skybox_tri_8),
 	gsSPDisplayList(mat_revert_skybox_bits__9),
 	gsSPDisplayList(mat_skybox_bits__10),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_9),
+	gsSPDisplayList(bits_skybox_tri_9),
 	gsSPDisplayList(mat_revert_skybox_bits__10),
 	gsSPDisplayList(mat_skybox_bits__11),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_10),
+	gsSPDisplayList(bits_skybox_tri_10),
 	gsSPDisplayList(mat_revert_skybox_bits__11),
 	gsSPDisplayList(mat_skybox_bits__12),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_11),
+	gsSPDisplayList(bits_skybox_tri_11),
 	gsSPDisplayList(mat_revert_skybox_bits__12),
 	gsSPDisplayList(mat_skybox_bits__13),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_12),
+	gsSPDisplayList(bits_skybox_tri_12),
 	gsSPDisplayList(mat_revert_skybox_bits__13),
 	gsSPDisplayList(mat_skybox_bits__14),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_13),
+	gsSPDisplayList(bits_skybox_tri_13),
 	gsSPDisplayList(mat_revert_skybox_bits__14),
 	gsSPDisplayList(mat_skybox_bits__15),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_14),
+	gsSPDisplayList(bits_skybox_tri_14),
 	gsSPDisplayList(mat_revert_skybox_bits__15),
 	gsSPDisplayList(mat_skybox_bits__16),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_15),
+	gsSPDisplayList(bits_skybox_tri_15),
 	gsSPDisplayList(mat_revert_skybox_bits__16),
 	gsSPDisplayList(mat_skybox_bits__17),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_16),
+	gsSPDisplayList(bits_skybox_tri_16),
 	gsSPDisplayList(mat_revert_skybox_bits__17),
 	gsSPDisplayList(mat_skybox_bits__18),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_17),
+	gsSPDisplayList(bits_skybox_tri_17),
 	gsSPDisplayList(mat_revert_skybox_bits__18),
 	gsSPDisplayList(mat_skybox_bits__19),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_18),
+	gsSPDisplayList(bits_skybox_tri_18),
 	gsSPDisplayList(mat_revert_skybox_bits__19),
 	gsSPDisplayList(mat_skybox_bits__20),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_19),
+	gsSPDisplayList(bits_skybox_tri_19),
 	gsSPDisplayList(mat_revert_skybox_bits__20),
 	gsSPDisplayList(mat_skybox_bits__21),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_20),
+	gsSPDisplayList(bits_skybox_tri_20),
 	gsSPDisplayList(mat_revert_skybox_bits__21),
 	gsSPDisplayList(mat_skybox_bits__22),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_21),
+	gsSPDisplayList(bits_skybox_tri_21),
 	gsSPDisplayList(mat_revert_skybox_bits__22),
 	gsSPDisplayList(mat_skybox_bits__23),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_22),
+	gsSPDisplayList(bits_skybox_tri_22),
 	gsSPDisplayList(mat_revert_skybox_bits__23),
 	gsSPDisplayList(mat_skybox_bits__24),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_23),
+	gsSPDisplayList(bits_skybox_tri_23),
 	gsSPDisplayList(mat_revert_skybox_bits__24),
 	gsSPDisplayList(mat_skybox_bits__25),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_24),
+	gsSPDisplayList(bits_skybox_tri_24),
 	gsSPDisplayList(mat_revert_skybox_bits__25),
 	gsSPDisplayList(mat_skybox_bits__26),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_25),
+	gsSPDisplayList(bits_skybox_tri_25),
 	gsSPDisplayList(mat_revert_skybox_bits__26),
 	gsSPDisplayList(mat_skybox_bits__27),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_26),
+	gsSPDisplayList(bits_skybox_tri_26),
 	gsSPDisplayList(mat_revert_skybox_bits__27),
 	gsSPDisplayList(mat_skybox_bits__28),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_27),
+	gsSPDisplayList(bits_skybox_tri_27),
 	gsSPDisplayList(mat_revert_skybox_bits__28),
 	gsSPDisplayList(mat_skybox_bits__29),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_28),
+	gsSPDisplayList(bits_skybox_tri_28),
 	gsSPDisplayList(mat_revert_skybox_bits__29),
 	gsSPDisplayList(mat_skybox_bits__30),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_29),
+	gsSPDisplayList(bits_skybox_tri_29),
 	gsSPDisplayList(mat_revert_skybox_bits__30),
 	gsSPDisplayList(mat_skybox_bits__31),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_30),
+	gsSPDisplayList(bits_skybox_tri_30),
 	gsSPDisplayList(mat_revert_skybox_bits__31),
 	gsSPDisplayList(mat_skybox_bits__32),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_31),
+	gsSPDisplayList(bits_skybox_tri_31),
 	gsSPDisplayList(mat_revert_skybox_bits__32),
 	gsSPDisplayList(mat_skybox_bits__33),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_32),
+	gsSPDisplayList(bits_skybox_tri_32),
 	gsSPDisplayList(mat_revert_skybox_bits__33),
 	gsSPDisplayList(mat_skybox_bits__34),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_33),
+	gsSPDisplayList(bits_skybox_tri_33),
 	gsSPDisplayList(mat_revert_skybox_bits__34),
 	gsSPDisplayList(mat_skybox_bits__35),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_34),
+	gsSPDisplayList(bits_skybox_tri_34),
 	gsSPDisplayList(mat_revert_skybox_bits__35),
 	gsSPDisplayList(mat_skybox_bits__36),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_35),
+	gsSPDisplayList(bits_skybox_tri_35),
 	gsSPDisplayList(mat_revert_skybox_bits__36),
 	gsSPDisplayList(mat_skybox_bits__37),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_36),
+	gsSPDisplayList(bits_skybox_tri_36),
 	gsSPDisplayList(mat_revert_skybox_bits__37),
 	gsSPDisplayList(mat_skybox_bits__38),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_37),
+	gsSPDisplayList(bits_skybox_tri_37),
 	gsSPDisplayList(mat_revert_skybox_bits__38),
 	gsSPDisplayList(mat_skybox_bits__39),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_38),
+	gsSPDisplayList(bits_skybox_tri_38),
 	gsSPDisplayList(mat_revert_skybox_bits__39),
 	gsSPDisplayList(mat_skybox_bits__40),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_39),
+	gsSPDisplayList(bits_skybox_tri_39),
 	gsSPDisplayList(mat_revert_skybox_bits__40),
 	gsSPDisplayList(mat_skybox_bits__41),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_40),
+	gsSPDisplayList(bits_skybox_tri_40),
 	gsSPDisplayList(mat_revert_skybox_bits__41),
 	gsSPDisplayList(mat_skybox_bits__42),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_41),
+	gsSPDisplayList(bits_skybox_tri_41),
 	gsSPDisplayList(mat_revert_skybox_bits__42),
 	gsSPDisplayList(mat_skybox_bits__43),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_42),
+	gsSPDisplayList(bits_skybox_tri_42),
 	gsSPDisplayList(mat_revert_skybox_bits__43),
 	gsSPDisplayList(mat_skybox_bits__44),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_43),
+	gsSPDisplayList(bits_skybox_tri_43),
 	gsSPDisplayList(mat_revert_skybox_bits__44),
 	gsSPDisplayList(mat_skybox_bits__45),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_44),
+	gsSPDisplayList(bits_skybox_tri_44),
 	gsSPDisplayList(mat_revert_skybox_bits__45),
 	gsSPDisplayList(mat_skybox_bits__46),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_45),
+	gsSPDisplayList(bits_skybox_tri_45),
 	gsSPDisplayList(mat_revert_skybox_bits__46),
 	gsSPDisplayList(mat_skybox_bits__47),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_46),
+	gsSPDisplayList(bits_skybox_tri_46),
 	gsSPDisplayList(mat_revert_skybox_bits__47),
 	gsSPDisplayList(mat_skybox_bits__48),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_47),
+	gsSPDisplayList(bits_skybox_tri_47),
 	gsSPDisplayList(mat_revert_skybox_bits__48),
 	gsSPDisplayList(mat_skybox_bits__49),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_48),
+	gsSPDisplayList(bits_skybox_tri_48),
 	gsSPDisplayList(mat_revert_skybox_bits__49),
 	gsSPDisplayList(mat_skybox_bits__50),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_49),
+	gsSPDisplayList(bits_skybox_tri_49),
 	gsSPDisplayList(mat_revert_skybox_bits__50),
 	gsSPDisplayList(mat_skybox_bits__51),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_50),
+	gsSPDisplayList(bits_skybox_tri_50),
 	gsSPDisplayList(mat_revert_skybox_bits__51),
 	gsSPDisplayList(mat_skybox_bits__52),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_51),
+	gsSPDisplayList(bits_skybox_tri_51),
 	gsSPDisplayList(mat_revert_skybox_bits__52),
 	gsSPDisplayList(mat_skybox_bits__53),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_52),
+	gsSPDisplayList(bits_skybox_tri_52),
 	gsSPDisplayList(mat_revert_skybox_bits__53),
 	gsSPDisplayList(mat_skybox_bits__54),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_53),
+	gsSPDisplayList(bits_skybox_tri_53),
 	gsSPDisplayList(mat_revert_skybox_bits__54),
 	gsSPDisplayList(mat_skybox_bits__55),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_54),
+	gsSPDisplayList(bits_skybox_tri_54),
 	gsSPDisplayList(mat_revert_skybox_bits__55),
 	gsSPDisplayList(mat_skybox_bits__56),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_55),
+	gsSPDisplayList(bits_skybox_tri_55),
 	gsSPDisplayList(mat_revert_skybox_bits__56),
 	gsSPDisplayList(mat_skybox_bits__57),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_56),
+	gsSPDisplayList(bits_skybox_tri_56),
 	gsSPDisplayList(mat_revert_skybox_bits__57),
 	gsSPDisplayList(mat_skybox_bits__58),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_57),
+	gsSPDisplayList(bits_skybox_tri_57),
 	gsSPDisplayList(mat_revert_skybox_bits__58),
 	gsSPDisplayList(mat_skybox_bits__59),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_58),
+	gsSPDisplayList(bits_skybox_tri_58),
 	gsSPDisplayList(mat_revert_skybox_bits__59),
 	gsSPDisplayList(mat_skybox_bits__60),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_59),
+	gsSPDisplayList(bits_skybox_tri_59),
 	gsSPDisplayList(mat_revert_skybox_bits__60),
 	gsSPDisplayList(mat_skybox_bits__61),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_60),
+	gsSPDisplayList(bits_skybox_tri_60),
 	gsSPDisplayList(mat_revert_skybox_bits__61),
 	gsSPDisplayList(mat_skybox_bits__62),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_61),
+	gsSPDisplayList(bits_skybox_tri_61),
 	gsSPDisplayList(mat_revert_skybox_bits__62),
 	gsSPDisplayList(mat_skybox_bits__63),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_62),
+	gsSPDisplayList(bits_skybox_tri_62),
 	gsSPDisplayList(mat_revert_skybox_bits__63),
 	gsSPDisplayList(mat_skybox_bits__64),
-	gsSPDisplayList(skybox_bits_skybox_mesh_tri_63),
+	gsSPDisplayList(bits_skybox_tri_63),
 	gsSPDisplayList(mat_revert_skybox_bits__64),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),

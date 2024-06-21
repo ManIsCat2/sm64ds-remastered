@@ -615,8 +615,8 @@ Gfx *envfx_update_particles(s32 mode, Vec3s playerPos, Vec3s camTo, Vec3s camFro
 }
 
 // 3D Skybox
-extern skybox_skybox_mesh;
-extern skybox_bits_skybox_mesh;
+extern bitdw_skybox;
+extern bits_skybox;
 
 #define DISTANCE 0.97f
 Gfx *sky_3d(s32 callContext, struct GraphNode *node, Mat4 mtxf) {
@@ -637,9 +637,9 @@ Gfx *sky_3d(s32 callContext, struct GraphNode *node, Mat4 mtxf) {
         gSPMatrix(dlE++, mtx, G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
         
         if ((gCurrLevelNum == LEVEL_BITDW) || (gCurrLevelNum == LEVEL_BOWSER_1)) {
-            gSPDisplayList(dlE++, &skybox_skybox_mesh);
+            gSPDisplayList(dlE++, &bitdw_skybox);
         } else if ((gCurrLevelNum == LEVEL_BITS) || (gCurrLevelNum == LEVEL_BOWSER_3)) {
-            gSPDisplayList(dlE++, &skybox_bits_skybox_mesh);
+            gSPDisplayList(dlE++, &bits_skybox);
         }
 
         gSPPopMatrix(dlE++, G_MTX_MODELVIEW);

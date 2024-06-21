@@ -73,34 +73,9 @@ extern struct Painting ttm_painting;
 extern struct Painting ttc_painting;
 extern struct Painting sl_painting;
 extern struct Painting thi_huge_painting;
-extern const Gfx inside_castle_seg7_dl_07023DB0[];
-extern const Gfx inside_castle_seg7_dl_07028FD0[];
-extern const Gfx inside_castle_seg7_dl_07029578[];
-extern const Gfx inside_castle_seg7_dl_0702A650[];
-extern const Gfx dl_castle_lobby_wing_cap_light[];
-extern const Gfx inside_castle_seg7_dl_0702AA10[];
-extern const Gfx inside_castle_seg7_dl_0702AB20[];
-extern const Gfx inside_castle_seg7_dl_0702E408[];
-extern const Gfx inside_castle_seg7_dl_0702FD30[];
+extern const Gfx peach_bowser_painting_geo[];
 extern const Vtx inside_castle_seg7_vertex_07030940[];
 extern const Gfx inside_castle_seg7_dl_07031168[];
-extern const Gfx inside_castle_seg7_dl_07031588[];
-extern const Gfx inside_castle_seg7_dl_07031720[];
-extern const Gfx inside_castle_seg7_dl_07031830[];
-extern const Gfx inside_castle_seg7_dl_07032FC0[];
-extern const Gfx inside_castle_seg7_dl_07033158[];
-extern const Gfx inside_castle_seg7_dl_07034D88[];
-extern const Gfx inside_castle_seg7_dl_07035178[];
-extern const Gfx inside_castle_seg7_dl_07035288[];
-extern const Gfx inside_castle_seg7_dl_07036D88[];
-extern const Gfx inside_castle_seg7_dl_07037988[];
-extern const Gfx inside_castle_seg7_dl_07037BF8[];
-extern const Gfx inside_castle_seg7_dl_07037DE8[];
-extern const Gfx dl_castle_aquarium_light[];
-extern const Gfx inside_castle_seg7_dl_07038350[];
-extern const Gfx inside_castle_seg7_dl_0703A6C8[];
-extern const Gfx inside_castle_seg7_dl_0703A808[];
-extern const Gfx inside_castle_seg7_dl_0703BA08[];
 extern const Gfx inside_castle_seg7_dl_0703BCB8[];
 extern const Gfx inside_castle_seg7_dl_0703BFA8[];
 extern const Gfx inside_castle_seg7_dl_0703E6F0[];
@@ -154,5 +129,51 @@ extern const struct MovtexQuadCollection inside_castle_movtex_moat_water[];
 
 // script
 extern const LevelScript level_castle_inside_entry[];
+
+#include "levels/castle_inside/castle_lobby_part_1_geo/header.h"
+
+#include "levels/castle_inside/castle_lobby_rails_geo/header.h"
+
+#include "levels/castle_inside/castle_lobby_part_2_geo/header.h"
+
+#include "levels/castle_inside/dl_castle_lobby_wing_cap_light/header.h"
+
+#include "levels/castle_inside/castle_lobby_sun_mat_geo/header.h"
+
+#include "levels/castle_inside/castle_lobby_peach_painting_geo/header.h"
+
+#include "levels/castle_inside/castle_basement_stairs_geo/header.h"
+
+#include "levels/castle_inside/castle_bowser_hallway_geo/header.h"
+
+#include "levels/castle_inside/castle_recroom_preview_geo/header.h"
+
+#include "levels/castle_inside/castle_bob_room_geo/header.h"
+
+#include "levels/castle_inside/castle_bob_room_signs_geo/header.h"
+
+#include "levels/castle_inside/castle_wf_room_geo/header.h"
+
+#include "levels/castle_inside/castle_wf_room_rails_geo/header.h"
+
+#include "levels/castle_inside/castle_wf_room_sign_geo/header.h"
+
+#include "levels/castle_inside/castle_jrb_room_part1_geo/header.h"
+
+#include "levels/castle_inside/castle_jrb_room_part2_geo/header.h"
+
+#include "levels/castle_inside/castle_jrb_room_part3_geo/header.h"
+
+#include "levels/castle_inside/castle_jrb_room_glass_geo/header.h"
+
+#include "levels/castle_inside/dl_castle_aquarium_light/header.h"
+
+#include "levels/castle_inside/castle_jrb_room_sign_geo/header.h"
+
+#include "levels/castle_inside/castle_ccm_room_geo/header.h"
+
+#include "levels/castle_inside/castle_ccm_room_sign_geo/header.h"
+
+#include "levels/castle_inside/castle_upstairs_preview_geo/header.h"
 
 #endif
