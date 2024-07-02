@@ -1,4 +1,5 @@
 #include "src/game/envfx_snow.h"
+#include "src/game/envfx_skybox.h"
 
 // 0x0E000718
 const GeoLayout bits_geo_000718[] = {

@@ -11,6 +11,7 @@
 #include "engine/graph_node.h"
 #include "engine/math_util.h"
 #include "envfx_snow.h"
+#include "envfx_skybox.h"
 #include "game_init.h"
 #include "interaction.h"
 #include "level_update.h"
