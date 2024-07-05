@@ -41,10 +41,8 @@
  * special menu messages and phases, button states and button clicked checks.
  */
 
-#ifdef VERSION_US
 // The current sound mode is automatically centered on US and Shindou.
 static s16 sSoundTextX;
-#endif
 
 //! @Bug (UB Array Access) For EU, more buttons were added than the array was extended.
 //! This causes no currently known issues on console (as the other variables are not changed
@@ -1618,27 +1616,15 @@ void print_save_file_star_count(s8 fileIndex, s16 x, s16 y) {
     }
 }
 
-#if defined(VERSION_SH)
-    #define SELECT_FILE_X 96
-    #define SCORE_X 50
-    #define COPY_X 115
-    #define ERASE_X 180
-    #define SOUNDMODE_X1 sSoundTextX
-    #define SAVEFILE_X1 92
-    #define SAVEFILE_X2 209
-    #define MARIOTEXT_X1 92
-    #define MARIOTEXT_X2 207
-#elif defined(VERSION_US)
-    #define SELECT_FILE_X 93
-    #define SCORE_X 52
-    #define COPY_X 117
-    #define ERASE_X 177
-    #define SOUNDMODE_X1 sSoundTextX
-    #define SAVEFILE_X1 92
-    #define SAVEFILE_X2 209
-    #define MARIOTEXT_X1 92
-    #define MARIOTEXT_X2 207
-#endif
+#define SELECT_FILE_X 93
+#define SCORE_X 52
+#define COPY_X 117
+#define ERASE_X 177
+#define SOUNDMODE_X1 sSoundTextX
+#define SAVEFILE_X1 92
+#define SAVEFILE_X2 209
+#define MARIOTEXT_X1 92
+#define MARIOTEXT_X2 207
 
 /**
  * Prints main menu strings that shows on the yellow background menu screen.
@@ -1681,13 +1667,8 @@ void print_main_menu_strings(void) {
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);
 }
 
-#if defined(VERSION_SH)
-    #define CHECK_FILE_X 90
-    #define NOSAVE_DATA_X1 90
-#elif defined(VERSION_US)
-    #define CHECK_FILE_X 95
-    #define NOSAVE_DATA_X1 99
-#endif
+#define CHECK_FILE_X 95
+#define NOSAVE_DATA_X1 99
 
 /**
  * Defines IDs for the top message of the score menu and displays it if the ID is called in messageID.
@@ -1703,15 +1684,9 @@ void score_menu_display_message(s8 messageID) {
     }
 }
 
-#if defined(VERSION_SH)
-    #define RETURN_X     45
-    #define COPYFILE_X1  128
-    #define ERASEFILE_X1 228
-#elif defined(VERSION_US)
-    #define RETURN_X     44
-    #define COPYFILE_X1  135
-    #define ERASEFILE_X1 231
-#endif
+#define RETURN_X     44
+#define COPYFILE_X1  135
+#define ERASEFILE_X1 231
 
 #define FADEOUT_TIMER 20
 
@@ -1760,21 +1735,12 @@ void print_score_menu_strings(void) {
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);
 }
 
-#if defined(VERSION_SH)
-    #define NOFILE_COPY_X  90
-    #define COPY_FILE_X    90
-    #define COPYIT_WHERE_X 90
-    #define NOSAVE_DATA_X2 90
-    #define COPYCOMPLETE_X 90
-    #define SAVE_EXISTS_X1 90
-#elif defined(VERSION_US)
-    #define NOFILE_COPY_X  119
-    #define COPY_FILE_X    104
-    #define COPYIT_WHERE_X 109
-    #define NOSAVE_DATA_X2 101
-    #define COPYCOMPLETE_X 110
-    #define SAVE_EXISTS_X1 110
-#endif
+#define NOFILE_COPY_X  119
+#define COPY_FILE_X    104
+#define COPYIT_WHERE_X 109
+#define NOSAVE_DATA_X2 101
+#define COPYCOMPLETE_X 110
+#define SAVE_EXISTS_X1 110
 
 /**
  * Defines IDs for the top message of the copy menu and displays it if the ID is called in messageID.
@@ -1848,13 +1814,8 @@ void copy_menu_update_message(void) {
     }
 }
 
-#if defined(VERSION_US)
-    #define VIEWSCORE_X1 128
-    #define ERASEFILE_X2 230
-#elif defined(VERSION_SH)
-    #define VIEWSCORE_X1 133
-    #define ERASEFILE_X2 230
-#endif
+#define VIEWSCORE_X1 128
+#define ERASEFILE_X2 230
 
 /**
  * Prints copy menu strings that shows on the blue background menu screen.
@@ -1981,19 +1942,11 @@ void print_erase_menu_prompt(s16 x, s16 y) {
 //   US and EU   ---    JP
 // M a r i o   A --- マ リ オ Ａ
 // 0 1 2 3 4 5 6 --- 0 1 2 3
-#if defined(VERSION_SH)
-    #define ERASE_FILE_X     111
-    #define NOSAVE_DATA_X3   90
-    #define MARIO_ERASED_VAR 3
-    #define MARIO_ERASED_X   90
-    #define SAVE_EXISTS_X2   90
-#elif defined(VERSION_US)
-    #define ERASE_FILE_X     98
-    #define NOSAVE_DATA_X3   100
-    #define MARIO_ERASED_VAR 6
-    #define MARIO_ERASED_X   100
-    #define SAVE_EXISTS_X2   100
-#endif
+#define ERASE_FILE_X     98
+#define NOSAVE_DATA_X3   100
+#define MARIO_ERASED_VAR 6
+#define MARIO_ERASED_X   100
+#define SAVE_EXISTS_X2   100
 
 /**
  * Defines IDs for the top message of the erase menu and displays it if the ID is called in messageID.
@@ -2113,11 +2066,7 @@ void print_erase_menu_strings(void) {
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);
 }
 
-#if defined(VERSION_SH)
-    #define SOUND_HUD_X 96
-#elif defined(VERSION_US)
-    #define SOUND_HUD_X 88
-#endif
+#define SOUND_HUD_X 88
 
 /**
  * Prints sound mode menu strings that shows on the purple background menu screen.
@@ -2126,10 +2075,7 @@ void print_erase_menu_strings(void) {
  */
 void print_sound_mode_menu_strings(void) {
     s32 mode;
-
-#if defined(VERSION_US) || defined(VERSION_SH)
     s16 textX;
-#endif
 
     unsigned char textSoundSelect[] = { TEXT_SOUND_SELECT };
 
@@ -2274,10 +2220,9 @@ void print_save_file_scores(s8 fileIndex) {
     unsigned char textPlayer[] = { TEXT_MARIO };
     unsigned char textHiScore[] = { TEXT_HI_SCORE };
     unsigned char textMyScore[] = { TEXT_MY_SCORE };
-#if defined(VERSION_US) || defined(VERSION_SH)
     unsigned char textFileLetter[] = { TEXT_ZERO };
     void **levelNameTable = segmented_to_virtual(seg2_course_name_table);
-#endif
+
     textFileLetter[0] = fileIndex + ASCII_TO_DIALOG('A'); // get letter of file selected
 
 #ifdef TARGET_N3DS
