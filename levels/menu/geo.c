@@ -41,32 +41,6 @@ const GeoLayout geo_menu_player_save_button_fade[] = {
     GEO_END(),
 };
 
-// 0x0E000230
-const GeoLayout geo_menu_player_new_button[] = {
-    GEO_NODE_START(),
-    GEO_OPEN_NODE(),
-        GEO_SCALE(0x00, 524288),
-        GEO_OPEN_NODE(),
-            GEO_DISPLAY_LIST(LAYER_OPAQUE, dl_menu_player_new_button_base),
-            GEO_DISPLAY_LIST(LAYER_OPAQUE, dl_menu_save_button_back),
-        GEO_CLOSE_NODE(),
-    GEO_CLOSE_NODE(),
-    GEO_END(),
-};
-
-// 0x0E000260
-const GeoLayout geo_menu_player_new_button_fade[] = {
-    GEO_NODE_START(),
-    GEO_OPEN_NODE(),
-        GEO_SCALE(0x00, 524288),
-        GEO_OPEN_NODE(),
-            GEO_DISPLAY_LIST(LAYER_OPAQUE, dl_menu_player_new_button_base),
-            GEO_DISPLAY_LIST(LAYER_OPAQUE, dl_menu_save_button_fade_back),
-        GEO_CLOSE_NODE(),
-    GEO_CLOSE_NODE(),
-    GEO_END(),
-};
-
 // 0x0E000290
 const GeoLayout geo_menu_erase_button[] = {
     GEO_NODE_START(),
@@ -244,3 +218,5 @@ const GeoLayout geo_menu_act_selector_strings[] = {
     GEO_CLOSE_NODE(),
     GEO_END(),
 };
+
+#include "levels/menu/file_button/geo.inc.c"

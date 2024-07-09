@@ -48,8 +48,7 @@ struct SaveFile {
 enum SaveFileIndex {
     SAVE_FILE_A,
     SAVE_FILE_B,
-    SAVE_FILE_C,
-    SAVE_FILE_D
+    SAVE_FILE_C
 };
 
 struct MainMenuSaveData {

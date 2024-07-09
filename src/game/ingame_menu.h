@@ -19,6 +19,7 @@
 // to print specific Japanese HUD chars
 #define HUD_LUT_JPMENU 1
 #define HUD_LUT_GLOBAL 2
+#define HUD_LUT_ORANGE 3
 
 // For file select JP HUD difference
 #if defined(VERSION_SH)
@@ -28,8 +29,9 @@
 #endif
 
 // Japanese font use the same width string size
-#define JP_DIALOG_CHAR_WIDTH 10
+#define JP_DIALOG_CHAR_WIDTH    10
 #define HUD_LUT_STRIDE_GLOBAL   12
+#define HUD_LUT_STRIDE_ORANGE   14
 
 enum MenuMode {
     MENU_MODE_NONE = -1,

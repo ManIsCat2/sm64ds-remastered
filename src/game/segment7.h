@@ -5,6 +5,7 @@
 #include <PR/gbi.h>
 
 // from main menu segment 7
+extern u8 dl_menu_cursor[];
 extern u8 dl_menu_idle_hand[];
 extern u8 dl_menu_grabbing_hand[];
 extern u8 menu_hud_lut[];

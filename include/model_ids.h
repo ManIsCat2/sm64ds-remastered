@@ -556,7 +556,8 @@
 #define MODEL_TRAJECTORY_MARKER_BALL      0xE1        // bowling_ball_track_geo - duplicate used in SSL Pyramid small sized and as a track ball
 
 // DS Specific
-#define MODEL_POWER_FLOWER                0x1C        // power_flower_geo
+#define MODEL_POWER_FLOWER                        0x1C                      // power_flower_geo
+#define MODEL_MAIN_MENU_FILE_BUTTON_C        0xE2                      // geo_menu_player_new_button_c
 
 // Menu Models (overwrites Level Geometry IDs)
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0
@@ -565,8 +566,8 @@
 #define MODEL_MAIN_MENU_YELLOW_FILE_BUTTON        MODEL_LEVEL_GEOMETRY_06   // main_menu_geo_0002E0
 #define MODEL_MAIN_MENU_GREEN_SCORE_BUTTON        MODEL_LEVEL_GEOMETRY_07   // main_menu_geo_000308
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON_FADE    MODEL_LEVEL_GEOMETRY_08   // main_menu_geo_000200
-#define MODEL_MAIN_MENU_MARIO_NEW_BUTTON          MODEL_LEVEL_GEOMETRY_09   // main_menu_geo_000230
-#define MODEL_MAIN_MENU_MARIO_NEW_BUTTON_FADE     MODEL_LEVEL_GEOMETRY_0A   // main_menu_geo_000260
+#define MODEL_MAIN_MENU_FILE_BUTTON_B             MODEL_LEVEL_GEOMETRY_09   // main_menu_geo_000230
+#define MODEL_MAIN_MENU_FILE_BUTTON_A             MODEL_LEVEL_GEOMETRY_0A   // main_menu_geo_000260
 #define MODEL_MAIN_MENU_PURPLE_SOUND_BUTTON       MODEL_LEVEL_GEOMETRY_0B   // main_menu_geo_000330
 #define MODEL_MAIN_MENU_GENERIC_BUTTON            MODEL_LEVEL_GEOMETRY_0C   // main_menu_geo_000358
 

@@ -565,34 +565,17 @@ void print_generic_string(s16 x, s16 y, const u8 *str) {
 
         strPos++;
     }
-
-#ifndef VERSION_EU
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
-#endif
 }
-
-#ifdef VERSION_EU
-void print_hud_char_umlaut(s16 x, s16 y, u8 chr) {
-    void **fontLUT = segmented_to_virtual(main_hud_lut);
-
-    gDPPipeSync(gDisplayListHead++);
-    gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, fontLUT[chr]);
-    gSPDisplayList(gDisplayListHead++, dl_rgba16_load_tex_block);
-    gSPTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 16) << 2, (y + 16) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
-
-    gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, fontLUT[GLYPH_UMLAUT]);
-    gSPDisplayList(gDisplayListHead++, dl_rgba16_load_tex_block);
-    gSPTextureRectangle(gDisplayListHead++, x << 2, (y - 4) << 2, (x + 16) << 2, (y + 12) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
-}
-#endif
 
 /**
  * Prints a hud string depending of the hud table list defined.
  */
 void print_hud_lut_string(s8 hudLUT, s16 x, s16 y, const u8 *str) {
     s32 strPos = 0;
-    void **hudLUT1 = segmented_to_virtual(menu_hud_lut); // Japanese Menu HUD Color font
-    void **hudLUT2 = segmented_to_virtual(main_hud_lut); // 0-9 A-Z HUD Color Font
+    void **hudLUT1 = segmented_to_virtual(menu_hud_lut); // 0-9 A-Z HUD Color Font
+    void **hudLUT2 = segmented_to_virtual(main_hud_lut); // 0-9 A-Z HUD Orange Font
+    void **hudLUT3 = segmented_to_virtual(orange_hud_lut); // 0-9 A-Z HUD Orange Font
     u32 curX = x;
     u32 curY = y;
 
@@ -600,33 +583,17 @@ void print_hud_lut_string(s8 hudLUT, s16 x, s16 y, const u8 *str) {
 
     if (hudLUT == HUD_LUT_JPMENU) {
         xStride = 16;
-    } else { // HUD_LUT_GLOBAL
+    } else if (hudLUT == HUD_LUT_GLOBAL) {
         xStride = HUD_LUT_STRIDE_GLOBAL;
+    } else { // HUD_LUT_ORANGE
+        xStride = HUD_LUT_STRIDE_ORANGE;
     }
 
     while (str[strPos] != GLOBAL_CHAR_TERMINATOR) {
         switch (str[strPos]) {
-#ifdef VERSION_EU
-            case GLOBAL_CHAR_SPACE:
-                curX += xStride / 2;
-                break;
-            case HUD_CHAR_A_UMLAUT:
-                print_hud_char_umlaut(curX, curY, ASCII_TO_DIALOG('A'));
-                curX += xStride;
-                break;
-            case HUD_CHAR_O_UMLAUT:
-                print_hud_char_umlaut(curX, curY, ASCII_TO_DIALOG('O'));
-                curX += xStride;
-                break;
-            case HUD_CHAR_U_UMLAUT:
-                print_hud_char_umlaut(curX, curY, ASCII_TO_DIALOG('U'));
-                curX += xStride;
-                break;
-#else
             case GLOBAL_CHAR_SPACE:
                 curX += 8;
                 break;
-#endif
             default:
                 gDPPipeSync(gDisplayListHead++);
 
@@ -638,6 +605,10 @@ void print_hud_lut_string(s8 hudLUT, s16 x, s16 y, const u8 *str) {
                     gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, hudLUT2[str[strPos]]);
                 }
 
+                if (hudLUT == HUD_LUT_ORANGE) {
+                    gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, hudLUT3[str[strPos]]);
+                }
+
                 gSPDisplayList(gDisplayListHead++, dl_rgba16_load_tex_block);
                 gSPTextureRectangle(gDisplayListHead++, curX << 2, curY << 2, (curX + 16) << 2,
                                     (curY + 16) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
@@ -647,22 +618,6 @@ void print_hud_lut_string(s8 hudLUT, s16 x, s16 y, const u8 *str) {
         strPos++;
     }
 }
-
-#ifdef VERSION_EU
-void print_menu_char_umlaut(s16 x, s16 y, u8 chr) {
-    void **fontLUT = segmented_to_virtual(menu_font_lut);
-
-    gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_IA, G_IM_SIZ_8b, 1, fontLUT[chr]);
-    gDPLoadSync(gDisplayListHead++);
-    gDPLoadBlock(gDisplayListHead++, G_TX_LOADTILE, 0, 0, 8 * 8 - 1, CALC_DXT(8, G_IM_SIZ_8b_BYTES));
-    gSPTextureRectangle(gDisplayListHead++, x << 2, y << 2, (x + 8) << 2, (y + 8) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
-
-    gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_IA, G_IM_SIZ_8b, 1, fontLUT[DIALOG_CHAR_UMLAUT]);
-    gDPLoadSync(gDisplayListHead++);
-    gDPLoadBlock(gDisplayListHead++, G_TX_LOADTILE, 0, 0, 8 * 8 - 1, CALC_DXT(8, G_IM_SIZ_8b_BYTES));
-    gSPTextureRectangle(gDisplayListHead++, x << 2, (y - 4) << 2, (x + 8) << 2, (y + 4) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
-}
-#endif
 
 void print_menu_generic_string(s16 x, s16 y, const u8 *str) {
     UNUSED s8 mark = DIALOG_MARK_NONE; // unused in EU

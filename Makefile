@@ -280,7 +280,7 @@ BASEPACK ?= base.zip
 #   us - builds the 1996 North American version
 #   eu - builds the 1997 PAL version
 #   sh - builds the 1997 Japanese Shindou version, with rumble pak support
-NUMRIC_VERSION ?= 0.01
+NUMRIC_VERSION ?= 0.02
 VERSION ?= us
 $(eval $(call validate-option,VERSION,jp us eu sh))
 
