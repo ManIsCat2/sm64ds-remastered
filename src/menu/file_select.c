@@ -1444,7 +1444,7 @@ void print_save_file_star_count(s8 fileIndex, s16 x, s16 y) {
  */
 void print_main_menu_strings(void) {
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
 
     // Print file star counts
     print_save_file_star_count(SAVE_FILE_A, SAVEFILE_X1 - 50, 80);
@@ -2184,7 +2184,7 @@ static void print_file_select_strings(void) {
     UNUSED u8 filler[8];
 
     create_dl_ortho_matrix();
-    switch (sSelectedButtonID) {
+    /*switch (sSelectedButtonID) {
         case MENU_BUTTON_NONE:
             print_main_menu_strings();
             break;
@@ -2210,7 +2210,8 @@ static void print_file_select_strings(void) {
         case MENU_BUTTON_SOUND_MODE:
             print_sound_mode_menu_strings();
             break;
-    }
+    }*/
+    print_main_menu_strings();
     // If all 3 save file exists, define true to sAllFilesExist to prevent more copies in copy menu
     if (save_file_exists(SAVE_FILE_A) == TRUE && save_file_exists(SAVE_FILE_B) == TRUE &&
         save_file_exists(SAVE_FILE_C) == TRUE) {
