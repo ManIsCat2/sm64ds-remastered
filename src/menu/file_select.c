@@ -1233,8 +1233,7 @@ void handle_cursor_button_input(void) {
             play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
         }
     } else { // If cursor is clicked
-        if (gPlayer3Controller->buttonPressed
-            & (A_BUTTON | B_BUTTON | START_BUTTON )) {
+        if (gPlayer3Controller->buttonPressed & A_BUTTON) {
             sClickPos[0] = sCursorPos[0];
             sClickPos[1] = sCursorPos[1];
             sCursorClickingTimer = 1;
