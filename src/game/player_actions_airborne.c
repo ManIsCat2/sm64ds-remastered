@@ -654,6 +654,9 @@ s32 act_double_jump(struct PlayerState *m) {
 #endif
 
 s32 act_triple_jump(struct PlayerState *m) {
+    if (m->input & INPUT_ABOVE_SLIDE) {
+        return set_player_action(m, ACT_JUMP, 0);
+    }
     if (gSpecialTripleJump) {
         return set_player_action(m, ACT_SPECIAL_TRIPLE_JUMP, 0);
     }
