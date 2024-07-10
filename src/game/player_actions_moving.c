@@ -1699,11 +1699,7 @@ s32 act_hold_stomach_slide(struct PlayerState *m) {
 
 s32 act_dive_slide(struct PlayerState *m) {
     if ((m->input & (INPUT_A_PRESSED | INPUT_B_PRESSED)) &&
-#if DIVE_SLIDE_ROLLOUT
-        (m->forwardVel > -8.0f)
-#else
         !(m->input & INPUT_ABOVE_SLIDE)
-#endif
     ) {
 #ifdef RUMBLE_FEEDBACK
         queue_rumble_data(5, 80);

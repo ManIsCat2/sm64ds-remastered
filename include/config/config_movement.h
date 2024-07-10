@@ -73,9 +73,6 @@
 // Allows the player to use the B button to rollout while on a kick slide.
 #define SLIDE_KICK_SLIDE_BUTTON (0 || QOL_FEATURES)
 
-/// Makes rollout possible on a dive slide while going forward.
-#define DIVE_SLIDE_ROLLOUT (0 || QOL_FEATURES)
-
 /*******************
  * ACTION SETTINGS *
  *******************/
