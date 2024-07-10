@@ -63,6 +63,7 @@ extern bool         configPrecacheRes;
 
 extern bool         configHUD;
 extern bool         configWallslide;
+extern bool         configNerfs;
 extern bool         configDive;
 extern bool         configGlobalCapBlocks;
 extern bool         configJHeight;

@@ -104,6 +104,7 @@ bool configDiscordRPC = true;
 bool configSkipIntro = false;
 bool configHUD = true;
 bool configWallslide = true;
+bool configNerfs = true;
 unsigned int configDash = 2;
 bool configDive = true;
 bool configJHeight = true;
@@ -159,6 +160,7 @@ static const struct ConfigOption options[] = {
     {.name = "y_to_dash",            .type = CONFIG_TYPE_BOOL, .boolValue = &configDash},
     {.name = "dive",                 .type = CONFIG_TYPE_BOOL, .boolValue = &configDive},
     {.name = "ds_jump_height",       .type = CONFIG_TYPE_BOOL, .boolValue = &configJHeight},
+    {.name = "ds_nerfs",             .type = CONFIG_TYPE_BOOL, .boolValue = &configNerfs},
     {.name = "globalcapblocks",      .type = CONFIG_TYPE_BOOL, .boolValue = &configGlobalCapBlocks},
 };
 

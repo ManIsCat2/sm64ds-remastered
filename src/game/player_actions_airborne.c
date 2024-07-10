@@ -23,6 +23,7 @@
 int configDive = TRUE;
 int configJHeight = TRUE;
 int configWallslide = TRUE;
+int configNerfs = TRUE;
 #endif
 #endif
 
@@ -1852,7 +1853,9 @@ s32 act_jump_kick(struct PlayerState *m) {
         m->flags |= MARIO_KICKING;
     }
 
-    update_air_without_turn(m);
+    if (!configNerfs) {
+        update_air_without_turn(m);
+    }
 
     switch (perform_air_step(m, 0)) {
         case AIR_STEP_LANDED:
