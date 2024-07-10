@@ -540,24 +540,7 @@ void update_walking_speed(struct PlayerState *m) {
         m->faceAngle[1] = m->intendedYaw;
     } else {
 #endif
-    #if VELOCITY_BASED_TURN_SPEED
-    if ((m->heldObj == NULL) && !(m->action & ACT_FLAG_SHORT_HITBOX)) {
-        if (m->forwardVel >= 16.0f) {
-            s16 turnRange = abs_angle_diff(m->faceAngle[1], m->intendedYaw);
-            f32 fac = (m->forwardVel + m->intendedMag);
-            turnRange *= (1.0f - (CLAMP(fac, 0.0f, 32.0f) / 32.0f));
-            turnRange = MAX(turnRange, 0x800);
-
-            approach_angle_bool(&m->faceAngle[1], m->intendedYaw, turnRange);
-        } else {
-            m->faceAngle[1] = m->intendedYaw;
-        }
-    } else {
-        m->faceAngle[1] = m->intendedYaw - approach_s32((s16)(m->intendedYaw - m->faceAngle[1]), 0, 0x800, 0x800);
-    }
-    #else
     m->faceAngle[1] = m->intendedYaw - approach_s32((s16)(m->intendedYaw - m->faceAngle[1]), 0, 0x800, 0x800);
-    #endif
 #ifdef CHEATS_ACTIONS
     }
 #endif

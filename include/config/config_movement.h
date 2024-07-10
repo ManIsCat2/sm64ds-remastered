@@ -55,9 +55,6 @@
 /// Improves flying so it's more responsive and smoother.
 #define BETTER_FLYING (0 || QOL_FEATURES)
 
-/// Makes turning walking speed based of velocity.
-#define VELOCITY_BASED_TURN_SPEED (0 || QOL_FEATURES)
-
 // If A and Z are pressed on the same frame while running, the player will long jump instead of ground pound.
 #define EASIER_LONG_JUMPS (0 || QOL_FEATURES)
 
