@@ -1394,7 +1394,7 @@ void update_player_button_inputs(struct PlayerState *m) {
     }
 
     if (m->controller->buttonPressed & L_TRIG) {
-        if (curChar > 1) {
+        if (curChar > 2) {
             curChar = 0;
         }
         curChar = curChar + 1;
