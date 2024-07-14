@@ -1347,11 +1347,15 @@ void handle_controller_cursor_input(void) {
 void print_menu_cursor(void) {
     handle_controller_cursor_input();
     create_dl_translation_matrix(MENU_MTX_PUSH, sCursorPos[0] + 160.0f - 5.0, sCursorPos[1] + 120.0f - 25.0, 0.0f);
+#ifdef MOUSE_ACTIONS
     if (!gMouseHasFreeControl) {
+#endif
         gSPDisplayList(gDisplayListHead++, dl_menu_cursor);
+#ifdef MOUSE_ACTIONS
     } else {
         gSPDisplayList(gDisplayListHead++, dl_menu_idle_hand);
     }
+#endif
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
     if (sCursorClickingTimer != 0) {
         sCursorClickingTimer++; // This is a very strange way to implement a timer? It counts up and
