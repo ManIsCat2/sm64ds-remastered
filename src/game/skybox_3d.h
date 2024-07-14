@@ -828,7 +828,7 @@ extern u8 skybox_water__4_rgba16[];
 extern u8 skybox_water__3_rgba16[];
 extern u8 skybox_water__2_rgba16[];
 extern u8 skybox_water__1_rgba16[];
-extern Vtx skybox_water_skybox_mesh_vtx_0[14];
+extern Vtx skybox_water_skybox_mesh_vtx_0[13];
 extern Gfx skybox_water_skybox_mesh_tri_0[];
 extern Vtx skybox_water_skybox_mesh_vtx_1[13];
 extern Gfx skybox_water_skybox_mesh_tri_1[];

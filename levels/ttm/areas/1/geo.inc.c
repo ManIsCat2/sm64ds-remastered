@@ -4,13 +4,6 @@
 const GeoLayout ttm_geo_000A70[] = {
     GEO_NODE_SCREEN_AREA(10, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, SCREEN_WIDTH/2, SCREEN_HEIGHT/2),
     GEO_OPEN_NODE(),
-        GEO_ZBUFFER(0),
-        GEO_OPEN_NODE(),
-            GEO_NODE_ORTHO(100),
-            GEO_OPEN_NODE(),
-                GEO_BACKGROUND(BACKGROUND_OCEAN_SKY, geo_skybox_main),
-            GEO_CLOSE_NODE(),
-        GEO_CLOSE_NODE(),
         GEO_ZBUFFER(1),
         GEO_OPEN_NODE(),
             GEO_CAMERA_FRUSTUM_WITH_FUNC(45, 100, 12800, geo_camera_fov),
