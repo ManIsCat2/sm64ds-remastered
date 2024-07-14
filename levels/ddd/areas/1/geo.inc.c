@@ -1,3 +1,5 @@
+#include "src/game/envfx_skybox.h"
+
 // 0x0E0004C0
 const GeoLayout ddd_geo_0004C0[] = {
     GEO_NODE_SCREEN_AREA(10, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, SCREEN_WIDTH/2, SCREEN_HEIGHT/2),
@@ -23,6 +25,7 @@ const GeoLayout ddd_geo_0004C0[] = {
                     GEO_ASM(0x2301, geo_movtex_draw_water_regions),
                     GEO_RENDER_OBJ(),
                     GEO_ASM(  13, geo_envfx_main),
+                    GEO_ASM(0, sky_3d),
                 GEO_CLOSE_NODE(),
             GEO_CLOSE_NODE(),
         GEO_CLOSE_NODE(),

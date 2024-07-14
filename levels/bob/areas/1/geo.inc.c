@@ -1,3 +1,5 @@
+#include "src/game/envfx_skybox.h"
+
 // 0x0E000488
 const GeoLayout bob_geo_000488[] = {
     GEO_NODE_SCREEN_AREA(10, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, SCREEN_WIDTH/2, SCREEN_HEIGHT/2),
@@ -20,6 +22,7 @@ const GeoLayout bob_geo_000488[] = {
 		            GEO_DISPLAY_LIST(LAYER_TRANSPARENT, level_model_000_displaylist_mesh_layer_5),
                     GEO_RENDER_OBJ(),
                     GEO_ASM(0, geo_envfx_main),
+                    GEO_ASM(0, sky_3d),
                 GEO_CLOSE_NODE(),
             GEO_CLOSE_NODE(),
         GEO_CLOSE_NODE(),

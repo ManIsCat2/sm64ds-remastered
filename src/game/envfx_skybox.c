@@ -26,8 +26,9 @@ Gfx *sky_3d(s32 callContext, struct GraphNode *node, Mat4 mtxf) {
             gSPDisplayList(dlE++, &bitdw_skybox);
         } else if ((gCurrLevelNum == LEVEL_BITS) || (gCurrLevelNum == LEVEL_BOWSER_3)) {
             gSPDisplayList(dlE++, &bits_skybox);
+        /*} else if ((gCurrLevelNum == LEVEL_CASTLE_GROUNDS) || (gCurrLevelNum == LEVEL_CASTLE_COURTYARD) || (gCurrLevelNum == LEVEL_BOB) || (gCurrLevelNum == LEVEL_DDD) || (gCurrLevelNum == LEVEL_THI) || (gCurrLevelNum == LEVEL_TTM)) {
+            gSPDisplayList(dlE++, &water_skybox);*/
         }
-
         gSPPopMatrix(dlE++, G_MTX_MODELVIEW);
         gSPEndDisplayList(dlE);
 

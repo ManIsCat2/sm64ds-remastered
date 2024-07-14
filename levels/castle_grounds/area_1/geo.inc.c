@@ -1,4 +1,5 @@
 #include "src/game/envfx_snow.h"
+#include "src/game/envfx_skybox.h"
 
 const GeoLayout castle_grounds_area_1_geo[] = {
 	GEO_NODE_START(),
@@ -34,6 +35,7 @@ const GeoLayout castle_grounds_area_1[] = {
 					GEO_BRANCH(1, castle_grounds_area_1_geo),
 					GEO_RENDER_OBJ(),
 					GEO_ASM(ENVFX_MODE_NONE, geo_envfx_main),
+                    GEO_ASM(ENVFX_MODE_NONE, sky_3d),
 				GEO_CLOSE_NODE(),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),

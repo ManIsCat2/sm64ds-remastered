@@ -1,3 +1,5 @@
+#include "src/game/envfx_skybox.h"
+
 // SHARE_PATH: [level]/areas/1/1/, [level]/areas/1/2/, [level]/areas/1/3/, [level]/areas/1/4/
 
 // 0x0E0006D4
@@ -31,6 +33,7 @@ const GeoLayout thi_geo_0006D4[] = {
                     GEO_ASM(0x1302, geo_movtex_draw_water_regions),
                     GEO_RENDER_OBJ(),
                     GEO_ASM(   0, geo_envfx_main),
+                    GEO_ASM(0, sky_3d),
                 GEO_CLOSE_NODE(),
             GEO_CLOSE_NODE(),
         GEO_CLOSE_NODE(),
