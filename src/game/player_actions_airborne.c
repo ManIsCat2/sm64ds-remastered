@@ -563,11 +563,7 @@ u32 common_air_action_step(struct PlayerState *m, u32 landAction, s32 animation,
                 // Player starts wall-sliding only if he's falling
                 // and moving towards the wall
                 if (m->forwardVel > 16.0f && m->vel[1] < 0.f) {
-                    if (configNerfs && curChar == 1) {
-                        set_player_action(m, ACT_WALL_SLIDE, 0);
-                    } else if (!configNerfs) {
-                        set_player_action(m, ACT_WALL_SLIDE, 0);
-                    }
+                    set_player_action(m, ACT_WALL_SLIDE, 0);
                 }
                 return AIR_STEP_NONE;
             }
@@ -659,7 +655,7 @@ s32 act_double_jump(struct PlayerState *m) {
 #endif
 
 s32 act_triple_jump(struct PlayerState *m) {
-    if (m->input & INPUT_ABOVE_SLIDE) {
+    if ((m->input & INPUT_ABOVE_SLIDE) && !(m->input & INPUT_OFF_FLOOR) && configNerfs) {
         return set_player_action(m, ACT_JUMP, 0);
     }
     if (gSpecialTripleJump) {
