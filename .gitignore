@@ -96,6 +96,7 @@ sm64dsr_config.txt
 !/textures/segment2/segment2.01200.rgba16.png
 !/textures/segment2/segment2.05C00.rgba16.png
 !/actors/tree/*
+!/actors/mushroom_1up/1-up_mushroom.rgba16.png
 
 # Android files
 !/textures/touchcontrols/*.png
