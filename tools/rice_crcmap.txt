@@ -510,7 +510,6 @@
 0xa742c5e3, textures/skybox_tiles/wdw.60.rgba16.png
 0xa7398f08, textures/segment2/segment2.081D0.rgba16.png
 0xa72c7c50, textures/skybox_tiles/wdw.46.rgba16.png
-0xa71d06b9, actors/bobomb/bob-omb_left_side.rgba16.png
 0xa6e20840, textures/outside/castle_grounds_textures.08800.rgba16.png
 0xa6d0d0cc, textures/skybox_tiles/ssl.61.rgba16.png
 0xa65a6e86, levels/menu/main_menu_seg7_us.0B1C0.ia8.png
@@ -1205,7 +1204,6 @@
 0x38ec1b66, textures/skybox_tiles/ssl.29.rgba16.png
 0x38afcd8f, textures/segment2/segment2.06580.rgba16.png
 0x38afccee, levels/ssl/6.rgba16.png
-0x38894888, actors/bobomb/bob-omb_right_side.rgba16.png
 0x386a9785, actors/bowser/bowser_shell.rgba16.png
 0x3867cbee, actors/wiggler/wiggler_segment_left_side.rgba16.png
 0x385055f4, textures/skybox_tiles/wdw.37.rgba16.png

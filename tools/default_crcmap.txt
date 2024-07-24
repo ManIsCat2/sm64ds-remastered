@@ -9,8 +9,6 @@
 0x0b1833a6, actors/bobomb/bob-omb_buddy_right_side.rgba16.png
 0xae5a9812, actors/bobomb/bob-omb_eyes.rgba16.png
 0x6cf0fe65, actors/bobomb/bob-omb_eyes_blink.rgba16.png
-0xd5ef42fe, actors/bobomb/bob-omb_left_side.rgba16.png
-0xc9a10845, actors/bobomb/bob-omb_right_side.rgba16.png
 0x6348045f, actors/bomb/bomb_left_side.rgba16.png
 0x83895fa8, actors/bomb/bomb_right_side.rgba16.png
 0x6edb77dd, actors/bomb/bomb_spike.rgba16.png
