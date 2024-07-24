@@ -186,4 +186,6 @@ extern const Collision unknown_seg8_collision_080262F8[];
 
 #include "power_flower/geo_header.h"
 
+#include "blue_coin_switch/geo_header.h"
+
 #endif

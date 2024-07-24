@@ -1,0 +1,7 @@
+extern const GeoLayout blue_coin_switch_geo[];
+extern Lights1 blue_coin_switch_mat_b_c_switch_f3d_lights;
+extern u8 blue_coin_switch_bc_switch_rgba16[];
+extern Vtx blue_coin_switch_blue_coin_switch_seg8_dl_08000E08_mesh_mesh_layer_1_vtx_0[20];
+extern Gfx blue_coin_switch_blue_coin_switch_seg8_dl_08000E08_mesh_mesh_layer_1_tri_0[];
+extern Gfx mat_blue_coin_switch_mat_b_c_switch_f3d[];
+extern Gfx blue_coin_switch_blue_coin_switch_seg8_dl_08000E08_mesh_mesh_layer_1[];
