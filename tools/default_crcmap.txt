@@ -88,7 +88,6 @@
 0x2e2ad98c, actors/butterfly/butterfly_wing.rgba16.png
 0x0e4dd4fc, actors/cannon_barrel/cannon_barrel.rgba16.png
 0x5f030348, actors/cannon_base/cannon_base.rgba16.png
-0x158b08e7, actors/cannon_lid/cannon_lid.rgba16.png
 0x71d10611, actors/capswitch/cap_switch_base.rgba16.png
 0xf4aef8c8, actors/capswitch/cap_switch_head.ia16.png
 0x1dc03e3e, actors/chain_ball/chain_ball.rgba16.png

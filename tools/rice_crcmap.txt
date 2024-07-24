@@ -189,7 +189,6 @@
 0xe127cedd, actors/sushi/sushi_eye.rgba16.png
 0xe0c22a3c, textures/mountain/ttm_textures.0A000.rgba16.png
 0xe0c22a3c, textures/sky/rr_textures.06000.rgba16.png
-0xe0bb9b61, actors/cannon_lid/cannon_lid.rgba16.png
 0xe0901c5a, textures/skybox_tiles/cloud_floor.5.rgba16.png
 0xe075472a, textures/skybox_tiles/wdw.53.rgba16.png
 0xe04ef9fc, textures/skybox_tiles/water.21.rgba16.png

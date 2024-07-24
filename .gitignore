@@ -99,6 +99,7 @@ sm64dsr_config.txt
 !/actors/mushroom_1up/1-up_mushroom.rgba16.png
 !/actors/bobomb/bob-omb_left_side.rgba16.png
 !/actors/bobomb/bob-omb_right_side.rgba16.png
+!/actors/cannon_lid/cannon_lid.rgba16.png
 
 # Android files
 !/textures/touchcontrols/*.png
