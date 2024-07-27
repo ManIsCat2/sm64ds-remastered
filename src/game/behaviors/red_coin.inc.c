@@ -56,7 +56,6 @@ void bhv_red_coin_loop(void) {
             // ...increment the star's counter.
             o->parentObj->oHiddenStarTriggerCounter++;
 
-            // For JP version, play an identical sound for all coins.
             // Spawn the orange number counter, as long as it isn't the last coin.
             if (o->parentObj->oHiddenStarTriggerCounter != 8) {
                 spawn_orange_number(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0);
@@ -72,4 +71,5 @@ void bhv_red_coin_loop(void) {
         // Despawn the coin.
         o->oInteractStatus = 0;
     }
+    o->oFaceAngleYaw += 0x0950;
 }

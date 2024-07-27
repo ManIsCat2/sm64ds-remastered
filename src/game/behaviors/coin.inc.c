@@ -31,10 +31,6 @@ void bhv_yellow_coin_init(void) {
     bhv_init_room();
     cur_obj_update_floor_height();
 
-    if (500.0f < absf(o->oPosY - o->oFloorHeight)) {
-        cur_obj_set_model(MODEL_YELLOW_COIN_NO_SHADOW);
-    }
-
     if (o->oFloorHeight < FLOOR_LOWER_LIMIT_MISC) {
         obj_mark_for_deletion(o);
     }
@@ -42,17 +38,16 @@ void bhv_yellow_coin_init(void) {
 
 void bhv_yellow_coin_loop(void) {
     bhv_coin_sparkles_init();
-    o->oAnimState++;
+    o->oFaceAngleYaw += 0x0950;
 }
 
 void bhv_temp_coin_loop(void) {
-    o->oAnimState++;
-
     if (cur_obj_wait_then_blink(200, 20)) {
         obj_mark_for_deletion(o);
     }
 
     bhv_coin_sparkles_init();
+    o->oFaceAngleYaw += 0x0950;
 }
 
 void bhv_spawned_coin_init(void) {
@@ -71,6 +66,8 @@ void bhv_spawned_coin_loop(void) {
     cur_obj_update_floor_and_walls();
     cur_obj_if_hit_wall_bounce_away();
     cur_obj_move_standard(-62);
+    
+    o->oFaceAngleYaw += 0x0950;
 
     if ((floor = o->oFloor) != NULL) {
         if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
@@ -93,23 +90,12 @@ void bhv_spawned_coin_loop(void) {
         cur_obj_become_tangible();
     }
 
-#if QOL_FEATURE_COIN_LAVA_FLICKER
-    if (o->oMoveFlags & OBJ_MOVE_LANDED) {
-        if (o->oMoveFlags & OBJ_MOVE_ABOVE_DEATH_BARRIER) {
-            obj_mark_for_deletion(o);
-        }
-        if (o->oMoveFlags & OBJ_MOVE_ABOVE_LAVA && cur_obj_wait_then_blink(0, 20)) {
-            obj_mark_for_deletion(o);
-        }
-    }
-#else
     if (o->oMoveFlags & OBJ_MOVE_LANDED) {
         if (o->oMoveFlags & (OBJ_MOVE_ABOVE_DEATH_BARRIER | OBJ_MOVE_ABOVE_LAVA))
         {
             obj_mark_for_deletion(o);
         }
     }
-#endif
 
     if (o->oMoveFlags & OBJ_MOVE_BOUNCE) {
         if (o->oCoinNumBounceSoundPlayed < 5) {
@@ -121,7 +107,6 @@ void bhv_spawned_coin_loop(void) {
     if (cur_obj_wait_then_blink(400, 20)) {
         obj_mark_for_deletion(o);
     }
-
     bhv_coin_sparkles_init();
 }
 
@@ -132,21 +117,6 @@ void bhv_coin_formation_spawn_loop(void) {
         bhv_init_room();
 
         if (o->oCoinOnGround) {
-#if BETTER_COIN_FORMATION_GROUND
-            // Get initial coin floor height
-            cur_obj_update_floor_height();
-            // Rise the coin y position if is below it's height, and update it's floor height again
-            if (find_floor_height(o->oPosX, o->oPosY + FIND_SURFACE_BUFFER, o->oPosZ) > o->oFloorHeight) {
-                o->oPosY += FIND_SURFACE_BUFFER;
-                cur_obj_update_floor_height();
-            }
-            // Delete if the coin is out of bounds
-            if (o->oFloorHeight < FLOOR_LOWER_LIMIT_MISC) {
-                obj_mark_for_deletion(o);
-            }
-            // Set it's final y position with it's proper floor height
-            o->oPosY = o->oFloorHeight;
-#else
             o->oPosY += 300.0f;
             cur_obj_update_floor_height();
 
@@ -155,24 +125,19 @@ void bhv_coin_formation_spawn_loop(void) {
             } else {
                 o->oPosY = o->oFloorHeight;
             }
-#endif
         } else {
             cur_obj_update_floor_height();
-
-            if (absf(o->oPosY - o->oFloorHeight) > 250.0f) {
-                cur_obj_set_model(MODEL_YELLOW_COIN_NO_SHADOW);
-            }
         }
     } else {
         if (bhv_coin_sparkles_init()) {
             o->parentObj->oCoinCollectedFlags |= (1 << o->oBhvParams2ndByte);
         }
-        o->oAnimState++;
     }
 
     if (o->parentObj->oAction == COIN_FORMATION_ACT_RESPAWN_COINS) {
         obj_mark_for_deletion(o);
     }
+    o->oFaceAngleYaw += 0x0950;
 }
 
 s16 sCoinArrowPositions[][2] = {
@@ -230,18 +195,6 @@ void spawn_coin_in_formation(s32 coinIndex, s32 coinFormationFlags) {
     if (coinFormationFlags & COIN_FORMATION_BP_FLAG_FLYING) {
         onGround = FALSE;
     }
-
-#if BETTER_COIN_FORMATION_GROUND
-    if (onGround) {
-        // Originally coins created by the spawner gets it's y position raised by 300
-        // In our case we instead raise the spawner by 250, the remaining values
-        // are set depending on where the coin is located
-        f32 nextHeight = find_floor_height(o->oPosX, o->oPosY + 250.0f, o->oPosZ);
-        if (o->oPosY < nextHeight) {
-            o->oPosY = nextHeight;
-        }
-    }
-#endif
 
     if (setSpawner) {
         coinSpawner = spawn_object_relative(coinIndex, pos[0], pos[1], pos[2], o,
@@ -312,6 +265,8 @@ void coin_inside_boo_act_1(void) {
     if (cur_obj_wait_then_blink(400, 20)) {
         obj_mark_for_deletion(o);
     }
+    cur_obj_scale(1);
+    o->oFaceAngleYaw += 0x0950;
 }
 
 void coin_inside_boo_act_0(void) {
@@ -323,7 +278,6 @@ void coin_inside_boo_act_0(void) {
 
     if (o->oTimer == 0 && gCurrLevelNum == LEVEL_BBH) {
         cur_obj_set_model(MODEL_BLUE_COIN);
-        cur_obj_scale(0.7f);
     }
 
     obj_copy_pos(o, parent);
@@ -336,6 +290,8 @@ void coin_inside_boo_act_0(void) {
         o->oVelZ = coss(sp26) * sp20;
         o->oVelY = 35.0f;
     }
+    cur_obj_scale(0.75f);
+    o->oFaceAngleYaw += 0x0950;
 }
 
 void (*sCoinInsideBooActions[])(void) = {
@@ -348,7 +304,7 @@ void bhv_coin_inside_boo_loop(void) {
 }
 
 void bhv_coin_sparkles_loop(void) {
-    cur_obj_scale(0.6f);
+    cur_obj_scale(0.75f);
 }
 
 void bhv_golden_coin_sparkles_loop(void) {

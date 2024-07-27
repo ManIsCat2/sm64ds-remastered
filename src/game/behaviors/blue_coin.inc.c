@@ -55,7 +55,7 @@ void bhv_hidden_blue_coin_loop(void) {
 
             break;
     }
-
+    o->oFaceAngleYaw += 0x0950;
     o->oInteractStatus = 0;
 }
 

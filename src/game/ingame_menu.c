@@ -2103,40 +2103,6 @@ void shade_screen(void) {
     gDisplayListHead = dlHead;
 }
 
-void print_animated_red_coin(s16 x, s16 y) {
-    s32 globalTimer = gGlobalTimer;
-
-    create_dl_translation_matrix(MENU_MTX_PUSH, x, y, 0);
-    create_dl_scale_matrix(MENU_MTX_NOPUSH, 0.2f, 0.2f, 1.0f);
-    gDPSetRenderMode(gDisplayListHead++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
-
-    switch (globalTimer & 6) {
-        case 0:
-            gSPDisplayList(gDisplayListHead++, coin_seg3_dl_03007940);
-            break;
-        case 2:
-            gSPDisplayList(gDisplayListHead++, coin_seg3_dl_03007968);
-            break;
-        case 4:
-            gSPDisplayList(gDisplayListHead++, coin_seg3_dl_03007990);
-            break;
-        case 6:
-            gSPDisplayList(gDisplayListHead++, coin_seg3_dl_030079B8);
-            break;
-    }
-
-    gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
-    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
-}
-
-void render_pause_red_coins(void) {
-    s8 x;
-
-    for (x = 0; x < gRedCoinsCollected; x++) {
-        print_animated_red_coin(GFX_DIMENSIONS_FROM_RIGHT_EDGE(30) - x * 20, 16);
-    }
-}
-
 #ifdef VERSION_EU
 u8 gTextCourse[][7] = {
     { TEXT_COURSE },
@@ -2588,7 +2554,6 @@ s16 render_pause_screen(void) {
         case MENU_STATE_PAUSE_SCREEN_COURSE:
             shade_screen();
             render_pause_my_score_coins();
-            render_pause_red_coins();
 
 #if !EXIT_COURSE_ANYWHERE
 /* Added support for the "Exit course at any time" cheat */
