@@ -157,18 +157,6 @@ extern const Gfx dl_power_meter_health_segments_end[];
 // sand
 extern const Gfx sand_seg3_dl_0302BCD0[];
 
-// star
-extern const GeoLayout star_geo[];
-extern const Gfx star_seg3_dl_0302B7B0[];
-extern const Gfx star_seg3_dl_0302B870[];
-extern const Gfx star_seg3_dl_0302B9C0[];
-extern const Gfx star_seg3_dl_0302BA18[];
-
-// transparent_star
-extern const GeoLayout transparent_star_geo[];
-extern const Gfx transparent_star_seg3_dl_0302C560[];
-extern const Gfx transparent_star_seg3_dl_0302C620[];
-
 // tree
 extern const GeoLayout bubbly_tree_geo[];
 extern const GeoLayout spiky_tree_geo[];
@@ -220,5 +208,9 @@ extern const Collision wooden_signpost_seg3_collision_0302DD80[];
 #include "mario_winged_metal_cap/geo_header.h"
 
 #include "coin/geo_header.h"
+
+#include "star/geo_header.h"
+
+#include "transparent_star/geo_header.h"
 
 #endif

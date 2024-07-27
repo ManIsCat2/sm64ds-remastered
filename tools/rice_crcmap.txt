@@ -33,7 +33,6 @@
 0xfc10a1b3, textures/segment2/segment2.02400.rgba16.png
 0xfc0dd433, textures/skybox_tiles/bits.54.rgba16.png
 0xfbec7687, textures/skybox_tiles/cake.8.rgba16.png
-0xfbe08cab, actors/coin/coin_tilt_right.ia16.png
 0xfbcb7598, levels/menu/main_menu_seg7.04C68.rgba16.png
 0xfba28e17, actors/water_wave/water_wave_0.ia16.png
 0xfb4e7d3c, textures/skybox_tiles/cloud_floor.17.rgba16.png
@@ -156,7 +155,6 @@
 0xe60ffd91, actors/treasure_chest/treasure_chest_lock.rgba16.png
 0xe6061d88, textures/skybox_tiles/bitfs.40.rgba16.png
 0xe5d87cd6, levels/menu/main_menu_seg7.04468.rgba16.png
-0xe5bcf46e, actors/coin/coin_side.ia16.png
 0xe56f0bbf, textures/cave/hmc_textures.02800.rgba16.png
 0xe559fc96, levels/bbh/0.rgba16.png
 0xe52ee127, actors/snowman/mr_blizzard_mouth.rgba16.png
@@ -920,7 +918,6 @@
 0x6a17a436, textures/skybox_tiles/ssl.11.rgba16.png
 0x69553f79, levels/ttm/6.rgba16.png
 0x6926316a, textures/skybox_tiles/cake.27.rgba16.png
-0x6906c074, actors/coin/coin_front.ia16.png
 0x6905fbf2, textures/skybox_tiles/ccm.30.rgba16.png
 0x68cbbcd3, textures/skybox_tiles/bits.9.rgba16.png
 0x68c4a756, textures/skybox_tiles/bidw.35.rgba16.png
@@ -1393,7 +1390,6 @@
 0x17ea3392, textures/snow/ccm_textures.09000.ia16.png
 0x17cde57d, actors/thwomp/thwomp_face.rgba16.png
 0x177d197c, levels/bitdw/3.rgba16.png
-0x176c2e93, actors/coin/coin_tilt_left.ia16.png
 0x17405808, levels/bbh/5.rgba16.png
 0x16db7146, textures/skybox_tiles/cake.38.rgba16.png
 0x16ce5dc5, textures/intro_raw/mario_face_shine.ia8.png
@@ -1433,7 +1429,6 @@
 0x11543850, textures/skybox_tiles/bits.62.rgba16.png
 0x112c8257, textures/skybox_tiles/water.44.rgba16.png
 0x10f30b26, actors/power_meter/power_meter_four_segments.rgba16.png
-0x10e998f8, actors/star/star_eye.rgba16.png
 0x10e998f8, actors/wiggler/wiggler_eye.rgba16.png
 0x10e452c9, textures/fire/lll_textures.01000.rgba16.png
 0x10c87d57, textures/skybox_tiles/cake.23.rgba16.png

@@ -111,10 +111,6 @@
 0xb8520d0e, actors/chuckya/chuckya_hand_antenna.rgba16.png
 0xe9f30ab8, actors/clam_shell/clam_shell.rgba16.png
 0x9226c89b, actors/clam_shell/clam_shell_mouth.rgba16.png
-0xf917b481, actors/coin/coin_front.ia16.png
-0xf3efe791, actors/coin/coin_side.ia16.png
-0x398f8275, actors/coin/coin_tilt_left.ia16.png
-0x285437f2, actors/coin/coin_tilt_right.ia16.png
 0xcfa59ad1, actors/cyan_fish/cyan_fish.rgba16.png
 0xdcfc2924, actors/dirt/dirt_particle.rgba16.png
 0x30e837d4, actors/door/bbh_door.rgba16.png
@@ -326,8 +322,6 @@
 0x30da7207, actors/spindrift/spindrift_petal.rgba16.png
 0x912d74b1, actors/springboard/springboard_base_unused.rgba16.png
 0x9303578c, actors/springboard/springboard_top_unused.rgba16.png
-0xe343a70a, actors/star/star_eye.rgba16.png
-0x2379d1f3, actors/star/star_surface.rgba16.png
 0x7bc16686, actors/stomp_smoke/stomp_smoke_0.ia16.png
 0x0f2deec7, actors/stomp_smoke/stomp_smoke_1.ia16.png
 0x952c47c7, actors/stomp_smoke/stomp_smoke_2.ia16.png
