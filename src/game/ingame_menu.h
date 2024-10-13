@@ -20,6 +20,7 @@
 #define HUD_LUT_JPMENU 1
 #define HUD_LUT_GLOBAL 2
 #define HUD_LUT_ORANGE 3
+#define HUD_LUT_RED    4
 
 // For file select JP HUD difference
 #if defined(VERSION_SH)

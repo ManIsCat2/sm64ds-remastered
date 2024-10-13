@@ -579,9 +579,8 @@ static const Vtx vertex_menu_hand[] = {
     {{{     0,     32,      0}, 0, {     0,      0}, {0x00, 0x00, 0x7f, 0xff}}},
 };
 
-// 0x07006328 - 0x07006B28
-ALIGNED8 static const Texture texture_menu_idle_hand[] = {
-#include "levels/menu/main_menu_seg7.06328.rgba16.inc.c"
+ALIGNED8 static const Texture texture_file_arrow[] = {
+#include "textures/hud_file_select/file_hud_arrow_down.rgba16.inc.c"
 };
 
 // 0x07006B28 - 0x07007328
@@ -866,10 +865,10 @@ static const Gfx dl_menu_hand[] = {
     gsSPEndDisplayList(),
 };
 
-// 0x070073A0 - 0x070073B8
-const Gfx dl_menu_idle_hand[] = {
+// File Select Arrow
+const Gfx dl_file_select_arrow[] = {
     gsDPPipeSync(),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_menu_idle_hand),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_file_arrow),
     gsSPBranchList(dl_menu_hand),
 };
 

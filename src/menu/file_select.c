@@ -23,11 +23,6 @@
 #include "sm64.h"
 #include "text_strings.h"
 
-#ifdef MOUSE_ACTIONS
-#include "pc/controller/controller_mouse.h"
-#include "pc/configfile.h"
-#endif
-
 #ifdef COMMAND_LINE_OPTIONS
 #include "pc/cliopts.h"
 #endif
@@ -69,6 +64,12 @@ static u8 sTextBaseAlpha = 0;
 // 2D position of the cursor on the screen.
 // sCursorPos[0]: X | sCursorPos[1]: Y
 static f32 sCursorPos[] = {0, 0};
+
+// 2D position of the arrow on the screen.
+static f32 sArrowPosY = 205;
+
+// A timer to determine when the arrow should move
+static f32 sArrowTimer = 0;
 
 // Determines which graphic to use for the cursor.
 static s16 sCursorClickingTimer = 0;
@@ -988,22 +989,23 @@ void bhv_menu_button_manager_init(void) {
     sMainMenuButtons[MENU_BUTTON_PLAY_FILE_C] = spawn_object_rel_with_rot(gCurrentObject, MODEL_MAIN_MENU_FILE_BUTTON_C, bhvMenuButton, 6400, 2800, 0, 0, 0, 0);
     sMainMenuButtons[MENU_BUTTON_PLAY_FILE_C]->oMenuButtonScale = 1.0f;
 
+    // Todo: Figure this stuff out
     // Score menu button
     sMainMenuButtons[MENU_BUTTON_SCORE] = spawn_object_rel_with_rot(
         gCurrentObject, MODEL_MAIN_MENU_GREEN_SCORE_BUTTON, bhvMenuButton, -6400, -3500, 0, 0, 0, 0);
-    sMainMenuButtons[MENU_BUTTON_SCORE]->oMenuButtonScale = 1.0f;
+    sMainMenuButtons[MENU_BUTTON_SCORE]->oMenuButtonScale = 0.0f;
     // Copy menu button
     sMainMenuButtons[MENU_BUTTON_COPY] = spawn_object_rel_with_rot(
         gCurrentObject, MODEL_MAIN_MENU_BLUE_COPY_BUTTON, bhvMenuButton, -2134, -3500, 0, 0, 0, 0);
-    sMainMenuButtons[MENU_BUTTON_COPY]->oMenuButtonScale = 1.0f;
+    sMainMenuButtons[MENU_BUTTON_COPY]->oMenuButtonScale = 0.0f;
     // Erase menu button
     sMainMenuButtons[MENU_BUTTON_ERASE] = spawn_object_rel_with_rot(
         gCurrentObject, MODEL_MAIN_MENU_RED_ERASE_BUTTON, bhvMenuButton, 2134, -3500, 0, 0, 0, 0);
-    sMainMenuButtons[MENU_BUTTON_ERASE]->oMenuButtonScale = 1.0f;
+    sMainMenuButtons[MENU_BUTTON_ERASE]->oMenuButtonScale = 0.0f;
     // Sound mode menu button (Option Mode in EU)
     sMainMenuButtons[MENU_BUTTON_SOUND_MODE] = spawn_object_rel_with_rot(
         gCurrentObject, MODEL_MAIN_MENU_PURPLE_SOUND_BUTTON, bhvMenuButton, 6400, -3500, 0, 0, 0, 0);
-    sMainMenuButtons[MENU_BUTTON_SOUND_MODE]->oMenuButtonScale = 1.0f;
+    sMainMenuButtons[MENU_BUTTON_SOUND_MODE]->oMenuButtonScale = 0.0f;
 
     sTextBaseAlpha = 0;
 }
@@ -1242,21 +1244,9 @@ void handle_controller_cursor_input(void) {
     if (rawStickY > -2 && rawStickY < 2) {
         rawStickY = 0;
     }
-    #ifdef MOUSE_ACTIONS 
-    else
-    {
-        gMouseHasFreeControl = FALSE;
-    }
-    #endif
     if (rawStickX > -2 && rawStickX < 2) {
         rawStickX = 0;
     }
-    #ifdef MOUSE_ACTIONS 
-    else
-    {
-        gMouseHasFreeControl = FALSE;
-    }
-    #endif
 
     // Move cursor
     if ((rawStickX > 60) || (dPadR)) {
@@ -1302,28 +1292,22 @@ void handle_controller_cursor_input(void) {
     } else {
         allowInput++;
     }
-#ifdef MOUSE_ACTIONS
-    if (sSelectedFileNum != 0)
-        gMouseHasFreeControl = FALSE;
-        
-    if ((gMouseXPos - gOldMouseXPos != 0 || gMouseYPos - gOldMouseYPos != 0) && sSelectedFileNum == 0)  {
-        gMouseHasFreeControl = TRUE;
-    }
-
-    static float screenScale;
-    screenScale = (float) gfx_current_dimensions.height / SCREEN_HEIGHT;
-    if (gMouseHasFreeControl) {
-        sCursorPos[0] = ((gMouseXPos - (gfx_current_dimensions.width - (screenScale * 320)) / 2) / screenScale) - 160.0f;
-        sCursorPos[1] = (gMouseYPos / screenScale - 120.0f) * -1;
-    }
-
-    gOldMouseXPos = gMouseXPos;
-    gOldMouseYPos = gMouseYPos;
-
-#endif
 
     if (sCursorClickingTimer == 0) {
         handle_cursor_button_input();
+    }
+
+    sArrowTimer++;
+    if (sArrowTimer <= 8) {
+        sArrowPosY--;
+    } else if (sArrowTimer >= 15) {
+        if (sArrowPosY >= 205) {
+            if (sArrowTimer >= 28) {
+                sArrowTimer = 0;
+            }
+        } else {
+            sArrowPosY++;
+        }
     }
 }
 
@@ -1334,17 +1318,19 @@ void handle_controller_cursor_input(void) {
  */
 void print_menu_cursor(void) {
     handle_controller_cursor_input();
+
     create_dl_translation_matrix(MENU_MTX_PUSH, sCursorPos[0] + 160.0f - 5.0, sCursorPos[1] + 120.0f - 25.0, 0.0f);
-#ifdef MOUSE_ACTIONS
-    if (!gMouseHasFreeControl) {
-#endif
-        gSPDisplayList(gDisplayListHead++, dl_menu_cursor);
-#ifdef MOUSE_ACTIONS
-    } else {
-        gSPDisplayList(gDisplayListHead++, dl_menu_idle_hand);
-    }
-#endif
+    gSPDisplayList(gDisplayListHead++, dl_menu_cursor);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+    create_dl_translation_matrix(MENU_MTX_PUSH, 20, sArrowPosY, 0.0f);
+    gSPDisplayList(gDisplayListHead++, dl_file_select_arrow);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+    create_dl_translation_matrix(MENU_MTX_PUSH, 270, sArrowPosY, 0.0f);
+    gSPDisplayList(gDisplayListHead++, dl_file_select_arrow);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
     if (sCursorClickingTimer != 0) {
         sCursorClickingTimer++; // This is a very strange way to implement a timer? It counts up and
                                 // then resets to 0 instead of just counting down to 0.
@@ -1436,6 +1422,9 @@ void print_save_file_star_count(s8 fileIndex, s16 x, s16 y) {
 void print_main_menu_strings(void) {
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+
+    // Print the "select a file" text
+    print_hud_lut_string(HUD_LUT_RED, 70, 20, textSelectFile);
 
     // Print file star counts
     print_save_file_star_count(SAVE_FILE_A, SAVEFILE_X1 - 50, 80);

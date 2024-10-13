@@ -40,7 +40,7 @@ extern const Gfx dl_menu_generic_button_dynamic[];
 #endif
 
 extern const Gfx dl_menu_cursor[];
-extern const Gfx dl_menu_idle_hand[];
+extern const Gfx dl_file_select_arrow[];
 extern const Gfx dl_menu_grabbing_hand[];
 extern const u8 *const menu_hud_lut[];
 extern const u8 *const menu_font_lut[];

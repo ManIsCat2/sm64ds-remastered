@@ -576,6 +576,7 @@ void print_hud_lut_string(s8 hudLUT, s16 x, s16 y, const u8 *str) {
     void **hudLUT1 = segmented_to_virtual(menu_hud_lut); // 0-9 A-Z HUD Color Font
     void **hudLUT2 = segmented_to_virtual(main_hud_lut); // 0-9 A-Z HUD Orange Font
     void **hudLUT3 = segmented_to_virtual(orange_hud_lut); // 0-9 A-Z HUD Orange Font
+    void **hudLUT4 = segmented_to_virtual(red_hud_lut); // 0-9 A-Z HUD Red Font
     u32 curX = x;
     u32 curY = y;
 
@@ -585,7 +586,7 @@ void print_hud_lut_string(s8 hudLUT, s16 x, s16 y, const u8 *str) {
         xStride = 16;
     } else if (hudLUT == HUD_LUT_GLOBAL) {
         xStride = HUD_LUT_STRIDE_GLOBAL;
-    } else { // HUD_LUT_ORANGE
+    } else { // HUD_LUT_RED or HUD_LUT_ORANGE
         xStride = HUD_LUT_STRIDE_ORANGE;
     }
 
@@ -607,6 +608,10 @@ void print_hud_lut_string(s8 hudLUT, s16 x, s16 y, const u8 *str) {
 
                 if (hudLUT == HUD_LUT_ORANGE) {
                     gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, hudLUT3[str[strPos]]);
+                }
+
+                if (hudLUT == HUD_LUT_RED) {
+                    gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, hudLUT4[str[strPos]]);
                 }
 
                 gSPDisplayList(gDisplayListHead++, dl_rgba16_load_tex_block);

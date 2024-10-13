@@ -93,6 +93,38 @@ ALIGNED8 static const Texture texture_hud_orange_char_9[] = {
 #include "textures/hud_file_select/file_hud_9.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture texture_hud_red_char_A[] = {
+#include "textures/hud_file_select/file_hud_a.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_red_char_C[] = {
+#include "textures/hud_file_select/file_hud_c.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_red_char_E[] = {
+#include "textures/hud_file_select/file_hud_e.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_red_char_F[] = {
+#include "textures/hud_file_select/file_hud_f.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_red_char_I[] = {
+#include "textures/hud_file_select/file_hud_i.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_red_char_L[] = {
+#include "textures/hud_file_select/file_hud_l.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_red_char_S[] = {
+#include "textures/hud_file_select/file_hud_s.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_red_char_T[] = {
+#include "textures/hud_file_select/file_hud_t.rgba16.inc.c"
+};
+
 // Main Font Letters
 
 ALIGNED8 static const Texture texture_hud_char_A[] = {
@@ -979,6 +1011,25 @@ const Texture *const orange_hud_lut[] = {
     texture_hud_char_K,           texture_hud_char_L,        texture_hud_char_M,        texture_orange_char_N,
     texture_hud_char_O,           texture_hud_char_P,        texture_hud_char_Q,        texture_hud_char_R,
     texture_hud_char_S,           texture_hud_char_T,        texture_hud_char_U,        texture_hud_char_V,
+    texture_orange_char_W,        texture_hud_char_X,        texture_hud_char_Y,        texture_hud_char_Z,
+    texture_hud_char_exclamation, texture_hud_char_red_coin, texture_hud_char_question, texture_hud_char_ampersand,
+    texture_hud_char_percent,     0,                         0,                         0,
+    0,                            0,                         0,                         0,
+    0,                            0,                         texture_hud_char_multiply, texture_hud_char_coin,
+    0,                            texture_hud_char_star,     0,                         0,
+    texture_hud_char_apostrophe,  texture_hud_char_double_quote,
+};
+
+// Red HUD Texture
+const Texture *const red_hud_lut[] = {
+    texture_hud_orange_char_0,    texture_hud_orange_char_1, texture_hud_orange_char_2, texture_hud_orange_char_3,
+    texture_hud_orange_char_4,    texture_hud_orange_char_5, texture_hud_orange_char_6, texture_hud_orange_char_7,
+    texture_hud_orange_char_8,    texture_hud_orange_char_9, texture_hud_red_char_A,    texture_hud_char_B,
+    texture_hud_red_char_C,       texture_hud_char_D,        texture_hud_red_char_E,    texture_hud_red_char_F,
+    texture_hud_char_G,           texture_hud_char_H,        texture_hud_red_char_I,    texture_hud_char_J,
+    texture_hud_char_K,           texture_hud_red_char_L,    texture_hud_char_M,        texture_orange_char_N,
+    texture_hud_char_O,           texture_hud_char_P,        texture_hud_char_Q,        texture_hud_char_R,
+    texture_hud_red_char_S,       texture_hud_red_char_T,    texture_hud_char_U,        texture_hud_char_V,
     texture_orange_char_W,        texture_hud_char_X,        texture_hud_char_Y,        texture_hud_char_Z,
     texture_hud_char_exclamation, texture_hud_char_red_coin, texture_hud_char_question, texture_hud_char_ampersand,
     texture_hud_char_percent,     0,                         0,                         0,
