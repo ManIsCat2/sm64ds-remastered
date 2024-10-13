@@ -880,17 +880,11 @@ s32 launch_player_until_land(struct PlayerState *m, s32 endAction, s32 animation
 
 s32 act_unlocking_key_door(struct PlayerState *m) {
     m->faceAngle[1] = m->usedObj->oMoveAngleYaw;
-
-#if FIX_DOOR_KEY_CUTSCENE
     s16 dAngle = abs_angle_diff(m->usedObj->oFaceAngleYaw, m->faceAngle[1]);
     f32 offset = ((dAngle <= 0x4000) ? 75.0f : -75.0f);
 
     m->pos[0] = m->usedObj->oPosX + coss(m->faceAngle[1]) * offset;
     m->pos[2] = m->usedObj->oPosZ + sins(m->faceAngle[1]) * offset;
-#else
-    m->pos[0] = m->usedObj->oPosX + coss(m->faceAngle[1]) * 75.0f;
-    m->pos[2] = m->usedObj->oPosZ + sins(m->faceAngle[1]) * 75.0f;
-#endif
 
     if (m->actionArg & WARP_FLAG_DOOR_FLIP_MARIO) {
         m->faceAngle[1] += 0x8000;
