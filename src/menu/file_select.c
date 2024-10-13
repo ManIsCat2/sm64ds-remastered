@@ -154,19 +154,7 @@ static unsigned char textNo[] = { TEXT_NO };
  * Although the scale is properly applied in the loop function.
  */
 void beh_yellow_background_menu_init(void) {
-    gCurrentObject->oFaceAngleYaw = 0x8000;
     gCurrentObject->oMenuButtonScale = 9.0f;
-#ifdef WIDESCREEN
-    gCurrentObject->oAnimState = 1;
-#endif
-}
-
-/**
- * Yellow Background Menu Loop Action
- * Properly scales the background in the main menu.
- */
-void beh_yellow_background_menu_loop(void) {
-    cur_obj_scale(9.0f);
 }
 
 /**

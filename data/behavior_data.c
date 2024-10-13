@@ -3621,7 +3621,6 @@ const BehaviorScript bhvYellowBackgroundInMenu[] = {
     CALL_NATIVE(beh_yellow_background_menu_init),
     BEGIN_LOOP(),
         SET_INT(oIntangibleTimer, 0),
-        CALL_NATIVE(beh_yellow_background_menu_loop),
     END_LOOP(),
 };
 

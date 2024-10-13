@@ -124,7 +124,6 @@ enum SoundModeMenuActionPhase {
 };
 
 void beh_yellow_background_menu_init(void);
-void beh_yellow_background_menu_loop(void);
 void bhv_menu_button_init(void);
 void bhv_menu_button_loop(void);
 void bhv_menu_button_manager_init(void);
