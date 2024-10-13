@@ -1428,7 +1428,7 @@ void print_save_file_star_count(s8 fileIndex, s16 x, s16 y) {
     
         // Print star count
         int_to_str(starCount, starCountText);
-        print_hud_lut_string(HUD_LUT_GLOBAL, x + 16 + offset, y, starCountText);
+        print_hud_lut_string(HUD_LUT_ORANGE, x + 16 + offset, y, starCountText);
     }
 }
 

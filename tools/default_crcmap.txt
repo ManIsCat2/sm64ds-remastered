@@ -1014,16 +1014,6 @@
 0x37db6cf9, textures/segment2/font_graphics.06F40.ia4.png
 0x89813602, textures/segment2/font_graphics.06F80.ia4.png
 0x55595e27, textures/segment2/font_graphics.06FC0.ia4.png
-0xcf341250, textures/segment2/segment2.00000.rgba16.png
-0x39f1d028, textures/segment2/segment2.00200.rgba16.png
-0xca380082, textures/segment2/segment2.00400.rgba16.png
-0xeb41b2c9, textures/segment2/segment2.00600.rgba16.png
-0x03a5f3b2, textures/segment2/segment2.00800.rgba16.png
-0x2cbaf6de, textures/segment2/segment2.00A00.rgba16.png
-0x6e925f0b, textures/segment2/segment2.00C00.rgba16.png
-0x7b160b36, textures/segment2/segment2.00E00.rgba16.png
-0x377ab51e, textures/segment2/segment2.01000.rgba16.png
-0xe204fbf6, textures/segment2/segment2.01200.rgba16.png
 0x9e0865f1, textures/segment2/segment2.01400.rgba16.png
 0xccf5a18a, textures/segment2/segment2.01600.rgba16.png
 0x3c6e303c, textures/segment2/segment2.01800.rgba16.png
@@ -1048,10 +1038,6 @@
 0x347bb5c1, textures/segment2/segment2.04800.rgba16.png
 0xe4ae946f, textures/segment2/segment2.04A00.rgba16.png
 0xeaef8ec7, textures/segment2/segment2.05000.rgba16.png
-0xf3554378, textures/segment2/segment2.05600.rgba16.png
-0x7efec761, textures/segment2/segment2.05800.rgba16.png
-0x207e74f1, textures/segment2/segment2.05A00.rgba16.png
-0x9cc450c0, textures/segment2/segment2.05C00.rgba16.png
 0x6df02dac, textures/segment2/segment2.06200.rgba16.png
 0x400ac163, textures/segment2/segment2.06280.rgba16.png
 0x83e67e30, textures/segment2/segment2.06300.rgba16.png
@@ -1083,9 +1069,6 @@
 0xf513768d, textures/segment2/segment2.07000.rgba16.png
 0x51874ba9, textures/segment2/segment2.07080.rgba16.png
 0xb65924dd, textures/segment2/segment2.07340.ia1.png
-0xd9ce10d3, textures/segment2/segment2.07B50.rgba16.png
-0x20c1e685, textures/segment2/segment2.07D50.rgba16.png
-0x6328bdd7, textures/segment2/segment2.07F50.rgba16.png
 0x28231083, textures/segment2/segment2.08150.rgba16.png
 0xfa68ab28, textures/segment2/segment2.081D0.rgba16.png
 0xd2092ad4, textures/segment2/segment2.0F458.ia8.png

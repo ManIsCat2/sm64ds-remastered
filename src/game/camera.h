@@ -150,16 +150,6 @@
 #define CAM_FLAG_UNUSED_CUTSCENE_ACTIVE  0x4000
 #define CAM_FLAG_BEHIND_MARIO_POST_DOOR  0x8000
 
-#define CAM_STATUS_NONE   0
-#define CAM_STATUS_MARIO  1 << 0
-#define CAM_STATUS_LAKITU 1 << 1
-#define CAM_STATUS_FIXED  1 << 2
-#define CAM_STATUS_C_DOWN 1 << 3
-#define CAM_STATUS_C_UP   1 << 4
-
-#define CAM_STATUS_MODE_GROUP   (CAM_STATUS_MARIO | CAM_STATUS_LAKITU | CAM_STATUS_FIXED)
-#define CAM_STATUS_C_MODE_GROUP (CAM_STATUS_C_DOWN | CAM_STATUS_C_UP)
-
 #define SHAKE_ATTACK         1
 #define SHAKE_GROUND_POUND   2
 #define SHAKE_SMALL_DAMAGE   3
@@ -677,7 +667,6 @@ s32 set_cam_angle(s32 mode);
 void set_handheld_shake(u8 mode);
 void shake_camera_handheld(Vec3f pos, Vec3f focus);
 s32 find_c_buttons_pressed(u16 currentState, u16 buttonsPressed, u16 buttonsDown);
-s32 update_camera_hud_status(struct Camera *c);
 s32 collide_with_walls(Vec3f pos, f32 offsetY, f32 radius);
 s32 clamp_pitch(Vec3f from, Vec3f to, s16 maxPitch, s16 minPitch);
 s32 is_within_100_units_of_player(f32 posX, f32 posY, f32 posZ);
