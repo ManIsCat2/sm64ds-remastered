@@ -1251,19 +1251,19 @@ void handle_controller_cursor_input(void) {
     // Move cursor
     if ((rawStickX > 60) || (dPadR)) {
         if (allowInput > 1) {
-            // File C
+            // File B
             if (cursorLoc == 0) {
                 sCursorPos[0] = -10.0f;
                 sCursorPos[1] = 19.0f;
                 cursorLoc = 1;
-            // File B
+            // File C
             } else if (cursorLoc == 1) {
-                sCursorPos[0] = 85.5f;
+                sCursorPos[0] = 82.5f;
                 sCursorPos[1] = 62.0f;
                 cursorLoc = 2;
             // File A
             } else {
-                sCursorPos[0] = -98.5f;
+                sCursorPos[0] = -103.0f;
                 sCursorPos[1] = 62.0f;
                 cursorLoc = 0;
             }
@@ -1271,19 +1271,19 @@ void handle_controller_cursor_input(void) {
         }
     } else if ((rawStickX < -60) || (dPadL)) {
         if (allowInput > 1) {
-            // File C
+            // File B
             if (cursorLoc == 2) {
                 sCursorPos[0] = -10.0f;
                 sCursorPos[1] = 19.0f;
                 cursorLoc = 1;
             // File A
             } else if (cursorLoc == 1) {
-                sCursorPos[0] = -98.5f;
+                sCursorPos[0] = -103.0f;
                 sCursorPos[1] = 62.0f;
                 cursorLoc = 0;
-            // File B
+            // File C
             } else {
-                sCursorPos[0] = 85.5f;
+                sCursorPos[0] = 82.5f;
                 sCursorPos[1] = 62.0f;
                 cursorLoc = 2;
             }
@@ -2246,14 +2246,14 @@ s32 lvl_init_menu_values_and_cursor_pos(UNUSED s32 arg, UNUSED s32 unused) {
     // the cursor will point on Player A save file.
     switch (gCurrSaveFileNum) {
         case 1: // File A
-            sCursorPos[0] = -98.5f;
+            sCursorPos[0] = -103.0f;
             sCursorPos[1] = 62.0f;
             break;
-        case 2: // File B
-            sCursorPos[0] = 85.5f;
+        case 2: // File C
+            sCursorPos[0] = 82.5f;
             sCursorPos[1] = 62.0f;
             break;
-        case 3: // File C
+        case 3: // File B
             sCursorPos[0] = -10.0f;
             sCursorPos[1] = 19.0f;
             break;
