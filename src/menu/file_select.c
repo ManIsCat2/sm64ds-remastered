@@ -62,10 +62,6 @@ static f32 sArrowTimer = 0;
 // Whether to fade out text or not.
 static s8 sFadeOutText = FALSE;
 
-// Used for text fading. The alpha value of text is calculated as
-// sTextBaseAlpha - sTextFadeAlpha.
-static u8 sTextFadeAlpha = 0;
-
 // File select timer that keeps counting until it reaches 1000.
 // Used to prevent buttons from being clickable as soon as a menu loads.
 static s16 sMainMenuTimer = 0;
@@ -325,7 +321,7 @@ void print_menu_cursor(void) {
  */
 void print_hud_lut_string_fade(s8 hudLUT, s16 x, s16 y, const unsigned char *text) {
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha - sTextFadeAlpha);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
     print_hud_lut_string(hudLUT, x, y, text);
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 }
@@ -335,27 +331,9 @@ void print_hud_lut_string_fade(s8 hudLUT, s16 x, s16 y, const unsigned char *tex
  */
 void print_generic_string_fade(s16 x, s16 y, const unsigned char *text) {
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha - sTextFadeAlpha);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
     print_generic_string(x, y, text);
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
-}
-
-/**
- * Updates text fade at the top of a menu.
- */
-s32 update_text_fade_out(void) {
-    if (sFadeOutText == TRUE) {
-        sTextFadeAlpha += 50;
-        if (sTextFadeAlpha == 250) {
-            sFadeOutText = FALSE;
-            return TRUE;
-        }
-    } else {
-        if (sTextFadeAlpha > 0) {
-            sTextFadeAlpha -= 50;
-        }
-    }
-    return FALSE;
 }
 
 /**
@@ -480,7 +458,6 @@ s32 lvl_init_menu_values_and_cursor_pos(UNUSED s32 arg, UNUSED s32 unused) {
     }
     sSelectedFileNum = 0;
     sFadeOutText = FALSE;
-    sTextFadeAlpha = 0;
     sMainMenuTimer = 0;
 
     return 0;
