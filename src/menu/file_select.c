@@ -98,8 +98,6 @@ void bhv_menu_button_loop(void) {
         case MENU_BUTTON_STATE_FADING: // Switching from button to menu state
             sTextBaseAlpha = 0;
             break;
-        case MENU_BUTTON_STATE_FULLSCREEN: // Menu state
-            break;
     }
 }
 
@@ -166,8 +164,18 @@ void bhv_menu_button_manager_loop(void) {
     } else if ((gPlayer3Controller->buttonPressed & A_BUTTON) && (sMainMenuTimer > 15) && (rowBottom == 1)) {
         switch (subCursorLoc) {
             case 0:
+                play_sound(SOUND_MENU_PAUSE_OPEN, gGlobalSoundSource);
+#ifdef RUMBLE_FEEDBACK
+                queue_rumble_data(60, 70);
+                queue_rumble_decay(1);
+#endif
                 break;
             case 1:
+                play_sound(SOUND_MENU_PINCH_MARIO_FACE, gGlobalSoundSource);
+#ifdef RUMBLE_FEEDBACK
+                queue_rumble_data(60, 70);
+                queue_rumble_decay(1);
+#endif
                 break;
         }        
     }
@@ -314,26 +322,6 @@ void print_menu_cursor(void) {
     create_dl_translation_matrix(MENU_MTX_PUSH, 270, sArrowPosY, 0.0f);
     gSPDisplayList(gDisplayListHead++, dl_file_select_arrow);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
-}
-
-/**
- * Prints a hud string depending of the hud table list defined with text fade properties.
- */
-void print_hud_lut_string_fade(s8 hudLUT, s16 x, s16 y, const unsigned char *text) {
-    gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
-    print_hud_lut_string(hudLUT, x, y, text);
-    gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
-}
-
-/**
- * Prints a generic white string with text fade properties.
- */
-void print_generic_string_fade(s16 x, s16 y, const unsigned char *text) {
-    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
-    print_generic_string(x, y, text);
-    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 }
 
 /**

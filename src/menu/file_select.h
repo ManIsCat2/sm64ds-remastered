@@ -8,8 +8,7 @@
 
 enum MainMenuButtonStates {
     MENU_BUTTON_STATE_DEFAULT,
-    MENU_BUTTON_STATE_FADING,
-    MENU_BUTTON_STATE_FULLSCREEN
+    MENU_BUTTON_STATE_FADING
 };
 
 enum MenuButtonTypes {
