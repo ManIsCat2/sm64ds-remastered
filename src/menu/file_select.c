@@ -18,8 +18,9 @@
 #include "game/segment2.h"
 #include "game/segment7.h"
 #include "game/spawn_object.h"
-#include "sm64.h"
+#include "game/level_update.h"
 #include "text_strings.h"
+#include "sm64.h"
 
 #ifdef COMMAND_LINE_OPTIONS
 #include "pc/cliopts.h"
