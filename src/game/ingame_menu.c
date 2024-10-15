@@ -2933,7 +2933,7 @@ void render_save_confirmation(s16 x, s16 y, s8 *index, s16 yOffset)
 #else
     u8 textSaveAndContinue[] = { TEXT_SAVE_AND_CONTINUE };
     u8 textSaveAndQuit[] = { TEXT_SAVE_AND_QUIT };
-#ifndef TARGET_N64
+#if !defined(TARGET_N64) || !defined(TARGET_WII_U)
     u8 textSaveExitGame[] = { TEXT_SAVE_EXIT_GAME }; // New text to exit game
 #endif
     u8 textContinueWithoutSave[] = { TEXT_CONTINUE_WITHOUT_SAVING };

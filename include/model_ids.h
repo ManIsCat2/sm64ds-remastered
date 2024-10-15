@@ -557,7 +557,9 @@
 
 // DS Specific
 #define MODEL_POWER_FLOWER                        0x1C                      // power_flower_geo
-#define MODEL_MAIN_MENU_FILE_BUTTON_C        0xE2                      // geo_menu_player_new_button_c
+#define MODEL_MAIN_MENU_FILE_BUTTON_C             0xE2                      // geo_menu_player_new_button_c
+#define MODEL_MAIN_MENU_FILE_OPTIONS              0xE3                      // file_options_geo
+#define MODEL_MAIN_MENU_FILE_RETURN               MODEL_LEVEL_GEOMETRY_0B   // file_return_geo
 
 // Menu Models (overwrites Level Geometry IDs)
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0
@@ -568,7 +570,6 @@
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON_FADE    MODEL_LEVEL_GEOMETRY_08   // main_menu_geo_000200
 #define MODEL_MAIN_MENU_FILE_BUTTON_B             MODEL_LEVEL_GEOMETRY_09   // main_menu_geo_000230
 #define MODEL_MAIN_MENU_FILE_BUTTON_A             MODEL_LEVEL_GEOMETRY_0A   // main_menu_geo_000260
-#define MODEL_MAIN_MENU_PURPLE_SOUND_BUTTON       MODEL_LEVEL_GEOMETRY_0B   // main_menu_geo_000330
 #define MODEL_MAIN_MENU_GENERIC_BUTTON            MODEL_LEVEL_GEOMETRY_0C   // main_menu_geo_000358
 #define MODEL_FILE_SELECT_BACKGROUND              MODEL_LEVEL_GEOMETRY_0D   // file_select_bg_geo
 

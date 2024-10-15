@@ -1,0 +1,14 @@
+extern const GeoLayout file_options_geo[];
+extern Lights1 file_options_File_Options_1_layer4_lights;
+extern Lights1 file_options_File_Options_2_layer4_lights;
+extern u8 file_options_File_Option_1_rgba16[];
+extern u8 file_options_File_Option_2_rgba16[];
+extern Vtx file_options_vtx_0[4];
+extern Gfx file_options_tri_0[];
+extern Vtx file_options_vtx_1[4];
+extern Gfx file_options_tri_1[];
+extern Gfx mat_file_options_File_Options_1_layer4[];
+extern Gfx mat_revert_file_options_File_Options_1_layer4[];
+extern Gfx mat_file_options_File_Options_2_layer4[];
+extern Gfx mat_revert_file_options_File_Options_2_layer4[];
+extern Gfx file_options[];
