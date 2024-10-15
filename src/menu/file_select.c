@@ -227,6 +227,7 @@ void handle_controller_cursor_input(void) {
                 subCursorLoc = 1;
             }
             allowInput = 0;
+            play_sound(SOUND_MENU_CHANGE_SELECT, gGlobalSoundSource);
         }
     } else if ((rawStickX < -60) || (dPadL)) {
         if (allowInput > 1) {
@@ -254,6 +255,7 @@ void handle_controller_cursor_input(void) {
                 subCursorLoc = 0;
             }
             allowInput = 0;
+            play_sound(SOUND_MENU_CHANGE_SELECT, gGlobalSoundSource);
         }
     } else if (((rawStickY > 60) || (dPadU)) && (rowBottom == 1)) {
         if (subCursorLoc == 0) {
@@ -273,6 +275,7 @@ void handle_controller_cursor_input(void) {
             cursorLoc = 2;
         }
         rowBottom = 0;
+        play_sound(SOUND_MENU_CHANGE_SELECT, gGlobalSoundSource);
     } else if (((rawStickY < -60) || (dPadD)) && (rowBottom == 0)) {
         if (cursorLoc < 2) {
             // Move to file options
@@ -285,6 +288,7 @@ void handle_controller_cursor_input(void) {
             subCursorLoc = 1;
         }
         rowBottom = 1;
+        play_sound(SOUND_MENU_CHANGE_SELECT, gGlobalSoundSource);
     } else {
         allowInput++;
     }
