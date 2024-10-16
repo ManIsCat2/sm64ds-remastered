@@ -70,4 +70,6 @@ extern const LevelScript level_main_menu_entry_2_exit[];
 
 #include "levels/menu/file_return/geo_header.h"
 
+#include "levels/menu/file_select_bg/geo_header.h"
+
 #endif

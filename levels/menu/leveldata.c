@@ -2293,3 +2293,4 @@ const Collision main_menu_seg7_collision[] = {
 #include "levels/menu/file_button/model.inc.c"
 #include "levels/menu/file_options/model.inc.c"
 #include "levels/menu/file_return/model.inc.c"
+#include "levels/menu/file_select_bg/model.inc.c"

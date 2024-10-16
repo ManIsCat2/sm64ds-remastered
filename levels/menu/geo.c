@@ -222,3 +222,4 @@ const GeoLayout geo_menu_act_selector_strings[] = {
 #include "levels/menu/file_button/geo.inc.c"
 #include "levels/menu/file_options/geo.inc.c"
 #include "levels/menu/file_return/geo.inc.c"
+#include "levels/menu/file_select_bg/geo.inc.c"
