@@ -26,14 +26,40 @@ Gfx *sky_3d(s32 callContext, struct GraphNode *node, Mat4 mtxf) {
 
         guTranslate(mtx, x, y, z);
         gSPMatrix(dlE++, mtx, G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
-        
-        if ((gCurrLevelNum == LEVEL_BITDW) || (gCurrLevelNum == LEVEL_BOWSER_1)) {
-            gSPDisplayList(dlE++, &bitdw_skybox);
-        } else if ((gCurrLevelNum == LEVEL_BITS) || (gCurrLevelNum == LEVEL_BOWSER_3)) {
-            gSPDisplayList(dlE++, &bits_skybox);
-        } else if ((gCurrLevelNum == LEVEL_CASTLE_GROUNDS) || (gCurrLevelNum == LEVEL_CASTLE_COURTYARD) || (gCurrLevelNum == LEVEL_BOB) || (gCurrLevelNum == LEVEL_DDD) || (gCurrLevelNum == LEVEL_THI) || (gCurrLevelNum == LEVEL_TTM)) {
+
+        switch (gCurrLevelNum) {
+          case LEVEL_CASTLE_GROUNDS:
             gSPDisplayList(dlE++, &water_skybox);
+            break;
+          case LEVEL_CASTLE_COURTYARD:
+            gSPDisplayList(dlE++, &water_skybox);
+            break;
+          case LEVEL_BOB:
+            gSPDisplayList(dlE++, &water_skybox);
+            break;
+          case LEVEL_DDD:
+            gSPDisplayList(dlE++, &water_skybox);
+            break;
+          case LEVEL_THI:
+            gSPDisplayList(dlE++, &water_skybox);
+            break;
+          case LEVEL_TTM:
+            gSPDisplayList(dlE++, &water_skybox);
+            break;
+          case LEVEL_BITDW:
+            gSPDisplayList(dlE++, &bitdw_skybox);
+            break;
+          case LEVEL_BOWSER_1:
+            gSPDisplayList(dlE++, &bitdw_skybox);
+            break;
+          case LEVEL_BITS:
+            gSPDisplayList(dlE++, &bits_skybox);
+            break;
+          case LEVEL_BOWSER_3:
+            gSPDisplayList(dlE++, &bits_skybox);
+            break;
         }
+
         gSPPopMatrix(dlE++, G_MTX_MODELVIEW);
         gSPEndDisplayList(dlE);
 

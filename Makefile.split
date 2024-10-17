@@ -196,7 +196,7 @@ $(BUILD_DIR)/levels/ending/cake.inc.c: levels/ending/cake.png
 # --------------------------------------
 
 # Others
-SEGMENT2_TEXTURES               := $(wildcard $(TEXTURE_DIR)/segment2/*.png) $(wildcard $(TEXTURE_DIR)/segment2/custom/*.png) $(wildcard $(TEXTURE_DIR)/hud/*.png) $(wildcard $(TEXTURE_DIR)/hud_file_select/*.png)
+SEGMENT2_TEXTURES               := $(wildcard $(TEXTURE_DIR)/segment2/*.png) $(wildcard $(TEXTURE_DIR)/segment2/custom/*.png) $(wildcard $(TEXTURE_DIR)/hud/*.png)
 TITLE_SCREEN_BG_TEXTURES        := $(wildcard $(TEXTURE_DIR)/title_screen_bg/*.png)
 SPOOKY_TEXTURES                 := $(wildcard $(TEXTURE_DIR)/spooky/*.png)
 GENERIC_TEXTURES                := $(wildcard $(TEXTURE_DIR)/generic/*.png)
@@ -211,6 +211,7 @@ SKY_TEXTURES                    := $(wildcard $(TEXTURE_DIR)/sky/*.png)
 MACHINE_TEXTURES                := $(wildcard $(TEXTURE_DIR)/machine/*.png)
 MOUNTAIN_TEXTURES               := $(wildcard $(TEXTURE_DIR)/mountain/*.png)
 GRASS_TEXTURES                  := $(wildcard $(TEXTURE_DIR)/grass/*.png)
+HUD_TEXTURES                    := $(wildcard $(TEXTURE_DIR)/hud_file_select/*.png)
 ifeq ($(TOUCH_CONTROLS),1)
 TOUCH_SCREEN_TEXTURES           := $(wildcard $(TEXTURE_DIR)/touchcontrols/*.png)
 endif
@@ -231,6 +232,7 @@ $(BUILD_DIR)/bin/sky.o:             $(SKY_TEXTURES:%.png=$(BUILD_DIR)/%.inc.c)
 $(BUILD_DIR)/bin/machine.o:         $(MACHINE_TEXTURES:%.png=$(BUILD_DIR)/%.inc.c)
 $(BUILD_DIR)/bin/mountain.o:        $(MOUNTAIN_TEXTURES:%.png=$(BUILD_DIR)/%.inc.c)
 $(BUILD_DIR)/bin/grass.o:           $(GRASS_TEXTURES:%.png=$(BUILD_DIR)/%.inc.c)
+$(BUILD_DIR)/src/game/hud.o:        $(HUD_TEXTURES:%.png=$(BUILD_DIR)/%.inc.c)
 ifeq ($(TOUCH_CONTROLS),1)
 $(BUILD_DIR)/src/pc/controller/controller_touchscreen.o: $(TOUCH_SCREEN_TEXTURES:%.png=$(BUILD_DIR)/%.inc.c)
 endif
