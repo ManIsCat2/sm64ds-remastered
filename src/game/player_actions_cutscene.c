@@ -1845,11 +1845,7 @@ static void intro_cutscene_hide_hud_and_player(struct PlayerState *m) {
     advance_cutscene_step(m);
 }
 
-#ifdef VERSION_EU
-    #define TIMER_SPAWN_PIPE 47
-#else
-    #define TIMER_SPAWN_PIPE 37
-#endif
+#define TIMER_SPAWN_PIPE 37
 
 static void intro_cutscene_peach_lakitu_scene(struct PlayerState *m) {
     if ((s16) m->statusForCamera->cameraEvent != CAM_EVENT_START_INTRO) {
@@ -1862,12 +1858,7 @@ static void intro_cutscene_peach_lakitu_scene(struct PlayerState *m) {
     }
 }
 #undef TIMER_SPAWN_PIPE
-
-#ifdef VERSION_EU
-    #define TIMER_RAISE_PIPE 28
-#else
-    #define TIMER_RAISE_PIPE 38
-#endif
+#define TIMER_RAISE_PIPE 38
 
 static void intro_cutscene_raise_pipe(struct PlayerState *m) {
     sIntroWarpPipeObj->oPosY = camera_approach_f32_symmetric(sIntroWarpPipeObj->oPosY, 260.0f, 10.0f);
