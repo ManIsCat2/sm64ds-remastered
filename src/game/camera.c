@@ -3775,18 +3775,6 @@ s32 move_point_along_spline(Vec3f pos, struct CutsceneSplinePoint spline[], s16 
     }
     progressChange = (secondSpeed - firstSpeed) * *progress + firstSpeed;
 
-#ifdef VERSION_EU
-    if (gCamera->cutscene == CUTSCENE_INTRO_PEACH) {
-        progressChange += progressChange * 0.19f;
-    }
-    if (gCamera->cutscene == CUTSCENE_CREDITS) {
-        progressChange += progressChange * 0.15f;
-    }
-    if (gCamera->cutscene == CUTSCENE_ENDING) {
-        progressChange += progressChange * 0.1f;
-    }
-#endif
-
     if (1 <= (*progress += progressChange)) {
         (*splineSegment)++;
         if (spline[*splineSegment + 3].index == -1) {
@@ -6327,9 +6315,10 @@ struct CutsceneSplinePoint sIntroStartToPipeFocus[] = {
 struct CutsceneSplinePoint sIntroPipeToDialogPosition[] = {
     { 0, 0, { -693, -423, 6792 } },  { 1, 0, { -693, -423, 6792 } },  { 2, 0, { -1194, -404, 6641 } },
     { 3, 0, { -1194, -425, 6652 } }, { 4, 0, { -1194, -660, 6228 } }, { 5, 0, { -1194, -690, 6358 } },
-    { 6, 0, { -1294, -694, 6424 } }, { 7, 0, { -1385, -742, 6488 } }, { 8, 0, { -1448, -749, 6643 } },
-    { 9, 0, { -1381, -732, 6839 } }, { 0, 0, { -1236, -563, 7282 } }, { 0, 0, { -1236, -563, 7282 } },
-    { 0, 0, { -1236, -563, 7282 } }, { -1, 0, { -1236, -563, 7282 } }
+    { 5, 0, { -1194, -690, 6358 } }, { 5, 0, { -1194, -690, 6358 } }, { 5, 0, { -1194, -690, 6358 } },
+    { 6, 0, { -1194, -711, 6282 } }, { 7, 0, { -1199, -742, 6123 } }, { 8, 0, { -1222, -749, 5598 } },
+    { 9, 0, { -1220, -732, 5533 } }, { 0, 0, { -1200, -697, 5480 } }, { 0, 0, { -1200, -697, 5480 } },
+    { 0, 0, { -1200, -697, 5480 } }, { -1, 0, { -1200, -697, 5480 } }
 };
 
 /**
@@ -6337,10 +6326,11 @@ struct CutsceneSplinePoint sIntroPipeToDialogPosition[] = {
  */
 struct CutsceneSplinePoint sIntroPipeToDialogFocus[] = {
     { 0, 20, { -1156, -598, 6861 } }, { 1, 59, { -1166, -563, 6871 } }, { 2, 59, { -1287, -704, 7034 } },
-    { 3, 20, { -1243, -682, 7080 } }, { 4, 23, { -1223, -678, 6715 } }, { 5, 40, { -1230, -715, 6856 } },
-    { 6, 25, { -1093, -719, 6881 } }, { 7, 21, { -967, -668, 6752 } }, { 8, 14, { -994, -627, 6471 } },
-    { 9, 21, { -1229, -702, 6363 } }, { 0, 0, { -1236, -663, 6619 } },  { 0, 0, { -1236, -663, 6619 } },
-    { 0, 0, { -1236, -663, 6619 } },  { -1, 0, { -1236, -663, 6619 } }
+    { 3, 20, { -1232, -682, 7080 } }, { 4, 23, { -1232, -678, 6715 } }, { 5, 40, { -1232, -715, 6856 } },
+    { 5, 40, { -1230, -715, 6856 } }, { 5, 40, { -1230, -715, 6856 } }, { 5, 40, { -1230, -715, 6856 } },
+    { 6, 25, { -1232, -719, 6881 } }, { 7, 21, { -1230, -723, 6993 } }, { 8, 14, { -1232, -670, 6471 } },
+    { 9, 21, { -1232, -646, 6369 } }, { 0, 0,  { -1236, -631, 6324 } },  { 0, 0, { -1236, -631, 6324 } },
+    { 0, 0,  { -1236, -631, 6324 } }, { -1, 0, { -1236, -631, 6324 } }
 };
 
 struct CutsceneSplinePoint sEndingFlyToWindowPos[] = {
@@ -7279,15 +7269,9 @@ BAD_RETURN(s32) cutscene_ending_look_up_at_castle(UNUSED struct Camera *c) {
 BAD_RETURN(s32) cutscene_ending_peach_wakeup(struct Camera *c) {
     cutscene_event(cutscene_ending_reset_spline, c, 0, 0);
     cutscene_event(cutscene_ending_look_up_at_castle, c, 0, 0);
-#ifdef VERSION_EU
-    cutscene_event(cutscene_ending_look_up_at_castle, c, 265, -1);
-    cutscene_spawn_obj(7, 315);
-    cutscene_spawn_obj(9, 355);
-#else
     cutscene_event(cutscene_ending_look_up_at_castle, c, 250, -1);
     cutscene_spawn_obj(7, 300);
     cutscene_spawn_obj(9, 340);
-#endif
     vec3f_set(c->pos, -163.f, 978.f, -1082.f);
     player2_rotate_cam(c, -0x800, 0x2000, -0x2000, 0x2000);
 }
@@ -9486,19 +9470,11 @@ BAD_RETURN(s32) play_sound_intro_turn_on_hud(UNUSED struct Camera *c) {
  * Fly to the pipe. Near the end, the camera jumps to Lakitu's position and the hud turns on.
  */
 BAD_RETURN(s32) cutscene_intro_peach_fly_to_pipe(struct Camera *c) {
-#if defined(VERSION_US) || defined(VERSION_SH)
     cutscene_event(play_sound_intro_turn_on_hud, c, 818, 818);
-#elif defined(VERSION_EU)
-    cutscene_event(play_sound_intro_turn_on_hud, c, 673, 673);
-#endif
     cutscene_spawn_obj(6, 1);
     cutscene_event(cutscene_intro_peach_start_flying_music, c, 0, 0);
     cutscene_event(cutscene_intro_peach_start_to_pipe_spline, c, 0, -1);
-#ifdef VERSION_EU
-    cutscene_event(cutscene_intro_peach_clear_cutscene_status, c, 572, 572);
-#else
     cutscene_event(cutscene_intro_peach_clear_cutscene_status, c, 717, 717);
-#endif
     clamp_pitch(c->pos, c->focus, 0x3B00, -0x3B00);
     sCutsceneVars[1].point[1] = 400.f;
 }
@@ -9513,7 +9489,7 @@ BAD_RETURN(s32) cutscene_intro_peach_player_appears(struct Camera *c) {
     cutscene_event(cutscene_intro_peach_reset_spline, c, 0, 0);
     cutscene_event(cutscene_intro_peach_follow_pipe_spline, c, 0, -1);
     cutscene_event(cutscene_intro_peach_handheld_shake_off, c, 70, 70);
-    cutscene_event(intro_pipe_exit_text, c, 250, 250);
+    cutscene_event(intro_pipe_exit_text, c, 570, 570);
 
     approach_f32_asymptotic_bool(&sCutsceneVars[1].point[1], 80.f + sPlayerGeometry.currFloorHeight +
                                  (sPlayerCamState->pos[1] - sPlayerGeometry.currFloorHeight) * 1.1f, 0.4f);
@@ -9540,9 +9516,6 @@ BAD_RETURN(s32) cutscene_intro_peach_letter(struct Camera *c) {
     cutscene_spawn_obj(5, 0);
     cutscene_event(cutscene_intro_peach_zoom_fov, c, 0, 0);
     cutscene_event(cutscene_intro_peach_start_letter_music, c, 65, 65);
-#ifdef VERSION_EU
-    cutscene_event(cutscene_intro_peach_eu_lower_volume, c, 68, 68);
-#endif
     cutscene_event(cutscene_intro_peach_start_to_pipe_spline, c, 0, 0);
     cutscene_event(peach_letter_text, c, 65, 65);
     cutscene_event(play_sound_peach_reading_letter, c, 83, 83);
@@ -10426,12 +10399,8 @@ struct Cutscene sCutsceneUnusedExit[] = {
 struct Cutscene sCutsceneIntroPeach[] = {
     { cutscene_intro_peach_letter, CUTSCENE_LOOP },
     { cutscene_intro_peach_reset_fov, 35 },
-#ifdef VERSION_EU
-    { cutscene_intro_peach_fly_to_pipe, 675 },
-#else
     { cutscene_intro_peach_fly_to_pipe, 820 },
-#endif
-    { cutscene_intro_peach_player_appears, 270 },
+    { cutscene_intro_peach_player_appears, 570 },
     { cutscene_intro_peach_dialog, CUTSCENE_LOOP }
 };
 

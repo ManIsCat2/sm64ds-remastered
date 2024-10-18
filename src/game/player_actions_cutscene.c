@@ -1884,21 +1884,15 @@ static void intro_cutscene_raise_pipe(struct PlayerState *m) {
 #undef TIMER_RAISE_PIPE
 
 static void intro_cutscene_jump_out_of_pipe(struct PlayerState *m) {
-    if (m->actionTimer == 25) {
-        gHudDisplay.flags = HUD_DISPLAY_DEFAULT;
-    }
+    //if (m->actionTimer == 25) {
+    //    gHudDisplay.flags = HUD_DISPLAY_DEFAULT;
+    //}
 
     if (m->actionTimer++ >= 118) {
         m->playerObj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
 
-#ifdef VERSION_EU
-        // For some reason these calls were swapped.
-        play_sound_if_no_flag(m, SOUND_ACTION_HIT_3, MARIO_ACTION_SOUND_PLAYED);
-        play_sound_if_no_flag(m, SOUND_MARIO_YAHOO, MARIO_MARIO_SOUND_PLAYED);
-#else
         play_sound_if_no_flag(m, SOUND_MARIO_YAHOO, MARIO_MARIO_SOUND_PLAYED);
         play_sound_if_no_flag(m, SOUND_ACTION_HIT_3, MARIO_ACTION_SOUND_PLAYED);
-#endif
 
         set_player_animation(m, MARIO_ANIM_SINGLE_JUMP);
         player_set_forward_vel(m, 10.0f);
