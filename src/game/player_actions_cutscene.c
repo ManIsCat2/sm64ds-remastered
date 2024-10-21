@@ -58,7 +58,9 @@ static u8 sStarsNeededForDialog[] = { STAR_MILESTONES };
 static u8 sStarsNeededForDialog[] = { 1, 3, 8, 30, 50, 70 };
 #endif
 
-struct Object *sIntroWarpPipeObj;
+struct Object *sIntroWarpPipeMObj;
+struct Object *sIntroWarpPipeLObj;
+struct Object *sIntroWarpPipeWObj;
 struct Object *sEndPeachObj;
 struct Object *sEndRightToadObj;
 struct Object *sEndLeftToadObj;
@@ -1850,35 +1852,31 @@ static void intro_cutscene_hide_hud_and_player(struct PlayerState *m) {
 static void intro_cutscene_peach_lakitu_scene(struct PlayerState *m) {
     if ((s16) m->statusForCamera->cameraEvent != CAM_EVENT_START_INTRO) {
         if (m->actionTimer++ == TIMER_SPAWN_PIPE) {
-            sIntroWarpPipeObj =
-                spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_CASTLE_GROUNDS_WARP_PIPE,
-                                          bhvStaticObject, -1328, 60, 4664, 0, 180, 0);
+            sIntroWarpPipeMObj = spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_CASTLE_GROUNDS_WARP_PIPE, bhvStaticObject, -1229, -1185, 6963, 0, 180, 0);
+            sIntroWarpPipeLObj = spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_CASTLE_GROUNDS_WARP_PIPE, bhvStaticObject, -1606, -1185, 7046, 0, 180, 0);
+            sIntroWarpPipeWObj = spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_CASTLE_GROUNDS_WARP_PIPE, bhvStaticObject, -845,  -1185, 7046, 0, 180, 0);
             advance_cutscene_step(m);
         }
     }
 }
 #undef TIMER_SPAWN_PIPE
-#define TIMER_RAISE_PIPE 38
+#define TIMER_RAISE_PIPE_MARIO 38
 
 static void intro_cutscene_raise_pipe(struct PlayerState *m) {
-    sIntroWarpPipeObj->oPosY = camera_approach_f32_symmetric(sIntroWarpPipeObj->oPosY, 260.0f, 10.0f);
+    sIntroWarpPipeMObj->oPosY = camera_approach_f32_symmetric(sIntroWarpPipeMObj->oPosY, -755.0f, 10.0f);
 
     if (m->actionTimer == 0) {
-        play_sound(SOUND_MENU_EXIT_PIPE, sIntroWarpPipeObj->header.gfx.cameraToObject);
+        play_sound(SOUND_MENU_EXIT_PIPE, sIntroWarpPipeMObj->header.gfx.cameraToObject);
     }
 
-    if (m->actionTimer++ == TIMER_RAISE_PIPE) {
+    if (m->actionTimer++ == TIMER_RAISE_PIPE_MARIO) {
         m->vel[1] = 60.0f;
         advance_cutscene_step(m);
     }
 }
-#undef TIMER_RAISE_PIPE
+#undef TIMER_RAISE_PIPE_MARIO
 
 static void intro_cutscene_jump_out_of_pipe(struct PlayerState *m) {
-    //if (m->actionTimer == 25) {
-    //    gHudDisplay.flags = HUD_DISPLAY_DEFAULT;
-    //}
-
     if (m->actionTimer++ >= 118) {
         m->playerObj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
 
@@ -1898,6 +1896,8 @@ static void intro_cutscene_jump_out_of_pipe(struct PlayerState *m) {
 
 static void intro_cutscene_land_outside_pipe(struct PlayerState *m) {
     set_player_animation(m, MARIO_ANIM_LAND_FROM_SINGLE_JUMP);
+    sIntroWarpPipeLObj->oPosY = camera_approach_f32_symmetric(sIntroWarpPipeMObj->oPosY, -755.0f, 10.0f);
+    sIntroWarpPipeWObj->oPosY = camera_approach_f32_symmetric(sIntroWarpPipeMObj->oPosY, -755.0f, 10.0f);
 
     if (is_anim_at_end(m)) {
         advance_cutscene_step(m);
@@ -1908,16 +1908,18 @@ static void intro_cutscene_land_outside_pipe(struct PlayerState *m) {
 
 static void intro_cutscene_lower_pipe(struct PlayerState *m) {
     if (m->actionTimer++ == 0) {
-        play_sound(SOUND_MENU_ENTER_PIPE, sIntroWarpPipeObj->header.gfx.cameraToObject);
+        play_sound(SOUND_MENU_ENTER_PIPE, sIntroWarpPipeMObj->header.gfx.cameraToObject);
         set_player_animation(m, MARIO_ANIM_FIRST_PERSON);
     }
 
-    sIntroWarpPipeObj->oPosY -= 5.0f;
-    if (sIntroWarpPipeObj->oPosY <= 50.0f) {
-        obj_mark_for_deletion(sIntroWarpPipeObj);
+    sIntroWarpPipeMObj->oPosY -= 5.0f;
+    if (sIntroWarpPipeMObj->oPosY <= -1485.0f) {
+        obj_mark_for_deletion(sIntroWarpPipeMObj);
         advance_cutscene_step(m);
     }
 
+    // Refer back to this when we need the hud
+    //gHudDisplay.flags = HUD_DISPLAY_DEFAULT;
     stop_and_set_height_to_floor(m);
 }
 

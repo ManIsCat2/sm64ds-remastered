@@ -6282,29 +6282,33 @@ struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
 #undef DEFINE_LEVEL
 
 struct CutsceneSplinePoint sIntroStartToPipePosition[] = {
-    { 0, 0, { 2122, 8762, 9114 } },  { 0, 0, { 2122, 8762, 9114 } },  { 1, 0, { 2122, 7916, 9114 } },
-    { 1, 0, { 2122, 7916, 9114 } },  { 2, 0, { 957, 5166, 8613 } },   { 3, 0, { 589, 4338, 7727 } },
-    { 4, 0, { 690, 3366, 6267 } },   { 5, 0, { -1600, 2151, 4955 } }, { 6, 0, { -1557, 232, 1283 } },
-    { 7, 0, { -6962, -295, 2729 } }, { 8, 0, { -6979, 131, 3246 } },  { 9, 0, { -6360, -283, 4044 } },
-    { 0, 0, { -5695, -334, 5264 } }, { 1, 0, { -5568, -319, 7933 } }, { 2, 0, { -3848, -200, 6278 } },
-    { 3, 0, { -965, -263, 6092 } },  { 4, 0, { 1607, 2465, 6329 } },  { 5, 0, { 2824, 180, 3548 } },
-    { 6, 0, { 1236, 136, 945 } },    { 0, 0, { 448, 136, 564 } },     { 0, 0, { 448, 136, 564 } },
-    { 0, 0, { 448, 136, 564 } },     { -1, 0, { 448, 136, 564 } }
+    { 0,  0, { -3762,  7958, -2092 } }, {  0, 0, { -3762,  7958, -2092 } },
+    { 1,  0, { -3762,  7112, -2092 } }, {  1, 0, { -3762,  7112, -2092 } },
+    { 2,  0, { -2597,  4362, -1591 } }, {  3, 0, { -2229,  3534, -705  } },
+    { 4,  0, { -2330,  2562,  755  } }, {  5, 0, { -40,    1347,  2067 } },
+    { 6,  0, { -83,    469,   5739 } }, {  7, 0, {  5322, -970,   4293 } },
+    { 8,  0, {  5339, -673,   3776 } }, {  9, 0, {  4720, -1087,  2978 } },
+    { 0,  0, {  4055, -1138,  1758 } }, {  1, 0, {  3928, -1123, -911  } },
+    { 2,  0, {  2208, -1004,  744  } }, {  3, 0, { -675,  -1067,  930  } },
+    { 4,  0, { -3247,  1661,  693  } }, {  5, 0, { -4464, -624,   3474 } },
+    { 6,  0, { -2876, -668,   6077 } }, {  0, 0, { -1866, -668,   6446 } },
+    { 0,  0, { -1866, -668,   6446 } }, {  0, 0, { -1866, -668,   6446 } },
+    { -1, 0, { -1866, -668,   6446 } }
 };
 
 struct CutsceneSplinePoint sIntroStartToPipeFocus[] = {
-    { 0, 50, { 1753, 29800, 8999 } }, { 0, 50, { 1753, 29800, 8999 } },
-    { 1, 50, { 1753, 8580, 8999 } },  { 1, 100, { 1753, 8580, 8999 } },
-    { 2, 50, { 520, 5400, 8674 } },   { 3, 50, { 122, 4437, 7875 } },
-    { 4, 50, { 316, 3333, 6538 } },   { 5, 36, { -1526, 2189, 5448 } },
-    { 6, 50, { -1517, 452, 1731 } },  { 7, 50, { -6659, -181, 3109 } },
-    { 8, 17, { -6649, 183, 3618 } },  { 9, 20, { -6009, -214, 4395 } },
-    { 0, 50, { -5258, -175, 5449 } }, { 1, 36, { -5158, -266, 7651 } },
-    { 2, 26, { -3351, -192, 6222 } }, { 3, 25, { -483, -137, 6060 } },
-    { 4, 100, { 1833, 2211, 5962 } }, { 5, 26, { 3022, 207, 3090 } },
-    { 6, 20, { 1250, 197, 449 } },    { 7, 50, { 248, 191, 227 } },
-    { 7, 0, { 48, 191, 227 } },       { 7, 0, { 48, 191, 227 } },
-    { -1, 0, { 48, 191, 227 } }
+    { 0,  50,  { -3393,  28996, -1977 } }, { 0, 50,  { -3393,  28996, -1977 } },
+    { 1,  50,  { -3393,  7776,  -1977 } }, { 1, 100, { -3393,  7776,  -1977 } },
+    { 2,  50,  { -2160,  4596,  -1652 } }, { 3, 50,  { -1762,  3633,  -853  } },
+    { 4,  50,  { -1956,  2529,   484  } }, { 5, 36,  { -114,   1385,   1574 } },
+    { 6,  50,  { -123,   668,    5291 } }, { 7, 50,  {  4994, -985,    3926 } },
+    { 8,  17,  {  5009, -621,    3404 } }, { 9, 20,  {  4369, -1018,   2627 } },
+    { 0,  50,  {  3618, -979,    1573 } }, { 1, 36,  {  3518, -1070,  -629  } },
+    { 2,  26,  {  1554, -996,    734  } }, { 3, 25,  { -1157, -941,    962  } },
+    { 4,  100, { -3473,  1407,   1060 } }, { 5, 26,  { -4662, -597,    3932 } },
+    { 6,  20,  { -2890, -607,    6573 } }, { 0, 50,  { -1888, -613,    6795 } },
+    { 0,  0,   { -1293, -613,    6670 } }, { 0, 0,   { -1293, -613,    6670 } },
+    { -1, 0,   { -1293, -613,    6670 } }
 };
 
 /**
@@ -6329,7 +6333,7 @@ struct CutsceneSplinePoint sIntroPipeToDialogPosition[] = {
  * Describes the spline that the camera's focus follows, during the same part of the intro as the above.
  */
 struct CutsceneSplinePoint sIntroPipeToDialogFocus[] = {
-    { 0,  20,  { -1156, -598,  6861 } }, { 1,  59,  { -1166, -563,  6871 } }, { 2,  59,  { -1287, -704,  7034 } },
+    { 0,  20,  { -1287, -704,  7034 } }, { 1,  59,  { -1287, -704,  7034 } }, { 2,  59,  { -1287, -704,  7034 } },
     { 3,  20,  { -1232, -682,  7080 } }, { 4,  23,  { -1232, -678,  6715 } }, { 5,  40,  { -1232, -715,  6856 } },
     { 5,  40,  { -1230, -715,  6856 } }, { 5,  40,  { -1230, -715,  6856 } }, { 5,  40,  { -1230, -715,  6856 } },
     { 6,  25,  { -1232, -719,  6881 } }, { 7,  21,  { -1230, -723,  6993 } }, { 8,  14,  { -1232, -670,  6471 } },
@@ -9365,37 +9369,6 @@ BAD_RETURN(s32) cutscene_unlock_key_door(UNUSED struct Camera *c) {
 }
 
 /**
- * Move the camera along `positionSpline` and point its focus at the corresponding point along
- * `focusSpline`. sCutsceneSplineSegmentProgress is updated after pos and focus are calculated.
- */
-s32 intro_peach_move_camera_start_to_pipe(struct Camera *c, struct CutsceneSplinePoint positionSpline[],
-                  struct CutsceneSplinePoint focusSpline[]) {
-    Vec3f offset;
-    s32 posReturn = 0;
-    s32 focusReturn = 0;
-
-    /**
-     * The position spline's speed parameters are all 0, so sCutsceneSplineSegmentProgress doesn't get
-     * updated. Otherwise position would move two frames ahead, and c->focus would always be one frame
-     * further along the spline than c->pos.
-     */
-    posReturn = move_point_along_spline(c->pos, positionSpline, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
-    focusReturn = move_point_along_spline(c->focus, focusSpline, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
-
-    // The two splines used by this function are reflected in the horizontal plane for some reason,
-    // so they are rotated every frame. Why do this, Nintendo?
-    rotate_in_xz(c->focus, c->focus, DEGREES(-180));
-    rotate_in_xz(c->pos, c->pos, DEGREES(-180));
-
-    vec3f_set(offset, -1328.f, 260.f, 4664.f);
-    vec3f_add(c->focus, offset);
-    vec3f_add(c->pos, offset);
-
-    posReturn += focusReturn; // Unused
-    return focusReturn;
-}
-
-/**
  * Create a dialog box with the letter text
  */
 BAD_RETURN(s32) peach_letter_text(UNUSED struct Camera *c) {
@@ -9411,10 +9384,8 @@ BAD_RETURN(s32) play_sound_peach_reading_letter(UNUSED struct Camera *c) {
  * sIntroStartToPipe splines.
  */
 BAD_RETURN(s32) cutscene_intro_peach_start_to_pipe_spline(struct Camera *c) {
-    if (intro_peach_move_camera_start_to_pipe(c, sIntroStartToPipePosition, sIntroStartToPipeFocus) != 0) {
-        gCameraMovementFlags &= ~CAM_MOVE_C_UP_MODE;
-        gCutsceneTimer = CUTSCENE_LOOP;
-    }
+    move_point_along_spline(c->pos, sIntroStartToPipePosition, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+    move_point_along_spline(c->focus, sIntroStartToPipeFocus, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
 }
 
 /**
