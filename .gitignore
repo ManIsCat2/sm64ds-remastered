@@ -86,6 +86,7 @@ sm64dsr_config.txt
 !/textures/segment2/*font_graphics*
 !/textures/hud/*
 !/textures/hud_file_select/*
+!/textures/skybox/*
 !/actors/tree/*
 !/actors/mushroom_1up/1-up_mushroom.rgba16.png
 !/actors/bobomb/bob-omb_left_side.rgba16.png
