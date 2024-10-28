@@ -883,6 +883,7 @@ const Gfx dl_menu_grabbing_hand[] = {
 const Gfx dl_menu_cursor[] = {
     gsDPPipeSync(),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 22, menu_cursor_rgba16),
+    gsDPSetTextureFilter(G_TF_POINT),
     gsSPBranchList(dl_menu_hand),
 };
 
