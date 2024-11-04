@@ -1,4 +1,6 @@
+#ifndef TARGET_N64
 #include "src/game/envfx_skybox.h"
+#endif
 
 // 0x0E000488
 const GeoLayout bob_geo_000488[] = {
@@ -15,7 +17,9 @@ const GeoLayout bob_geo_000488[] = {
 		            GEO_DISPLAY_LIST(LAYER_TRANSPARENT, level_model_000_displaylist_mesh_layer_5),
                     GEO_RENDER_OBJ(),
                     GEO_ASM(0, geo_envfx_main),
+#ifndef TARGET_N64
                     GEO_ASM(0, sky_3d),
+#endif
                 GEO_CLOSE_NODE(),
             GEO_CLOSE_NODE(),
         GEO_CLOSE_NODE(),
