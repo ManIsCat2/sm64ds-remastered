@@ -1,4 +1,4 @@
-void scroll_castle_courtyard_dl_Visual_Model_mesh_layer_5_vtx_2() {
+void scroll_courtyard_mesh_Visual_Model_mesh_layer_5_vtx_2() {
 	int i = 0;
 	int count = 4;
 	int width = 32 * 0x20;
@@ -8,10 +8,10 @@ void scroll_castle_courtyard_dl_Visual_Model_mesh_layer_5_vtx_2() {
 	int deltaX;
 	static int currentY = 0;
 	int deltaY;
-	Vtx *vertices = segmented_to_virtual(castle_courtyard_dl_Visual_Model_mesh_layer_5_vtx_2);
+	Vtx *vertices = segmented_to_virtual(courtyard_mesh_Visual_Model_mesh_layer_5_vtx_2);
 
-	deltaX = (int)(0.75 * 0x20) % width;
-	deltaY = (int)(0.75 * 0x20) % height;
+	deltaX = (int)(0.4300000071525574 * 0x20) % width;
+	deltaY = (int)(0.7600000500679016 * 0x20) % height;
 
 	if (absi(currentX) > width) {
 		deltaX -= (int)(absi(currentX) / width) * width * signum_positive(deltaX);
@@ -27,6 +27,6 @@ void scroll_castle_courtyard_dl_Visual_Model_mesh_layer_5_vtx_2() {
 	currentX += deltaX;	currentY += deltaY;
 }
 
-void scroll_castle_courtyard() {
-	scroll_castle_courtyard_dl_Visual_Model_mesh_layer_5_vtx_2();
+void scroll_castle_courtyard_level_geo_courtyard_mesh() {
+	scroll_courtyard_mesh_Visual_Model_mesh_layer_5_vtx_2();
 };
