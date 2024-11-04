@@ -25,7 +25,7 @@ s16 bhv_mips_castle_find_furthest_waypoint_to_player(void) {
     s16 furthestWaypointIndex = -1;
     f32 furthestWaypointDistance = -10000.0f;
     f32 distanceToPlayer;
-    struct Waypoint **pathBase = segmented_to_virtual(&castle_grounds_trajectory_mips);
+    struct Waypoint **pathBase = segmented_to_virtual(0/*&castle_grounds_trajectory_mips*/);
 
     // For each waypoint in MIPS path...
     for (i = 0; i < 10; i++) {
@@ -73,7 +73,7 @@ void bhv_mips_castle_act_wait_for_nearby_player(void) {
 
 void bhv_mips_castle_act_follow_path(void) {
     // Retrieve current waypoint.
-    struct Waypoint **pathBase = segmented_to_virtual(&castle_grounds_trajectory_mips);
+    struct Waypoint **pathBase = segmented_to_virtual(0/*&castle_grounds_trajectory_mips*/);
     struct Waypoint *waypoint = segmented_to_virtual(*(pathBase + o->oMipsStartWaypointIndex));
 
     // Set start waypoint and follow the path from there.
