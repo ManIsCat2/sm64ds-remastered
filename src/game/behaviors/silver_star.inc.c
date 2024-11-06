@@ -59,7 +59,6 @@ void bhv_silver_star_init(void) {
             gCurrentObject->parentObj = spawn_object(o, MODEL_GOOMBA, bhvGoomba);
             break;
     }
-    obj_scale(o, 0.8f);
     obj_set_hitbox(o, &sSilverStarHitbox);
 }
 
@@ -80,7 +79,7 @@ void bhv_silver_star_handler_loop(void) {
 
     // Drop a silver star if damaged
     if (remainingSilverStars < 5 && gPlayerState->hurtCounter > gCurrentObject->oAction) {
-        struct Object *silverStar = spawn_object(o, MODEL_STAR, bhvSilverStar);
+        struct Object *silverStar = spawn_object(o, MODEL_SILVER_STAR, bhvSilverStar);
         silverStar->oVelX = ((random_u16() & 1) ? -1.f : 1.f) * 12.f;
         silverStar->oVelY = 30.f;
         silverStar->oVelZ = ((random_u16() & 1) ? -1.f : 1.f) * 12.f;

@@ -48,7 +48,7 @@ static struct MacroPreset sMacroObjectPresets[] = {
     /* macro_homing_amp                  */ { bhvHomingAmp, MODEL_AMP, 0 },
     /* macro_circling_amp                */ { bhvCirclingAmp, MODEL_AMP, AMP_BP_ROT_RADIUS_200 },
     /* macro_unknown_40                  */ { bhvCarrySomething1, MODEL_UNKNOWN_7D, 0 }, // unused
-    /* macro_unknown_41                  */ { bhvBetaTrampolineTop, MODEL_TRAMPOLINE, 0 }, // unused
+    /* macro_unknown_41                  */ { bhvBetaTrampolineTop, 0/*MODEL_TRAMPOLINE*/, 0 }, // unused
     /* macro_free_bowling_ball           */ { bhvFreeBowlingBall, MODEL_BOWLING_BALL, 0 }, // unused
     /* macro_snufit                      */ { bhvSnufit, MODEL_SNUFIT, 0 },
     /* macro_recovery_heart              */ { bhvRecoveryHeart, MODEL_HEART, 0 },

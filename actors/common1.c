@@ -89,3 +89,7 @@ UNUSED static const u64 binid_22 = 22;
 #include "mario_metal_cap/model.inc.c"
 #include "mario_wing_cap/model.inc.c"
 #include "mario_winged_metal_cap/model.inc.c"
+
+#include "luigi_cap/model.inc.c"
+#include "wario_cap/model.inc.c"
+#include "silver_star/model.inc.c"

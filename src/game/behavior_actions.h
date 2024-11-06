@@ -371,6 +371,8 @@ void bhv_wing_cap_init(void);
 void bhv_wing_vanish_cap_loop(void);
 void bhv_metal_cap_init(void);
 void bhv_metal_cap_loop(void);
+void bhv_player_cap_init(void);
+void bhv_player_cap_loop(struct PlayerState *m);
 void bhv_normal_cap_init(void);
 void bhv_normal_cap_loop(void);
 void bhv_vanish_cap_init(void);

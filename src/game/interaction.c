@@ -157,6 +157,12 @@ u32 get_player_cap_flag(struct Object *capObject) {
         return PLAYER_WING_CAP;
     } else if (script == bhvVanishCap) {
         return PLAYER_VANISH_CAP;
+    } else if (script == bhvMarioCap) {
+        curChar = 1; // Todo: make this not swap hud or sfx
+    } else if (script == bhvLuigiCap) {
+        curChar = 2; // Todo: make this not swap hud or sfx
+    } else if (script == bhvWarioCap) {
+        curChar = 3; // Todo: make this not swap hud or sfx
     } else if (script == bhvPowerFlower) {
         if (curChar == 1) {
             return PLAYER_WING_CAP;

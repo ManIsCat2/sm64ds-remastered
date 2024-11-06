@@ -4564,6 +4564,33 @@ const BehaviorScript bhvBigBoulderGenerator[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvMarioCap[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_player_cap_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_player_cap_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvLuigiCap[] = { // Todo: Optimize this bullcrap code xD
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_player_cap_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_player_cap_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvWarioCap[] = { // Todo: Optimize this bullcrap code xD
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_player_cap_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_player_cap_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvWingCap[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),

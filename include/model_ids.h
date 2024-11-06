@@ -463,6 +463,13 @@
 #define MODEL_MARIOS_METAL_CAP            0x86        // marios_metal_cap_geo
 #define MODEL_MARIOS_WING_CAP             0x87        // marios_wing_cap_geo
 #define MODEL_MARIOS_CAP                  0x88        // marios_cap_geo
+
+#define MODEL_LUIGIS_CAP                  0xB5        // luigis_cap_geo
+#define MODEL_WARIOS_CAP                  0xB6        // warios_cap_geo
+
+// Todo: Use these unused ids
+#define MODEL_UNUSED_5                    0xD8        // red_coin_no_shadow_geo
+
 #define MODEL_CAP_BOX                     0x89        // cap_box_geo
 #define MODEL_DIRT_ANIMATION              0x8A        // dirt_animation_geo
 #define MODEL_CARTOON_STAR                0x8B        // cartoon_star_geo
@@ -482,7 +489,6 @@
 // find me
 // find me
 // find me
-#define MODEL_BURN_SMOKE_UNUSED           0x9C        // burn_smoke_geo - unused & duplicated
 // find me
 #define MODEL_WHITE_PARTICLE_DL           0x9E        // white_particle_dl
 #define MODEL_SAND_DUST                   0x9F        // sand_seg3_dl_0302BCD0
@@ -508,12 +514,8 @@
 #define MODEL_BOWSER_BOMB                 0xB3        // bowser_bomb_geo
 #define MODEL_WATER_MINE                  0xB3        // water_mine_geo
 #define MODEL_BOWLING_BALL                0xB4        // bowling_ball_geo
-#define MODEL_TRAMPOLINE                  0xB5        // springboard_top_geo (unused)
-#define MODEL_TRAMPOLINE_CENTER           0xB6        // springboard_spring_geo (unused)
-#define MODEL_TRAMPOLINE_BASE             0xB7        // springboard_bottom_geo (unused)
 #define MODEL_UNKNOWN_B8                  0xB8        // referenced in special presets as a static object. Unknown usage
 #define MODEL_FISH                        0xB9        // fish_geo - fish without shadow, used
-#define MODEL_FISH_SHADOW                 0xBA        // fish_shadow_geo - fish with shadow, unused
 #define MODEL_BUTTERFLY                   0xBB        // butterfly_geo
 #define MODEL_BLACK_BOBOMB                0xBC        // black_bobomb_geo
 // find me
@@ -535,7 +537,6 @@
 #define MODEL_EXPLOSION                   0xCD        // explosion_geo
 #define MODEL_SNUFIT                      0xCE        // snufit_geo
 #define MODEL_RED_SWITCH                  0xCF        // red_switch_geo
-#define MODEL_STAR_SWITCH                 0xF1        // star_switch_geo
 #define MODEL_CASTLE_STAR_DOOR_30_STARS   0xD0        // castle_geo_000F00
 #define MODEL_CASTLE_STAR_DOOR_50_STARS   0xD1        // castle_geo_000F00
 #define MODEL_CCM_SNOWMAN_BASE            0xD2        // ccm_geo_0003F0
@@ -544,7 +545,6 @@
 #define MODEL_CASTLE_STAR_DOOR_8_STARS    0xD5        // castle_geo_000F00
 #define MODEL_CASTLE_STAR_DOOR_70_STARS   0xD6        // castle_geo_000F00
 #define MODEL_RED_COIN                    0xD7        // red_coin_geo
-#define MODEL_UNUSED_5                    0xD8        // red_coin_no_shadow_geo
 #define MODEL_METAL_BOX                   0xD9        // metal_box_geo
 #define MODEL_METAL_BOX_DL                0xDA        // metal_box_dl
 #define MODEL_NUMBER                      0xDB        // number_geo
@@ -556,7 +556,9 @@
 #define MODEL_TRAJECTORY_MARKER_BALL      0xE1        // bowling_ball_track_geo - duplicate used in SSL Pyramid small sized and as a track ball
 
 // DS Specific
-#define MODEL_POWER_FLOWER                        0x1C                      // power_flower_geo
+#define MODEL_POWER_FLOWER                0x9C        // power_flower_geo
+#define MODEL_SILVER_STAR                 0xB7        // silver_star_geo
+#define MODEL_STAR_SWITCH                 0xBA        // star_switch_geo
 
 // Menu Models (overwrites Level Geometry IDs)
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0
