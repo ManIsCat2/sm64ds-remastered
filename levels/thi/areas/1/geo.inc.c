@@ -1,4 +1,4 @@
-#include "src/game/envfx_skybox.h"
+#include "src/game/envfx_snow.h"
 
 // 0x0E000608
 const GeoLayout thi_geo_000608[] = {

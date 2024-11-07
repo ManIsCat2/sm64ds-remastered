@@ -1,6 +1,4 @@
-#ifndef TARGET_N64
-#include "src/game/envfx_skybox.h"
-#endif
+#include "src/game/envfx_snow.h"
 
 // 0x0E00073C
 const GeoLayout castle_grounds_area_1[] = {
@@ -19,9 +17,7 @@ const GeoLayout castle_grounds_area_1[] = {
                     GEO_ASM(0x1601, geo_movtex_draw_water_regions),
                     GEO_RENDER_OBJ(),
                     GEO_ASM(0, geo_envfx_main),
-#ifndef TARGET_N64
                     GEO_ASM(0, sky_3d),
-#endif
                 GEO_CLOSE_NODE(),
             GEO_CLOSE_NODE(),
         GEO_CLOSE_NODE(),
