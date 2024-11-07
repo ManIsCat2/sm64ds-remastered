@@ -1,4 +1,4 @@
-#include "src/game/envfx_skybox.h"
+#include "src/game/envfx_snow.h"
 
 // 0x0E0004C0
 const GeoLayout ddd_geo_0004C0[] = {
