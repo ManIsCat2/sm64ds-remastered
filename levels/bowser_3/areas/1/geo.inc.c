@@ -1,4 +1,5 @@
 #include "src/game/envfx_snow.h"
+#include "src/game/envfx_skybox.h"
 
 // 0x0E000398
 const GeoLayout bowser_3_geo_000398[] = {

@@ -1,4 +1,4 @@
-#include "src/game/envfx_snow.h"
+#include "src/game/envfx_skybox.h"
 
 // 0x0E000A70
 const GeoLayout ttm_geo_000A70[] = {

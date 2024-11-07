@@ -7,6 +7,7 @@
 #include "engine/math_util.h"
 #include "camera.h"
 #include "envfx_snow.h"
+#include "envfx_skybox.h"
 #include "level_geo.h"
 
 /**

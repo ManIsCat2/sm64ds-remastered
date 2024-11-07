@@ -1,4 +1,5 @@
 #include "src/game/envfx_snow.h"
+#include "src/game/envfx_skybox.h"
 
 const GeoLayout bowser_1_area_1_geo[] = {
 	GEO_NODE_START(),
