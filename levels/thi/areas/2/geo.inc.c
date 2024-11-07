@@ -1,4 +1,4 @@
-#include "src/game/envfx_snow.h"
+#include "src/game/envfx_skybox.h"
 
 // SHARE_PATH: [level]/areas/1/1/, [level]/areas/1/2/, [level]/areas/1/3/, [level]/areas/1/4/
 
