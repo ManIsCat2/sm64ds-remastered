@@ -6,9 +6,9 @@
 // geo
 extern const GeoLayout geo_menu_player_save_button[];
 extern const GeoLayout geo_menu_player_save_button_fade[];
-extern const GeoLayout geo_menu_player_new_button_a[];
-extern const GeoLayout geo_menu_player_new_button_b[];
-extern const GeoLayout geo_menu_player_new_button_c[];
+extern const GeoLayout geo_menu_file_a[];
+extern const GeoLayout geo_menu_file_b[];
+extern const GeoLayout geo_menu_file_c[];
 extern const GeoLayout geo_menu_erase_button[];
 extern const GeoLayout geo_menu_copy_button[];
 extern const GeoLayout geo_menu_file_button[];

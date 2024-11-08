@@ -565,7 +565,7 @@
 #define MODEL_MAIN_MENU_RED_ERASE_BUTTON          MODEL_LEVEL_GEOMETRY_04   // main_menu_geo_000290
 #define MODEL_MAIN_MENU_BLUE_COPY_BUTTON          MODEL_LEVEL_GEOMETRY_05   // main_menu_geo_0002B8
 #define MODEL_FILE_SELECT_BACKGROUND              MODEL_LEVEL_GEOMETRY_06   // file_select_bg_geo
-#define MODEL_MAIN_MENU_GREEN_SCORE_BUTTON        MODEL_LEVEL_GEOMETRY_07   // main_menu_geo_000308
+#define MODEL_MAIN_MENU_REC_ROOM                  MODEL_LEVEL_GEOMETRY_07   // geo_menu_rec_room
 #define MODEL_MAIN_MENU_FILE_OPTIONS              MODEL_LEVEL_GEOMETRY_08   // file_options_geo
 #define MODEL_MAIN_MENU_FILE_BUTTON_A             MODEL_LEVEL_GEOMETRY_09   // file_a_geo
 #define MODEL_MAIN_MENU_FILE_BUTTON_B             MODEL_LEVEL_GEOMETRY_0A   // file_b_geo
