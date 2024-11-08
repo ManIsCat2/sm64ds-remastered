@@ -1,13 +1,19 @@
+#ifndef TARGET_N64
+#include "src/game/envfx_skybox.h"
+#endif
+
 const GeoLayout rec_room_geo[] = {
     GEO_NODE_SCREEN_AREA(10, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, SCREEN_WIDTH/2, SCREEN_HEIGHT/2),
     GEO_OPEN_NODE(),
+#ifdef TARGET_N64
         GEO_ZBUFFER(0),
         GEO_OPEN_NODE(),
             GEO_NODE_ORTHO(100),
             GEO_OPEN_NODE(),
-                GEO_BACKGROUND_COLOR(1),
+                GEO_BACKGROUND(BACKGROUND_OCEAN_SKY, geo_skybox_main),
             GEO_CLOSE_NODE(),
         GEO_CLOSE_NODE(),
+#endif
         GEO_ZBUFFER(1),
         GEO_OPEN_NODE(),
             GEO_CAMERA_FRUSTUM_WITH_FUNC(64, 50, 7000, geo_camera_fov),
@@ -25,6 +31,9 @@ const GeoLayout rec_room_geo[] = {
                     GEO_ASM(PAINTING_ID(0x000F, 1), geo_painting_draw),
                     GEO_RENDER_OBJ(),
                     GEO_ASM(0, geo_envfx_main),
+#ifndef TARGET_N64
+                    GEO_ASM(0, sky_3d),
+#endif
                 GEO_CLOSE_NODE(),
             GEO_CLOSE_NODE(),
         GEO_CLOSE_NODE(),

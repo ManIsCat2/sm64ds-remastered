@@ -1522,7 +1522,7 @@ struct Painting si_painting = {
     /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Player's on */,
     /* Ripple Status */ 0x00,
     /* Rotation */     0.0f,   -135.0f,
-    /* Position */ 5206.0f, 4301.0f, 717.0f,
+    /* Position */ 5206.0f, -4301.0f, 717.0f,
     /*                         curr   passive     entry */
     /* Ripple Magnitude */     0.0f,    20.0f,    80.0f,
     /* Ripple Decay */         1.0f,  0.9608f,  0.9524f,
