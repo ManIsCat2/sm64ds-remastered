@@ -1514,6 +1514,33 @@ struct Painting ssl_painting = {
     /* Size */  614.0f,
 };
 
+// Sunshine Isles
+struct Painting si_painting = {
+    /* id */ 0x000F,
+    /* Image Count */ 0x02,
+    /* Texture Type */ PAINTING_IMAGE,
+    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Player's on */,
+    /* Ripple Status */ 0x00,
+    /* Rotation */     0.0f,   -135.0f,
+    /* Position */ 5206.0f, 4301.0f, 717.0f,
+    /*                         curr   passive     entry */
+    /* Ripple Magnitude */     0.0f,    20.0f,    80.0f,
+    /* Ripple Decay */         1.0f,  0.9608f,  0.9524f,
+    /* Ripple Rate */          0.0f,    0.24f,    0.14f,
+    /* Ripple Dispersion */    0.0f,    40.0f,    30.0f,
+    /* Curr Ripple Timer */    0.0f,
+    /* Curr Ripple x, y */     0.0f,     0.0f,
+    /* Normal DList */ inside_castle_seg7_painting_dl_07023230,
+    /* Texture Maps */ inside_castle_seg7_painting_texture_maps_07022518,
+    /* Textures */     inside_castle_seg7_painting_textures_070235E8,
+    /* Texture w, h */ 64, 32,
+    /* Ripple DList */ inside_castle_seg7_painting_dl_07021AC0,
+    /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
+    /* Alpha */ 0xFF,
+    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not Player is below the painting */
+    /* Size */  614.0f,
+};
+
 // 0x070238F0 - 0x07023968
 struct Painting hmc_painting = {
     /* id */ 0x000E,

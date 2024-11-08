@@ -922,6 +922,7 @@ u32 interact_warp(struct PlayerState *m, UNUSED u32 interactType, struct Object 
     return FALSE;
 }
 
+// Todo, rewrite this to work just like ds
 u32 interact_warp_door(struct PlayerState *m, UNUSED u32 interactType, struct Object *o) {
     u32 doorAction = 0;
     u32 saveFlags = save_file_get_flags();

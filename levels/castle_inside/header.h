@@ -53,6 +53,7 @@ extern const GeoLayout castle_geo_001AF8[];
 extern const GeoLayout castle_geo_001B48[];
 extern const GeoLayout castle_geo_001BB0[];
 extern const GeoLayout castle_geo_001C10[];
+extern const GeoLayout rec_room_geo[];
 
 // leveldata
 extern const Gfx inside_castle_seg7_dl_070225D8[];
@@ -65,6 +66,7 @@ extern struct Painting wf_painting;
 extern struct Painting jrb_painting;
 extern struct Painting lll_painting;
 extern struct Painting ssl_painting;
+extern struct Painting si_painting;
 extern struct Painting hmc_painting;
 extern struct Painting ddd_painting;
 extern struct Painting wdw_painting;
@@ -113,12 +115,15 @@ extern const Collision inside_castle_seg7_area_2_collision[];
 extern const Collision inside_castle_seg7_area_3_collision[];
 extern const Collision inside_castle_seg7_collision_ddd_warp[];
 extern const Collision inside_castle_seg7_collision_ddd_warp_2[];
+extern const Collision rec_room_collision[];
 extern const MacroObject inside_castle_seg7_area_1_macro_objs[];
 extern const MacroObject inside_castle_seg7_area_2_macro_objs[];
 extern const MacroObject inside_castle_seg7_area_3_macro_objs[];
+extern const MacroObject rec_room_macro_objs[];
 extern const RoomData inside_castle_seg7_area_1_rooms[];
 extern const RoomData inside_castle_seg7_area_2_rooms[];
 extern const RoomData inside_castle_seg7_area_3_rooms[];
+extern const RoomData rec_room_rooms[];
 extern const Collision inside_castle_seg7_collision_floor_trap[];
 extern const Collision inside_castle_seg7_collision_star_door[];
 extern const Collision inside_castle_seg7_collision_water_level_pillar[];
@@ -174,5 +179,11 @@ extern const LevelScript level_castle_inside_entry[];
 #include "levels/castle_inside/castle_ccm_room_sign_geo/header.h"
 
 #include "levels/castle_inside/castle_upstairs_preview_geo/header.h"
+
+#include "levels/castle_inside/rec_room_1/header.h"
+
+#include "levels/castle_inside/rec_room_2/header.h"
+
+#include "levels/castle_inside/rec_room_3/header.h"
 
 #endif
