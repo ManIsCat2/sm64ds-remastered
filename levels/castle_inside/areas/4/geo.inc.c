@@ -28,7 +28,7 @@ const GeoLayout rec_room_geo[] = {
 		            GEO_DISPLAY_LIST(LAYER_TRANSPARENT, rec_room_3_r2_node_mesh_layer_5),
 		            GEO_DISPLAY_LIST(LAYER_ALPHA, rec_room_3_r2_node_mesh_layer_4), // third geo
                     GEO_ASM(0, geo_painting_update),
-                    GEO_ASM(PAINTING_ID(0x000F, 1), geo_painting_draw),
+                    GEO_ASM(PAINTING_ID(6, 1), geo_painting_draw),
                     GEO_RENDER_OBJ(),
                     GEO_ASM(0, geo_envfx_main),
 #ifndef TARGET_N64

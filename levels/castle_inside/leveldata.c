@@ -55,7 +55,6 @@
 #include "levels/castle_inside/areas/1/room.inc.c"
 #include "levels/castle_inside/areas/2/room.inc.c"
 #include "levels/castle_inside/areas/3/room.inc.c"
-#include "levels/castle_inside/areas/4/room.inc.c"
 #include "levels/castle_inside/trap_door/collision.inc.c"
 #include "levels/castle_inside/star_door/collision.inc.c"
 #include "levels/castle_inside/clock_minute_hand/collision.inc.c"

@@ -1084,7 +1084,7 @@
     #define KLEPTO_ANIM_STATE_HOLDING_NOTHING          0
     #define KLEPTO_ANIM_STATE_HOLDING_CAP              1
     #define KLEPTO_ANIM_STATE_HOLDING_STAR             2
-    #define KLEPTO_ANIM_STATE_HOLDING_TRANSPARENT_STAR 3
+    #define KLEPTO_ANIM_STATE_HOLDING_SILVER_STAR 3
 
 /* Bird */
     /* oAction */

@@ -76,17 +76,10 @@ static void klepto_anim_dive(void) {
 }
 
 void bhv_klepto_init(void) {
-    if (o->oBhvParams2ndByte != 0) {
-#if OBJ_HOLD_TRANSPARENT_STAR
-        u8 bp1 = o->oBhvParams >> 24; // Star ID - Star 1 by default
-        if (save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum)) & (1 << bp1)) {
-            o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_TRANSPARENT_STAR;
-        } else {
-            o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_STAR;
-        }
-#else
+    if (o->oBhvParams2ndByte == 1)
         o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_STAR;
-#endif
+    else if (o->oBhvParams2ndByte == 2) {
+        o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_SILVER_STAR;
     } else {
         o->oKleptoStartPosX = o->oPosX;
         o->oKleptoStartPosY = o->oPosY;
@@ -372,16 +365,10 @@ void bhv_klepto_update(void) {
             if (o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_CAP) {
                 save_file_clear_flags(SAVE_FLAG_CAP_ON_KLEPTO);
                 spawn_object(o, MODEL_MARIOS_CAP, bhvNormalCap);
-            } else if (o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_STAR
-            #if QOL_FEATURE_KLEPTO_HOLDING_BLUE_STAR
-            || o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_TRANSPARENT_STAR
-            #endif
-            ) {
-                #ifdef RM2C_HAS_CUSTOM_STAR_POS
-                spawn_default_star(KleptoStarPos);
-                #else
+            } else if (o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_STAR) {
                 spawn_default_star(-5550.0f, 300.0f, -930.0f);
-                #endif
+            } else if (o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_SILVER_STAR) {
+                spawn_object(o, MODEL_SILVER_STAR, bhvSilverStar); // ds come back
             }
 
             o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_NOTHING;

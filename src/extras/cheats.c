@@ -119,7 +119,13 @@ struct SubMenu menuCheats = DEF_SUBMENU( optCheatMenuStr[0], optsCheats );
 
 void cheats_moon_jump(struct PlayerState *m) {
     if (Cheats.MoonJump) {
-        if (m->controller->buttonDown & X_BUTTON) {
+        if (m->controller->buttonDown &
+#ifndef TARGET_N64
+        X_BUTTON
+#else
+        L_TRIG
+#endif
+        ) {
             m->vel[1] = 40.0f;
             return TRUE;
         }

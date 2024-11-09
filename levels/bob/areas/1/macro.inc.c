@@ -107,7 +107,7 @@ const MacroObject bob_seg7_macro_objs[] = {
 	MACRO_OBJECT(macro_goomba, -90, -1282, 257, 5798),
 	MACRO_OBJECT(macro_goomba, 0, -6194, 770, 814),
 	MACRO_OBJECT(macro_goomba, -90, 3806, 902, 3981),
-	MACRO_OBJECT(macro_recovery_heart, 0, 3723, 3540, -7020),
+	MACRO_OBJECT(macro_recovery_heart, 0, 3723, 3600, -7020),
 	MACRO_OBJECT(macro_hidden_star_trigger, 0, -1536, 5583, 1229),
 	MACRO_OBJECT(macro_hidden_star_trigger, 0, 3021, 3688, 1229),
 	MACRO_OBJECT(macro_hidden_star_trigger, 0, 2150, 3688, 1229),

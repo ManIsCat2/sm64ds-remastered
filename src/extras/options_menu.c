@@ -239,8 +239,8 @@ static struct Option optsSettings[] = {
 static struct Option optsDsSettings[] = {
 #ifndef TARGET_N64
     DEF_OPT_CHOICE( optsVideoStr[1], &configFiltering, filterChoices ),
-#endif
     DEF_OPT_CHOICE( optsDsSettingsStr[1], &configDash, movementChoices ),
+#endif
     DEF_OPT_TOGGLE( optsDsSettingsStr[0], &configWallslide ),
     DEF_OPT_TOGGLE( optsDsSettingsStr[2], &configDive ),
     DEF_OPT_TOGGLE( optsDsSettingsStr[3], &configGlobalCapBlocks ),

@@ -1,13 +1,10 @@
 #include "game/paintings.h"
 
-// 0x07021800 - 0x07021818
-static const Lights1 inside_castle_seg7_lights_07021800 = gdSPDefLights1(
-    0x50, 0x50, 0x50,
-    0xff, 0xff, 0xff, 0x32, 0x32, 0x32
-);
+// Lighting used for all paintings
+static const Lights1 painting_lighting = gdSPDefLights1(0x50, 0x50, 0x50, 0xff, 0xff, 0xff, 0x32, 0x32, 0x32);
 
-// 0x07021818 - 0x07021898
-static const Vtx inside_castle_seg7_vertex_07021818[] = {
+// Vertex positions for the bottom half of the paintings (I think)
+static const Vtx bottom_painting_vertex[] = {
     {{{     0,      0,      0}, 0, {   -32,    992}, {0x00, 0x00, 0x7f, 0xff}}},
     {{{   614,      0,      0}, 0, {  2012,    992}, {0x00, 0x00, 0x7f, 0xff}}},
     {{{   614,    307,      0}, 0, {  2012,      0}, {0x00, 0x00, 0x7f, 0xff}}},
@@ -71,8 +68,8 @@ static const Gfx inside_castle_seg7_dl_07021A48[] = {
     gsDPPipeSync(),
     gsSPSetGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsDPSetCombineMode(G_CC_MODULATERGB, G_CC_MODULATERGB),
-    gsSPLight(&inside_castle_seg7_lights_07021800.l, 1),
-    gsSPLight(&inside_castle_seg7_lights_07021800.a, 2),
+    gsSPLight(&painting_lighting.l, 1),
+    gsSPLight(&painting_lighting.a, 2),
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD),
     gsDPTileSync(),
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 6, G_TX_NOLOD),
@@ -556,19 +553,10 @@ static const PaintingData inside_castle_seg7_painting_texture_map_top_07021FFC[]
 
 
 // 0x07022518
-static const PaintingData *const inside_castle_seg7_painting_texture_maps_07022518[] = {
+static const PaintingData *const painting_2_texture_map[] = {
     inside_castle_seg7_painting_texture_map_bottom_07021AE0,
     inside_castle_seg7_painting_texture_map_top_07021FFC,
 };
-
-UNUSED static const u64 castle_inside_unused_0 = 0x0;
-
-
-// 0x07022528 - 0x07022540
-static const Lights1 inside_castle_seg7_lights_07022528 = gdSPDefLights1(
-    0x50, 0x50, 0x50,
-    0xff, 0xff, 0xff, 0x32, 0x32, 0x32
-);
 
 // 0x07022540 - 0x07022558
 // No gdSPDefLights1 macro defined because of odd different light value (0xff and 0xfa)
@@ -577,43 +565,12 @@ static const Lights1 inside_castle_seg7_lights_07022540 = {
     {{{ {0x64, 0x64, 0xff}, 0, {0x64, 0x64, 0xfa}, 0, {0x28, 0x28, 0x28},0} }}
 };
 
-// 0x07022558 - 0x07022598
-static const Vtx inside_castle_seg7_vertex_07022558[] = {
-    {{{     0,      0,      0}, 0, {   -32,    990}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{   614,      0,      0}, 0, {  6100,    990}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{   614,    614,      0}, 0, {  6100,  -5142}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{     0,    614,      0}, 0, {   -32,  -5142}, {0x00, 0x00, 0x7f, 0xff}}},
-};
-
 // 0x07022598 - 0x070225D8
 static const Vtx inside_castle_seg7_vertex_07022598[] = {
     {{{     0,      0,      0}, 0, {     0,      0}, {0x00, 0x00, 0x7f, 0xff}}},
     {{{   614,      0,      0}, 0, {     0,      0}, {0x00, 0x00, 0x7f, 0xff}}},
     {{{   614,    614,      0}, 0, {     0,      0}, {0x00, 0x00, 0x7f, 0xff}}},
     {{{     0,    614,      0}, 0, {     0,      0}, {0x00, 0x00, 0x7f, 0xff}}},
-};
-
-// TODO: this is unused
-// 0x070225D8 - 0x07022610
-const Gfx inside_castle_seg7_dl_070225D8[] = {
-    gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_MODULATERGB, G_CC_MODULATERGB),
-    gsSPLight(&inside_castle_seg7_lights_07022528.l, 1),
-    gsSPLight(&inside_castle_seg7_lights_07022528.a, 2),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsSPVertex(inside_castle_seg7_vertex_07022558, 4, 0),
-    gsSPEndDisplayList(),
-};
-
-// TODO: this is unused
-// 0x07022610 - 0x07022640
-const Gfx inside_castle_seg7_dl_07022610[] = {
-    gsSP1Triangle( 0,  1,  2, 0x0),
-    gsSP1Triangle( 0,  2,  3, 0x0),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
-    gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
-    gsSPEndDisplayList(),
 };
 
 // 0x07022640 - 0x07022660
@@ -1063,18 +1020,15 @@ static const PaintingData *const inside_castle_seg7_painting_env_map_texture_map
     inside_castle_seg7_painting_env_map_texture_map_07022660,
 };
 
-UNUSED static const u64 castle_inside_unused_1 = 0x0;
-
-
-// 0x07023050 - 0x070230B0
-static const Gfx inside_castle_seg7_painting_dl_07023050[] = {
+// Bob-omb Battlefield dl
+static const Gfx bob_painting_dl[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
-    gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0700B800),
+    gsSPVertex(bottom_painting_vertex, 8, 0),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bob_painting_bottom_tex),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPDisplayList(inside_castle_seg7_dl_07021A18),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0700A800),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bob_painting_top_tex),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPDisplayList(inside_castle_seg7_dl_07021A30),
@@ -1082,15 +1036,15 @@ static const Gfx inside_castle_seg7_painting_dl_07023050[] = {
     gsSPEndDisplayList(),
 };
 
-// 0x070230B0 - 0x07023110
-static const Gfx inside_castle_seg7_painting_dl_070230B0[] = {
+// Cool Cool Mountain dl
+static const Gfx ccm_painting_dl[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
-    gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0700D800),
+    gsSPVertex(bottom_painting_vertex, 8, 0),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, ccm_painting_bottom_tex),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPDisplayList(inside_castle_seg7_dl_07021A18),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0700C800),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, ccm_painting_top_tex),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPDisplayList(inside_castle_seg7_dl_07021A30),
@@ -1101,7 +1055,7 @@ static const Gfx inside_castle_seg7_painting_dl_070230B0[] = {
 // 0x07023110 - 0x07023170
 static const Gfx inside_castle_seg7_painting_dl_07023110[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
-    gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
+    gsSPVertex(bottom_painting_vertex, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0700F800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
@@ -1117,7 +1071,7 @@ static const Gfx inside_castle_seg7_painting_dl_07023110[] = {
 // 0x07023170 - 0x070231D0
 static const Gfx inside_castle_seg7_painting_dl_07023170[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
-    gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
+    gsSPVertex(bottom_painting_vertex, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_07011800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
@@ -1133,7 +1087,7 @@ static const Gfx inside_castle_seg7_painting_dl_07023170[] = {
 // 0x070231D0 - 0x07023230
 static const Gfx inside_castle_seg7_painting_dl_070231D0[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
-    gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
+    gsSPVertex(bottom_painting_vertex, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_07012800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
@@ -1149,7 +1103,7 @@ static const Gfx inside_castle_seg7_painting_dl_070231D0[] = {
 // 0x07023230 - 0x07023290
 static const Gfx inside_castle_seg7_painting_dl_07023230[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
-    gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
+    gsSPVertex(bottom_painting_vertex, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_07015800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
@@ -1162,10 +1116,26 @@ static const Gfx inside_castle_seg7_painting_dl_07023230[] = {
     gsSPEndDisplayList(),
 };
 
+// Sunshine Isles dl
+static const Gfx si_painting_dl[] = {
+    gsSPDisplayList(inside_castle_seg7_dl_07021A48),
+    gsSPVertex(bottom_painting_vertex, 8, 0),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, si_painting_bottom_tex),
+    gsDPLoadSync(),
+    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
+    gsSPDisplayList(inside_castle_seg7_dl_07021A18),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, si_painting_top_tex),
+    gsDPLoadSync(),
+    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
+    gsSPDisplayList(inside_castle_seg7_dl_07021A30),
+    gsSPDisplayList(inside_castle_seg7_dl_07021AA0),
+    gsSPEndDisplayList(),
+};
+
 // 0x07023290 - 0x070232F0
 static const Gfx inside_castle_seg7_painting_dl_07023290[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
-    gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
+    gsSPVertex(bottom_painting_vertex, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_07018800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
@@ -1181,7 +1151,7 @@ static const Gfx inside_castle_seg7_painting_dl_07023290[] = {
 // 0x070232F0 - 0x07023350
 static const Gfx inside_castle_seg7_painting_dl_070232F0[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
-    gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
+    gsSPVertex(bottom_painting_vertex, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0701A800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
@@ -1197,7 +1167,7 @@ static const Gfx inside_castle_seg7_painting_dl_070232F0[] = {
 // 0x07023350 - 0x070233B0
 static const Gfx inside_castle_seg7_painting_dl_07023350[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
-    gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
+    gsSPVertex(bottom_painting_vertex, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0701C800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
@@ -1213,7 +1183,7 @@ static const Gfx inside_castle_seg7_painting_dl_07023350[] = {
 // 0x070233B0 - 0x07023410
 static const Gfx inside_castle_seg7_painting_dl_070233B0[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
-    gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
+    gsSPVertex(bottom_painting_vertex, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0701E800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
@@ -1256,11 +1226,11 @@ static const Gfx inside_castle_seg7_painting_dl_07023410[] = {
 const Gfx inside_castle_seg7_dl_070234C0[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
     gsSPVertex(inside_castle_seg7_vertex_07021918, 8, 0),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0700D800),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, ccm_painting_bottom_tex),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPDisplayList(inside_castle_seg7_dl_07021A18),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0700C800),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, ccm_painting_top_tex),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPDisplayList(inside_castle_seg7_dl_07021A30),
@@ -1272,11 +1242,11 @@ const Gfx inside_castle_seg7_dl_070234C0[] = {
 const Gfx inside_castle_seg7_dl_07023520[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
     gsSPVertex(inside_castle_seg7_vertex_07021998, 8, 0),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0700D800),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, ccm_painting_bottom_tex),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPDisplayList(inside_castle_seg7_dl_07021A18),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0700C800),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, ccm_painting_top_tex),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPDisplayList(inside_castle_seg7_dl_07021A30),
@@ -1300,12 +1270,12 @@ static const Gfx inside_castle_seg7_painting_dl_070235B8[] = {
     gsSPBranchList(inside_castle_seg7_painting_dl_07023580),
 };
 
-ALIGNED8 static const Texture *const inside_castle_seg7_painting_textures_070235C0[] = {
-    inside_castle_seg7_texture_0700B800, inside_castle_seg7_texture_0700A800,
+ALIGNED8 static const Texture *const bob_painting_tex[] = {
+    bob_painting_bottom_tex, bob_painting_top_tex,
 };
 
 ALIGNED8 static const Texture *const inside_castle_seg7_painting_textures_070235C8[] = {
-    inside_castle_seg7_texture_0700D800, inside_castle_seg7_texture_0700C800,
+    ccm_painting_bottom_tex, ccm_painting_top_tex,
 };
 
 ALIGNED8 static const Texture *const inside_castle_seg7_painting_textures_070235D0[] = {
@@ -1352,13 +1322,13 @@ ALIGNED8 static const Texture *const inside_castle_seg7_painting_textures_070236
     inside_castle_seg7_texture_07020800, inside_castle_seg7_texture_0701F800,
 };
 
-// 0x07023620 - 0x07023698
+// Bob-omb Battlefield Painting
 struct Painting bob_painting = {
-    /* id */ 0x0000,
-    /* Image Count */ 0x02,
+    /* id */ 0,
+    /* Image Count */ 2,
     /* Texture Type */ PAINTING_IMAGE,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors the player is on */,
-    /* Ripple Status */ 0x00,
+    /* Floor Status */ 0, 0, 0 /* which of the painting's nearby special floors the player is on */,
+    /* Ripple Status */ 0,
     /* Rotation */     0.0f,    90.0f,
     /* Position */ -5222.4f,   409.6f,   -153.6f,
     /*                         curr   passive     entry */
@@ -1368,24 +1338,24 @@ struct Painting bob_painting = {
     /* Ripple Dispersion */    0.0f,    40.0f,    30.0f,
     /* Curr Ripple Timer */    0.0f,
     /* Curr Ripple x, y */     0.0f,    0.0f,
-    /* Normal DList */ inside_castle_seg7_painting_dl_07023050,
-    /* Texture Maps */ inside_castle_seg7_painting_texture_maps_07022518,
-    /* Textures */     inside_castle_seg7_painting_textures_070235C0,
+    /* Normal DList */ bob_painting_dl,
+    /* Texture Maps */ painting_2_texture_map,
+    /* Textures */     bob_painting_tex,
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ inside_castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
-    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not the player is below the painting */
+    /* Alpha */ 255,
+    /* Player Below */  0, 0, 0, /* Whether or not the player is below the painting */
     /* Size */  614.0f,
 };
 
-// 0x07023698 - 0x07023710
+// Cool Cool Mountain Painting
 struct Painting ccm_painting = {
-    /* id */ 0x0001,
-    /* Image Count */ 0x02,
+    /* id */ 1,
+    /* Image Count */ 2,
     /* Texture Type */ PAINTING_IMAGE,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors the player is on */,
-    /* Ripple Status */ 0x00,
+    /* Floor Status */ 0, 0, 0 /* which of the painting's nearby special floors the player is on */,
+    /* Ripple Status */ 0,
     /* Rotation */     0.0f,     0.0f,
     /* Position */ -2611.2f,  -307.2f, -4352.0f,
     /*                         curr   passive     entry */
@@ -1395,24 +1365,24 @@ struct Painting ccm_painting = {
     /* Ripple Dispersion */    0.0f,    40.0f,    30.0f,
     /* Curr Ripple Timer */    0.0f,
     /* Curr Ripple x, y */     0.0f,     0.0f,
-    /* Normal DList */ inside_castle_seg7_painting_dl_070230B0,
-    /* Texture Maps */ inside_castle_seg7_painting_texture_maps_07022518,
+    /* Normal DList */ ccm_painting_dl,
+    /* Texture Maps */ painting_2_texture_map,
     /* Textures */     inside_castle_seg7_painting_textures_070235C8,
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ inside_castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
-    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not the player is below the painting */
+    /* Alpha */ 255,
+    /* Player Below */  0, 0, 0, /* Whether or not the player is below the painting */
     /* Size */  614.0f,
 };
 
-// 0x07023710 - 0x07023788
+// Whomps Fortress Painting
 struct Painting wf_painting = {
-    /* id */ 0x0002,
-    /* Image Count */ 0x02,
+    /* id */ 2,
+    /* Image Count */ 2,
     /* Texture Type */ PAINTING_IMAGE,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors the player is on */,
-    /* Ripple Status */ 0x00,
+    /* Floor Status */ 0, 0, 0 /* which of the painting's nearby special floors the player is on */,
+    /* Ripple Status */ 0,
     /* Rotation */     0.0f,     0.0f,
     /* Position */   -51.2f,  -204.8f, -4505.6f,
     /*                         curr   passive     entry */
@@ -1423,23 +1393,23 @@ struct Painting wf_painting = {
     /* Curr Ripple Timer */    0.0f,
     /* Curr Ripple x, y */     0.0f,     0.0f,
     /* Normal DList */ inside_castle_seg7_painting_dl_07023110,
-    /* Texture Maps */ inside_castle_seg7_painting_texture_maps_07022518,
+    /* Texture Maps */ painting_2_texture_map,
     /* Textures */     inside_castle_seg7_painting_textures_070235D0,
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ inside_castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
-    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not the player is below the painting */
+    /* Alpha */ 255,
+    /* Player Below */  0, 0, 0, /* Whether or not the player is below the painting */
     /* Size */  614.0f,
 };
 
 // 0x07023788 - 0x07023800
 struct Painting jrb_painting = {
-    /* id */ 0x0003,
-    /* Image Count */ 0x02,
+    /* id */ 3,
+    /* Image Count */ 2,
     /* Texture Type */ PAINTING_IMAGE,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors the player is on */,
-    /* Ripple Status */ 0x00,
+    /* Floor Status */ 0, 0, 0 /* which of the painting's nearby special floors the player is on */,
+    /* Ripple Status */ 0,
     /* Rotation */     0.0f,   270.0f,
     /* Position */  4300.8f,   409.6f,  -537.6f,
     /*                         curr   passive     entry */
@@ -1450,23 +1420,23 @@ struct Painting jrb_painting = {
     /* Curr Ripple Timer */    0.0f,
     /* Curr Ripple x, y */     0.0f,     0.0f,
     /* Normal DList */ inside_castle_seg7_painting_dl_07023170,
-    /* Texture Maps */ inside_castle_seg7_painting_texture_maps_07022518,
+    /* Texture Maps */ painting_2_texture_map,
     /* Textures */     inside_castle_seg7_painting_textures_070235D8,
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ inside_castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
-    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not the player is below the painting */
+    /* Alpha */ 255,
+    /* Player Below */  0, 0, 0, /* Whether or not the player is below the painting */
     /* Size */  614.0f,
 };
 
 // 0x07023800 - 0x07023878
 struct Painting lll_painting = {
-    /* id */ 0x0004,
-    /* Image Count */ 0x02,
+    /* id */ 4,
+    /* Image Count */ 2,
     /* Texture Type */ PAINTING_IMAGE,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Player's on */,
-    /* Ripple Status */ 0x00,
+    /* Floor Status */ 0, 0, 0 /* which of the painting's nearby special floors Player's on */,
+    /* Ripple Status */ 0,
     /* Rotation */     0.0f,     0.0f,
     /* Position */ -1689.6f, -1126.4f, -3942.4f,
     /*                         curr   passive     entry */
@@ -1477,23 +1447,23 @@ struct Painting lll_painting = {
     /* Curr Ripple Timer */    0.0f,
     /* Curr Ripple x, y */     0.0f,     0.0f,
     /* Normal DList */ inside_castle_seg7_painting_dl_070231D0,
-    /* Texture Maps */ inside_castle_seg7_painting_texture_maps_07022518,
+    /* Texture Maps */ painting_2_texture_map,
     /* Textures */     inside_castle_seg7_painting_textures_070235E0,
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ inside_castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
-    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not the player is below the painting */
+    /* Alpha */ 255,
+    /* Player Below */  0, 0, 0, /* Whether or not the player is below the painting */
     /* Size */  614.0f,
 };
 
 // 0x07023878 - 0x070238F0
 struct Painting ssl_painting = {
-    /* id */ 0x0005,
-    /* Image Count */ 0x02,
+    /* id */ 5,
+    /* Image Count */ 2,
     /* Texture Type */ PAINTING_IMAGE,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Player's on */,
-    /* Ripple Status */ 0x00,
+    /* Floor Status */ 0, 0, 0 /* which of the painting's nearby special floors Player's on */,
+    /* Ripple Status */ 0,
     /* Rotation */     0.0f,   180.0f,
     /* Position */ -2611.2f, -1177.6f, -1075.2f,
     /*                         curr   passive     entry */
@@ -1504,77 +1474,50 @@ struct Painting ssl_painting = {
     /* Curr Ripple Timer */    0.0f,
     /* Curr Ripple x, y */     0.0f,     0.0f,
     /* Normal DList */ inside_castle_seg7_painting_dl_07023230,
-    /* Texture Maps */ inside_castle_seg7_painting_texture_maps_07022518,
+    /* Texture Maps */ painting_2_texture_map,
     /* Textures */     inside_castle_seg7_painting_textures_070235E8,
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ inside_castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
-    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not Player is below the painting */
+    /* Alpha */ 255,
+    /* Player Below */  0, 0, 0, /* Whether or not Player is below the painting */
     /* Size */  614.0f,
 };
 
 // Sunshine Isles
 struct Painting si_painting = {
-    /* id */ 0x000F,
-    /* Image Count */ 0x02,
+    /* id */ 6,
+    /* Image Count */ 2,
     /* Texture Type */ PAINTING_IMAGE,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Player's on */,
-    /* Ripple Status */ 0x00,
-    /* Rotation */     0.0f,   -135.0f,
-    /* Position */ 5206.0f, -4301.0f, 717.0f,
+    /* Floor Status */ 0, 0, 0 /* which of the painting's nearby special floors the player is on */,
+    /* Ripple Status */ 0,
+    /* Rotation */     0.0f,    45.0f,
+    /* Position */ 2499.62752f,   716.80317f,   -4445.96096f,
     /*                         curr   passive     entry */
     /* Ripple Magnitude */     0.0f,    20.0f,    80.0f,
     /* Ripple Decay */         1.0f,  0.9608f,  0.9524f,
     /* Ripple Rate */          0.0f,    0.24f,    0.14f,
     /* Ripple Dispersion */    0.0f,    40.0f,    30.0f,
     /* Curr Ripple Timer */    0.0f,
-    /* Curr Ripple x, y */     0.0f,     0.0f,
-    /* Normal DList */ inside_castle_seg7_painting_dl_07023230,
-    /* Texture Maps */ inside_castle_seg7_painting_texture_maps_07022518,
-    /* Textures */     inside_castle_seg7_painting_textures_070235E8,
+    /* Curr Ripple x, y */     0.0f,    0.0f,
+    /* Normal DList */ si_painting_dl,
+    /* Texture Maps */ painting_2_texture_map,
+    /* Textures */     bob_painting_tex,
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ inside_castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
-    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not Player is below the painting */
-    /* Size */  614.0f,
-};
-
-// 0x070238F0 - 0x07023968
-struct Painting hmc_painting = {
-    /* id */ 0x000E,
-    /* Image Count */ 0x01,
-    /* Texture Type */ PAINTING_ENV_MAP,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Player's on */,
-    /* Ripple Status */ 0x00,
-    /* Rotation */   270.0f,   0.0f,
-    /* Position */  2099.2f, -1484.8f, -2278.4f,
-    /*                         curr   passive     entry */
-    /* Ripple Magnitude */     0.0f,    10.0f,    30.0f,
-    /* Ripple Decay */         1.0f,     1.0f,    0.98f,
-    /* Ripple Rate */          0.0f,    0.05f,    0.05f,
-    /* Ripple Dispersion */    0.0f,    15.0f,    15.0f,
-    /* Curr Ripple Timer */    0.0f,
-    /* Curr Ripple x, y */     0.0f,   0.0f,
-    /* Normal DList */ inside_castle_seg7_painting_dl_07023580,
-    /* Texture Maps */ inside_castle_seg7_painting_env_map_texture_maps_07023044,
-    /* Textures */     inside_castle_seg7_painting_textures_070235F0,
-    /* Texture w, h */ 32, 32,
-    /* Ripple DList */ inside_castle_seg7_painting_dl_07022640,
-    /* Ripple Trigger */ RIPPLE_TRIGGER_CONTINUOUS,
-    /* Alpha */ 0xFF,
-    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not Player is below the painting */
-    /* Size */  768.0f,
+    /* Alpha */ 255,
+    /* Player Below */  0, 0, 0, /* Whether or not the player is below the painting */
+    /* Size */  307.0f,
 };
 
 // 0x07023968 - 0x070239E0
 struct Painting ddd_painting = {
-    /* id */ 0x0007,
+    /* id */ 7,
     /* Image Count */ 0x01,
     /* Texture Type */ PAINTING_ENV_MAP,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Player's on */,
-    /* Ripple Status */ 0x00,
+    /* Floor Status */ 0, 0, 0 /* which of the painting's nearby special floors Player's on */,
+    /* Ripple Status */ 0,
     /* Rotation */    0.0f, 270.0f,
     /* Position */ 3456.0f, -1075.2f, 1587.2f,
     /*                         curr   passive     entry */
@@ -1591,17 +1534,17 @@ struct Painting ddd_painting = {
     /* Ripple DList */ inside_castle_seg7_painting_dl_07022640,
     /* Ripple Trigger */ RIPPLE_TRIGGER_CONTINUOUS,
     /* Alpha */ 0xB4,
-    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not Player is below the painting */
+    /* Player Below */  0, 0, 0, /* Whether or not Player is below the painting */
     /* Size */  819.2f,
 };
 
 // 0x070239E0 - 0x07023A58
 struct Painting wdw_painting = {
-    /* id */ 0x0008,
-    /* Image Count */ 0x02,
+    /* id */ 8,
+    /* Image Count */ 2,
     /* Texture Type */ PAINTING_IMAGE,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Player's on */,
-    /* Ripple Status */ 0x00,
+    /* Floor Status */ 0, 0, 0 /* which of the painting's nearby special floors Player's on */,
+    /* Ripple Status */ 0,
     /* Rotation */     0.0f,     0.0f,
     /* Position */ -966.656f, 1305.6f, -143.36f,
     /*                         curr   passive     entry */
@@ -1612,23 +1555,23 @@ struct Painting wdw_painting = {
     /* Curr Ripple Timer */    0.0f,
     /* Curr Ripple x, y */     0.0f,     0.0f,
     /* Normal DList */ inside_castle_seg7_painting_dl_07023290,
-    /* Texture Maps */ inside_castle_seg7_painting_texture_maps_07022518,
+    /* Texture Maps */ painting_2_texture_map,
     /* Textures */     inside_castle_seg7_painting_textures_070235F8,
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ inside_castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
-    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not Player is below the painting */
+    /* Alpha */ 255,
+    /* Player Below */  0, 0, 0, /* Whether or not Player is below the painting */
     /* Size */  614.0f,
 };
 
 // 0x07023A58 - 0x07023AD0
 struct Painting thi_tiny_painting = {
-    /* id */ 0x0009,
-    /* Image Count */ 0x02,
+    /* id */ 9,
+    /* Image Count */ 2,
     /* Texture Type */ PAINTING_IMAGE,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Player's on */,
-    /* Ripple Status */ 0x00,
+    /* Floor Status */ 0, 0, 0 /* which of the painting's nearby special floors Player's on */,
+    /* Ripple Status */ 0,
     /* Rotation */     0.0f,   180.0f,
     /* Position */ -4598.7842f, 1354.752f, 3005.44f,
     /*                         curr   passive     entry */
@@ -1639,23 +1582,23 @@ struct Painting thi_tiny_painting = {
     /* Curr Ripple Timer */    0.0f,
     /* Curr Ripple x, y */     0.0f,     0.0f,
     /* Normal DList */ inside_castle_seg7_painting_dl_070232F0,
-    /* Texture Maps */ inside_castle_seg7_painting_texture_maps_07022518,
+    /* Texture Maps */ painting_2_texture_map,
     /* Textures */     inside_castle_seg7_painting_textures_07023600,
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ inside_castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
-    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not Player is below the painting */
+    /* Alpha */ 255,
+    /* Player Below */  0, 0, 0, /* Whether or not Player is below the painting */
     /* Size */  393.216f,
 };
 
 // 0x07023AD0 - 0x07023B48
 struct Painting ttm_painting = {
-    /* id */ 0x000A,
-    /* Image Count */ 0x02,
+    /* id */ 10,
+    /* Image Count */ 2,
     /* Texture Type */ PAINTING_IMAGE,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Player's on */,
-    /* Ripple Status */ 0x00,
+    /* Floor Status */ 0, 0, 0 /* which of the painting's nearby special floors Player's on */,
+    /* Ripple Status */ 0,
     /* Rotation */      0.0f,   180.0f,
     /* Position */ -546.816f, 1356.8f, 3813.376f,
     /*                         curr   passive     entry */
@@ -1666,23 +1609,23 @@ struct Painting ttm_painting = {
     /* Curr Ripple Timer */    0.0f,
     /* Curr Ripple x, y */     0.0f,     0.0f,
     /* Normal DList */ inside_castle_seg7_painting_dl_07023350,
-    /* Texture Maps */ inside_castle_seg7_painting_texture_maps_07022518,
+    /* Texture Maps */ painting_2_texture_map,
     /* Textures */     inside_castle_seg7_painting_textures_07023608,
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ inside_castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
-    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not Player is below the painting */
+    /* Alpha */ 255,
+    /* Player Below */  0, 0, 0, /* Whether or not Player is below the painting */
     /* Size */  256.0f,
 };
 
 // 0x07023B48 - 0x07023BC0
 struct Painting ttc_painting = {
-    /* id */ 0x000B,
-    /* Image Count */ 0x02,
+    /* id */ 11,
+    /* Image Count */ 2,
     /* Texture Type */ PAINTING_IMAGE,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Player's on */,
-    /* Ripple Status */ 0x00,
+    /* Floor Status */ 0, 0, 0 /* which of the painting's nearby special floors Player's on */,
+    /* Ripple Status */ 0,
     /* Rotation */       0.0f,   180.0f,
     /* Position */ 0.0f, 2713.6f, 7232.5122f,
     /*                         curr   passive     entry */
@@ -1693,23 +1636,23 @@ struct Painting ttc_painting = {
     /* Curr Ripple Timer */    0.0f,
     /* Curr Ripple x, y */     0.0f,     0.0f,
     /* Normal DList */ inside_castle_seg7_painting_dl_070233B0,
-    /* Texture Maps */ inside_castle_seg7_painting_texture_maps_07022518,
+    /* Texture Maps */ painting_2_texture_map,
     /* Textures */     inside_castle_seg7_painting_textures_07023610,
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ inside_castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
-    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not Player is below the painting */
+    /* Alpha */ 255,
+    /* Player Below */  0, 0, 0, /* Whether or not Player is below the painting */
     /* Size */  409.6f,
 };
 
 // 0x07023BC0 - 0x07023C38
 struct Painting sl_painting = {
-    /* id */ 0x000C,
-    /* Image Count */ 0x02,
+    /* id */ 12,
+    /* Image Count */ 2,
     /* Texture Type */ PAINTING_IMAGE,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Player's on */,
-    /* Ripple Status */ 0x00,
+    /* Floor Status */ 0, 0, 0 /* which of the painting's nearby special floors Player's on */,
+    /* Ripple Status */ 0,
     /* Rotation */     0.0f,     0.0f,
     /* Position */ 3179.52f, 1408.0f, -271.36f,
     /*                         curr   passive     entry */
@@ -1720,23 +1663,23 @@ struct Painting sl_painting = {
     /* Curr Ripple Timer */    0.0f,
     /* Curr Ripple x, y */     0.0f,     0.0f,
     /* Normal DList */ inside_castle_seg7_painting_dl_07023410,
-    /* Texture Maps */ inside_castle_seg7_painting_texture_maps_07022518,
+    /* Texture Maps */ painting_2_texture_map,
     /* Textures */     inside_castle_seg7_painting_textures_07023618,
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ inside_castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
-    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not Player is below the painting */
+    /* Alpha */ 255,
+    /* Player Below */  0, 0, 0, /* Whether or not Player is below the painting */
     /* Size */  716.8f,
 };
 
 // 0x07023C38 - 0x07023CB0
 struct Painting thi_huge_painting = {
-    /* id */ 0x000D,
-    /* Image Count */ 0x02,
+    /* id */ 13,
+    /* Image Count */ 2,
     /* Texture Type */ PAINTING_IMAGE,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Player's on */,
-    /* Ripple Status */ 0x00,
+    /* Floor Status */ 0, 0, 0 /* which of the painting's nearby special floors Player's on */,
+    /* Ripple Status */ 0,
     /* Rotation */      0.0f,     0.0f,
     /* Position */ -5614.5918f, 1510.4f, -3292.16f,
     /*                         curr   passive     entry */
@@ -1747,12 +1690,39 @@ struct Painting thi_huge_painting = {
     /* Curr Ripple Timer */    0.0f,
     /* Curr Ripple x, y */     0.0f,    0.0f,
     /* Normal DList */ inside_castle_seg7_painting_dl_070232F0,
-    /* Texture Maps */ inside_castle_seg7_painting_texture_maps_07022518,
+    /* Texture Maps */ painting_2_texture_map,
     /* Textures */     inside_castle_seg7_painting_textures_07023600,
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ inside_castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
-    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not Player is below the painting */
+    /* Alpha */ 255,
+    /* Player Below */  0, 0, 0, /* Whether or not Player is below the painting */
     /* Size */  1638.4f,
+};
+
+// 0x070238F0 - 0x07023968
+struct Painting hmc_painting = {
+    /* id */ 14,
+    /* Image Count */ 0x01,
+    /* Texture Type */ PAINTING_ENV_MAP,
+    /* Floor Status */ 0, 0, 0 /* which of the painting's nearby special floors Player's on */,
+    /* Ripple Status */ 0,
+    /* Rotation */   270.0f,   0.0f,
+    /* Position */  2099.2f, -1484.8f, -2278.4f,
+    /*                         curr   passive     entry */
+    /* Ripple Magnitude */     0.0f,    10.0f,    30.0f,
+    /* Ripple Decay */         1.0f,     1.0f,    0.98f,
+    /* Ripple Rate */          0.0f,    0.05f,    0.05f,
+    /* Ripple Dispersion */    0.0f,    15.0f,    15.0f,
+    /* Curr Ripple Timer */    0.0f,
+    /* Curr Ripple x, y */     0.0f,   0.0f,
+    /* Normal DList */ inside_castle_seg7_painting_dl_07023580,
+    /* Texture Maps */ inside_castle_seg7_painting_env_map_texture_maps_07023044,
+    /* Textures */     inside_castle_seg7_painting_textures_070235F0,
+    /* Texture w, h */ 32, 32,
+    /* Ripple DList */ inside_castle_seg7_painting_dl_07022640,
+    /* Ripple Trigger */ RIPPLE_TRIGGER_CONTINUOUS,
+    /* Alpha */ 255,
+    /* Player Below */  0, 0, 0, /* Whether or not Player is below the painting */
+    /* Size */  768.0f,
 };
