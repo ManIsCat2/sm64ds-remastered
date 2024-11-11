@@ -1294,6 +1294,10 @@ ALIGNED8 static const Texture *const inside_castle_seg7_painting_textures_070235
     inside_castle_seg7_texture_07015800, inside_castle_seg7_texture_07014800,
 };
 
+ALIGNED8 static const Texture *const si_painting_tex[] = {
+    si_painting_bottom_tex, si_painting_top_tex,
+};
+
 ALIGNED8 static const Texture *const inside_castle_seg7_painting_textures_070235F0[] = {
     inside_castle_seg7_texture_07016800,
 };
@@ -1502,7 +1506,7 @@ struct Painting si_painting = {
     /* Curr Ripple x, y */     0.0f,    0.0f,
     /* Normal DList */ si_painting_dl,
     /* Texture Maps */ painting_2_texture_map,
-    /* Textures */     bob_painting_tex,
+    /* Textures */     si_painting_tex,
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ inside_castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,

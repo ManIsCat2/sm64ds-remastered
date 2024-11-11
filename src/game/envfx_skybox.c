@@ -37,6 +37,9 @@ Gfx *sky_3d(s32 callContext, struct GraphNode *node, Mat4 mtxf) {
           case LEVEL_BOB:
             gSPDisplayList(dlE++, &water_skybox);
             break;
+          case LEVEL_SI:
+            gSPDisplayList(dlE++, &water_skybox);
+            break;
           case LEVEL_DDD:
             gSPDisplayList(dlE++, &water_skybox);
             break;

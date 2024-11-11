@@ -11,7 +11,7 @@
 #define MENU_DATA_MAGIC 0x4849
 #define SAVE_FILE_MAGIC 0x4441
 
-#define NUM_SAVE_FILES 4
+#define NUM_SAVE_FILES 3
 #define NUM_STARS_PER_COURSE 8
 #define NUM_ACTS_PER_COURSE 7
 
@@ -57,13 +57,8 @@ struct MainMenuSaveData {
     // on the high score screen.
     u32 coinScoreAges[NUM_SAVE_FILES];
     u16 soundMode;
-
-#ifdef VERSION_EU
-    u16 language;
-#define SUBTRAHEND 8
-#else
-#define SUBTRAHEND 6
-#endif
+    
+    #define SUBTRAHEND 6
 
     // Pad to match the EEPROM size of 0x200 (10 bytes on JP/US, 8 bytes on EU)
     u8 filler[EEPROM_SIZE / 2 - SUBTRAHEND - NUM_SAVE_FILES * (4 + sizeof(struct SaveFile))];

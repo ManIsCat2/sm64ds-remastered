@@ -6135,6 +6135,10 @@ struct CameraTrigger sCamCCM[] = {
     NULL_TRIGGER
 };
 
+struct CameraTrigger sCamSi[] = {
+	NULL_TRIGGER
+};
+
 /**
  * The Castle triggers are used to set the camera to fixed mode when entering the lobby, and to set it
  * to close mode when leaving it. They also set the mode to spiral staircase.
@@ -10659,7 +10663,7 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // Unused         | BOWSER_2
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // BOWSER_3       | Unused
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // TTM            | Unused
-	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // Unused         | Unused
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sZoomOutAreaMasks) - 1 == LEVEL_MAX / 2, "Make sure you edit sZoomOutAreaMasks when adding / removing courses.");
