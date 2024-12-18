@@ -10,7 +10,7 @@ extern const GeoLayout wf_geo_000820[];
 extern const GeoLayout wf_geo_000860[];
 extern const GeoLayout wf_geo_000878[];
 extern const GeoLayout wf_geo_000890[];
-extern const GeoLayout wf_geo_0008A8[];
+extern const GeoLayout wf_tower_geo[];
 extern const GeoLayout wf_geo_0008E8[];
 extern const GeoLayout wf_geo_000900[];
 extern const GeoLayout wf_geo_000940[];
