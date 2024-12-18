@@ -32,6 +32,7 @@
 #include "levels/thi/header.h"
 #include "levels/ttc/header.h"
 #include "levels/vcutm/header.h"
+#include "levels/si/header.h"
 #include "player.h"
 #include "player_actions_cutscene.h"
 #include "memory.h"

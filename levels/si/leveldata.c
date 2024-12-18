@@ -9,6 +9,6 @@
 #include "dialog_ids.h"
 
 #include "make_const_nonconst.h"
-
+#include "levels/si/texture.inc.c"
 #include "levels/si/areas/1/collision.inc.c"
 #include "levels/si/areas/1/macro.inc.c"

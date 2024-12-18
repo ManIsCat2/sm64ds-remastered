@@ -8,8 +8,10 @@
 extern const GeoLayout si_area_1[];
 
 // leveldata
-extern const LevelScript level_si_entry[];
 extern const Collision si_area_1_collision[];
 extern const MacroObject si_area_1_macro_objs[];
+
+// script
+extern const LevelScript level_si_entry[];
 
 #endif

@@ -33,7 +33,7 @@ const char *sav_courses[NUM_COURSES] = {
 };
 
 const char *sav_bonus_courses[NUM_BONUS_COURSES] = {
-    "bitdw", "bitfs", "bits", "pss", "cotmc",
+    "si", "bitdw", "bitfs", "bits", "pss", "cotmc",
     "totwc", "vcutm", "wmotr", "sa", "hub"    // hub is Castle Grounds
 };
 
