@@ -69,3 +69,4 @@
 #include "levels/wf/areas/1/movtext.inc.c"
 
 #include "levels/wf/ds_geo/model.inc.c"
+#include "levels/wf/small_bomp/model.inc.c"

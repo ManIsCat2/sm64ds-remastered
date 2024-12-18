@@ -269,8 +269,8 @@
 #define MODEL_DDD_POLE                            0x38        // ddd_geo_000450
 
 // wf
-#define MODEL_WF_BREAKABLE_WALL_RIGHT             0x36        // wf_geo_000B78
-#define MODEL_WF_BREAKABLE_WALL_LEFT              0x37        // wf_geo_000B90
+#define MODEL_WF_BREAKABLE_WALL_RIGHT             0x36        // breakable_wall_right_geo
+#define MODEL_WF_BREAKABLE_WALL_LEFT              0x37        // breakable_wall_left_geo
 #define MODEL_WF_KICKABLE_BOARD                   0x38        // wf_geo_000BA8
 #define MODEL_WF_TOWER_DOOR                       0x39        // wf_geo_000BE0
 #define MODEL_WF_KICKABLE_BOARD_FELLED            0x3A        // wf_geo_000BC8
@@ -506,10 +506,10 @@
 // find me
 #define MODEL_UNKNOWN_AC                  0xAC        // according to an special preset, it was the original id of the castle floor trap
 #define MODEL_WF_SLIDING_PLATFORM         0xAD        // wf_geo_000A98
-#define MODEL_WF_SMALL_BOMP               0xAE        // wf_geo_000A00
+#define MODEL_WF_SMALL_BOMP               0xAE        // small_bomp_geo
 #define MODEL_WF_ROTATING_WOODEN_PLATFORM 0xAF        // wf_geo_000A58
 #define MODEL_WF_TUMBLING_BRIDGE_PART     0xB0        // wf_geo_000AB0
-#define MODEL_WF_LARGE_BOMP               0xB1        // wf_geo_000A40
+#define MODEL_WF_LARGE_BOMP               0xB1        // large_bomp_geo
 #define MODEL_WF_TUMBLING_BRIDGE          0xB2        // wf_geo_000AC8
 #define MODEL_BOWSER_BOMB                 0xB3        // bowser_bomb_geo
 #define MODEL_WATER_MINE                  0xB3        // water_mine_geo
