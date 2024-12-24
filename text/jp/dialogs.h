@@ -1917,3 +1917,48 @@ up from behind and\n\
 fling me down. And\n\
 that will never happen!\n\
 Bring it, shorty!"))
+
+DEFINE_DIALOG(DIALOG_175, 1, 4, 30, 200, _("\
+Hello!\n\
+Please take a look\n\
+at the map below.\n\
+Memorized it?\n\
+If you are lost.\n\
+please talk to\n\
+me again."))
+
+DEFINE_DIALOG(DIALOG_176, 1, 6, 30, 200, _("\
+When you step on the\n\
+strange ? Switch\n\
+hidden in the castle,\n\
+the ? Blocks will\n\
+become solid.\n\
+\n\
+Some of these blocks\n\
+have useful items inside\n\
+Get the items by\n\
+breaking the blocks.\n\
+But beware! Some\n\
+blocks are duds."))
+
+DEFINE_DIALOG(DIALOG_177, 1, 5, 30, 220, _("\
+Crouch while jumping to\n\
+pound the ground and smash\n\
+certain objects. Ground-pound\n\
+blue Switches to make blue\n\
+coins appear.\n\
+Each blue coin is worth 5\n\
+yellow coins. But you have\n\
+to hurry! The coins will\n\
+disappear if you're not quick\n\
+enough to collect them!"))
+
+DEFINE_DIALOG(DIALOG_178, 1, 3, 30, 200, _("\
+Press [L] to center\n\
+the camera behind you.\n\
+\n\
+Even when it's hard to\n\
+see what's around you,\n\
+relax and press [L].\n\
+A word of advice:\n\
+keep going but don't rush."))

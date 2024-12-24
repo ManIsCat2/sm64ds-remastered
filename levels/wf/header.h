@@ -32,8 +32,8 @@ extern const GeoLayout wf_geo_000B38[];
 extern const GeoLayout wf_geo_000B60[];
 extern const GeoLayout breakable_wall_right_geo[];
 extern const GeoLayout breakable_wall_left_geo[];
-extern const GeoLayout wf_geo_000BA8[];
-extern const GeoLayout wf_geo_000BC8[];
+extern const GeoLayout wf_kickable_board_geo[];
+extern const GeoLayout wf_kickable_board_felled_geo[];
 extern const GeoLayout wf_geo_000BE0[];
 extern const GeoLayout wf_geo_000BF8[];
 
@@ -98,6 +98,8 @@ extern const struct MovtexQuadCollection wf_movtex_water[];
 
 // script
 extern const LevelScript level_wf_entry[];
+
+#include "levels/wf/kickable_board/geo_header.h"
 
 #include "levels/wf/ds_geo/geo_header.h"
 

@@ -115,10 +115,10 @@ u8 sDialogSpeaker[] = {
     /*14*/ _,     _,     _,     _,     _,     _,     _,     _,     _,     _,
     /*15*/ WIGLR, WIGLR, WIGLR, _,     _,     _,     _,     _,     _,     _,
     /*16*/ _,     YOSHI, _,     _,     _,     _,     _,     _,     WIGLR, _,
-    /*17*/ BOWS1, _, _, KBOMB
+    /*17*/ BOWS1, _, _, KBOMB, _, _, _, _, _
 };
 #undef _
-STATIC_ASSERT(ARRAY_COUNT(sDialogSpeaker) == DIALOG_174,
+STATIC_ASSERT(ARRAY_COUNT(sDialogSpeaker) == DIALOG_COUNT,
               "change this array if you are adding dialogs");
 
 s32 sDialogSpeakerVoice[] = {

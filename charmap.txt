@@ -317,6 +317,7 @@
 '[C]' = 0x56
 '[Z]' = 0x57
 '[R]' = 0x58
+'[L]' = 0x58
 '/' = 0xD0
 
 # multi-text US symbols

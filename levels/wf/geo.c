@@ -41,5 +41,4 @@
 #include "levels/wf/kickable_board/geo.inc.c"
 #include "levels/wf/tower_door/geo.inc.c"
 #include "levels/wf/areas/1/geo.inc.c"
-
 #include "levels/wf/ds_geo/geo.inc.c"

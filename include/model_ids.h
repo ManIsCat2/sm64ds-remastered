@@ -271,9 +271,9 @@
 // wf
 #define MODEL_WF_BREAKABLE_WALL_RIGHT             0x36        // breakable_wall_right_geo
 #define MODEL_WF_BREAKABLE_WALL_LEFT              0x37        // breakable_wall_left_geo
-#define MODEL_WF_KICKABLE_BOARD                   0x38        // wf_geo_000BA8
+#define MODEL_WF_KICKABLE_BOARD                   0x38        // wf_kickable_board_geo
 #define MODEL_WF_TOWER_DOOR                       0x39        // wf_geo_000BE0
-#define MODEL_WF_KICKABLE_BOARD_FELLED            0x3A        // wf_geo_000BC8
+#define MODEL_WF_KICKABLE_BOARD_FELLED            0x3A        // wf_kickable_board_felled_geo
 #define MODEL_WF_TOWER_TRAPEZOID_PLATORM          0x3B        // wf_geo_000AF8 - unused
 #define MODEL_WF_TOWER_SQUARE_PLATORM             0x3C        // wf_geo_000B10
 #define MODEL_WF_TOWER_SQUARE_PLATORM_UNUSED      0x3D        // wf_geo_000B38 - unused & duplicated
