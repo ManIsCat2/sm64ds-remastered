@@ -1689,9 +1689,8 @@ const Collision wf_col[] = {
 	COL_TRI(122, 54, 121),
 	COL_TRI(122, 144, 54),
 	COL_TRI_STOP(),
-    COL_SPECIAL_INIT(2),
+    COL_SPECIAL_INIT(1),
     SPECIAL_OBJECT_WITH_YAW(/*preset*/ special_null_start,   /*pos*/  2560,  256, 5120, /*yaw*/ 64), // unused, probably an early way to set initial position
-    SPECIAL_OBJECT(/*preset*/ special_bubble_tree,  /*pos*/  2560,  256, 4608),
     COL_WATER_BOX_INIT(1),
     COL_WATER_BOX(0, -1023, 1024, 3226, 4096, 973),
     COL_END(),

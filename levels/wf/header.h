@@ -93,7 +93,7 @@ extern const Collision wf_seg7_collision_rotating_platform[];
 extern const Collision wf_seg7_collision_tower[];
 extern const Collision wf_seg7_collision_bullet_bill_cannon[];
 extern const Collision wf_col[];
-extern const MacroObject wf_seg7_macro_objs[];
+extern const MacroObject macro_wf[];
 extern const struct MovtexQuadCollection wf_movtex_water[];
 
 // script
