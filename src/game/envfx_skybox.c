@@ -29,37 +29,40 @@ Gfx *sky_3d(s32 callContext, struct GraphNode *node, Mat4 mtxf) {
 
         switch (gCurrLevelNum) {
           case LEVEL_CASTLE_GROUNDS:
-            gSPDisplayList(dlE++, &water_skybox);
+            gSPDisplayList(dlE++, &skybox_water);
             break;
           case LEVEL_CASTLE_COURTYARD:
-            gSPDisplayList(dlE++, &water_skybox);
+            gSPDisplayList(dlE++, &skybox_water);
             break;
           case LEVEL_BOB:
-            gSPDisplayList(dlE++, &water_skybox);
+            gSPDisplayList(dlE++, &skybox_water);
+            break;
+          case LEVEL_WF:
+            gSPDisplayList(dlE++, &skybox_above_clouds);
             break;
           case LEVEL_SI:
-            gSPDisplayList(dlE++, &water_skybox);
+            gSPDisplayList(dlE++, &skybox_water);
             break;
           case LEVEL_DDD:
-            gSPDisplayList(dlE++, &water_skybox);
+            gSPDisplayList(dlE++, &skybox_water);
             break;
           case LEVEL_THI:
-            gSPDisplayList(dlE++, &water_skybox);
+            gSPDisplayList(dlE++, &skybox_water);
             break;
           case LEVEL_TTM:
-            gSPDisplayList(dlE++, &water_skybox);
+            gSPDisplayList(dlE++, &skybox_water);
             break;
           case LEVEL_BITDW:
-            gSPDisplayList(dlE++, &bitdw_skybox);
+            //gSPDisplayList(dlE++, &bitdw_skybox);
             break;
           case LEVEL_BOWSER_1:
-            gSPDisplayList(dlE++, &bitdw_skybox);
+            //gSPDisplayList(dlE++, &bitdw_skybox);
             break;
           case LEVEL_BITS:
-            gSPDisplayList(dlE++, &bits_skybox);
+            //gSPDisplayList(dlE++, &bits_skybox);
             break;
           case LEVEL_BOWSER_3:
-            gSPDisplayList(dlE++, &bits_skybox);
+            //gSPDisplayList(dlE++, &bits_skybox);
             break;
         }
 

@@ -35,7 +35,7 @@ extern const GeoLayout breakable_wall_left_geo[];
 extern const GeoLayout wf_kickable_board_geo[];
 extern const GeoLayout wf_kickable_board_felled_geo[];
 extern const GeoLayout wf_geo_000BE0[];
-extern const GeoLayout wf_geo_000BF8[];
+extern const GeoLayout wf_geo[];
 
 // leveldata
 extern const Gfx wf_seg7_dl_070050C8[];

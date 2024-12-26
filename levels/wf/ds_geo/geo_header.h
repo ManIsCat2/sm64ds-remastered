@@ -1,4 +1,4 @@
-extern const GeoLayout wf_geo[];
+extern const GeoLayout wf_mesh_geo[];
 extern u8 ds_geo_ami_tesuri_rgba16[];
 extern u8 ds_geo_bk_amite_rgba16[];
 extern u8 ds_geo_n_bldtex01_rgba16[];

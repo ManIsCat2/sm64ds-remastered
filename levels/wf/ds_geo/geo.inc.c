@@ -1,6 +1,6 @@
 #include "src/game/envfx_snow.h"
 
-const GeoLayout wf_geo[] = {
+const GeoLayout wf_mesh_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ds_geo_wf_mesh_layer_1),

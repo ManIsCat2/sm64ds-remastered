@@ -56,7 +56,7 @@ static const LevelScript script_func_local_1[] = {
 		OBJECT_WITH_ACTS(MODEL_WF_TOWER_SQUARE_PLATORM, 0, 4198, -717, 0, 180, 0, 0, bhvWFSlidingTowerPlatform, ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6),
 		OBJECT_WITH_ACTS(MODEL_WF_TOWER_SQUARE_PLATORM, -717, 4403, 0, 0, -90, 0, 0, bhvWFSlidingTowerPlatform, ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6),
 		OBJECT(MODEL_WF_BUBBLY_TREE, 2560, 256, 4608, 0, 0, 0, 0, bhvTree),
-		OBJECT(MODEL_WF_TUMBLING_BRIDGE, 1792, 2495, 1087, 0, 0, 0, BPARAM2(TUMBLING_BRIDGE_BP_WF), bhvTumblingBridge),
+		OBJECT(MODEL_WF_TUMBLING_BRIDGE, 1792, 2495, 1600, 0, 0, 0, BPARAM2(TUMBLING_BRIDGE_BP_WF), bhvTumblingBridge),
 		OBJECT(MODEL_CHECKERBOARD_PLATFORM, 973, 2693, -870, 0, 45, 0, 0, bhvCheckerboardElevatorGroup),
 		OBJECT(MODEL_WARIOS_CAP, 2970, 2304, -307, 0, 0, 0, 0, bhvWarioCap),
 		OBJECT_WITH_ACTS(MODEL_1UP, -410, 3584, 0, 0, 0, 0, 0, bhv1Up, ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6),
@@ -121,7 +121,7 @@ const LevelScript level_wf_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_WF_TOWER_DOOR,                    wf_geo_000940),
     LOAD_MODEL_FROM_GEO(MODEL_WF_KICKABLE_BOARD_FELLED,         wf_kickable_board_felled_geo),
 
-    AREA(1, wf_geo_000BF8),
+    AREA(1, wf_geo),
         OBJECT(MODEL_NONE, 3174, 1997, 4506, 0, 90, 0, BPARAM2(0x0A), bhvSpinAirborneWarp),
         WARP_NODE(WARP_NODE_0A, LEVEL_WF, 1, WARP_NODE_0A, WARP_NO_CHECKPOINT),
         WARP_NODE(WARP_NODE_0B, LEVEL_WF, 1, WARP_NODE_0C, WARP_NO_CHECKPOINT),
