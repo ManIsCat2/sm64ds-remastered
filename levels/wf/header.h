@@ -22,7 +22,7 @@ extern const GeoLayout wf_geo_0009E8[];
 extern const GeoLayout small_bomp_geo[];
 extern const GeoLayout large_bomp_geo[];
 extern const GeoLayout wf_geo_000A58[];
-extern const GeoLayout wf_geo_000A98[];
+extern const GeoLayout wf_sliding_platform_geo[];
 extern const GeoLayout wf_geo_000AB0[];
 extern const GeoLayout wf_geo_000AC8[];
 extern const GeoLayout wf_geo_000AE0[];
@@ -108,5 +108,7 @@ extern const LevelScript level_wf_entry[];
 #include "levels/wf/breakable_wall_left/geo_header.h"
 
 #include "levels/wf/small_bomp/geo_header.h"
+
+#include "levels/wf/sliding_platform/geo_header.h"
 
 #endif

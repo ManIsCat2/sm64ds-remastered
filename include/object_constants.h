@@ -469,11 +469,6 @@
     #define BOMP_ACT_RETRACT  3
 
 /* WF Sliding Brick Platform */
-    /* oBhvParams2ndByte */
-    #define WF_SLID_BRICK_PTFM_BP_MOV_VEL_10 1
-    #define WF_SLID_BRICK_PTFM_BP_MOV_VEL_15 2
-    #define WF_SLID_BRICK_PTFM_BP_MOV_VEL_20 3
-
     /* oAction */
     #define WF_SLID_BRICK_PTFM_ACT_WAIT    0
     #define WF_SLID_BRICK_PTFM_ACT_EXTEND  1

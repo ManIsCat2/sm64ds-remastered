@@ -505,7 +505,7 @@
 #define MODEL_PURPLE_MARBLE               0xAA        // purple_marble_geo
 // find me
 #define MODEL_UNKNOWN_AC                  0xAC        // according to an special preset, it was the original id of the castle floor trap
-#define MODEL_WF_SLIDING_PLATFORM         0xAD        // wf_geo_000A98
+#define MODEL_WF_SLIDING_PLATFORM         0xAD        // wf_sliding_platform_geo
 #define MODEL_WF_SMALL_BOMP               0xAE        // small_bomp_geo
 #define MODEL_WF_ROTATING_WOODEN_PLATFORM 0xAF        // wf_geo_000A58
 #define MODEL_WF_TUMBLING_BRIDGE_PART     0xB0        // wf_geo_000AB0

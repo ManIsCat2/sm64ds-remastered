@@ -8249,31 +8249,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_14[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx ds_geo_wf_mesh_layer_1_vtx_15[12] = {
-	{{ {1273, 3086, -781}, 0, {-16, -16}, {206, 198, 0, 255} }},
-	{{ {1362, 2804, -880}, 0, {-16, -16}, {206, 198, 0, 255} }},
-	{{ {1170, 2800, -680}, 0, {-16, -16}, {206, 198, 0, 255} }},
-	{{ {-700, 3038, -1344}, 0, {-16, -16}, {206, 198, 0, 255} }},
-	{{ {-832, 2881, -1024}, 0, {-16, -16}, {206, 198, 0, 255} }},
-	{{ {-826, 3198, -1022}, 0, {-16, -16}, {206, 198, 0, 255} }},
-	{{ {-1039, 3034, -35}, 0, {-16, -16}, {206, 198, 0, 255} }},
-	{{ {-1039, 2878, 340}, 0, {-16, -16}, {206, 198, 0, 255} }},
-	{{ {-1039, 3195, 340}, 0, {-16, -16}, {206, 198, 0, 255} }},
-	{{ {3842, 1086, -2470}, 0, {-16, -16}, {255, 247, 0, 255} }},
-	{{ {3666, 1086, -2197}, 0, {-16, -16}, {255, 247, 0, 255} }},
-	{{ {4012, 1086, -2197}, 0, {-16, -16}, {255, 247, 0, 255} }},
-};
-
-Gfx ds_geo_wf_mesh_layer_1_tri_15[] = {
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_15 + 0, 12, 0),
-	gsSP1Triangle(0, 1, 2, 0),
-	gsSP1Triangle(3, 4, 5, 0),
-	gsSP1Triangle(6, 7, 8, 0),
-	gsSP1Triangle(9, 10, 11, 0),
-	gsSPEndDisplayList(),
-};
-
-Vtx ds_geo_wf_mesh_layer_1_vtx_16[58] = {
+Vtx ds_geo_wf_mesh_layer_1_vtx_15[58] = {
 	{{ {-1024, 922, 3072}, 0, {-3668, -2496}, {248, 248, 248, 255} }},
 	{{ {-1024, 922, 4045}, 0, {-5550, -1134}, {248, 248, 248, 255} }},
 	{{ {512, 922, 3072}, 0, {-1516, 474}, {248, 248, 248, 255} }},
@@ -8334,8 +8310,8 @@ Vtx ds_geo_wf_mesh_layer_1_vtx_16[58] = {
 	{{ {-2488, 1945, -269}, 0, {248, 52}, {248, 248, 248, 255} }},
 };
 
-Gfx ds_geo_wf_mesh_layer_1_tri_16[] = {
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 0, 16, 0),
+Gfx ds_geo_wf_mesh_layer_1_tri_15[] = {
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_15 + 0, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(2, 3, 4, 0),
@@ -8348,7 +8324,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_16[] = {
 	gsSP1Triangle(11, 12, 13, 0),
 	gsSP1Triangle(14, 13, 12, 0),
 	gsSP1Triangle(12, 15, 14, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 16, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_15 + 16, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 0, 0),
 	gsSP1Triangle(4, 0, 3, 0),
@@ -8361,7 +8337,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_16[] = {
 	gsSP1Triangle(11, 12, 13, 0),
 	gsSP1Triangle(14, 13, 12, 0),
 	gsSP1Triangle(12, 15, 14, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 32, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_15 + 32, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 0, 0),
 	gsSP1Triangle(4, 0, 3, 0),
@@ -8374,7 +8350,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_16[] = {
 	gsSP1Triangle(11, 12, 13, 0),
 	gsSP1Triangle(14, 13, 12, 0),
 	gsSP1Triangle(14, 12, 15, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 48, 10, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_15 + 48, 10, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 3, 5, 0),
@@ -8385,7 +8361,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_16[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx ds_geo_wf_mesh_layer_1_vtx_17[189] = {
+Vtx ds_geo_wf_mesh_layer_1_vtx_16[189] = {
 	{{ {-1741, 1024, 3993}, 0, {-6842, -28346}, {248, 248, 248, 255} }},
 	{{ {-1024, 1024, 3072}, 0, {-12816, -20666}, {248, 248, 248, 255} }},
 	{{ {-1741, 1024, 3789}, 0, {-6842, -26640}, {248, 248, 248, 255} }},
@@ -8577,14 +8553,14 @@ Vtx ds_geo_wf_mesh_layer_1_vtx_17[189] = {
 	{{ {3021, 1024, 4045}, 0, {-1458, 2032}, {248, 248, 248, 255} }},
 };
 
-Gfx ds_geo_wf_mesh_layer_1_tri_17[] = {
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 0, 14, 0),
+Gfx ds_geo_wf_mesh_layer_1_tri_16[] = {
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 0, 14, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
 	gsSP1Triangle(9, 10, 11, 0),
 	gsSP1Triangle(12, 13, 4, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 14, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 14, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 5, 4, 0),
@@ -8595,7 +8571,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_17[] = {
 	gsSP1Triangle(11, 5, 7, 0),
 	gsSP1Triangle(12, 13, 14, 0),
 	gsSP1Triangle(15, 14, 13, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 30, 15, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 30, 15, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 0, 0),
 	gsSP1Triangle(1, 0, 4, 0),
@@ -8607,7 +8583,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_17[] = {
 	gsSP1Triangle(12, 11, 10, 0),
 	gsSP1Triangle(11, 12, 13, 0),
 	gsSP1Triangle(14, 13, 12, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 45, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 45, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 0, 0),
 	gsSP1Triangle(4, 0, 3, 0),
@@ -8618,7 +8594,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_17[] = {
 	gsSP1Triangle(10, 11, 9, 0),
 	gsSP1Triangle(12, 9, 11, 0),
 	gsSP1Triangle(13, 14, 15, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 61, 14, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 61, 14, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 3, 5, 0),
@@ -8627,7 +8603,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_17[] = {
 	gsSP1Triangle(11, 10, 9, 0),
 	gsSP1Triangle(10, 11, 12, 0),
 	gsSP1Triangle(12, 13, 10, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 75, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 75, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -8638,7 +8614,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_17[] = {
 	gsSP1Triangle(13, 12, 9, 0),
 	gsSP1Triangle(9, 14, 13, 0),
 	gsSP1Triangle(15, 13, 14, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 91, 15, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 91, 15, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 5, 4, 0),
@@ -8646,7 +8622,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_17[] = {
 	gsSP1Triangle(10, 9, 8, 0),
 	gsSP1Triangle(11, 12, 13, 0),
 	gsSP1Triangle(14, 13, 12, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 106, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 106, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -8655,7 +8631,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_17[] = {
 	gsSP1Triangle(11, 10, 9, 0),
 	gsSP1Triangle(12, 13, 14, 0),
 	gsSP1Triangle(15, 14, 13, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 122, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 122, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -8664,7 +8640,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_17[] = {
 	gsSP1Triangle(11, 10, 9, 0),
 	gsSP1Triangle(12, 13, 14, 0),
 	gsSP1Triangle(15, 14, 13, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 138, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 138, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -8673,7 +8649,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_17[] = {
 	gsSP1Triangle(11, 10, 9, 0),
 	gsSP1Triangle(12, 13, 14, 0),
 	gsSP1Triangle(15, 14, 13, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 154, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 154, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -8682,7 +8658,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_17[] = {
 	gsSP1Triangle(11, 10, 9, 0),
 	gsSP1Triangle(12, 13, 14, 0),
 	gsSP1Triangle(15, 14, 13, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 170, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 170, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -8691,12 +8667,12 @@ Gfx ds_geo_wf_mesh_layer_1_tri_17[] = {
 	gsSP1Triangle(11, 10, 9, 0),
 	gsSP1Triangle(12, 13, 14, 0),
 	gsSP1Triangle(15, 14, 13, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 186, 3, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_16 + 186, 3, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSPEndDisplayList(),
 };
 
-Vtx ds_geo_wf_mesh_layer_1_vtx_18[102] = {
+Vtx ds_geo_wf_mesh_layer_1_vtx_17[102] = {
 	{{ {2560, 2304, 0}, 0, {876, -4300}, {248, 248, 248, 255} }},
 	{{ {2048, 2560, 0}, 0, {-408, -2326}, {248, 248, 248, 255} }},
 	{{ {2048, 2560, 1024}, 0, {3540, 240}, {248, 248, 248, 255} }},
@@ -8801,8 +8777,8 @@ Vtx ds_geo_wf_mesh_layer_1_vtx_18[102] = {
 	{{ {-2048, 1664, 318}, 0, {-3088, -16}, {88, 88, 104, 255} }},
 };
 
-Gfx ds_geo_wf_mesh_layer_1_tri_18[] = {
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_18 + 0, 16, 0),
+Gfx ds_geo_wf_mesh_layer_1_tri_17[] = {
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 0, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 5, 4, 0),
@@ -8815,7 +8791,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_18[] = {
 	gsSP1Triangle(11, 13, 12, 0),
 	gsSP1Triangle(14, 12, 13, 0),
 	gsSP1Triangle(13, 15, 14, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_18 + 16, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 16, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 5, 4, 0),
@@ -8826,7 +8802,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_18[] = {
 	gsSP1Triangle(8, 10, 11, 0),
 	gsSP1Triangle(12, 11, 10, 0),
 	gsSP1Triangle(13, 14, 15, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_18 + 32, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 32, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 0, 0),
 	gsSP1Triangle(4, 0, 3, 0),
@@ -8835,7 +8811,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_18[] = {
 	gsSP1Triangle(9, 10, 11, 0),
 	gsSP1Triangle(12, 11, 10, 0),
 	gsSP1Triangle(13, 14, 15, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_18 + 48, 15, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 48, 15, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 5, 4, 0),
@@ -8843,7 +8819,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_18[] = {
 	gsSP1Triangle(10, 9, 8, 0),
 	gsSP1Triangle(11, 12, 13, 0),
 	gsSP1Triangle(14, 13, 12, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_18 + 63, 15, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 63, 15, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -8853,7 +8829,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_18[] = {
 	gsSP1Triangle(10, 8, 9, 0),
 	gsSP1Triangle(11, 12, 13, 0),
 	gsSP1Triangle(11, 13, 14, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_18 + 78, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 78, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -8866,7 +8842,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_18[] = {
 	gsSP1Triangle(11, 6, 5, 0),
 	gsSP1Triangle(12, 13, 14, 0),
 	gsSP1Triangle(15, 13, 12, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_18 + 94, 8, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_17 + 94, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(3, 4, 2, 0),
@@ -8876,7 +8852,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_18[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx ds_geo_wf_mesh_layer_1_vtx_19[84] = {
+Vtx ds_geo_wf_mesh_layer_1_vtx_18[84] = {
 	{{ {2048, 2535, 0}, 0, {-16, -5136}, {248, 248, 248, 255} }},
 	{{ {2099, 2535, 0}, 0, {-16, -4932}, {248, 248, 248, 255} }},
 	{{ {2048, 2535, -512}, 0, {2032, -5136}, {248, 248, 248, 255} }},
@@ -8963,8 +8939,8 @@ Vtx ds_geo_wf_mesh_layer_1_vtx_19[84] = {
 	{{ {2560, 2304, -512}, 0, {2032, -3088}, {248, 248, 248, 255} }},
 };
 
-Gfx ds_geo_wf_mesh_layer_1_tri_19[] = {
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_19 + 0, 16, 0),
+Gfx ds_geo_wf_mesh_layer_1_tri_18[] = {
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_18 + 0, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -8973,7 +8949,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_19[] = {
 	gsSP1Triangle(11, 10, 9, 0),
 	gsSP1Triangle(12, 13, 14, 0),
 	gsSP1Triangle(15, 14, 13, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_19 + 16, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_18 + 16, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -8982,7 +8958,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_19[] = {
 	gsSP1Triangle(11, 10, 9, 0),
 	gsSP1Triangle(12, 13, 14, 0),
 	gsSP1Triangle(15, 14, 13, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_19 + 32, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_18 + 32, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -8991,7 +8967,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_19[] = {
 	gsSP1Triangle(11, 10, 9, 0),
 	gsSP1Triangle(12, 13, 14, 0),
 	gsSP1Triangle(15, 14, 13, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_19 + 48, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_18 + 48, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -9000,7 +8976,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_19[] = {
 	gsSP1Triangle(11, 10, 9, 0),
 	gsSP1Triangle(12, 13, 14, 0),
 	gsSP1Triangle(15, 14, 13, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_19 + 64, 16, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_18 + 64, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -9009,13 +8985,13 @@ Gfx ds_geo_wf_mesh_layer_1_tri_19[] = {
 	gsSP1Triangle(11, 10, 9, 0),
 	gsSP1Triangle(12, 13, 14, 0),
 	gsSP1Triangle(15, 14, 13, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_19 + 80, 4, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_18 + 80, 4, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSPEndDisplayList(),
 };
 
-Vtx ds_geo_wf_mesh_layer_1_vtx_20[24] = {
+Vtx ds_geo_wf_mesh_layer_1_vtx_19[24] = {
 	{{ {4096, 1075, -512}, 0, {1098, -2176}, {240, 240, 240, 255} }},
 	{{ {3584, 1075, -512}, 0, {-106, -2176}, {248, 248, 248, 255} }},
 	{{ {4096, 1075, 1536}, 0, {1098, 3168}, {248, 248, 248, 255} }},
@@ -9042,8 +9018,8 @@ Vtx ds_geo_wf_mesh_layer_1_vtx_20[24] = {
 	{{ {3840, 974, 1909}, 0, {512, -560}, {248, 248, 248, 255} }},
 };
 
-Gfx ds_geo_wf_mesh_layer_1_tri_20[] = {
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_20 + 0, 16, 0),
+Gfx ds_geo_wf_mesh_layer_1_tri_19[] = {
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_19 + 0, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -9058,7 +9034,7 @@ Gfx ds_geo_wf_mesh_layer_1_tri_20[] = {
 	gsSP1Triangle(15, 13, 14, 0),
 	gsSP1Triangle(15, 14, 6, 0),
 	gsSP1Triangle(4, 6, 14, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_20 + 16, 8, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_19 + 16, 8, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 3, 1, 0),
 	gsSP1Triangle(4, 1, 3, 0),
@@ -9069,15 +9045,15 @@ Gfx ds_geo_wf_mesh_layer_1_tri_20[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx ds_geo_wf_mesh_layer_1_vtx_21[4] = {
+Vtx ds_geo_wf_mesh_layer_1_vtx_20[4] = {
 	{{ {3584, 512, 3840}, 0, {-8, 974}, {248, 248, 248, 255} }},
 	{{ {4096, 512, 3840}, 0, {1062, 974}, {232, 248, 216, 255} }},
 	{{ {3584, 551, 3680}, 0, {-18, 466}, {248, 248, 248, 255} }},
 	{{ {4096, 548, 3694}, 0, {1052, 460}, {248, 248, 248, 255} }},
 };
 
-Gfx ds_geo_wf_mesh_layer_1_tri_21[] = {
-	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_21 + 0, 4, 0),
+Gfx ds_geo_wf_mesh_layer_1_tri_20[] = {
+	gsSPVertex(ds_geo_wf_mesh_layer_1_vtx_20 + 0, 4, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSPEndDisplayList(),
@@ -10136,7 +10112,31 @@ Gfx ds_geo_wf_mesh_layer_5_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx ds_geo_wf_mesh_layer_5_vtx_1[30] = {
+Vtx ds_geo_wf_mesh_layer_5_vtx_1[12] = {
+	{{ {1273, 3086, -781}, 0, {-16, -16}, {206, 198, 0, 255} }},
+	{{ {1362, 2804, -880}, 0, {-16, -16}, {206, 198, 0, 255} }},
+	{{ {1170, 2800, -680}, 0, {-16, -16}, {206, 198, 0, 255} }},
+	{{ {-700, 3038, -1344}, 0, {-16, -16}, {206, 198, 0, 255} }},
+	{{ {-832, 2881, -1024}, 0, {-16, -16}, {206, 198, 0, 255} }},
+	{{ {-826, 3198, -1022}, 0, {-16, -16}, {206, 198, 0, 255} }},
+	{{ {-1039, 3034, -35}, 0, {-16, -16}, {206, 198, 0, 255} }},
+	{{ {-1039, 2878, 340}, 0, {-16, -16}, {206, 198, 0, 255} }},
+	{{ {-1039, 3195, 340}, 0, {-16, -16}, {206, 198, 0, 255} }},
+	{{ {3842, 1086, -2470}, 0, {-16, -16}, {255, 247, 0, 255} }},
+	{{ {3666, 1086, -2197}, 0, {-16, -16}, {255, 247, 0, 255} }},
+	{{ {4012, 1086, -2197}, 0, {-16, -16}, {255, 247, 0, 255} }},
+};
+
+Gfx ds_geo_wf_mesh_layer_5_tri_1[] = {
+	gsSPVertex(ds_geo_wf_mesh_layer_5_vtx_1 + 0, 12, 0),
+	gsSP1Triangle(0, 1, 2, 0),
+	gsSP1Triangle(3, 4, 5, 0),
+	gsSP1Triangle(6, 7, 8, 0),
+	gsSP1Triangle(9, 10, 11, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx ds_geo_wf_mesh_layer_5_vtx_2[30] = {
 	{{ {-2260, 726, 1900}, 0, {-16, -16}, {255, 247, 0, 255} }},
 	{{ {-2082, 659, 1646}, 0, {-16, -16}, {255, 247, 0, 255} }},
 	{{ {-2428, 659, 1644}, 0, {-16, -16}, {255, 247, 0, 255} }},
@@ -10169,14 +10169,14 @@ Vtx ds_geo_wf_mesh_layer_5_vtx_1[30] = {
 	{{ {3599, 1412, 1083}, 0, {-16, -16}, {255, 247, 0, 255} }},
 };
 
-Gfx ds_geo_wf_mesh_layer_5_tri_1[] = {
-	gsSPVertex(ds_geo_wf_mesh_layer_5_vtx_1 + 0, 15, 0),
+Gfx ds_geo_wf_mesh_layer_5_tri_2[] = {
+	gsSPVertex(ds_geo_wf_mesh_layer_5_vtx_2 + 0, 15, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
 	gsSP1Triangle(9, 10, 11, 0),
 	gsSP1Triangle(12, 13, 14, 0),
-	gsSPVertex(ds_geo_wf_mesh_layer_5_vtx_1 + 15, 15, 0),
+	gsSPVertex(ds_geo_wf_mesh_layer_5_vtx_2 + 15, 15, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
@@ -10185,15 +10185,15 @@ Gfx ds_geo_wf_mesh_layer_5_tri_1[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx ds_geo_wf_mesh_layer_5_vtx_2[4] = {
+Vtx ds_geo_wf_mesh_layer_5_vtx_3[4] = {
 	{{ {-1045, 973, 4075}, 0, {-5788, 8396}, {248, 248, 248, 255} }},
 	{{ {3205, 973, 4075}, 0, {8876, 4544}, {248, 248, 248, 255} }},
 	{{ {-1045, 973, 1004}, 0, {-8574, -2204}, {248, 248, 248, 255} }},
 	{{ {3200, 973, 1004}, 0, {6002, -6034}, {248, 248, 248, 255} }},
 };
 
-Gfx ds_geo_wf_mesh_layer_5_tri_2[] = {
-	gsSPVertex(ds_geo_wf_mesh_layer_5_vtx_2 + 0, 4, 0),
+Gfx ds_geo_wf_mesh_layer_5_tri_3[] = {
+	gsSPVertex(ds_geo_wf_mesh_layer_5_vtx_3 + 0, 4, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(3, 2, 1, 0),
 	gsSPEndDisplayList(),
@@ -10572,9 +10572,10 @@ Gfx mat_revert_ds_geo_obj_kabe03_f3d_001[] = {
 
 Gfx mat_ds_geo_renga010_dark_f3d_001[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(SHADE, 0, SHADE, 0, ENVIRONMENT, 0, ENVIRONMENT, 0, SHADE, 0, SHADE, 0, ENVIRONMENT, 0, ENVIRONMENT, 0),
+	gsDPSetCombineLERP(SHADE, 0, SHADE, 0, ENVIRONMENT, 0, PRIMITIVE, 0, SHADE, 0, SHADE, 0, ENVIRONMENT, 0, PRIMITIVE, 0),
 	gsSPClearGeometryMode(G_LIGHTING),
 	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
 	gsSPEndDisplayList(),
 };
 
@@ -10671,6 +10672,7 @@ Gfx mat_ds_geo_renga09_f3d_001[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
+	gsDPSetEnvColor(255, 255, 255, 128),
 	gsSPEndDisplayList(),
 };
 
@@ -10804,26 +10806,23 @@ Gfx ds_geo_wf_mesh_layer_1[] = {
 	gsSPDisplayList(mat_ds_geo_obj_kabe03_f3d_001),
 	gsSPDisplayList(ds_geo_wf_mesh_layer_1_tri_14),
 	gsSPDisplayList(mat_revert_ds_geo_obj_kabe03_f3d_001),
-	gsSPDisplayList(mat_ds_geo_renga010_dark_f3d_001),
-	gsSPDisplayList(ds_geo_wf_mesh_layer_1_tri_15),
-	gsSPDisplayList(mat_revert_ds_geo_renga010_dark_f3d_001),
 	gsSPDisplayList(mat_ds_geo_renga02_f3d_001),
-	gsSPDisplayList(ds_geo_wf_mesh_layer_1_tri_16),
+	gsSPDisplayList(ds_geo_wf_mesh_layer_1_tri_15),
 	gsSPDisplayList(mat_revert_ds_geo_renga02_f3d_001),
 	gsSPDisplayList(mat_ds_geo_renga04_f3d_001),
-	gsSPDisplayList(ds_geo_wf_mesh_layer_1_tri_17),
+	gsSPDisplayList(ds_geo_wf_mesh_layer_1_tri_16),
 	gsSPDisplayList(mat_revert_ds_geo_renga04_f3d_001),
 	gsSPDisplayList(mat_ds_geo_renga05_f3d_001),
-	gsSPDisplayList(ds_geo_wf_mesh_layer_1_tri_18),
+	gsSPDisplayList(ds_geo_wf_mesh_layer_1_tri_17),
 	gsSPDisplayList(mat_revert_ds_geo_renga05_f3d_001),
 	gsSPDisplayList(mat_ds_geo_renga07_f3d_001),
-	gsSPDisplayList(ds_geo_wf_mesh_layer_1_tri_19),
+	gsSPDisplayList(ds_geo_wf_mesh_layer_1_tri_18),
 	gsSPDisplayList(mat_revert_ds_geo_renga07_f3d_001),
 	gsSPDisplayList(mat_ds_geo_sand_f3d_001),
-	gsSPDisplayList(ds_geo_wf_mesh_layer_1_tri_20),
+	gsSPDisplayList(ds_geo_wf_mesh_layer_1_tri_19),
 	gsSPDisplayList(mat_revert_ds_geo_sand_f3d_001),
 	gsSPDisplayList(mat_ds_geo_sand_a_f3d_001),
-	gsSPDisplayList(ds_geo_wf_mesh_layer_1_tri_21),
+	gsSPDisplayList(ds_geo_wf_mesh_layer_1_tri_20),
 	gsSPDisplayList(mat_revert_ds_geo_sand_a_f3d_001),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
@@ -10862,11 +10861,14 @@ Gfx ds_geo_wf_mesh_layer_5[] = {
 	gsSPDisplayList(mat_ds_geo_flow_b_f3d_001),
 	gsSPDisplayList(ds_geo_wf_mesh_layer_5_tri_0),
 	gsSPDisplayList(mat_revert_ds_geo_flow_b_f3d_001),
-	gsSPDisplayList(mat_ds_geo_renga09_f3d_001),
+	gsSPDisplayList(mat_ds_geo_renga010_dark_f3d_001),
 	gsSPDisplayList(ds_geo_wf_mesh_layer_5_tri_1),
+	gsSPDisplayList(mat_revert_ds_geo_renga010_dark_f3d_001),
+	gsSPDisplayList(mat_ds_geo_renga09_f3d_001),
+	gsSPDisplayList(ds_geo_wf_mesh_layer_5_tri_2),
 	gsSPDisplayList(mat_revert_ds_geo_renga09_f3d_001),
 	gsSPDisplayList(mat_ds_geo_water_mat_f3d_001),
-	gsSPDisplayList(ds_geo_wf_mesh_layer_5_tri_2),
+	gsSPDisplayList(ds_geo_wf_mesh_layer_5_tri_3),
 	gsSPDisplayList(mat_revert_ds_geo_water_mat_f3d_001),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),

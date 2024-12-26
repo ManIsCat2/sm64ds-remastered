@@ -43,8 +43,8 @@ extern const GeoLayout breakable_box_geo[];
 extern const GeoLayout breakable_box_small_geo[];
 extern const Gfx breakable_box_seg8_dl_08012C30[];
 extern const Gfx breakable_box_seg8_dl_08012CD8[];
-extern const Gfx breakable_box_seg8_dl_08012D20[];
-extern const Gfx breakable_box_seg8_dl_08012D48[];
+extern const Gfx breakable_box_small_dl[];
+extern const Gfx breakable_box_dl[];
 extern const Collision breakable_box_seg8_collision_08012D70[];
 
 // cannon_barrel
@@ -187,5 +187,7 @@ extern const Collision unknown_seg8_collision_080262F8[];
 #include "power_flower/geo_header.h"
 
 #include "blue_coin_switch/geo_header.h"
+
+#include "breakable_box/geo_header.h"
 
 #endif
