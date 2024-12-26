@@ -12,8 +12,7 @@
 
 Gfx *sky_3d(s32 callContext, struct GraphNode *node, Mat4 mtxf) {
     switch (callContext) {
-    case GEO_CONTEXT_RENDER:
-      {
+    case GEO_CONTEXT_RENDER: {
         struct GraphNodeGenerated *graphNode = (struct GraphNodeGenerated *) node;
 
         Gfx *dlE = alloc_display_list(4 * sizeof(Gfx));
