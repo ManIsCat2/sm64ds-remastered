@@ -10576,6 +10576,7 @@ Gfx mat_ds_geo_renga010_dark_f3d_001[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
+	gsDPSetEnvColor(0, 0, 0, 64),
 	gsSPEndDisplayList(),
 };
 

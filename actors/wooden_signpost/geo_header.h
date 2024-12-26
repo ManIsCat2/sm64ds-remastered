@@ -1,0 +1,12 @@
+extern const GeoLayout wooden_signpost_geo[];
+extern Lights1 wooden_signpost_mat_wood_f3d_lights;
+extern Lights1 wooden_signpost_mat_wood_paper_f3d_lights;
+extern u8 wooden_signpost_wood_rgba16[];
+extern u8 wooden_signpost_wood_paper_rgba16[];
+extern Vtx wooden_signpost_sign_dl_mesh_layer_1_vtx_0[43];
+extern Gfx wooden_signpost_sign_dl_mesh_layer_1_tri_0[];
+extern Vtx wooden_signpost_sign_dl_mesh_layer_1_vtx_1[4];
+extern Gfx wooden_signpost_sign_dl_mesh_layer_1_tri_1[];
+extern Gfx mat_wooden_signpost_mat_wood_f3d[];
+extern Gfx mat_wooden_signpost_mat_wood_paper_f3d[];
+extern Gfx wooden_signpost_sign_dl_mesh_layer_1[];

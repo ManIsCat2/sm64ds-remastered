@@ -34,7 +34,6 @@ static const LevelScript script_func_local_1[] = {
 		OBJECT_WITH_ACTS(MODEL_WF_KICKABLE_BOARD, 13, 3584, -1408, 0, -45, 0, 0, bhvKickableBoard, ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6),
 		OBJECT(MODEL_WF_LARGE_BOMP, 3835, 1070, 614, 0, 0, 0, 0, bhvLargeBomp),
 		OBJECT(MODEL_LUIGIS_CAP, 3840, 1075, -3891, 0, 0, 0, 0, bhvLuigiCap),
-		OBJECT(MODEL_MARIOS_CAP, 2068, 2560, -2806, 0, 140, 0, 0, bhvMarioCap),
 		OBJECT(MODEL_NONE, -2495, 1331, -256, 0, 0, 0, BPARAM2(0x3D), bhvPoleGrabbing),
 		OBJECT(MODEL_NONE, 4608, 307, 2765, 0, 0, 0, BPARAM1(STAR_INDEX_ACT_4), bhvHiddenRedCoinStar),
 		OBJECT(MODEL_WF_ROTATING_WOODEN_PLATFORM, -256, 2560, 2304, 0, 0, 0, 0, bhvWFRotatingWoodenPlatform),

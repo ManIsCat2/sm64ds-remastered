@@ -5,7 +5,7 @@ const MacroObject macro_wf[] = {
 	MACRO_OBJECT(macro_breakable_box_no_coins, 0, 4040, 102, -5023),
 	MACRO_OBJECT(macro_breakable_box_three_coins, 90, 1439, 102, -4710),
 	MACRO_OBJECT(macro_breakable_box_three_coins, 90, 1439, 102, -4915),
-	MACRO_OBJECT(macro_breakable_box_three_coins, 90, 2949, 1075, -3850),
+	MACRO_OBJECT(macro_breakable_box_three_coins, 0, 2949, 1075, -3850),
 	MACRO_OBJECT(macro_breakable_box_three_coins, 90, 1439, 102, -4506),
 	MACRO_OBJECT(macro_breakable_box_three_coins, 0, -2867, 2560, 328),
 	MACRO_OBJECT(macro_breakable_box_giant, 90, 3748, 102, -1792),

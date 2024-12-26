@@ -1,0 +1,12 @@
+extern const GeoLayout wooden_post_geo[];
+extern Lights1 poundable_pole_lambert57_f3d_lights;
+extern Lights1 poundable_pole_mat_pile_tip_f3d_lights;
+extern u8 poundable_pole_pile_side_rgba16[];
+extern u8 poundable_pole_pile_top__rgba16[];
+extern Vtx poundable_pole_post_dl_mesh_layer_1_vtx_0[16];
+extern Gfx poundable_pole_post_dl_mesh_layer_1_tri_0[];
+extern Vtx poundable_pole_post_dl_mesh_layer_1_vtx_1[7];
+extern Gfx poundable_pole_post_dl_mesh_layer_1_tri_1[];
+extern Gfx mat_poundable_pole_lambert57_f3d[];
+extern Gfx mat_poundable_pole_mat_pile_tip_f3d[];
+extern Gfx poundable_pole_post_dl_mesh_layer_1[];
