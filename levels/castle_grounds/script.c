@@ -12,6 +12,7 @@
 #include "levels/scripts.h"
 
 #include "actors/common1.h"
+#include "actors/group14.h"
 
 #include "make_const_nonconst.h"
 #include "levels/castle_grounds/header.h"
@@ -27,6 +28,8 @@ const LevelScript level_castle_grounds_entry[] = {
     LOAD_RAW(0x0D, _group15_geoSegmentRomStart,  _group15_geoSegmentRomEnd),
     LOAD_MIO0(0x08, _common0_mio0SegmentRomStart, _common0_mio0SegmentRomEnd),
     LOAD_RAW(0x0F, _common0_geoSegmentRomStart,  _common0_geoSegmentRomEnd),
+	LOAD_MIO0(0x06, _group14_mio0SegmentRomStart, _group14_mio0SegmentRomEnd),
+    LOAD_RAW(0x0D, _group14_geoSegmentRomStart,  _group14_geoSegmentRomEnd),
 	ALLOC_LEVEL_POOL(),
 	MARIO(MODEL_MARIO, BPARAM4(0x01), bhvPlayer),
 	JUMP_LINK(script_func_global_1), 
@@ -41,6 +44,7 @@ const LevelScript level_castle_grounds_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_FLAG, castle_grounds_geo_000660),
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_CANNON_GRILL, castle_grounds_geo_000724),
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_KEY_DOOR, key_door_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_WHOMP, whomp_geo),
 
 	AREA(1, castle_grounds_area_1),
 		WARP_NODE(WARP_NODE_DEATH, LEVEL_CASTLE_GROUNDS, 1, WARP_NODE_03, WARP_NO_CHECKPOINT),
@@ -103,6 +107,7 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(MODEL_NONE, -3850, -2277, -3430, 0, 0, 0, BPARAM2(WARP_NODE_07), bhvSwimmingWarp),
 		OBJECT(MODEL_NONE, -3379, -1812, 24, 0, 0, 0, BPARAM1(60) | BPARAM2(WARP_NODE_05), bhvWarp),
 		OBJECT(MODEL_NONE, -1229, -788, 6963, 0, 180, 0, 0x000A0000, bhvSpinAirborneWarp),
+		OBJECT(MODEL_WHOMP, -1229, -788, 6963, 0, 180, 0, 0, bhvSmallWhomp),
 		MARIO_POS(0x01, -90, -1229, -788, 6963),
 		TERRAIN(castle_grounds_area_1_collision),
 		MACRO_OBJECTS(castle_grounds_area_1_macro_objs),
