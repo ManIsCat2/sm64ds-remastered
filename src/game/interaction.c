@@ -15,6 +15,7 @@
 #include "level_update.h"
 #include "player.h"
 #include "player_step.h"
+#include "player_actions_cutscene.c"
 #include "memory.h"
 #include "obj_behaviors.h"
 #include "object_helpers.h"

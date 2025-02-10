@@ -2,7 +2,6 @@
 #include "game/memory.h"
 #include "game/tile_scroll.h"
 
-
 /*
  * Parameters:
  * dl - Which display list to modify (make sure it's passed by reference).
@@ -39,4 +38,3 @@ void shift_t_down(Gfx *dl, u32 cmd, u16 t) {
     tile->t -= t;
     tile->v += t;
 }
-
