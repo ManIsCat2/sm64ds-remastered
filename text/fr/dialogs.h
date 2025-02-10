@@ -159,7 +159,7 @@ DEFINE_DIALOG(DIALOG_008, 1, 5, 30, 200, _("\
 ATTENTION AU CHOMP\n\
 ENCHAINE!!!\n\
 Danger! Approchez-vous\n\
-et appuyez sur [C]^ pour\n\
+et appuyez sur [C]▲ pour\n\
 jeter un oeil.\n\
 Impressionnant, non?\n\
 Avez-vous remarqué la\n\
@@ -373,8 +373,8 @@ pour ne pas faire de bruit\n\
 et ainsi surprendre vos\n\
 ennemis.\n\
 Vous pouvez déplacer ma\n\
-caméra avec [C]> et [C]<.\n\
-Appuyez sur [C]| pour voir\n\
+caméra avec [C]▶ et [C]◀.\n\
+Appuyez sur [C]▼ pour voir\n\
 de loin.\n\
 Lorsque ma caméra ne\n\
 peut plus se déplacer,\n\
@@ -439,7 +439,7 @@ la caméra, un signal\n\
 sonore retentira.\n\
 Pour jeter un oeil autour\n\
 de Mario, arrêtez-vous\n\
-et appuyez sur [C]^.\n\
+et appuyez sur [C]▲.\n\
 Appuyez sur le bouton [A]\n\
 pour revenir au jeu.\n\
 \n\
@@ -456,7 +456,7 @@ meilleures images..."))
 
 DEFINE_DIALOG(DIALOG_035, 1, 6, 30, 200, _("\
 Il existe quatre boutons\n\
-[C]. En appuyant sur [C]^ et\n\
+[C]. En appuyant sur [C]▲ et\n\
 en bougeant le stick\n\
 multidirectionnel, vous\n\
 pourrez jeter un oeil aux\n\
@@ -469,14 +469,14 @@ sur [R] et ainsi utiliser\n\
 la 『caméra-Mario』.\n\
 Appuyez sur [R] à nouveau\n\
 pour utiliser la caméra de\n\
-Lakitu. Appuyez sur [C]|\n\
+Lakitu. Appuyez sur [C]▼\n\
 pour voir Mario de loin,\n\
 quelque soit le mode de\n\
 vue que vous utilisez."))
 
 DEFINE_DIALOG(DIALOG_036, 1, 4, 30, 200, _("\
 --PANORAMA--\n\
-Appuyez sur [C]^ pour jeter\n\
+Appuyez sur [C]▲ pour jeter\n\
 un coup d'oeil. Profitez\n\
 de la vue!\n\
 Appuyez sur [R] pour\n\
@@ -2295,68 +2295,3 @@ Cette caverne est très\n\
 dangereuse!!!\n\
 Alors... DE-HORS!\n\
 / -- Le capitaine --"))
-
-DEFINE_DIALOG(DIALOG_174, 1, 4, 30, 200, _("\
-The king refuses to be\n\
-dejected by a single\n\
-defeat. I'm back with a\n\
-new Star from Bowser!\n\
-I've also restyled my\n\
-mustache.\n\
-I'm unstoppable!\n\
-If you want the Power\n\
-Star, you'll have to\n\
-knock it out of me!\n\
-\n\
-\n\
-But the only way to\n\
-do that is to pick me\n\
-up from behind and\n\
-fling me down. And\n\
-that will never happen!\n\
-Bring it, shorty!"))
-
-DEFINE_DIALOG(DIALOG_175, 1, 4, 30, 200, _("\
-Hello!\n\
-Please take a look\n\
-at the map below.\n\
-Memorized it?\n\
-If you are lost.\n\
-please talk to\n\
-me again."))
-
-DEFINE_DIALOG(DIALOG_176, 1, 6, 30, 200, _("\
-When you step on the\n\
-strange ? Switch\n\
-hidden in the castle,\n\
-the ? Blocks will\n\
-become solid.\n\
-\n\
-Some of these blocks\n\
-have useful items inside\n\
-Get the items by\n\
-breaking the blocks.\n\
-But beware! Some\n\
-blocks are duds."))
-
-DEFINE_DIALOG(DIALOG_177, 1, 5, 30, 200, _("\
-Crouch while jumping to\n\
-pound the ground and smash\n\
-certain objects. Ground-pound\n\
-blue Switches to make blue\n\
-coins appear.\n\
-Each blue coin is worth 5\n\
-yellow coins. But you have\n\
-to hurry! The coins will\n\
-disappear if you're not quick\n\
-enough to collect them!"))
-
-DEFINE_DIALOG(DIALOG_178, 1, 3, 30, 200, _("\
-Press [L] to center\n\
-the camera behind you.\n\
-\n\
-Even when it's hard to\n\
-see what's around you,\n\
-relax and press [L].\n\
-A word of advice:\n\
-keep going but don't rush."))

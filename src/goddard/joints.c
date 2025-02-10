@@ -124,7 +124,7 @@ void grabbable_joint_update_func(struct ObjJoint *self) {
 }
 
 /**
- * Update function for Player's eye joints, which makes them follow the cursor
+ * Update function for Mario's eye joints, which makes them follow the cursor
  */
 void eye_joint_update_func(struct ObjJoint *self) {
     Mat4f *sp5C;

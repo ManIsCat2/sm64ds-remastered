@@ -5,7 +5,7 @@ void bhv_jukebox_loop(void) {
 
     o->oMopJukeboxChangeMusic = FALSE;
 
-    if (obj_check_if_collided_with_object(o, gPlayerObject)) {
+    if (obj_check_if_collided_with_object(o, gMarioObject)) {
         if (o->oAction == 0) {
             currMusic = ((o->oBhvParams >> 24) & 0xFF); // bp1
             o->oAction = (s32) currMusic;

@@ -18,7 +18,6 @@
 #include "gfx/gfx_screen_config.h"
 #include "gfx/gfx_window_manager_api.h"
 #include "controller/controller_api.h"
-#include "src/extras/options_menu.h"
 #include "fs/fs.h"
 
 #define ARRAY_LEN(arr) (sizeof(arr) / sizeof(arr[0]))
@@ -62,39 +61,44 @@ ConfigWindow configWindow       = {
 #endif
 };
 
-unsigned int configFiltering    = 0;          // 0=force nearest, 1=linear
+unsigned int configFiltering    = 1;          // 0=force nearest, 1=linear
 unsigned int configMasterVolume = MAX_VOLUME; // 0 - MAX_VOLUME
 unsigned int configMusicVolume = MAX_VOLUME;
 unsigned int configSfxVolume = MAX_VOLUME;
 unsigned int configEnvVolume = MAX_VOLUME;
 
 // Keyboard mappings (VK_ values, by default keyboard/gamepad/mouse)
-unsigned int configKeyA[MAX_BINDS]          = { 0x1101,     0x0039,     VK_INVALID   };
-unsigned int configKeyB[MAX_BINDS]          = { 0x1103,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyX[MAX_BINDS]          = { 0x0038,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyY[MAX_BINDS]          = { 0x001D,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyStart[MAX_BINDS]      = { 0x1102,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyL[MAX_BINDS]          = { 0x0012,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyR[MAX_BINDS]          = { 0x0010,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyZL[MAX_BINDS]         = { 0x002A,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyZR[MAX_BINDS]         = { 0x002A,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyCUp[MAX_BINDS]        = { 0x0017,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyCDown[MAX_BINDS]      = { 0x0025,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyCLeft[MAX_BINDS]      = { 0x0024,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyCRight[MAX_BINDS]     = { 0x0026,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyDUp[MAX_BINDS]        = { 0x0148,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyDDown[MAX_BINDS]      = { 0x0150,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyDLeft[MAX_BINDS]      = { 0x014B,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyDRight[MAX_BINDS]     = { 0x014D,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyStickUp[MAX_BINDS]    = { 0x0011,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyStickDown[MAX_BINDS]  = { 0x001F,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyStickLeft[MAX_BINDS]  = { 0x001E,     VK_INVALID, VK_INVALID   };
-unsigned int configKeyStickRight[MAX_BINDS] = { 0x0020,     VK_INVALID, VK_INVALID   };
+unsigned int configKeyA[MAX_BINDS]          = { 0x002D,   0x1000,     0x1101     };
+unsigned int configKeyB[MAX_BINDS]          = { 0x002E,   0x1002,     0x1103     };
+unsigned int configKeyStart[MAX_BINDS]      = { 0x001C,   0x1006,     0x1102     };
+unsigned int configKeyL[MAX_BINDS]          = { 0x0010,   0x1009,     VK_INVALID };
+unsigned int configKeyR[MAX_BINDS]          = { 0x0012,   0x100A,     VK_INVALID };
+unsigned int configKeyZ[MAX_BINDS]          = { 0x002C,   0x1007,     VK_INVALID };
+unsigned int configKeyCUp[MAX_BINDS]        = { 0x0011,   VK_INVALID, VK_INVALID };
+unsigned int configKeyCDown[MAX_BINDS]      = { 0x001F,   VK_INVALID, VK_INVALID };
+unsigned int configKeyCLeft[MAX_BINDS]      = { 0x001E,   VK_INVALID, VK_INVALID };
+unsigned int configKeyCRight[MAX_BINDS]     = { 0x0020,   VK_INVALID, VK_INVALID };
+unsigned int configKeyDUp[MAX_BINDS]        = { 0x0014,   VK_INVALID, VK_INVALID };
+unsigned int configKeyDDown[MAX_BINDS]      = { 0x0022,   VK_INVALID, VK_INVALID };
+unsigned int configKeyDLeft[MAX_BINDS]      = { 0x0021,   VK_INVALID, VK_INVALID };
+unsigned int configKeyDRight[MAX_BINDS]     = { 0x0023,   VK_INVALID, VK_INVALID };
+unsigned int configKeyStickUp[MAX_BINDS]    = { 0x0148,   VK_INVALID, VK_INVALID };
+unsigned int configKeyStickDown[MAX_BINDS]  = { 0x0150,   VK_INVALID, VK_INVALID };
+unsigned int configKeyStickLeft[MAX_BINDS]  = { 0x014B,   VK_INVALID, VK_INVALID };
+unsigned int configKeyStickRight[MAX_BINDS] = { 0x014D,   VK_INVALID, VK_INVALID };
 unsigned int configStickDeadzone = 16; // 16*DEADZONE_STEP=4960 (the original default deadzone)
 unsigned int configRumbleStrength = 50;
 
+#ifdef TOUCH_CONTROLS
+bool configAutohideTouch = false;
+#endif
+
 #ifdef EXTERNAL_DATA
 bool configPrecacheRes = true;
+#endif
+
+#ifdef MOUSE_ACTIONS
+bool configMouse = false;
 #endif
 
 #ifdef DISCORDRPC
@@ -103,12 +107,36 @@ bool configDiscordRPC = true;
 
 bool configSkipIntro = false;
 bool configHUD = true;
-bool configWallslide = true;
-bool configNerfs = true;
-unsigned int configDash = 2;
-bool configDive = true;
-bool configJHeight = true;
-bool configGlobalCapBlocks = false;
+
+#if MORE_VANILLA_CAM_STUFF
+ConfigVanillaCam configVanillaCam = {
+    .parallel = false,
+    .srMario = false,
+    .parallelCol = false,
+    .cUpSounds = true,
+};
+#endif
+
+#ifdef BETTERCAMERA
+// PuppyCam 2 settings
+ConfigPuppyCam configPuppyCam = {
+    .enable = true,
+    .legacy = false,
+    .analog = false,
+#ifdef MOUSE_ACTIONS
+    .mouse = false,
+    .mouseSpeed = 15,
+#endif
+    .invertX = true,
+    .invertY = true,
+    .sensX = 50,
+    .sensY = 50,
+    .helper = true,
+    .opaque = true,
+    .input = 0, // PUPPYCAM_INPUT_TYPE_DOUBLE_TAB
+    .debug = false,
+};
+#endif
 
 static const struct ConfigOption options[] = {
 #ifndef TARGET_PORT_CONSOLE
@@ -127,13 +155,10 @@ static const struct ConfigOption options[] = {
 #ifndef TARGET_PORT_CONSOLE
     {.name = "key_a",                .type = CONFIG_TYPE_BIND, .uintValue = configKeyA},
     {.name = "key_b",                .type = CONFIG_TYPE_BIND, .uintValue = configKeyB},
-    {.name = "key_x",                .type = CONFIG_TYPE_BIND, .uintValue = configKeyX},
-    {.name = "key_y",                .type = CONFIG_TYPE_BIND, .uintValue = configKeyY},
     {.name = "key_start",            .type = CONFIG_TYPE_BIND, .uintValue = configKeyStart},
     {.name = "key_l",                .type = CONFIG_TYPE_BIND, .uintValue = configKeyL},
     {.name = "key_r",                .type = CONFIG_TYPE_BIND, .uintValue = configKeyR},
-    {.name = "key_zl",               .type = CONFIG_TYPE_BIND, .uintValue = configKeyZL},
-    {.name = "key_zr",               .type = CONFIG_TYPE_BIND, .uintValue = configKeyZR},
+    {.name = "key_z",                .type = CONFIG_TYPE_BIND, .uintValue = configKeyZ},
     {.name = "key_cup",              .type = CONFIG_TYPE_BIND, .uintValue = configKeyCUp},
     {.name = "key_cdown",            .type = CONFIG_TYPE_BIND, .uintValue = configKeyCDown},
     {.name = "key_cleft",            .type = CONFIG_TYPE_BIND, .uintValue = configKeyCLeft},
@@ -152,16 +177,39 @@ static const struct ConfigOption options[] = {
     #ifdef EXTERNAL_DATA
     {.name = "precache",             .type = CONFIG_TYPE_BOOL, .boolValue = &configPrecacheRes},
     #endif
+    #ifdef MOUSE_ACTIONS
+    {.name = "mouse_enable",         .type = CONFIG_TYPE_BOOL, .boolValue = &configMouse},
+    #endif
     #ifdef DISCORDRPC
     {.name = "discordrpc_enable",    .type = CONFIG_TYPE_BOOL, .boolValue = &configDiscordRPC},
     #endif
     {.name = "skip_intro",           .type = CONFIG_TYPE_BOOL, .boolValue = &configSkipIntro},
-    {.name = "wallslide",            .type = CONFIG_TYPE_BOOL, .boolValue = &configWallslide},
-    {.name = "y_to_dash",            .type = CONFIG_TYPE_BOOL, .boolValue = &configDash},
-    {.name = "dive",                 .type = CONFIG_TYPE_BOOL, .boolValue = &configDive},
-    {.name = "ds_jump_height",       .type = CONFIG_TYPE_BOOL, .boolValue = &configJHeight},
-    {.name = "ds_nerfs",             .type = CONFIG_TYPE_BOOL, .boolValue = &configNerfs},
-    {.name = "globalcapblocks",      .type = CONFIG_TYPE_BOOL, .boolValue = &configGlobalCapBlocks},
+#if MORE_VANILLA_CAM_STUFF
+    {.name = "vanillacam_parallel",     .type = CONFIG_TYPE_BOOL, .boolValue = &configVanillaCam.parallel},  
+    {.name = "vanillacam_srmario",      .type = CONFIG_TYPE_BOOL, .boolValue = &configVanillaCam.srMario},
+    {.name = "vanillacam_c_up_sounds",  .type = CONFIG_TYPE_BOOL, .boolValue = &configVanillaCam.cUpSounds},
+    {.name = "vanillacam_parallel_col", .type = CONFIG_TYPE_BOOL, .boolValue = &configVanillaCam.parallelCol},
+#endif
+#ifdef BETTERCAMERA
+    {.name = "bettercam_enable",     .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.enable},
+    {.name = "bettercam_legacy",     .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.legacy},
+    {.name = "bettercam_analog",     .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.analog},
+    #ifdef MOUSE_ACTIONS
+    {.name = "bettercam_mouse_look",  .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.mouse},
+    {.name = "bettercam_mouse_speed", .type = CONFIG_TYPE_UINT, .uintValue = &configPuppyCam.mouseSpeed},
+    #endif
+    {.name = "bettercam_invertx",    .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.invertX},
+    {.name = "bettercam_inverty",    .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.invertY},
+    {.name = "bettercam_xsens",      .type = CONFIG_TYPE_UINT, .uintValue = &configPuppyCam.sensX},
+    {.name = "bettercam_ysens",      .type = CONFIG_TYPE_UINT, .uintValue = &configPuppyCam.sensY},
+    {.name = "bettercam_turnhelper", .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.helper},
+    {.name = "bettercam_opaque",     .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.opaque},
+    {.name = "bettercam_inputtype",  .type = CONFIG_TYPE_UINT, .uintValue = &configPuppyCam.input},
+    {.name = "bettercam_debug",      .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.debug},
+#endif
+#ifdef TOUCH_CONTROLS
+    {.name = "touch_autohide",       .type = CONFIG_TYPE_BOOL, .boolValue = &configAutohideTouch},
+#endif
 };
 
 // Reads an entire line from a file (excluding the newline character) and returns an allocated string

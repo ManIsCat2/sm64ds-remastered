@@ -27,9 +27,9 @@
 #include "levels/castle_inside/header.h"
 #include "levels/hmc/header.h"
 #include "main.h"
-#include "player.h"
-#include "player_actions_cutscene.h"
-#include "player_step.h"
+#include "mario.h"
+#include "mario_actions_cutscene.h"
+#include "mario_step.h"
 #include "obj_behaviors.h"
 #include "obj_behaviors_2.h"
 #include "object_constants.h"
@@ -44,6 +44,9 @@
 #include "spawn_object.h"
 #include "spawn_sound.h"
 #include "rumble_init.h"
+#ifdef PORT_MOP_OBJS
+#include "src/extras/mop/include_code.h"
+#endif
 
 #define o gCurrentObject
 
@@ -136,27 +139,24 @@ void spawn_mist_particles_variable(s32 count, s32 offsetY, f32 size) {
 #include "behaviors/flamethrower.inc.c"
 #include "behaviors/bouncing_fireball.inc.c"
 #include "behaviors/shock_wave.inc.c"
-#include "behaviors/flame_player.inc.c"
+#include "behaviors/flame_mario.inc.c"
 #include "behaviors/beta_fish_splash_spawner.inc.c"
 #include "behaviors/spindrift.inc.c"
 #include "behaviors/tower_platform.inc.c"
 #include "behaviors/tree_particles.inc.c"
 #include "behaviors/square_platform_cycle.inc.c"
 #include "behaviors/piranha_bubbles.inc.c"
-#include "behaviors/red_switch.inc.c"
-#include "behaviors/star_switch.inc.c"
-#include "behaviors/switch_star_spawn.inc.c"
-#include "behaviors/timed_star_spawn.inc.c"
+#include "behaviors/purple_switch.inc.c"
 #include "behaviors/metal_box.inc.c"
 #include "behaviors/switch_hidden_objects.inc.c"
 #include "behaviors/breakable_box.inc.c"
 
 // not sure what this is doing here. not in a behavior file.
-Gfx *geo_move_player_part_from_parent(s32 run, UNUSED struct GraphNode *node, Mat4 mtx) {
+Gfx *geo_move_mario_part_from_parent(s32 run, UNUSED struct GraphNode *node, Mat4 mtx) {
     if (run == TRUE) {
         Mat4 sp20;
         struct Object *obj = (struct Object *) gCurGraphNodeObject;
-        if (obj == gPlayerObject && obj->prevObj != NULL) {
+        if (obj == gMarioObject && obj->prevObj != NULL) {
             create_transformation_from_matrices(sp20, mtx, *gCurGraphNodeCamera->matrixPtr);
             obj_update_pos_from_parent_transformation(sp20, obj->prevObj);
             obj_set_gfx_pos_from_pos(obj->prevObj);
@@ -169,7 +169,9 @@ Gfx *geo_move_player_part_from_parent(s32 run, UNUSED struct GraphNode *node, Ma
 #include "behaviors/heave_ho.inc.c"
 #include "behaviors/spawn_star_exit.inc.c"
 #include "behaviors/unused_poundable_platform.inc.c"
+#ifndef PORT_MOP_OBJS
 #include "behaviors/beta_trampoline.inc.c"
+#endif
 #include "behaviors/jumping_box.inc.c"
 #include "behaviors/boo_cage.inc.c"
 
@@ -245,7 +247,7 @@ s32 set_obj_anim_with_accel_and_sound(s16 a0, s16 a1, s32 a2) {
 #include "behaviors/fish.inc.c"
 #include "behaviors/express_elevator.inc.c"
 #include "behaviors/bub.inc.c"
-#include "behaviors/cap_box.inc.c"
+#include "behaviors/exclamation_box.inc.c"
 #include "behaviors/sound_spawner.inc.c"
 #include "behaviors/ddd_sub.inc.c"
 #include "behaviors/sushi.inc.c"
@@ -261,7 +263,9 @@ s32 set_obj_anim_with_accel_and_sound(s16 a0, s16 a1, s32 a2) {
 #include "behaviors/bbh_merry_go_round.inc.c"
 #include "behaviors/static_checkered_platform.inc.c"
 #include "behaviors/beta_bowser_anchor.inc.c"
+#ifndef VERSION_JP
 #include "behaviors/music_touch.inc.c"
+#endif
 #include "behaviors/castle_floor_trap.inc.c"
 #include "behaviors/pole_base.inc.c"
 #include "behaviors/sparkle_spawn.inc.c"
@@ -274,3 +278,7 @@ s32 set_obj_anim_with_accel_and_sound(s16 a0, s16 a1, s32 a2) {
 
 #include "behaviors/2d_physics.inc.c"
 #include "behaviors/legacy_tex_scroll.inc.c"
+
+#ifdef PORT_MOP_OBJS
+#include "src/extras/mop/code.inc.c"
+#endif

@@ -33,9 +33,9 @@ char gLevelSelectStageNames[][16] = {
 #undef DEFINE_LEVEL
 
 static u16 sDemoCountdown = 0;
-#if defined(GODDARD_MFACE)
-static s16 sPlayPlayerGreeting = TRUE;
-static s16 sPlayPlayerGameOver = TRUE;
+#if !defined(VERSION_JP) && defined(GODDARD_MFACE)
+static s16 sPlayMarioGreeting = TRUE;
+static s16 sPlayMarioGameOver = TRUE;
 #endif
 
 #define PRESS_START_DEMO_TIMER 800
@@ -54,7 +54,7 @@ s32 run_level_id_or_demo(s32 level) {
             // player is idle on PRESS START screen.
             if ((++sDemoCountdown) == PRESS_START_DEMO_TIMER) {
 
-                // start the Player demo animation for the demo list.
+                // start the Mario demo animation for the demo list.
                 load_patchable_table(&gDemoInputsBuf, gDemoInputListID);
 
                 // if the next demo sequence ID is the count limit, reset it back to
@@ -78,6 +78,9 @@ s32 run_level_id_or_demo(s32 level) {
     return level;
 }
 
+#if ZELDA_STYLE_LEVEL_SELECT
+#include "extras/redone/title_screen.inc.c"
+#else
 /**
  * Level select intro function, updates the selected stage
  * count if an input was received. signals the stage to be started
@@ -93,12 +96,6 @@ s16 intro_level_select(void) {
         ++gCurrLevelNum, stageChanged = TRUE;
     }
     if (gPlayer1Controller->buttonPressed & B_BUTTON) {
-        --gCurrLevelNum, stageChanged = TRUE;
-    }
-    if (gPlayer1Controller->buttonPressed & X_BUTTON) {
-        ++gCurrLevelNum, stageChanged = TRUE;
-    }
-    if (gPlayer1Controller->buttonPressed & Y_BUTTON) {
         --gCurrLevelNum, stageChanged = TRUE;
     }
     if (gPlayer1Controller->buttonPressed & U_JPAD) {
@@ -149,10 +146,11 @@ s16 intro_level_select(void) {
     }
     return 0;
 }
+#endif
 
 #ifdef GODDARD_MFACE
 /**
- * Regular intro function that handles Player's greeting voice and game start.
+ * Regular intro function that handles Mario's greeting voice and game start.
  */
 s32 intro_regular(void) {
     s32 level = LEVEL_NONE;
@@ -160,18 +158,20 @@ s32 intro_regular(void) {
     if (gGlobalGameSkips & GAME_SKIP_GODDARD) {
         return (100 + gDebugLevelSelect);
     }
+#ifndef VERSION_JP
     // When the game stars, gGlobalTimer is less than 129 frames,
-    // so Player greets the player. After that, he will always say
+    // so Mario greets the player. After that, he will always say
     // "press start to play" when it goes back to the title screen
     // (using SAVE AND QUIT)
-    if (sPlayPlayerGreeting == TRUE) {
+    if (sPlayMarioGreeting == TRUE) {
         if (gGlobalTimer < 129) {
             play_sound(SOUND_MARIO_HELLO, gGlobalSoundSource);
         } else {
             play_sound(SOUND_MARIO_PRESS_START_TO_PLAY, gGlobalSoundSource);
         }
-        sPlayPlayerGreeting = FALSE;
+        sPlayMarioGreeting = FALSE;
     }
+#endif
     print_intro_text();
 
     if (gPlayer1Controller->buttonPressed & START_BUTTON) {
@@ -184,13 +184,15 @@ s32 intro_regular(void) {
         // defined in level_intro_mario_head_regular JUMP_IF commands
         // 100 is File Select - 101 is Level Select
         level = 100 + gDebugLevelSelect;
-        sPlayPlayerGreeting = TRUE;
+#ifndef VERSION_JP
+        sPlayMarioGreeting = TRUE;
+#endif
     }
     return run_level_id_or_demo(level);
 }
 
 /**
- * Game over intro function that handles Player's game over voice and game start.
+ * Game over intro function that handles Mario's game over voice and game start.
  */
 s32 intro_game_over(void) {
     s32 level = LEVEL_NONE;
@@ -198,10 +200,12 @@ s32 intro_game_over(void) {
     if (gGlobalGameSkips & GAME_SKIP_GODDARD) {
         return (100 + gDebugLevelSelect);
     }
-    if (sPlayPlayerGameOver == TRUE) {
+#ifndef VERSION_JP
+    if (sPlayMarioGameOver == TRUE) {
         play_sound(SOUND_MARIO_GAME_OVER, gGlobalSoundSource);
-        sPlayPlayerGameOver = FALSE;
+        sPlayMarioGameOver = FALSE;
     }
+#endif
 
     print_intro_text();
 
@@ -213,16 +217,18 @@ s32 intro_game_over(void) {
 #endif
         // same criteria as intro_regular
         level = 100 + gDebugLevelSelect;
-        sPlayPlayerGameOver = TRUE;
+#ifndef VERSION_JP
+        sPlayMarioGameOver = TRUE;
+#endif
     }
     return run_level_id_or_demo(level);
 }
 #endif
 
 /**
- * Plays the casual "It's a me player" when the game stars.
+ * Plays the casual "It's a me mario" when the game stars.
  */
-s32 intro_play_its_a_me_player(void) {
+s32 intro_play_its_a_me_mario(void) {
     play_sound(SOUND_MENU_COIN_ITS_A_ME_MARIO, gGlobalSoundSource);
     return 1;
 }
@@ -232,9 +238,15 @@ s32 intro_play_its_a_me_player(void) {
  * Returns a level ID after their criteria is met.
  */
 s32 lvl_intro_update(s16 arg, UNUSED s32 unusedArg) {
+#ifdef KEY_COMBO_LEVEL_SELECT
+    if (gPlayer1Controller->buttonDown == (L_TRIG | R_TRIG) && arg == LVL_INTRO_REGULAR) {
+        gDebugLevelSelect = TRUE;
+    }
+#endif
+
     switch (arg) {
         case LVL_INTRO_PLAY_ITS_A_ME_MARIO:
-            return intro_play_its_a_me_player();
+            return intro_play_its_a_me_mario();
 #ifdef GODDARD_MFACE
         case LVL_INTRO_REGULAR:
             return intro_regular();

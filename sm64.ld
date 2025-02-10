@@ -223,7 +223,7 @@ SECTIONS
     END_NOLOAD(framebuffers)
 
     __expansionRamStart = 0x80400000;
-    #ifndef USE_EXT_RAM
+    #ifndef N64_USE_EXTENDED_RAM
         #ifndef PRELIMINARY
             ASSERT((. <= __expansionRamStart), "Error: RDRAM expanded into Expansion RAM, despite Expansion RAM not being defined.")
         #endif
@@ -242,7 +242,7 @@ SECTIONS
     MIO0_EU_SEG(translation_de, 0x19000000)
 #endif
 
-    /* player actor group */
+    /* mario actor group */
     STANDARD_OBJECTS(group0,  0x04000000, 0x17000000)
 
     /* load the other actor groups */
@@ -355,14 +355,14 @@ SECTIONS
         BUILD_DIR/libgoddard.a:dynlist_test_cube.o(.data);
         BUILD_DIR/libgoddard.a:dynlist_unused.o(.data);
         BUILD_DIR/libgoddard.a:dynlist_mario_face.o(.data);
-        BUILD_DIR/libgoddard.a:dynlists_player_eyes.o(.data);
-        BUILD_DIR/libgoddard.a:dynlists_player_eyebrows_mustache.o(.data);
-        BUILD_DIR/libgoddard.a:dynlist_player_master.o(.data);
-        BUILD_DIR/libgoddard.a:anim_player_mustache_right.o(.data);
-        BUILD_DIR/libgoddard.a:anim_player_mustache_left.o(.data);
-        BUILD_DIR/libgoddard.a:anim_player_lips_1.o(.data);
-        BUILD_DIR/libgoddard.a:anim_player_lips_2.o(.data);
-        BUILD_DIR/libgoddard.a:anim_player_eyebrows_1.o(.data);
+        BUILD_DIR/libgoddard.a:dynlists_mario_eyes.o(.data);
+        BUILD_DIR/libgoddard.a:dynlists_mario_eyebrows_mustache.o(.data);
+        BUILD_DIR/libgoddard.a:dynlist_mario_master.o(.data);
+        BUILD_DIR/libgoddard.a:anim_mario_mustache_right.o(.data);
+        BUILD_DIR/libgoddard.a:anim_mario_mustache_left.o(.data);
+        BUILD_DIR/libgoddard.a:anim_mario_lips_1.o(.data);
+        BUILD_DIR/libgoddard.a:anim_mario_lips_2.o(.data);
+        BUILD_DIR/libgoddard.a:anim_mario_eyebrows_1.o(.data);
         BUILD_DIR/libgoddard.a:anim_group_1.o(.data);
         BUILD_DIR/libgoddard.a:anim_group_2.o(.data);
         BUILD_DIR/libgoddard.a:dynlist_test_cube.o(.rodata*);
@@ -443,8 +443,8 @@ SECTIONS
     /* 4E9FA0-? [?] */
     BEGIN_SEG(assets, __romPos)
     {
-        BUILD_DIR/assets/player_anim_data.o(.data);
-        BUILD_DIR/assets/player_anim_data.o(.rodata);
+        BUILD_DIR/assets/mario_anim_data.o(.data);
+        BUILD_DIR/assets/mario_anim_data.o(.rodata);
         BUILD_DIR/assets/demo_data.o(.data);
         BUILD_DIR/sound/sound_data.o(.data);
     }

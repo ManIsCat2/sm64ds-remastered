@@ -9,7 +9,7 @@
 #include "buffers/zbuffer.h"
 #include "game/area.h"
 #include "game/game_init.h"
-#include "game/player.h"
+#include "game/mario.h"
 #include "game/memory.h"
 #include "game/object_helpers.h"
 #include "game/object_list_processor.h"
@@ -27,6 +27,10 @@
 #include "level_table.h"
 #ifdef GODDARD_MFACE
 #include "goddard/renderer.h"
+#endif
+
+#ifdef BETTERCAMERA
+#include "extras/bettercamera.h"
 #endif
 
 #define NUM_PAINTINGS 45
@@ -318,6 +322,7 @@ static void level_cmd_load_mario_head(void) {
         gdm_setup();
         gdm_maketestdl(CMD_GET(s16, 2));
     } else {
+        CN_DEBUG_PRINTF(("face anime memory overflow\n"));
     }
 #endif
 
@@ -451,17 +456,17 @@ static void level_cmd_23(void) {
     sCurrentCmd = CMD_NEXT;
 }
 
-static void level_cmd_init_player(void) {
-    vec3s_set(gPlayerSpawnInfo->startPos, 0, 0, 0);
-    vec3s_set(gPlayerSpawnInfo->startAngle, 0, 0, 0);
+static void level_cmd_init_mario(void) {
+    vec3s_set(gMarioSpawnInfo->startPos, 0, 0, 0);
+    vec3s_set(gMarioSpawnInfo->startAngle, 0, 0, 0);
 
-    gPlayerSpawnInfo->activeAreaIndex = -1;
-    gPlayerSpawnInfo->areaIndex = 0;
-    gPlayerSpawnInfo->respawnInfo = 0;
-    gPlayerSpawnInfo->behaviorArg = CMD_GET(u32, 4);
-    gPlayerSpawnInfo->behaviorScript = CMD_GET(void *, 8);
-    gPlayerSpawnInfo->model = gLoadedGraphNodes[CMD_GET(ModelID16, 0x2)];
-    gPlayerSpawnInfo->next = NULL;
+    gMarioSpawnInfo->activeAreaIndex = -1;
+    gMarioSpawnInfo->areaIndex = 0;
+    gMarioSpawnInfo->respawnInfo = 0;
+    gMarioSpawnInfo->behaviorArg = CMD_GET(u32, 4);
+    gMarioSpawnInfo->behaviorScript = CMD_GET(void *, 8);
+    gMarioSpawnInfo->model = gLoadedGraphNodes[CMD_GET(ModelID16, 0x2)];
+    gMarioSpawnInfo->next = NULL;
 
     sCurrentCmd = CMD_NEXT;
 }
@@ -680,21 +685,21 @@ static void level_cmd_unload_area(void) {
     sCurrentCmd = CMD_NEXT;
 }
 
-static void level_cmd_set_player_start_pos(void) {
-    gPlayerSpawnInfo->areaIndex = CMD_GET(u8, 2);
+static void level_cmd_set_mario_start_pos(void) {
+    gMarioSpawnInfo->areaIndex = CMD_GET(u8, 2);
 
 #if IS_64_BIT
-    vec3s_set(gPlayerSpawnInfo->startPos, CMD_GET(s16, 6), CMD_GET(s16, 8), CMD_GET(s16, 10));
+    vec3s_set(gMarioSpawnInfo->startPos, CMD_GET(s16, 6), CMD_GET(s16, 8), CMD_GET(s16, 10));
 #else
-    vec3s_copy(gPlayerSpawnInfo->startPos, CMD_GET(Vec3s, 6));
+    vec3s_copy(gMarioSpawnInfo->startPos, CMD_GET(Vec3s, 6));
 #endif
-    vec3s_set(gPlayerSpawnInfo->startAngle, 0, CMD_GET(s16, 4) * 0x8000 / 180, 0);
+    vec3s_set(gMarioSpawnInfo->startAngle, 0, CMD_GET(s16, 4) * 0x8000 / 180, 0);
 
     sCurrentCmd = CMD_NEXT;
 }
 
 static void level_cmd_2C(void) {
-    unload_player_area();
+    unload_mario_area();
     sCurrentCmd = CMD_NEXT;
 }
 
@@ -711,6 +716,7 @@ static void level_cmd_set_transition(void) {
 }
 
 static void level_cmd_nop(void) {
+    CN_DEBUG_PRINTF(("BAD: seqBlankColor\n"));
     sCurrentCmd = CMD_NEXT;
 }
 
@@ -789,6 +795,44 @@ static void level_cmd_get_or_set_var(void) {
     sCurrentCmd = CMD_NEXT;
 }
 
+#ifdef BETTERCAMERA
+static void level_cmd_puppyvolume(void) {
+    sPuppyVolumeStack[gPuppyVolumeCount] = mem_pool_alloc(gPuppyMemoryPool, sizeof(struct sPuppyVolume));
+
+    if (sPuppyVolumeStack[gPuppyVolumeCount] == NULL) {
+        sCurrentCmd = CMD_NEXT;
+        gPuppyError |= PUPPY_ERROR_POOL_FULL;
+        return;
+    }
+
+    vec3s_set(sPuppyVolumeStack[gPuppyVolumeCount]->pos, CMD_GET(s16, 2),
+                                                         CMD_GET(s16, 4),
+                                                         CMD_GET(s16, 6));
+
+    vec3s_set(sPuppyVolumeStack[gPuppyVolumeCount]->radius, CMD_GET(s16,  8),
+                                                            CMD_GET(s16, 10),
+                                                            CMD_GET(s16, 12));
+
+    sPuppyVolumeStack[gPuppyVolumeCount]->rot = CMD_GET(s16, 14);
+
+    sPuppyVolumeStack[gPuppyVolumeCount]->func   = CMD_GET(void *, 16);
+    sPuppyVolumeStack[gPuppyVolumeCount]->angles = segmented_to_virtual(CMD_GET(void *, 20));
+
+    sPuppyVolumeStack[gPuppyVolumeCount]->flagsAdd    = CMD_GET(s32, 24);
+    sPuppyVolumeStack[gPuppyVolumeCount]->flagsRemove = CMD_GET(s32, 28);
+
+    sPuppyVolumeStack[gPuppyVolumeCount]->flagPersistance = CMD_GET(u8, 32);
+
+    sPuppyVolumeStack[gPuppyVolumeCount]->shape = CMD_GET(u8,  33);
+    sPuppyVolumeStack[gPuppyVolumeCount]->room  = CMD_GET(s16, 34);
+    sPuppyVolumeStack[gPuppyVolumeCount]->fov  = CMD_GET(u8, 36);
+    sPuppyVolumeStack[gPuppyVolumeCount]->area  = sCurrAreaIndex;
+
+    gPuppyVolumeCount++;
+    sCurrentCmd = CMD_NEXT;
+}
+#endif
+
 static void (*LevelScriptJumpTable[])(void) = {
     /*00*/ level_cmd_load_and_execute,
     /*01*/ level_cmd_exit_and_execute,
@@ -827,13 +871,13 @@ static void (*LevelScriptJumpTable[])(void) = {
     /*22*/ level_cmd_load_model_from_geo,
     /*23*/ level_cmd_23,
     /*24*/ level_cmd_place_object,
-    /*25*/ level_cmd_init_player,
+    /*25*/ level_cmd_init_mario,
     /*26*/ level_cmd_create_warp_node,
     /*27*/ level_cmd_create_painting_warp_node,
     /*28*/ level_cmd_create_instant_warp,
     /*29*/ level_cmd_load_area,
     /*2A*/ level_cmd_unload_area,
-    /*2B*/ level_cmd_set_player_start_pos,
+    /*2B*/ level_cmd_set_mario_start_pos,
     /*2C*/ level_cmd_2C,
     /*2D*/ level_cmd_2D,
     /*2E*/ level_cmd_set_terrain_data,
@@ -851,6 +895,9 @@ static void (*LevelScriptJumpTable[])(void) = {
     /*3A*/ level_cmd_3A,
     /*3B*/ level_cmd_create_whirlpool,
     /*3C*/ level_cmd_get_or_set_var,
+#ifdef BETTERCAMERA
+    /*3D*/ level_cmd_puppyvolume,
+#endif
 };
 
 #ifdef TOUCH_CONTROLS
@@ -862,6 +909,9 @@ struct LevelCommand *level_script_execute(struct LevelCommand *cmd) {
     sCurrentCmd = cmd;
 
     while (sScriptStatus == SCRIPT_RUNNING) {
+        CN_DEBUG_PRINTF(("%08X: ", sCurrentCmd));
+        CN_DEBUG_PRINTF(("%02d\n", sCurrentCmd->type));
+
         LevelScriptJumpTable[sCurrentCmd->type]();
     }
 

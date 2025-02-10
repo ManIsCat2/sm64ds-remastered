@@ -76,8 +76,8 @@ void hoot_free_step(s16 fastOscY, s32 speed) {
 
 void hoot_player_set_yaw(void) {
 #if BETTER_HOOT_YAW_CONTROL
-    s16 turnSpeed  = (gPlayerState->intendedMag * 0x20);
-    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, gPlayerState->intendedYaw, turnSpeed);
+    s16 turnSpeed  = (gMarioState->intendedMag * 0x20);
+    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, gMarioState->intendedYaw, turnSpeed);
 #else
     s16 stickX = gPlayer3Controller->rawStickX;
     s16 stickY = gPlayer3Controller->rawStickY;
@@ -130,7 +130,7 @@ void hoot_surface_collision(f32 xPrev, UNUSED f32 yPrev, f32 zPrev) {
         o->oPosX = hitbox.x;
         o->oPosY = hitbox.y;
         o->oPosZ = hitbox.z;
-        gPlayerObject->oInteractStatus |= INT_STATUS_MARIO_UNK7;
+        gMarioObject->oInteractStatus |= INT_STATUS_MARIO_UNK7;
     }
 
     floorY = find_floor(o->oPosX, o->oPosY, o->oPosZ, &floor);
@@ -208,7 +208,7 @@ void hoot_action_loop(void) {
             hoot_carry_step(20, xPrev, zPrev);
 
             if (o->oTimer > 60) {
-                gPlayerObject->oInteractStatus |= INT_STATUS_MARIO_UNK7;
+                gMarioObject->oInteractStatus |= INT_STATUS_MARIO_UNK7;
             }
             break;
     }
@@ -248,7 +248,7 @@ void hoot_awake_loop(void) {
 void bhv_hoot_loop(void) {
     switch (o->oHootAvailability) {
         case HOOT_AVAIL_ASLEEP_IN_TREE:
-            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 50)) {
+            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 50)) {
                 o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
                 o->oHootAvailability = HOOT_AVAIL_WANTS_TO_TALK;
             }
@@ -270,9 +270,9 @@ void bhv_hoot_loop(void) {
         case HOOT_AVAIL_WANTS_TO_TALK:
             hoot_awake_loop();
 
-            if (set_player_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_SPEAK
+            if (set_mario_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_SPEAK
                 && cutscene_object_with_dialog(CUTSCENE_DIALOG, o, DIALOG_044)) {
-                set_player_npc_dialog(MARIO_DIALOG_STOP);
+                set_mario_npc_dialog(MARIO_DIALOG_STOP);
 
                 cur_obj_become_tangible();
 

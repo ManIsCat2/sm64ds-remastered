@@ -32,7 +32,7 @@ void bhv_hidden_star_loop(void) {
 }
 
 void bhv_hidden_star_trigger_loop(void) {
-    if (obj_check_if_collided_with_object(o, gPlayerObject) == TRUE) {
+    if (obj_check_if_collided_with_object(o, gMarioObject) == TRUE) {
         struct Object *hiddenStar = cur_obj_nearest_object_with_behavior(bhvHiddenStar);
 
         if (hiddenStar != NULL) {
@@ -42,8 +42,12 @@ void bhv_hidden_star_trigger_loop(void) {
                 spawn_orange_number(hiddenStar->oHiddenStarTriggerCounter, 0, 0, 0);
             }
 
+#ifdef VERSION_JP
+            play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
+#else
             play_sound(SOUND_MENU_COLLECT_SECRET
                        + (((u8) hiddenStar->oHiddenStarTriggerCounter - 1) << 16), gGlobalSoundSource);
+#endif
         }
 
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
@@ -55,7 +59,7 @@ void bhv_bowser_course_red_coin_star_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (o->oHiddenStarTriggerCounter == REDS_REQ) {
+            if (o->oHiddenStarTriggerCounter == REDS_BOWSER_REQ) {
                 o->oAction = 1;
             }
             break;

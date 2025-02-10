@@ -14,7 +14,7 @@
 
 #include "course_table.h"
 
-#define FILENAME_FORMAT "%s/sm64dsr_save_file_%d.sav"
+#define FILENAME_FORMAT "%s/sm64_save_file_%d.sav"
 #define NUM_COURSES 15
 #define NUM_BONUS_COURSES 10
 #define NUM_FLAGS 21
@@ -33,7 +33,7 @@ const char *sav_courses[NUM_COURSES] = {
 };
 
 const char *sav_bonus_courses[NUM_BONUS_COURSES] = {
-    "si", "bitdw", "bitfs", "bits", "pss", "cotmc",
+    "bitdw", "bitfs", "bits", "pss", "cotmc",
     "totwc", "vcutm", "wmotr", "sa", "hub"    // hub is Castle Grounds
 };
 
@@ -101,8 +101,15 @@ s32 write_text_save(s32 fileIndex) {
     } else
         printf("Saving updated progress to '%s'\n", filename);
 
+    fprintf(file, "# Super Mario 64 save file\n");
+    fprintf(file, "# Comment starts with #\n");
+    fprintf(file, "# True = 1, False = 0\n");
+
+    get_timestamp(value);
+    fprintf(file, "# %s\n", value);
+
     menudata = &gSaveBuffer.menuData[0];
-    fprintf(file, "[menu]\n");
+    fprintf(file, "\n[menu]\n");
     fprintf(file, "coin_score_age = %d\n", menudata->coinScoreAges[fileIndex]);
     
     if (menudata->soundMode == 0) {
@@ -135,7 +142,7 @@ s32 write_text_save(s32 fileIndex) {
         stars = save_file_get_star_flags(fileIndex, i);
         coins = save_file_get_course_coin_score(fileIndex, i);
         cannonFlag = save_file_get_cannon_flags(fileIndex, i);
-        starFlags = int_to_bin(stars);      // 63 -> 1111111
+        starFlags = int_to_bin(stars);      // 63 -> 111111
             
         fprintf(file, "%s = \"%d, %07d, %d\"\n", sav_courses[i], coins, starFlags, cannonFlag);
     }

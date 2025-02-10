@@ -40,31 +40,31 @@ void bhv_beta_trampoline_spring_loop(void) {
 /**
  * Update function for bhvBetaTrampolineTop.
  * This spawns the other 2 trampoline parts when initialized,
- * and sets a boolean for whether Player's on or off the trampoline.
+ * and sets a boolean for whether Mario's on or off the trampoline.
  * The trampoline top never actually moves, so the spring will never
  * do anything.
  */
 void bhv_beta_trampoline_top_loop(void) {
-    //cur_obj_set_model(MODEL_TRAMPOLINE);
+    cur_obj_set_model(MODEL_TRAMPOLINE);
 
     // When initialized, spawn the rest of the trampoline
     if (o->oTimer == 0) {
         struct Object *trampolinePart;
 
-        trampolinePart = 0;//spawn_object(o, MODEL_TRAMPOLINE_CENTER, bhvBetaTrampolineSpring);
+        trampolinePart = spawn_object(o, MODEL_TRAMPOLINE_CENTER, bhvBetaTrampolineSpring);
         trampolinePart->oPosY -= 75.0f;
 
-        trampolinePart = 0;//spawn_object(o, MODEL_TRAMPOLINE_BASE, bhvStaticObject);
+        trampolinePart = spawn_object(o, MODEL_TRAMPOLINE_BASE, bhvStaticObject);
         trampolinePart->oPosY -= 150.0f;
     }
 
-    // Update o->oBetaTrampolinePlayerOnTrampoline, and reset
-    // the trampoline's position if Player's not on it.
+    // Update o->oBetaTrampolineMarioOnTrampoline, and reset
+    // the trampoline's position if Mario's not on it.
     // Since the trampoline never moves, this doesn't do anything.
     // Maybe they intended to decrease the trampoline's position
-    // when Player's on it in this if statement?/*
-    if (gPlayerObject->platform == o) {
-        o->oBetaTrampolinePlayerOnTrampoline = TRUE;
+    // when Mario's on it in this if statement?/*
+    if (gMarioObject->platform == o) {
+        o->oBetaTrampolineMarioOnTrampoline = TRUE;
 
         o->oVelY -= 4.f;
 
@@ -72,11 +72,11 @@ void bhv_beta_trampoline_top_loop(void) {
             ((o->oBhvParams2ndByte >> 4) / 2.0f)
             + ((o->oHomeY - o->oPosY) / ((o->oBhvParams2ndByte & 0x0F) / 2.0f));
     } else {
-        if (o->oBetaTrampolinePlayerOnTrampoline) {
-            gPlayerStates[0].vel[1] += o->oBetaTrampolineAdditiveYVel;
+        if (o->oBetaTrampolineMarioOnTrampoline) {
+            gMarioStates[0].vel[1] += o->oBetaTrampolineAdditiveYVel;
             cur_obj_play_sound_2(SOUND_GENERAL_BOING_UNUSED);
 
-            o->oBetaTrampolinePlayerOnTrampoline = FALSE;
+            o->oBetaTrampolineMarioOnTrampoline = FALSE;
         } else {
             o->oBetaTrampolineAdditiveYVel = 0;
         }

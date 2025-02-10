@@ -108,10 +108,10 @@ index ffd0a63..51d2dc3 100644
 -		AF_SAMPFMT_TWOSCOMP, 16,
 -		_AF_NEXT_NUM_COMPTYPES,
 -		_af_next_compression_types,
--	    0,	/* maximum marker count */
--	    0,	/* maximum instrument count */
--	    0,	/* maximum number of loops per instrument */
--	    0, NULL
+-		0,	/* maximum marker count */
+-		0,	/* maximum instrument count */
+-		0,	/* maximum number of loops per instrument */
+-		0, NULL
 -	},
  	{
  		AF_FILE_WAVE,
@@ -129,10 +129,10 @@ index ffd0a63..51d2dc3 100644
 -		AF_SAMPFMT_TWOSCOMP, 16,
 -		_AF_IRCAM_NUM_COMPTYPES,
 -		_af_ircam_compression_types,
--	    0,		// maximum marker count
--	    0,		// maximum instrument count
--	    0,		// maximum number of loops per instrument
--	    0,		// number of instrument parameters
+-		0,		// maximum marker count
+-		0,		// maximum instrument count
+-		0,		// maximum number of loops per instrument
+-		0,		// number of instrument parameters
 -		NULL	// instrument parameters
 -	},
 -	{
@@ -157,12 +157,12 @@ index ffd0a63..51d2dc3 100644
 -		AVRFile::completeSetup,
 -		AVRFile::recognize,
 -		AF_SAMPFMT_TWOSCOMP, 16,
--	    0,	/* number of compression types */
+-		0,	/* number of compression types */
 -		NULL,	/* compression types */
--	    0,	/* maximum marker count */
--	    0,	/* maximum instrument count */
--	    0,	/* maximum number of loops per instrument */
--	    0,	/* number of instrument parameters */
+-		0,	/* maximum marker count */
+-		0,	/* maximum instrument count */
+-		0,	/* maximum number of loops per instrument */
+-		0,	/* number of instrument parameters */
 -	},
 -	{
 -		AF_FILE_IFF_8SVX,
@@ -171,12 +171,12 @@ index ffd0a63..51d2dc3 100644
 -		IFFFile::completeSetup,
 -		IFFFile::recognize,
 -		AF_SAMPFMT_TWOSCOMP, 8,
--	    0,	/* number of compression types */
+-		0,	/* number of compression types */
 -		NULL,	/* compression types */
--	    0,	/* maximum marker count */
--	    0,	/* maximum instrument count */
--	    0,	/* maximum number of loops per instrument */
--	    0,	/* number of instrument parameters */
+-		0,	/* maximum marker count */
+-		0,	/* maximum instrument count */
+-		0,	/* maximum number of loops per instrument */
+-		0,	/* number of instrument parameters */
 -	},
 -	{
 -		AF_FILE_SAMPLEVISION,
@@ -185,12 +185,12 @@ index ffd0a63..51d2dc3 100644
 -		SampleVisionFile::completeSetup,
 -		SampleVisionFile::recognize,
 -		AF_SAMPFMT_TWOSCOMP, 16,
--	    0,		// number of compression types
+-		0,		// number of compression types
 -		NULL,	// compression types
--	    0,		// maximum marker count
--	    0,		// maximum instrument count
--	    0,		// maximum number of loops per instrument
--	    0,		// number of instrument parameters
+-		0,		// maximum marker count
+-		0,		// maximum instrument count
+-		0,		// maximum number of loops per instrument
+-		0,		// number of instrument parameters
 -		NULL	// instrument parameters
 -	},
 -	{
@@ -202,10 +202,10 @@ index ffd0a63..51d2dc3 100644
 -		AF_SAMPFMT_TWOSCOMP, 16,
 -		_AF_VOC_NUM_COMPTYPES,
 -		_af_voc_compression_types,
--	    0,		// maximum marker count
--	    0,		// maximum instrument count
--	    0,		// maximum number of loops per instrument
--	    0,		// number of instrument parameters
+-		0,		// maximum marker count
+-		0,		// maximum instrument count
+-		0,		// maximum number of loops per instrument
+-		0,		// number of instrument parameters
 -		NULL	// instrument parameters
 -	},
 -	{
@@ -215,12 +215,12 @@ index ffd0a63..51d2dc3 100644
 -		NISTFile::completeSetup,
 -		NISTFile::recognize,
 -		AF_SAMPFMT_TWOSCOMP, 16,
--	    0,	/* number of compression types */
+-		0,	/* number of compression types */
 -		NULL,	/* compression types */
--	    0,	/* maximum marker count */
--	    0,	/* maximum instrument count */
--	    0,	/* maximum number of loops per instrument */
--	    0,	/* number of instrument parameters */
+-		0,	/* maximum marker count */
+-		0,	/* maximum instrument count */
+-		0,	/* maximum number of loops per instrument */
+-		0,	/* number of instrument parameters */
 -		NULL	/* instrument parameters */
 -	},
 -	{
@@ -237,10 +237,10 @@ index ffd0a63..51d2dc3 100644
 -		AF_SAMPFMT_TWOSCOMP, 16,
 -		_AF_CAF_NUM_COMPTYPES,
 -		_af_caf_compression_types,
--	    0,		// maximum marker count
--	    0,		// maximum instrument count
--	    0,		// maximum number of loops per instrument
--	    0,		// number of instrument parameters
+-		0,		// maximum marker count
+-		0,		// maximum instrument count
+-		0,		// maximum number of loops per instrument
+-		0,		// number of instrument parameters
 -		NULL	// instrument parameters
 -	},
 -	{
@@ -252,10 +252,10 @@ index ffd0a63..51d2dc3 100644
 -		AF_SAMPFMT_TWOSCOMP, 16,
 -		_AF_FLAC_NUM_COMPTYPES,
 -		_af_flac_compression_types,
--	    0,		// maximum marker count
--	    0,		// maximum instrument count
--	    0,		// maximum number of loops per instrument
--	    0,		// number of instrument parameters
+-		0,		// maximum marker count
+-		0,		// maximum instrument count
+-		0,		// maximum number of loops per instrument
+-		0,		// number of instrument parameters
 -		NULL	// instrument parameters
 -	}
  };

@@ -72,11 +72,11 @@ void bhv_goomba_triplet_spawner_update(void) {
     UNUSED u8 filler2[2];
     s32 angle;
 
-    // If player is close enough and the goombas aren't currently loaded, then
+    // If mario is close enough and the goombas aren't currently loaded, then
     // spawn them
     if (o->oAction == GOOMBA_TRIPLET_SPAWNER_ACT_UNLOADED) {
 #ifndef NODRAWINGDISTANCE
-        if (o->oDistanceToPlayer < 3000.0f) {
+        if (o->oDistanceToMario < 3000.0f) {
 #endif
             // The spawner is capable of spawning more than 3 goombas, but this
             // is not used in the game
@@ -98,8 +98,8 @@ void bhv_goomba_triplet_spawner_update(void) {
             o->oAction++;
 #ifndef NODRAWINGDISTANCE
         }
-    } else if (o->oDistanceToPlayer > 4000.0f) {
-        // If player is too far away, enter the unloaded action. The goombas
+    } else if (o->oDistanceToMario > 4000.0f) {
+        // If mario is too far away, enter the unloaded action. The goombas
         // will detect this and unload themselves
         o->oAction = GOOMBA_TRIPLET_SPAWNER_ACT_UNLOADED;
 #endif
@@ -136,7 +136,7 @@ static void goomba_begin_jump(void) {
 
 /**
  * If spawned by a triplet spawner, mark the flag in the spawner to indicate that
- * this goomba died. This prevents it from spawning again when player leaves and
+ * this goomba died. This prevents it from spawning again when mario leaves and
  * comes back.
  */
 static void mark_goomba_as_dead(void) {
@@ -147,11 +147,11 @@ static void mark_goomba_as_dead(void) {
 }
 
 /**
- * Walk around randomly occasionally jumping. If player comes within range,
+ * Walk around randomly occasionally jumping. If mario comes within range,
  * chase him.
  */
 static void goomba_act_walk(void) {
-    treat_far_home_as_player(1000.0f);
+    treat_far_home_as_mario(1000.0f);
 
     obj_forward_vel_approach(o->oGoombaRelativeSpeed * o->oGoombaScale, 0.4f);
 
@@ -171,25 +171,25 @@ static void goomba_act_walk(void) {
         o->oGoombaTurningAwayFromWall = obj_resolve_collisions_and_turn(o->oGoombaTargetYaw, 0x200);
     } else {
         // If far from home, walk toward home.
-        if (o->oDistanceToPlayer >= 25000.0f) {
-            o->oGoombaTargetYaw = o->oAngleToPlayer;
+        if (o->oDistanceToMario >= 25000.0f) {
+            o->oGoombaTargetYaw = o->oAngleToMario;
             o->oGoombaWalkTimer = random_linear_offset(20, 30);
         }
 
         if (!(o->oGoombaTurningAwayFromWall =
                   obj_bounce_off_walls_edges_objects(&o->oGoombaTargetYaw))) {
-            if (o->oDistanceToPlayer < 500.0f) {
-                // If close to player, begin chasing him. If not already chasing
+            if (o->oDistanceToMario < 500.0f) {
+                // If close to mario, begin chasing him. If not already chasing
                 // him, jump first
 
                 if (o->oGoombaRelativeSpeed <= 2.0f) {
                     goomba_begin_jump();
                 }
 
-                o->oGoombaTargetYaw = o->oAngleToPlayer;
+                o->oGoombaTargetYaw = o->oAngleToMario;
                 o->oGoombaRelativeSpeed = 20.0f;
             } else {
-                // If player is far away, walk at a normal pace, turning randomly
+                // If mario is far away, walk at a normal pace, turning randomly
                 // and occasionally jumping
 
                 o->oGoombaRelativeSpeed = 4.0f / 3.0f;
@@ -213,10 +213,10 @@ static void goomba_act_walk(void) {
 }
 
 /**
- * This action occurs when either the goomba attacks player normally, or player
+ * This action occurs when either the goomba attacks mario normally, or mario
  * attacks a huge goomba with an attack that doesn't kill it.
  */
-static void goomba_act_attacked_player(void) {
+static void goomba_act_attacked_mario(void) {
     if (o->oGoombaSize == GOOMBA_SIZE_TINY) {
         mark_goomba_as_dead();
 #if !TINY_GOOMBA_DROP_COIN
@@ -233,7 +233,7 @@ static void goomba_act_attacked_player(void) {
         //  hard to chain these in practice
         goomba_begin_jump();
 #endif
-        o->oGoombaTargetYaw = o->oAngleToPlayer;
+        o->oGoombaTargetYaw = o->oAngleToMario;
         o->oGoombaTurningAwayFromWall = FALSE;
     }
 }
@@ -259,10 +259,10 @@ static void goomba_act_jump(void) {
 }
 
 /**
- * Attack handler for when player attacks a huge goomba with an attack that
+ * Attack handler for when mario attacks a huge goomba with an attack that
  * doesn't kill it.
  * From the goomba's perspective, this is the same as the goomba attacking
- * player.
+ * mario.
  */
 void huge_goomba_weakly_attacked(void) {
     o->oAction = GOOMBA_ACT_ATTACKED_MARIO;
@@ -277,7 +277,7 @@ void bhv_goomba_update(void) {
     f32 animSpeed;
 
     if (obj_update_standard_actions(o->oGoombaScale)) {
-        // If this goomba has a spawner and player moved away from the spawner, unload
+        // If this goomba has a spawner and mario moved away from the spawner, unload
         if (o->parentObj != o) {
             if (o->parentObj->oAction == GOOMBA_TRIPLET_SPAWNER_ACT_UNLOADED) {
                 obj_mark_for_deletion(o);
@@ -299,7 +299,7 @@ void bhv_goomba_update(void) {
                 goomba_act_walk();
                 break;
             case GOOMBA_ACT_ATTACKED_MARIO:
-                goomba_act_attacked_player();
+                goomba_act_attacked_mario();
                 break;
             case GOOMBA_ACT_JUMP:
                 goomba_act_jump();
@@ -308,9 +308,9 @@ void bhv_goomba_update(void) {
 
         //! @bug Weak attacks on huge goombas in a triplet mark them as dead even if they're not.
         // obj_handle_attacks returns the type of the attack, which is non-zero
-        // even for Player's weak attacks. Thus, if Player weakly attacks a huge goomba
+        // even for Mario's weak attacks. Thus, if Mario weakly attacks a huge goomba
         // without harming it (e.g. by punching it), the goomba will be marked as dead
-        // and will not respawn if Player leaves and re-enters the spawner's radius
+        // and will not respawn if Mario leaves and re-enters the spawner's radius
         // even though the goomba isn't actually dead.
         if (obj_handle_attacks(&sGoombaHitbox, GOOMBA_ACT_ATTACKED_MARIO,
             sGoombaAttackHandlers[o->oGoombaSize & 1])

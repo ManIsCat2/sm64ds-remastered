@@ -18,7 +18,7 @@
 #include "make_const_nonconst.h"
 #include "levels/intro/header.h"
 
-#if defined(TARGET_N64) && defined(USE_EXT_RAM)
+#if defined(TARGET_N64) && defined(N64_USE_EXTENDED_RAM)
 const LevelScript level_intro_entry_error_screen[] = {
     INIT_LEVEL(),
 #ifdef GODDARD_MFACE
@@ -150,12 +150,14 @@ const LevelScript level_intro_mario_head_dizzy_skip[] = {
 
 const LevelScript level_intro_entry_4[] = {
     INIT_LEVEL(),
-    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_REC_ROOM, geo_menu_rec_room),
     LOAD_RAW         (/*seg*/ 0x13, _behaviorSegmentRomStart, _behaviorSegmentRomEnd),
     LOAD_MIO0_TEXTURE(/*seg*/ 0x0A, _title_screen_bg_mio0SegmentRomStart, _title_screen_bg_mio0SegmentRomEnd),
     LOAD_MIO0        (/*seg*/ 0x07, _debug_level_select_mio0SegmentRomStart, _debug_level_select_mio0SegmentRomEnd),
 #ifdef GODDARD_MFACE
     FIXED_LOAD(/*loadAddr*/ _goddardSegmentStart, /*romStart*/ _goddardSegmentRomStart, /*romEnd*/ _goddardSegmentRomEnd),
+#endif
+#if ZELDA_STYLE_LEVEL_SELECT
+    CALL(/*arg*/ 0, /*func*/ lvl_init_intro_level_select),
 #endif
     ALLOC_LEVEL_POOL(),
 

@@ -3,7 +3,7 @@
 #include "sm64.h"
 #include "debug.h"
 #include "interaction.h"
-#include "player.h"
+#include "mario.h"
 #include "object_list_processor.h"
 #include "spawn_object.h"
 
@@ -15,7 +15,7 @@ struct Object *debug_print_obj_collision(struct Object *a) {
     for (i = 0; i < a->numCollidedObjs; i++) {
         print_debug_top_down_objectinfo("ON", 0);
         sp24 = a->collidedObjs[i];
-        if (sp24 != gPlayerObject) {
+        if (sp24 != gMarioObject) {
             return sp24;
         }
     }
@@ -55,7 +55,11 @@ s32 detect_object_hitbox_overlap(struct Object *a, struct Object *b) {
         b->numCollidedObjs++;
         return 1;
     }
+
+    //! no return value
+#ifdef AVOID_UB
     return 0;
+#endif
 }
 
 s32 detect_object_hurtbox_overlap(struct Object *a, struct Object *b) {
@@ -67,7 +71,7 @@ s32 detect_object_hurtbox_overlap(struct Object *a, struct Object *b) {
     f32 sp28 = a->hurtboxRadius + b->hurtboxRadius;
     f32 sp24 = sqrtf(sp34 * sp34 + sp2C * sp2C);
 
-    if (a == gPlayerObject) {
+    if (a == gMarioObject) {
         b->oInteractionSubtype |= INT_SUBTYPE_DELAY_INVINCIBILITY;
     }
 
@@ -81,7 +85,7 @@ s32 detect_object_hurtbox_overlap(struct Object *a, struct Object *b) {
         if (sp20 < sp38) {
             return 0;
         }
-        if (a == gPlayerObject) {
+        if (a == gMarioObject) {
             b->oInteractionSubtype &= ~INT_SUBTYPE_DELAY_INVINCIBILITY;
         }
         return 1;
@@ -156,7 +160,7 @@ void check_destructive_object_collision(void) {
     struct Object *sp18 = (struct Object *) sp1C->header.next;
 
     while (sp18 != sp1C) {
-        if (sp18->oDistanceToPlayer < 2000.0f && !(sp18->activeFlags & ACTIVE_FLAG_UNK9)) {
+        if (sp18->oDistanceToMario < 2000.0f && !(sp18->activeFlags & ACTIVE_FLAG_UNK9)) {
             check_collision_in_list(sp18, (struct Object *) sp18->header.next, sp1C);
             check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_GENACTOR].next,
                           (struct Object *) &gObjectLists[OBJ_LIST_GENACTOR]);

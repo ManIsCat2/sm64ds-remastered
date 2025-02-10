@@ -10,7 +10,7 @@ extern const GeoLayout wf_geo_000820[];
 extern const GeoLayout wf_geo_000860[];
 extern const GeoLayout wf_geo_000878[];
 extern const GeoLayout wf_geo_000890[];
-extern const GeoLayout wf_tower_geo[];
+extern const GeoLayout wf_geo_0008A8[];
 extern const GeoLayout wf_geo_0008E8[];
 extern const GeoLayout wf_geo_000900[];
 extern const GeoLayout wf_geo_000940[];
@@ -19,10 +19,10 @@ extern const GeoLayout wf_geo_0009A0[];
 extern const GeoLayout wf_geo_0009B8[];
 extern const GeoLayout wf_geo_0009D0[];
 extern const GeoLayout wf_geo_0009E8[];
-extern const GeoLayout small_bomp_geo[];
-extern const GeoLayout large_bomp_geo[];
+extern const GeoLayout wf_geo_000A00[];
+extern const GeoLayout wf_geo_000A40[];
 extern const GeoLayout wf_geo_000A58[];
-extern const GeoLayout wf_sliding_platform_geo[];
+extern const GeoLayout wf_geo_000A98[];
 extern const GeoLayout wf_geo_000AB0[];
 extern const GeoLayout wf_geo_000AC8[];
 extern const GeoLayout wf_geo_000AE0[];
@@ -30,12 +30,12 @@ extern const GeoLayout wf_geo_000AF8[];
 extern const GeoLayout wf_geo_000B10[];
 extern const GeoLayout wf_geo_000B38[];
 extern const GeoLayout wf_geo_000B60[];
-extern const GeoLayout breakable_wall_right_geo[];
-extern const GeoLayout breakable_wall_left_geo[];
-extern const GeoLayout wf_kickable_board_geo[];
-extern const GeoLayout wf_kickable_board_felled_geo[];
+extern const GeoLayout wf_geo_000B78[];
+extern const GeoLayout wf_geo_000B90[];
+extern const GeoLayout wf_geo_000BA8[];
+extern const GeoLayout wf_geo_000BC8[];
 extern const GeoLayout wf_geo_000BE0[];
-extern const GeoLayout wf_geo[];
+extern const GeoLayout wf_geo_000BF8[];
 
 // leveldata
 extern const Gfx wf_seg7_dl_070050C8[];
@@ -92,23 +92,11 @@ extern const Collision wf_seg7_collision_tower_door[];
 extern const Collision wf_seg7_collision_rotating_platform[];
 extern const Collision wf_seg7_collision_tower[];
 extern const Collision wf_seg7_collision_bullet_bill_cannon[];
-extern const Collision wf_col[];
-extern const MacroObject macro_wf[];
+extern const Collision wf_seg7_collision_070102D8[];
+extern const MacroObject wf_seg7_macro_objs[];
 extern const struct MovtexQuadCollection wf_movtex_water[];
 
 // script
 extern const LevelScript level_wf_entry[];
-
-#include "levels/wf/kickable_board/geo_header.h"
-
-#include "levels/wf/ds_geo/geo_header.h"
-
-#include "levels/wf/breakable_wall_right/geo_header.h"
-
-#include "levels/wf/breakable_wall_left/geo_header.h"
-
-#include "levels/wf/small_bomp/geo_header.h"
-
-#include "levels/wf/sliding_platform/geo_header.h"
 
 #endif

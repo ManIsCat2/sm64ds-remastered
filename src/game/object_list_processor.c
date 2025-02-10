@@ -11,7 +11,7 @@
 #include "engine/surface_load.h"
 #include "interaction.h"
 #include "level_update.h"
-#include "player.h"
+#include "mario.h"
 #include "memory.h"
 #include "object_collision.h"
 #include "object_helpers.h"
@@ -81,9 +81,9 @@ struct ObjectNode *gObjectLists;
 struct ObjectNode gFreeObjectList;
 
 /**
- * The object representing Player.
+ * The object representing Mario.
  */
-struct Object *gPlayerObject;
+struct Object *gMarioObject;
 
 /**
  * An object variable that may have been used to represent the planned
@@ -142,17 +142,21 @@ s16 gCollisionFlags = COLLISION_FLAGS_NONE;
 TerrainData *gEnvironmentRegions;
 s32 gEnvironmentLevels[20];
 struct TransitionRoomData gDoorAdjacentRooms[MAX_NUM_TRANSITION_ROOMS];
-s16 gPlayerCurrentRoom;
+s16 gMarioCurrentRoom;
 s16 D_8035FEE2;
 s16 gNumDoorRenderCount;
 s16 gTHIWaterDrained;
 s16 gTTCSpeedSetting;
-s16 gPlayerShotFromCannon;
+s16 gMarioShotFromCannon;
 s16 gCCMEnteredSlide;
-s16 gNumRoomedObjectsInPlayerRoom;
-s16 gNumRoomedObjectsNotInPlayerRoom;
+s16 gNumRoomedObjectsInMarioRoom;
+s16 gNumRoomedObjectsNotInMarioRoom;
 s16 gWDWWaterLevelChanging;
-s16 gPlayerOnMerryGoRound;
+s16 gMarioOnMerryGoRound;
+#ifdef PORT_MOP_OBJS
+s16 gMOPSwitchBlockState;
+s16 gMOPFlipSwitchStarSpawned;
+#endif
 
 /**
  * Nodes used to represent the doubly linked object lists.
@@ -211,23 +215,23 @@ struct ParticleProperties sParticleTypes[] = {
 };
 
 /**
- * Copy position, velocity, and angle variables from PlayerState to the Player
+ * Copy position, velocity, and angle variables from MarioState to the Mario
  * object.
  */
-void copy_player_state_to_object(void) {
+void copy_mario_state_to_object(void) {
     s32 i = 0;
     // L is real
-    if (gCurrentObject != gPlayerObject) {
+    if (gCurrentObject != gMarioObject) {
         i++;
     }
 
-    gCurrentObject->oVelX = gPlayerStates[i].vel[0];
-    gCurrentObject->oVelY = gPlayerStates[i].vel[1];
-    gCurrentObject->oVelZ = gPlayerStates[i].vel[2];
+    gCurrentObject->oVelX = gMarioStates[i].vel[0];
+    gCurrentObject->oVelY = gMarioStates[i].vel[1];
+    gCurrentObject->oVelZ = gMarioStates[i].vel[2];
 
-    gCurrentObject->oPosX = gPlayerStates[i].pos[0];
-    gCurrentObject->oPosY = gPlayerStates[i].pos[1];
-    gCurrentObject->oPosZ = gPlayerStates[i].pos[2];
+    gCurrentObject->oPosX = gMarioStates[i].pos[0];
+    gCurrentObject->oPosY = gMarioStates[i].pos[1];
+    gCurrentObject->oPosZ = gMarioStates[i].pos[2];
 
     gCurrentObject->oMoveAnglePitch = gCurrentObject->header.gfx.angle[0];
     gCurrentObject->oMoveAngleYaw = gCurrentObject->header.gfx.angle[1];
@@ -237,9 +241,9 @@ void copy_player_state_to_object(void) {
     gCurrentObject->oFaceAngleYaw = gCurrentObject->header.gfx.angle[1];
     gCurrentObject->oFaceAngleRoll = gCurrentObject->header.gfx.angle[2];
 
-    gCurrentObject->oAngleVelPitch = gPlayerStates[i].angleVel[0];
-    gCurrentObject->oAngleVelYaw = gPlayerStates[i].angleVel[1];
-    gCurrentObject->oAngleVelRoll = gPlayerStates[i].angleVel[2];
+    gCurrentObject->oAngleVelPitch = gMarioStates[i].angleVel[0];
+    gCurrentObject->oAngleVelYaw = gMarioStates[i].angleVel[1];
+    gCurrentObject->oAngleVelRoll = gMarioStates[i].angleVel[2];
 }
 
 /**
@@ -255,18 +259,18 @@ void spawn_particle(u32 activeParticleFlag, ModelID16 model, const BehaviorScrip
 }
 
 /**
- * Player's primary behavior update function.
+ * Mario's primary behavior update function.
  */
-void bhv_player_update(void) {
+void bhv_mario_update(void) {
     u32 particleFlags = 0;
     s32 i;
 
-    particleFlags = execute_player_action(gCurrentObject);
-    gCurrentObject->oPlayerParticleFlags = particleFlags;
+    particleFlags = execute_mario_action(gCurrentObject);
+    gCurrentObject->oMarioParticleFlags = particleFlags;
 
-    // Player code updates PlayerState's versions of position etc, so we need
-    // to sync it with the Player object
-    copy_player_state_to_object();
+    // Mario code updates MarioState's versions of position etc, so we need
+    // to sync it with the Mario object
+    copy_mario_state_to_object();
 
     i = 0;
     while (sParticleTypes[i].particleFlag != 0) {
@@ -301,7 +305,7 @@ s32 update_objects_starting_at(struct ObjectNode *objList, struct ObjectNode *fi
 
 /**
  * Update objects in objList starting with firstObj while time stop is active.
- * This means that only certain select objects will be updated, such as Player,
+ * This means that only certain select objects will be updated, such as Mario,
  * doors, unimportant objects, and the object that initiated time stop.
  * The exact set of objects that are updated depends on which flags are set
  * in gTimeStopState.
@@ -319,7 +323,7 @@ s32 update_objects_during_time_stop(struct ObjectNode *objList, struct ObjectNod
 
         // Selectively unfreeze certain objects
         if (!(gTimeStopState & TIME_STOP_ALL_OBJECTS)) {
-            if (gCurrentObject == gPlayerObject && !(gTimeStopState & TIME_STOP_MARIO_AND_DOORS)) {
+            if (gCurrentObject == gMarioObject && !(gTimeStopState & TIME_STOP_MARIO_AND_DOORS)) {
                 unfrozen = TRUE;
             }
 
@@ -435,11 +439,16 @@ void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo) {
     gTimeStopState = 0;
 
     gWDWWaterLevelChanging = FALSE;
-    gPlayerOnMerryGoRound = FALSE;
+    gMarioOnMerryGoRound = FALSE;
 
-    //! (Spawning Displacement) On the Japanese version, Player's platform object
-    //  isn't cleared when transitioning between areas. This can cause Player to
+    //! (Spawning Displacement) On the Japanese version, Mario's platform object
+    //  isn't cleared when transitioning between areas. This can cause Mario to
     //  receive displacement after spawning.
+#if !PLATFORM_DISPLACEMENT_2
+    #ifndef VERSION_JP
+    clear_mario_platform();
+    #endif
+#endif
 
     if (gCurrAreaIndex == 2) {
         gCCMEnteredSlide |= 1;
@@ -472,9 +481,9 @@ void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo) {
             object->respawnInfoPointer = &spawnInfo->respawnInfo;
             
             // ex-alo change
-            // Checks for Player behavior so bparam4 can be used by any object
-            if (object->behavior == segmented_to_virtual(bhvPlayer)) {
-                gPlayerObject = object;
+            // Checks for Mario behavior so bparam4 can be used by any object
+            if (object->behavior == segmented_to_virtual(bhvMario)) {
+                gMarioObject = object;
                 geo_make_first_child(&object->header.gfx.node);
             }
 
@@ -535,8 +544,8 @@ void clear_objects(void) {
 
     gTHIWaterDrained = 0;
     gTimeStopState = 0;
-    gPlayerObject = NULL;
-    gPlayerCurrentRoom = 0;
+    gMarioObject = NULL;
+    gMarioCurrentRoom = 0;
 
     bzero(gDoorAdjacentRooms, sizeof(gDoorAdjacentRooms));
 
@@ -636,8 +645,8 @@ void update_objects(UNUSED s32 unused) {
 
     gTimeStopState &= ~TIME_STOP_MARIO_OPENED_DOOR;
 
-    gNumRoomedObjectsInPlayerRoom = 0;
-    gNumRoomedObjectsNotInPlayerRoom = 0;
+    gNumRoomedObjectsInMarioRoom = 0;
+    gNumRoomedObjectsNotInMarioRoom = 0;
     gCollisionFlags &= ~COLLISION_FLAG_CAMERA;
 
     reset_debug_objectinfo();
@@ -653,11 +662,11 @@ void update_objects(UNUSED s32 unused) {
     cycleCounts[2] = get_clock_difference(cycleCounts[0]);
     update_terrain_objects();
 
-    // If Player was touching a moving platform at the end of last frame, apply
+    // If Mario was touching a moving platform at the end of last frame, apply
     // displacement now
     //! If the platform object unloaded and a different object took its place,
     //  displacement could be applied incorrectly
-    apply_player_platform_displacement();
+    apply_mario_platform_displacement();
 
     // Detect which objects are intersecting
     cycleCounts[3] = get_clock_difference(cycleCounts[0]);
@@ -671,14 +680,14 @@ void update_objects(UNUSED s32 unused) {
     cycleCounts[5] = get_clock_difference(cycleCounts[0]);
     unload_deactivated_objects();
 
-    // Check if Player is on a platform object and save this object
+    // Check if Mario is on a platform object and save this object
     cycleCounts[6] = get_clock_difference(cycleCounts[0]);
-    update_player_platform();
+    update_mario_platform();
 
     cycleCounts[7] = get_clock_difference(cycleCounts[0]);
 
     cycleCounts[0] = 0;
-    try_print_debug_player_object_info();
+    try_print_debug_mario_object_info();
 
     // If time stop was enabled this frame, activate it now so that it will
     // take effect next frame

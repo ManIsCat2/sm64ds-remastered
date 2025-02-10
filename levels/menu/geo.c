@@ -16,12 +16,12 @@
 #include "levels/menu/header.h"
 
 // 0x0E0001D0
-const GeoLayout geo_menu_player_save_button[] = {
+const GeoLayout geo_menu_mario_save_button[] = {
     GEO_NODE_START(),
     GEO_OPEN_NODE(),
         GEO_SCALE(0x00, 524288),
         GEO_OPEN_NODE(),
-            GEO_DISPLAY_LIST(LAYER_OPAQUE, dl_menu_player_save_button_base),
+            GEO_DISPLAY_LIST(LAYER_OPAQUE, dl_menu_mario_save_button_base),
             GEO_DISPLAY_LIST(LAYER_OPAQUE, dl_menu_save_button_back),
         GEO_CLOSE_NODE(),
     GEO_CLOSE_NODE(),
@@ -29,12 +29,38 @@ const GeoLayout geo_menu_player_save_button[] = {
 };
 
 // 0x0E000200
-const GeoLayout geo_menu_player_save_button_fade[] = {
+const GeoLayout geo_menu_mario_save_button_fade[] = {
     GEO_NODE_START(),
     GEO_OPEN_NODE(),
         GEO_SCALE(0x00, 524288),
         GEO_OPEN_NODE(),
-            GEO_DISPLAY_LIST(LAYER_OPAQUE, dl_menu_player_save_button_base),
+            GEO_DISPLAY_LIST(LAYER_OPAQUE, dl_menu_mario_save_button_base),
+            GEO_DISPLAY_LIST(LAYER_OPAQUE, dl_menu_save_button_fade_back),
+        GEO_CLOSE_NODE(),
+    GEO_CLOSE_NODE(),
+    GEO_END(),
+};
+
+// 0x0E000230
+const GeoLayout geo_menu_mario_new_button[] = {
+    GEO_NODE_START(),
+    GEO_OPEN_NODE(),
+        GEO_SCALE(0x00, 524288),
+        GEO_OPEN_NODE(),
+            GEO_DISPLAY_LIST(LAYER_OPAQUE, dl_menu_mario_new_button_base),
+            GEO_DISPLAY_LIST(LAYER_OPAQUE, dl_menu_save_button_back),
+        GEO_CLOSE_NODE(),
+    GEO_CLOSE_NODE(),
+    GEO_END(),
+};
+
+// 0x0E000260
+const GeoLayout geo_menu_mario_new_button_fade[] = {
+    GEO_NODE_START(),
+    GEO_OPEN_NODE(),
+        GEO_SCALE(0x00, 524288),
+        GEO_OPEN_NODE(),
+            GEO_DISPLAY_LIST(LAYER_OPAQUE, dl_menu_mario_new_button_base),
             GEO_DISPLAY_LIST(LAYER_OPAQUE, dl_menu_save_button_fade_back),
         GEO_CLOSE_NODE(),
     GEO_CLOSE_NODE(),
@@ -218,8 +244,3 @@ const GeoLayout geo_menu_act_selector_strings[] = {
     GEO_CLOSE_NODE(),
     GEO_END(),
 };
-
-#include "levels/menu/file_button/geo.inc.c"
-#include "levels/menu/file_options/geo.inc.c"
-#include "levels/menu/file_return/geo.inc.c"
-#include "levels/menu/file_select_bg/geo.inc.c"

@@ -81,7 +81,11 @@ void bhv_moving_yellow_coin_loop(void) {
             break;
 
         case MOV_YCOIN_ACT_LAVA_DEATH:
+#if QOL_FEATURE_COIN_LAVA_FLICKER
+            moving_coin_flicker();
+#else
             o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+#endif
             break;
 
         case MOV_YCOIN_ACT_DEATH_PLANE_DEATH:
@@ -89,11 +93,16 @@ void bhv_moving_yellow_coin_loop(void) {
             break;
     }
 
+#if QOL_FEATURE_COIN_LAVA_FLICKER
+    if (o->oMoveFlags & OBJ_MOVE_ABOVE_LAVA) {
+        moving_coin_flicker();
+    }
+#endif
+
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         coin_collected();
         o->oInteractStatus = 0;
     }
-    o->oFaceAngleYaw += 0x0950;
 }
 
 void bhv_moving_blue_coin_init(void) {
@@ -109,7 +118,7 @@ void bhv_moving_blue_coin_loop(void) {
 
     switch (o->oAction) {
         case MOV_BCOIN_ACT_STILL:
-            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1500)) {
+            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1500)) {
                 o->oAction = MOV_BCOIN_ACT_MOVING;
             }
             break;
@@ -138,7 +147,6 @@ void bhv_moving_blue_coin_loop(void) {
         coin_collected();
         o->oInteractStatus = 0;
     }
-    o->oFaceAngleYaw += 0x0950;
 }
 
 void bhv_blue_coin_sliding_jumping_init(void) {
@@ -149,11 +157,11 @@ void bhv_blue_coin_sliding_jumping_init(void) {
     obj_set_hitbox(o, &sMovingBlueCoinHitbox);
 }
 
-void blue_coin_sliding_away_from_player(void) {
+void blue_coin_sliding_away_from_mario(void) {
     s16 collisionFlags;
 
     o->oForwardVel = 15.0;
-    o->oMoveAngleYaw = o->oAngleToPlayer + 0x8000;
+    o->oMoveAngleYaw = o->oAngleToMario + 0x8000;
 
     if (coin_step(&collisionFlags)) {
         o->oVelY += 18.0f;
@@ -163,7 +171,7 @@ void blue_coin_sliding_away_from_player(void) {
         o->oAction = 3;
     }
 
-    if (!is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
+    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
         o->oAction = 2;
     }
 }
@@ -173,7 +181,7 @@ void blue_coin_sliding_slow_down(void) {
 
     coin_step(&collisionFlags);
 
-    if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 500) == TRUE) {
+    if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 500) == TRUE) {
         o->oAction = 1;
     }
 
@@ -187,7 +195,7 @@ void bhv_blue_coin_sliding_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 500) == TRUE) {
+            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 500) == TRUE) {
                 o->oAction = 1;
             }
 
@@ -195,7 +203,7 @@ void bhv_blue_coin_sliding_loop(void) {
             break;
 
         case 1:
-            blue_coin_sliding_away_from_player();
+            blue_coin_sliding_away_from_mario();
             break;
 
         case 2:
@@ -215,7 +223,11 @@ void bhv_blue_coin_sliding_loop(void) {
             break;
 
         case 100:
+#if QOL_FEATURE_COIN_LAVA_FLICKER
+            o->oAction = 4;
+#else
             o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+#endif
             break;
 
         case 101:
@@ -227,7 +239,6 @@ void bhv_blue_coin_sliding_loop(void) {
         coin_collected();
         o->oInteractStatus = 0;
     }
-    o->oFaceAngleYaw += 0x0950;
 }
 
 void bhv_blue_coin_jumping_loop(void) {
@@ -249,7 +260,7 @@ void bhv_blue_coin_jumping_loop(void) {
             break;
 
         case 1:
-            blue_coin_sliding_away_from_player();
+            blue_coin_sliding_away_from_mario();
             break;
 
         case 2:
@@ -273,5 +284,4 @@ void bhv_blue_coin_jumping_loop(void) {
         coin_collected();
         o->oInteractStatus = 0;
     }
-    o->oFaceAngleYaw += 0x0950;
 }

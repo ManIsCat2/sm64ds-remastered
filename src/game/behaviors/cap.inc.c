@@ -196,51 +196,6 @@ void bhv_metal_cap_loop(void) {
     cap_despawn();
 }
 
-void bhv_player_cap_init(void) {
-    gCurrentObject->oAction = gCurrentObject->oBhvParams2ndByte;
-    o->oGravity = 0.7f;
-
-    switch (gCurrentObject->oBhvParams2ndByte) {
-        case 0: // Idle
-            gCurrentObject->oHomeX = gCurrentObject->oPosX;
-            gCurrentObject->oHomeY = gCurrentObject->oPosY;
-            gCurrentObject->oHomeZ = gCurrentObject->oPosZ;
-            break;
-        case 1: // Goomba
-            gCurrentObject->parentObj = spawn_object(o, MODEL_GOOMBA, bhvGoomba);
-            break;
-    }
-}
-
-void bhv_player_cap_loop(struct PlayerState *m) {
-    obj_set_hitbox(o, &sCapHitbox);
-
-    switch (gCurrentObject->oAction) {
-        case 0: // Idle
-            cur_obj_unhide();
-            cur_obj_become_tangible();
-            break;
-        case 1: // Goomba
-            cur_obj_hide();
-            cur_obj_become_intangible();
-            struct Object *goomba = gCurrentObject->parentObj;
-            if (!goomba->activeFlags) {
-                gCurrentObject->oAction = 1;
-                gCurrentObject->oPosX = goomba->oPosX;
-                gCurrentObject->oPosY = goomba->oPosY + 100.f;
-                gCurrentObject->oPosZ = goomba->oPosZ;
-                gCurrentObject->oHomeX = gCurrentObject->oPosX;
-                gCurrentObject->oHomeY = gCurrentObject->oPosY;
-                gCurrentObject->oHomeZ = gCurrentObject->oPosZ;
-            } else {
-                gCurrentObject->oPosX = goomba->oPosX;
-                gCurrentObject->oPosY = goomba->oPosY;
-                gCurrentObject->oPosZ = goomba->oPosZ;
-            }
-            break;
-    }
-}
-
 void bhv_normal_cap_init(void) {
     o->oGravity = 0.7f;
     o->oFriction = 0.89f;

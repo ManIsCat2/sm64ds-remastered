@@ -1,18 +1,18 @@
 /*
  * Redone description:
  * A rewritten version of platform displacement (hence the 2).
- * Adds intertia so Player has correct momentum on moving platforms.
+ * Adds intertia so Mario has correct momentum on moving platforms.
  * Made by Arthurtilly.
  */
 
 /**
- * Determine if Player is standing on a platform object, meaning that he is
+ * Determine if Mario is standing on a platform object, meaning that he is
  * within 4 units of the floor. Set his referenced platform object accordingly.
  */
-void update_player_platform(void) {
-    struct Surface *floor = gPlayerState->floor;
+void update_mario_platform(void) {
+    struct Surface *floor = gMarioState->floor;
 
-    if (gPlayerObject == NULL || floor == NULL) {
+    if (gMarioObject == NULL || floor == NULL) {
         return;
     }
     
@@ -20,20 +20,20 @@ void update_player_platform(void) {
 
     if (floor != NULL
      && floorObj != NULL
-     && absf(gPlayerObject->oPosY - gPlayerState->floorHeight) < 4.0f) {
-        gPlayerObject->platform = floorObj;
+     && absf(gMarioObject->oPosY - gMarioState->floorHeight) < 4.0f) {
+        gMarioObject->platform = floorObj;
     } else {
-        gPlayerObject->platform = NULL;
+        gMarioObject->platform = NULL;
     }
 }
 
-static struct PlatformDisplacementInfo sPlayerDisplacementInfo;
-static Vec3f sPlayerAmountDisplaced;
+static struct PlatformDisplacementInfo sMarioDisplacementInfo;
+static Vec3f sMarioAmountDisplaced;
 
 extern s32 gGlobalTimer;
 
 /**
- * Apply one frame of platform displacement to Player or an object using the given
+ * Apply one frame of platform displacement to Mario or an object using the given
  * platform.
  */
 void apply_platform_displacement(struct PlatformDisplacementInfo *displaceInfo, Vec3f pos, s16 *yaw, struct Object *platform) {
@@ -41,7 +41,7 @@ void apply_platform_displacement(struct PlatformDisplacementInfo *displaceInfo, 
     Vec3f posDifference;
     Vec3f yawVec;
     Vec3f scaledPos;
-    // Determine how much Player turned on his own since last frame
+    // Determine how much Mario turned on his own since last frame
     s16 yawDifference = *yaw - displaceInfo->prevYaw;
 
     // Avoid a crash if the platform unloaded its collision while stood on
@@ -49,7 +49,7 @@ void apply_platform_displacement(struct PlatformDisplacementInfo *displaceInfo, 
 
     vec3f_copy(platformPos, (*platform->header.gfx.throwMatrix)[3]);
 
-    // Determine how far Player moved on his own since last frame
+    // Determine how far Mario moved on his own since last frame
     vec3f_copy(posDifference, pos);
     vec3f_sub(posDifference, displaceInfo->prevPos);
 
@@ -60,7 +60,7 @@ void apply_platform_displacement(struct PlatformDisplacementInfo *displaceInfo, 
         // Transform from relative positions to world positions
         linear_mtxf_mul_vec3f(*platform->header.gfx.throwMatrix, pos, scaledPos);
 
-        // Add on how much Player moved in the previous frame
+        // Add on how much Mario moved in the previous frame
         vec3f_add(pos, posDifference);
 
         // Calculate new yaw
@@ -83,15 +83,15 @@ void apply_platform_displacement(struct PlatformDisplacementInfo *displaceInfo, 
     vec3f_quot(displaceInfo->prevTransformedPos, scaledPos, platform->header.gfx.scale);
     vec3f_add(pos, platformPos);
 
-    // If the object is Player, set inertia
-    if (pos == gPlayerState->pos) {
-        vec3f_copy(sPlayerAmountDisplaced, pos);
-        vec3f_sub(sPlayerAmountDisplaced, displaceInfo->prevPos);
-        vec3f_sub(sPlayerAmountDisplaced, posDifference);
+    // If the object is Mario, set inertia
+    if (pos == gMarioState->pos) {
+        vec3f_copy(sMarioAmountDisplaced, pos);
+        vec3f_sub(sMarioAmountDisplaced, displaceInfo->prevPos);
+        vec3f_sub(sMarioAmountDisplaced, posDifference);
 
         // Make sure inertia isn't set on the first frame otherwise the previous value isn't cleared
         if ((platform != displaceInfo->prevPlatform) || (gGlobalTimer != displaceInfo->prevTimer + 1)) {
-            vec3_zero(sPlayerAmountDisplaced);
+            vec3_zero(sMarioAmountDisplaced);
         }
     }
 
@@ -116,24 +116,24 @@ static u8 sShouldApplyInertia = FALSE;
 static u8 sInertiaFirstFrame = FALSE;
 
 /**
- * Apply inertia based on Player's last platform.
+ * Apply inertia based on Mario's last platform.
  */
-static void apply_player_inertia(void) {
-    // On the first frame of leaving the ground, boost Player's y velocity
+static void apply_mario_inertia(void) {
+    // On the first frame of leaving the ground, boost Mario's y velocity
     if (sInertiaFirstFrame) {
-        gPlayerState->vel[1] += sPlayerAmountDisplaced[1];
+        gMarioState->vel[1] += sMarioAmountDisplaced[1];
     }
 
     // Apply sideways inertia
-    gPlayerState->pos[0] += sPlayerAmountDisplaced[0];
-    gPlayerState->pos[2] += sPlayerAmountDisplaced[2];
+    gMarioState->pos[0] += sMarioAmountDisplaced[0];
+    gMarioState->pos[2] += sMarioAmountDisplaced[2];
 
     // Drag
-    sPlayerAmountDisplaced[0] *= 0.97f;
-    sPlayerAmountDisplaced[2] *= 0.97f;
+    sMarioAmountDisplaced[0] *= 0.97f;
+    sMarioAmountDisplaced[2] *= 0.97f;
 
-    // Stop applying inertia once Player has landed, or when ground pounding
-    if (!(gPlayerState->action & ACT_FLAG_AIR) || (gPlayerState->action == ACT_GROUND_POUND)) {
+    // Stop applying inertia once Mario has landed, or when ground pounding
+    if (!(gMarioState->action & ACT_FLAG_AIR) || (gMarioState->action == ACT_GROUND_POUND)) {
         sShouldApplyInertia = FALSE;
     }
 }
@@ -141,16 +141,16 @@ static void apply_player_inertia(void) {
 /**
  * Apply platform displacement or inertia if required.
  */
-void apply_player_platform_displacement(void) {
-    if (!(gTimeStopState & TIME_STOP_ACTIVE) && gPlayerObject != NULL && !(gPlayerState->action & ACT_FLAG_INTANGIBLE)) {
-        struct Object *platform = gPlayerObject->platform;
+void apply_mario_platform_displacement(void) {
+    if (!(gTimeStopState & TIME_STOP_ACTIVE) && gMarioObject != NULL && !(gMarioState->action & ACT_FLAG_INTANGIBLE)) {
+        struct Object *platform = gMarioObject->platform;
 
         if (platform != NULL) {
-            apply_platform_displacement(&sPlayerDisplacementInfo, gPlayerState->pos, &gPlayerState->faceAngle[1], platform);
+            apply_platform_displacement(&sMarioDisplacementInfo, gMarioState->pos, &gMarioState->faceAngle[1], platform);
             sShouldApplyInertia = TRUE;
             sInertiaFirstFrame = TRUE;
         } else if (sShouldApplyInertia && gDoInertia) {
-            apply_player_inertia();
+            apply_mario_inertia();
             sInertiaFirstFrame = FALSE;
         }
     }

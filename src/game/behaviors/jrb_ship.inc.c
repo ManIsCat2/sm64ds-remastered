@@ -13,10 +13,10 @@ struct ObjectHitbox sSkullSlidingBoxHitbox = {
 };
 
 void bhv_sunken_ship_part_loop(void) {
-    if (o->oDistanceToPlayer > 10000.0f) {
+    if (o->oDistanceToMario > 10000.0f) {
         o->oOpacity = 140;
     } else {
-        o->oOpacity = o->oDistanceToPlayer * 140.0f / 10000.0;
+        o->oOpacity = o->oDistanceToMario * 140.0f / 10000.0;
     }
 
     cur_obj_disable_rendering();
@@ -35,7 +35,7 @@ void bhv_ship_part_3_loop(void) {
     o->oAngleVelPitch = o->oFaceAnglePitch - sp1E;
     o->oAngleVelRoll = o->oFaceAngleRoll - sp1C;
 
-    if (gPlayerObject->oPosY > 1000.0f) {
+    if (gMarioObject->oPosY > 1000.0f) {
         cur_obj_play_sound_1(SOUND_ENV_BOAT_ROCKING1);
     }
 }
@@ -100,7 +100,7 @@ void bhv_jrb_sliding_box_loop(void) {
     o->oJRBSlidingBoxUnkF8 += 0x100;
     o->oParentRelativePosZ += o->oJRBSlidingBoxUnkFC;
 
-    if (gPlayerObject->oPosY > 1000.0f && absf(o->oJRBSlidingBoxUnkFC) > 3.0f) {
+    if (gMarioObject->oPosY > 1000.0f && absf(o->oJRBSlidingBoxUnkFC) > 3.0f) {
         cur_obj_play_sound_1(SOUND_AIR_ROUGH_SLIDE);
     }
 
@@ -110,7 +110,7 @@ void bhv_jrb_sliding_box_loop(void) {
         cur_obj_become_tangible();
     }
 
-    if (obj_check_if_collided_with_object(o, gPlayerObject)) {
+    if (obj_check_if_collided_with_object(o, gMarioObject)) {
         o->oInteractStatus = 0;
         cur_obj_become_intangible();
     }

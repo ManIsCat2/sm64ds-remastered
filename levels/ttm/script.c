@@ -21,7 +21,7 @@ static const LevelScript script_func_local_1[] = {
 };
 
 static const LevelScript script_func_local_2[] = {
-    OBJECT          (/*model*/ MODEL_NONE,               /*pos*/ -1639,  1146, -1742, /*angle*/ 0,   0, 0, /*bhvParam*/ BPARAM2(BBALL_BP_STYPE_TTM), /*bhv*/ bhvTtmBowlingBallSpawner),
+    OBJECT          (/*model*/ MODEL_NONE,               /*pos*/ -1639,  1146, -1742, /*angle*/ 0,   0, 0, /*bhvParam*/ BPARAM2(BBALL_BP_STYPE_TTM), /*bhv*/ bhvTTMBowlingBallSpawner),
     OBJECT          (/*model*/ MODEL_NONE,               /*pos*/  3295, -3692,  2928, /*angle*/ 0,   0, 0, /*bhvParam*/ 0, /*bhv*/ bhvWaterfallSoundLoop),
     OBJECT          (/*model*/ MODEL_NONE,               /*pos*/  2004, -1580,  1283, /*angle*/ 0,   0, 0, /*bhvParam*/ 0, /*bhv*/ bhvWaterfallSoundLoop),
     OBJECT          (/*model*/ MODEL_DL_MONTY_MOLE_HOLE, /*pos*/ -2077, -1023, -1969, /*angle*/ 0,   0, 0, /*bhvParam*/ 0, /*bhv*/ bhvMontyMoleHole),
@@ -90,7 +90,7 @@ const LevelScript level_ttm_entry[] = {
     LOAD_MIO0        (/*seg*/ 0x08, _common0_mio0SegmentRomStart, _common0_mio0SegmentRomEnd),
     LOAD_RAW         (/*seg*/ 0x0F, _common0_geoSegmentRomStart,  _common0_geoSegmentRomEnd),
     ALLOC_LEVEL_POOL(),
-    MARIO(/*model*/ MODEL_MARIO, /*bhvParam*/ BPARAM4(0x01), /*bhv*/ bhvPlayer),
+    MARIO(/*model*/ MODEL_MARIO, /*bhvParam*/ BPARAM4(0x01), /*bhv*/ bhvMario),
     JUMP_LINK(script_func_global_1),
     JUMP_LINK(script_func_global_7),
     LOAD_MODEL_FROM_GEO(MODEL_TTM_SLIDE_EXIT_PODIUM, ttm_geo_000DF4),
@@ -129,9 +129,9 @@ const LevelScript level_ttm_entry[] = {
         WARP_NODE(/*id*/ WARP_NODE_14, /*destLevel*/ LEVEL_TTM, /*destArea*/ 1, /*destNode*/ WARP_NODE_14, /*flags*/ WARP_NO_CHECKPOINT),
         WARP_NODE(/*id*/ WARP_NODE_15, /*destLevel*/ LEVEL_TTM, /*destArea*/ 1, /*destNode*/ WARP_NODE_16, /*flags*/ WARP_NO_CHECKPOINT),
         WARP_NODE(/*id*/ WARP_NODE_16, /*destLevel*/ LEVEL_TTM, /*destArea*/ 1, /*destNode*/ WARP_NODE_15, /*flags*/ WARP_NO_CHECKPOINT),
-        P_WARP_NODE(/*id*/ WARP_NODE_00, /*destLevel*/ LEVEL_TTM, /*destArea*/ 2, /*destNode*/ WARP_NODE_0A, /*flags*/ WARP_CHECKPOINT),
-        P_WARP_NODE(/*id*/ WARP_NODE_01, /*destLevel*/ LEVEL_TTM, /*destArea*/ 2, /*destNode*/ WARP_NODE_0A, /*flags*/ WARP_CHECKPOINT),
-        P_WARP_NODE(/*id*/ WARP_NODE_02, /*destLevel*/ LEVEL_TTM, /*destArea*/ 2, /*destNode*/ WARP_NODE_0A, /*flags*/ WARP_CHECKPOINT),
+        PAINTING_WARP_NODE(/*id*/ WARP_NODE_00, /*destLevel*/ LEVEL_TTM, /*destArea*/ 2, /*destNode*/ WARP_NODE_0A, /*flags*/ WARP_CHECKPOINT),
+        PAINTING_WARP_NODE(/*id*/ WARP_NODE_01, /*destLevel*/ LEVEL_TTM, /*destArea*/ 2, /*destNode*/ WARP_NODE_0A, /*flags*/ WARP_CHECKPOINT),
+        PAINTING_WARP_NODE(/*id*/ WARP_NODE_02, /*destLevel*/ LEVEL_TTM, /*destArea*/ 2, /*destNode*/ WARP_NODE_0A, /*flags*/ WARP_CHECKPOINT),
         WARP_NODE(/*id*/ WARP_NODE_SUCCESS,    /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 2, /*destNode*/ WARP_NODE_34, /*flags*/ WARP_NO_CHECKPOINT),
         WARP_NODE(/*id*/ WARP_NODE_DEATH,      /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 2, /*destNode*/ WARP_NODE_66, /*flags*/ WARP_NO_CHECKPOINT),
         JUMP_LINK(script_func_local_1),

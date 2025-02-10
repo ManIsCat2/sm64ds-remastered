@@ -19,7 +19,7 @@
 #define TUXIES_MOTHER_SAD_EYES (0 || QOL_FEATURES)
 
 /// Adds japanese text at the bottom of the logo like in modern games.
-#define INTRO_JAPANESE_GAME_TEXT (0 || ((VERSION_SH) && QOL_FEATURES))
+#define INTRO_JAPANESE_GAME_TEXT (0 || ((VERSION_JP || VERSION_SH) && QOL_FEATURES))
 
 /// Changes credit text font to the one used by generic strings.
 #define CREDITS_TEXT_STRING_FONT (0 || QOL_FEATURES)
@@ -30,7 +30,7 @@
 /// Makes trees use actual shadows, recommended to use with optimized shadows.
 #define PROPER_TREE_SHADOWS (0 || QOL_FEATURES)
 
-/// Makes the player show a proper graphic of a special collectable (Transparent stars are now properly shown).
+/// Makes Mario show a proper graphic of a special collectable (Transparent stars are now properly shown).
 #define SHOW_INTERACT_OBJ_COLLECTABLE (0 || QOL_FEATURES)
 
 /// Correctly changes star model to be transparent when (Klepto and Unagi) stars are collected.

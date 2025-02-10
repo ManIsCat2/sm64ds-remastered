@@ -1,7 +1,7 @@
 // king_bobomb.inc.c
 
 // Copy of geo_update_projectile_pos_from_parent
-Gfx *geo_update_held_player_pos(s32 run, UNUSED struct GraphNode *node, Mat4 mtx) {
+Gfx *geo_update_held_mario_pos(s32 run, UNUSED struct GraphNode *node, Mat4 mtx) {
     if (run == TRUE) {
         Mat4 sp20;
         struct Object *obj = (struct Object *) gCurGraphNodeObject;
@@ -15,21 +15,15 @@ Gfx *geo_update_held_player_pos(s32 run, UNUSED struct GraphNode *node, Mat4 mtx
     return NULL;
 }
 
-void bhv_bobomb_anchor_player_loop(void) {
-    common_anchor_player_behavior(50.0f, 50.0f, INT_STATUS_MARIO_UNK6);
+void bhv_bobomb_anchor_mario_loop(void) {
+    common_anchor_mario_behavior(50.0f, 50.0f, INT_STATUS_MARIO_UNK6);
 }
 
 void king_bobomb_act_0(void) {
-    s16 dialogID;
-
+#ifndef VERSION_JP
     o->oForwardVel = 0.0f;
     o->oVelY = 0.0f;
-
-    if (o->oBhvParams2ndByte == BOBOMB_KING_BP_TYPE_1) {
-        dialogID = DIALOG_017;
-    } else {
-        dialogID = DIALOG_174;
-    }
+#endif
 
     if (o->oSubAction == 0) {
         cur_obj_become_intangible();
@@ -38,19 +32,19 @@ void king_bobomb_act_0(void) {
         cur_obj_set_pos_to_home();
         o->oHealth = KING_BOMB_HEALTH;
 
-        if (cur_obj_can_player_activate_textbox_2(500.0f, 100.0f)) {
+        if (cur_obj_can_mario_activate_textbox_2(500.0f, 100.0f)) {
             o->oSubAction++;
             seq_player_lower_volume(SEQ_PLAYER_LEVEL, 60, 40);
         }
     } else if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP,
-        DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, dialogID)) {
+        DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, DIALOG_017)) {
         o->oAction = 2;
         o->oFlags |= OBJ_FLAG_HOLDABLE;
     }
 }
 
-s32 player_is_far_below_object(f32 arg0) {
-    if (arg0 < o->oPosY - gPlayerObject->oPosY) {
+s32 mario_is_far_below_object(f32 arg0) {
+    if (arg0 < o->oPosY - gMarioObject->oPosY) {
         return TRUE;
     } else {
         return FALSE;
@@ -83,18 +77,18 @@ void king_bobomb_act_2(void) {
 
         if (o->oKingBobombUnk108 == 0) {
             o->oForwardVel = KING_BOMB_FVEL;
-            cur_obj_rotate_yaw_toward(o->oAngleToPlayer, KING_BOMB_YAWVEL);
+            cur_obj_rotate_yaw_toward(o->oAngleToMario, KING_BOMB_YAWVEL);
         } else {
             o->oForwardVel = 0.0f;
             o->oKingBobombUnk108--;
         }
     }
 
-    if (cur_obj_check_grabbed_player()) {
+    if (cur_obj_check_grabbed_mario()) {
         o->oAction = 3;
     }
 
-    if (player_is_far_below_object(1200.0f)) {
+    if (mario_is_far_below_object(1200.0f)) {
         o->oAction = 0;
         stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
     }
@@ -154,13 +148,13 @@ void king_bobomb_act_1(void) {
 
     cur_obj_init_animation_with_sound(11);
 
-    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToPlayer, 0x200);
+    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x200);
 
-    if (o->oDistanceToPlayer < 2500.0f) {
+    if (o->oDistanceToMario < 2500.0f) {
         o->oAction = 2;
     }
 
-    if (player_is_far_below_object(1200.0f)) {
+    if (mario_is_far_below_object(1200.0f)) {
         o->oAction = 0;
         stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
     }
@@ -198,7 +192,7 @@ void king_bobomb_act_6(void) {
     } else {
         cur_obj_init_animation_with_sound(11);
 
-        if (cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 0x800) == TRUE) {
+        if (cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x800) == TRUE) {
             o->oAction = 2;
         }
     }
@@ -220,7 +214,14 @@ void king_bobomb_act_7(void) {
         spawn_mist_particles_variable(0, 0, 200.0f);
         spawn_triangle_break_particles(20, MODEL_DIRT_ANIMATION, 3.0f, 4);
         cur_obj_shake_screen(SHAKE_POS_SMALL);
+#ifdef VERSION_JP
+        o->oPosY += 100.0f;
+#endif
+#ifdef RM2C_HAS_CUSTOM_STAR_POS
+        cur_obj_spawn_star_at_y_offset(KingBobOmbStarPos, 200.0f);
+#else
         cur_obj_spawn_star_at_y_offset(2000.0f, 4500.0f, -4500.0f, 200.0f);
+#endif
         o->oAction = 8;
     }
 }
@@ -266,7 +267,7 @@ void king_bobomb_act_4(void) { // bobomb been thrown
         o->oSubAction++;
 
 #if FIX_KING_BOBOMB_MUSIC_THROWN_OFF
-        if (o->oDistanceToPlayer > 2000.0f) {
+        if (o->oDistanceToMario > 2000.0f) {
             stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
         }
 #endif
@@ -320,15 +321,15 @@ void king_bobomb_act_5(void) { // bobomb returns home
 
         case 3:
 #if FIX_KING_BOBOMB_MUSIC_THROWN_OFF
-            if (o->oDistanceToPlayer > 2000.0f)
+            if (o->oDistanceToMario > 2000.0f)
 #else
-            if (player_is_far_below_object(1200.0f))
+            if (mario_is_far_below_object(1200.0f))
 #endif
             {
                 o->oAction = 0;
                 stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
             }
-            if (cur_obj_can_player_activate_textbox_2(500.0f, 100.0f)) {
+            if (cur_obj_can_mario_activate_textbox_2(500.0f, 100.0f)) {
                 o->oSubAction++;
             }
             break;
@@ -380,7 +381,7 @@ void king_bobomb_move(void) {
     cur_obj_call_action_function(sKingBobombActions);
     exec_anim_sound_state(sKingBobombSoundStates);
 #ifndef NODRAWINGDISTANCE
-    if (o->oDistanceToPlayer < 5000.0f) {
+    if (o->oDistanceToMario < 5000.0f) {
 #endif
         cur_obj_enable_rendering();
 #ifndef NODRAWINGDISTANCE

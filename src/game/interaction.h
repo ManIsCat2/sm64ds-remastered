@@ -44,14 +44,14 @@
 
 // Damaging interactions
 #define INT_SUBTYPE_DELAY_INVINCIBILITY 0x00000002
-#define INT_SUBTYPE_BIG_KNOCKBACK 0x00000008 /* Used by Bowser, sets Player's forward velocity to 40 on hit */
+#define INT_SUBTYPE_BIG_KNOCKBACK 0x00000008 /* Used by Bowser, sets Mario's forward velocity to 40 on hit */
 
 // INTERACT_GRABBABLE
 #define INT_SUBTYPE_GRABS_MARIO 0x00000004 /* Also makes the object heavy */
 #define INT_SUBTYPE_HOLDABLE_NPC 0x00000010 /* Allows the object to be gently dropped, and sets vertical speed to 0 when dropped with no forwards velocity */
-#define INT_SUBTYPE_DROP_IMMEDIATELY 0x00000040 /* This gets set by grabbable NPCs that talk to Player to make him drop them after the dialog is finished */
+#define INT_SUBTYPE_DROP_IMMEDIATELY 0x00000040 /* This gets set by grabbable NPCs that talk to Mario to make him drop them after the dialog is finished */
 #define INT_SUBTYPE_KICKABLE 0x00000100
-#define INT_SUBTYPE_NOT_GRABBABLE 0x00000200 /* Used by Heavy-Ho to allow it to throw Player, without Player being able to pick it up */
+#define INT_SUBTYPE_NOT_GRABBABLE 0x00000200 /* Used by Heavy-Ho to allow it to throw Mario, without Mario being able to pick it up */
 
 // INTERACT_DOOR
 #define INT_SUBTYPE_STAR_DOOR 0x00000020
@@ -80,7 +80,7 @@
 
 #define INT_STATUS_ATTACK_MASK 0x000000FF
 
-// Player Interaction Status
+// Mario Interaction Status
 #define INT_STATUS_MARIO_STUNNED         (1 <<  0) /* 0x00000001 */
 #define INT_STATUS_MARIO_KNOCKBACK_DMG   (1 <<  1) /* 0x00000002 */
 #define INT_STATUS_MARIO_UNK2            (1 <<  2) /* 0x00000004 */
@@ -106,20 +106,20 @@
 
 extern u8 gPSSSlideStarted;
 
-s16 player_obj_angle_to_object(struct PlayerState *m, struct Object *o);
-void player_stop_riding_object(struct PlayerState *m);
-void player_grab_used_object(struct PlayerState *m);
-void player_drop_held_object(struct PlayerState *m);
-void player_throw_held_object(struct PlayerState *m);
-void player_stop_riding_and_holding(struct PlayerState *m);
-u32 does_player_have_normal_cap_on_head(struct PlayerState *m);
-void player_blow_off_cap(struct PlayerState *m, f32 capSpeed);
-u32 player_lose_cap_to_enemy(u32 arg);
-void player_retrieve_cap(void);
-struct Object *player_get_collided_object(struct PlayerState *m, u32 interactType);
-u32 player_check_object_grab(struct PlayerState *m);
+s16 mario_obj_angle_to_object(struct MarioState *m, struct Object *o);
+void mario_stop_riding_object(struct MarioState *m);
+void mario_grab_used_object(struct MarioState *m);
+void mario_drop_held_object(struct MarioState *m);
+void mario_throw_held_object(struct MarioState *m);
+void mario_stop_riding_and_holding(struct MarioState *m);
+u32 does_mario_have_normal_cap_on_head(struct MarioState *m);
+void mario_blow_off_cap(struct MarioState *m, f32 capSpeed);
+u32 mario_lose_cap_to_enemy(u32 arg);
+void mario_retrieve_cap(void);
+struct Object *mario_get_collided_object(struct MarioState *m, u32 interactType);
+u32 mario_check_object_grab(struct MarioState *m);
 u32 get_door_save_file_flag(struct Object *door);
-void player_process_interactions(struct PlayerState *m);
-void player_handle_special_floors(struct PlayerState *m);
+void mario_process_interactions(struct MarioState *m);
+void mario_handle_special_floors(struct MarioState *m);
 
 #endif // INTERACTION_H

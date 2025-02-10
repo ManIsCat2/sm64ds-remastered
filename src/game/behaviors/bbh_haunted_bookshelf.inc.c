@@ -9,10 +9,10 @@
  * Update function for bhvHauntedBookshelf.
  */
 void bhv_haunted_bookshelf_loop(void) {
-    // oDistanceToPlayer is unused by this object.
-    // This may have been used for revealing the books when Player comes near,
+    // oDistanceToMario is unused by this object.
+    // This may have been used for revealing the books when Mario comes near,
     // but in the final game this is done by bhvHauntedBookshelfManager.
-    o->oDistanceToPlayer = dist_between_objects(o, gPlayerObject);
+    o->oDistanceToMario = dist_between_objects(o, gMarioObject);
 
     o->oFaceAngleYaw = 0;
 

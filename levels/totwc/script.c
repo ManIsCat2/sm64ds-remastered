@@ -18,6 +18,9 @@
 
 static const LevelScript script_func_local_1[] = {
     OBJECT(/*model*/ MODEL_CAP_SWITCH, /*pos*/    0, -2047, 10, /*angle*/ 0, 0, 0, /*bhvParam*/ 0, /*bhv*/ bhvCapSwitch),
+#ifdef PORT_MOP_OBJS
+    OBJECT(/*model*/ MODEL_TRAMPOLINE, /*pos*/ -800, -1900,  0, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM2(0xAA), /*bhv*/ bhvBetaTrampolineTop),
+#endif
     RETURN(),
 };
 
@@ -36,7 +39,7 @@ const LevelScript level_totwc_entry[] = {
     LOAD_MIO0        (/*seg*/ 0x08, _common0_mio0SegmentRomStart, _common0_mio0SegmentRomEnd),
     LOAD_RAW         (/*seg*/ 0x0F, _common0_geoSegmentRomStart,  _common0_geoSegmentRomEnd),
     ALLOC_LEVEL_POOL(),
-    MARIO(/*model*/ MODEL_MARIO, /*bhvParam*/ BPARAM4(0x01), /*bhv*/ bhvPlayer),
+    MARIO(/*model*/ MODEL_MARIO, /*bhvParam*/ BPARAM4(0x01), /*bhv*/ bhvMario),
     JUMP_LINK(script_func_global_1),
     JUMP_LINK(script_func_global_9),
     LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_03, totwc_geo_000160),

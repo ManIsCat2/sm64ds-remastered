@@ -92,7 +92,7 @@ struct DynListBankInfo {
 };
 
 // bss
-#if defined(VERSION_EU) || defined(VERSION_SH)
+#if defined(VERSION_EU) || defined(VERSION_SH) || defined(VERSION_CN)
 static OSMesgQueue D_801BE830; // controller msg queue
 static OSMesg D_801BE848[10];
 u8 EUpad1[0x40];
@@ -132,17 +132,17 @@ static s16 sVtxCvrtTCBuf[2];            // @ 801BB0A0
 static s32 sCarGdDlNum;                 // @ 801BB0A4
 static struct ObjGroup *sYoshiSceneGrp; // @ 801BB0A8
 static s32 unusedDl801BB0AC;                  // unused DL number
-static struct ObjGroup *sPlayerSceneGrp; // @ 801BB0B0
+static struct ObjGroup *sMarioSceneGrp; // @ 801BB0B0
 static s32 D_801BB0B4;                  // second offset into sTriangleBuf
 static struct ObjGroup *sCarSceneGrp;   // @ 801BB0B8
 static s32 sVertexBufCount; // vtx's to load into RPD? Vtx len in GD Dl and in the lower bank (AF30)
 static struct ObjView *sYoshiSceneView; // @ 801BB0C0
 static s32 sTriangleBufCount;                  // number of triangles in sTriangleBuf
-static struct ObjView *sMSceneView;     // @ 801BB0C8; Player scene view
+static struct ObjView *sMSceneView;     // @ 801BB0C8; Mario scene view
 static s32 sVertexBufStartIndex;                  // Vtx start in GD Dl
 static struct ObjView *sCarSceneView;   // @ 801BB0D0
 static s32 sUpdateYoshiScene;           // @ 801BB0D4; update dl Vtx from ObjVertex?
-static s32 sUpdatePlayerScene;           // @ 801BB0D8; update dl Vtx from ObjVertex?
+static s32 sUpdateMarioScene;           // @ 801BB0D8; update dl Vtx from ObjVertex?
 UNUSED static u32 unref_801bb0dc;
 static s32 sUpdateCarScene; // @ 801BB0E0; guess, not really used
 UNUSED static u32 unref_801bb0e4;
@@ -174,7 +174,7 @@ static s32 sPickBufPosition;                         // @ 801BE784
 static s16 *sPickBuf;                                // @ 801BE788
 static LookAt D_801BE790[2];
 static LookAt D_801BE7D0[3];
-#if defined(VERSION_US)
+#if defined(VERSION_JP) || defined(VERSION_US)
 static OSMesgQueue D_801BE830; // controller msg queue
 static OSMesg D_801BE848[10];
 UNUSED static u32 unref_801be870[16];
@@ -234,7 +234,7 @@ static u32 sGdDlCount = 0;                        // @ 801A8700
 static struct DynListBankInfo sDynLists[] = {     // @ 801A8704
     { STD_LIST_BANK, dynlist_test_cube },
     { STD_LIST_BANK, dynlist_spot_shape },
-    { STD_LIST_BANK, dynlist_player_master },
+    { STD_LIST_BANK, dynlist_mario_master },
     { TABLE_END, NULL }
 };
 
@@ -1207,16 +1207,16 @@ void gdm_init(void *blockpool, u32 size) {
 #endif
 
 /**
- * Initializes the Player head demo
+ * Initializes the Mario head demo
  */
 void gdm_setup(void) {
     UNUSED u8 filler[4];
 
     imin("gdm_setup");
     sYoshiSceneGrp = NULL;
-    sPlayerSceneGrp = NULL;
+    sMarioSceneGrp = NULL;
     sUpdateYoshiScene = FALSE;
-    sUpdatePlayerScene = FALSE;
+    sUpdateMarioScene = FALSE;
     sCarGdDlNum = 0;
     osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
     osCreateMesgQueue(&sGdDMAQueue, sGdMesgBuf, ARRAY_COUNT(sGdMesgBuf));
@@ -1261,21 +1261,21 @@ void gdm_maketestdl(s32 id) {
         case 1:
             reset_nets_and_gadgets(sYoshiSceneGrp);
             break;
-        case 2: // normal Player head
-            if (sPlayerSceneGrp == NULL) {
+        case 2: // normal Mario head
+            if (sMarioSceneGrp == NULL) {
                 load_mario_head(animate_mario_head_normal);
-                sPlayerSceneGrp = gPlayerFaceGrp; // gPlayerFaceGrp set by load_mario_head
+                sMarioSceneGrp = gMarioFaceGrp; // gMarioFaceGrp set by load_mario_head
                 gd_setup_cursor(NULL);
             }
-            sMSceneView = make_view_withgrp("mscene", sPlayerSceneGrp);
+            sMSceneView = make_view_withgrp("mscene", sMarioSceneGrp);
             break;
-        case 3: // game over Player head
-            if (sPlayerSceneGrp == NULL) {
+        case 3: // game over Mario head
+            if (sMarioSceneGrp == NULL) {
                 load_mario_head(animate_mario_head_gameover);
-                sPlayerSceneGrp = gPlayerFaceGrp;
+                sMarioSceneGrp = gMarioFaceGrp;
                 gd_setup_cursor(NULL);
             }
-            sMSceneView = make_view_withgrp("mscene", sPlayerSceneGrp);
+            sMSceneView = make_view_withgrp("mscene", sMarioSceneGrp);
             break;
         case 4:
             sCarSceneView = make_view_withgrp("car_scene", sCarSceneGrp);
@@ -1308,11 +1308,11 @@ void gd_vblank(void) {
     if (sUpdateYoshiScene) {
         apply_to_obj_types_in_group(OBJ_TYPE_NETS, (applyproc_t) convert_net_verts, sYoshiSceneGrp);
     }
-    if (sUpdatePlayerScene) {
-        apply_to_obj_types_in_group(OBJ_TYPE_NETS, (applyproc_t) convert_net_verts, sPlayerSceneGrp);
+    if (sUpdateMarioScene) {
+        apply_to_obj_types_in_group(OBJ_TYPE_NETS, (applyproc_t) convert_net_verts, sMarioSceneGrp);
     }
     sUpdateYoshiScene = FALSE;
-    sUpdatePlayerScene = FALSE;
+    sUpdateMarioScene = FALSE;
     gGdFrameBufNum ^= 1;
     reset_cur_dl_indices();
     parse_p1_controller();
@@ -1331,7 +1331,7 @@ void gd_copy_p1_contpad(OSContPad *p1cont) {
         dest[i] = src[i];
     }
 
-    if (p1cont->button & (ZL_TRIG | ZR_TRIG)) {
+    if (p1cont->button & Z_TRIG) {
         print_all_timers();
     }
 }
@@ -1382,7 +1382,7 @@ Gfx *gdm_gettestdl(s32 id) {
             sCurrentGdDl = sMHeadMainDls[gGdFrameBufNum];
             gSPEndDisplayList(next_gfx());
             gddl = sCurrentGdDl;
-            sUpdatePlayerScene = TRUE;
+            sUpdateMarioScene = TRUE;
             break;
         case 4:
             if (sCarSceneView == NULL) {
@@ -2470,8 +2470,6 @@ void parse_p1_controller(void) {
     gdctrl->trgR   = (currInputs->button & R_TRIG) != 0;
     gdctrl->btnA   = (currInputs->button & A_BUTTON) != 0;
     gdctrl->btnB   = (currInputs->button & B_BUTTON) != 0;
-    gdctrl->btnX   = (currInputs->button & X_BUTTON) != 0;
-    gdctrl->btnY   = (currInputs->button & Y_BUTTON) != 0;
     gdctrl->cleft  = (currInputs->button & L_CBUTTONS) != 0;
     gdctrl->cright = (currInputs->button & R_CBUTTONS) != 0;
     gdctrl->cup    = (currInputs->button & U_CBUTTONS) != 0;
@@ -2510,7 +2508,7 @@ void parse_p1_controller(void) {
         gdctrl->newStartPress ^= 1;
     }
 
-    if (currInputs->button & (ZL_TRIG | ZR_TRIG) && !(prevInputs->button & (ZL_TRIG | ZR_TRIG))) {
+    if (currInputs->button & Z_TRIG && !(prevInputs->button & Z_TRIG)) {
         sCurrDebugViewIndex++;
     }
 
@@ -2534,40 +2532,32 @@ void parse_p1_controller(void) {
         sDebugViews[sCurrDebugViewIndex - 1]->flags |= VIEW_UPDATE;
     }
 
+#ifdef MOUSE_ACTIONS 
+    controller_mouse_read_window();
+#endif
+
     // deadzone checks
     if (ABS(gdctrl->stickX) >= 6) {
         gdctrl->csrX += gdctrl->stickX * 0.1;
 #ifdef MOUSE_ACTIONS
-        gMouseHasFreeControl = FALSE;
+        mouse_has_current_control = FALSE;
 #endif
     }
 
     if (ABS(gdctrl->stickY) >= 6) {
         gdctrl->csrY -= gdctrl->stickY * 0.1;
 #ifdef MOUSE_ACTIONS 
-        gMouseHasFreeControl = FALSE;
+        mouse_has_current_control = FALSE;
 #endif
     }
 
 #ifdef MOUSE_ACTIONS
-    if (!(sHandView->flags & VIEW_UPDATE))
-        gMouseHasFreeControl = FALSE;
-
-    if ((gMouseXPos - gOldMouseXPos != 0 || gMouseYPos - gOldMouseYPos != 0) && (sHandView->flags & VIEW_UPDATE)) {
-        gMouseHasFreeControl = TRUE;
-    }
-
-    float screenScale = (float) gfx_current_dimensions.height / (float)SCREEN_HEIGHT;
-    if (gMouseHasFreeControl) {
-        gdctrl->csrX = (gMouseXPos - (gfx_current_dimensions.width - (screenScale * (float)SCREEN_WIDTH))/ 2)/ screenScale;
-        gdctrl->csrY = gMouseYPos / screenScale;
-    }
-
-    gOldMouseXPos = gMouseXPos;
-    gOldMouseYPos = gMouseYPos;
-
-if (!gMouseHasFreeControl) {
+    float screenScale = (float) gfx_current_dimensions.height / SCREEN_HEIGHT;
+    f32 mousePosX = (f32) ((mouse_window_x - (gfx_current_dimensions.width - (screenScale * (float)SCREEN_WIDTH))/ 2)/ screenScale);
+    f32 mousePosY = (f32) (mouse_window_y / screenScale);
+if (!controller_mouse_set_position(&gdctrl->csrX, &gdctrl->csrY, mousePosX, mousePosY, (sHandView->flags & VIEW_UPDATE), TRUE))
 #endif
+    {
     // clamp cursor position within screen view bounds
     if (gdctrl->csrX < sScreenView->parent->upperLeft.x + GFX_DIMENSIONS_FROM_LEFT_EDGE(16.0f)) {
         gdctrl->csrX = sScreenView->parent->upperLeft.x + GFX_DIMENSIONS_FROM_LEFT_EDGE(16.0f);
@@ -2588,10 +2578,7 @@ if (!gMouseHasFreeControl) {
     for (i = 0; i < sizeof(OSContPad); i++) {
         ((u8 *) prevInputs)[i] = ((u8 *) currInputs)[i];
     }
-#ifdef MOUSE_ACTIONS
-    
-}
-#endif
+    }
 }
 
 void stub_renderer_4(f32 arg0) {

@@ -7,7 +7,7 @@ struct MacroPreset {
 };
 
 static struct MacroPreset sMacroObjectPresets[] = {
-    /* macro_yellow_coin               */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
+    /* macro_yellow_coin_1               */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
     /* macro_yellow_coin_2               */ { bhvOneCoin, MODEL_YELLOW_COIN, 0 },
     /* macro_moving_blue_coin            */ { bhvMovingBlueCoin, MODEL_BLUE_COIN, 0 },
     /* macro_sliding_blue_coin           */ { bhvBlueCoinSliding, MODEL_BLUE_COIN, 0 }, // unused
@@ -48,7 +48,7 @@ static struct MacroPreset sMacroObjectPresets[] = {
     /* macro_homing_amp                  */ { bhvHomingAmp, MODEL_AMP, 0 },
     /* macro_circling_amp                */ { bhvCirclingAmp, MODEL_AMP, AMP_BP_ROT_RADIUS_200 },
     /* macro_unknown_40                  */ { bhvCarrySomething1, MODEL_UNKNOWN_7D, 0 }, // unused
-    /* macro_unknown_41                  */ { bhvBetaTrampolineTop, 0/*MODEL_TRAMPOLINE*/, 0 }, // unused
+    /* macro_unknown_41                  */ { bhvBetaTrampolineTop, MODEL_TRAMPOLINE, 0 }, // unused
     /* macro_free_bowling_ball           */ { bhvFreeBowlingBall, MODEL_BOWLING_BALL, 0 }, // unused
     /* macro_snufit                      */ { bhvSnufit, MODEL_SNUFIT, 0 },
     /* macro_recovery_heart              */ { bhvRecoveryHeart, MODEL_HEART, 0 },
@@ -67,26 +67,26 @@ static struct MacroPreset sMacroObjectPresets[] = {
     /* macro_vanish_cap_switch           */ { bhvCapSwitch, MODEL_CAP_SWITCH, CAP_SWITCH_BP_BLUE }, // unused
     /* macro_yellow_cap_switch           */ { bhvCapSwitch, MODEL_CAP_SWITCH, CAP_SWITCH_BP_YELLOW }, // unused
     /* macro_unknown_59                  */ { bhvWaterLevelDiamond, MODEL_BREAKABLE_BOX, 0 }, // unused
-    /* macro_box_wing_cap                */ { bhvCapBox, MODEL_CAP_BOX, CAP_BOX_BP_WING_CAP },
-    /* macro_box_metal_cap               */ { bhvCapBox, MODEL_CAP_BOX, CAP_BOX_BP_METAL_CAP },
-    /* macro_box_vanish_cap              */ { bhvCapBox, MODEL_CAP_BOX, CAP_BOX_BP_VANISH_CAP },
-    /* macro_box_koopa_shell             */ { bhvCapBox, MODEL_CAP_BOX, CAP_BOX_BP_KOOPA_SHELL },
-    /* macro_box_one_coin                */ { bhvCapBox, MODEL_CAP_BOX, CAP_BOX_BP_ONE_COIN }, // unused
-    /* macro_box_three_coins             */ { bhvCapBox, MODEL_CAP_BOX, CAP_BOX_BP_THREE_COINS },
-    /* macro_box_ten_coins               */ { bhvCapBox, MODEL_CAP_BOX, CAP_BOX_BP_TEN_COINS },
-    /* macro_box_1up                     */ { bhvCapBox, MODEL_CAP_BOX, CAP_BOX_BP_1UP_WALKING },
-    /* macro_box_star_act_1              */ { bhvCapBox, MODEL_CAP_BOX, CAP_BOX_BP_STAR_ACT_1 },
+    /* macro_box_wing_cap                */ { bhvExclamationBox, MODEL_EXCLAMATION_BOX, EXCLAMATION_BOX_BP_WING_CAP },
+    /* macro_box_metal_cap               */ { bhvExclamationBox, MODEL_EXCLAMATION_BOX, EXCLAMATION_BOX_BP_METAL_CAP },
+    /* macro_box_vanish_cap              */ { bhvExclamationBox, MODEL_EXCLAMATION_BOX, EXCLAMATION_BOX_BP_VANISH_CAP },
+    /* macro_box_koopa_shell             */ { bhvExclamationBox, MODEL_EXCLAMATION_BOX, EXCLAMATION_BOX_BP_KOOPA_SHELL },
+    /* macro_box_one_coin                */ { bhvExclamationBox, MODEL_EXCLAMATION_BOX, EXCLAMATION_BOX_BP_ONE_COIN }, // unused
+    /* macro_box_three_coins             */ { bhvExclamationBox, MODEL_EXCLAMATION_BOX, EXCLAMATION_BOX_BP_THREE_COINS },
+    /* macro_box_ten_coins               */ { bhvExclamationBox, MODEL_EXCLAMATION_BOX, EXCLAMATION_BOX_BP_TEN_COINS },
+    /* macro_box_1up                     */ { bhvExclamationBox, MODEL_EXCLAMATION_BOX, EXCLAMATION_BOX_BP_1UP_WALKING },
+    /* macro_box_star_act_1              */ { bhvExclamationBox, MODEL_EXCLAMATION_BOX, EXCLAMATION_BOX_BP_STAR_ACT_1 },
     /* macro_breakable_box_no_coins      */ { bhvBreakableBox, MODEL_BREAKABLE_BOX, BREAKABLE_BOX_BP_NO_COINS },
     /* macro_breakable_box_three_coins   */ { bhvBreakableBox, MODEL_BREAKABLE_BOX, BREAKABLE_BOX_BP_3_COINS },
     /* macro_pushable_metal_box          */ { bhvPushableMetalBox, MODEL_METAL_BOX, 0 },
     /* macro_breakable_box_small         */ { bhvBreakableBoxSmall, MODEL_BREAKABLE_BOX_SMALL, 0 },
-    /* macro_floor_switch_hidden_objects */ { bhvFloorSwitchHiddenObjects, MODEL_RED_SWITCH, 0 },
+    /* macro_floor_switch_hidden_objects */ { bhvFloorSwitchHiddenObjects, MODEL_PURPLE_SWITCH, 0 },
     /* macro_hidden_breakable_box        */ { bhvHiddenObject, MODEL_BREAKABLE_BOX, HIDDEN_OBJECT_BP_BREAKABLE_BOX },
     /* macro_hidden_unbreakable_box_1    */ { bhvHiddenObject, MODEL_BREAKABLE_BOX, HIDDEN_OBJECT_BP_UNBREAKABLE_BOX_UNUSED_1 }, // unused
     /* macro_hidden_unbreakable_box_2    */ { bhvHiddenObject, MODEL_BREAKABLE_BOX, HIDDEN_OBJECT_BP_UNBREAKABLE_BOX_UNUSED_2 }, // unused
     /* macro_breakable_box_giant         */ { bhvBreakableBox, MODEL_BREAKABLE_BOX, BREAKABLE_BOX_BP_GIANT },
     /* macro_koopa_shell_underwater      */ { bhvKoopaShellUnderwater, MODEL_KOOPA_SHELL, 0 },
-    /* macro_box_1up_running_away        */ { bhvCapBox, MODEL_CAP_BOX, CAP_BOX_BP_1UP_RUNNING_AWAY },
+    /* macro_box_1up_running_away        */ { bhvExclamationBox, MODEL_EXCLAMATION_BOX, EXCLAMATION_BOX_BP_1UP_RUNNING_AWAY },
     /* macro_empty_80                    */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
     /* macro_bullet_bill_cannon          */ { bhvBulletBill, MODEL_BULLET_BILL, 0 }, // unused
     /* macro_heave_ho                    */ { bhvHeaveHo, MODEL_HEAVE_HO, 0 },
@@ -113,7 +113,7 @@ static struct MacroPreset sMacroObjectPresets[] = {
     /* macro_empty_103                   */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
     /* macro_empty_104                   */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
     /* macro_empty_105                   */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
-    /* macro_wooden_post               */ { bhvWoodenPost, MODEL_WOODEN_POST, 0 },
+    /* macro_wooden_post_1               */ { bhvWoodenPost, MODEL_WOODEN_POST, 0 },
     /* macro_water_bomb_spawner          */ { bhvWaterBombSpawner, MODEL_NONE, 0 },
     /* macro_enemy_lakitu                */ { bhvEnemyLakitu, MODEL_ENEMY_LAKITU, 0 },
     /* macro_bob_koopa_the_quick         */ { bhvKoopa, MODEL_KOOPA_WITH_SHELL, KOOPA_BP_KOOPA_THE_QUICK_BOB }, // unused
@@ -346,11 +346,11 @@ static struct MacroPreset sMacroObjectPresets[] = {
     /* macro_empty_336                   */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
     /* macro_empty_337                   */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
     /* macro_empty_338                   */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
-    /* macro_box_star_act_2              */ { bhvCapBox, MODEL_CAP_BOX, CAP_BOX_BP_STAR_ACT_2 },
-    /* macro_box_star_act_3              */ { bhvCapBox, MODEL_CAP_BOX, CAP_BOX_BP_STAR_ACT_3 },
-    /* macro_box_star_act_4              */ { bhvCapBox, MODEL_CAP_BOX, CAP_BOX_BP_STAR_ACT_4 },
-    /* macro_box_star_act_5              */ { bhvCapBox, MODEL_CAP_BOX, CAP_BOX_BP_STAR_ACT_5 }, // unused
-    /* macro_box_star_act_6              */ { bhvCapBox, MODEL_CAP_BOX, CAP_BOX_BP_STAR_ACT_6 },
+    /* macro_box_star_act_2              */ { bhvExclamationBox, MODEL_EXCLAMATION_BOX, EXCLAMATION_BOX_BP_STAR_ACT_2 },
+    /* macro_box_star_act_3              */ { bhvExclamationBox, MODEL_EXCLAMATION_BOX, EXCLAMATION_BOX_BP_STAR_ACT_3 },
+    /* macro_box_star_act_4              */ { bhvExclamationBox, MODEL_EXCLAMATION_BOX, EXCLAMATION_BOX_BP_STAR_ACT_4 },
+    /* macro_box_star_act_5              */ { bhvExclamationBox, MODEL_EXCLAMATION_BOX, EXCLAMATION_BOX_BP_STAR_ACT_5 }, // unused
+    /* macro_box_star_act_6              */ { bhvExclamationBox, MODEL_EXCLAMATION_BOX, EXCLAMATION_BOX_BP_STAR_ACT_6 },
     /* macro_empty_344                   */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
     /* macro_empty_345                   */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
     /* macro_empty_346                   */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },

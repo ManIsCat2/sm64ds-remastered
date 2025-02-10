@@ -412,6 +412,7 @@ struct GraphNodeShadow *init_graph_node_shadow(struct AllocOnlyPool *pool,
     }
 
     if (graphNode != NULL) {
+#if OPTIMIZED_SHADOWS
     #if 1 // LEGACY_SHADOW_IDS, will be enforced until Fast64 support name values
         if (shadowType == 0 || shadowType == 1 || shadowType == 2 || shadowType == 99) {
             shadowType = SHADOW_CIRCLE;
@@ -421,6 +422,7 @@ struct GraphNodeShadow *init_graph_node_shadow(struct AllocOnlyPool *pool,
             shadowType = SHADOW_SQUARE_PERMANENT;
         }
     #endif
+#endif
         init_scene_graph_node_links(&graphNode->node, GRAPH_NODE_TYPE_SHADOW);
         graphNode->shadowScale = shadowScale;
         graphNode->shadowSolidity = shadowSolidity;
@@ -583,9 +585,9 @@ struct GraphNode *geo_remove_child(struct GraphNode *graphNode) {
 
 /**
  * Reorders the given node so it's the first child of its parent.
- * This is called on the Player object when he is spawned. That's why Player's
+ * This is called on the Mario object when he is spawned. That's why Mario's
  * object is always drawn before any other objects. (Note that the geo order
- * is independent from processing group order, where Player is not first.)
+ * is independent from processing group order, where Mario is not first.)
  */
 struct GraphNode *geo_make_first_child(struct GraphNode *newFirstChild) {
     struct GraphNode *lastSibling;

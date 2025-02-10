@@ -10,7 +10,6 @@
 
 #include "make_const_nonconst.h"
 #include "levels/castle_grounds/texture.inc.c"
-#include "levels/castle_grounds/areas/1/trajectory.inc.c"
 #include "levels/castle_grounds/areas/1/1/model.inc.c"
 #include "levels/castle_grounds/areas/1/2/model.inc.c"
 #include "levels/castle_grounds/areas/1/3/model.inc.c"
@@ -32,5 +31,3 @@
 #include "levels/castle_grounds/areas/1/7/collision.inc.c"
 #include "levels/castle_grounds/areas/1/8/collision.inc.c"
 #include "levels/castle_grounds/areas/1/movtext.inc.c"
-
-#include "levels/castle_grounds/ds_mesh/model.inc.c"

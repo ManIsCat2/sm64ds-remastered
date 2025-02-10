@@ -20,7 +20,7 @@ void bhv_water_air_bubble_loop(void) {
     } else {
         cur_obj_become_tangible();
         cur_obj_forward_vel_approach_upward(2.0f, 10.0f);
-        o->oMoveAngleYaw = obj_angle_to_object(o, gPlayerObject);
+        o->oMoveAngleYaw = obj_angle_to_object(o, gMarioObject);
         cur_obj_move_using_fvel_and_gravity();
     }
 
@@ -122,7 +122,7 @@ void bhv_small_bubbles_loop(void) {
 }
 
 void bhv_fish_group_loop(void) {
-    if ((gPlayerCurrentRoom == 15 || gPlayerCurrentRoom == 7) && (gGlobalTimer & 1)) {
+    if ((gMarioCurrentRoom == 15 || gMarioCurrentRoom == 7) && (gGlobalTimer & 1)) {
         spawn_object(o, MODEL_WHITE_PARTICLE_SMALL, bhvSmallParticleBubbles);
     }
 }

@@ -6618,7 +6618,7 @@ const tMipsOpcode MipsOpcodes[] = {
 	{"stv",		"RtRo,i7(s)",	MIPS_RSP_SWC2(0x0b),		MA_RSP,		MO_RSP_QWOFFSET },
 	{"stv",		"RtRo,(s)",		MIPS_RSP_SWC2(0x0b),		MA_RSP,		MO_RSP_QWOFFSET },
 	// END
-	{ nullptr,	nullptr,	    0,						    0,			0 },
+	{ nullptr,	nullptr,		0,							0,			0 },
 };
 
 const MipsArchDefinition mipsArchs[] = {
@@ -6633,7 +6633,7 @@ const MipsArchDefinition mipsArchs[] = {
 	// MARCH_RSP
 	{ "RSP",		MA_MIPS1|MA_RSP,					MA_EXRSP,	0 },
 	// MARCH_INVALID
-	{ "Invalid",    0,								    0,			0 },
+	{ "Invalid",	0,									0,			0 },
 };
 
 // file: Parser/ExpressionParser.h
@@ -18777,9 +18777,9 @@ ExpressionValue expLabelFuncHeaderSize(const std::wstring& funcName, const std::
 }
 
 const ExpressionFunctionMap expressionFunctions = {
-	{ L"version",		{ &expFuncVersion,		    0,    0,	ExpFuncSafety::Safe } },
-	{ L"endianness",	{ &expFuncEndianness,	    0,    0,	ExpFuncSafety::Unsafe } },
-	{ L"outputname",	{ &expFuncOutputName,	    0,    0,	ExpFuncSafety::Unsafe } },
+	{ L"version",		{ &expFuncVersion,			0,	0,	ExpFuncSafety::Safe } },
+	{ L"endianness",	{ &expFuncEndianness,		0,	0,	ExpFuncSafety::Unsafe } },
+	{ L"outputname",	{ &expFuncOutputName,		0,	0,	ExpFuncSafety::Unsafe } },
 	{ L"fileexists",	{ &expFuncFileExists,		1,	1,	ExpFuncSafety::Safe } },
 	{ L"filesize",		{ &expFuncFileSize,			1,	1,	ExpFuncSafety::ConditionalUnsafe } },
 	{ L"tostring",		{ &expFuncToString,			1,	1,	ExpFuncSafety::Safe } },

@@ -10,7 +10,7 @@
 #include "levels/castle_inside/header.h"
 #include "levels/hmc/header.h"
 #include "levels/ttm/header.h"
-#include "player.h"
+#include "mario.h"
 #include "memory.h"
 #include "moving_texture.h"
 #include "object_list_processor.h"
@@ -43,20 +43,20 @@
  * Painting state machine:
  * Paintings spawn in the PAINTING_IDLE state
  *      From IDLE, paintings can change to PAINTING_RIPPLE or PAINTING_ENTERED
- *        - This state checks for ENTERED because if Player waits long enough, a PROXIMITY painting could
+ *        - This state checks for ENTERED because if Mario waits long enough, a PROXIMITY painting could
  *          reset to IDLE
  *
  * Paintings in the PAINTING_RIPPLE state are passively rippling.
- *      For RIPPLE_TRIGGER_PROXIMITY paintings, this means Player bumped the wall in front of the
+ *      For RIPPLE_TRIGGER_PROXIMITY paintings, this means Mario bumped the wall in front of the
  *          painting.
  *
  *      Paintings that use RIPPLE_TRIGGER_CONTINUOUS try to transition to this state as soon as possible,
- *          usually when Player enters the room.
+ *          usually when Mario enters the room.
  *
  *      A PROXIMITY painting will automatically reset to IDLE if its ripple magnitude becomes small
  *          enough.
  *
- * Paintings in the PAINTING_ENTERED state have been entered by Player.
+ * Paintings in the PAINTING_ENTERED state have been entered by Mario.
  *      A CONTINUOUS painting will automatically reset to RIPPLE if its ripple magnitude becomes small
  *          enough.
  */
@@ -92,13 +92,13 @@
 #define ENTER_RIGHT 0x1
 
 /**
- * Use the 1/4th part of the painting that is nearest to Player's current floor.
+ * Use the 1/4th part of the painting that is nearest to Mario's current floor.
  */
 #define NEAREST_4TH 30
 
 /**
- * Use Player's relative x position.
- * @see painting_player_x
+ * Use Mario's relative x position.
+ * @see painting_mario_x
  */
 #define MARIO_X 40
 
@@ -108,14 +108,14 @@
 #define MIDDLE_X 50
 
 /**
- * Use Player's relative y position.
- * @see painting_player_y
+ * Use Mario's relative y position.
+ * @see painting_mario_y
  */
 #define MARIO_Y 60
 
 /**
- * Use Player's relative z position.
- * @see painting_player_z
+ * Use Mario's relative z position.
+ * @see painting_mario_z
  */
 #define MARIO_Z 70
 
@@ -135,12 +135,12 @@
  */
 #define RESET_TIMER 100
 
-/// A copy of the type of floor Player is standing on.
-s16 gPaintingPlayerFloorType;
-// A copy of Player's position
-f32 gPaintingPlayerXPos;
-f32 gPaintingPlayerYPos;
-f32 gPaintingPlayerZPos;
+/// A copy of the type of floor Mario is standing on.
+s16 gPaintingMarioFloorType;
+// A copy of Mario's position
+f32 gPaintingMarioXPos;
+f32 gPaintingMarioYPos;
+f32 gPaintingMarioZPos;
 
 /**
  * When a painting is rippling, this mesh is generated each frame using the Painting's parameters.
@@ -171,10 +171,9 @@ struct Painting *sHMCPaintings[] = {
 };
 
 struct Painting *sInsideCastlePaintings[] = {
-    &bob_painting,      &ccm_painting, &wf_painting,  &jrb_painting, &lll_painting,
-    &ssl_painting,      &si_painting,  &hmc_painting, &ddd_painting, &wdw_painting,
-    &thi_tiny_painting, &ttm_painting, &ttc_painting, &sl_painting,  &thi_huge_painting, 
-    NULL,
+    &bob_painting, &ccm_painting, &wf_painting,  &jrb_painting,      &lll_painting,
+    &ssl_painting, &hmc_painting, &ddd_painting, &wdw_painting,      &thi_tiny_painting,
+    &ttm_painting, &ttc_painting, &sl_painting,  &thi_huge_painting, NULL,
 };
 
 struct Painting *sTTMPaintings[] = {
@@ -239,12 +238,12 @@ void stop_other_paintings(s16 *idptr, struct Painting *paintingGroup[]) {
 }
 
 /**
- * @return Player's y position inside the painting (bounded).
+ * @return Mario's y position inside the painting (bounded).
  */
-f32 painting_player_y(struct Painting *painting) {
+f32 painting_mario_y(struct Painting *painting) {
     //! Unnecessary use of double constants
-    // Add 50 to make the ripple closer to Player's center of mass.
-    f32 relY = gPaintingPlayerYPos - painting->posY + 50.0;
+    // Add 50 to make the ripple closer to Mario's center of mass.
+    f32 relY = gPaintingMarioYPos - painting->posY + 50.0;
 
     if (relY < 0.0) {
         relY = 0.0;
@@ -255,10 +254,10 @@ f32 painting_player_y(struct Painting *painting) {
 }
 
 /**
- * @return Player's z position inside the painting (bounded).
+ * @return Mario's z position inside the painting (bounded).
  */
-f32 painting_player_z(struct Painting *painting) {
-    f32 relZ = painting->posZ - gPaintingPlayerZPos;
+f32 painting_mario_z(struct Painting *painting) {
+    f32 relZ = painting->posZ - gPaintingMarioZPos;
 
     if (relZ < 0.0) {
         relZ = 0.0;
@@ -275,13 +274,13 @@ f32 painting_player_z(struct Painting *painting) {
 f32 painting_ripple_y(struct Painting *painting, s8 ySource) {
     switch (ySource) {
         case MARIO_Y:
-            return painting_player_y(painting); // normal wall paintings
+            return painting_mario_y(painting); // normal wall paintings
             break;
         case MARIO_Z:
-            return painting_player_z(painting); // floor paintings use X and Z
+            return painting_mario_z(painting); // floor paintings use X and Z
             break;
         case MIDDLE_Y:
-            return painting->size / 2.0; // some concentric ripples don't care about Player
+            return painting->size / 2.0; // some concentric ripples don't care about Mario
             break;
     }
 #ifdef AVOID_UB
@@ -290,7 +289,7 @@ f32 painting_ripple_y(struct Painting *painting, s8 ySource) {
 }
 
 /**
- * Return the quarter of the painting that is closest to the floor Player entered.
+ * Return the quarter of the painting that is closest to the floor Mario entered.
  */
 f32 painting_nearest_4th(struct Painting *painting) {
     f32 firstQuarter = painting->size / 4.0;       // 1/4 of the way across the painting
@@ -318,10 +317,10 @@ f32 painting_nearest_4th(struct Painting *painting) {
 }
 
 /**
- * @return Player's x position inside the painting (bounded).
+ * @return Mario's x position inside the painting (bounded).
  */
-f32 painting_player_x(struct Painting *painting) {
-    f32 relX = gPaintingPlayerXPos - painting->posX;
+f32 painting_mario_x(struct Painting *painting) {
+    f32 relX = gPaintingMarioXPos - painting->posX;
 
     if (relX < 0.0) {
         relX = 0.0;
@@ -340,9 +339,9 @@ f32 painting_ripple_x(struct Painting *painting, s8 xSource) {
             return painting_nearest_4th(painting);
             break;
         case MARIO_X: // horizontally placed paintings use X and Z
-            return painting_player_x(painting);
+            return painting_mario_x(painting);
             break;
-        case MIDDLE_X: // concentric rippling may not care about Player
+        case MIDDLE_X: // concentric rippling may not care about Mario
             return painting->size / 2.0;
             break;
     }
@@ -352,7 +351,7 @@ f32 painting_ripple_x(struct Painting *painting, s8 xSource) {
 }
 
 /**
- * Set the painting's state, causing it to start a passive ripple or a ripple from Player entering.
+ * Set the painting's state, causing it to start a passive ripple or a ripple from Mario entering.
  *
  * @param state The state to enter
  * @param painting,paintingGroup identifies the painting that is changing state
@@ -383,7 +382,7 @@ void painting_state(s8 state, struct Painting *painting, struct Painting *painti
     painting->state = state;
     painting->rippleX = painting_ripple_x(painting, xSource);
     painting->rippleY = painting_ripple_y(painting, ySource);
-    gPaintingPlayerYEntry = gPaintingPlayerYPos;
+    gPaintingMarioYEntry = gPaintingMarioYPos;
 
     // Because true or false would be too simple...
     if (resetTimer == RESET_TIMER) {
@@ -396,7 +395,7 @@ void painting_state(s8 state, struct Painting *painting, struct Painting *painti
  * Idle update function for wall paintings that use RIPPLE_TRIGGER_PROXIMITY.
  */
 void wall_painting_proximity_idle(struct Painting *painting, struct Painting *paintingGroup[]) {
-    // Check for Player triggering a ripple
+    // Check for Mario triggering a ripple
     if (painting->floorEntered & RIPPLE_LEFT) {
         painting_state(PAINTING_RIPPLE, painting, paintingGroup, NEAREST_4TH, MARIO_Y, RESET_TIMER);
     } else if (painting->floorEntered & RIPPLE_MIDDLE) {
@@ -404,7 +403,7 @@ void wall_painting_proximity_idle(struct Painting *painting, struct Painting *pa
     } else if (painting->floorEntered & RIPPLE_RIGHT) {
         painting_state(PAINTING_RIPPLE, painting, paintingGroup, NEAREST_4TH, MARIO_Y, RESET_TIMER);
 
-    // Check for Player entering
+    // Check for Mario entering
     } else if (painting->floorEntered & ENTER_LEFT) {
         painting_state(PAINTING_ENTERED, painting, paintingGroup, NEAREST_4TH, MARIO_Y, RESET_TIMER);
     } else if (painting->floorEntered & ENTER_MIDDLE) {
@@ -431,7 +430,7 @@ void wall_painting_proximity_rippling(struct Painting *painting, struct Painting
  * Idle update function for wall paintings that use RIPPLE_TRIGGER_CONTINUOUS.
  */
 void wall_painting_continuous_idle(struct Painting *painting, struct Painting *paintingGroup[]) {
-    // Check for Player triggering a ripple
+    // Check for Mario triggering a ripple
     if (painting->floorEntered & RIPPLE_LEFT) {
         painting_state(PAINTING_RIPPLE, painting, paintingGroup, MIDDLE_X, MIDDLE_Y, RESET_TIMER);
     } else if (painting->floorEntered & RIPPLE_MIDDLE) {
@@ -439,7 +438,7 @@ void wall_painting_continuous_idle(struct Painting *painting, struct Painting *p
     } else if (painting->floorEntered & RIPPLE_RIGHT) {
         painting_state(PAINTING_RIPPLE, painting, paintingGroup, MIDDLE_X, MIDDLE_Y, RESET_TIMER);
 
-    // Check for Player entering
+    // Check for Mario entering
     } else if (painting->floorEntered & ENTER_LEFT) {
         painting_state(PAINTING_ENTERED, painting, paintingGroup, NEAREST_4TH, MARIO_Y, RESET_TIMER);
     } else if (painting->floorEntered & ENTER_MIDDLE) {
@@ -468,7 +467,7 @@ void wall_painting_continuous_rippling(struct Painting *painting, struct Paintin
  * No floor paintings use RIPPLE_TRIGGER_PROXIMITY in the game.
  */
 void floor_painting_proximity_idle(struct Painting *painting, struct Painting *paintingGroup[]) {
-    // Check for Player triggering a ripple
+    // Check for Mario triggering a ripple
     if (painting->floorEntered & RIPPLE_LEFT) {
         painting_state(PAINTING_RIPPLE, painting, paintingGroup, MARIO_X, MARIO_Z, RESET_TIMER);
     } else if (painting->floorEntered & RIPPLE_MIDDLE) {
@@ -476,8 +475,8 @@ void floor_painting_proximity_idle(struct Painting *painting, struct Painting *p
     } else if (painting->floorEntered & RIPPLE_RIGHT) {
         painting_state(PAINTING_RIPPLE, painting, paintingGroup, MARIO_X, MARIO_Z, RESET_TIMER);
 
-    // Only check for Player entering if he jumped below the surface
-    } else if (painting->playerWentUnder) {
+    // Only check for Mario entering if he jumped below the surface
+    } else if (painting->marioWentUnder) {
         if (painting->currFloor & ENTER_LEFT) {
             painting_state(PAINTING_ENTERED, painting, paintingGroup, MARIO_X, MARIO_Z, RESET_TIMER);
         } else if (painting->currFloor & ENTER_MIDDLE) {
@@ -494,7 +493,7 @@ void floor_painting_proximity_idle(struct Painting *painting, struct Painting *p
  * No floor paintings use RIPPLE_TRIGGER_PROXIMITY in the game.
  */
 void floor_painting_proximity_rippling(struct Painting *painting, struct Painting *paintingGroup[]) {
-    if (painting->playerWentUnder) {
+    if (painting->marioWentUnder) {
         if (painting->currFloor & ENTER_LEFT) {
             painting_state(PAINTING_ENTERED, painting, paintingGroup, MARIO_X, MARIO_Z, RESET_TIMER);
         } else if (painting->currFloor & ENTER_MIDDLE) {
@@ -509,11 +508,11 @@ void floor_painting_proximity_rippling(struct Painting *painting, struct Paintin
  * Idle update function for floor paintings that use RIPPLE_TRIGGER_CONTINUOUS.
  *
  * Both floor paintings (HMC and CotMC) are hidden behind a door, which hides the ripple's start up.
- * The floor just inside the doorway is RIPPLE_LEFT, so the painting starts rippling as soon as Player
+ * The floor just inside the doorway is RIPPLE_LEFT, so the painting starts rippling as soon as Mario
  * enters the room.
  */
 void floor_painting_continuous_idle(struct Painting *painting, struct Painting *paintingGroup[]) {
-    // Check for Player triggering a ripple
+    // Check for Mario triggering a ripple
     if (painting->floorEntered & RIPPLE_LEFT) {
         painting_state(PAINTING_RIPPLE, painting, paintingGroup, MIDDLE_X, MIDDLE_Y, RESET_TIMER);
     } else if (painting->floorEntered & RIPPLE_MIDDLE) {
@@ -521,7 +520,7 @@ void floor_painting_continuous_idle(struct Painting *painting, struct Painting *
     } else if (painting->floorEntered & RIPPLE_RIGHT) {
         painting_state(PAINTING_RIPPLE, painting, paintingGroup, MIDDLE_X, MIDDLE_Y, RESET_TIMER);
 
-    // Check for Player entering
+    // Check for Mario entering
     } else if (painting->currFloor & ENTER_LEFT) {
         painting_state(PAINTING_ENTERED, painting, paintingGroup, MARIO_X, MARIO_Z, RESET_TIMER);
     } else if (painting->currFloor & ENTER_MIDDLE) {
@@ -535,7 +534,7 @@ void floor_painting_continuous_idle(struct Painting *painting, struct Painting *
  * Rippling update function for floor paintings that use RIPPLE_TRIGGER_CONTINUOUS.
  */
 void floor_painting_continuous_rippling(struct Painting *painting, struct Painting *paintingGroup[]) {
-    if (painting->playerWentUnder) {
+    if (painting->marioWentUnder) {
         if (painting->currFloor & ENTER_LEFT) {
             painting_state(PAINTING_ENTERED, painting, paintingGroup, MARIO_X, MARIO_Z, DONT_RESET);
         } else if (painting->currFloor & ENTER_MIDDLE) {
@@ -547,7 +546,7 @@ void floor_painting_continuous_rippling(struct Painting *painting, struct Painti
 }
 
 /**
- * Check for Player entering one of the special floors associated with the painting.
+ * Check for Mario entering one of the special floors associated with the painting.
  */
 void painting_update_floors(struct Painting *painting) {
     s16 paintingId = painting->id;
@@ -560,26 +559,26 @@ void painting_update_floors(struct Painting *painting) {
 
     /* The area in front of every painting in the game (except HMC and CotMC, which   *\
     |* act a little differently) is made up of 3 special floor triangles with special *|
-    |* (unique) surface types. This code checks which surface Player is currently on   *|
+    |* (unique) surface types. This code checks which surface Mario is currently on   *|
     \* and sets a bitfield accordingly.                                               */
 
-    // check if Player's current floor is one of the special floors
-    if (gPaintingPlayerFloorType == paintingId * 3 + SURFACE_PAINTING_WOBBLE_A6) {
+    // check if Mario's current floor is one of the special floors
+    if (gPaintingMarioFloorType == paintingId * 3 + SURFACE_PAINTING_WOBBLE_A6) {
         rippleLeft = RIPPLE_LEFT;
     }
-    if (gPaintingPlayerFloorType == paintingId * 3 + SURFACE_PAINTING_WOBBLE_A7) {
+    if (gPaintingMarioFloorType == paintingId * 3 + SURFACE_PAINTING_WOBBLE_A7) {
         rippleMiddle = RIPPLE_MIDDLE;
     }
-    if (gPaintingPlayerFloorType == paintingId * 3 + SURFACE_PAINTING_WOBBLE_A8) {
+    if (gPaintingMarioFloorType == paintingId * 3 + SURFACE_PAINTING_WOBBLE_A8) {
         rippleRight = RIPPLE_RIGHT;
     }
-    if (gPaintingPlayerFloorType == paintingId * 3 + SURFACE_PAINTING_WARP_D3) {
+    if (gPaintingMarioFloorType == paintingId * 3 + SURFACE_PAINTING_WARP_D3) {
         enterLeft = ENTER_LEFT;
     }
-    if (gPaintingPlayerFloorType == paintingId * 3 + SURFACE_PAINTING_WARP_D4) {
+    if (gPaintingMarioFloorType == paintingId * 3 + SURFACE_PAINTING_WARP_D4) {
         enterMiddle = ENTER_MIDDLE;
     }
-    if (gPaintingPlayerFloorType == paintingId * 3 + SURFACE_PAINTING_WARP_D5) {
+    if (gPaintingMarioFloorType == paintingId * 3 + SURFACE_PAINTING_WARP_D5) {
         enterRight = ENTER_RIGHT;
     }
 
@@ -588,19 +587,19 @@ void painting_update_floors(struct Painting *painting) {
     painting->currFloor = rippleLeft + rippleMiddle + rippleRight + enterLeft + enterMiddle + enterRight;
 
     // floorEntered is true iff currFloor is true and lastFloor is false
-    // (Player just entered the floor on this frame)
+    // (Mario just entered the floor on this frame)
     painting->floorEntered = (painting->lastFloor ^ painting->currFloor) & painting->currFloor;
 
-    painting->playerWasUnder = painting->playerIsUnder;
-    // Check if Player has fallen below the painting (used for floor paintings)
-    if (gPaintingPlayerYPos < painting->posY) {
-        painting->playerIsUnder = TRUE;
+    painting->marioWasUnder = painting->marioIsUnder;
+    // Check if Mario has fallen below the painting (used for floor paintings)
+    if (gPaintingMarioYPos < painting->posY) {
+        painting->marioIsUnder = TRUE;
     } else {
-        painting->playerIsUnder = FALSE;
+        painting->marioIsUnder = FALSE;
     }
 
-    // Player "went under" if he was not under last frame, but is under now
-    painting->playerWentUnder = (painting->playerWasUnder ^ painting->playerIsUnder) & painting->playerIsUnder;
+    // Mario "went under" if he was not under last frame, but is under now
+    painting->marioWentUnder = (painting->marioWasUnder ^ painting->marioIsUnder) & painting->marioIsUnder;
 }
 
 /**
@@ -629,7 +628,7 @@ void painting_update_ripple_state(struct Painting *painting) {
 
         // if the painting is doing the entry ripple but the ripples are as small as those from the
         // passive ripple, make it do a passive ripple
-        // If Player goes below the surface but doesn't warp, the painting will eventually reset.
+        // If Mario goes below the surface but doesn't warp, the painting will eventually reset.
         if (painting->state == PAINTING_ENTERED && painting->currRippleMag <= painting->passiveRippleMag) {
 
             painting->state = PAINTING_RIPPLE;
@@ -1115,15 +1114,15 @@ Gfx *display_painting_not_rippling(struct Painting *painting) {
 }
 
 /**
- * Clear Player-related state and clear gRipplingPainting.
+ * Clear Mario-related state and clear gRipplingPainting.
  */
 void reset_painting(struct Painting *painting) {
     painting->lastFloor = 0;
     painting->currFloor = 0;
     painting->floorEntered = 0;
-    painting->playerWasUnder = 0;
-    painting->playerIsUnder = 0;
-    painting->playerWentUnder = 0;
+    painting->marioWasUnder = 0;
+    painting->marioIsUnder = 0;
+    painting->marioWentUnder = 0;
 
     gRipplingPainting = NULL;
 
@@ -1150,9 +1149,9 @@ void reset_painting(struct Painting *painting) {
 /**
  * Controls the x coordinate of the DDD painting.
  *
- * Before Player gets the "Board Bowser's Sub" star in DDD, the painting spawns at frontPos.
+ * Before Mario gets the "Board Bowser's Sub" star in DDD, the painting spawns at frontPos.
  *
- * If Player just got the star, the painting's x coordinate moves to backPos at a rate of `speed` units.
+ * If Mario just got the star, the painting's x coordinate moves to backPos at a rate of `speed` units.
  *
  * When the painting reaches backPos, a save flag is set so that the painting will spawn at backPos
  * whenever it loads.
@@ -1317,7 +1316,7 @@ Gfx *geo_painting_draw(s32 callContext, struct GraphNode *node, UNUSED void *con
 }
 
 /**
- * Update the painting system's local copy of Player's current floor and position.
+ * Update the painting system's local copy of Mario's current floor and position.
  */
 Gfx *geo_painting_update(s32 callContext, UNUSED struct GraphNode *node, UNUSED Mat4 c) {
     struct Surface *surface;
@@ -1330,12 +1329,12 @@ Gfx *geo_painting_update(s32 callContext, UNUSED struct GraphNode *node, UNUSED 
         gLastPaintingUpdateCounter = gPaintingUpdateCounter;
         gPaintingUpdateCounter = gAreaUpdateCounter;
 
-        // Store Player's floor and position
-        find_floor(gPlayerObject->oPosX, gPlayerObject->oPosY, gPlayerObject->oPosZ, &surface);
-        gPaintingPlayerFloorType = surface->type;
-        gPaintingPlayerXPos = gPlayerObject->oPosX;
-        gPaintingPlayerYPos = gPlayerObject->oPosY;
-        gPaintingPlayerZPos = gPlayerObject->oPosZ;
+        // Store Mario's floor and position
+        find_floor(gMarioObject->oPosX, gMarioObject->oPosY, gMarioObject->oPosZ, &surface);
+        gPaintingMarioFloorType = surface->type;
+        gPaintingMarioXPos = gMarioObject->oPosX;
+        gPaintingMarioYPos = gMarioObject->oPosY;
+        gPaintingMarioZPos = gMarioObject->oPosZ;
     }
     return NULL;
 }

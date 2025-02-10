@@ -7,8 +7,8 @@
 #define SURFACE_NEW_WATER                    0x0002 // Custom water surface (Used when NEW_WATER_SURFACES is set)
 #define SURFACE_NEW_WATER_BOTTOM             0x0003 // Custom water surface bottom marker (Used when NEW_WATER_SURFACES is set)
 #define SURFACE_0004                         0x0004 // Unused, has no function and has parameters
-#define SURFACE_HANGABLE                     0x0005 // Ceiling that the player can climb on
-#define SURFACE_SLOW                         0x0009 // Slow down the player, unused
+#define SURFACE_HANGABLE                     0x0005 // Ceiling that Mario can climb on
+#define SURFACE_SLOW                         0x0009 // Slow down Mario, unused
 #define SURFACE_DEATH_PLANE                  0x000A // Death floor
 #define SURFACE_CLOSE_CAMERA                 0x000B // Close camera
 #define SURFACE_WATER                        0x000D // Water, has no action, used on some waterboxes below
@@ -80,9 +80,9 @@
 #define SURFACE_PAINTING_WOBBLE_B5           0x00B5 // Painting wobble (SSL Left)
 #define SURFACE_PAINTING_WOBBLE_B6           0x00B6 // Painting wobble (SSL Middle)
 #define SURFACE_PAINTING_WOBBLE_B7           0x00B7 // Painting wobble (SSL Right)
-#define SURFACE_PAINTING_WOBBLE_B8           0x00B8 // Painting wobble (SI  Left)
-#define SURFACE_PAINTING_WOBBLE_B9           0x00B9 // Painting wobble (SI  Middle)
-#define SURFACE_PAINTING_WOBBLE_BA           0x00BA // Painting wobble (SI  Right)
+#define SURFACE_PAINTING_WOBBLE_B8           0x00B8 // Painting wobble (Unused - Left)
+#define SURFACE_PAINTING_WOBBLE_B9           0x00B9 // Painting wobble (Unused - Middle)
+#define SURFACE_PAINTING_WOBBLE_BA           0x00BA // Painting wobble (Unused - Right)
 #define SURFACE_PAINTING_WOBBLE_BB           0x00BB // Painting wobble (DDD - Left), makes the painting wobble if touched
 #define SURFACE_PAINTING_WOBBLE_BC           0x00BC // Painting wobble (Unused, DDD - Middle)
 #define SURFACE_PAINTING_WOBBLE_BD           0x00BD // Painting wobble (Unused, DDD - Right)
@@ -125,12 +125,12 @@
 #define SURFACE_PAINTING_WARP_E2             0x00E2 // Painting warp (SSL Left)
 #define SURFACE_PAINTING_WARP_E3             0x00E3 // Painting warp (SSL Medium)
 #define SURFACE_PAINTING_WARP_E4             0x00E4 // Painting warp (SSL Right)
-#define SURFACE_PAINTING_WARP_E5             0x00E5 // Painting warp (SI  Left)
-#define SURFACE_PAINTING_WARP_E6             0x00E6 // Painting warp (SI  Medium)
-#define SURFACE_PAINTING_WARP_E7             0x00E7 // Painting warp (SI  Right)
-#define SURFACE_PAINTING_WARP_E8             0x00E8 // Painting warp (DDD Left)
-#define SURFACE_PAINTING_WARP_E9             0x00E9 // Painting warp (DDD Middle)
-#define SURFACE_PAINTING_WARP_EA             0x00EA // Painting warp (DDD Right)
+#define SURFACE_PAINTING_WARP_E5             0x00E5 // Painting warp (Unused - Left)
+#define SURFACE_PAINTING_WARP_E6             0x00E6 // Painting warp (Unused - Medium)
+#define SURFACE_PAINTING_WARP_E7             0x00E7 // Painting warp (Unused - Right)
+#define SURFACE_PAINTING_WARP_E8             0x00E8 // Painting warp (DDD - Left)
+#define SURFACE_PAINTING_WARP_E9             0x00E9 // Painting warp (DDD - Middle)
+#define SURFACE_PAINTING_WARP_EA             0x00EA // Painting warp (DDD - Right)
 #define SURFACE_PAINTING_WARP_EB             0x00EB // Painting warp (WDW Left)
 #define SURFACE_PAINTING_WARP_EC             0x00EC // Painting warp (WDW Middle)
 #define SURFACE_PAINTING_WARP_ED             0x00ED // Painting warp (WDW Right)

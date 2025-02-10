@@ -9,7 +9,7 @@
 #include "object_constants.h"
 #include "sounds.h"
 #include "model_ids.h"
-#include "player_animation_ids.h"
+#include "mario_animation_ids.h"
 #include "mario_geo_switch_case_ids.h"
 #include "surface_terrains.h"
 #include "macros.h"
@@ -139,10 +139,10 @@ enum RenderLayers {
 #define MODEL_STATE_NOISE_ALPHA 0x180
 #define MODEL_STATE_METAL       0x200
 
-#define PLAYER_NORMAL_CAP                0x00000001
-#define PLAYER_VANISH_CAP                0x00000002
-#define PLAYER_METAL_CAP                 0x00000004
-#define PLAYER_WING_CAP                  0x00000008
+#define MARIO_NORMAL_CAP                0x00000001
+#define MARIO_VANISH_CAP                0x00000002
+#define MARIO_METAL_CAP                 0x00000004
+#define MARIO_WING_CAP                  0x00000008
 #define MARIO_CAP_ON_HEAD               0x00000010
 #define MARIO_CAP_IN_HAND               0x00000020
 #define MARIO_METAL_SHOCK               0x00000040
@@ -160,8 +160,8 @@ enum RenderLayers {
 #define MARIO_AIR_HIT_WALL              0x40000000
 #define MARIO_UNKNOWN_31                0x80000000
 
-#define MARIO_SPECIAL_CAPS (PLAYER_VANISH_CAP | PLAYER_METAL_CAP | PLAYER_WING_CAP)
-#define MARIO_CAPS (PLAYER_NORMAL_CAP | MARIO_SPECIAL_CAPS)
+#define MARIO_SPECIAL_CAPS (MARIO_VANISH_CAP | MARIO_METAL_CAP | MARIO_WING_CAP)
+#define MARIO_CAPS (MARIO_NORMAL_CAP | MARIO_SPECIAL_CAPS)
 
 #define ACT_ID_MASK 0x000001FF
 
@@ -457,11 +457,10 @@ enum RenderLayers {
 */
 #define END_DEMO       (1 << 7)
 
-#define VALID_BUTTONS (A_BUTTON      | B_BUTTON      | Y_BUTTON      | X_BUTTON     | \
-                       ZL_TRIG       | ZR_TRIG       | START_BUTTON                 | \
-                       U_JPAD        | D_JPAD        | L_JPAD        | R_JPAD       | \
-                       L_TRIG        | R_TRIG        |                              \
-                       U_CBUTTONS    | D_CBUTTONS    | L_CBUTTONS    | R_CBUTTONS   )
+#define VALID_BUTTONS (A_BUTTON   | B_BUTTON   | Z_TRIG     | START_BUTTON | \
+                       U_JPAD     | D_JPAD     | L_JPAD     | R_JPAD       | \
+                       L_TRIG     | R_TRIG     |                             \
+                       U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS   )
 
 #define JPAD_BUTTONS  (U_JPAD     | D_JPAD     | L_JPAD     | R_JPAD)
 

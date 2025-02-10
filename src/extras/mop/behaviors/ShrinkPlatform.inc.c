@@ -2,7 +2,7 @@
 
 void bhv_shrinkplatform_loop(void) {
     if (o->oAction == 0) {
-        if (cur_obj_is_player_on_platform()) {
+        if (cur_obj_is_mario_on_platform()) {
             o->oAction = 1;
         }
     } else {

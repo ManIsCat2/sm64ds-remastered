@@ -76,7 +76,6 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_RAW (/*seg*/ 0x13, _behaviorSegmentRomStart, _behaviorSegmentRomEnd),
     ALLOC_LEVEL_POOL(),
     LOAD_MODEL_FROM_GEO(MODEL_MARIO,                   mario_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_LUIGI,                   luigi_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SMOKE,                   smoke_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SPARKLES,                sparkles_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BUBBLE,                  bubble_geo),
@@ -85,11 +84,6 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_WATER_SPLASH,            water_splash_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WAVE_TRAIL,              wave_trail_geo),
     LOAD_MODEL_FROM_GEO(MODEL_YELLOW_COIN,             yellow_coin_geo),
-#ifndef TARGET_N64
-    LOAD_MODEL_FROM_GEO(MODEL_POWER_FLOWER,            power_flower_geo),
-#else
-    LOAD_MODEL_FROM_GEO(MODEL_POWER_FLOWER,            yellow_coin_geo),
-#endif
     LOAD_MODEL_FROM_GEO(MODEL_STAR,                    star_geo),
     LOAD_MODEL_FROM_GEO(MODEL_TRANSPARENT_STAR,        transparent_star_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WOODEN_SIGNPOST,         wooden_signpost_geo),
@@ -100,38 +94,52 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_LEAVES,                  leaves_geo),
     LOAD_MODEL_FROM_GEO(MODEL_PURPLE_MARBLE,           purple_marble_geo),
     LOAD_MODEL_FROM_GEO(MODEL_FISH,                    fish_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_SILVER_STAR,             silver_star_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_FISH_SHADOW,             fish_shadow_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SPARKLES_ANIMATION,      sparkles_animation_geo),
     LOAD_MODEL_FROM_DL (MODEL_SAND_DUST,               sand_seg3_dl_0302BCD0,   LAYER_ALPHA),
     LOAD_MODEL_FROM_GEO(MODEL_BUTTERFLY,               butterfly_geo),
-    //LOAD_MODEL_FROM_GEO(MODEL_BURN_SMOKE_UNUSED,     burn_smoke_geo), Todo: Use this
+    LOAD_MODEL_FROM_GEO(MODEL_BURN_SMOKE_UNUSED,       burn_smoke_geo),
     LOAD_MODEL_FROM_DL (MODEL_PEBBLE,                  pebble_seg3_dl_0301CB00, LAYER_ALPHA),
     LOAD_MODEL_FROM_GEO(MODEL_MIST,                    mist_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WHITE_PUFF,              white_puff_geo),
     LOAD_MODEL_FROM_DL (MODEL_WHITE_PARTICLE_DL,       white_particle_dl,       LAYER_ALPHA),
     LOAD_MODEL_FROM_GEO(MODEL_WHITE_PARTICLE,          white_particle_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_YELLOW_COIN_NO_SHADOW,   yellow_coin_no_shadow_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BLUE_COIN,               blue_coin_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BLUE_COIN_NO_SHADOW,     blue_coin_no_shadow_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MARIOS_WINGED_METAL_CAP, marios_winged_metal_cap_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MARIOS_METAL_CAP,        marios_metal_cap_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MARIOS_WING_CAP,         marios_wing_cap_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MARIOS_CAP,              marios_cap_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MARIOS_CAP,              marios_cap_geo), // repeated
-#ifndef TARGET_N64
-    LOAD_MODEL_FROM_GEO(MODEL_LUIGIS_CAP,              luigis_cap_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_WARIOS_CAP,              warios_cap_geo),
-#else
-    LOAD_MODEL_FROM_GEO(MODEL_LUIGIS_CAP,              marios_cap_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_WARIOS_CAP,              marios_cap_geo),
-#endif
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_KEY_CUTSCENE,     bowser_key_cutscene_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_KEY,              bowser_key_geo),
     LOAD_MODEL_FROM_GEO(MODEL_RED_FLAME_SHADOW,        red_flame_shadow_geo),
     LOAD_MODEL_FROM_GEO(MODEL_1UP,                     mushroom_1up_geo),
     LOAD_MODEL_FROM_GEO(MODEL_RED_COIN,                red_coin_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_RED_COIN_NO_SHADOW,      red_coin_no_shadow_geo),
     LOAD_MODEL_FROM_GEO(MODEL_NUMBER,                  number_geo),
     LOAD_MODEL_FROM_GEO(MODEL_EXPLOSION,               explosion_geo),
     LOAD_MODEL_FROM_GEO(MODEL_DIRT_ANIMATION,          dirt_animation_geo),
     LOAD_MODEL_FROM_GEO(MODEL_CARTOON_STAR,            cartoon_star_geo),
+#ifdef PORT_MOP_OBJS
+    LOAD_MODEL_FROM_GEO(MODEL_MOP_NOTEBLOCK,                Noteblock_MOP),
+    LOAD_MODEL_FROM_GEO(MODEL_MOP_CHECKPOINT_FLAG,          Checkpoint_Flap_MOP),
+    LOAD_MODEL_FROM_GEO(MODEL_MOP_FLIPBLOCK,                FlipBlock_MOP),
+	LOAD_MODEL_FROM_DL (MODEL_MOP_FLIPSWAP_PLATFORM,        DL_Flipswap_Platform_MOP_0x5f9ac0, LAYER_OPAQUE),
+    LOAD_MODEL_FROM_DL (MODEL_MOP_FLIPSWAP_PLATFORM_BORDER, DL_Flipswap_Platform_Border_MOP_0x5f8560, LAYER_OPAQUE),
+	LOAD_MODEL_FROM_GEO(MODEL_MOP_FLIPSWITCH_PANEL,         Flipswitch_Panel_MOP),
+	LOAD_MODEL_FROM_DL (MODEL_MOP_SWITCHBOARD,              DL_Green_Switchboard_MOP_0x5fd8b0, LAYER_OPAQUE),
+    LOAD_MODEL_FROM_DL (MODEL_MOP_SWITCHBOARD_GEARS,        DL_Green_Switchboard_Gears_MOP_0x600460, LAYER_OPAQUE),
+    LOAD_MODEL_FROM_DL (MODEL_MOP_SHRINKPLAT_BORDER,        DL_Shrink_Platform_Border_MOP, LAYER_OPAQUE),
+	LOAD_MODEL_FROM_DL (MODEL_MOP_SPRING,                   DL_Spring_MOP_0x301fc98, LAYER_OPAQUE),
+	LOAD_MODEL_FROM_GEO(MODEL_MOP_ROTATING_BLOCK,           Moving_Rotating_Block_MOP),
+	LOAD_MODEL_FROM_GEO(MODEL_MOP_SANDBLOCK,                Sandblock_MOP),
+	LOAD_MODEL_FROM_GEO(MODEL_MOP_SHRINKPLAT,               Shrink_Platform_MOP),
+	LOAD_MODEL_FROM_GEO(MODEL_MOP_SWITCHBLOCK,              Switchblock_MOP),
+	LOAD_MODEL_FROM_GEO(MODEL_MOP_SWITCHBLOCK_SWITCH,       Switchblock_Switch_MOP),
+    LOAD_MODEL_FROM_GEO(MODEL_MOP_EMITTER_SPARKLES,         Sparkles_Emitter_MOP),
+#endif
     FREE_LEVEL_POOL(),
     POP_POOL(),
     CALL(/*arg*/ 0, /*func*/ lvl_init_from_save_file),
@@ -210,15 +218,14 @@ static const LevelScript script_exec_ ## folder [] = { \
 const LevelScript script_func_global_1[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BLUE_COIN_SWITCH,        blue_coin_switch_geo),
     LOAD_MODEL_FROM_GEO(MODEL_AMP,                     dAmpGeo),
-    LOAD_MODEL_FROM_GEO(MODEL_RED_SWITCH,              red_switch_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_STAR_SWITCH,             star_switch_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_PURPLE_SWITCH,           purple_switch_geo),
     LOAD_MODEL_FROM_GEO(MODEL_CHECKERBOARD_PLATFORM,   checkerboard_platform_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BREAKABLE_BOX,           breakable_box_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BREAKABLE_BOX_SMALL,     breakable_box_small_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_CAP_BOX_OUTLINE,         cap_box_outline_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_CAP_BOX,                 cap_box_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_EXCLAMATION_BOX_OUTLINE, exclamation_box_outline_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_EXCLAMATION_BOX,         exclamation_box_geo),
     LOAD_MODEL_FROM_GEO(MODEL_GOOMBA,                  goomba_geo),
-    LOAD_MODEL_FROM_DL (MODEL_EXCLAMATION_POINT,       cap_box_outline_seg8_dl_08025F08, LAYER_ALPHA),
+    LOAD_MODEL_FROM_DL (MODEL_EXCLAMATION_POINT,       exclamation_box_outline_seg8_dl_08025F08, LAYER_ALPHA),
     LOAD_MODEL_FROM_GEO(MODEL_KOOPA_SHELL,             koopa_shell_geo),
     LOAD_MODEL_FROM_GEO(MODEL_METAL_BOX,               metal_box_geo),
     LOAD_MODEL_FROM_DL (MODEL_METAL_BOX_DL,            metal_box_dl,                             LAYER_OPAQUE),
@@ -232,6 +239,10 @@ const LevelScript script_func_global_1[] = {
     LOAD_MODEL_FROM_GEO(MODEL_FLYGUY,                  flyguy_geo),
     LOAD_MODEL_FROM_GEO(MODEL_CHUCKYA,                 chuckya_geo),
     LOAD_MODEL_FROM_GEO(MODEL_TRAJECTORY_MARKER_BALL,  bowling_ball_track_geo),
+#ifdef PORT_MOP_OBJS
+	LOAD_MODEL_FROM_GEO(MODEL_MOP_SHELL_GREEN,         koopa_shell2_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_MOP_SHELL_RED,           koopa_shell3_geo),
+#endif
     RETURN(),
 };
 
@@ -239,6 +250,7 @@ const LevelScript script_func_global_2[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BULLET_BILL,             bullet_bill_geo),
     LOAD_MODEL_FROM_GEO(MODEL_YELLOW_SPHERE,           yellow_sphere_geo),
     LOAD_MODEL_FROM_GEO(MODEL_HOOT,                    hoot_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_YOSHI_EGG,               yoshi_egg_geo),
     LOAD_MODEL_FROM_GEO(MODEL_THWOMP,                  thwomp_geo),
     LOAD_MODEL_FROM_GEO(MODEL_HEAVE_HO,                heave_ho_geo),
     RETURN(),
@@ -297,6 +309,11 @@ const LevelScript script_func_global_9[] = {
     LOAD_MODEL_FROM_DL (MODEL_CAP_SWITCH_EXCLAMATION,  cap_switch_exclamation_seg5_dl_05002E00, LAYER_ALPHA),
     LOAD_MODEL_FROM_GEO(MODEL_CAP_SWITCH,              cap_switch_geo),
     LOAD_MODEL_FROM_DL (MODEL_CAP_SWITCH_BASE,         cap_switch_base_seg5_dl_05003120,        LAYER_OPAQUE),
+#ifdef PORT_MOP_OBJS
+    LOAD_MODEL_FROM_GEO(MODEL_TRAMPOLINE,              springboard_top_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_TRAMPOLINE_CENTER,       springboard_spring_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_TRAMPOLINE_BASE,         springboard_bottom_geo),
+#endif
     RETURN(),
 };
 
@@ -314,6 +331,7 @@ const LevelScript script_func_global_10[] = {
 const LevelScript script_func_global_11[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BIRDS,                   birds_geo),
     LOAD_MODEL_FROM_GEO(MODEL_PEACH,                   peach_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_YOSHI,                   yoshi_geo),
     RETURN(),
 };
 

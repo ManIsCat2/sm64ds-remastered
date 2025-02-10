@@ -597,7 +597,7 @@ s32 save_file_get_course_star_count(s32 fileIndex, s32 courseIndex) {
     u8 flag = 1;
     u8 starFlags = save_file_get_star_flags(fileIndex, courseIndex);
 
-    for (i = 0; i < NUM_STARS_PER_COURSE; i++, flag <<= 1) {
+    for (i = 0; i < (STAR_INDEX_100_COINS + 1); i++, flag <<= 1) {
         if (starFlags & flag) {
             count++;
         }
@@ -645,7 +645,7 @@ u32 save_file_get_star_flags(s32 fileIndex, s32 courseIndex) {
     if (courseIndex == COURSE_NUM_TO_INDEX(COURSE_NONE)) {
         starFlags = SAVE_FLAG_TO_STAR_FLAG(gSaveBuffer.files[fileIndex][0].flags);
     } else {
-        starFlags = gSaveBuffer.files[fileIndex][0].courseStars[courseIndex] & 0xFF;
+        starFlags = gSaveBuffer.files[fileIndex][0].courseStars[courseIndex] & 0x7F;
     }
 
     return starFlags;
@@ -678,14 +678,14 @@ u32 save_file_get_cannon_flags(s32 fileIndex, s32 courseIndex) {
  * Return TRUE if the cannon is unlocked in the current course.
  */
 s32 save_file_is_cannon_unlocked(void) {
-    return (gSaveBuffer.files[gCurrSaveFileNum - 1][0].courseStars[gCurrCourseNum] & (1 << 8)) != 0;
+    return (gSaveBuffer.files[gCurrSaveFileNum - 1][0].courseStars[gCurrCourseNum] & (1 << 7)) != 0;
 }
 
 /**
  * Sets the cannon status to unlocked in the current course.
  */
 void save_file_set_cannon_unlocked(void) {
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].courseStars[gCurrCourseNum] |= (1 << 8);
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].courseStars[gCurrCourseNum] |= (1 << 7);
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }
@@ -720,6 +720,10 @@ void save_file_set_sound_mode(u16 mode) {
 }
 
 u16 save_file_get_sound_mode(void) {
+    // Check if the sound is in range, in case we loaded a shifted save file
+    if (gSaveBuffer.menuData[0].soundMode > 2) {
+        save_file_set_sound_mode(0); // Reset it to stereo if not
+    }
     return gSaveBuffer.menuData[0].soundMode;
 }
 
@@ -748,9 +752,9 @@ void eu_set_language(u16 language) {
 }
 
 u16 eu_get_language(void) {
-    // check if the language is in range, in case we loaded a US save with garbage padding or something
+    // Check if the language is in range, in case we loaded a non-eu save with garbage values or a shifted save
     if (gSaveBuffer.menuData[0].language >= LANGUAGE_MAX) {
-        eu_set_language(LANGUAGE_ENGLISH); // reset it to english if not
+        eu_set_language(LANGUAGE_ENGLISH); // Reset it to english if not
     }
     return gSaveBuffer.menuData[0].language;
 }

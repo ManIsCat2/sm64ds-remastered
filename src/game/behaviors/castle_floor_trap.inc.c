@@ -1,7 +1,7 @@
 // castle_floor_trap.inc.c
 
 void bhv_floor_trap_in_castle_loop(void) {
-    if (gPlayerObject->platform == o) {
+    if (gMarioObject->platform == o) {
         o->parentObj->oInteractStatus |= INT_STATUS_TRAP_TURN;
     }
     o->oFaceAngleRoll = o->parentObj->oFaceAngleRoll;
@@ -15,8 +15,8 @@ void bhv_castle_floor_trap_init(void) {
 }
 
 void bhv_castle_floor_trap_open_detect(void) {
-    if (gPlayerStates[0].action == ACT_SPECIAL_EXIT_AIRBORNE
-        || gPlayerStates[0].action == ACT_SPECIAL_DEATH_EXIT) {
+    if (gMarioStates[0].action == ACT_SPECIAL_EXIT_AIRBORNE
+        || gMarioStates[0].action == ACT_SPECIAL_DEATH_EXIT) {
         o->oAction = 4; // rotates trapdoor so it looks always open
     } else {
         o->oAngleVelRoll = 0x400;
@@ -45,7 +45,7 @@ void bhv_castle_floor_trap_open(void) {
 }
 
 void bhv_castle_floor_trap_close_detect(void) {
-    if (o->oDistanceToPlayer > 1000.0f) {
+    if (o->oDistanceToMario > 1000.0f) {
         o->oAction = 3; // close trapdoor
     }
 }

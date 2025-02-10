@@ -193,8 +193,8 @@ void mr_i_act_2(void) {
         o->oMrIUnk104 = 0;
     }
 
-    obj_turn_toward_object(o, gPlayerObject, 0x10, 0x800);
-    obj_turn_toward_object(o, gPlayerObject, 0x0F, 0x400);
+    obj_turn_toward_object(o, gMarioObject, 0x10, 0x800);
+    obj_turn_toward_object(o, gMarioObject, 0x0F, 0x400);
 
     sp1C = sp1E - (s16)(o->oMoveAngleYaw);
 
@@ -247,15 +247,15 @@ void mr_i_act_2(void) {
         o->oMrIUnk108 = (s32)(random_float() * 50.0f + 50.0f);
     }
 
-    if (o->oDistanceToPlayer > 800.0f) {
+    if (o->oDistanceToMario > 800.0f) {
         o->oAction = 1;
     }
 }
 
 void mr_i_act_1(void) {
-    s16 sp1E = obj_angle_to_object(o, gPlayerObject);
+    s16 sp1E = obj_angle_to_object(o, gMarioObject);
     s16 sp1C = abs_angle_diff(o->oMoveAngleYaw, sp1E);
-    s16 sp1A = abs_angle_diff(o->oMoveAngleYaw, gPlayerObject->oFaceAngleYaw);
+    s16 sp1A = abs_angle_diff(o->oMoveAngleYaw, gMarioObject->oFaceAngleYaw);
 
     if (o->oTimer == 0) {
         cur_obj_become_tangible();
@@ -270,7 +270,7 @@ void mr_i_act_1(void) {
     }
 
     if (sp1C < 1024 && sp1A > 0x4000) {
-        if (o->oDistanceToPlayer < 700.0f) {
+        if (o->oDistanceToMario < 700.0f) {
             o->oAction = 2;
         } else {
             o->oMrIUnk104++;
@@ -292,7 +292,13 @@ void mr_i_act_1(void) {
 }
 
 void mr_i_act_0(void) {
+#ifndef VERSION_JP
     obj_set_angle(o, 0, 0, 0);
+#else
+    o->oMoveAnglePitch = 0;
+    o->oMoveAngleYaw = 0;
+    o->oMoveAngleRoll = 0;
+#endif
     cur_obj_scale(o->oBhvParams2ndByte + 1);
 #if FIX_MR_I_EYEBALL_POSITION
     o->oGraphYOffset = 100.0f * o->header.gfx.scale[1];
@@ -301,7 +307,7 @@ void mr_i_act_0(void) {
         cur_obj_set_pos_to_home();
     }
 
-    if (o->oDistanceToPlayer < 1500.0f) {
+    if (o->oDistanceToMario < 1500.0f) {
         o->oAction = 1;
     }
 }
@@ -330,7 +336,7 @@ void bhv_mr_i_loop(void) {
     cur_obj_call_action_function(sMrIActions);
 
     if (o->oAction != 3) {
-        if ((o->oDistanceToPlayer > 3000.0f) || (o->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM)) {
+        if ((o->oDistanceToMario > 3000.0f) || (o->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM)) {
             o->oAction = 0;
         }
     }

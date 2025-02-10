@@ -9,4 +9,8 @@
 
 #include "bully/geo.inc.c"
 
+#ifdef PORT_MOP_OBJS
+#include "src/extras/mop/actors/Blargg_MOP/geo.inc.c"
+#else
 #include "blargg/geo.inc.c"
+#endif

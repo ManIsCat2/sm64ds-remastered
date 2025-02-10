@@ -9,8 +9,8 @@
 #include "levels/castle_inside/header.h"
 #include "levels/ending/header.h"
 #include "levels/rr/header.h"
-#include "player.h"
-#include "player_actions_cutscene.h"
+#include "mario.h"
+#include "mario_actions_cutscene.h"
 #include "memory.h"
 #include "object_list_processor.h"
 #include "rendering_graph_node.h"
@@ -75,7 +75,7 @@ Gfx *geo_exec_inside_castle_light(s32 callContext, struct GraphNode *node, UNUSE
 
     if (callContext == GEO_CONTEXT_RENDER) {
         flags = save_file_get_flags();
-        if (gHudDisplay.stars >= 10 && !((flags & SAVE_FLAG_HAVE_WING_CAP) || (flags & SAVE_FLAG_HAVE_POWER_FLOWER))) {
+        if (gHudDisplay.stars >= 10 && !(flags & SAVE_FLAG_HAVE_WING_CAP)) {
             displayList = alloc_display_list(2 * sizeof(*displayList));
 
             if (displayList == NULL) {
@@ -167,7 +167,7 @@ Gfx *geo_exec_flying_carpet_create(s32 callContext, struct GraphNode *node, UNUS
         gSPEndDisplayList(displayListHead);
 
         curGraphNodeObject = (struct Object *) gCurGraphNodeObject;
-        if (gPlayerObject->platform == curGraphNodeObject) {
+        if (gMarioObject->platform == curGraphNodeObject) {
             gFlyingCarpetState = FLYING_CARPET_MOVING_WITH_MARIO;
         } else if (curGraphNodeObject->oForwardVel != 0.0) {
             gFlyingCarpetState = FLYING_CARPET_MOVING_WITHOUT_MARIO;

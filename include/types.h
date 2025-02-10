@@ -140,7 +140,7 @@ struct Animation {
     /*0x0A*/ s16 unusedBoneCount;
     /*0x0C*/ const s16 *values;
     /*0x10*/ const u16 *index;
-    /*0x14*/ u32 length; // only used with the players animations to determine how much to load. 0 otherwise.
+    /*0x14*/ u32 length; // only used with Mario animations to determine how much to load. 0 otherwise.
 };
 
 #define ANIMINDEX_NUMPARTS(animindex) (sizeof(animindex) / sizeof(u16) / 6 - 1)
@@ -305,12 +305,12 @@ struct Surface {
     /*0x2C*/ struct Object *object;
 };
 
-struct PlayerBodyState {
+struct MarioBodyState {
     /*0x00*/ u32 action;
-    /*0x04*/ s8 capState; /// see PlayerCapGSCId
+    /*0x04*/ s8 capState; /// see MarioCapGSCId
     /*0x05*/ s8 eyeState;
     /*0x06*/ s8 handState;
-    /*0x07*/ s8 wingFlutter; /// whether the player's wing cap wings are fluttering
+    /*0x07*/ s8 wingFlutter; /// whether Mario's wing cap wings are fluttering
     /*0x08*/ s16 modelState;
     /*0x0A*/ s8 grabPos;
     /*0x0B*/ u8 punchState; /// 2 bits for type of punch, 6 bits for punch animation timer
@@ -320,7 +320,7 @@ struct PlayerBodyState {
     u8 filler[4];
 };
 
-struct PlayerState {
+struct MarioState {
     /*0x00*/ u16 unk00;
     /*0x02*/ u16 input;
     /*0x04*/ u32 flags;
@@ -358,11 +358,11 @@ struct PlayerState {
     /*0x7C*/ struct Object *heldObj;
     /*0x80*/ struct Object *usedObj;
     /*0x84*/ struct Object *riddenObj;
-    /*0x88*/ struct Object *playerObj;
+    /*0x88*/ struct Object *marioObj;
     /*0x8C*/ struct SpawnInfo *spawnInfo;
     /*0x90*/ struct Area *area;
     /*0x94*/ struct PlayerCameraState *statusForCamera;
-    /*0x98*/ struct PlayerBodyState *playerBodyState;
+    /*0x98*/ struct MarioBodyState *marioBodyState;
     /*0x9C*/ struct Controller *controller;
     /*0xA0*/ struct DmaHandlerList *animList;
     /*0xA4*/ u32 collidedObjInteractTypes;

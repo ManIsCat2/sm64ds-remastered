@@ -9,7 +9,7 @@
 
 #include "config.h"
 
-#define CONFIGFILE_DEFAULT "sm64dsr_config.txt"
+#define CONFIGFILE_DEFAULT "sm64config.txt"
 
 #define MAX_BINDS  3
 #define MAX_VOLUME 127
@@ -36,13 +36,10 @@ extern unsigned int configSfxVolume;
 extern unsigned int configEnvVolume;
 extern unsigned int configKeyA[];
 extern unsigned int configKeyB[];
-extern unsigned int configKeyX[];
-extern unsigned int configKeyY[];
 extern unsigned int configKeyStart[];
 extern unsigned int configKeyL[];
 extern unsigned int configKeyR[];
-extern unsigned int configKeyZL[];
-extern unsigned int configKeyZR[];
+extern unsigned int configKeyZ[];
 extern unsigned int configKeyCUp[];
 extern unsigned int configKeyCDown[];
 extern unsigned int configKeyCLeft[];
@@ -57,17 +54,52 @@ extern unsigned int configKeyStickLeft[];
 extern unsigned int configKeyStickRight[];
 extern unsigned int configStickDeadzone;
 extern unsigned int configRumbleStrength;
+
+#ifdef TOUCH_CONTROLS
+extern bool configAutohideTouch;
+#endif
+
 #ifdef EXTERNAL_DATA
-extern bool         configPrecacheRes;
+extern bool configPrecacheRes;
+#endif
+
+#if MORE_VANILLA_CAM_STUFF
+typedef struct {
+    bool parallel;
+    bool srMario;
+    bool cUpSounds;
+    bool parallelCol;
+} ConfigVanillaCam;
+
+extern ConfigVanillaCam configVanillaCam;
+#endif
+
+#ifdef BETTERCAMERA
+typedef struct {
+    bool enable;
+    bool legacy;
+    bool analog;
+#ifdef MOUSE_ACTIONS
+    bool mouse;
+    unsigned int mouseSpeed;
+#endif
+    bool invertX;
+    bool invertY;
+    bool helper;
+    bool opaque;
+    unsigned int sensX;
+    unsigned int sensY;
+    unsigned int input;
+    bool debug;
+} ConfigPuppyCam;
+
+extern ConfigPuppyCam configPuppyCam;
 #endif
 
 extern bool         configHUD;
-extern bool         configWallslide;
-extern bool         configNerfs;
-extern bool         configDive;
-extern bool         configGlobalCapBlocks;
-extern bool         configJHeight;
-extern unsigned int configDash;
+#ifdef MOUSE_ACTIONS
+extern bool         configMouse;
+#endif
 extern bool         configSkipIntro;
 #ifdef DISCORDRPC
 extern bool         configDiscordRPC;

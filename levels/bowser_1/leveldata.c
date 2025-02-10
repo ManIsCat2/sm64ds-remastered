@@ -11,5 +11,3 @@
 #include "levels/bowser_1/texture.inc.c"
 #include "levels/bowser_1/areas/1/1/model.inc.c"
 #include "levels/bowser_1/areas/1/collision.inc.c"
-
-#include "levels/bowser_1/leveldata.inc.c"

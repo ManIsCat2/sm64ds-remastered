@@ -25,6 +25,10 @@
 #include "boot/system_checks.h"
 #endif
 
+#ifdef BETTERCAMERA
+#include "extras/bettercamera.h"
+#endif
+
 #if defined(TARGET_N3DS) && !defined(DISABLE_N3DS_AUDIO)
 #include "pc/audio/audio_3ds_threading.h"
 #endif
@@ -67,10 +71,10 @@ struct VblankHandler gGameVblankHandler;
 uintptr_t gPhysicalFramebuffers[3];
 uintptr_t gPhysicalZBuffer;
 
-// Player Anims and Demo allocation
-void *gPlayerAnimsMemAlloc;
+// Mario Anims and Demo allocation
+void *gMarioAnimsMemAlloc;
 void *gDemoInputsMemAlloc;
-struct DmaHandlerList gPlayerAnimsBuf;
+struct DmaHandlerList gMarioAnimsBuf;
 struct DmaHandlerList gDemoInputsBuf;
 
 // General timer that runs as the game starts
@@ -121,7 +125,7 @@ void init_rdp(void) {
     gDPSetColorDither(gDisplayListHead++, G_CD_MAGICSQ);
     gDPSetCycleType(gDisplayListHead++, G_CYC_FILL);
 
-#ifdef VERSION_SH
+#if defined(VERSION_SH) || defined(VERSION_CN)
     gDPSetAlphaDither(gDisplayListHead++, G_AD_PATTERN);
 #endif
     gDPPipeSync(gDisplayListHead++);
@@ -442,7 +446,7 @@ void display_and_vsync(void) {
 UNUSED static void record_demo(void) {
     // Record the player's button mask and current rawStickX and rawStickY.
     u8 buttonMask =
-        ((gPlayer1Controller->buttonDown & (A_BUTTON | B_BUTTON | X_BUTTON | Y_BUTTON | ZL_TRIG | ZR_TRIG | START_BUTTON)) >> 8)
+        ((gPlayer1Controller->buttonDown & (A_BUTTON | B_BUTTON | Z_TRIG | START_BUTTON)) >> 8)
         | (gPlayer1Controller->buttonDown & (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS));
     s8 rawStickX = gPlayer1Controller->rawStickX;
     s8 rawStickY = gPlayer1Controller->rawStickY;
@@ -623,6 +627,19 @@ void read_controller_inputs(void) {
     gPlayer3Controller->stickMag = gPlayer1Controller->stickMag;
     gPlayer3Controller->buttonPressed = gPlayer1Controller->buttonPressed;
     gPlayer3Controller->buttonDown = gPlayer1Controller->buttonDown;
+    
+#ifdef BETTERCAMERA
+    //If a cutscene's active, just kill all controller input.
+    if (gPuppyCam.enabled && gPuppyCam.cutscene && gPuppyCam.sceneInput) {
+        gPlayer1Controller->rawStickX = 0;
+        gPlayer1Controller->rawStickY = 0;
+        gPlayer1Controller->buttonPressed = 0;
+        gPlayer1Controller->buttonDown = 0;
+        gPlayer1Controller->stickX = 0;
+        gPlayer1Controller->stickY = 0;
+        gPlayer1Controller->stickMag = 0;
+    }
+#endif
 }
 
 /**
@@ -681,10 +698,10 @@ void setup_game_memory(void) {
     gPhysicalFramebuffers[0] = VIRTUAL_TO_PHYSICAL(gFramebuffer0);
     gPhysicalFramebuffers[1] = VIRTUAL_TO_PHYSICAL(gFramebuffer1);
     gPhysicalFramebuffers[2] = VIRTUAL_TO_PHYSICAL(gFramebuffer2);
-    // Setup Player Animations
-    gPlayerAnimsMemAlloc = main_pool_alloc(0x4000, MEMORY_POOL_LEFT);
-    set_segment_base_addr(17, (void *) gPlayerAnimsMemAlloc);
-    setup_dma_table_list(&gPlayerAnimsBuf, gPlayerAnims, gPlayerAnimsMemAlloc);
+    // Setup Mario Animations
+    gMarioAnimsMemAlloc = main_pool_alloc(0x4000, MEMORY_POOL_LEFT);
+    set_segment_base_addr(17, (void *) gMarioAnimsMemAlloc);
+    setup_dma_table_list(&gMarioAnimsBuf, gMarioAnims, gMarioAnimsMemAlloc);
     // Setup Demo Inputs List
     gDemoInputsMemAlloc = main_pool_alloc(0x800, MEMORY_POOL_LEFT);
     set_segment_base_addr(24, (void *) gDemoInputsMemAlloc);
@@ -707,15 +724,22 @@ void thread5_game_loop(UNUSED void *arg) {
     struct LevelCommand *levelCommandAddr;
 #endif
 
+    CN_DEBUG_PRINTF(("start gfx thread\n"));
+
     setup_game_memory();
 #ifdef RUMBLE_FEEDBACK
     init_rumble_pak_scheduler_queue();
 #endif
+    CN_DEBUG_PRINTF(("init ctrl\n"));
     init_controllers();
+    CN_DEBUG_PRINTF(("done ctrl\n"));
 #ifdef RUMBLE_FEEDBACK
     create_thread_6();
 #endif
     save_file_load_all();
+#ifdef BETTERCAMERA
+    puppycam_boot();
+#endif
 
     set_vblank_handler(2, &gGameVblankHandler, &gGameVblankQueue, (OSMesg) 1);
 

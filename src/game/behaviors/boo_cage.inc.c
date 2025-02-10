@@ -2,13 +2,13 @@
 /**
  * Behavior for bhvBooCage.
  * This is the cage inside the big boo in the castle courtyard
- * that lets Player enter BBH. It has its own special interaction type,
+ * that lets Mario enter BBH. It has its own special interaction type,
  * INTERACT_BBH_ENTRANCE.
  */
 
 /**
  * Boo cage hitbox. It's not tangible; this is the hitbox
- * Player has to enter to enter BBH.
+ * Mario has to enter to enter BBH.
  */
 static struct ObjectHitbox sBooCageHitbox = {
     /* interactType:      */ INTERACT_BBH_ENTRANCE,
@@ -32,7 +32,7 @@ void bhv_boo_cage_loop(void) {
 
     switch (o->oAction) {
         case BOO_CAGE_ACT_IN_BOO:
-            // Don't let Player enter BBH until the boo is killed
+            // Don't let Mario enter BBH until the boo is killed
             cur_obj_become_intangible();
 
             // Useless scale. This is also found in the code for BOO_CAGE_ACT_ON_GROUND.
@@ -82,21 +82,21 @@ void bhv_boo_cage_loop(void) {
             break;
 
         case BOO_CAGE_ACT_ON_GROUND:
-            // Allow Player to enter the cage once it's still on the ground.
+            // Allow Mario to enter the cage once it's still on the ground.
             cur_obj_become_tangible();
 
             // The other useless scale
             cur_obj_scale(1.0f);
 
-            // Set the action to BOO_CAGE_ACT_MARIO_JUMPING_IN when Player jumps in.
-            if (obj_check_if_collided_with_object(o, gPlayerObject)) {
+            // Set the action to BOO_CAGE_ACT_MARIO_JUMPING_IN when Mario jumps in.
+            if (obj_check_if_collided_with_object(o, gMarioObject)) {
                 o->oAction++;
             }
 
             break;
 
         case BOO_CAGE_ACT_MARIO_JUMPING_IN:
-            // All this action does is wait 100 frames after Player starts
+            // All this action does is wait 100 frames after Mario starts
             // jumping into the cage to set the action to BOO_CAGE_ACT_USELESS,
             // which does nothing. By extension, this action is also useless.
 

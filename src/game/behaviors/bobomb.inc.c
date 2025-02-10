@@ -45,7 +45,7 @@ void bobomb_check_interactions(void) {
 
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         if (o->oInteractStatus & INT_STATUS_MARIO_KNOCKBACK_DMG) {
-            o->oMoveAngleYaw = gPlayerObject->header.gfx.angle[1];
+            o->oMoveAngleYaw = gMarioObject->header.gfx.angle[1];
             o->oForwardVel = 25.0f;
             o->oVelY = 30.0f;
             o->oAction = BOBOMB_ACT_LAUNCHED;
@@ -72,7 +72,7 @@ void bobomb_act_patrol(void) {
     collisionFlags = object_step();
 
     if ((obj_return_home_if_safe(o, o->oHomeX, o->oHomeY, o->oHomeZ, 400) == TRUE)
-        && (obj_check_if_facing_toward_angle(o->oMoveAngleYaw, o->oAngleToPlayer, 0x2000) == TRUE)) {
+        && (obj_check_if_facing_toward_angle(o->oMoveAngleYaw, o->oAngleToMario, 0x2000) == TRUE)) {
         o->oBobombFuseLit = 1;
         o->oAction = BOBOMB_ACT_CHASE_MARIO;
     }
@@ -80,7 +80,7 @@ void bobomb_act_patrol(void) {
     obj_check_floor_death(collisionFlags, sObjFloor);
 }
 
-void bobomb_act_chase_player(void) {
+void bobomb_act_chase_mario(void) {
     UNUSED u8 filler[4];
     s16 animFrame = ++o->header.gfx.animInfo.animFrame;
     s16 collisionFlags;
@@ -92,7 +92,7 @@ void bobomb_act_chase_player(void) {
         cur_obj_play_sound_2(SOUND_OBJ_BOBOMB_WALK);
     }
 
-    obj_turn_toward_object(o, gPlayerObject, 16, 0x800);
+    obj_turn_toward_object(o, gMarioObject, 16, 0x800);
     obj_check_floor_death(collisionFlags, sObjFloor);
 }
 
@@ -115,7 +115,7 @@ void generic_bobomb_free_loop(void) {
             break;
 
         case BOBOMB_ACT_CHASE_MARIO:
-            bobomb_act_chase_player();
+            bobomb_act_chase_mario();
             break;
 
         case BOBOMB_ACT_EXPLODE:
@@ -181,14 +181,14 @@ void bobomb_free_loop(void) {
 void bobomb_held_loop(void) {
     o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
     cur_obj_init_animation(1);
-    cur_obj_set_pos_relative(gPlayerObject, 0, 60.0f, 100.0);
+    cur_obj_set_pos_relative(gMarioObject, 0, 60.0f, 100.0);
 
     o->oBobombFuseLit = 1;
     if (o->oBobombFuseTimer > 150) {
         //! Although the Bob-omb's action is set to explode when the fuse timer expires,
         //  bobomb_act_explode() will not execute until the bob-omb's held state changes.
         //  This allows the Bob-omb to be regrabbed indefinitely.
-        gPlayerObject->oInteractStatus |= INT_STATUS_MARIO_DROP_OBJECT;
+        gMarioObject->oInteractStatus |= INT_STATUS_MARIO_DROP_OBJECT;
         o->oAction = BOBOMB_ACT_EXPLODE;
     }
 }
@@ -241,7 +241,7 @@ void curr_obj_random_blink(s32 *blinkTimer) {
 void bhv_bobomb_loop(void) {
     s8 dustPeriodMinus1;
 
-    if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 4000)) {
+    if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 4000)) {
         switch (o->oHeldState) {
             case HELD_FREE:
                 bobomb_free_loop();
@@ -310,8 +310,8 @@ void bobomb_buddy_act_idle(void) {
         cur_obj_play_sound_2(SOUND_OBJ_BOBOMB_WALK);
     }
 
-    if (o->oDistanceToPlayer < 1000.0f) {
-        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToPlayer, 0x140);
+    if (o->oDistanceToMario < 1000.0f) {
+        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x140);
     }
 
     if (o->oInteractStatus == INT_STATUS_INTERACTED) {
@@ -322,10 +322,10 @@ void bobomb_buddy_act_idle(void) {
 /**
  * Function for the Bob-omb Buddy cannon guy.
  * dialogFirstText is the first dialogID called when Bob-omb Buddy
- * starts to talk to Player to prepare the cannon(s) for him.
+ * starts to talk to Mario to prepare the cannon(s) for him.
  * Then the camera goes to the nearest cannon, to play the "prepare cannon" cutscene
  * dialogSecondText is called after Bob-omb Buddy has the cannon(s) ready and
- * then tells Player that is "Ready for blastoff".
+ * then tells Mario that is "Ready for blastoff".
  */
 void bobomb_buddy_cannon_dialog(s16 dialogFirstText, s16 dialogSecondText) {
     struct Object *cannonClosed;
@@ -361,10 +361,10 @@ void bobomb_buddy_cannon_dialog(s16 dialogFirstText, s16 dialogSecondText) {
             break;
 
         case BOBOMB_BUDDY_CANNON_STOP_TALKING:
-            set_player_npc_dialog(MARIO_DIALOG_STOP);
+            set_mario_npc_dialog(MARIO_DIALOG_STOP);
 
             o->activeFlags &= ~ACTIVE_FLAG_INITIATED_TIME_STOP;
-            o->oBobombBuddyHasTalkedToPlayer = BOBOMB_BUDDY_HAS_TALKED;
+            o->oBobombBuddyHasTalkedToMario = BOBOMB_BUDDY_HAS_TALKED;
             o->oInteractStatus = 0;
             o->oAction = BOBOMB_BUDDY_ACT_IDLE;
             o->oBobombBuddyCannonStatus = BOBOMB_BUDDY_CANNON_OPENED;
@@ -373,17 +373,17 @@ void bobomb_buddy_cannon_dialog(s16 dialogFirstText, s16 dialogSecondText) {
 }
 
 void bobomb_buddy_act_talk(void) {
-    if (set_player_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
+    if (set_mario_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
         o->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
 
         switch (o->oBobombBuddyRole) {
             case BOBOMB_BUDDY_ROLE_ADVICE:
                 if (cutscene_object_with_dialog(CUTSCENE_DIALOG, o, o->oBhvParams2ndByte)
                     != BOBOMB_BUDDY_BP_STYPE_GENERIC) {
-                    set_player_npc_dialog(MARIO_DIALOG_STOP);
+                    set_mario_npc_dialog(MARIO_DIALOG_STOP);
 
                     o->activeFlags &= ~ACTIVE_FLAG_INITIATED_TIME_STOP;
-                    o->oBobombBuddyHasTalkedToPlayer = BOBOMB_BUDDY_HAS_TALKED;
+                    o->oBobombBuddyHasTalkedToMario = BOBOMB_BUDDY_HAS_TALKED;
                     o->oInteractStatus = 0;
                     o->oAction = BOBOMB_BUDDY_ACT_IDLE;
                 }
@@ -407,9 +407,9 @@ void bobomb_buddy_act_turn_to_talk(void) {
         cur_obj_play_sound_2(SOUND_OBJ_BOBOMB_WALK);
     }
 
-    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToPlayer, 0x1000);
+    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
 
-    if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToPlayer) {
+    if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
         o->oAction = BOBOMB_BUDDY_ACT_TALK;
     }
 

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/time.h>
-//#include "PR/os_internal.h"
 #include "macros.h"
 #include "platform.h"
 #include "fs/fs.h"
@@ -36,7 +35,7 @@ s32 osJamMesg(UNUSED OSMesgQueue *mq, UNUSED OSMesg msg, UNUSED s32 flag) {
     return 0;
 }
 s32 osSendMesg(UNUSED OSMesgQueue *mq, UNUSED OSMesg msg, UNUSED s32 flag) {
-#if defined(VERSION_EU) || defined(VERSION_SH)
+#if defined(VERSION_EU) || defined(VERSION_SH) || defined(VERSION_CN)
     s32 index;
     if (mq->validCount >= mq->msgCount) {
         return -1;
@@ -48,7 +47,7 @@ s32 osSendMesg(UNUSED OSMesgQueue *mq, UNUSED OSMesg msg, UNUSED s32 flag) {
     return 0;
 }
 s32 osRecvMesg(UNUSED OSMesgQueue *mq, UNUSED OSMesg *msg, UNUSED s32 flag) {
-#if defined(VERSION_EU) || defined(VERSION_SH)
+#if defined(VERSION_EU) || defined(VERSION_SH) || defined(VERSION_CN)
     if (mq->validCount == 0) {
         return -1;
     }
@@ -133,7 +132,7 @@ s32 osEepromLongRead(UNUSED OSMesgQueue *mq, u8 address, u8 *buffer, int nbytes)
 
 #ifdef TARGET_WEB
     if (EM_ASM_INT({
-        var s = localStorage.sm64dsr_save_file;
+        var s = localStorage.sm64_save_file;
         if (s && s.length === 684) {
             try {
                 var binary = atob(s);
@@ -178,7 +177,7 @@ s32 osEepromLongWrite(UNUSED OSMesgQueue *mq, u8 address, u8 *buffer, int nbytes
         for (var i = 0; i < EEPROM_SIZE; i++) {
             str += String.fromCharCode(HEAPU8[$0 + i]);
         }
-        localStorage.sm64dsr_save_file = btoa(str);
+        localStorage.sm64_save_file = btoa(str);
     }, content);
     s32 ret = 0;
 #else

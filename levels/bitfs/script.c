@@ -35,6 +35,9 @@ static const LevelScript script_func_local_1[] = {
     OBJECT(/*model*/ MODEL_BITFS_SLIDING_PLATFORM,        /*pos*/  2103,   198,  312, /*angle*/ 0, 0, 0,   /*bhvParam*/ BPARAM1(0x01) | BPARAM2(0x9F), /*bhv*/ bhvSlidingPlatform2),
     OBJECT(/*model*/ MODEL_BITFS_TUMBLING_PLATFORM,       /*pos*/  4979,  4250,   96, /*angle*/ 0, 0, 0,   /*bhvParam*/ BPARAM2(TUMBLING_BRIDGE_BP_BITFS), /*bhv*/ bhvTumblingBridge),
     OBJECT(/*model*/ MODEL_NONE,                          /*pos*/  3890, -2043,  266, /*angle*/ 0, 0, 0,   /*bhvParam*/ BPARAM2(82),   /*bhv*/ bhvPoleGrabbing),
+#ifdef PORT_MOP_OBJS
+    OBJECT(/*model*/ MODEL_BLARGG,                        /*pos*/  7900, -3071,  266, /*angle*/ 0, 0, 0,   /*bhvParam*/ 0, /*bhv*/ bhvBlargg),
+#endif
     RETURN(),
 };
 
@@ -63,7 +66,7 @@ const LevelScript level_bitfs_entry[] = {
     LOAD_MIO0        (/*seg*/ 0x08, _common0_mio0SegmentRomStart, _common0_mio0SegmentRomEnd),
     LOAD_RAW         (/*seg*/ 0x0F, _common0_geoSegmentRomStart, _common0_geoSegmentRomEnd),
     ALLOC_LEVEL_POOL(),
-    MARIO(/*model*/ MODEL_MARIO, /*bhvParam*/ BPARAM4(0x01), /*bhv*/ bhvPlayer),
+    MARIO(/*model*/ MODEL_MARIO, /*bhvParam*/ BPARAM4(0x01), /*bhv*/ bhvMario),
     JUMP_LINK(script_func_global_3),
     JUMP_LINK(script_func_global_18),
     JUMP_LINK(script_func_global_1),

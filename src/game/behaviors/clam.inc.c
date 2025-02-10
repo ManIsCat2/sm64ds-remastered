@@ -25,7 +25,7 @@ void clam_act_0(void) {
 #endif
         o->oClamUnkF4 = 10;
         o->oTimer = 0;
-    } else if (o->oTimer > 150 && o->oDistanceToPlayer < 500.0f) {
+    } else if (o->oTimer > 150 && o->oDistanceToMario < 500.0f) {
         cur_obj_play_sound_2(SOUND_GENERAL_CLAM_SHELL_OPEN);
         o->oAction = 1;
     } else if (o->oClamUnkF4 != 0) {

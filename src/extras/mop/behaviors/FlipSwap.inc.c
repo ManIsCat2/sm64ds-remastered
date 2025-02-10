@@ -2,7 +2,7 @@ void bhv_flipswap_loop(void){
 	switch(o->oAction){
 		//still
 		case 0:
-			if (((gPlayerState->prevAction&ACT_GROUP_MASK)!=ACT_GROUP_AIRBORNE) && ((gPlayerState->action& ACT_GROUP_MASK)==ACT_GROUP_AIRBORNE)){
+			if (((gMarioState->prevAction&ACT_GROUP_MASK)!=ACT_GROUP_AIRBORNE) && ((gMarioState->action& ACT_GROUP_MASK)==ACT_GROUP_AIRBORNE)){
 				//sloth brain it
 				if (o->oFaceAngleRoll==0){
 					o->oMoveAngleRoll=-0x800; // originally 0x400
@@ -17,7 +17,7 @@ void bhv_flipswap_loop(void){
 			if (o->oTimer<0x10){ // originally 0x20
 				o->oFaceAngleRoll+=o->oMoveAngleRoll;
 			}else 
-			if (((gPlayerState->action& ACT_GROUP_MASK)!=ACT_GROUP_AIRBORNE)){
+			if (((gMarioState->action& ACT_GROUP_MASK)!=ACT_GROUP_AIRBORNE)){
 				o->oAction=0;
 			}
 			break;

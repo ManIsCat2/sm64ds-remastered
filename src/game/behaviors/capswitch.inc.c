@@ -1,12 +1,6 @@
 // capswitch.inc.c
 
-#ifdef EXT_OPTIONS_MENU
-#ifndef TARGET_N64
-#include "pc/configfile.h"
-#else
-extern int configGlobalCapBlocks;
-#endif
-#endif
+UNUSED u8 sCapSwitchText[] = { DIALOG_010, DIALOG_011, DIALOG_012 };
 
 void cap_switch_act_0(void) {
     o->oAnimState = o->oBhvParams2ndByte;
@@ -16,10 +10,7 @@ void cap_switch_act_0(void) {
     spawn_object_relative_with_scale(0, 0, -71, 0, 0.5f, o, MODEL_CAP_SWITCH_BASE, bhvCapSwitchBase);
 
     if (gCurrLevelNum != LEVEL_UNKNOWN_32) {
-        if ((save_file_get_flags() & sCapSaveFlags[o->oBhvParams2ndByte]) && (!configGlobalCapBlocks)) {
-            o->oAction = 3;
-            o->header.gfx.scale[1] = 0.1f;
-        } else if ((save_file_get_flags() & sCapSaveFlags[SAVE_FLAG_HAVE_POWER_FLOWER]) && (configGlobalCapBlocks)) {
+        if (save_file_get_flags() & sCapSaveFlags[o->oBhvParams2ndByte]) {
             o->oAction = 3;
             o->header.gfx.scale[1] = 0.1f;
         } else {
@@ -31,12 +22,8 @@ void cap_switch_act_0(void) {
 }
 
 void cap_switch_act_1(void) {
-    if (cur_obj_is_player_on_platform()) {
-        if (configGlobalCapBlocks) {
-            save_file_set_flags(sCapSaveFlags[SAVE_FLAG_HAVE_POWER_FLOWER]);
-        } else {
-            save_file_set_flags(sCapSaveFlags[o->oBhvParams2ndByte]);
-        }
+    if (cur_obj_is_mario_on_platform()) {
+        save_file_set_flags(sCapSaveFlags[o->oBhvParams2ndByte]);
         o->oAction = 2;
         cur_obj_play_sound_2(SOUND_GENERAL_ACTIVATE_CAP_SWITCH);
     }

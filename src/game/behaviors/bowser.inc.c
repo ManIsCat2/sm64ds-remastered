@@ -17,8 +17,8 @@ void bowser_tail_anchor_act_default(void) {
     if (bowser->oAction == BOWSER_ACT_TILT_LAVA_PLATFORM) {
         // Bowser cannot be touched when he tilts BitFS platform
         bowser->oIntangibleTimer = -1;
-    } else if (obj_check_if_collided_with_object(o, gPlayerObject)) {
-        // When Player collides his tail, it now gets
+    } else if (obj_check_if_collided_with_object(o, gMarioObject)) {
+        // When Mario collides his tail, it now gets
         // intangible so he can grab it through
         bowser->oIntangibleTimer = 0;
         o->oAction = BOWSER_ACT_TAIL_TOUCHED_MARIO;
@@ -38,9 +38,9 @@ void bowser_tail_anchor_thrown(void) {
 }
 
 /**
- * Makes the tail intangible so Player can grab it
+ * Makes the tail intangible so Mario can grab it
  */
-void bowser_tail_anchor_act_touched_player(void) {
+void bowser_tail_anchor_act_touched_mario(void) {
     // Return to main action when Bowser tilts BitFS platform
     if (o->parentObj->oAction == BOWSER_ACT_TILT_LAVA_PLATFORM) {
         o->parentObj->oIntangibleTimer = -1;
@@ -52,7 +52,7 @@ void bowser_tail_anchor_act_touched_player(void) {
 void (*sBowserTailAnchorActions[])(void) = {
     bowser_tail_anchor_act_default,
     bowser_tail_anchor_thrown,
-    bowser_tail_anchor_act_touched_player,
+    bowser_tail_anchor_act_touched_mario,
 };
 
 /**
@@ -135,7 +135,7 @@ void bhv_bowser_body_anchor_loop(void) {
         o->oInteractType = INTERACT_TEXT;
 #endif
     } else {
-        // Do damage if Player touches Bowser
+        // Do damage if Mario touches Bowser
         o->oInteractType = INTERACT_DAMAGE;
         // Make body intangible while is transparent
         // in BitFS (Teleporting)
@@ -317,7 +317,7 @@ void bowser_bitdw_actions(void) {
     // Set attacks when Bowser Reacts
     if (!o->oBowserIsReacting) {
         if (o->oBowserStatus & BOWSER_STATUS_ANGLE_MARIO) {
-            if (o->oDistanceToPlayer < 1500.0f) { // nearby
+            if (o->oDistanceToMario < 1500.0f) { // nearby
                 o->oAction = BOWSER_ACT_BREATH_FIRE;
             } else { // far away
                 o->oAction = BOWSER_ACT_QUICK_JUMP;
@@ -331,15 +331,19 @@ void bowser_bitdw_actions(void) {
         o->oBowserIsReacting = FALSE;
         // Set starting Bowser level actions, randomly he can also start
         // dancing after the introduction
+#ifndef VERSION_JP
         if (gCurrDemoInput == NULL) { // demo check because entry exits post JP
+#endif
             if (rand < 0.1) {
                 o->oAction = BOWSER_ACT_DANCE; // 10% chance
             } else {
                 o->oAction = BOWSER_ACT_WALK_TO_MARIO; // common
             }
+#ifndef VERSION_JP
         } else {
             o->oAction = BOWSER_ACT_WALK_TO_MARIO;
         }
+#endif
     }
 }
 
@@ -352,7 +356,7 @@ void bowser_bitfs_actions(void) {
     // Set attacks when Bowser Reacts
     if (!o->oBowserIsReacting) {
         if (o->oBowserStatus & BOWSER_STATUS_ANGLE_MARIO) {
-            if (o->oDistanceToPlayer < 1300.0f) {  // nearby
+            if (o->oDistanceToMario < 1300.0f) {  // nearby
                 if (rand < 0.5) { // 50% chance
                     o->oAction = BOWSER_ACT_TELEPORT;
                 } else {
@@ -383,7 +387,7 @@ void bowser_bitfs_actions(void) {
 void bowser_bits_action_list(void) {
     f32 rand = random_float();
     if (o->oBowserStatus & BOWSER_STATUS_ANGLE_MARIO) {
-        if (o->oDistanceToPlayer < 1000.0f) { // nearby
+        if (o->oDistanceToMario < 1000.0f) { // nearby
             if (rand < 0.4) {
                 o->oAction = BOWSER_ACT_SPIT_FIRE_ONTO_FLOOR; // 40% chance
             } else if (rand < 0.8) {
@@ -497,12 +501,12 @@ void bowser_act_breath_fire(void) {
 }
 
 /**
- * Makes Bowser walk towards Player
+ * Makes Bowser walk towards Mario
  */
-void bowser_act_walk_to_player(void) {
-    UNUSED s32 facing; // is Bowser facing Player?
+void bowser_act_walk_to_mario(void) {
+    UNUSED s32 facing; // is Bowser facing Mario?
     s16 turnSpeed;
-    s16 angleFromPlayer = abs_angle_diff(o->oMoveAngleYaw, o->oAngleToPlayer);
+    s16 angleFromMario = abs_angle_diff(o->oMoveAngleYaw, o->oAngleToMario);
 
     // Set turning speed depending of the health
     // Also special case for BitFS
@@ -518,7 +522,7 @@ void bowser_act_walk_to_player(void) {
         }
     }
 
-    facing = cur_obj_rotate_yaw_toward(o->oAngleToPlayer, turnSpeed);
+    facing = cur_obj_rotate_yaw_toward(o->oAngleToMario, turnSpeed);
 
     if (o->oSubAction == 0) {
         o->oBowserTimer = 0;
@@ -536,7 +540,7 @@ void bowser_act_walk_to_player(void) {
                     o->oBowserStatus &= ~BOWSER_STATUS_FIRE_SKY;
                 }
             // Do subaction below if angles is less than 0x2000
-            } else if (angleFromPlayer < 0x2000) {
+            } else if (angleFromMario < 0x2000) {
                 o->oSubAction++;
             }
         }
@@ -560,10 +564,10 @@ void bowser_act_teleport(void) {
             if (o->oTimer == 0) {
                 cur_obj_play_sound_2(SOUND_OBJ2_BOWSER_TELEPORT);
             }
-            // Bowser is invisible, move angle to face Player
+            // Bowser is invisible, move angle to face Mario
             if (o->oOpacity == 0) {
                 o->oSubAction++;
-                o->oMoveAngleYaw = o->oAngleToPlayer;
+                o->oMoveAngleYaw = o->oAngleToMario;
             }
             break;
 
@@ -573,13 +577,13 @@ void bowser_act_teleport(void) {
                 o->oForwardVel = 100.0f;
             } else {
                 o->oSubAction = BOWSER_SUB_ACT_TELEPORT_STOP;
-                o->oMoveAngleYaw = o->oAngleToPlayer; // update angle
+                o->oMoveAngleYaw = o->oAngleToMario; // update angle
             }
 
-            if (abs_angle_diff(o->oMoveAngleYaw, o->oAngleToPlayer) > 0x4000) {
-                if (o->oDistanceToPlayer > 500.0f) {
+            if (abs_angle_diff(o->oMoveAngleYaw, o->oAngleToMario) > 0x4000) {
+                if (o->oDistanceToMario > 500.0f) {
                     o->oSubAction = BOWSER_SUB_ACT_TELEPORT_STOP;
-                    o->oMoveAngleYaw = o->oAngleToPlayer; // update angle
+                    o->oMoveAngleYaw = o->oAngleToMario; // update angle
                     cur_obj_play_sound_2(SOUND_OBJ2_BOWSER_TELEPORT);
                 }
             }
@@ -695,10 +699,10 @@ s32 bowser_land(void) {
         // Set status attacks in BitDW since the other levels
         // have different attacks defined
         if (o->oBhvParams2ndByte == BOWSER_BP_BITDW) {
-            if (o->oDistanceToPlayer < 850.0f) {
-                gPlayerObject->oInteractStatus |= INT_STATUS_MARIO_KNOCKBACK_DMG;
+            if (o->oDistanceToMario < 850.0f) {
+                gMarioObject->oInteractStatus |= INT_STATUS_MARIO_KNOCKBACK_DMG;
             } else {
-                gPlayerObject->oInteractStatus |= INT_STATUS_MARIO_STUNNED;
+                gMarioObject->oInteractStatus |= INT_STATUS_MARIO_STUNNED;
             }
         }
         return TRUE;
@@ -831,7 +835,7 @@ void bowser_act_hit_edge(void) {
  * Makes Bowser do a fire split attack
  */
 void bowser_act_spit_fire_onto_floor(void) {
-    // Set fixed rand value if Player is low health
+    // Set fixed rand value if Mario is low health
     if (gHudDisplay.wedges < 4) {
         o->oBowserRandSplitFloor = 3;
     } else {
@@ -890,9 +894,9 @@ void bowser_act_turn_from_edge(void) {
 }
 
 /**
- * Makes Bowser charge (run) to Player
+ * Makes Bowser charge (run) to Mario
  */
-void bowser_act_charge_player(void) {
+void bowser_act_charge_mario(void) {
     s32 time;
     // Reset Speed to prepare charge
     if (o->oTimer == 0) {
@@ -917,15 +921,15 @@ void bowser_act_charge_player(void) {
                 if (o->oBowserTimer >= 6) {
                     o->oSubAction = BOWSER_SUB_ACT_CHARGE_SLIP;
                 }
-                // Slip if Player has a differentiable angle and 2 timer frames has passed
+                // Slip if Mario has a differentiable angle and 2 timer frames has passed
                 if (o->oBowserTimer >= 2) {
-                    if (abs_angle_diff(o->oAngleToPlayer, o->oMoveAngleYaw) > 0x2000) {
+                    if (abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw) > 0x2000) {
                         o->oSubAction = BOWSER_SUB_ACT_CHARGE_SLIP;
                     }
                 }
             }
-            // Rotate to Player
-            cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 0x200);
+            // Rotate to Mario
+            cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x200);
             break;
 
         case BOWSER_SUB_ACT_CHARGE_SLIP:
@@ -985,7 +989,7 @@ s32 bowser_check_hit_mine(void) {
 }
 
 /**
- * Bowser's thrown act that gets called after Player releases him
+ * Bowser's thrown act that gets called after Mario releases him
  */
 void bowser_act_thrown(void) {
     UNUSED u8 filler[4];
@@ -1199,14 +1203,14 @@ void bowser_dead_bounce(void) {
 }
 
 /**
- * Wait for Player to get close while Bowser is defeated
+ * Wait for Mario to get close while Bowser is defeated
  * Returns TRUE if he is close enough
  */
-s32 bowser_dead_wait_for_player(void) {
+s32 bowser_dead_wait_for_mario(void) {
     s32 ret = FALSE;
     cur_obj_become_intangible();
-    if (cur_obj_init_animation_and_check_if_near_end(BOWSER_ANIM_LAY_DOWN) && o->oDistanceToPlayer < 700.0f
-        && abs_angle_diff(gPlayerObject->oMoveAngleYaw, o->oAngleToPlayer) > 0x6000) {
+    if (cur_obj_init_animation_and_check_if_near_end(BOWSER_ANIM_LAY_DOWN) && o->oDistanceToMario < 700.0f
+        && abs_angle_diff(gMarioObject->oMoveAngleYaw, o->oAngleToMario) > 0x6000) {
         ret = TRUE;
     }
     cur_obj_extend_animation_if_at_end();
@@ -1292,7 +1296,7 @@ s32 bowser_dead_default_stage_ending(void) {
         bowser_dead_hide();
         spawn_triangle_break_particles(20, MODEL_YELLOW_COIN, 1.0f, 0);
         bowser_spawn_collectable();
-        set_player_npc_dialog(MARIO_DIALOG_STOP);
+        set_mario_npc_dialog(MARIO_DIALOG_STOP);
         ret = TRUE;
     }
 
@@ -1357,8 +1361,8 @@ void bowser_act_dead(void) {
             break;
 
         case BOWSER_SUB_ACT_DEAD_WAIT:
-            // Check if Player is close to Bowser
-            if (bowser_dead_wait_for_player()) {
+            // Check if Mario is close to Bowser
+            if (bowser_dead_wait_for_mario()) {
                 o->oBowserTimer = 0;
                 // Set different (final) subaction in BitS
                 // Non-BitS Bowser uses default subaction and sets dithering
@@ -1508,7 +1512,9 @@ s32 bowser_check_fallen_off_stage(void) {
     return FALSE;
 }
 
+#if PLATFORM_DISPLACEMENT_2
 struct PlatformDisplacementInfo sBowserDisplacementInfo;
+#endif
 
 /**
  * Set Bowser's actions
@@ -1521,14 +1527,14 @@ void (*sBowserActions[])(void) = {
     bowser_act_dead,
     bowser_act_wait,
     bowser_act_intro_walk,
-    bowser_act_charge_player,
+    bowser_act_charge_mario,
     bowser_act_spit_fire_into_sky,
     bowser_act_spit_fire_onto_floor,
     bowser_act_hit_edge,
     bowser_act_turn_from_edge,
     bowser_act_hit_mine,
     bowser_act_big_jump,
-    bowser_act_walk_to_player,
+    bowser_act_walk_to_mario,
     bowser_act_breath_fire,
     bowser_act_teleport,
     bowser_act_quick_jump,
@@ -1588,7 +1594,11 @@ void bowser_free_update(void) {
 
     // Platform displacement check (for BitFS)
     if (platform != NULL) {
+#if PLATFORM_DISPLACEMENT_2
         apply_platform_displacement(&sBowserDisplacementInfo, &o->oPosX, (s16 *) &o->oFaceAngleYaw, platform);
+#else
+        apply_platform_displacement(FALSE, platform);
+#endif
     }
     // Reset grabbed status
     o->oBowserGrabbedStatus = BOWSER_GRAB_STATUS_NONE;
@@ -1644,10 +1654,10 @@ void bowser_held_update(void) {
 
     // Reset move flags
     o->oMoveFlags = 0;
-    // Copy angle values from Player
-    o->oBowserHeldAnglePitch = gPlayerObject->oMoveAnglePitch;
-    o->oBowserHeldAngleVelYaw = gPlayerObject->oAngleVelYaw;
-    o->oMoveAngleYaw = gPlayerObject->oMoveAngleYaw;
+    // Copy angle values from Mario
+    o->oBowserHeldAnglePitch = gMarioObject->oMoveAnglePitch;
+    o->oBowserHeldAngleVelYaw = gMarioObject->oAngleVelYaw;
+    o->oMoveAngleYaw = gMarioObject->oMoveAngleYaw;
 }
 
 /**
@@ -1688,13 +1698,13 @@ void bowser_thrown_dropped_update(void) {
  * Bowser's main loop
  */
 void bhv_bowser_loop(void) {
-    s16 angleToPlayer;  // AngleToPlayer from Bowser's perspective
+    s16 angleToMario;  // AngleToMario from Bowser's perspective
     s16 angleToCenter; // AngleToCenter from Bowser's perspective
 
     // Set distance/angle values
     o->oBowserDistToCenter = sqrtf(o->oPosX * o->oPosX + o->oPosZ * o->oPosZ);
     o->oBowserAngleToCenter = atan2s(0.0f - o->oPosZ, 0.0f - o->oPosX);
-    angleToPlayer = abs_angle_diff(o->oMoveAngleYaw, o->oAngleToPlayer);
+    angleToMario = abs_angle_diff(o->oMoveAngleYaw, o->oAngleToMario);
     angleToCenter = abs_angle_diff(o->oMoveAngleYaw, o->oBowserAngleToCenter);
 
     // Reset Status
@@ -1702,7 +1712,7 @@ void bhv_bowser_loop(void) {
 
     // Set bitflag status for distance/angle values
     // Only the first one is used
-    if (angleToPlayer < 0x2000) {
+    if (angleToMario < 0x2000) {
         o->oBowserStatus |= BOWSER_STATUS_ANGLE_MARIO;
     }
     if (angleToCenter < 0x3800) {
@@ -1711,7 +1721,7 @@ void bhv_bowser_loop(void) {
     if (o->oBowserDistToCenter < 1000.0f) {
         o->oBowserStatus |= BOWSER_STATUS_DIST_CENTER; // unused
     }
-    if (o->oDistanceToPlayer < 850.0f) {
+    if (o->oDistanceToMario < 850.0f) {
         o->oBowserStatus |= BOWSER_STATUS_DIST_MARIO; // unused
     }
 
@@ -1801,7 +1811,7 @@ Gfx *geo_update_body_rot_from_parent(s32 callContext, UNUSED struct GraphNode *n
 }
 
 /**
- * Bowser's eyes Geo-Switch-Case IDs, defined from Player's POV
+ * Bowser's eyes Geo-Switch-Case IDs, defined from Mario's POV
  */
 enum BowserEyesGSCId {
     /*0x00*/ BOWSER_EYES_OPEN,
@@ -1821,15 +1831,15 @@ enum BowserEyesGSCId {
  */
 void bowser_open_eye_switch(struct Object *obj, struct GraphNodeSwitchCase *switchCase) {
     s32 eyeCase;
-    s16 angleFromPlayer;
+    s16 angleFromMario;
 
-    angleFromPlayer = abs_angle_diff(obj->oMoveAngleYaw, obj->oAngleToPlayer);
+    angleFromMario = abs_angle_diff(obj->oMoveAngleYaw, obj->oAngleToMario);
     eyeCase = switchCase->selectedCase;
 
     switch (eyeCase) {
         case BOWSER_EYES_OPEN:
-            // Player is in Bowser's field of view
-            if (angleFromPlayer > 0x2000) {
+            // Mario is in Bowser's field of view
+            if (angleFromMario > 0x2000) {
                 if (obj->oAngleVelYaw > 0) {
                     switchCase->selectedCase = BOWSER_EYES_RIGHT;
                 }

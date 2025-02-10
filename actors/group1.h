@@ -66,7 +66,12 @@ extern const Gfx hoot_seg5_dl_05004D48[];
 extern const struct Animation *const hoot_seg5_anims_05005768[];
 
 // thwomp
+extern const GeoLayout thwomp_geo[];
+extern const Gfx thwomp_seg5_dl_0500B570[];
+extern const Gfx thwomp_seg5_dl_0500B718[];
+extern const Gfx thwomp_seg5_dl_0500B750[];
 extern const Collision thwomp_seg5_collision_0500B7D0[];
+extern const Collision thwomp_seg5_collision_0500B92C[];
 
 // yellow_sphere_small
 extern const GeoLayout yellow_sphere_geo[];
@@ -74,8 +79,16 @@ extern const Gfx yellow_sphere_seg5_dl_05000840[];
 extern const Gfx yellow_sphere_seg5_dl_05000888[];
 extern const Gfx yellow_sphere_seg5_dl_050008C8[];
 
-#include "thwomp/geo_header.h"
-
-#include "thwomp/collision_header.h"
+// yoshi_egg
+extern const GeoLayout yoshi_egg_geo[];
+extern const Gfx yoshi_egg_seg5_dl_050097B8[];
+extern const Gfx yoshi_egg_seg5_dl_05009820[];
+extern const Gfx yoshi_egg_seg5_dl_05009838[];
+extern const Gfx yoshi_egg_seg5_dl_05009850[];
+extern const Gfx yoshi_egg_seg5_dl_05009868[];
+extern const Gfx yoshi_egg_seg5_dl_05009880[];
+extern const Gfx yoshi_egg_seg5_dl_05009898[];
+extern const Gfx yoshi_egg_seg5_dl_050098B0[];
+extern const Gfx yoshi_egg_seg5_dl_050098C8[];
 
 #endif

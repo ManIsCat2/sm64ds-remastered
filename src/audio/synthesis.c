@@ -1,4 +1,4 @@
-#ifndef VERSION_SH
+#if !defined(VERSION_SH) && !defined(VERSION_CN)
 #include <ultra64.h>
 
 #include "synthesis.h"
@@ -1435,7 +1435,11 @@ void note_set_vel_pan_reverb(struct Note *note, f32 velocity, f32 pan, u8 reverb
     // in external.c. An out-of-bounds read by itself doesn't crash, but if the
     // resulting value is a nan or denormal, performing arithmetic on it crashes
     // on console.
+#ifdef VERSION_JP
+    panIndex = MIN((s32)(pan * 127.5), 127);
+#else
     panIndex = (s32)(pan * 127.5f) & 127;
+#endif
     if (note->stereoHeadsetEffects && gSoundMode == SOUND_MODE_HEADSET) {
         s8 smallPanIndex;
         s8 temp = (s8)(pan * 10.0f);
@@ -1479,8 +1483,13 @@ void note_set_vel_pan_reverb(struct Note *note, f32 velocity, f32 pan, u8 reverb
     if (velocity < 0) {
         velocity = 0;
     }
+#ifdef VERSION_JP
+    note->targetVolLeft = (u16)(velocity * volLeft) & ~0x80FF; // 0x7F00, but that doesn't match
+    note->targetVolRight = (u16)(velocity * volRight) & ~0x80FF;
+#else
     note->targetVolLeft = (u16)(s32)(velocity * volLeft) & ~0x80FF;
     note->targetVolRight = (u16)(s32)(velocity * volRight) & ~0x80FF;
+#endif
     if (note->targetVolLeft == 0) {
         note->targetVolLeft++;
     }

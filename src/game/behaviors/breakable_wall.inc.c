@@ -1,13 +1,13 @@
 // breakable_wall.inc.c
 
 void bhv_wf_breakable_wall_loop(void) {
-    if (gPlayerStates[0].action == ACT_SHOT_FROM_CANNON) {
+    if (gMarioStates[0].action == ACT_SHOT_FROM_CANNON) {
         cur_obj_become_tangible();
-        if (obj_check_if_collided_with_object(o, gPlayerObject)) {
+        if (obj_check_if_collided_with_object(o, gMarioObject)) {
             if (cur_obj_has_behavior(bhvWFBreakableWallRight)) {
                 play_puzzle_jingle();
 #if BETTER_WF_BREAKEABLE_WALL
-                set_player_action(gPlayerState, ACT_SPAWN_SPIN_AIRBORNE, 0);
+                set_mario_action(gMarioState, ACT_SPAWN_SPIN_AIRBORNE, 0);
 #endif
             }
 

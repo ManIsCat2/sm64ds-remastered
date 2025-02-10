@@ -1087,6 +1087,7 @@ const Gfx peach_seg5_dl_05007230[] = {
     gsSPEndDisplayList(),
 };
 
+#ifndef VERSION_JP
 // 0x05007288 - 0x050072E8
 const Gfx peach_seg5_us_dl_05007288[] = {
     gsDPPipeSync(),
@@ -1102,6 +1103,7 @@ const Gfx peach_seg5_us_dl_05007288[] = {
     gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
+#endif
 
 // 0x05007288
 static const Lights1 peach_seg5_lights_05007288 = gdSPDefLights1(
@@ -2217,6 +2219,7 @@ const Gfx peach_seg5_dl_0500A0A8[] = {
     gsSPEndDisplayList(),
 };
 
+#ifndef VERSION_JP
 // 0x0500A188 - 0x0500A210
 const Gfx peach_seg5_us_dl_0500A188[] = {
     gsDPPipeSync(),
@@ -2237,3 +2240,4 @@ const Gfx peach_seg5_us_dl_0500A188[] = {
     gsDPSetAlphaCompare(G_AC_NONE),
     gsSPEndDisplayList(),
 };
+#endif

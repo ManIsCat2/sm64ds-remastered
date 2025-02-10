@@ -3,9 +3,9 @@ s32 flip_block_sqrtf_diff(struct Object *obj) {
     f32 dy;
     f32 dz;
 
-    dx = gPlayerObject->oPosX - obj->oPosX;
-    dz = obj->oPosZ - gPlayerObject->oPosZ;
-    dy = obj->oPosY - gPlayerObject->oPosY;
+    dx = gMarioObject->oPosX - obj->oPosX;
+    dz = obj->oPosZ - gMarioObject->oPosZ;
+    dy = obj->oPosY - gMarioObject->oPosY;
 
     if ((sqrtf(dx * dx) < 104.0f) && (sqrtf(dz * dz) < 104.0f) && (sqrtf(dy * dy) < 304.0f)) {
         return TRUE;
@@ -20,8 +20,8 @@ void bhv_flip_block_loop(void) {
             o->oAction = 1;
         }
 
-        if (flip_block_sqrtf_diff(o) && !(o->oPosY < gPlayerObject->oPosY) && !(gPlayerState[0].vel[1] < 15.0f)) {
-            gPlayerState[0].vel[1] = 0.0f;
+        if (flip_block_sqrtf_diff(o) && !(o->oPosY < gMarioObject->oPosY) && !(gMarioState[0].vel[1] < 15.0f)) {
+            gMarioState[0].vel[1] = 0.0f;
             o->oAction = 1;
         }
     } else {

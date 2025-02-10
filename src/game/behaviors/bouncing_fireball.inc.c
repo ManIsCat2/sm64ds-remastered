@@ -46,7 +46,7 @@ void bhv_bouncing_fireball_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (o->oDistanceToPlayer < 2000.0f) {
+            if (o->oDistanceToMario < 2000.0f) {
                 o->oAction = 1;
             }
             break;

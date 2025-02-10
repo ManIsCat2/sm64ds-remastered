@@ -7,7 +7,7 @@
 /// Enabled specific vanilla camera code.
 #define CAMERA_VANILLA_DEFINES (0 || VANILLA_CHECKS)
 
-/// Makes the camera approach the players height much more quickly.
+/// Makes the camera approach Mario's height much more quickly.
 #define FAST_VERTICAL_CAMERA_MOVEMENT (0 || QOL_FIXES)
 
 /// Fixes up checks when vanilla camera rotates to a wall 
@@ -22,10 +22,10 @@
 /// Changes C-Up vanilla camera similar to the DS version
 #define DS_CAM_MOVEMENT_C_UP (0 || QOL_FEATURES)
 
-/// Adds parallel lakitu camera, star road player camera and some reonucam stuff, all configurable
+/// Adds parallel lakitu camera, star road mario camera and some reonucam stuff, all configurable
 #define MORE_VANILLA_CAM_STUFF (0 || (EXT_OPTIONS_MENU && QOL_FEATURES))
 
-/// The number of steps between the player and the camera to check for walls obstructing the player. Vanilla is 8.
+/// The number of steps between Mario and the camera to check for walls obstructing Mario. Vanilla is 8.
 #define CAMERA_NUM_OBSTRUCTION_CHECKS   8
 
 /*********************
@@ -38,8 +38,8 @@
 /// Properly adds unused SSL Pyramid cutscene after standing on the 4 pillars
 #define SSL_PYRAMID_CUTSCENE (0 || QOL_FEATURES)
 
-/// If the player is high enough above the ground or above an unsafe floor, they will perform the star dance in midair instead of falling.
-#define MIDAIR_STAR_DANCE (0 || QOL_FEATURES)
+/// Makes Mario dance in midair if he's way above a floor and uses default cam for nonstop stars
+#define BETTER_STAR_INTERACTION (0 || QOL_FEATURES)
 
 /// Makes cutscene object camera correctly focus an object in a room
 #define ROOM_OBJECT_CAMERA_FOCUS (0 || QOL_FEATURES || !VANILLA_CHECKS)

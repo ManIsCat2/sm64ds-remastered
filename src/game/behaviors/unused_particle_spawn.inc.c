@@ -2,7 +2,7 @@
 /**
  * Behavior for bhvUnusedParticleSpawn.
  *
- * This unused behavior spawns 10 purple particles if Player collides with its
+ * This unused behavior spawns 10 purple particles if Mario collides with its
  * associated object.
  */
 
@@ -15,7 +15,7 @@ void bhv_unused_particle_spawn_loop(void) {
         obj_mark_for_deletion(o);
     }
 
-    if (obj_check_if_collided_with_object(o, gPlayerObject)) {
+    if (obj_check_if_collided_with_object(o, gMarioObject)) {
     SWAP_PARTICLE_CALL(
         obj_mark_for_deletion(o);
         ,

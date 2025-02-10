@@ -67,7 +67,7 @@ void bhv_checkerboard_platform_loop(void) {
 
     o->oCheckerBoardPlatformUnkF8 = 0;
 
-    if (o->oDistanceToPlayer < 1000.0f) {
+    if (o->oDistanceToMario < 1000.0f) {
         cur_obj_play_sound_1(SOUND_ENV_ELEVATOR4);
     }
 

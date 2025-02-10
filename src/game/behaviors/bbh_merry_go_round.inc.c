@@ -6,7 +6,7 @@
 
 /**
  * This function handles the merry-go-round's music.
- * It starts the music when Player enters the room around the
+ * It starts the music when Mario enters the room around the
  * merry-go-round's enclosure, and ends the music when he's neither
  * in the enclosure nor in the room around it.
  */
@@ -14,47 +14,47 @@ static void handle_merry_go_round_music(void) {
     // If the music should play, play it and check whether it still should.
     // Otherwise, don't play it and check whether it should.
     if (o->oMerryGoRoundMusicShouldPlay == FALSE) {
-        if (gPlayerCurrentRoom == BBH_NEAR_MERRY_GO_ROUND_ROOM) {
+        if (gMarioCurrentRoom == BBH_NEAR_MERRY_GO_ROUND_ROOM) {
             // Play the merry-go-round and BBH music at the same time
             play_secondary_music(SEQ_EVENT_MERRY_GO_ROUND, 45, 20, 200);
             // Set to TRUE
             o->oMerryGoRoundMusicShouldPlay++;
         }
     } else {
-        // Get Player's floor and floor surface type
-        struct Surface *playerFloor;
-        u16 playerFloorType;
+        // Get Mario's floor and floor surface type
+        struct Surface *marioFloor;
+        u16 marioFloorType;
 
-        find_floor(gPlayerObject->oPosX, gPlayerObject->oPosY, gPlayerObject->oPosZ, &playerFloor);
+        find_floor(gMarioObject->oPosX, gMarioObject->oPosY, gMarioObject->oPosZ, &marioFloor);
 
-        if (playerFloor == NULL) {
-            playerFloorType = 0;
+        if (marioFloor == NULL) {
+            marioFloorType = 0;
         } else {
-            playerFloorType = playerFloor->type;
+            marioFloorType = marioFloor->type;
         }
 
         // All floors in the merry-go-round's enclosure have surface type 0x1A.
-        // The cur_obj_is_player_on_platform check is redundant since the merry-go-round
-        // has surface type 0x1A, so Player cannot be on the merry-go-round
+        // The cur_obj_is_mario_on_platform check is redundant since the merry-go-round
+        // has surface type 0x1A, so Mario cannot be on the merry-go-round
         // without being on a floor with surface type 0x1A (SURFACE_MGR_MUSIC).
-        if (cur_obj_is_player_on_platform() || playerFloorType == SURFACE_MGR_MUSIC) {
-            // If Player is in the merry-go-round's enclosure, play only the merry-go-round music.
+        if (cur_obj_is_mario_on_platform() || marioFloorType == SURFACE_MGR_MUSIC) {
+            // If Mario is in the merry-go-round's enclosure, play only the merry-go-round music.
             play_secondary_music(SEQ_EVENT_MERRY_GO_ROUND, 0, 78, 50);
-            gPlayerOnMerryGoRound = TRUE;
+            gMarioOnMerryGoRound = TRUE;
         } else {
-            // If Player is not in the merry-go-round's enclosure,
+            // If Mario is not in the merry-go-round's enclosure,
             // i.e. he's around it, play both the merry-go-round music and the BBH music.
             play_secondary_music(SEQ_EVENT_MERRY_GO_ROUND, 45, 20, 200);
-            gPlayerOnMerryGoRound = FALSE;
+            gMarioOnMerryGoRound = FALSE;
         }
 
-        // If Player is not in the merry-go-round's area of the basement anymore,
+        // If Mario is not in the merry-go-round's area of the basement anymore,
         // stop playing the music.
         // If he is, play the creaking sound.
         if (
             // The merry-go-round is a dynamic surface.
-            gPlayerCurrentRoom != BBH_DYNAMIC_SURFACE_ROOM
-            && gPlayerCurrentRoom != BBH_NEAR_MERRY_GO_ROUND_ROOM) {
+            gMarioCurrentRoom != BBH_DYNAMIC_SURFACE_ROOM
+            && gMarioCurrentRoom != BBH_NEAR_MERRY_GO_ROUND_ROOM) {
             func_80321080(300); // Switch to BBH music? FIXME: Audio needs labelling
             o->oMerryGoRoundMusicShouldPlay = FALSE;
         } else {
@@ -69,22 +69,22 @@ static void handle_merry_go_round_music(void) {
 void bhv_merry_go_round_loop(void) {
     // Surprisingly, the merry-go-round is what's responsible
     // for playing the howling wind sound in BBH.
-    if (!o->oMerryGoRoundPlayerIsOutside) {
-        if (gPlayerCurrentRoom == BBH_OUTSIDE_ROOM) {
+    if (!o->oMerryGoRoundMarioIsOutside) {
+        if (gMarioCurrentRoom == BBH_OUTSIDE_ROOM) {
             // Set to TRUE
-            o->oMerryGoRoundPlayerIsOutside++;
+            o->oMerryGoRoundMarioIsOutside++;
         }
     } else {
         play_sound(SOUND_AIR_HOWLING_WIND, gGlobalSoundSource);
 
         if (
             // There are objects outside BBH, such as corkboxes.
-            // The howling wind should not stop when Player stands on a cork box.
-            //! @bug Interestingly, this means if Player goes from outside
+            // The howling wind should not stop when Mario stands on a cork box.
+            //! @bug Interestingly, this means if Mario goes from outside
             // to a dynamic surface *inside* the mansion in a single frame,
             // the howling wind music will still play.
-            gPlayerCurrentRoom != BBH_OUTSIDE_ROOM && gPlayerCurrentRoom != BBH_DYNAMIC_SURFACE_ROOM) {
-            o->oMerryGoRoundPlayerIsOutside = FALSE;
+            gMarioCurrentRoom != BBH_OUTSIDE_ROOM && gMarioCurrentRoom != BBH_DYNAMIC_SURFACE_ROOM) {
+            o->oMerryGoRoundMarioIsOutside = FALSE;
         }
     }
 

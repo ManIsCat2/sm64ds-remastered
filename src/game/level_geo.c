@@ -2,12 +2,11 @@
 
 #include "sm64.h"
 #include "rendering_graph_node.h"
-#include "player_misc.h"
+#include "mario_misc.h"
 #include "skybox.h"
 #include "engine/math_util.h"
 #include "camera.h"
 #include "envfx_snow.h"
-#include "envfx_skybox.h"
 #include "level_geo.h"
 
 /**
@@ -15,7 +14,7 @@
  * snow or jet stream bubbles.
  */
 Gfx *geo_envfx_main(s32 callContext, struct GraphNode *node, UNUSED Mat4 mtxf) {
-    Vec3s playerPos;
+    Vec3s marioPos;
     Vec3s camFrom;
     Vec3s camTo;
     void *particleList;
@@ -32,8 +31,8 @@ Gfx *geo_envfx_main(s32 callContext, struct GraphNode *node, UNUSED Mat4 mtxf) {
 
             vec3f_to_vec3s(camTo, gCurGraphNodeCamera->focus);
             vec3f_to_vec3s(camFrom, gCurGraphNodeCamera->pos);
-            vec3f_to_vec3s(playerPos, gPlayerCameraState->pos);
-            particleList = envfx_update_particles(snowMode, playerPos, camTo, camFrom);
+            vec3f_to_vec3s(marioPos, gPlayerCameraState->pos);
+            particleList = envfx_update_particles(snowMode, marioPos, camTo, camFrom);
             if (particleList != NULL) {
                 // ex-alo change
                 // Gfx calls particle list directly instead of doing branch dls
@@ -46,8 +45,8 @@ Gfx *geo_envfx_main(s32 callContext, struct GraphNode *node, UNUSED Mat4 mtxf) {
         // Give these arguments some dummy values. Not used in ENVFX_MODE_NONE
         vec3s_copy(camTo, gVec3sZero);
         vec3s_copy(camFrom, gVec3sZero);
-        vec3s_copy(playerPos, gVec3sZero);
-        envfx_update_particles(ENVFX_MODE_NONE, playerPos, camTo, camFrom);
+        vec3s_copy(marioPos, gVec3sZero);
+        envfx_update_particles(ENVFX_MODE_NONE, marioPos, camTo, camFrom);
     }
 
     return gfx;

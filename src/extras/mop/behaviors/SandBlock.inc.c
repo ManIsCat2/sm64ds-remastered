@@ -21,7 +21,7 @@ void bhv_sandblock_loop(void) {
 			}
 			break;
 	}
-	if (cur_obj_is_player_on_platform() && o->oAction==0){
+	if (cur_obj_is_mario_on_platform() && o->oAction==0){
 		o->oAction=1;
 	}
 }

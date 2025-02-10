@@ -110,7 +110,7 @@ void bhv_intro_lakitu_loop(void) {
             }
 
             switch (o->oTimer) {
-#if defined(VERSION_US) || defined(VERSION_SH)
+#if defined(VERSION_US) || defined(VERSION_SH) || defined(VERSION_CN)
                 case 534:
                     cur_obj_play_sound_2(SOUND_ACTION_FLYING_FAST);
                     break;
@@ -186,16 +186,18 @@ void bhv_intro_lakitu_loop(void) {
                 obj_mark_for_deletion(o->oIntroLakituCloud);
             }
 
+#ifndef VERSION_JP
             if (o->oTimer == 14) {
                 cur_obj_play_sound_2(SOUND_ACTION_INTRO_UNK45F);
             }
+#endif
             break;
 
         case 100:
             cur_obj_enable_rendering();
 
             vec3f_set(sp64, -100.0f, 100.0f, 300.0f);
-            offset_rotated(sp4C, gCamera->pos, sp64, sPlayerCamState->faceAngle);
+            offset_rotated(sp4C, gCamera->pos, sp64, sMarioCamState->faceAngle);
             vec3f_to_object_pos(o, sp4C);
 
             o->oMoveAnglePitch = 0x1000;

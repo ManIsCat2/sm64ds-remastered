@@ -9,8 +9,8 @@
 #include "engine/surface_load.h"
 #include "ingame_menu.h"
 #include "screen_transition.h"
-#include "player.h"
-#include "player_actions_cutscene.h"
+#include "mario.h"
+#include "mario_actions_cutscene.h"
 #include "print.h"
 #include "hud.h"
 #include "audio/external.h"
@@ -37,7 +37,7 @@ s16 gSavedCourseNum;
 s16 gMenuOptSelectIndex;
 s16 gSaveOptSelectIndex;
 
-struct SpawnInfo *gPlayerSpawnInfo = &gPlayerSpawnInfos[0];
+struct SpawnInfo *gMarioSpawnInfo = &gPlayerSpawnInfos[0];
 struct GraphNode **gLoadedGraphNodes = gGraphNodePointers;
 struct Area *gAreas = gAreaData;
 struct Area *gCurrentArea = NULL;
@@ -58,7 +58,7 @@ s16 gCurrLevelNum = LEVEL_MIN;
 s16 gGlobalGameSkips = 0;
 
 /*
- * The following two tables are used in get_player_spawn_type() to determine spawn type
+ * The following two tables are used in get_mario_spawn_type() to determine spawn type
  * from warp behavior.
  * When looping through sWarpBhvSpawnTable, if the behavior function in the table matches
  * the spawn behavior executed, the index of that behavior is used with sSpawnTypeFromWarpBhv
@@ -116,6 +116,9 @@ static int scale_x_to_correct_aspect_center(int x) {
 }
 
 void print_intro_text(void) {
+#ifdef VERSION_CN
+    u8 sp18[] = { 0xB0, 0x00 }; // 按
+#endif
 #ifdef VERSION_EU
     s32 language = eu_get_language();
 #endif
@@ -130,14 +133,18 @@ void print_intro_text(void) {
 #ifdef VERSION_EU
             print_text(GFX_DIMENSIONS_FROM_LEFT_EDGE(20), 20, "START");
 #else
+#ifdef VERSION_CN
+            print_text_centered(GFX_DIMENSIONS_FROM_LEFT_EDGE(60), 38, (char *) sp18);
+#else
             print_text_centered(GFX_DIMENSIONS_FROM_LEFT_EDGE(60), 38, "PRESS");
+#endif
             print_text_centered(GFX_DIMENSIONS_FROM_LEFT_EDGE(60), 20, "START");
 #endif
         }
     }
 }
 
-u32 get_player_spawn_type(struct Object *o) {
+u32 get_mario_spawn_type(struct Object *o) {
     s32 i;
     const BehaviorScript *behavior = virtual_to_segmented(0x13, o->behavior);
 
@@ -178,7 +185,7 @@ void load_obj_warp_nodes(void) {
     do {
         struct Object *sp1C = sp20;
 
-        if (sp1C->activeFlags != ACTIVE_FLAG_DEACTIVATED && get_player_spawn_type(sp1C) != 0) {
+        if (sp1C->activeFlags != ACTIVE_FLAG_DEACTIVATED && get_mario_spawn_type(sp1C) != 0) {
             sp24 = area_get_warp_node_from_params(sp1C);
             if (sp24 != NULL) {
                 sp24->object = sp1C;
@@ -194,7 +201,7 @@ void clear_areas(void) {
     gCurrentArea = NULL;
     gWarpTransition.isActive = FALSE;
     gWarpTransition.pauseRendering = FALSE;
-    gPlayerSpawnInfo->areaIndex = -1;
+    gMarioSpawnInfo->areaIndex = -1;
 
     for (i = 0; i < 8; i++) {
         gAreaData[i].index = i;
@@ -246,7 +253,7 @@ void load_area(s32 index) {
         main_pool_push_state();
 
 #if BETTER_ROOM_CHECKS
-        gPlayerCurrentRoom = 0;
+        gMarioCurrentRoom = 0;
 #endif
 
 #if FIX_DOOR_NO_ROOM_VISIBLE
@@ -280,19 +287,19 @@ void unload_area(void) {
     }
 }
 
-void load_player_area(void) {
+void load_mario_area(void) {
     stop_sounds_in_continuous_banks();
-    load_area(gPlayerSpawnInfo->areaIndex);
+    load_area(gMarioSpawnInfo->areaIndex);
 
-    if (gCurrentArea->index == gPlayerSpawnInfo->areaIndex) {
+    if (gCurrentArea->index == gMarioSpawnInfo->areaIndex) {
         gCurrentArea->flags |= 0x01;
-        spawn_objects_from_info(0, gPlayerSpawnInfo);
+        spawn_objects_from_info(0, gMarioSpawnInfo);
     }
 }
 
-void unload_player_area(void) {
+void unload_mario_area(void) {
     if (gCurrentArea != NULL && (gCurrentArea->flags & 0x01)) {
-        unload_objects_from_area(0, gPlayerSpawnInfo->activeAreaIndex);
+        unload_objects_from_area(0, gMarioSpawnInfo->activeAreaIndex);
 
         gCurrentArea->flags &= ~0x01;
         if (gCurrentArea->flags == 0) {
@@ -309,11 +316,11 @@ void change_area(s32 index) {
         load_area(index);
 
         gCurrentArea->flags = areaFlags;
-        gPlayerObject->oActiveParticleFlags = 0;
+        gMarioObject->oActiveParticleFlags = 0;
     }
 
     if (areaFlags & 0x01) {
-        gPlayerObject->header.gfx.areaIndex = index, gPlayerSpawnInfo->areaIndex = index;
+        gMarioObject->header.gfx.areaIndex = index, gMarioSpawnInfo->areaIndex = index;
     }
 }
 

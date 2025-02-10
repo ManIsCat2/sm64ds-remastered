@@ -35,7 +35,7 @@
  * they are processed and which objects they can collide with.
  */
 enum ObjectList {
-    OBJ_LIST_PLAYER,      //  (0) Player
+    OBJ_LIST_PLAYER,      //  (0) Mario
     OBJ_LIST_UNUSED_1,    //  (1) (unused)
     OBJ_LIST_DESTRUCTIVE, //  (2) things that can be used to destroy other objects, like
                           //      bob-ombs and corkboxes
@@ -52,7 +52,7 @@ enum ObjectList {
     OBJ_LIST_SURFACE,     //  (9) surface objects. objects that specifically have surface
                           //      collision and not object collision. (thwomp, whomp, etc)
     OBJ_LIST_POLELIKE,    // (10) polelike objects. objects that attract or otherwise
-                          //      "cling" Player similar to a pole action. (hoot,
+                          //      "cling" Mario similar to a pole action. (hoot,
                           //      whirlpool, trees/poles, etc)
     OBJ_LIST_SPAWNER,     // (11) spawners
     OBJ_LIST_UNIMPORTANT, // (12) unimportant objects. objects that will not load
@@ -87,7 +87,7 @@ extern struct Object gObjectPool[];
 extern struct ObjectNode *gObjectLists;
 extern struct ObjectNode gFreeObjectList;
 
-extern struct Object *gPlayerObject;
+extern struct Object *gMarioObject;
 extern struct Object *gLuigiObject;
 extern struct Object *gCurrentObject;
 
@@ -124,19 +124,23 @@ struct TransitionRoomData {
 
 extern struct TransitionRoomData gDoorAdjacentRooms[MAX_NUM_TRANSITION_ROOMS];
 
-extern s16 gPlayerCurrentRoom;
+extern s16 gMarioCurrentRoom;
 extern s16 D_8035FEE2;
 extern s16 gNumDoorRenderCount;
 extern s16 gTHIWaterDrained;
 extern s16 gTTCSpeedSetting;
-extern s16 gPlayerShotFromCannon;
+extern s16 gMarioShotFromCannon;
 extern s16 gCCMEnteredSlide;
-extern s16 gNumRoomedObjectsInPlayerRoom;
-extern s16 gNumRoomedObjectsNotInPlayerRoom;
+extern s16 gNumRoomedObjectsInMarioRoom;
+extern s16 gNumRoomedObjectsNotInMarioRoom;
 extern s16 gWDWWaterLevelChanging;
-extern s16 gPlayerOnMerryGoRound;
+extern s16 gMarioOnMerryGoRound;
+#ifdef PORT_MOP_OBJS
+extern s16 gMOPSwitchBlockState;
+extern s16 gMOPFlipSwitchStarSpawned;
+#endif
 
-void bhv_player_update(void);
+void bhv_mario_update(void);
 void set_object_respawn_info_bits(struct Object *obj, u8 bits);
 void unload_objects_from_area(UNUSED s32 unused, s32 areaIndex);
 void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo);

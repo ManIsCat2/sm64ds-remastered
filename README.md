@@ -1,5 +1,14 @@
-# sm64ds-remastered
-Fork of [AloXado320/sm64ex-alo](https://github.com/AloUltraExt/sm64ex-alo)
+# sm64ex_alo
+Fork of [sm64pc/sm64ex](https://github.com/sm64pc/sm64ex) with additional features. 
+
+## Changes
+ * N64 Building - Support for it was removed in sm64ex
+ * Based of the latest refresh (since sm64ex is stuck on 12)
+ * Puppycam 2 (sm64ex still has Puppycam 1)
+ * Quality of life fixes and features (QOL_FIXES=1 and QOL_FEATURES=1 respectively)
+ * Mouse support for desktop targets (MOUSE_ACTIONS=1)
+ * Simple debug options menu (EXT_DEBUG_MENU=1)
+ * Kaze's more objects patch (PORT_MOP_OBJS=1)
  
 ## Backends included
  * Same ones as in [sm64ex](https://github.com/sm64pc/sm64ex/tree/nightly) (macOS - Raspberry Pi Series - Windows - Linux), etc.
@@ -9,19 +18,22 @@ Fork of [AloXado320/sm64ex-alo](https://github.com/AloUltraExt/sm64ex-alo)
  * [Nintendo Switch](https://github.com/fgsfdsfgs/sm64ex/tree/switch) (by Vatuu, fgsfdsfgs, KiritoDev)
  * [Android](https://github.com/VDavid003/sm64-port-android/tree/ex/nightly) (by VDavid003)
 
+## Patches
+ * Some misc patches for this repo are available [here](https://github.com/AloXado320/sm64ex-alo-patches) (more incoming)
+
 ## Building
  ### Clone the repository:
 
  ```sh
- git clone https://github.com/ExcellentGamer/sm64ds-remastered
- cd sm64ds-remastered
+ git clone https://github.com/AloUltraExt/sm64ex-alo
+ cd sm64ex-alo
  ```
  
  **Note:** On Unix systems you may need to do this before doing any changes:
  
  ```sh
  git config core.fileMode false
- chmod -R 777 .
+ chmod -R 775 .
  ```
  
  ### Copy baserom(s) for asset extraction:
@@ -37,7 +49,7 @@ Fork of [AloXado320/sm64ex-alo](https://github.com/AloUltraExt/sm64ex-alo)
 
   #### Install build dependencies:
   ```sh
-  sudo apt install -y binutils-mips-linux-gnu build-essential git libcapstone-dev pkgconf python3 gcc-mips-linux-gnu
+  sudo apt install -y binutils-mips-linux-gnu build-essential git pkgconf python3 gcc-mips-linux-gnu
   ```
 
   #### Build:
@@ -48,7 +60,7 @@ Fork of [AloXado320/sm64ex-alo](https://github.com/AloUltraExt/sm64ex-alo)
  
   #### ROM location:
   ```sh
-  build/us/sm64dsr.us.(currentver).z64
+  build/us/sm64.us.f3dzex.z64
   ```
 
 </details>
@@ -66,7 +78,7 @@ Fork of [AloXado320/sm64ex-alo](https://github.com/AloUltraExt/sm64ex-alo)
 
   #### Install build dependencies
   ```sh
-  pkg install git wget make python getconf zip apksigner clang binutils
+  pkg install git wget make python getconf zip apksigner clang binutils which libglvnd-dev
   ```
 
   #### Copy in your baserom:
@@ -89,9 +101,11 @@ Fork of [AloXado320/sm64ex-alo](https://github.com/AloUltraExt/sm64ex-alo)
   make -j4
   ```
 
- #### Install apk:
+ #### Copying and Installing apk:
+ 
+ Do this to move the apk to the root of your storage then open it using a file manager.
   ```sh
-  xdg-open build/us_android/sm64dsr.us.(currentver).apk
+  cp build/us_android/sm64.us.f3dex2e.apk /sdcard/sm64.us.f3dex2e.apk
   ```
  
 </details>

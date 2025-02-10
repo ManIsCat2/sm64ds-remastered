@@ -4,7 +4,7 @@
 /**
  * @file gd_macros.h
  *
- * Common macros that Goddard used throughout the Player Head subsytem code.
+ * Common macros that Goddard used throughout the Mario Head subsytem code.
  */
 
 #define DEG_PER_RAD 57.29577950560105

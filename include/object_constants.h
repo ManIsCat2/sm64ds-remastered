@@ -37,8 +37,16 @@
 #define OBJ_FLAG_1000                             (1 << 12) // 0x00001000
 #define OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO           (1 << 13) // 0x00002000
 #define OBJ_FLAG_PERSISTENT_RESPAWN               (1 << 14) // 0x00004000
+#if PLATFORM_DISPLACEMENT_2
 #define OBJ_FLAG_VELOCITY_PLATFORM                (1 << 15) // 0x00008000
+#else
+#define OBJ_FLAG_VELOCITY_PLATFORM                (0 << 0)
+#endif
+#if AUTO_COLLISION_DISTANCE
 #define OBJ_FLAG_DONT_CALC_COLL_DIST              (1 << 16) // 0x00010000
+#else
+#define OBJ_FLAG_DONT_CALC_COLL_DIST              (0 << 0)
+#endif
 #if OBJ_OPACITY_BY_CAM_DIST
 #define OBJ_FLAG_OPACITY_FROM_CAMERA_DIST         (1 << 21) // 0x00200000
 #else
@@ -87,7 +95,9 @@
 #define OBJ_MOVE_ABOVE_LAVA            (1 << 11) // 0x0800
 #define OBJ_MOVE_LEAVING_WATER         (1 << 12) // 0x1000
 #define OBJ_MOVE_BOUNCE                (1 << 13) // 0x2000
+#ifndef VERSION_JP
 #define OBJ_MOVE_ABOVE_DEATH_BARRIER   (1 << 14) // 0x4000
+#endif
 
 #define OBJ_MOVE_MASK_ON_GROUND (OBJ_MOVE_LANDED | OBJ_MOVE_ON_GROUND)
 #define OBJ_MOVE_MASK_IN_WATER ( \
@@ -133,20 +143,14 @@
 #define STAR_INDEX_ACT_4     3
 #define STAR_INDEX_ACT_5     4
 #define STAR_INDEX_ACT_6     5
-#define STAR_INDEX_ACT_7     6
-#define STAR_INDEX_100_COINS 7
-#define STAR_INDEX_CANNON    8
+#define STAR_INDEX_100_COINS 6
+#define STAR_INDEX_CANNON    7
 
 /* gTTCSpeedSetting */
 #define TTC_SPEED_SLOW    0
 #define TTC_SPEED_FAST    1
 #define TTC_SPEED_RANDOM  2
 #define TTC_SPEED_STOPPED 3
-
-/* King Bob-omb */
-    /* oBhvParams2ndByte */
-    #define BOBOMB_KING_BP_TYPE_1 0
-    #define BOBOMB_KING_BP_TYPE_2 1
 
 /* Bob-omb */
     /* oBhvParams2ndByte */
@@ -231,7 +235,7 @@
     #define BOBOMB_BUDDY_CANNON_OPENED       2
     #define BOBOMB_BUDDY_CANNON_STOP_TALKING 3
 
-    /* oBobombBuddyHasTalkedToPlayer */
+    /* oBobombBuddyHasTalkedToMario */
     #define BOBOMB_BUDDY_HAS_NOT_TALKED 0
     #define BOBOMB_BUDDY_HAS_TALKED     2
 
@@ -469,6 +473,11 @@
     #define BOMP_ACT_RETRACT  3
 
 /* WF Sliding Brick Platform */
+    /* oBhvParams2ndByte */
+    #define WF_SLID_BRICK_PTFM_BP_MOV_VEL_10 1
+    #define WF_SLID_BRICK_PTFM_BP_MOV_VEL_15 2
+    #define WF_SLID_BRICK_PTFM_BP_MOV_VEL_20 3
+
     /* oAction */
     #define WF_SLID_BRICK_PTFM_ACT_WAIT    0
     #define WF_SLID_BRICK_PTFM_ACT_EXTEND  1
@@ -569,7 +578,7 @@
     #define HAUNTED_BOOKSHELF_ACT_RECEDE 1
 
 /* BBH Merry-Go-Round */
-    /* gPlayerCurrentRoom */
+    /* gMarioCurrentRoom */
     #define BBH_NEAR_MERRY_GO_ROUND_ROOM 10
     #define BBH_DYNAMIC_SURFACE_ROOM     0
     #define BBH_OUTSIDE_ROOM             13
@@ -595,6 +604,16 @@
     /* status */
     #define ARROW_LIFT_NOT_DONE_MOVING 0
     #define ARROW_LIFT_DONE_MOVING     1
+
+/* Yoshi */
+    /* oAction */
+    #define YOSHI_ACT_IDLE                       0
+    #define YOSHI_ACT_WALK                       1
+    #define YOSHI_ACT_TALK                       2
+    #define YOSHI_ACT_WALK_JUMP_OFF_ROOF         3
+    #define YOSHI_ACT_FINISH_JUMPING_AND_DESPAWN 4
+    #define YOSHI_ACT_GIVE_PRESENT               5
+    #define YOSHI_ACT_CREDITS                    10
 
 /* Koopa */
     /* oAction */
@@ -897,13 +916,13 @@
     #define PLATFORM_ON_TRACK_TYPE_CHECKERED 2
     #define PLATFORM_ON_TRACK_TYPE_GRATE     3
 
-/* Floor Switches */
+/* Purple Switch */
     /* oAction */
-    #define SWITCH_ACT_IDLE                      0
-    #define SWITCH_ACT_PRESSED                   1
-    #define SWITCH_ACT_TICKING                   2
-    #define SWITCH_ACT_UNPRESSED                 3
-    #define SWITCH_ACT_WAIT_FOR_MARIO_TO_GET_OFF 4
+    #define PURPLE_SWITCH_ACT_IDLE                      0
+    #define PURPLE_SWITCH_ACT_PRESSED                   1
+    #define PURPLE_SWITCH_ACT_TICKING                   2
+    #define PURPLE_SWITCH_ACT_UNPRESSED                 3
+    #define PURPLE_SWITCH_ACT_WAIT_FOR_MARIO_TO_GET_OFF 4
 
 /* Pyramid Elevator */
     /* oAction */
@@ -1079,7 +1098,7 @@
     #define KLEPTO_ANIM_STATE_HOLDING_NOTHING          0
     #define KLEPTO_ANIM_STATE_HOLDING_CAP              1
     #define KLEPTO_ANIM_STATE_HOLDING_STAR             2
-    #define KLEPTO_ANIM_STATE_HOLDING_SILVER_STAR      3
+    #define KLEPTO_ANIM_STATE_HOLDING_TRANSPARENT_STAR 3
 
 /* Bird */
     /* oAction */
@@ -1137,19 +1156,12 @@
     /* oAction */
     // Loading
     #define WATER_LEVEL_DIAMOND_ACT_INIT               0
-    // Idling when the player isn't inside its hitbox
+    // Idling when Mario isn't inside its hitbox
     #define WATER_LEVEL_DIAMOND_ACT_IDLE               1
     // While the water level is changing
     #define WATER_LEVEL_DIAMOND_ACT_CHANGE_WATER_LEVEL 2
-    // After the water level has changed but the player hasn't left its hitbox yet
+    // After the water level has changed but Mario hasn't left its hitbox yet
     #define WATER_LEVEL_DIAMOND_ACT_IDLE_SPINNING      3
-/* Castle Mips */
-    /* oMipsKeyStatus*/
-    #define MIPS_KEY_STATUS_HAVENT_GIVEN_KEY    0
-    #define MIPS_KEY_STATUS_SHOULD_GIVE_KEY     1
-
-    /* oBhvParams2ndByte */
-    #define MIPS_BP_CASTLE_KEY 0
 
 /* Mips */
     /* oAction */
@@ -1165,8 +1177,8 @@
     #define MIPS_STAR_STATUS_ALREADY_SPAWNED_STAR 2
 
     /* oBhvParams2ndByte */
-    #define MIPS_BP_15_STARS   0
-    #define MIPS_BP_50_STARS   1
+    #define MIPS_BP_15_STARS 0
+    #define MIPS_BP_50_STARS 1
 
 /* Falling Pillar */
     /* oAction */
@@ -1226,40 +1238,38 @@
     #define HIDDEN_OBJECT_BP_UNBREAKABLE_BOX_UNUSED_1 1
     #define HIDDEN_OBJECT_BP_UNBREAKABLE_BOX_UNUSED_2 2
 
-/* Cap Box */
+/* Exclamation Box */
     /* oAnimState */
-    #define CAP_BOX_ANIM_STATE_WING_CAP   0
-    #define CAP_BOX_ANIM_STATE_METAL_CAP  1
-    #define CAP_BOX_ANIM_STATE_VANISH_CAP 2
-    #define CAP_BOX_ANIM_STATE_DEFAULT    3
-    #define CAP_BOX_ANIM_STATE_QUESTION   4
+    #define EXCLAMATION_BOX_ANIM_STATE_WING_CAP   0
+    #define EXCLAMATION_BOX_ANIM_STATE_METAL_CAP  1
+    #define EXCLAMATION_BOX_ANIM_STATE_VANISH_CAP 2
+    #define EXCLAMATION_BOX_ANIM_STATE_DEFAULT    3
 
     /* oBhvParams2ndByte */
-    #define CAP_BOX_BP_WING_CAP         0
-    #define CAP_BOX_BP_METAL_CAP        1
-    #define CAP_BOX_BP_VANISH_CAP       2
-    #define CAP_BOX_BP_KOOPA_SHELL      3
-    #define CAP_BOX_BP_SPECIAL_CAP_END  CAP_BOX_BP_VANISH_CAP
+    #define EXCLAMATION_BOX_BP_WING_CAP         0
+    #define EXCLAMATION_BOX_BP_METAL_CAP        1
+    #define EXCLAMATION_BOX_BP_VANISH_CAP       2
+    #define EXCLAMATION_BOX_BP_KOOPA_SHELL      3
+    #define EXCLAMATION_BOX_BP_SPECIAL_CAP_END  EXCLAMATION_BOX_BP_VANISH_CAP
 
 #if KOOPA_SHELL_BOXES_RESPAWN
-    #define CAP_BOX_BP_RESPAWN_END      CAP_BOX_BP_KOOPA_SHELL
+    #define EXCLAMATION_BOX_BP_RESPAWN_END      EXCLAMATION_BOX_BP_KOOPA_SHELL
 #else
-    #define CAP_BOX_BP_RESPAWN_END      CAP_BOX_BP_VANISH_CAP
+    #define EXCLAMATION_BOX_BP_RESPAWN_END      EXCLAMATION_BOX_BP_VANISH_CAP
 #endif
 
-    #define CAP_BOX_BP_ONE_COIN         4
-    #define CAP_BOX_BP_THREE_COINS      5
-    #define CAP_BOX_BP_TEN_COINS        6
-    #define CAP_BOX_BP_1UP_WALKING      7
-    #define CAP_BOX_BP_STAR_ACT_1       8
-    #define CAP_BOX_BP_1UP_RUNNING_AWAY 9
-    #define CAP_BOX_BP_STAR_ACT_2       10
-    #define CAP_BOX_BP_STAR_ACT_3       11
-    #define CAP_BOX_BP_STAR_ACT_4       12
-    #define CAP_BOX_BP_STAR_ACT_5       13
-    #define CAP_BOX_BP_STAR_ACT_6       14
-    #define CAP_BOX_BP_POWER_FLOWER     15
-    #define CAP_BOX_BP_END              99
+    #define EXCLAMATION_BOX_BP_ONE_COIN         4
+    #define EXCLAMATION_BOX_BP_THREE_COINS      5
+    #define EXCLAMATION_BOX_BP_TEN_COINS        6
+    #define EXCLAMATION_BOX_BP_1UP_WALKING      7
+    #define EXCLAMATION_BOX_BP_STAR_ACT_1       8
+    #define EXCLAMATION_BOX_BP_1UP_RUNNING_AWAY 9
+    #define EXCLAMATION_BOX_BP_STAR_ACT_2       10
+    #define EXCLAMATION_BOX_BP_STAR_ACT_3       11
+    #define EXCLAMATION_BOX_BP_STAR_ACT_4       12
+    #define EXCLAMATION_BOX_BP_STAR_ACT_5       13
+    #define EXCLAMATION_BOX_BP_STAR_ACT_6       14
+    #define EXCLAMATION_BOX_BP_END              99
 
 /* Cap Switch */
     /* oBhvParams2ndByte */

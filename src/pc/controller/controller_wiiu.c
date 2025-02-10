@@ -6,6 +6,7 @@
 #include <string.h>
 
 #include <ultra64.h>
+#define OSTime N64_OSTime // WUT has it's own OSTime variable
 
 #include <vpad/input.h>
 #include <padscore/wpad.h>
@@ -33,13 +34,10 @@ struct WiiUKeymap {
 #define SE(dir) VPAD_STICK_R_EMULATION_##dir, WPAD_CLASSIC_STICK_R_EMULATION_##dir, WPAD_PRO_STICK_R_EMULATION_##dir
 
 struct WiiUKeymap map[] = {
-    { B_BUTTON, VB(A), CB(A), PB(A) },
-    { A_BUTTON, VB(B), CB(B), PB(B) },
-    { X_BUTTON, VB(X), CB(X), PB(X) },
-    { Y_BUTTON, VB(Y), CB(Y), PB(Y) },
+    { B_BUTTON, VB(B) | VB(Y), CB(B) | CB(Y), PB(B) | PB(Y) },
+    { A_BUTTON, VB(A) | VB(X), CB(A) | CB(X), PB(A) | PB(X) },
     { START_BUTTON, VB(PLUS), CB(PLUS), PB(PLUS) },
-    { ZL_TRIG, VB(ZL), CB(ZL), PT(ZL) },
-    { ZR_TRIG, VB(ZR), CB(ZR), PT(ZR) },
+    { Z_TRIG, VB(ZL) | VB(ZR), CB(ZL) | CB(ZR), PT(ZL) | PT(ZR) },
     { L_TRIG, VB(L), CB(L), PT(L) },
     { R_TRIG, VB(R), CB(R), PT(R) },
     { U_CBUTTONS, SE(UP) },
@@ -138,8 +136,8 @@ static void read_wpad(OSContPad* pad) {
     bool gamepadRightStickNotSet = pad->ext_stick_x == 0 && pad->ext_stick_y == 0;
 
     if (status.extensionType == WPAD_EXT_NUNCHUK || status.extensionType == WPAD_EXT_MPLUS_NUNCHUK) {
-        uint32_t ext = status.nunchuck.hold;
-        stick = status.nunchuck.stick;
+        uint32_t ext = status.nunchuk.hold;
+        stick = status.nunchuk.stick;
         rStick = (KPADVec2D) {0.0, 0.0};
 
         if (wm & WPAD_BUTTON_A) pad->button |= A_BUTTON;
@@ -151,7 +149,7 @@ static void read_wpad(OSContPad* pad) {
         if (wm & WPAD_BUTTON_RIGHT) { pad->button |= R_CBUTTONS; rStick.x += 1.0; }
         if (wm & WPAD_BUTTON_MINUS) pad->button |= L_TRIG;
         if (ext & WPAD_NUNCHUK_BUTTON_C) pad->button |= R_TRIG;
-        if (ext & WPAD_NUNCHUK_BUTTON_Z) pad->button |= ZR_TRIG;
+        if (ext & WPAD_NUNCHUK_BUTTON_Z) pad->button |= Z_TRIG;
     } else if (status.extensionType == WPAD_EXT_CLASSIC || status.extensionType == WPAD_EXT_MPLUS_CLASSIC) {
         uint32_t ext = status.classic.hold;
         stick = status.classic.leftStick;

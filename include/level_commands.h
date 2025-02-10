@@ -97,6 +97,9 @@ enum LevelCommandsIDList {
     LVL_SCRIPT_CMD_3A,
     LVL_SCRIPT_CMD_3B,
     LVL_SCRIPT_CMD_3C,
+#ifdef BETTERCAMERA
+    LVL_SCRIPT_CMD_PUPPYVOLUME,
+#endif
 };
 
 #ifdef NO_SEGMENTED_MEMORY
@@ -304,7 +307,7 @@ enum LevelCommandsIDList {
     CMD_BBBB(LVL_SCRIPT_CMD_26, 0x08, id, destLevel), \
     CMD_BBBB(destArea, destNode, flags, 0x00)
 
-#define P_WARP_NODE(id, destLevel, destArea, destNode, flags) \
+#define PAINTING_WARP_NODE(id, destLevel, destArea, destNode, flags) \
     CMD_BBBB(LVL_SCRIPT_CMD_27, 0x08, id, destLevel), \
     CMD_BBBB(destArea, destNode, flags, 0x00)
 

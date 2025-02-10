@@ -9,7 +9,7 @@
 #include "game/object_helpers.h"
 #include "game/macro_special_objects.h"
 #include "surface_collision.h"
-#include "game/player.h"
+#include "game/mario.h"
 #include "game/object_list_processor.h"
 #include "surface_load.h"
 #include "game/game_init.h"
@@ -187,16 +187,12 @@ static void add_surface_to_cell(s32 dynamic, s32 cellX, s32 cellZ, struct Surfac
         list = &gStaticSurfacePartition[cellZ][cellX][listIndex];
     }
 
-#if !NO_SURFACE_PRIORITY_REORDER || WATER_SURFACES
-#if WATER_SURFACES
-    if (listIndex == SPATIAL_PARTITION_WATER)
-#endif
+    //! (Surface Cucking) Surfaces are sorted by the height of their first vertex.
+    //  Since vertices aren't ordered by height, this causes many lower triangles
+    //  to be sorted higher. This worsens surface cucking since many functions
+    //  only use the first triangle in surface order that fits, missing higher surfaces.
+    //  upperY would be a better sort method, set with optimizations enabled.
     {
-        //! (Surface Cucking) Surfaces are sorted by the height of their first vertex.
-        //  Since vertices aren't ordered by height, this causes many lower triangles
-        //  to be sorted higher. This worsens surface cucking since many functions
-        //  only use the first triangle in surface order that fits, missing higher surfaces.
-        //  upperY would be a better sort method, set with optimizations enabled.
         s32 surfacePriority = SURFACE_SORT(surface) * sortDir;
         s32 priority;
         // Loop until we find the appropriate place for the surface in the list.
@@ -210,7 +206,7 @@ static void add_surface_to_cell(s32 dynamic, s32 cellX, s32 cellZ, struct Surfac
             list = list->next;
         }
     }
-#endif
+
     newNode->next = list->next;
     list->next = newNode;
 }
@@ -353,7 +349,7 @@ static struct Surface *read_surface_data(TerrainData *vertexData, TerrainData **
 }
 
 /**
- * Returns whether a surface has exertion/moves Player
+ * Returns whether a surface has exertion/moves Mario
  * based on the surface type.
  */
 static s32 surface_has_force(TerrainData surfaceType) {
@@ -373,6 +369,7 @@ static s32 surface_has_force(TerrainData surfaceType) {
         default:
             break;
     }
+
     return hasForce;
 }
 
@@ -464,6 +461,7 @@ static void load_environmental_regions(TerrainData **data) {
     numRegions = *(*data)++;
 
     if (numRegions > 20) {
+        CN_DEBUG_PRINTF(("Error Water Over\n"));
     }
 
     for (i = 0; i < numRegions; i++) {
@@ -610,7 +608,8 @@ void load_area_terrain(s16 index, TerrainData *data, RoomData *surfaceRooms, s16
             break;
         } else if (TERRAIN_LOAD_IS_SURFACE_TYPE_HIGH(terrainLoadType)) {
             load_static_surfaces(&data, vertexData, terrainLoadType, &surfaceRooms);
-            continue;
+        } else {
+            CN_DEBUG_PRINTF((" BGCode Error \n"));
         }
     }
 
@@ -768,21 +767,20 @@ void load_object_surfaces(TerrainData **data, TerrainData *vertexData, u32 dynam
     }
 }
 
+#if AUTO_COLLISION_DISTANCE
 // From Kaze
 static f32 get_optimal_collision_distance(struct Object *obj) {
-    f32 thisVertDist, maxDist = 0.0f;
-    Vec3f thisVertPos, scale;
+    register f32 thisVertDist, maxDist = 0.0f;
+    Vec3f thisVertPos;
     TerrainData *collisionData = obj->collisionData;
     collisionData++;
-    u32 vertsLeft = *(collisionData)++;
-
-    vec3_copy(scale, obj->header.gfx.scale);
+    register u32 vertsLeft = *(collisionData)++;
 
     // Loop through the collision vertices to find the vertex
     // with the furthest distance from the model's origin.
     while (vertsLeft) {
         // Apply scale to the position
-        vec3_prod(thisVertPos, collisionData, scale);
+        vec3_prod(thisVertPos, collisionData, obj->header.gfx.scale);
 
         // Get the distance to the model's origin.
         thisVertDist = vec3_sumsq(thisVertPos);
@@ -801,6 +799,7 @@ static f32 get_optimal_collision_distance(struct Object *obj) {
     // Only run sqrtf once.
     return (sqrtf(maxDist) + 100.0f);
 }
+#endif
 
 static TerrainData sDynamicVertices[600];
 
@@ -809,15 +808,13 @@ static TerrainData sDynamicVertices[600];
  */
 void load_object_collision_model(void) {
     struct Object* obj = gCurrentObject;
-
     TerrainData *collisionData = obj->collisionData;
-
+#if AUTO_COLLISION_DISTANCE
     f32 sqrLateralDist;
-    vec3f_get_lateral_dist_squared(&obj->oPosX, &gPlayerObject->oPosX, &sqrLateralDist);
-
-    f32 verticalPlayerDiff = (gPlayerObject->oPosY - obj->oPosY);
-
+    vec3f_get_lateral_dist_squared(&obj->oPosX, &gMarioObject->oPosX, &sqrLateralDist);
+    f32 verticalMarioDiff = (gMarioObject->oPosY - obj->oPosY);
     f32 colDist;
+
     if (collisionData == NULL) {
         // No collision data, so no collision distance.
         colDist = 0.0f;
@@ -829,7 +826,16 @@ void load_object_collision_model(void) {
         // Use existing collision distance.
         colDist = obj->oCollisionDistance;
     }
+#else
+    f32 marioDist = obj->oDistanceToMario;
+    // On an object's first frame, the distance is set to F32_MAX.
+    // If the distance hasn't been updated, update it now.
+    if (marioDist == F32_MAX) {
+        marioDist = dist_between_objects(obj, gMarioObject);
+    }
 
+    f32 colDist = obj->oCollisionDistance;
+#endif
     f32 drawDist = obj->oDrawingDistance;
 
     // ex-alo change
@@ -846,16 +852,15 @@ void load_object_collision_model(void) {
         drawDist = colDist;
     }
 
-    f32 playerDist = obj->oDistanceToPlayer;
-
-    int isInit = (playerDist == F32_MAX);
-
-    // A value higher than 500.0f causes crashes with surfaces
+#if AUTO_COLLISION_DISTANCE
     s32 inColRadius = (
            (sqrLateralDist < sqr(colDist))
-        && (verticalPlayerDiff > 0 || verticalPlayerDiff > -colDist)
-        && (verticalPlayerDiff < 0 || verticalPlayerDiff < (colDist + 500.0f))
+        && (verticalMarioDiff > 0 || verticalMarioDiff > -colDist)
+        && (verticalMarioDiff < 0 || verticalMarioDiff < (colDist + 2000.0f))
     );
+#else
+    s32 inColRadius = (marioDist < colDist);
+#endif
 
     // Update if no Time Stop, in range, and in the current room.
     if (!(gTimeStopState & TIME_STOP_ACTIVE) && inColRadius
@@ -869,14 +874,17 @@ void load_object_collision_model(void) {
         }
     }
 
+#if AUTO_COLLISION_DISTANCE
+    f32 marioDist = obj->oDistanceToMario;
     // On an object's first frame, the distance is set to F32_MAX.
     // If the distance hasn't been updated, update it now.
-    if (isInit) {
-        playerDist = dist_between_objects(obj, gPlayerObject);
+    if (marioDist == F32_MAX) {
+        marioDist = dist_between_objects(obj, gMarioObject);
     }
+#endif
 
 #ifndef NODRAWINGDISTANCE
-    if (playerDist < drawDist) {
+    if (marioDist < drawDist) {
         obj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
     } else {
         obj->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;

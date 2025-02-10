@@ -27,7 +27,7 @@ static void triplet_butterfly_act_init(void) {
     s32 butterflySpawnType = o->oBhvParams2ndByte & TRIPLET_BUTTERFLY_BP_SPAWN_TYPE_MASK;
     s32 i;
 
-    if (butterflySpawnType != TRIPLET_BUTTERFLY_BP_SPAWN_TYPE_SPAWNER || o->oDistanceToPlayer < 200.0f) {
+    if (butterflySpawnType != TRIPLET_BUTTERFLY_BP_SPAWN_TYPE_SPAWNER || o->oDistanceToMario < 200.0f) {
         if (butterflySpawnType == TRIPLET_BUTTERFLY_BP_SPAWN_TYPE_SPAWNER) {
             for (i = 1; i <= 2; i++) {
                 spawn_object_relative(i, 0, 0, 0, o, MODEL_BUTTERFLY, bhvTripletButterfly);
@@ -56,7 +56,7 @@ static void triplet_butterfly_act_init(void) {
 
 static void triplet_butterfly_act_wander(void) {
 #ifndef NODRAWINGDISTANCE
-    if (o->oDistanceToPlayer > 1500.0f) {
+    if (o->oDistanceToMario > 1500.0f) {
         obj_mark_for_deletion(o);
     } else {
 #endif
@@ -66,7 +66,7 @@ static void triplet_butterfly_act_wander(void) {
         } else {
             o->oTripletButterflyTargetYaw = (s32) o->oTripletButterflyBaseYaw;
 
-            if (o->oTimer > 110 && o->oDistanceToPlayer < 200.0f
+            if (o->oTimer > 110 && o->oDistanceToMario < 200.0f
                 && o->oTripletButterflyType > TRIPLET_BUTTERFLY_TYPE_NORMAL) {
                 o->oAction = TRIPLET_BUTTERFLY_ACT_ACTIVATE;
                 o->oTripletButterflySpeed = 0.0f;
@@ -141,8 +141,8 @@ static void triplet_butterfly_act_explode(void) {
         }
 
         approach_f32_ptr(&o->oTripletButterflySpeed, 20.0f, 1.0f);
-        cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 800);
-        obj_turn_pitch_toward_player(-100.0f, 800);
+        cur_obj_rotate_yaw_toward(o->oAngleToMario, 800);
+        obj_turn_pitch_toward_mario(-100.0f, 800);
     }
 }
 

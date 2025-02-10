@@ -330,11 +330,11 @@ unachtsam, wenn Du Dich\n\
 leise, also langsam,\n\
 bewegst.\n\
 Die Kameraposition kannst\n\
-Du durch [C]> und [C]<\n\
+Du durch [C]▶ und [C]◀\n\
 verändern, um einen\n\
 Überblick zu erhalten.\n\
 Das Weitwinkelobjektiv\n\
-wird mit [C]| eingesetzt.\n\
+wird mit [C]▼ eingesetzt.\n\
 Details der Umgebung\n\
 werden so sichtbar!\n\
 Ein Warnton erklingt,\n\
@@ -417,7 +417,7 @@ zum Hauptfilm!"))
 DEFINE_DIALOG(DIALOG_035, 1, 5, 30, 200, _("\
 Die [C]-Knöpfe dienen der\n\
 Steuerung der Kamera.\n\
-Benutze den ^-Knopf, um\n\
+Benutze den ▲-Knopf, um\n\
 die Kamera mit dem\n\
 Analog-Stick zu bewegen.\n\
 Normalerweise sorgt ein\n\
@@ -431,7 +431,7 @@ Drückst Du die [R]-Taste,\n\
 wechselst Du zwischen\n\
 Lakitus und Marios\n\
 Sicht hin und her. Drücke\n\
-|, um den Zoom oder\n\
+▼, um den Zoom oder\n\
 das Weitwinkelobjektiv zu\n\
 aktivieren. Dies ist in\n\
 allen Perspektiven möglich.\n\
@@ -443,7 +443,7 @@ dem Bildschirm befindet."))
 
 DEFINE_DIALOG(DIALOG_036, 1, 5, 30, 200, _("\
 AUSSICHTSPLATTFORM\n\
-Drücke ^ und genieße die\n\
+Drücke ▲ und genieße die\n\
 Aussicht. Vielleicht\n\
 entdeckst Du Geheimnisse\n\
 Deiner Umgebung.\n\
@@ -2056,68 +2056,3 @@ Wer sich hier ohne meine\n\
 Erlaubnis Zutritt\n\
 verschafft, handelt sich\n\
 eine Menge Ärger ein!!!"))
-
-DEFINE_DIALOG(DIALOG_174, 1, 4, 30, 200, _("\
-The king refuses to be\n\
-dejected by a single\n\
-defeat. I'm back with a\n\
-new Star from Bowser!\n\
-I've also restyled my\n\
-mustache.\n\
-I'm unstoppable!\n\
-If you want the Power\n\
-Star, you'll have to\n\
-knock it out of me!\n\
-\n\
-\n\
-But the only way to\n\
-do that is to pick me\n\
-up from behind and\n\
-fling me down. And\n\
-that will never happen!\n\
-Bring it, shorty!"))
-
-DEFINE_DIALOG(DIALOG_175, 1, 4, 30, 200, _("\
-Hello!\n\
-Please take a look\n\
-at the map below.\n\
-Memorized it?\n\
-If you are lost.\n\
-please talk to\n\
-me again."))
-
-DEFINE_DIALOG(DIALOG_176, 1, 6, 30, 200, _("\
-When you step on the\n\
-strange ? Switch\n\
-hidden in the castle,\n\
-the ? Blocks will\n\
-become solid.\n\
-\n\
-Some of these blocks\n\
-have useful items inside\n\
-Get the items by\n\
-breaking the blocks.\n\
-But beware! Some\n\
-blocks are duds."))
-
-DEFINE_DIALOG(DIALOG_177, 1, 5, 30, 200, _("\
-Crouch while jumping to\n\
-pound the ground and smash\n\
-certain objects. Ground-pound\n\
-blue Switches to make blue\n\
-coins appear.\n\
-Each blue coin is worth 5\n\
-yellow coins. But you have\n\
-to hurry! The coins will\n\
-disappear if you're not quick\n\
-enough to collect them!"))
-
-DEFINE_DIALOG(DIALOG_178, 1, 3, 30, 200, _("\
-Press [L] to center\n\
-the camera behind you.\n\
-\n\
-Even when it's hard to\n\
-see what's around you,\n\
-relax and press [L].\n\
-A word of advice:\n\
-keep going but don't rush."))

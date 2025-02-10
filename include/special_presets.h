@@ -80,7 +80,6 @@ enum SpecialPresets {
     special_metal_door_warp,
     special_unknown2_door_warp,
     special_unknown3_door_warp,
-    special_key_door_warp,
     special_castle_door_warp,
     special_castle_door,
     special_0stars_door,

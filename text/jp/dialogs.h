@@ -1,11 +1,20 @@
 // Parameters: dialog enum ID, (unused), lines per box, left offset, width
 
+#ifdef VERSION_JP
+#define HOW_TO_READ_SIGNS_1 "\
+カンバンを　よむときも\n\
+たちどまって　Ｂボタン！\n\
+ＡかＢボタンですすめる！\n\
+まえにたつだけで　はなし\n\
+かける、どうぶつもいます。"
+#else
 #define HOW_TO_READ_SIGNS_1 "\
 カンバンは　まえにたって\n\
 ＡかＢボタンでよめます。\n\
 まえにたつだけで　はなし\n\
 かけてくれる　どうぶつも\n\
 います。"
+#endif
 
 DEFINE_DIALOG(DIALOG_000, 1, 5, 30, 200, _("\
 おおっと、ここはキケンな\n\
@@ -1080,7 +1089,11 @@ DEFINE_DIALOG(DIALOG_094, 1, 3, 30, 200, _("\
 はしりながら　Ｚボタンで\n\
 しゃがんで　ジャンプだ！"))
 
+#ifdef VERSION_JP
+#define HOW_TO_READ_SIGNS_2 "　Ｂボタンをおすと"
+#else
 #define HOW_TO_READ_SIGNS_2 "ＡかＢボタンをおし"
+#endif
 
 DEFINE_DIALOG(DIALOG_095, 1, 3, 30, 200, _("\
 このように　カンバンの\n\
@@ -1868,6 +1881,15 @@ DEFINE_DIALOG(DIALOG_166, 1, 6, 30, 200, _("\
 くるといいッス！\n\
 　　　　　　　ノコノコ"))
 
+#ifdef VERSION_JP
+#define A_BUTTON_ACT "\
+Ａボタン『ジャンプ』\n"
+#define B_BUTTON_ACT "\
+Ｂボタン『カンバンよむ』\n\
+　　　　『パンチ』\n\
+　　　　『ものをもつ』\n\
+もういちどおす『なげる』"
+#else
 #define A_BUTTON_ACT "\
 Ａボタン『ジャンプ』\n\
 　　　　『カンバンよむ』\n"
@@ -1877,6 +1899,7 @@ DEFINE_DIALOG(DIALOG_166, 1, 6, 30, 200, _("\
 　　　　『ものをもつ』\n\
 　もういちどおすと\n\
 　　　　『なげる』"
+#endif
 
 DEFINE_DIALOG(DIALOG_167, 1, 4, 30, 200, _("\
 『ピーチの　おしろ』\n\
@@ -1897,68 +1920,3 @@ DEFINE_DIALOG(DIALOG_169, 1, 5, 30, 200, _("\
 むだんで　はいるものには、\n\
 わざわいが　おとずれる！\n\
 　　--せんちょうより"))
-
-DEFINE_DIALOG(DIALOG_174, 1, 4, 30, 200, _("\
-The king refuses to be\n\
-dejected by a single\n\
-defeat. I'm back with a\n\
-new Star from Bowser!\n\
-I've also restyled my\n\
-mustache.\n\
-I'm unstoppable!\n\
-If you want the Power\n\
-Star, you'll have to\n\
-knock it out of me!\n\
-\n\
-\n\
-But the only way to\n\
-do that is to pick me\n\
-up from behind and\n\
-fling me down. And\n\
-that will never happen!\n\
-Bring it, shorty!"))
-
-DEFINE_DIALOG(DIALOG_175, 1, 4, 30, 200, _("\
-Hello!\n\
-Please take a look\n\
-at the map below.\n\
-Memorized it?\n\
-If you are lost.\n\
-please talk to\n\
-me again."))
-
-DEFINE_DIALOG(DIALOG_176, 1, 6, 30, 200, _("\
-When you step on the\n\
-strange ? Switch\n\
-hidden in the castle,\n\
-the ? Blocks will\n\
-become solid.\n\
-\n\
-Some of these blocks\n\
-have useful items inside\n\
-Get the items by\n\
-breaking the blocks.\n\
-But beware! Some\n\
-blocks are duds."))
-
-DEFINE_DIALOG(DIALOG_177, 1, 5, 30, 220, _("\
-Crouch while jumping to\n\
-pound the ground and smash\n\
-certain objects. Ground-pound\n\
-blue Switches to make blue\n\
-coins appear.\n\
-Each blue coin is worth 5\n\
-yellow coins. But you have\n\
-to hurry! The coins will\n\
-disappear if you're not quick\n\
-enough to collect them!"))
-
-DEFINE_DIALOG(DIALOG_178, 1, 3, 30, 200, _("\
-Press [L] to center\n\
-the camera behind you.\n\
-\n\
-Even when it's hard to\n\
-see what's around you,\n\
-relax and press [L].\n\
-A word of advice:\n\
-keep going but don't rush."))

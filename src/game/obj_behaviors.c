@@ -20,9 +20,9 @@
 #include "level_update.h"
 #include "levels/bob/header.h"
 #include "levels/ttm/header.h"
-#include "player.h"
-#include "player_actions_cutscene.h"
-#include "player_misc.h"
+#include "mario.h"
+#include "mario_actions_cutscene.h"
+#include "mario_misc.h"
 #include "memory.h"
 #include "obj_behaviors.h"
 #include "object_helpers.h"
@@ -63,14 +63,26 @@ static struct Surface *sObjFloor;
 static s8 sOrientObjWithFloor = TRUE;
 
 /**
- * Keeps track of Player's previous non-zero room.
- * Helps keep track of room when Player is over an object.
+ * Keeps track of Mario's previous non-zero room.
+ * Helps keep track of room when Mario is over an object.
  */
-s16 sPrevCheckPlayerRoom = 0;
+s16 sPrevCheckMarioRoom = 0;
+
+/**
+ * Tracks whether or not Yoshi has walked/jumped off the roof.
+ */
+s8 sYoshiDead = FALSE;
 
 extern void *ccm_seg7_trajectory_snowman;
 extern void *inside_castle_seg7_trajectory_mips;
-extern void *castle_grounds_trajectory_mips;
+
+/**
+ * Resets yoshi as spawned/despawned upon new file select.
+ * Possibly a function with stubbed code.
+ */
+void set_yoshi_as_not_dead(void) {
+    sYoshiDead = FALSE;
+}
 
 /**
  * An unused geo function. Bears strong similarity to geo_bits_bowser_coloring, and relates something
@@ -473,12 +485,12 @@ void obj_move_xyz_using_fvel_and_yaw(struct Object *obj) {
 }
 
 /**
- * Checks if a point is within distance from Player's graphical position. Test is exclusive.
+ * Checks if a point is within distance from Mario's graphical position. Test is exclusive.
  */
-s8 is_point_within_radius_of_player(f32 x, f32 y, f32 z, s32 dist) {
-    f32 mGfxX = gPlayerObject->header.gfx.pos[0];
-    f32 mGfxY = gPlayerObject->header.gfx.pos[1];
-    f32 mGfxZ = gPlayerObject->header.gfx.pos[2];
+s8 is_point_within_radius_of_mario(f32 x, f32 y, f32 z, s32 dist) {
+    f32 mGfxX = gMarioObject->header.gfx.pos[0];
+    f32 mGfxY = gMarioObject->header.gfx.pos[1];
+    f32 mGfxZ = gMarioObject->header.gfx.pos[2];
 
     if ((x - mGfxX) * (x - mGfxX) + (y - mGfxY) * (y - mGfxY) + (z - mGfxZ) * (z - mGfxZ)
         < (f32)(dist * dist)) {
@@ -505,7 +517,7 @@ s8 is_point_close_to_object(struct Object *obj, f32 x, f32 y, f32 z, s32 dist) {
 }
 
 /**
- * Sets an object as visible if within a certain distance of Player's graphical position.
+ * Sets an object as visible if within a certain distance of Mario's graphical position.
  */
 #ifndef NODRAWINGDISTANCE
 void set_object_visibility(struct Object *obj, s32 dist) {
@@ -514,7 +526,7 @@ void set_object_visibility(struct Object *obj, s32 dist) {
     f32 objZ = obj->oPosZ;
 
 
-    if (is_point_within_radius_of_player(objX, objY, objZ, dist) == TRUE) {
+    if (is_point_within_radius_of_mario(objX, objY, objZ, dist) == TRUE) {
         obj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
     } else {
         obj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
@@ -527,14 +539,14 @@ void set_object_visibility(UNUSED struct Object *obj, UNUSED s32 dist) {
 #endif
 
 /**
- * Turns an object towards home if Player is not near to it.
+ * Turns an object towards home if Mario is not near to it.
  */
 s8 obj_return_home_if_safe(struct Object *obj, f32 homeX, f32 y, f32 homeZ, s32 dist) {
     f32 homeDistX = homeX - obj->oPosX;
     f32 homeDistZ = homeZ - obj->oPosZ;
     s16 angleTowardsHome = atan2s(homeDistZ, homeDistX);
 
-    if (is_point_within_radius_of_player(homeX, y, homeZ, dist) == TRUE) {
+    if (is_point_within_radius_of_mario(homeX, y, homeZ, dist) == TRUE) {
         return TRUE;
     } else {
         obj->oMoveAngleYaw = approach_s16_symmetric(obj->oMoveAngleYaw, angleTowardsHome, 320);
@@ -638,46 +650,46 @@ s8 obj_flicker_and_disappear(struct Object *obj, s16 lifeSpan) {
 }
 
 /**
- * Checks if a given room is the players current room, even if on an object.
+ * Checks if a given room is Mario's current room, even if on an object.
  */
-s8 current_player_room_check(s16 room) {
+s8 current_mario_room_check(s16 room) {
     s16 result;
 
     // Since object surfaces have room 0, this tests if the surface is an
     // object first and uses the last room if so.
-    if (gPlayerCurrentRoom == 0) {
-        if (room == sPrevCheckPlayerRoom) {
+    if (gMarioCurrentRoom == 0) {
+        if (room == sPrevCheckMarioRoom) {
             return TRUE;
         } else {
             return FALSE;
         }
     } else {
-        if (room == gPlayerCurrentRoom) {
+        if (room == gMarioCurrentRoom) {
             result = TRUE;
         } else {
             result = FALSE;
         }
 
-        sPrevCheckPlayerRoom = gPlayerCurrentRoom;
+        sPrevCheckMarioRoom = gMarioCurrentRoom;
     }
 
     return result;
 }
 
 /**
- * Triggers dialog when Player is facing an object and controls it while in the dialog.
+ * Triggers dialog when Mario is facing an object and controls it while in the dialog.
  */
 s16 trigger_obj_dialog_when_facing(s32 *inDialog, s16 dialogID, f32 dist, s32 actionArg) {
-    if ((is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, (s32) dist) == TRUE
-         && obj_check_if_facing_toward_angle(o->oFaceAngleYaw, gPlayerObject->header.gfx.angle[1] + 0x8000, 0x1000) == TRUE
-         && obj_check_if_facing_toward_angle(o->oMoveAngleYaw, o->oAngleToPlayer, 0x1000) == TRUE)
+    if ((is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, (s32) dist) == TRUE
+         && obj_check_if_facing_toward_angle(o->oFaceAngleYaw, gMarioObject->header.gfx.angle[1] + 0x8000, 0x1000) == TRUE
+         && obj_check_if_facing_toward_angle(o->oMoveAngleYaw, o->oAngleToMario, 0x1000) == TRUE)
         || (*inDialog == TRUE)) {
         *inDialog = TRUE;
 
-        if (set_player_npc_dialog(actionArg) == MARIO_DIALOG_STATUS_SPEAK) { //If Player is speaking.
+        if (set_mario_npc_dialog(actionArg) == MARIO_DIALOG_STATUS_SPEAK) { //If Mario is speaking.
             s16 dialogResponse = cutscene_object_with_dialog(CUTSCENE_DIALOG, o, dialogID);
             if (dialogResponse != DIALOG_RESPONSE_NONE) {
-                set_player_npc_dialog(MARIO_DIALOG_STOP);
+                set_mario_npc_dialog(MARIO_DIALOG_STOP);
                 *inDialog = FALSE;
                 return dialogResponse;
             }
@@ -841,6 +853,4 @@ UNUSED s8 debug_sequence_tracker(s16 debugInputSequence[]) {
 #include "behaviors/decorative_pendulum.inc.c"
 #include "behaviors/treasure_chest.inc.c"
 #include "behaviors/mips.inc.c"
-#include "behaviors/mips_castle.inc.c"
-#include "behaviors/power_flower.inc.c"
-#include "behaviors/silver_star.inc.c"
+#include "behaviors/yoshi.inc.c"

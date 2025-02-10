@@ -207,7 +207,7 @@ void print_checkinfo(void) {
 }
 
 void print_surfaceinfo(void) {
-    debug_surface_list_info(gPlayerObject->oPosX, gPlayerObject->oPosZ);
+    debug_surface_list_info(gMarioObject->oPosX, gMarioObject->oPosZ);
 }
 
 void print_stageinfo(void) {
@@ -360,7 +360,7 @@ void try_change_debug_page(void) {
 void try_modify_debug_controls(void) {
     s32 sp4;
 
-    if (gPlayer1Controller->buttonPressed & (ZL_TRIG | ZR_TRIG)) {
+    if (gPlayer1Controller->buttonPressed & Z_TRIG) {
         sNoExtraDebug ^= 1;
     }
     if (!(gPlayer1Controller->buttonDown & (L_TRIG | R_TRIG)) && !sNoExtraDebug) {
@@ -406,12 +406,12 @@ void stub_debug_5(void) {
 }
 
 /*
- * If Player's object exists, this function tries to print available object debug
+ * If Mario's object exists, this function tries to print available object debug
  * information depending on the debug sys ID. Additional information (updated obj
  * count, floor misses, and an unknown wall counter) is also printed.
  */
-void try_print_debug_player_object_info(void) {
-    if (gPlayerObject != NULL) {
+void try_print_debug_mario_object_info(void) {
+    if (gMarioObject != NULL) {
         switch (sDebugPage) {
             case DEBUG_PAGE_CHECKSURFACEINFO:
                 print_surfaceinfo();
@@ -442,7 +442,7 @@ void try_print_debug_player_object_info(void) {
  * Similar to above, but with level information. (checkinfo, mapinfo,
  * stageinfo)
  */
-void try_print_debug_player_level_info(void) {
+void try_print_debug_mario_level_info(void) {
     switch (sDebugPage) {
         case DEBUG_PAGE_OBJECTINFO:
             break; // no info list is printed for obj info.
@@ -472,7 +472,7 @@ void try_print_debug_player_level_info(void) {
  * debug controls with try_modify_debug_controls and setting
  * [5][7] (b7 in the string array) to 1 to enable debug spawn.
  */
-void try_do_player_debug_object_spawn(void) {
+void try_do_mario_debug_object_spawn(void) {
     UNUSED u8 filler[4];
 
     if (sDebugPage == DEBUG_PAGE_STAGEINFO && gDebugInfo[DEBUG_PAGE_ENEMYINFO][7] == 1) {

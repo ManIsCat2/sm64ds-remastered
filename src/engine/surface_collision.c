@@ -4,7 +4,7 @@
 #include "game/debug.h"
 #include "game/game_init.h"
 #include "game/level_update.h"
-#include "game/player.h"
+#include "game/mario.h"
 #include "game/object_helpers.h"
 #include "game/object_list_processor.h"
 #include "math_util.h"
@@ -185,8 +185,8 @@ static s32 find_wall_collisions_from_list(struct SurfaceNode *surfaceNode, struc
                     continue;
                 }
 
-                // If Player has a vanish cap, pass through the vanish cap wall.
-                if (gCurrentObject == gPlayerObject && (gPlayerState->flags & PLAYER_VANISH_CAP)) {
+                // If Mario has a vanish cap, pass through the vanish cap wall.
+                if (gCurrentObject == gMarioObject && (gMarioState->flags & MARIO_VANISH_CAP)) {
                     continue;
                 }
             }
@@ -279,7 +279,7 @@ static s32 find_wall_collisions_from_list(struct SurfaceNode *surfaceNode, struc
         data->z = pos[2] += (nz * (radius - offset));
     #else
         //! (Wall Overlaps) Because this doesn't update the x and z local variables,
-        //  multiple walls can push the player more than is required.
+        //  multiple walls can push mario more than is required.
         data->x += nx * (radius - offset);
         data->z += nz * (radius - offset);
     #endif
@@ -591,9 +591,9 @@ static struct Surface *find_floor_from_list(struct SurfaceNode *surfaceNode, s32
     while (surfaceNode != NULL) {
         surf = surfaceNode->surface;
         surfaceNode = surfaceNode->next;
-        // To prevent the Merry-Go-Round room from loading when Player passes above the hole that leads
+        // To prevent the Merry-Go-Round room from loading when Mario passes above the hole that leads
         // there, SURFACE_INTANGIBLE is used. This prevent the wrong room from loading, but can also allow
-        // Player to pass through.
+        // Mario to pass through.
         if (!(gCollisionFlags & COLLISION_FLAG_INCLUDE_INTANGIBLE) && (surf->type == SURFACE_INTANGIBLE)) {
             continue;
         }
@@ -631,7 +631,7 @@ static struct Surface *find_floor_from_list(struct SurfaceNode *surfaceNode, s32
 #endif
 
 #ifdef CHEATS_ACTIONS
-        // Set floor height cheats for Player.
+        // Set floor height cheats for Mario.
         height = cheats_walk_on_environment(height, x, z);
 #endif
 
@@ -673,7 +673,7 @@ struct Surface *find_water_bottom_from_list(struct SurfaceNode *surfaceNode, s32
     struct SurfaceNode *currSurfaceNode = surfaceNode;
     struct Surface *surf, *waterBottom = NULL;
     f32 height, lowest = *pheight;
-    f32 bufferY = (y + 160.0f); // Player's hitbox height
+    f32 bufferY = (y + 160.0f); // Mario's hitbox height
 
     while (currSurfaceNode != NULL) {
         surf = currSurfaceNode->surface;
@@ -970,7 +970,7 @@ s32 find_water_level_and_floor(s32 x, s32 z, struct Surface **pfloor) {
     s32 loX, hiX, loZ, hiZ;
     TerrainData *p = gEnvironmentRegions;
     struct Surface *floor = NULL;
-    s32 waterLevel = find_water_floor(x, ((gCollisionFlags & COLLISION_FLAG_CAMERA) ? gLakituState.pos[1] : gPlayerState->pos[1]), z, &floor);
+    s32 waterLevel = find_water_floor(x, ((gCollisionFlags & COLLISION_FLAG_CAMERA) ? gLakituState.pos[1] : gMarioState->pos[1]), z, &floor);
 
     if (p != NULL && waterLevel == FLOOR_LOWER_LIMIT) {
         s32 numRegions = *p++;
@@ -1011,7 +1011,7 @@ f32 find_water_level(f32 x, f32 z) {
 
 #if WATER_SURFACES
     struct Surface *floor;
-    f32 waterLevel = find_water_floor(x, ((gCollisionFlags & COLLISION_FLAG_CAMERA) ? gLakituState.pos[1] : gPlayerState->pos[1]), z, &floor);
+    f32 waterLevel = find_water_floor(x, ((gCollisionFlags & COLLISION_FLAG_CAMERA) ? gLakituState.pos[1] : gMarioState->pos[1]), z, &floor);
     if (p != NULL && waterLevel == FLOOR_LOWER_LIMIT)
 #else
     f32 waterLevel = FLOOR_LOWER_LIMIT;
@@ -1166,8 +1166,8 @@ s32 ray_surface_intersect(Vec3f orig, Vec3f dir, f32 dir_length, struct Surface 
         || surface->type == SURFACE_VANISH_CAP_WALLS || surface->flags & SURFACE_FLAG_NO_CAM_COLLISION)
         return FALSE;
 
-    //Ignore hangable surface if Player is hanging
-    if (surface->type == SURFACE_HANGABLE && gPlayerState->action & ACT_FLAG_HANGING)
+    //Ignore hangable surface if Mario is hanging
+    if (surface->type == SURFACE_HANGABLE && gMarioState->action & ACT_FLAG_HANGING)
         return FALSE;
 
     // Convert the vertices to Vec3f.

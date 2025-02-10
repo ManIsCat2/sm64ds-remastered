@@ -485,7 +485,7 @@ void envfx_set_bubble_texture(s32 mode, s16 index) {
  * Updates the bubble particle positions, then generates and returns a display
  * list drawing them.
  */
-Gfx *envfx_update_bubble_particles(s32 mode, UNUSED Vec3s playerPos, Vec3s camFrom, Vec3s camTo) {
+Gfx *envfx_update_bubble_particles(s32 mode, UNUSED Vec3s marioPos, Vec3s camFrom, Vec3s camTo) {
     s32 i;
     s16 radius, pitch, yaw;
 
@@ -596,7 +596,7 @@ void envfx_set_max_bubble_particles(s32 mode) {
  * lower modes are snow effects which are updated in a different function.
  * Returns a display list drawing the particles.
  */
-Gfx *envfx_update_bubbles(s32 mode, Vec3s playerPos, Vec3s camTo, Vec3s camFrom) {
+Gfx *envfx_update_bubbles(s32 mode, Vec3s marioPos, Vec3s camTo, Vec3s camFrom) {
     Gfx *gfx;
 
     if (gEnvFxMode == ENVFX_MODE_NONE && !envfx_init_bubble(mode)) {
@@ -611,19 +611,19 @@ Gfx *envfx_update_bubbles(s32 mode, Vec3s playerPos, Vec3s camTo, Vec3s camFrom)
 
     switch (mode) {
         case ENVFX_FLOWERS:
-            gfx = envfx_update_bubble_particles(ENVFX_FLOWERS, playerPos, camFrom, camTo);
+            gfx = envfx_update_bubble_particles(ENVFX_FLOWERS, marioPos, camFrom, camTo);
             break;
 
         case ENVFX_LAVA_BUBBLES:
-            gfx = envfx_update_bubble_particles(ENVFX_LAVA_BUBBLES, playerPos, camFrom, camTo);
+            gfx = envfx_update_bubble_particles(ENVFX_LAVA_BUBBLES, marioPos, camFrom, camTo);
             break;
 
         case ENVFX_WHIRLPOOL_BUBBLES:
-            gfx = envfx_update_bubble_particles(ENVFX_WHIRLPOOL_BUBBLES, playerPos, camFrom, camTo);
+            gfx = envfx_update_bubble_particles(ENVFX_WHIRLPOOL_BUBBLES, marioPos, camFrom, camTo);
             break;
 
         case ENVFX_JETSTREAM_BUBBLES:
-            gfx = envfx_update_bubble_particles(ENVFX_JETSTREAM_BUBBLES, playerPos, camFrom, camTo);
+            gfx = envfx_update_bubble_particles(ENVFX_JETSTREAM_BUBBLES, marioPos, camFrom, camTo);
             break;
 
         default:

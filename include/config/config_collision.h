@@ -10,7 +10,7 @@
 // Fixes most collision bugs and adds extra checks for performance.
 #define COLLISION_IMPROVEMENTS (0 || COLLISION_FIXES)
 
-// Checks for ceilings from the players actual height instead of from the floor height.
+// Checks for ceilings from Mario's actual height instead of from the floor height.
 #define EXPOSED_CEILINGS_FIX (0 || COLLISION_FIXES)
 
 // Fixes cell buffer by checking extra cells in corners.
@@ -19,7 +19,7 @@
 // Fixes landing on a floor vertically aligned and within 160 units of a ceiling
 #define PEDRO_SPOT_FIX (0 || COLLISION_FIXES)
 
-// Push the player out of sloped ceilings instead of stopping or knocking.
+// Push Mario out of sloped ceilings instead of stopping or knocking.
 #define BETTER_CEILING_HANDLING (0 || COLLISION_FIXES)
 
 // Adds margins to celling surfaces (except hangable ones).
@@ -37,8 +37,8 @@
 // Saves a lot of CPU over silliness, by cleaning only used dynamic cells.
 #define BETTER_DYNAMIC_CELLS (0 || COLLISION_FIXES)
 
-// Removes surface priority ordering to save processing time.
-#define NO_SURFACE_PRIORITY_REORDER (0 || COLLISION_FIXES)
+// Automatically calculates the optimal collision distance for an object based on it's vertices.
+#define AUTO_COLLISION_DISTANCE (0 || QOL_FEATURES)
 
 /// Use the floor's normal instead of a triangle of find_floor if the floor isn't steep
 #define FAST_FLOOR_ALIGN (0 || QOL_FEATURES)

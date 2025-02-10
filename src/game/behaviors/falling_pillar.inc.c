@@ -40,13 +40,13 @@ void bhv_falling_pillar_spawn_hitboxes(void) {
 
 /**
  * Computes the angle from current pillar position to 500 units in front of
- * Player.
+ * Mario.
  */
-s16 bhv_falling_pillar_calculate_angle_in_front_of_player(void) {
-    // Calculate target to be 500 units in front of Player in
+s16 bhv_falling_pillar_calculate_angle_in_front_of_mario(void) {
+    // Calculate target to be 500 units in front of Mario in
     // the direction he is facing (angle[1] is yaw).
-    f32 targetX = sins(gPlayerObject->header.gfx.angle[1]) * 500.0f + gPlayerObject->header.gfx.pos[0];
-    f32 targetZ = coss(gPlayerObject->header.gfx.angle[1]) * 500.0f + gPlayerObject->header.gfx.pos[2];
+    f32 targetX = sins(gMarioObject->header.gfx.angle[1]) * 500.0f + gMarioObject->header.gfx.pos[0];
+    f32 targetZ = coss(gMarioObject->header.gfx.angle[1]) * 500.0f + gMarioObject->header.gfx.pos[2];
 
     // Calculate the angle to the target from the pillar's current location.
     return atan2s(targetZ - o->oPosZ, targetX - o->oPosX);
@@ -56,20 +56,20 @@ s16 bhv_falling_pillar_calculate_angle_in_front_of_player(void) {
  * Falling pillar main logic loop.
  */
 void bhv_falling_pillar_loop(void) {
-    s16 angleInFrontOfPlayer;
+    s16 angleInFrontOfMario;
 
     switch (o->oAction) {
         case FALLING_PILLAR_ACT_IDLE:
-            // When Player is within 1300 units of distance...
-            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1300)) {
-                // Begin slightly moving towards Player.
-                o->oMoveAngleYaw = o->oAngleToPlayer;
+            // When Mario is within 1300 units of distance...
+            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1300)) {
+                // Begin slightly moving towards Mario.
+                o->oMoveAngleYaw = o->oAngleToMario;
                 o->oForwardVel = 1.0f;
 
                 // Spawn the invisible hitboxes.
                 bhv_falling_pillar_spawn_hitboxes();
 
-                // Start turning towards Player.
+                // Start turning towards Mario.
                 o->oAction = FALLING_PILLAR_ACT_TURNING;
 
                 // Play the detaching sound.
@@ -80,9 +80,9 @@ void bhv_falling_pillar_loop(void) {
         case FALLING_PILLAR_ACT_TURNING:
             object_step_without_floor_orient();
 
-            // Calculate angle in front of Player and turn towards it.
-            angleInFrontOfPlayer = bhv_falling_pillar_calculate_angle_in_front_of_player();
-            o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, angleInFrontOfPlayer, 0x400);
+            // Calculate angle in front of Mario and turn towards it.
+            angleInFrontOfMario = bhv_falling_pillar_calculate_angle_in_front_of_mario();
+            o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, angleInFrontOfMario, 0x400);
 
             // After 10 ticks, start falling.
             if (o->oTimer > 10) {
@@ -135,7 +135,7 @@ void bhv_falling_pillar_hitbox_loop(void) {
     o->oPosY = coss(pitch) * yOffset + y;
     o->oPosZ = sins(pitch) * coss(yaw) * yOffset + z;
 
-    // Give these a hitbox so they can collide with Player.
+    // Give these a hitbox so they can collide with Mario.
     obj_set_hitbox(o, &sFallingPillarHitbox);
 
     // When the pillar goes inactive, the hitboxes also go inactive.

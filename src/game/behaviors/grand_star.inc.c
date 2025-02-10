@@ -65,7 +65,7 @@ void bhv_grand_star_loop(void) {
             o->oPosY = o->oHomeY + 200.0f;
             grand_star_zero_velocity();
             gObjCutsceneDone = TRUE;
-            set_player_npc_dialog(MARIO_DIALOG_STOP);
+            set_mario_npc_dialog(MARIO_DIALOG_STOP);
             o->oAction++;
             o->oInteractStatus = 0;
 

@@ -1,7 +1,7 @@
 // respawner.inc.c
 
 void bhv_respawner_loop(void) {
-    if (!is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, o->oRespawnerMinSpawnDist)) {
+    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, o->oRespawnerMinSpawnDist)) {
         struct Object *spawnedObject = spawn_object(o, o->oRespawnerModelToRespawn,
                                                     o->oRespawnerBehaviorToRespawn);
         spawnedObject->oBhvParams = o->oBhvParams;

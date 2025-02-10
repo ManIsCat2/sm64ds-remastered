@@ -44,11 +44,11 @@ static void cloud_act_spawn_parts(void) {
 }
 
 /**
- * Wait for player to approach, then unhide and enter the spawn parts action.
+ * Wait for mario to approach, then unhide and enter the spawn parts action.
  */
 static void cloud_act_fwoosh_hidden(void) {
 #ifndef NODRAWINGDISTANCE
-    if (o->oDistanceToPlayer < 2000.0f) {
+    if (o->oDistanceToMario < 2000.0f) {
 #endif
         cur_obj_unhide();
         o->oAction = CLOUD_ACT_SPAWN_PARTS;
@@ -58,12 +58,12 @@ static void cloud_act_fwoosh_hidden(void) {
 }
 
 /**
- * Move in a circle. Unload if player moves far away. If player stays close for
+ * Move in a circle. Unload if mario moves far away. If mario stays close for
  * long enough, blow wind at him.
  */
 static void cloud_fwoosh_update(void) {
 #ifndef NODRAWINGDISTANCE
-    if (o->oDistanceToPlayer > 2500.0f) {
+    if (o->oDistanceToMario > 2500.0f) {
         o->oAction = CLOUD_ACT_UNLOAD;
     } else {
 #endif
@@ -85,8 +85,8 @@ static void cloud_fwoosh_update(void) {
             approach_f32_ptr(&o->header.gfx.scale[0], 3.0f, 0.012f);
             o->oCloudFwooshMovementRadius += 0xC8;
 
-            // If player stays nearby for 100 frames, begin blowing
-            if (o->oDistanceToPlayer < 1000.0f) {
+            // If mario stays nearby for 100 frames, begin blowing
+            if (o->oDistanceToMario < 1000.0f) {
                 if (o->oTimer > 100) {
                     o->oCloudBlowing = TRUE;
                     o->oCloudGrowSpeed = 0.14f;
@@ -128,7 +128,7 @@ static void cloud_act_main(void) {
     } else if (o->oBhvParams2ndByte != CLOUD_BP_FWOOSH) {
         // This code should never run, since a lakitu cloud should always have
         // a parent
-        if (o->oDistanceToPlayer > 1500.0f) {
+        if (o->oDistanceToMario > 1500.0f) {
             o->oAction = CLOUD_ACT_UNLOAD;
         }
     } else {

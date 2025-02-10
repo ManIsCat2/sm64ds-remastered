@@ -17,5 +17,3 @@
 #include "levels/castle_courtyard/areas/1/collision.inc.c"
 #include "levels/castle_courtyard/areas/1/macro.inc.c"
 #include "levels/castle_courtyard/areas/1/movtext.inc.c"
-
-#include "levels/castle_courtyard/courtyard_mesh/model.inc.c"

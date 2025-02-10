@@ -150,6 +150,16 @@
 #define CAM_FLAG_UNUSED_CUTSCENE_ACTIVE  0x4000
 #define CAM_FLAG_BEHIND_MARIO_POST_DOOR  0x8000
 
+#define CAM_STATUS_NONE   0
+#define CAM_STATUS_MARIO  1 << 0
+#define CAM_STATUS_LAKITU 1 << 1
+#define CAM_STATUS_FIXED  1 << 2
+#define CAM_STATUS_C_DOWN 1 << 3
+#define CAM_STATUS_C_UP   1 << 4
+
+#define CAM_STATUS_MODE_GROUP   (CAM_STATUS_MARIO | CAM_STATUS_LAKITU | CAM_STATUS_FIXED)
+#define CAM_STATUS_C_MODE_GROUP (CAM_STATUS_C_DOWN | CAM_STATUS_C_UP)
+
 #define SHAKE_ATTACK         1
 #define SHAKE_GROUND_POUND   2
 #define SHAKE_SMALL_DAMAGE   3
@@ -260,19 +270,22 @@
 #define CAM_FOV_ZOOM_30     12
 #define CAM_FOV_SET_29      13
 
-#define CAM_EVENT_CANNON              1
-#define CAM_EVENT_SHOT_FROM_CANNON    2
-#define CAM_EVENT_UNUSED_3            3
-#define CAM_EVENT_BOWSER_INIT         4
-#define CAM_EVENT_DOOR_WARP           5
-#define CAM_EVENT_DOOR                6
-#define CAM_EVENT_BOWSER_JUMP         7
-#define CAM_EVENT_BOWSER_THROW_BOUNCE 8
-#define CAM_EVENT_START_INTRO         9
-#define CAM_EVENT_START_GRAND_STAR    10
-#define CAM_EVENT_START_ENDING        11
-#define CAM_EVENT_START_END_WAVING    12
-#define CAM_EVENT_START_CREDITS       13
+enum CameraEvent {
+    CAM_EVENT_NONE,
+    CAM_EVENT_CANNON,
+    CAM_EVENT_SHOT_FROM_CANNON,
+    CAM_EVENT_NO_EXIT_STAR, // repurpose from unused
+    CAM_EVENT_BOWSER_INIT,
+    CAM_EVENT_DOOR_WARP,
+    CAM_EVENT_DOOR,
+    CAM_EVENT_BOWSER_JUMP,
+    CAM_EVENT_BOWSER_THROW_BOUNCE,
+    CAM_EVENT_START_INTRO,
+    CAM_EVENT_START_GRAND_STAR,
+    CAM_EVENT_START_ENDING,
+    CAM_EVENT_START_END_WAVING,
+    CAM_EVENT_START_CREDITS
+};
 
 /**
  * A copy of player information that is relevant to the camera.
@@ -306,7 +319,7 @@ struct TransitionInfo {
     /*0x0A*/ s16 focYaw;
     /*0x0C*/ f32 focDist;
     /*0x10*/ s32 framesLeft;
-    /*0x14*/ Vec3f playerPos;
+    /*0x14*/ Vec3f marioPos;
     /*0x20*/ u8 unused; // for the structs to align, there has to be an extra unused variable here. type is unknown.
 };
 
@@ -655,7 +668,7 @@ void set_camera_mode(struct Camera *c, s16 mode, s16 frames);
 void update_camera(struct Camera *c);
 void reset_camera(struct Camera *c);
 void init_camera(struct Camera *c);
-void select_player_cam_mode(void);
+void select_mario_cam_mode(void);
 Gfx *geo_camera_main(s32 callContext, struct GraphNode *g, void *context);
 void stub_camera_2(UNUSED struct Camera *c);
 void stub_camera_3(UNUSED struct Camera *c);
@@ -667,9 +680,10 @@ s32 set_cam_angle(s32 mode);
 void set_handheld_shake(u8 mode);
 void shake_camera_handheld(Vec3f pos, Vec3f focus);
 s32 find_c_buttons_pressed(u16 currentState, u16 buttonsPressed, u16 buttonsDown);
+s32 update_camera_hud_status(struct Camera *c);
 s32 collide_with_walls(Vec3f pos, f32 offsetY, f32 radius);
 s32 clamp_pitch(Vec3f from, Vec3f to, s16 maxPitch, s16 minPitch);
-s32 is_within_100_units_of_player(f32 posX, f32 posY, f32 posZ);
+s32 is_within_100_units_of_mario(f32 posX, f32 posY, f32 posZ);
 s32 set_or_approach_f32_asymptotic(f32 *dst, f32 goal, f32 scale);
 void approach_vec3f_asymptotic(Vec3f current, Vec3f target, f32 xMul, f32 yMul, f32 zMul);
 void set_or_approach_vec3f_asymptotic(Vec3f dst, Vec3f goal, f32 xMul, f32 yMul, f32 zMul);
@@ -705,7 +719,7 @@ void play_sound_cbutton_down(void);
 void play_sound_cbutton_side(void);
 void play_sound_button_change_blocked(void);
 void play_sound_rbutton_changed(void);
-void play_sound_if_cam_switched_to_lakitu_or_player(void);
+void play_sound_if_cam_switched_to_lakitu_or_mario(void);
 void radial_camera_input(struct Camera *c);
 s32 trigger_cutscene_dialog(s32 trigger);
 void handle_c_button_movement(struct Camera *c);

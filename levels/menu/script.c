@@ -26,16 +26,20 @@ const LevelScript level_main_menu_entry_1[] = {
     LOAD_MIO0(/*seg*/ 0x07, _menu_segment_7SegmentRomStart, _menu_segment_7SegmentRomEnd),
     LOAD_RAW (/*seg*/ 0x13, _behaviorSegmentRomStart, _behaviorSegmentRomEnd),
     ALLOC_LEVEL_POOL(),
-    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_FILE_BUTTON_A,           geo_menu_file_a),
-    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_FILE_BUTTON_B,           geo_menu_file_b),
-    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_FILE_BUTTON_C,           geo_menu_file_c),
-    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_FILE_OPTIONS,            file_options_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_FILE_RETURN,             file_return_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_FILE_SELECT_BACKGROUND,            file_select_bg_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_MARIO_SAVE_BUTTON,      geo_menu_mario_save_button),
+    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_RED_ERASE_BUTTON,       geo_menu_erase_button),
+    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_BLUE_COPY_BUTTON,       geo_menu_copy_button),
+    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_YELLOW_FILE_BUTTON,     geo_menu_file_button),
+    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_GREEN_SCORE_BUTTON,     geo_menu_score_button),
+    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_MARIO_SAVE_BUTTON_FADE, geo_menu_mario_save_button_fade),
+    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_MARIO_NEW_BUTTON,       geo_menu_mario_new_button),
+    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_MARIO_NEW_BUTTON_FADE,  geo_menu_mario_new_button_fade),
+    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_PURPLE_SOUND_BUTTON,    geo_menu_sound_button),
+    LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_GENERIC_BUTTON,         geo_menu_generic_button),
 
     AREA(/*index*/ 1, geo_menu_file_select_strings_and_menu_cursor),
         OBJECT(/*model*/ MODEL_NONE,         /*pos*/ 0, 0, -19000, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM1(0x04), /*bhv*/ bhvMenuButtonManager),
-        OBJECT(/*model*/ MODEL_FILE_SELECT_BACKGROUND, /*pos*/ 0, 0, -19000, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM1(0x04), /*bhv*/ bhvYellowBackgroundInMenu),
+        OBJECT(/*model*/ MODEL_MAIN_MENU_YELLOW_FILE_BUTTON, /*pos*/ 0, 0, -19000, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM1(0x04), /*bhv*/ bhvYellowBackgroundInMenu),
         TERRAIN(/*terrainData*/ main_menu_seg7_collision),
     END_AREA(),
 
@@ -55,12 +59,20 @@ const LevelScript level_main_menu_entry_1[] = {
     SLEEP(/*frames*/ 16),
     CLEAR_LEVEL(),
     SLEEP_BEFORE_EXIT(/*frames*/ 1),
+#ifdef RM2C
     SET_REG(/*value*/ START_LEVEL),
+#else
+    SET_REG(/*value*/ LEVEL_CASTLE_GROUNDS),
+#endif
     EXIT_AND_EXECUTE(/*seg*/ 0x15, _scriptsSegmentRomStart, _scriptsSegmentRomEnd, level_main_scripts_entry),
 };
 
 const LevelScript level_main_menu_entry_1_skip[] = {
+#ifdef RM2C
     SET_REG(/*value*/ START_LEVEL),
+#else
+    SET_REG(/*value*/ LEVEL_CASTLE_GROUNDS),
+#endif
     EXIT_AND_EXECUTE(/*seg*/ 0x15, _scriptsSegmentRomStart, _scriptsSegmentRomEnd, level_main_scripts_entry),
 };
 

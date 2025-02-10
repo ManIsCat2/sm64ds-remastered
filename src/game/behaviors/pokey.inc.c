@@ -143,7 +143,7 @@ void bhv_pokey_body_part_update(void) {
 }
 
 /**
- * When player gets within range, spawn the 5 body parts and enter the wander
+ * When mario gets within range, spawn the 5 body parts and enter the wander
  * action.
  */
 static void pokey_act_uninitialized(void) {
@@ -152,7 +152,7 @@ static void pokey_act_uninitialized(void) {
     ModelID16 partModel;
 
 #ifndef NODRAWINGDISTANCE
-    if (o->oDistanceToPlayer < 2000.0f) {
+    if (o->oDistanceToMario < 2000.0f) {
 #endif
         partModel = MODEL_POKEY_HEAD;
 
@@ -178,10 +178,10 @@ static void pokey_act_uninitialized(void) {
 }
 
 /**
- * Wander around, replenishing body parts if they are killed. When player moves
+ * Wander around, replenishing body parts if they are killed. When mario moves
  * far away, enter the unload parts action.
- * While wandering, if player is within 2000 units, try to move toward him. But
- * if player gets too close, then shy away from him.
+ * While wandering, if mario is within 2000 units, try to move toward him. But
+ * if mario gets too close, then shy away from him.
  */
 static void pokey_act_wander(void) {
     s32 targetAngleOffset;
@@ -189,12 +189,12 @@ static void pokey_act_wander(void) {
     if (o->oPokeyNumAliveBodyParts == 0) {
         obj_mark_for_deletion(o);
 #ifndef NODRAWINGDISTANCE
-    } else if (o->oDistanceToPlayer > 2500.0f) {
+    } else if (o->oDistanceToMario > 2500.0f) {
         o->oAction = POKEY_ACT_UNLOAD_PARTS;
         o->oForwardVel = 0.0f;
 #endif
     } else {
-        treat_far_home_as_player(1000.0f);
+        treat_far_home_as_mario(1000.0f);
         cur_obj_update_floor_and_walls();
 
         if (o->oPokeyHeadWasKilled) {
@@ -233,42 +233,42 @@ static void pokey_act_wander(void) {
                     obj_resolve_collisions_and_turn(o->oPokeyTargetYaw, 0x200);
             } else {
                 // If far from home, turn back toward home
-                if (o->oDistanceToPlayer >= 25000.0f) {
-                    o->oPokeyTargetYaw = o->oAngleToPlayer;
+                if (o->oDistanceToMario >= 25000.0f) {
+                    o->oPokeyTargetYaw = o->oAngleToMario;
                 }
 
                 if (!(o->oPokeyTurningAwayFromWall =
                           obj_bounce_off_walls_edges_objects(&o->oPokeyTargetYaw))) {
                     if (o->oPokeyChangeTargetTimer != 0) {
                         o->oPokeyChangeTargetTimer--;
-                    } else if (o->oDistanceToPlayer > 2000.0f) {
+                    } else if (o->oDistanceToMario > 2000.0f) {
                         o->oPokeyTargetYaw = obj_random_fixed_turn(0x2000);
                         o->oPokeyChangeTargetTimer = random_linear_offset(30, 50);
                     } else {
                         // The goal of this computation is to make pokey approach
-                        // player directly if he is far away, but to shy away from
+                        // mario directly if he is far away, but to shy away from
                         // him when he is nearby
 
-                        // targetAngleOffset is 0 when distance to player is >= 1838.4
-                        // and 0x4000 when distance to player is <= 200
-                        targetAngleOffset = (s32)(0x4000 - (o->oDistanceToPlayer - 200.0f) * 10.0f);
+                        // targetAngleOffset is 0 when distance to mario is >= 1838.4
+                        // and 0x4000 when distance to mario is <= 200
+                        targetAngleOffset = (s32)(0x4000 - (o->oDistanceToMario - 200.0f) * 10.0f);
                         if (targetAngleOffset < 0) {
                             targetAngleOffset = 0;
                         } else if (targetAngleOffset > 0x4000) {
                             targetAngleOffset = 0x4000;
                         }
 
-                        // If we need to rotate CCW to get to player, then negate
+                        // If we need to rotate CCW to get to mario, then negate
                         // the target angle offset
-                        if ((s16)(o->oAngleToPlayer - o->oMoveAngleYaw) > 0) {
+                        if ((s16)(o->oAngleToMario - o->oMoveAngleYaw) > 0) {
                             targetAngleOffset = -targetAngleOffset;
                         }
 
-                        // When player is far, targetAngleOffset is 0, so he moves
-                        // toward him directly. When player is close,
+                        // When mario is far, targetAngleOffset is 0, so he moves
+                        // toward him directly. When mario is close,
                         // targetAngleOffset is 0x4000, so he turns 90 degrees
-                        // away from player
-                        o->oPokeyTargetYaw = o->oAngleToPlayer + targetAngleOffset;
+                        // away from mario
+                        o->oPokeyTargetYaw = o->oAngleToMario + targetAngleOffset;
                     }
                 }
 

@@ -74,27 +74,4 @@ extern const Collision bitdw_seg7_collision_0700FD9C[];
 // script
 extern const LevelScript level_bitdw_entry[];
 
-
-#include "levels/bitdw/header.inc.h"
-
-#include "levels/bitdw/seesaw_platform/geo_header.h"
-
-#include "levels/bitdw/square_platform/geo_header.h"
-
-#include "levels/bitdw/ferris_wheel_axle/geo_header.h"
-
-#include "levels/bitdw/ferris_platform/geo_header.h"
-
-#include "levels/bitdw/sliding_platform/geo_header.h"
-
-#include "levels/bitdw/collapsing_stairs_5/geo_header.h"
-
-#include "levels/bitdw/collapsing_stairs_1/geo_header.h"
-
-#include "levels/bitdw/collapsing_stairs_2/geo_header.h"
-
-#include "levels/bitdw/collapsing_stairs_3/geo_header.h"
-
-#include "levels/bitdw/collapsing_stairs_4/geo_header.h"
-
 #endif

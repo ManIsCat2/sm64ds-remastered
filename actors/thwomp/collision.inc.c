@@ -66,7 +66,8 @@ const Collision thwomp_seg5_collision_0500B7D0[] = {
     COL_END(),
 };
 
-const Collision thwomp_collision[] = {
+// 0x0500B92C - 0x0500BA88
+const Collision thwomp_seg5_collision_0500B92C[] = {
     COL_INIT(),
     COL_VERTEX_INIT(0x14),
     COL_VERTEX(-156, 3, 73),

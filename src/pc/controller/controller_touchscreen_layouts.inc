@@ -7,6 +7,11 @@ struct Position GetDefaultJoystickPos() {
     return ret;
 }
 
+struct Position GetDefaultJoystickAnalogPos() {
+    struct Position ret = { .x = GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(60) << 2, .y = 290 };
+    return ret;
+}
+
 struct Position GetDefaultStartPos() {
     struct Position ret = { .x = SCREEN_WIDTH_API / 2, .y = 900 };
     return ret;
@@ -58,14 +63,12 @@ struct Position GetDefaultRightPos() {
 }
 
 static struct ControlElement ControlElementsDefault[] = {
-{.type = Joystick, .GetPos = GetDefaultJoystickPos},
+{.type = Joystick, .GetPos = GetDefaultJoystickPos, .isJoyAnalog = FALSE},
+{.type = Joystick, .GetPos = GetDefaultJoystickAnalogPos, .isJoyAnalog = TRUE},
 {.type = Button, .GetPos = GetDefaultStartPos, .character = 's', .buttonID = START_BUTTON},
 {.type = Button, .GetPos = GetDefaultAPos, .character = 'a', .buttonID = A_BUTTON},
 {.type = Button, .GetPos = GetDefaultBPos, .character = 'b', .buttonID = B_BUTTON},
-{.type = Button, .GetPos = GetDefaultXPos, .character = 'x', .buttonID = X_BUTTON},
-{.type = Button, .GetPos = GetDefaultYPos, .character = 'y', .buttonID = Y_BUTTON},
-{.type = Button, .GetPos = GetDefaultZLPos, .character = 'zl', .buttonID = ZL_TRIG},
-{.type = Button, .GetPos = GetDefaultZRPos, .character = 'zr', .buttonID = ZR_TRIG},
+{.type = Button, .GetPos = GetDefaultZPos, .character = 'z', .buttonID = Z_TRIG},
 {.type = Button, .GetPos = GetDefaultLPos, .character = 'l', .buttonID = L_TRIG},
 {.type = Button, .GetPos = GetDefaultRPos, .character = 'r', .buttonID = R_TRIG},
 {.type = Button, .GetPos = GetDefaultUpPos, .character = 'u', .buttonID = U_CBUTTONS},

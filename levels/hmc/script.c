@@ -45,7 +45,7 @@ static const LevelScript script_func_local_2[] = {
     OBJECT(/*model*/ MODEL_HMC_ELEVATOR_PLATFORM, /*pos*/  -973,  1741, -7347, /*angle*/ 0,   0, 0, /*bhvParam*/ BPARAM2(0x02), /*bhv*/ bhvHMCElevatorPlatform),
     OBJECT(/*model*/ MODEL_HMC_ELEVATOR_PLATFORM, /*pos*/ -3533,  1741, -7040, /*angle*/ 0,   0, 0, /*bhvParam*/ BPARAM2(0x03), /*bhv*/ bhvHMCElevatorPlatform),
     OBJECT(/*model*/ MODEL_NONE,                  /*pos*/   614, -4690,  2330, /*angle*/ 0, 270, 0, /*bhvParam*/ BPARAM2(OPENABLE_GRILL_BP_HMC), /*bhv*/ bhvOpenableGrill),
-    OBJECT(/*model*/ MODEL_RED_SWITCH,         /*pos*/  -307, -4997,  2483, /*angle*/ 0, 270, 0, /*bhvParam*/ 0, /*bhv*/ bhvFloorSwitchGrills),
+    OBJECT(/*model*/ MODEL_PURPLE_SWITCH,         /*pos*/  -307, -4997,  2483, /*angle*/ 0, 270, 0, /*bhvParam*/ 0, /*bhv*/ bhvFloorSwitchGrills),
     OBJECT(/*model*/ MODEL_CHECKERBOARD_PLATFORM, /*pos*/  1270,  2000,  4000, /*angle*/ 0, 270, 0, /*bhvParam*/ BPARAM1(0x09) | BPARAM2(0xA4), /*bhv*/ bhvPlatformOnTrack),
     RETURN(),
 };
@@ -79,7 +79,7 @@ const LevelScript level_hmc_entry[] = {
     LOAD_MIO0        (/*seg*/ 0x08, _common0_mio0SegmentRomStart, _common0_mio0SegmentRomEnd),
     LOAD_RAW         (/*seg*/ 0x0F, _common0_geoSegmentRomStart,  _common0_geoSegmentRomEnd),
     ALLOC_LEVEL_POOL(),
-    MARIO(/*model*/ MODEL_MARIO, /*bhvParam*/ BPARAM4(0x01), /*bhv*/ bhvPlayer),
+    MARIO(/*model*/ MODEL_MARIO, /*bhvParam*/ BPARAM4(0x01), /*bhv*/ bhvMario),
     JUMP_LINK(script_func_global_1),
     JUMP_LINK(script_func_global_7),
     JUMP_LINK(script_func_global_18),

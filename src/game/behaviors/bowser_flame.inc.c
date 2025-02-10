@@ -266,7 +266,7 @@ void bhv_blue_flames_group_loop(void) {
     s32 i;
 
     if (o->oTimer == 0) {
-        o->oMoveAngleYaw = obj_angle_to_object(o, gPlayerObject);
+        o->oMoveAngleYaw = obj_angle_to_object(o, gMarioObject);
         o->oBlueFlameNextScale = 5.0f;
     }
 

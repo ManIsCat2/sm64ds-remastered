@@ -28,17 +28,17 @@ void bhv_bowser_shock_wave_loop(void) {
     if (o->oOpacity <= 0) {
         obj_mark_for_deletion(o);
     }
-    // If object times is less than 70 frame and Player is not in the air...
-    if (o->oTimer < fadeFrames && !player_is_in_air_action()) {
+    // If object times is less than 70 frame and Mario is not in the air...
+    if (o->oTimer < fadeFrames && !mario_is_in_air_action()) {
         // ..define distance values depending of the scale multiplied by hit points
         distMin1 = o->oBowserShockWaveScale * sBowserShockwaveHitPoints[0];
         distMax1 = o->oBowserShockWaveScale * sBowserShockwaveHitPoints[1];
         distMin2 = o->oBowserShockWaveScale * sBowserShockwaveHitPoints[2];
         distMax2 = o->oBowserShockWaveScale * sBowserShockwaveHitPoints[3];
-        // If Player is in between distMin and distMax values, shock him
-        if ((distMin1 < o->oDistanceToPlayer && o->oDistanceToPlayer < distMax1)
-            || (distMin2 < o->oDistanceToPlayer && o->oDistanceToPlayer < distMax2)) {
-            gPlayerObject->oInteractStatus |= INT_STATUS_MARIO_SHOCKWAVE;
+        // If Mario is in between distMin and distMax values, shock him
+        if ((distMin1 < o->oDistanceToMario && o->oDistanceToMario < distMax1)
+            || (distMin2 < o->oDistanceToMario && o->oDistanceToMario < distMax2)) {
+            gMarioObject->oInteractStatus |= INT_STATUS_MARIO_SHOCKWAVE;
         }
     }
 }

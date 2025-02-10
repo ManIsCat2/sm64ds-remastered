@@ -43,8 +43,8 @@ extern const GeoLayout breakable_box_geo[];
 extern const GeoLayout breakable_box_small_geo[];
 extern const Gfx breakable_box_seg8_dl_08012C30[];
 extern const Gfx breakable_box_seg8_dl_08012CD8[];
-extern const Gfx breakable_box_small_dl[];
-extern const Gfx breakable_box_dl[];
+extern const Gfx breakable_box_seg8_dl_08012D20[];
+extern const Gfx breakable_box_seg8_dl_08012D48[];
 extern const Collision breakable_box_seg8_collision_08012D70[];
 
 // cannon_barrel
@@ -98,19 +98,33 @@ extern const Gfx chuckya_seg8_dl_0800AB70[];
 extern const Gfx chuckya_seg8_dl_0800ABE8[];
 extern const struct Animation *const chuckya_seg8_anims_0800C070[];
 
-// cap_box_outline
-extern const GeoLayout cap_box_outline_geo[];
-extern const Gfx cap_box_outline_seg8_dl_08024EB8[];
-extern const Gfx cap_box_outline_seg8_dl_08024F30[];
-extern const Gfx cap_box_outline_seg8_dl_08024F58[];
-extern const Gfx cap_box_outline_seg8_dl_08024F88[];
-extern const Gfx cap_box_outline_seg8_dl_08024FA8[];
-extern const Gfx cap_box_outline_seg8_dl_08024FC8[];
-extern const Gfx cap_box_outline_seg8_dl_08024FE8[];
-extern const Gfx cap_box_outline_seg8_dl_08025968[];
-extern const Gfx cap_box_outline_seg8_dl_080259F8[];
-extern const Gfx cap_box_outline_seg8_dl_08025EC0[];
-extern const Gfx cap_box_outline_seg8_dl_08025F08[];
+// exclamation_box
+extern const GeoLayout exclamation_box_geo[];
+extern const Gfx exclamation_box_seg8_dl_08018FA8[];
+extern const Gfx exclamation_box_seg8_dl_08019008[];
+extern const Gfx exclamation_box_seg8_dl_08019058[];
+extern const Gfx exclamation_box_seg8_dl_08019220[];
+extern const Gfx exclamation_box_seg8_dl_08019280[];
+extern const Gfx exclamation_box_seg8_dl_080192D0[];
+extern const Gfx exclamation_box_seg8_dl_08019318[];
+extern const Gfx exclamation_box_seg8_dl_08019378[];
+extern const Gfx exclamation_box_seg8_dl_080193D8[];
+extern const Gfx exclamation_box_seg8_dl_08019438[];
+
+// exclamation_box_outline
+extern const GeoLayout exclamation_box_outline_geo[];
+extern const Gfx exclamation_box_outline_seg8_dl_08024EB8[];
+extern const Gfx exclamation_box_outline_seg8_dl_08024F30[];
+extern const Gfx exclamation_box_outline_seg8_dl_08024F58[];
+extern const Gfx exclamation_box_outline_seg8_dl_08024F88[];
+extern const Gfx exclamation_box_outline_seg8_dl_08024FA8[];
+extern const Gfx exclamation_box_outline_seg8_dl_08024FC8[];
+extern const Gfx exclamation_box_outline_seg8_dl_08024FE8[];
+extern const Gfx exclamation_box_outline_seg8_dl_08025968[];
+extern const Gfx exclamation_box_outline_seg8_dl_080259F8[];
+extern const Gfx exclamation_box_outline_seg8_dl_08025EC0[];
+extern const Gfx exclamation_box_outline_seg8_dl_08025F08[];
+extern const Collision exclamation_box_outline_seg8_collision_08025F78[];
 
 // flyguy
 extern const GeoLayout flyguy_geo[];
@@ -165,29 +179,16 @@ extern const Gfx metal_box_seg8_dl_08024B18[];
 extern const Gfx metal_box_dl[];
 extern const Collision metal_box_seg8_collision_08024C28[];
 
+// purple_switch
+extern const GeoLayout purple_switch_geo[];
+extern const Gfx purple_switch_seg8_dl_0800C668[];
+extern const Gfx purple_switch_seg8_dl_0800C6E0[];
+extern const Gfx purple_switch_seg8_dl_0800C718[];
+extern const Collision purple_switch_seg8_collision_0800C7A8[];
+
 // test_platform
 extern const GeoLayout test_platform_geo[];
 extern const Gfx unknown_seg8_dl_08026260[];
 extern const Collision unknown_seg8_collision_080262F8[];
-
-#include "red_switch/geo_header.h"
-
-#include "red_switch/collision_header.h"
-
-#include "star_switch/geo_header.h"
-
-#include "star_switch/collision_header.h"
-
-#include "question_box/geo_header.h"
-
-#include "cap_box/geo_header.h"
-
-#include "cap_box/collision_header.h"
-
-#include "power_flower/geo_header.h"
-
-#include "blue_coin_switch/geo_header.h"
-
-#include "breakable_box/geo_header.h"
 
 #endif

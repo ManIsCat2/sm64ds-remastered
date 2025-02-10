@@ -2,9 +2,19 @@ ALIGNED8 static const Texture texture_castle_light[] = {
 #include "levels/castle_inside/castle_light.ia16.inc.c"
 };
 
+// 0x07000800 - 0x07001000
+ALIGNED8 static const Texture inside_castle_seg7_texture_07000800[] = {
+#include "levels/castle_inside/1.rgba16.inc.c"
+};
+
 // 0x07001000 - 0x07002000
 ALIGNED8 static const Texture inside_castle_seg7_texture_07001000[] = {
 #include "levels/castle_inside/2.ia16.inc.c"
+};
+
+// 0x07002000 - 0x07003000
+ALIGNED8 static const Texture inside_castle_seg7_texture_07002000[] = {
+#include "levels/castle_inside/3.rgba16.inc.c"
 };
 
 // 0x07003000 - 0x07003800
@@ -73,22 +83,22 @@ ALIGNED8 static const Texture inside_castle_seg7_texture_0700A000[] = {
 };
 
 // 0x0700A800 - 0x0700B800
-ALIGNED8 static const Texture bob_painting_top_tex[] = {
+ALIGNED8 static const Texture inside_castle_seg7_texture_0700A800[] = {
 #include "levels/castle_inside/17.rgba16.inc.c"
 };
 
 // 0x0700B800 - 0x0700C800
-ALIGNED8 static const Texture bob_painting_bottom_tex[] = {
+ALIGNED8 static const Texture inside_castle_seg7_texture_0700B800[] = {
 #include "levels/castle_inside/18.rgba16.inc.c"
 };
 
 // 0x0700C800 - 0x0700D800
-ALIGNED8 static const Texture ccm_painting_top_tex[] = {
+ALIGNED8 static const Texture inside_castle_seg7_texture_0700C800[] = {
 #include "levels/castle_inside/19.rgba16.inc.c"
 };
 
 // 0x0700D800 - 0x0700E800
-ALIGNED8 static const Texture ccm_painting_bottom_tex[] = {
+ALIGNED8 static const Texture inside_castle_seg7_texture_0700D800[] = {
 #include "levels/castle_inside/20.rgba16.inc.c"
 };
 
@@ -102,6 +112,18 @@ ALIGNED8 static const Texture inside_castle_seg7_texture_0700F800[] = {
 #include "levels/castle_inside/22.rgba16.inc.c"
 };
 
+#ifdef VERSION_JP
+// 0x07010800 - 0x07011800
+ALIGNED8 static const Texture inside_castle_seg7_texture_07010800[] = {
+#include "levels/castle_inside/23.rgba16.inc.c"
+};
+
+// 0x07011800 - 0x0701200
+ALIGNED8 static const Texture inside_castle_seg7_texture_07011800[] = {
+#include "levels/castle_inside/24.rgba16.inc.c"
+};
+
+#else
 // 0x07010800 - 0x07011800
 ALIGNED8 static const Texture inside_castle_seg7_texture_07010800[] = {
 #include "levels/castle_inside/23_us.rgba16.inc.c"
@@ -111,6 +133,7 @@ ALIGNED8 static const Texture inside_castle_seg7_texture_07010800[] = {
 ALIGNED8 static const Texture inside_castle_seg7_texture_07011800[] = {
 #include "levels/castle_inside/24_us.rgba16.inc.c"
 };
+#endif
 
 // 0x07012800 - 0x07013800
 ALIGNED8 static const Texture inside_castle_seg7_texture_07012800[] = {
@@ -190,14 +213,4 @@ ALIGNED8 static const Texture inside_castle_seg7_texture_0701F800[] = {
 // 0x07020800 - 0x07021800
 ALIGNED8 static const Texture inside_castle_seg7_texture_07020800[] = {
 #include "levels/castle_inside/40.rgba16.inc.c"
-};
-
-// Sunshine Isles Painting Top Texture
-ALIGNED8 static const Texture si_painting_top_tex[] = {
-//#include "levels/castle_inside/41.rgba16.inc.c"
-};
-
-// Sunshine Isles Painting Bottom Texture
-ALIGNED8 static const Texture si_painting_bottom_tex[] = {
-//#include "levels/castle_inside/42.rgba16.inc.c"
 };

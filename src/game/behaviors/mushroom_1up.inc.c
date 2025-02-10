@@ -3,9 +3,9 @@
 void bhv_1up_interact(void) {
     UNUSED u8 filler[4];
 
-    if (obj_check_if_collided_with_object(o, gPlayerObject) == TRUE) {
+    if (obj_check_if_collided_with_object(o, gMarioObject) == TRUE) {
         play_sound(SOUND_GENERAL_COLLECT_1UP, gGlobalSoundSource);
-        gPlayerState->numLives++;
+        gMarioState->numLives++;
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
 #ifdef RUMBLE_FEEDBACK
         queue_rumble_data(5, 80);
@@ -44,13 +44,13 @@ void one_up_loop_in_air(void) {
     }
 }
 
-void pole_1up_move_towards_player(void) {
-    f32 sp34 = gPlayerObject->header.gfx.pos[0] - o->oPosX;
-    f32 sp30 = gPlayerObject->header.gfx.pos[1] + 120.0f - o->oPosY;
-    f32 sp2C = gPlayerObject->header.gfx.pos[2] - o->oPosZ;
+void pole_1up_move_towards_mario(void) {
+    f32 sp34 = gMarioObject->header.gfx.pos[0] - o->oPosX;
+    f32 sp30 = gMarioObject->header.gfx.pos[1] + 120.0f - o->oPosY;
+    f32 sp2C = gMarioObject->header.gfx.pos[2] - o->oPosZ;
     s16 sp2A = atan2s(sqrtf(sqr(sp34) + sqr(sp2C)), sp30);
 
-    obj_turn_toward_object(o, gPlayerObject, 16, 0x1000);
+    obj_turn_toward_object(o, gMarioObject, 16, 0x1000);
 
     o->oMoveAnglePitch = approach_s16_symmetric(o->oMoveAnglePitch, sp2A, 0x1000);
     o->oVelY = sins(o->oMoveAnglePitch) * 30.0f;
@@ -59,9 +59,9 @@ void pole_1up_move_towards_player(void) {
     bhv_1up_interact();
 }
 
-void one_up_move_away_from_player(s16 collisionFlags) {
+void one_up_move_away_from_mario(s16 collisionFlags) {
     o->oForwardVel = 8.0f;
-    o->oMoveAngleYaw = o->oAngleToPlayer + 0x8000;
+    o->oMoveAngleYaw = o->oAngleToMario + 0x8000;
 
     bhv_1up_interact();
 
@@ -69,7 +69,7 @@ void one_up_move_away_from_player(s16 collisionFlags) {
         o->oAction = 2;
     }
 
-    if (!is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 3000)) {
+    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 3000)) {
         o->oAction = 2;
     }
 }
@@ -137,7 +137,7 @@ void bhv_1up_running_away_loop(void) {
 
         case 1:
             spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
-            one_up_move_away_from_player(collisionFlags);
+            one_up_move_away_from_mario(collisionFlags);
             break;
 
         case 2:
@@ -163,7 +163,7 @@ void sliding_1up_move(void) {
         o->oForwardVel = 40.0f;
     }
 
-    if (!is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 5000)) {
+    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 5000)) {
         o->oAction = 2;
     }
 }
@@ -172,7 +172,7 @@ void bhv_1up_sliding_loop(void) {
     switch (o->oAction) {
         case 0:
             set_object_visibility(o, 3000);
-            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
+            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
                 o->oAction = 1;
             }
             break;
@@ -201,7 +201,7 @@ void bhv_1up_jump_on_approach_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
+            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
                 o->oVelY = 40.0f;
                 o->oAction = 1;
             }
@@ -209,7 +209,7 @@ void bhv_1up_jump_on_approach_loop(void) {
 
         case 1:
             collisionFlags = object_step();
-            one_up_move_away_from_player(collisionFlags);
+            one_up_move_away_from_mario(collisionFlags);
             spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
             break;
 
@@ -239,7 +239,7 @@ void bhv_1up_hidden_loop(void) {
 
         case 1:
             collisionFlags = object_step();
-            one_up_move_away_from_player(collisionFlags);
+            one_up_move_away_from_mario(collisionFlags);
             spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
             break;
 
@@ -267,7 +267,7 @@ void bhv_1up_hidden_loop(void) {
 }
 
 void bhv_1up_hidden_trigger_loop(void) {
-    if (obj_check_if_collided_with_object(o, gPlayerObject) == TRUE) {
+    if (obj_check_if_collided_with_object(o, gMarioObject) == TRUE) {
         struct Object *hidden1Up = cur_obj_nearest_object_with_behavior(bhvHidden1Up);
         if (hidden1Up != NULL) {
             hidden1Up->oHidden1UpNumTouchedTriggers++;
@@ -292,7 +292,7 @@ void bhv_1up_hidden_in_pole_loop(void) {
             break;
 
         case 1:
-            pole_1up_move_towards_player();
+            pole_1up_move_towards_mario();
             collisionFlags = object_step();
             break;
 
@@ -314,7 +314,7 @@ void bhv_1up_hidden_in_pole_loop(void) {
 }
 
 void bhv_1up_hidden_in_pole_trigger_loop(void) {
-    if (obj_check_if_collided_with_object(o, gPlayerObject) == TRUE) {
+    if (obj_check_if_collided_with_object(o, gMarioObject) == TRUE) {
         struct Object *hidden1Up = cur_obj_nearest_object_with_behavior(bhvHidden1UpInPole);
         if (hidden1Up != NULL) {
             hidden1Up->oHidden1UpNumTouchedTriggers++;
@@ -325,7 +325,7 @@ void bhv_1up_hidden_in_pole_trigger_loop(void) {
 }
 
 void bhv_1up_hidden_in_pole_spawner_loop(void) {
-    if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 700)) {
+    if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 700)) {
         s8 i;
         spawn_object_relative(2, 0, 50, 0, o, MODEL_1UP, bhvHidden1UpInPole);
         for (i = 0; i <= 1; i++) {

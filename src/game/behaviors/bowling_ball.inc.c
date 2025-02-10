@@ -92,7 +92,7 @@ void bhv_bowling_ball_roll_loop(void) {
     bowling_ball_set_hitbox();
 
     if (followStatus == PATH_REACHED_END) {
-        if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 7000)) {
+        if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 7000)) {
             spawn_mist_particles();
             spawn_mist_particles_variable(0, 0, 92.0f);
         }
@@ -180,13 +180,13 @@ void bhv_generic_bowling_ball_spawner_loop(void) {
         o->oTimer = 0;
     }
 
-    if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1000)
-        || o->oPosY < gPlayerObject->header.gfx.pos[1]) {
+    if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1000)
+        || o->oPosY < gMarioObject->header.gfx.pos[1]) {
         return;
     }
 
     if ((o->oTimer & o->oBBallSpawnerPeriodMinus1) == 0) { /* Modulus */
-        if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, o->oBBallSpawnerMaxSpawnDist)
+        if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, o->oBBallSpawnerMaxSpawnDist)
             && (s32)(random_float() * o->oBBallSpawnerSpawnOdds) == 0) {
             struct Object *bowlingBall = spawn_object(o, MODEL_BOWLING_BALL, bhvBowlingBall);
             bowlingBall->oBhvParams2ndByte = o->oBhvParams2ndByte;
@@ -199,13 +199,13 @@ void bhv_thi_bowling_ball_spawner_loop(void) {
         o->oTimer = 0;
     }
 
-    if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 800)
-        || o->oPosY < gPlayerObject->header.gfx.pos[1]) {
+    if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 800)
+        || o->oPosY < gMarioObject->header.gfx.pos[1]) {
         return;
     }
 
     if ((o->oTimer % 64) == 0) {
-        if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 12000)
+        if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 12000)
             && (s32)(random_float() * 1.5) == 0) {
             struct Object *bowlingBall = spawn_object(o, MODEL_BOWLING_BALL, bhvBowlingBall);
             bowlingBall->oBhvParams2ndByte = o->oBhvParams2ndByte;
@@ -259,7 +259,7 @@ void bhv_free_bowling_ball_roll_loop(void) {
         cur_obj_play_sound_2(SOUND_GENERAL_QUIET_POUND1_LOWPRIO);
     }
 
-    if (!is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 6000)) {
+    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 6000)) {
         o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
         cur_obj_become_intangible();
 
@@ -276,7 +276,7 @@ void bhv_free_bowling_ball_loop(void) {
 
     switch (o->oAction) {
         case FREE_BBALL_ACT_IDLE:
-            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 3000)) {
+            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 3000)) {
                 o->oAction = FREE_BBALL_ACT_ROLL;
                 o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
                 cur_obj_become_tangible();
@@ -288,7 +288,7 @@ void bhv_free_bowling_ball_loop(void) {
             break;
 
         case FREE_BBALL_ACT_RESET:
-            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 5000)) {
+            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 5000)) {
                 o->oAction = FREE_BBALL_ACT_IDLE;
             }
             break;

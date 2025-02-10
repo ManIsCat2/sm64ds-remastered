@@ -20,7 +20,4 @@ extern const Gfx cotmc_dl_water[];
 // script
 extern const LevelScript level_cotmc_entry[];
 
-
-#include "levels/cotmc/header.inc.h"
-
 #endif

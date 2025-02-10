@@ -80,9 +80,9 @@ enum SoundBank {
 #define SOUND_STATUS_PLAYING        2
 
 /**
- * Terrain types. player_get_terrain_sound_addend computes a
+ * Terrain types. mario_get_terrain_sound_addend computes a
  * sound terrain type between 0 and 7, depending on the terrain type of the
- * level and the floor type that the player is standing on. That value is then added
+ * level and the floor type that Mario is standing on. That value is then added
  * to the sound ID for the TERRAIN_* sounds.
  */
 #define SOUND_TERRAIN_DEFAULT   0 // e.g. air
@@ -164,8 +164,6 @@ enum SoundBank {
 #define SOUND_ACTION_UNK5D                       /* 0x005D0001 */ SOUND_ARG_LOAD(SOUND_BANK_ACTION,   0x5D, 0x00, 0) // unverified, unused
 #define SOUND_ACTION_INTRO_UNK45E                /* 0x045E8081 */ SOUND_ARG_LOAD(SOUND_BANK_ACTION,   0x5E, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE) // unverified
 #define SOUND_ACTION_INTRO_UNK45F                /* 0x045F8081 */ SOUND_ARG_LOAD(SOUND_BANK_ACTION,   0x5F, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE) // unverified
-#define SOUND_TIMED_STAR_00                      /* 0x0470FF10 */ SOUND_ARG_LOAD(SOUND_BANK_ACTION,   0x70, 0xFF, SOUND_LOWER_BACKGROUND_MUSIC)
-#define SOUND_TIMED_STAR_01                      /* 0x0471FF10 */ SOUND_ARG_LOAD(SOUND_BANK_ACTION,   0x71, 0xFF, SOUND_LOWER_BACKGROUND_MUSIC)
 
 /* Moving Sound Effects */
 
@@ -187,10 +185,8 @@ enum SoundBank {
 
 /* Mario Sound Effects */
 // A random number 0-2 is added to the sound ID before playing, producing Yah/Wah/Hoo
-#define SOUND_MARIO_YAH                          /* 0x24008081 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x00, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE)
-#define SOUND_MARIO_WAH                          /* 0x24018081 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x01, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE)
-#define SOUND_MARIO_HOO                          /* 0x24028081 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x02, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE)
-#define SOUND_MARIO_MUH                          /* 0x24038081 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x03, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE) // unverified
+#define SOUND_MARIO_YAH_WAH_HOO                  /* 0x24008081 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x00, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE)
+#define SOUND_MARIO_HOOHOO                       /* 0x24038081 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x03, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE) // unverified
 #define SOUND_MARIO_YAHOO                        /* 0x24048081 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x04, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE) // unverified
 #define SOUND_MARIO_UH                           /* 0x24058081 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x05, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE) // unverified
 #define SOUND_MARIO_HRMM                         /* 0x24068081 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x06, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE) // unverified
@@ -233,6 +229,7 @@ enum SoundBank {
 // A random number 0-4 is added to the sound ID before playing, producing one of
 // Yahoo! (60% chance), Waha! (20%), or Yippee! (20%).
 #define SOUND_MARIO_YAHOO_WAHA_YIPPEE            /* 0x242B8081 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x2B, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE)
+
 #define SOUND_MARIO_DOH                          /* 0x24308081 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x30, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE)
 #define SOUND_MARIO_GAME_OVER                    /* 0x2431FF81 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x31, 0xFF, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE)
 #define SOUND_MARIO_HELLO                        /* 0x2432FF81 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x32, 0xFF, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE)
@@ -292,7 +289,9 @@ enum SoundBank {
 #define SOUND_GENERAL_PLATFORM                   /* 0x302D8081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL,  0x2D, 0x80, SOUND_DISCRETE) // unverified
 #define SOUND_GENERAL_DONUT_PLATFORM_EXPLOSION   /* 0x302E2081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL,  0x2E, 0x20, SOUND_DISCRETE)
 #define SOUND_GENERAL_BOWSER_BOMB_EXPLOSION      /* 0x312F0081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL,  0x2F, 0x00, SOUND_NO_VOLUME_LOSS | SOUND_DISCRETE)
-#if defined(VERSION_US)
+#if defined(VERSION_JP)
+#define SOUND_GENERAL_COIN_SPURT                 /* 0x30300081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL,  0x30, 0x00, SOUND_DISCRETE) // unverified
+#elif defined(VERSION_US)
 #define SOUND_GENERAL_COIN_SPURT                 /* 0x38300081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL,  0x30, 0x00, SOUND_CONSTANT_FREQUENCY | SOUND_DISCRETE) // unverified
 #else
 #define SOUND_GENERAL_COIN_SPURT                 /* 0x38302081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL,  0x30, 0x20, SOUND_CONSTANT_FREQUENCY | SOUND_DISCRETE) // unverified
@@ -561,7 +560,7 @@ enum SoundBank {
 // to play two channel 3 sounds at once (since just one sound from each channel
 // can play at a given time).
 #define SOUND_GENERAL2_BOBOMB_EXPLOSION          /* 0x802E2081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL2, 0x2E, 0x20, SOUND_DISCRETE)
-#define SOUND_GENERAL2_SWITCH             /* 0x803EC081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL2, 0x3E, 0xC0, SOUND_DISCRETE)
+#define SOUND_GENERAL2_PURPLE_SWITCH             /* 0x803EC081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL2, 0x3E, 0xC0, SOUND_DISCRETE)
 #define SOUND_GENERAL2_ROTATING_BLOCK_CLICK      /* 0x80400081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL2, 0x40, 0x00, SOUND_DISCRETE)
 #define SOUND_GENERAL2_SPINDEL_ROLL              /* 0x80482081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL2, 0x48, 0x20, SOUND_DISCRETE)
 #define SOUND_GENERAL2_PYRAMID_TOP_SPIN          /* 0x814BE081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL2, 0x4B, 0xE0, SOUND_NO_VOLUME_LOSS | SOUND_DISCRETE)

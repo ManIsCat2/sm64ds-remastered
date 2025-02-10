@@ -11,9 +11,7 @@
 #define MENU_DATA_MAGIC 0x4849
 #define SAVE_FILE_MAGIC 0x4441
 
-#define NUM_SAVE_FILES 3
-#define NUM_STARS_PER_COURSE 8
-#define NUM_ACTS_PER_COURSE 7
+#define NUM_SAVE_FILES 4
 
 // Support both types of endianness on PC Port (little and big)
 #ifndef TARGET_N64
@@ -48,7 +46,8 @@ struct SaveFile {
 enum SaveFileIndex {
     SAVE_FILE_A,
     SAVE_FILE_B,
-    SAVE_FILE_C
+    SAVE_FILE_C,
+    SAVE_FILE_D
 };
 
 struct MainMenuSaveData {
@@ -57,8 +56,13 @@ struct MainMenuSaveData {
     // on the high score screen.
     u32 coinScoreAges[NUM_SAVE_FILES];
     u16 soundMode;
-    
-    #define SUBTRAHEND 6
+
+#ifdef VERSION_EU
+    u16 language;
+#define SUBTRAHEND 8
+#else
+#define SUBTRAHEND 6
+#endif
 
     // Pad to match the EEPROM size of 0x200 (10 bytes on JP/US, 8 bytes on EU)
     u8 filler[EEPROM_SIZE / 2 - SUBTRAHEND - NUM_SAVE_FILES * (4 + sizeof(struct SaveFile))];
@@ -84,38 +88,35 @@ extern u8 gSpecialTripleJump;
 extern s8 gLevelToCourseNumTable[];
 
 // game progress flags
-#define SAVE_FLAG_FILE_EXISTS            /* 0x000000001 */ (1 << 0)
-#define SAVE_FLAG_HAVE_POWER_FLOWER      /* 0x000000002 */ (1 << 1)
-#define SAVE_FLAG_HAVE_WING_CAP          /* 0x000000004 */ (1 << 2)
-#define SAVE_FLAG_HAVE_METAL_CAP         /* 0x000000008 */ (1 << 3)
-#define SAVE_FLAG_HAVE_VANISH_CAP        /* 0x000000010 */ (1 << 4)
-#define SAVE_FLAG_HAVE_KEY_1             /* 0x000000020 */ (1 << 5)
-#define SAVE_FLAG_HAVE_KEY_2             /* 0x000000040 */ (1 << 6)
-#define SAVE_FLAG_UNLOCKED_BASEMENT_DOOR /* 0x000000080 */ (1 << 7)
-#define SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR /* 0x000000100 */ (1 << 8)
-#define SAVE_FLAG_DDD_MOVED_BACK         /* 0x000000200 */ (1 << 9)
-#define SAVE_FLAG_MOAT_DRAINED           /* 0x000000400 */ (1 << 10)
-#define SAVE_FLAG_UNLOCKED_PSS_DOOR      /* 0x000000800 */ (1 << 11)
-#define SAVE_FLAG_UNLOCKED_WF_DOOR       /* 0x000001000 */ (1 << 12)
-#define SAVE_FLAG_UNLOCKED_CCM_DOOR      /* 0x000002000 */ (1 << 13)
-#define SAVE_FLAG_UNLOCKED_JRB_DOOR      /* 0x000004000 */ (1 << 14)
-#define SAVE_FLAG_UNLOCKED_BITDW_DOOR    /* 0x000008000 */ (1 << 15)
-#define SAVE_FLAG_UNLOCKED_BITFS_DOOR    /* 0x000010000 */ (1 << 16)
-#define SAVE_FLAG_CAP_ON_GROUND          /* 0x000020000 */ (1 << 17)
-#define SAVE_FLAG_CAP_ON_KLEPTO          /* 0x000040000 */ (1 << 18)
-#define SAVE_FLAG_CAP_ON_UKIKI           /* 0x000080000 */ (1 << 19)
-#define SAVE_FLAG_CAP_ON_MR_BLIZZARD     /* 0x000100000 */ (1 << 20)
-#define SAVE_FLAG_UNLOCKED_50_STAR_DOOR  /* 0x000200000 */ (1 << 24)
-#define SAVE_FLAG_HAVE_KEY_BUNNY         /* 0x000400000 */ (1 << 25)
-#define SAVE_FLAG_UNLOCKED_CASTLE_DOOR   /* 0x000800000 */ (1 << 26)
-#define SAVE_FLAG_COLLECTED_TOAD_STAR_1  /* 0x001000000 */ (1 << 27)
-#define SAVE_FLAG_COLLECTED_TOAD_STAR_2  /* 0x002000000 */ (1 << 28)
-#define SAVE_FLAG_COLLECTED_TOAD_STAR_3  /* 0x004000000 */ (1 << 29)
-#define SAVE_FLAG_COLLECTED_MIPS_STAR_1  /* 0x008000000 */ (1 << 30)
-#define SAVE_FLAG_COLLECTED_MIPS_STAR_2  /* 0x010000000 */ (1 << 31)
+#define SAVE_FLAG_FILE_EXISTS            /* 0x00000001 */ (1 << 0)
+#define SAVE_FLAG_HAVE_WING_CAP          /* 0x00000002 */ (1 << 1)
+#define SAVE_FLAG_HAVE_METAL_CAP         /* 0x00000004 */ (1 << 2)
+#define SAVE_FLAG_HAVE_VANISH_CAP        /* 0x00000008 */ (1 << 3)
+#define SAVE_FLAG_HAVE_KEY_1             /* 0x00000010 */ (1 << 4)
+#define SAVE_FLAG_HAVE_KEY_2             /* 0x00000020 */ (1 << 5)
+#define SAVE_FLAG_UNLOCKED_BASEMENT_DOOR /* 0x00000040 */ (1 << 6)
+#define SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR /* 0x00000080 */ (1 << 7)
+#define SAVE_FLAG_DDD_MOVED_BACK         /* 0x00000100 */ (1 << 8)
+#define SAVE_FLAG_MOAT_DRAINED           /* 0x00000200 */ (1 << 9)
+#define SAVE_FLAG_UNLOCKED_PSS_DOOR      /* 0x00000400 */ (1 << 10)
+#define SAVE_FLAG_UNLOCKED_WF_DOOR       /* 0x00000800 */ (1 << 11)
+#define SAVE_FLAG_UNLOCKED_CCM_DOOR      /* 0x00001000 */ (1 << 12)
+#define SAVE_FLAG_UNLOCKED_JRB_DOOR      /* 0x00002000 */ (1 << 13)
+#define SAVE_FLAG_UNLOCKED_BITDW_DOOR    /* 0x00004000 */ (1 << 14)
+#define SAVE_FLAG_UNLOCKED_BITFS_DOOR    /* 0x00008000 */ (1 << 15)
+#define SAVE_FLAG_CAP_ON_GROUND          /* 0x00010000 */ (1 << 16)
+#define SAVE_FLAG_CAP_ON_KLEPTO          /* 0x00020000 */ (1 << 17)
+#define SAVE_FLAG_CAP_ON_UKIKI           /* 0x00040000 */ (1 << 18)
+#define SAVE_FLAG_CAP_ON_MR_BLIZZARD     /* 0x00080000 */ (1 << 19)
+#define SAVE_FLAG_UNLOCKED_50_STAR_DOOR  /* 0x00100000 */ (1 << 20)
+#define SAVE_FLAG_COLLECTED_TOAD_STAR_1  /* 0x01000000 */ (1 << 24)
+#define SAVE_FLAG_COLLECTED_TOAD_STAR_2  /* 0x02000000 */ (1 << 25)
+#define SAVE_FLAG_COLLECTED_TOAD_STAR_3  /* 0x04000000 */ (1 << 26)
+#define SAVE_FLAG_COLLECTED_MIPS_STAR_1  /* 0x08000000 */ (1 << 27)
+#define SAVE_FLAG_COLLECTED_MIPS_STAR_2  /* 0x10000000 */ (1 << 28)
 
-#define SAVE_FLAG_TO_STAR_FLAG(cmd) (((cmd) >> 27) & 0x7F)
-#define STAR_FLAG_TO_SAVE_FLAG(cmd) ((cmd) << 27)
+#define SAVE_FLAG_TO_STAR_FLAG(cmd) (((cmd) >> 24) & 0x7F)
+#define STAR_FLAG_TO_SAVE_FLAG(cmd) ((cmd) << 24)
 
 // Variable for setting a warp checkpoint.
 

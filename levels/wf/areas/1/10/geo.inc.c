@@ -1,5 +1,5 @@
 // 0x0E0008A8
-const GeoLayout wf_tower_geo[] = {
+const GeoLayout wf_geo_0008A8[] = {
     GEO_CULLING_RADIUS(2700),
     GEO_OPEN_NODE(),
         GEO_RENDER_RANGE(-2048, 5000),
