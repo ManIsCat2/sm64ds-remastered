@@ -1,7 +1,0 @@
-extern u8 dl_castle_lobby_wing_cap_light_hikari_cus_ia8[];
-extern Vtx dl_castle_lobby_wing_cap_light__5__dl_castle_lobby_wing_cap_light_mesh_vtx_cull[8];
-extern Vtx dl_castle_lobby_wing_cap_light__5__dl_castle_lobby_wing_cap_light_mesh_vtx_0[16];
-extern Gfx dl_castle_lobby_wing_cap_light__5__dl_castle_lobby_wing_cap_light_mesh_tri_0[];
-extern Gfx mat_dl_castle_lobby_wing_cap_light_mat_hikari_001_f3d[];
-extern Gfx mat_revert_dl_castle_lobby_wing_cap_light_mat_hikari_001_f3d[];
-extern Gfx dl_castle_lobby_wing_cap_light[];

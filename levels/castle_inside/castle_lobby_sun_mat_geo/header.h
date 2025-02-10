@@ -1,8 +1,0 @@
-extern u8 castle_lobby_sun_mat_geo_yuka_sun_ci8[];
-extern u8 castle_lobby_sun_mat_geo_yuka_sun_pal_rgba16[];
-extern Vtx castle_lobby_sun_mat_geo__6__castle_lobby_sun_mat_geo_mesh_vtx_cull[8];
-extern Vtx castle_lobby_sun_mat_geo__6__castle_lobby_sun_mat_geo_mesh_vtx_0[9];
-extern Gfx castle_lobby_sun_mat_geo__6__castle_lobby_sun_mat_geo_mesh_tri_0[];
-extern Gfx mat_castle_lobby_sun_mat_geo_mat_shine_f3d[];
-extern Gfx mat_revert_castle_lobby_sun_mat_geo_mat_shine_f3d[];
-extern Gfx castle_lobby_sun_mat_geo[];

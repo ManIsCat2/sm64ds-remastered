@@ -1,7 +1,0 @@
-extern u8 castle_lobby_peach_painting_geo_peach_b_cus_rgba16[];
-extern Vtx castle_lobby_peach_painting_geo__7__castle_lobby_peach_painting_geo_mesh_vtx_cull[8];
-extern Vtx castle_lobby_peach_painting_geo__7__castle_lobby_peach_painting_geo_mesh_vtx_0[4];
-extern Gfx castle_lobby_peach_painting_geo__7__castle_lobby_peach_painting_geo_mesh_tri_0[];
-extern Gfx mat_castle_lobby_peach_painting_geo_mat_peach_b_f3d[];
-extern Gfx mat_revert_castle_lobby_peach_painting_geo_mat_peach_b_f3d[];
-extern Gfx castle_lobby_peach_painting_geo[];

@@ -1,7 +1,0 @@
-extern u8 castle_lobby_rails_geo_tesuri_rgba16[];
-extern Vtx castle_lobby_rails_geo__3__castle_lobby_rails_geo_mesh_vtx_cull[8];
-extern Vtx castle_lobby_rails_geo__3__castle_lobby_rails_geo_mesh_vtx_0[72];
-extern Gfx castle_lobby_rails_geo__3__castle_lobby_rails_geo_mesh_tri_0[];
-extern Gfx mat_castle_lobby_rails_geo_mat_tesuri_f3d[];
-extern Gfx mat_revert_castle_lobby_rails_geo_mat_tesuri_f3d[];
-extern Gfx castle_lobby_rails_geo[];
