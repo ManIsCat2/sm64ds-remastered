@@ -1155,10 +1155,6 @@ void reset_misc_level_object_values(void) {
 #if QOL_FIX_RESET_PSS_SLIDE_STARTED
     gPSSSlideStarted = FALSE;
 #endif
-#ifdef PORT_MOP_OBJS
-    gMOPSwitchBlockState = 1;
-    gMOPFlipSwitchStarSpawned = FALSE;
-#endif
 }
 
 s32 update_level(void) {
@@ -1391,11 +1387,9 @@ s32 lvl_play_the_end_screen_sound(UNUSED s16 arg0, UNUSED s32 arg1) {
     return 1;
 }
 
-#if QOL_FEATURE_ENDING_SCREEN_START
 s32 lvl_end_screen_start_button_reset(UNUSED s16 arg0, UNUSED s32 arg1) {
     if (gPlayer1Controller->buttonPressed & START_BUTTON) {
         return 1;
     }
     return 0;
 }
-#endif

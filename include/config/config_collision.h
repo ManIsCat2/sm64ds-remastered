@@ -37,9 +37,6 @@
 // Saves a lot of CPU over silliness, by cleaning only used dynamic cells.
 #define BETTER_DYNAMIC_CELLS (0 || COLLISION_FIXES)
 
-// Automatically calculates the optimal collision distance for an object based on it's vertices.
-#define AUTO_COLLISION_DISTANCE (0 || QOL_FEATURES)
-
 /// Use the floor's normal instead of a triangle of find_floor if the floor isn't steep
 #define FAST_FLOOR_ALIGN (0 || QOL_FEATURES)
 

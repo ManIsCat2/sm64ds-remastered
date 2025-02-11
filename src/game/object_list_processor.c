@@ -153,10 +153,6 @@ s16 gNumRoomedObjectsInMarioRoom;
 s16 gNumRoomedObjectsNotInMarioRoom;
 s16 gWDWWaterLevelChanging;
 s16 gMarioOnMerryGoRound;
-#ifdef PORT_MOP_OBJS
-s16 gMOPSwitchBlockState;
-s16 gMOPFlipSwitchStarSpawned;
-#endif
 
 /**
  * Nodes used to represent the doubly linked object lists.
@@ -444,9 +440,6 @@ void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo) {
     //! (Spawning Displacement) On the Japanese version, Mario's platform object
     //  isn't cleared when transitioning between areas. This can cause Mario to
     //  receive displacement after spawning.
-#if !PLATFORM_DISPLACEMENT_2
-    clear_mario_platform();
-#endif
 
     if (gCurrAreaIndex == 2) {
         gCCMEnteredSlide |= 1;
