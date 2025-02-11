@@ -24,9 +24,6 @@
 #include "sound_init.h"
 #include "rumble_init.h"
 
-#ifdef BETTERCAMERA
-#include "extras/bettercamera.h"
-#endif
 
 #ifdef CHEATS_ACTIONS
 #include "extras/cheats.h"
@@ -813,16 +810,7 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         }
 
         if (m->action & ACT_FLAG_AIR) {
-#if BETTER_STAR_INTERACTION
-            if ((m->pos[1] > m->floorHeight + 1024.0f) || ((m->floor != NULL 
-                && m->floor->type == SURFACE_DEATH_PLANE) || m->floor->type == SURFACE_VERTICAL_WIND)) {
-                starGrabAction = ACT_STAR_DANCE_WATER;
-            } else {
-                starGrabAction = ACT_FALL_AFTER_STAR_GRAB;
-            }
-#else
             starGrabAction = ACT_FALL_AFTER_STAR_GRAB;
-#endif
         }
 
         spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
@@ -1917,12 +1905,6 @@ void mario_handle_special_floors(struct MarioState *m) {
     if ((m->action & ACT_GROUP_MASK) == ACT_GROUP_CUTSCENE) {
         return;
     }
-
-#ifdef BETTERCAMERA
-    if (gPuppyCam.flags & PUPPYCAM_BEHAVIOUR_FREE) {
-        return;
-    }
-#endif
 
     if (m->floor != NULL) {
         s32 floorType = m->floor->type;

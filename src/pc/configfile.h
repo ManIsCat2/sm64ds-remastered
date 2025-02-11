@@ -63,43 +63,13 @@ extern bool configAutohideTouch;
 extern bool configPrecacheRes;
 #endif
 
-#if MORE_VANILLA_CAM_STUFF
-typedef struct {
-    bool parallel;
-    bool srMario;
-    bool cUpSounds;
-    bool parallelCol;
-} ConfigVanillaCam;
-
-extern ConfigVanillaCam configVanillaCam;
-#endif
-
-#ifdef BETTERCAMERA
-typedef struct {
-    bool enable;
-    bool legacy;
-    bool analog;
-#ifdef MOUSE_ACTIONS
-    bool mouse;
-    unsigned int mouseSpeed;
-#endif
-    bool invertX;
-    bool invertY;
-    bool helper;
-    bool opaque;
-    unsigned int sensX;
-    unsigned int sensY;
-    unsigned int input;
-    bool debug;
-} ConfigPuppyCam;
-
-extern ConfigPuppyCam configPuppyCam;
-#endif
-
 extern bool         configHUD;
 #ifdef MOUSE_ACTIONS
 extern bool         configMouse;
 #endif
+extern bool         configWallslide;
+extern bool         configDive;
+extern bool         configDash;
 extern bool         configSkipIntro;
 #ifdef DISCORDRPC
 extern bool         configDiscordRPC;

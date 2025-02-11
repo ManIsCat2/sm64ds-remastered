@@ -216,18 +216,6 @@ ALIGNED8 static const Texture texture_hud_char_beta_key[] = {
 };
 #endif
 
-#ifdef BETTERCAMERA
-ALIGNED8 const Texture texture_hud_char_puppycam[] = {
-#include "textures/segment2/custom/tex_puppycam_icon.rgba16.inc.c"
-};
-
-#ifdef MOUSE_ACTIONS
-ALIGNED8 const Texture texture_hud_char_mouse_small[] = {
-#include "textures/segment2/custom/tex_mouse_small.rgba16.inc.c"
-};
-#endif
-#endif
-
 #if defined(VERSION_CN)
 ALIGNED8 static const Texture texture_hud_char_cn_04A00[] = {
 #include "textures/segment2/cn/segment2_cn.04A00.rgba16.inc.c"

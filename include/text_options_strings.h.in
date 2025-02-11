@@ -12,6 +12,7 @@
 #define TEXT_OPT_AUDIO     _("SOUND")
 #define TEXT_OPT_SETTINGS  _("SETTINGS")
 #define TEXT_TOUCH_CONTROLS _("TOUCH CONTROLS")
+#define TEXT_OPT_DS_SETTINGS _("DS SETTINGS")
 
 // Markers
 
@@ -43,8 +44,6 @@
 #define TEXT_OPT_CAM_C_UP_SOUNDS  _("CAMERA SOUND EFFECTS")
 #define TEXT_OPT_CAM_PARALLEL_COL _("PARALLEL CAM COLLISION")
 
-#define TEXT_OPT_PUPPYCAM  _("PUPPY CAMERA")
-#define TEXT_OPT_PUPPYON   _("PUPPYCAM 2")
 #define TEXT_OPT_CAMSCHEME _("CONTROL SCHEME")
 #define TEXT_OPT_CAMANALOG _("ANALOGUE CAMERA")
 #define TEXT_OPT_CAMLEGACY _("LEGACY CAMERA")
@@ -62,10 +61,9 @@
 #define TEXT_OPT_CAM_SCH2  _("SINGLE PRESS")
 #define TEXT_OPT_CAM_SCH3  _("CLASSIC")
 
-#define TEXT_OPT_TEXFILTER _("TEXTURE FILTERING")
 #define TEXT_OPT_FSCREEN   _("FULLSCREEN")
-#define TEXT_OPT_NEAREST   _("NEAREST")
-#define TEXT_OPT_LINEAR    _("LINEAR")
+#define TEXT_OPT_DS        _("DS FILTERING")
+#define TEXT_OPT_N64       _("N64 FILTERING")
 #define TEXT_OPT_MVOLUME   _("MASTER VOLUME")
 #define TEXT_OPT_MUSVOLUME _("MUSIC VOLUME")
 #define TEXT_OPT_SFXVOLUME _("SFX VOLUME")
@@ -76,6 +74,11 @@
 
 #define TEXT_OPT_HUD       _("HUD")
 #define TEXT_OPT_MOUSE     _("MOUSE")
+
+#define TEXT_OPT_TEXMODE   _("TEXTURE MODE")
+#define TEXT_OPT_DS_SLIDE  _("DS WALLSLIDE")
+#define TEXT_OPT_DS_DASH   _("DS DASH")
+#define TEXT_OPT_DS_DIVE   _("DS DIVE")
 
 #define TEXT_BIND_A        _("A BUTTON")
 #define TEXT_BIND_B        _("B BUTTON")
@@ -120,8 +123,6 @@
 #define TEXT_OPT_CAM_C_UP_SOUNDS  _("Camera Sound Effects")
 #define TEXT_OPT_CAM_PARALLEL_COL _("Parallel Cam Collision")
 
-#define TEXT_OPT_PUPPYCAM  _("PUPPY CAMERA")
-#define TEXT_OPT_PUPPYON   _("PuppyCam 2")
 #define TEXT_OPT_CAMSCHEME _("Control Scheme")
 #define TEXT_OPT_CAMANALOG _("Analogue Camera")
 #define TEXT_OPT_CAMLEGACY _("Legacy Camera")
@@ -139,10 +140,9 @@
 #define TEXT_OPT_CAM_SCH2  _("Single Press")
 #define TEXT_OPT_CAM_SCH3  _("Classic")
 
-#define TEXT_OPT_TEXFILTER _("Texture Filtering")
 #define TEXT_OPT_FSCREEN   _("Fullscreen")
-#define TEXT_OPT_NEAREST   _("Nearest")
-#define TEXT_OPT_LINEAR    _("Linear")
+#define TEXT_OPT_DS        _("DS FILTERING")
+#define TEXT_OPT_N64       _("N64 FILTERING")
 #define TEXT_OPT_MVOLUME   _("Master Volume")
 #define TEXT_OPT_MUSVOLUME _("Music Volume")
 #define TEXT_OPT_SFXVOLUME _("Sfx Volume")
@@ -153,6 +153,11 @@
 
 #define TEXT_OPT_HUD       _("HUD")
 #define TEXT_OPT_MOUSE     _("Mouse")
+
+#define TEXT_OPT_TEXMODE   _("Texture Mode")
+#define TEXT_OPT_DS_SLIDE  _("DS Wallslide")
+#define TEXT_OPT_DS_DASH   _("DS Dash")
+#define TEXT_OPT_DS_DIVE   _("DS Dive")
 
 #define TEXT_BIND_A        _("A Button")
 #define TEXT_BIND_B        _("B Button")

@@ -16,12 +16,12 @@
 #include "levels/ttm/header.h"
 
 static const LevelScript script_func_local_1[] = {
-    OBJECT(/*model*/ MODEL_TTM_ROLLING_LOG,    /*pos*/  4360, -1722,  4001, /*angle*/ 0,  48, 0, /*bhvParam*/ 0, /*bhv*/ bhvTTMRollingLog),
+    OBJECT(/*model*/ MODEL_TTM_ROLLING_LOG,    /*pos*/  4360, -1722,  4001, /*angle*/ 0,  48, 0, /*bhvParam*/ 0, /*bhv*/ bhvTtmRollingLog),
     RETURN(),
 };
 
 static const LevelScript script_func_local_2[] = {
-    OBJECT          (/*model*/ MODEL_NONE,               /*pos*/ -1639,  1146, -1742, /*angle*/ 0,   0, 0, /*bhvParam*/ BPARAM2(BBALL_BP_STYPE_TTM), /*bhv*/ bhvTTMBowlingBallSpawner),
+    OBJECT          (/*model*/ MODEL_NONE,               /*pos*/ -1639,  1146, -1742, /*angle*/ 0,   0, 0, /*bhvParam*/ BPARAM2(BBALL_BP_STYPE_TTM), /*bhv*/ bhvTtmBowlingBallSpawner),
     OBJECT          (/*model*/ MODEL_NONE,               /*pos*/  3295, -3692,  2928, /*angle*/ 0,   0, 0, /*bhvParam*/ 0, /*bhv*/ bhvWaterfallSoundLoop),
     OBJECT          (/*model*/ MODEL_NONE,               /*pos*/  2004, -1580,  1283, /*angle*/ 0,   0, 0, /*bhvParam*/ 0, /*bhv*/ bhvWaterfallSoundLoop),
     OBJECT          (/*model*/ MODEL_DL_MONTY_MOLE_HOLE, /*pos*/ -2077, -1023, -1969, /*angle*/ 0,   0, 0, /*bhvParam*/ 0, /*bhv*/ bhvMontyMoleHole),

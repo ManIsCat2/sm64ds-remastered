@@ -8,8 +8,6 @@ DEBUG ?= 0
 EXT_OPTIONS_MENU ?= 1
 # Enable debug options menu (Enabled if DEBUG is not 0)
 EXT_DEBUG_MENU ?= 0
-# Enable better camera (Puppycam 2)
-BETTERCAMERA ?= 1
 # Enable cheats
 CHEATS_ACTIONS ?= 1
 # Enable rumble functions (Originally in Shindou)
@@ -34,18 +32,18 @@ RM2C ?= 0
 # --------------------------------------
 
 # Quality of life fixes
-QOL_FIXES ?= 1
+QOL_FIXES ?= 0
 # Quality of life features
-QOL_FEATURES ?= 1
+QOL_FEATURES ?= 0
 # Quality of life redone files
-QOL_REDONE ?= 1
+QOL_REDONE ?= 0
 
 # --------------------------------------
 # Port Only Defines
 # --------------------------------------
 
 # Enable 60 fps interpolation
-HIGH_FPS_PC ?= 0
+HIGH_FPS_PC ?= 1
 # Disable text-based save-files by default
 TEXTSAVES ?= 0
 # Load resources from external files
@@ -135,12 +133,6 @@ endif
 # Check for Debug Menu option
 ifeq ($(EXT_DEBUG_MENU),1)
   CUSTOM_C_DEFINES += -DEXT_DEBUG_MENU
-  EXT_OPTIONS_MENU := 1
-endif
-
-# Check for Puppycam option
-ifeq ($(BETTERCAMERA),1)
-  CUSTOM_C_DEFINES += -DBETTERCAMERA
   EXT_OPTIONS_MENU := 1
 endif
 

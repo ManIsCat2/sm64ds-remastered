@@ -18,6 +18,7 @@
 #include "gfx/gfx_screen_config.h"
 #include "gfx/gfx_window_manager_api.h"
 #include "controller/controller_api.h"
+#include "src/extras/options_menu.h"
 #include "fs/fs.h"
 
 #define ARRAY_LEN(arr) (sizeof(arr) / sizeof(arr[0]))
@@ -107,36 +108,9 @@ bool configDiscordRPC = true;
 
 bool configSkipIntro = false;
 bool configHUD = true;
-
-#if MORE_VANILLA_CAM_STUFF
-ConfigVanillaCam configVanillaCam = {
-    .parallel = false,
-    .srMario = false,
-    .parallelCol = false,
-    .cUpSounds = true,
-};
-#endif
-
-#ifdef BETTERCAMERA
-// PuppyCam 2 settings
-ConfigPuppyCam configPuppyCam = {
-    .enable = true,
-    .legacy = false,
-    .analog = false,
-#ifdef MOUSE_ACTIONS
-    .mouse = false,
-    .mouseSpeed = 15,
-#endif
-    .invertX = true,
-    .invertY = true,
-    .sensX = 50,
-    .sensY = 50,
-    .helper = true,
-    .opaque = true,
-    .input = 0, // PUPPYCAM_INPUT_TYPE_DOUBLE_TAB
-    .debug = false,
-};
-#endif
+bool configWallslide = true;
+bool configDash = false;
+bool configDive = true;
 
 static const struct ConfigOption options[] = {
 #ifndef TARGET_PORT_CONSOLE
@@ -184,29 +158,9 @@ static const struct ConfigOption options[] = {
     {.name = "discordrpc_enable",    .type = CONFIG_TYPE_BOOL, .boolValue = &configDiscordRPC},
     #endif
     {.name = "skip_intro",           .type = CONFIG_TYPE_BOOL, .boolValue = &configSkipIntro},
-#if MORE_VANILLA_CAM_STUFF
-    {.name = "vanillacam_parallel",     .type = CONFIG_TYPE_BOOL, .boolValue = &configVanillaCam.parallel},  
-    {.name = "vanillacam_srmario",      .type = CONFIG_TYPE_BOOL, .boolValue = &configVanillaCam.srMario},
-    {.name = "vanillacam_c_up_sounds",  .type = CONFIG_TYPE_BOOL, .boolValue = &configVanillaCam.cUpSounds},
-    {.name = "vanillacam_parallel_col", .type = CONFIG_TYPE_BOOL, .boolValue = &configVanillaCam.parallelCol},
-#endif
-#ifdef BETTERCAMERA
-    {.name = "bettercam_enable",     .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.enable},
-    {.name = "bettercam_legacy",     .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.legacy},
-    {.name = "bettercam_analog",     .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.analog},
-    #ifdef MOUSE_ACTIONS
-    {.name = "bettercam_mouse_look",  .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.mouse},
-    {.name = "bettercam_mouse_speed", .type = CONFIG_TYPE_UINT, .uintValue = &configPuppyCam.mouseSpeed},
-    #endif
-    {.name = "bettercam_invertx",    .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.invertX},
-    {.name = "bettercam_inverty",    .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.invertY},
-    {.name = "bettercam_xsens",      .type = CONFIG_TYPE_UINT, .uintValue = &configPuppyCam.sensX},
-    {.name = "bettercam_ysens",      .type = CONFIG_TYPE_UINT, .uintValue = &configPuppyCam.sensY},
-    {.name = "bettercam_turnhelper", .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.helper},
-    {.name = "bettercam_opaque",     .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.opaque},
-    {.name = "bettercam_inputtype",  .type = CONFIG_TYPE_UINT, .uintValue = &configPuppyCam.input},
-    {.name = "bettercam_debug",      .type = CONFIG_TYPE_BOOL, .boolValue = &configPuppyCam.debug},
-#endif
+    {.name = "wallslide",            .type = CONFIG_TYPE_BOOL, .boolValue = &configWallslide},
+    {.name = "y_to_dash",            .type = CONFIG_TYPE_BOOL, .boolValue = &configDash},
+    {.name = "dive",                 .type = CONFIG_TYPE_BOOL, .boolValue = &configDive},
 #ifdef TOUCH_CONTROLS
     {.name = "touch_autohide",       .type = CONFIG_TYPE_BOOL, .boolValue = &configAutohideTouch},
 #endif

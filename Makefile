@@ -263,7 +263,7 @@ endif
 
 # Base settings for EXTERNAL_DATA
 ifeq ($(TARGET_PORT_CONSOLE),1)
-  BASEDIR ?= sm64ex_res
+  BASEDIR ?= sm64dsr_res
 else
   BASEDIR ?= res
 endif
@@ -275,12 +275,14 @@ BASEPACK ?= base.zip
 # Main defines                                                                 #
 #==============================================================================#
 
+# NUMRIC_VERSION - sets the current version of DS Remastered
 # VERSION - selects the version of the game to build
 #   jp - builds the 1996 Japanese version
 #   us - builds the 1996 North American version
 #   eu - builds the 1997 PAL version
 #   sh - builds the 1997 Japanese Shindou version, with rumble pak support
 #   cn - builds the 2003 Chinese iQue version
+NUMRIC_VERSION ?= 0.01
 VERSION ?= us
 $(eval $(call validate-option,VERSION,jp us eu sh cn))
 
@@ -302,7 +304,7 @@ endif
 
 DEFINES += $(VER_DEFINES)
 
-TARGET := sm64.$(VERSION).$(GRUCODE)
+TARGET := sm64dsr.$(VERSION).$(NUMRIC_VERSION)
 
 # GRUCODE - selects which RSP microcode to use.
 #   f3d_old - First version the Fast3D (Originally in JP - US)
@@ -519,7 +521,7 @@ BUILD_DIR_BASE := build
 TARGET_NAME :=
 
 ifeq ($(TARGET_N64),1)
-  BUILD_DIR := $(BUILD_DIR_BASE)/$(VERSION)
+  BUILD_DIR := $(BUILD_DIR_BASE)/$(VERSION)_n64
   EXE := $(BUILD_DIR)/$(TARGET)
   ROM := $(BUILD_DIR)/$(TARGET).z64
   TARGET_NAME := Nintendo 64
@@ -1417,11 +1419,6 @@ ifeq ($(TARGET_N64),1)
 endif
 
 ifeq ($(EXT_OPTIONS_MENU),1)
-
-  ifeq ($(BETTERCAMERA),1)
-    $(BUILD_DIR)/src/extras/bettercamera.o: $(BUILD_DIR)/include/text_strings.h $(LANG_O_FILES)
-  endif
-
   ifeq ($(CHEATS_ACTIONS),1)
     $(BUILD_DIR)/src/extras/cheats.o:       $(BUILD_DIR)/include/text_strings.h $(LANG_O_FILES)
   endif

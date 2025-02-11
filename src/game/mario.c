@@ -34,9 +34,6 @@
 #include "sound_init.h"
 #include "pc/configfile.h"
 
-#ifdef BETTERCAMERA
-#include "extras/bettercamera.h"
-#endif
 
 #ifdef CHEATS_ACTIONS
 #include "extras/cheats.h"
@@ -1487,9 +1484,6 @@ void update_mario_inputs(struct MarioState *m) {
 #ifdef CHEATS_ACTIONS
     cheats_mario_inputs(m);
 #endif
-#ifdef BETTERCAMERA
-    puppycam_mario_inputs(m);
-#endif
 
     if (gCameraMovementFlags & CAM_MOVE_C_UP_MODE) {
         if (m->action & ACT_FLAG_ALLOW_FIRST_PERSON) {
@@ -1604,11 +1598,7 @@ void update_mario_health(struct MarioState *m) {
 
         // Play a noise to alert the player when Mario is close to drowning.
 
-        if (((m->action & ACT_GROUP_MASK) == ACT_GROUP_SUBMERGED) && (m->health < 0x300)
-#if NO_DROWNING_SOUND_METAL
-        && !(m->flags & (MARIO_METAL_CAP))
-#endif
-        ) {
+        if (((m->action & ACT_GROUP_MASK) == ACT_GROUP_SUBMERGED) && (m->health < 0x300)) {
             play_sound(SOUND_MOVING_ALMOST_DROWNING, gGlobalSoundSource);
 #ifdef RUMBLE_FEEDBACK
             if (gRumblePakTimer == 0) {

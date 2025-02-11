@@ -28,9 +28,6 @@
 #include "goddard/renderer.h"
 #endif
 
-#ifdef BETTERCAMERA
-#include "extras/bettercamera.h"
-#endif
 
 enum ToadMessageStates {
     TOAD_MESSAGE_FADED,
@@ -308,15 +305,7 @@ static Gfx *make_gfx_mario_alpha(struct GraphNodeGenerated *node, s16 alpha) {
         node->fnNode.node.flags = (node->fnNode.node.flags & 0xFF) | (LAYER_TRANSPARENT << 8);
         gfxHead = alloc_display_list(3 * sizeof(*gfxHead));
         gfx = gfxHead;
-#ifdef BETTERCAMERA
-        if (gMarioState->flags & (MARIO_VANISH_CAP | MARIO_TELEPORTING)) {
-            gDPSetAlphaCompare(gfx++, G_AC_DITHER);
-        } else {
-            gDPSetAlphaCompare(gfx++, G_AC_NONE);
-        }
-#else
         gDPSetAlphaCompare(gfx++, G_AC_DITHER);
-#endif
     }
     gDPSetEnvColor(gfx++, 255, 255, 255, alpha);
     gSPEndDisplayList(gfx);
@@ -336,14 +325,6 @@ Gfx *geo_mirror_mario_set_alpha(s32 callContext, struct GraphNode *node, UNUSED 
 
     if (callContext == GEO_CONTEXT_RENDER) {
         alpha = (bodyState->modelState & 0x100) ? (bodyState->modelState & 0xFF) : 255;
-#ifdef BETTERCAMERA
-        if (gPuppyCam.enabled && alpha > gPuppyCam.opacity && !gCamera->cutscene) {
-            alpha = gPuppyCam.opacity;
-            bodyState->modelState |= MODEL_STATE_NOISE_ALPHA;
-        } else {
-            gPuppyCam.opacity = 255;
-        }    
-#endif
         gfx = make_gfx_mario_alpha(asGenerated, alpha);
     }
     return gfx;
@@ -422,12 +403,7 @@ Gfx *geo_mario_head_rotation(s32 callContext, struct GraphNode *node, UNUSED Mat
         struct GraphNodeRotation *rotNode = (struct GraphNodeRotation *) node->next;
         struct Camera *camera = gCurGraphNodeCamera->config.camera;
 
-        if (camera->mode == CAMERA_MODE_C_UP
-#ifdef BETTERCAMERA
-        || gPuppyCam.mode3Flags & PUPPYCAM_MODE3_ENTER_FIRST_PERSON
-#endif
-        ) {
-            
+        if (camera->mode == CAMERA_MODE_C_UP) {
             rotNode->rotation[0] = gPlayerCameraState->headRotation[1];
             rotNode->rotation[2] = gPlayerCameraState->headRotation[0];
         } else if (action & ACT_FLAG_WATER_OR_TEXT) {

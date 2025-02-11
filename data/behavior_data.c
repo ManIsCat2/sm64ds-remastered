@@ -3198,11 +3198,7 @@ const BehaviorScript bhvFloorTrapInCastle[] = {
 
 const BehaviorScript bhvTree[] = {
     BEGIN(OBJ_LIST_POLELIKE),
-    #ifdef BETTERCAMERA
-    CYLBOARD(),
-    #else
     BILLBOARD(),
-    #endif
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_OPACITY_FROM_CAMERA_DIST)),
     SET_INT(oInteractType, INTERACT_POLE),
     SET_HITBOX(/*Radius*/ 80, /*Height*/ 500),
@@ -4357,7 +4353,7 @@ const BehaviorScript bhvBowlingBall[] = {
     END_LOOP(),
 };
 
-const BehaviorScript bhvTTMBowlingBallSpawner[] = {
+const BehaviorScript bhvTtmBowlingBallSpawner[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_INT(oBBallSpawnerPeriodMinus1, 63),
@@ -4367,7 +4363,7 @@ const BehaviorScript bhvTTMBowlingBallSpawner[] = {
     END_LOOP(),
 };
 
-const BehaviorScript bhvBoBBowlingBallSpawner[] = {
+const BehaviorScript bhvBobBowlingBallSpawner[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_INT(oBBallSpawnerPeriodMinus1, 127),
@@ -4696,7 +4692,7 @@ const BehaviorScript bhvHiddenStarTrigger[] = {
     END_LOOP(),
 };
 
-const BehaviorScript bhvTTMRollingLog[] = {
+const BehaviorScript bhvTtmRollingLog[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(ttm_seg7_collision_pitoune_2),
