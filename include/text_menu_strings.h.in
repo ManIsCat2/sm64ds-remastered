@@ -8,7 +8,7 @@
 /**
  * File Select JP HUD Text
  */
-#if defined(VERSION_JP) || defined(VERSION_SH)
+#if defined(VERSION_SH)
 #define TEXT_JPHUD_MARIO _("マリオ")
 #define TEXT_JPHUD_SELECT_FILE _("ファイルセレクト")
 #define TEXT_JPHUD_CHECK_FILE _("どのスコアをみる？")

@@ -57,7 +57,7 @@
 
 // Macro defines for qol
 #if QOL_FEATURE_Z_BUTTON_EXTRA_OPTION
-#define Z_BUTTON_DEF(b) (b | 0x2000) // CONT_G aka Z_TRIG
+#define Z_BUTTON_DEF(b) (b | 0x2000) // CONT_G aka (ZL_TRIG | ZR_TRIG)
 #else
 #define Z_BUTTON_DEF(b) (b)
 #endif

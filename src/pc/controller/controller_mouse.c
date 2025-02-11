@@ -82,11 +82,6 @@ void controller_mouse_set_visible(void) {
 }
 
 int controller_mouse_set_position(void *cursorX, void *cursorY, f32 mPosX, f32 mPosY, int hasControlCondition, int isInteger) {
-    // Disable control is mouse config is off.
-    if (!configMouse) {
-        return FALSE;
-    }
-
     // Disable mouse control if condition isn't met.
     if (!hasControlCondition) {
         mouse_has_current_control = FALSE;
@@ -98,7 +93,7 @@ int controller_mouse_set_position(void *cursorX, void *cursorY, f32 mPosX, f32 m
     }
 
     // Scale calculations and cursor position update if the mouse has control.
-    if (configMouse && mouse_has_current_control) {
+    if (mouse_has_current_control) {
         float posX = mPosX;
         float posY = mPosY;
 

@@ -45,7 +45,7 @@ QOL_REDONE ?= 0
 # Enable 60 fps interpolation
 HIGH_FPS_PC ?= 1
 # Disable text-based save-files by default
-TEXTSAVES ?= 0
+TEXTSAVES ?= 1
 # Load resources from external files
 EXTERNAL_DATA ?= 0
 # Enable Discord Rich Presence

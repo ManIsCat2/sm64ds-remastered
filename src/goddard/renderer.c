@@ -174,7 +174,7 @@ static s32 sPickBufPosition;                         // @ 801BE784
 static s16 *sPickBuf;                                // @ 801BE788
 static LookAt D_801BE790[2];
 static LookAt D_801BE7D0[3];
-#if defined(VERSION_JP) || defined(VERSION_US)
+#if defined(VERSION_US)
 static OSMesgQueue D_801BE830; // controller msg queue
 static OSMesg D_801BE848[10];
 UNUSED static u32 unref_801be870[16];
@@ -1331,7 +1331,7 @@ void gd_copy_p1_contpad(OSContPad *p1cont) {
         dest[i] = src[i];
     }
 
-    if (p1cont->button & Z_TRIG) {
+    if (p1cont->button & (ZL_TRIG | ZR_TRIG)) {
         print_all_timers();
     }
 }
@@ -2470,6 +2470,8 @@ void parse_p1_controller(void) {
     gdctrl->trgR   = (currInputs->button & R_TRIG) != 0;
     gdctrl->btnA   = (currInputs->button & A_BUTTON) != 0;
     gdctrl->btnB   = (currInputs->button & B_BUTTON) != 0;
+    gdctrl->btnX   = (currInputs->button & X_BUTTON) != 0;
+    gdctrl->btnY   = (currInputs->button & Y_BUTTON) != 0;
     gdctrl->cleft  = (currInputs->button & L_CBUTTONS) != 0;
     gdctrl->cright = (currInputs->button & R_CBUTTONS) != 0;
     gdctrl->cup    = (currInputs->button & U_CBUTTONS) != 0;
@@ -2508,7 +2510,7 @@ void parse_p1_controller(void) {
         gdctrl->newStartPress ^= 1;
     }
 
-    if (currInputs->button & Z_TRIG && !(prevInputs->button & Z_TRIG)) {
+    if (currInputs->button & (ZL_TRIG | ZR_TRIG) && !(prevInputs->button & (ZL_TRIG | ZR_TRIG))) {
         sCurrDebugViewIndex++;
     }
 

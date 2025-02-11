@@ -288,9 +288,7 @@ $(eval $(call validate-option,VERSION,jp us eu sh cn))
 
 NEW_AUDIO_REV ?= false
 
-ifeq      ($(VERSION),jp)
-  VER_DEFINES   += VERSION_JP=1
-else ifeq ($(VERSION),us)
+ifeq ($(VERSION),us)
   VER_DEFINES   += VERSION_US=1
 else ifeq ($(VERSION),eu)
   VER_DEFINES   += VERSION_EU=1
@@ -521,7 +519,7 @@ BUILD_DIR_BASE := build
 TARGET_NAME :=
 
 ifeq ($(TARGET_N64),1)
-  BUILD_DIR := $(BUILD_DIR_BASE)/$(VERSION)_n64
+  BUILD_DIR := $(BUILD_DIR_BASE)/$(VERSION)
   EXE := $(BUILD_DIR)/$(TARGET)
   ROM := $(BUILD_DIR)/$(TARGET).z64
   TARGET_NAME := Nintendo 64

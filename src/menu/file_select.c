@@ -1435,11 +1435,7 @@ void bhv_menu_button_manager_init(void) {
     sTextBaseAlpha = 0;
 }
 
-#ifdef VERSION_JP
-    #define SAVE_FILE_SOUND SOUND_MENU_STAR_SOUND
-#else
-    #define SAVE_FILE_SOUND SOUND_MENU_STAR_SOUND_OKEY_DOKEY
-#endif
+#define SAVE_FILE_SOUND SOUND_MENU_STAR_SOUND_OKEY_DOKEY
 
 /**
  * In the main menu, check if a button was clicked to play it's button growing state.
@@ -1860,17 +1856,13 @@ void print_save_file_star_count(s8 fileIndex, s16 x, s16 y) {
     }
 }
 
-#if defined(VERSION_JP) || defined(VERSION_SH)
+#if defined(VERSION_SH)
     #define SELECT_FILE_X 96
     #define SELECT_FILE_Y 35
     #define SCORE_X 50
     #define COPY_X 115
     #define ERASE_X 180
-#ifdef VERSION_JP
-    #define SOUNDMODE_X1 235
-#else
     #define SOUNDMODE_X1 sSoundTextX
-#endif
     #define SAVEFILE_X1 92
     #define SAVEFILE_X2 209
     #define MARIOTEXT_X1 92
@@ -1943,12 +1935,11 @@ void print_main_menu_strings(void) {
     print_generic_string(SCORE_X, 39, textScore);
     print_generic_string(COPY_X, 39, textCopy);
     print_generic_string(ERASE_X, 39, textErase);
-#ifndef VERSION_JP
-    sSoundTextX = get_str_x_pos_from_center(254, textSoundModes[sSoundMode], 10.0f);
-#endif
     print_generic_string(SOUNDMODE_X1, 39, textSoundModes[sSoundMode]);
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 #endif
+
+    sSoundTextX = get_str_x_pos_from_center(254, textSoundModes[sSoundMode], 10.0f);
 
     // Print file names
     gSPDisplayList(gDisplayListHead++, FILE_SELECT_TEXT_DL_BEGIN);
@@ -1993,7 +1984,7 @@ void print_main_lang_strings(void) {
 }
 #endif
 
-#if defined(VERSION_JP) || defined(VERSION_SH)
+#if defined(VERSION_SH)
     #define CHECK_FILE_X 90
     #define CHECK_FILE_Y 35
     #define NOSAVE_DATA_X1 90
@@ -2035,7 +2026,7 @@ void score_menu_display_message(s8 messageID) {
     }
 }
 
-#if defined(VERSION_JP) || defined(VERSION_SH)
+#if defined(VERSION_SH)
     #define RETURN_X     45
     #define COPYFILE_X1  128
     #define ERASEFILE_X1 228
@@ -2135,7 +2126,7 @@ void print_score_menu_strings(void) {
 #endif
 }
 
-#if defined(VERSION_JP) || defined(VERSION_SH)
+#if defined(VERSION_SH)
     #define NOFILE_COPY_X  90
     #define COPY_FILE_X    90
     #define COPYIT_WHERE_X 90
@@ -2265,12 +2256,7 @@ void copy_menu_update_message(void) {
     }
 }
 
-#if defined(VERSION_JP)
-    #define VIEWSCORE_X1 133
-    #define ERASEFILE_X2 220
-    #define COPY_FILE_Y1 62
-    #define COPY_FILE_Y2 105
-#elif defined(VERSION_US)
+#if defined(VERSION_US)
     #define VIEWSCORE_X1 128
     #define ERASEFILE_X2 230
     #define COPY_FILE_Y1 62
@@ -2343,12 +2329,8 @@ void print_copy_menu_strings(void) {
 #endif
 }
 
-#if defined(VERSION_JP) || defined(VERSION_SH)
-#ifdef VERSION_JP
-    #define CURSOR_X 160.0f
-#else
+#if defined(VERSION_SH)
     #define CURSOR_X (x + 70)
-#endif
     #define MENU_ERASE_YES_MIN_X 145
     #define MENU_ERASE_YES_MAX_X 164
 #elif defined(VERSION_CN)
@@ -2464,12 +2446,8 @@ void print_erase_menu_prompt(s16 x, s16 y) {
 //   US and EU   ---    JP
 // M a r i o   A --- マ リ オ Ａ
 // 0 1 2 3 4 5 6 --- 0 1 2 3
-#if defined(VERSION_JP) || defined(VERSION_SH)
-#ifdef VERSION_JP
-    #define ERASE_FILE_X     96
-#else
+#if defined(VERSION_SH)
     #define ERASE_FILE_X     111
-#endif
     #define ERASE_FILE_Y     35
     #define NOSAVE_DATA_X3   90
     #define MARIO_ERASED_VAR 3
@@ -2589,7 +2567,7 @@ void erase_menu_update_message(void) {
     }
 }
 
-#if defined(VERSION_JP) || defined(VERSION_SH)
+#if defined(VERSION_SH)
     #define VIEWSCORE_X2 133
     #define COPYFILE_X2 223
     #define ERASE_FILE_Y1 62
@@ -2663,7 +2641,7 @@ void print_erase_menu_strings(void) {
 #endif
 }
 
-#if defined(VERSION_JP) || defined(VERSION_SH)
+#if defined(VERSION_SH)
     #define SOUND_HUD_X 96
     #define SOUND_HUD_Y 35
 #elif defined(VERSION_US)
@@ -2739,13 +2717,9 @@ void print_sound_mode_menu_strings(void) {
         } else {
             gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, sTextBaseAlpha);
         }
-        #ifndef VERSION_JP
             // Mode names are centered correctly on US and Shindou
             textX = get_str_x_pos_from_center(mode * 74 + 87, textSoundModes[mode], 10.0f);
             print_generic_string(textX, 87, textSoundModes[mode]);
-        #else
-            print_generic_string(mode * 74 + 67, 87, textSoundModes[mode]);
-        #endif
     }
 #endif
 
@@ -2786,7 +2760,7 @@ void print_score_file_castle_secret_stars(s8 fileIndex, s16 x, s16 y) {
 #endif
 }
 
-#if defined(VERSION_JP) || defined(VERSION_SH)
+#if defined(VERSION_SH)
     #define HISCORE_COIN_ICON_X  0
     #define HISCORE_COIN_TEXT_X  16
     #define HISCORE_COIN_NAMES_X 45
@@ -2810,7 +2784,7 @@ void print_score_file_course_coin_score(s8 fileIndex, s16 courseIndex, s16 x, s1
     u8 textCoinX[] = { TEXT_COIN_X };
     u8 textStar[] = { TEXT_STAR };
 
-#if defined(VERSION_JP) || defined(VERSION_SH)
+#if defined(VERSION_SH)
     #define LENGTH 5
 #elif defined(VERSION_CN)
     #define LENGTH 16
@@ -2891,17 +2865,12 @@ void print_score_file_star_score(s8 fileIndex, s16 courseIndex, s16 x, s16 y) {
     FILE_SELECT_PRINT_STRING(x, y, starScoreText);
 }
 
-#if defined(VERSION_JP) || defined(VERSION_SH)
+#if defined(VERSION_SH)
     #define MARIO_X 28
     #define MARIO_Y 15
     #define FILE_LETTER_X 86
-#ifdef VERSION_JP
-    #define LEVEL_NUM_PAD 0
-    #define SECRET_STARS_PAD 0
-#else
     #define LEVEL_NUM_PAD 5
     #define SECRET_STARS_PAD 10
-#endif
     #define LEVEL_NAME_X 23
     #define STAR_SCORE_X 152
     #define MYSCORE_X 237
@@ -2963,20 +2932,14 @@ void print_save_file_scores(s8 fileIndex) {
 #endif
 #ifndef VERSION_EU
     u8 textMario[] = { TEXT_MARIO };
-#ifdef VERSION_JP
-    u8 textFileLetter[] = { TEXT_ZERO };
-    void **levelNameTable = segmented_to_virtual(seg2_course_name_table);
-#endif
     u8 textHiScore[] = { TEXT_HI_SCORE };
     u8 textMyScore[] = { TEXT_MY_SCORE };
 #ifdef VERSION_CN
     u8 textArrowL[] = { TEXT_ARROW_L };
     u8 textRArrow[] = { TEXT_R_ARROW };
 #endif
-#ifndef VERSION_JP
     u8 textFileLetter[] = { TEXT_ZERO };
     void **levelNameTable = segmented_to_virtual(seg2_course_name_table);
-#endif
 #else
     u8 textFileLetter[] = { TEXT_ZERO };
     void **levelNameTable;

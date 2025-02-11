@@ -259,17 +259,13 @@ void play_sound_if_no_flag(struct MarioState *m, u32 soundBits, u32 flags) {
  */
 void play_mario_jump_sound(struct MarioState *m) {
     if (!(m->flags & MARIO_MARIO_SOUND_PLAYED)) {
-#ifndef VERSION_JP
         if (m->action == ACT_TRIPLE_JUMP) {
             play_sound(SOUND_MARIO_YAHOO_WAHA_YIPPEE + ((gAudioRandom % 5) << 16),
                        m->marioObj->header.gfx.cameraToObject);
         } else {
-#endif
             play_sound(SOUND_MARIO_YAH_WAH_HOO + ((gAudioRandom % 3) << 16),
                        m->marioObj->header.gfx.cameraToObject);
-#ifndef VERSION_JP
         }
-#endif
         m->flags |= MARIO_MARIO_SOUND_PLAYED;
     }
 }
@@ -1365,11 +1361,11 @@ void update_mario_button_inputs(struct MarioState *m) {
             m->input |= INPUT_B_PRESSED;
         }
 
-        if (m->controller->buttonDown & Z_TRIG) {
+        if (m->controller->buttonDown & (ZL_TRIG | ZR_TRIG)) {
             m->input |= INPUT_Z_DOWN;
         }
 
-        if (m->controller->buttonPressed & Z_TRIG) {
+        if (m->controller->buttonPressed & (ZL_TRIG | ZR_TRIG)) {
             m->input |= INPUT_Z_PRESSED;
         }
     }
@@ -1778,16 +1774,12 @@ void set_wind_floor_properties(struct MarioState *m) {
         // non-Japanese releases.
         if (m->floor->type == SURFACE_HORIZONTAL_WIND) {
             spawn_wind_particles(0, (m->floor->force << 8));
-#ifndef VERSION_JP
             play_sound(SOUND_ENV_WIND2, m->marioObj->header.gfx.cameraToObject);
-#endif
         }
 
         if (m->floor->type == SURFACE_VERTICAL_WIND) {
             spawn_wind_particles(1, 0);
-#ifndef VERSION_JP
             play_sound(SOUND_ENV_WIND2, m->marioObj->header.gfx.cameraToObject);
-#endif
         }
     }
 }
@@ -1797,10 +1789,7 @@ void set_wind_floor_properties(struct MarioState *m) {
  * sets Mario with a different cap.
  */
 void debug_update_mario_cap(u16 button, s32 flags, u16 capTimer, u16 capMusic) {
-    // This checks for Z_TRIG instead of Z_DOWN flag
-    // (which is also what other debug functions do),
-    // so likely debug behavior rather than unused behavior.
-    if ((gPlayer1Controller->buttonDown & Z_TRIG) && (gPlayer1Controller->buttonPressed & button)
+    if ((gPlayer1Controller->buttonDown & (ZL_TRIG | ZR_TRIG)) && (gPlayer1Controller->buttonPressed & button)
         && !(gMarioState->flags & flags)) {
         gMarioState->flags |= (flags + MARIO_CAP_ON_HEAD);
 

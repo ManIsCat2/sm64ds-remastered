@@ -18,7 +18,7 @@
 #ifndef TARGET_N64
 #include "pc/configfile.h"
 #else
-int configWallslide = TRUE;
+extern int configWallslide;
 #endif
 #endif
 
@@ -241,9 +241,6 @@ u32 mario_update_windy_ground(struct MarioState *m) {
         m->vel[0] += pushSpeed * sins(pushAngle);
         m->vel[2] += pushSpeed * coss(pushAngle);
 
-#ifdef VERSION_JP
-        play_sound(SOUND_ENV_WIND2, m->marioObj->header.gfx.cameraToObject);
-#endif
         return TRUE;
     }
 
@@ -970,10 +967,6 @@ void apply_vertical_wind(struct MarioState *m) {
                     m->vel[1] = maxVelY;
                 }
             }
-
-#ifdef VERSION_JP
-            play_sound(SOUND_ENV_WIND2, m->marioObj->header.gfx.cameraToObject);
-#endif
         }
     }
 }
@@ -1004,6 +997,7 @@ s32 perform_air_step(struct MarioState *m, u32 stepArg) {
         if (quarterStepResult != AIR_STEP_NONE) {
             stepResult = quarterStepResult;
         }
+    
         if (configWallslide) {
             if (quarterStepResult == AIR_STEP_HIT_WALL && m->wall != NULL) {
                 wall = m->wall;
@@ -1030,6 +1024,12 @@ s32 perform_air_step(struct MarioState *m, u32 stepArg) {
 
     vec3f_copy(m->marioObj->header.gfx.pos, m->pos);
     vec3s_set(m->marioObj->header.gfx.angle, 0, m->faceAngle[1], 0);
+
+    if (configWallslide) {
+        if (stepResult == AIR_STEP_HIT_WALL) {
+            m->wall = wall;
+        }
+    }
 
     return stepResult;
 }
