@@ -224,9 +224,9 @@ static struct Option optsControls[] = {
     DEF_OPT_BIND( optBindStr[22], configKeyStickRight ),
     // max deadzone is 31000; this is less than the max range of ~32768, but this
     // way, the player can't accidentally lock themselves out of using the stick
-    DEF_OPT_SCROLL( optBindStr[20], &configStickDeadzone, 0, 100, 1 ),
+    DEF_OPT_SCROLL( optBindStr[23], &configStickDeadzone, 0, 100, 1 ),
 #ifdef RUMBLE_FEEDBACK
-    DEF_OPT_SCROLL( optBindStr[21], &configRumbleStrength, 0, 100, 1),
+    DEF_OPT_SCROLL( optBindStr[24], &configRumbleStrength, 0, 100, 1),
 #endif
 };
 
@@ -240,12 +240,10 @@ struct SubMenu menuTouch = DEF_SUBMENU( optTouchStr[0], optsTouch );
 
 #endif
 
-#ifndef TARGET_N64
+#if !defined(TARGET_N64) || !defined (TARGET_PORT_CONSOLE)
 static struct Option optsVideo[] = {
-#ifndef TARGET_PORT_CONSOLE
     DEF_OPT_TOGGLE( optsVideoStr[0], &configWindow.fullscreen ),
     DEF_OPT_TOGGLE( optsVideoStr[5], &configWindow.vsync ),
-#endif
 #if !defined(TARGET_PORT_CONSOLE) && !defined(TARGET_ANDROID)
     DEF_OPT_BUTTON( optsVideoStr[4], optvideo_reset_window ),
 #endif
