@@ -28,7 +28,7 @@ static const LevelScript script_func_local_1[] = {
 
 static const LevelScript script_func_local_2[] = {
     OBJECT_WITH_ACTS(/*model*/ MODEL_NONE,      /*pos*/ -2400, -4607, 125, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM1(STAR_INDEX_ACT_2), /*bhv*/ bhvTreasureChestsDDD, /*acts*/ ALL_ACTS),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_MANTA_RAY, /*pos*/ -4640, -1380,  40, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM1(STAR_INDEX_ACT_5), /*bhv*/ bhvMantaRay,          /*acts*/ ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6),
+    OBJECT_WITH_ACTS(/*model*/ MODEL_MANTA_RAY, /*pos*/ -4640, -1380,  40, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM1(STAR_INDEX_ACT_5), /*bhv*/ bhvMantaRay,          /*acts*/ ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6 | ACT_7),
     RETURN(),
 };
 
@@ -98,7 +98,7 @@ const LevelScript level_ddd_entry[] = {
 
     AREA(/*index*/ 2, ddd_geo_000570),
         WHIRLPOOL(/*index*/ 0, /*acts*/ ALL_ACTS, /*pos*/ 3355, -3575, -515, /*strength*/ -30),
-        WHIRLPOOL(/*index*/ 1, /*acts*/ ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6, /*pos*/ 3917, -2040, -6041, /*strength*/ 50),
+        WHIRLPOOL(/*index*/ 1, /*acts*/ ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6 | ACT_7, /*pos*/ 3917, -2040, -6041, /*strength*/ 50),
         WARP_NODE(/*id*/ WARP_NODE_SUCCESS,    /*destLevel*/ LEVEL_CASTLE,         /*destArea*/ 3, /*destNode*/ WARP_NODE_35, /*flags*/ WARP_NO_CHECKPOINT),
         WARP_NODE(/*id*/ WARP_NODE_DEATH,      /*destLevel*/ LEVEL_CASTLE,         /*destArea*/ 3, /*destNode*/ WARP_NODE_67, /*flags*/ WARP_NO_CHECKPOINT),
         WARP_NODE(/*id*/ WARP_NODE_WARP_FLOOR, /*destLevel*/ LEVEL_CASTLE_GROUNDS, /*destArea*/ 1, /*destNode*/ WARP_NODE_1E, /*flags*/ WARP_NO_CHECKPOINT),

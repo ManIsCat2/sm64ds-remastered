@@ -133,8 +133,9 @@
 #define STAR_INDEX_ACT_4     3
 #define STAR_INDEX_ACT_5     4
 #define STAR_INDEX_ACT_6     5
-#define STAR_INDEX_100_COINS 6
-#define STAR_INDEX_CANNON    7
+#define STAR_INDEX_ACT_7     6
+#define STAR_INDEX_100_COINS 7
+#define STAR_INDEX_CANNON    8
 
 /* gTTCSpeedSetting */
 #define TTC_SPEED_SLOW    0
@@ -906,13 +907,13 @@
     #define PLATFORM_ON_TRACK_TYPE_CHECKERED 2
     #define PLATFORM_ON_TRACK_TYPE_GRATE     3
 
-/* Red Switch */
+/* Floor Switches */
     /* oAction */
-    #define RED_SWITCH_ACT_IDLE                      0
-    #define RED_SWITCH_ACT_PRESSED                   1
-    #define RED_SWITCH_ACT_TICKING                   2
-    #define RED_SWITCH_ACT_UNPRESSED                 3
-    #define RED_SWITCH_ACT_WAIT_FOR_MARIO_TO_GET_OFF 4
+    #define SWITCH_ACT_IDLE                      0
+    #define SWITCH_ACT_PRESSED                   1
+    #define SWITCH_ACT_TICKING                   2
+    #define SWITCH_ACT_UNPRESSED                 3
+    #define SWITCH_ACT_WAIT_FOR_MARIO_TO_GET_OFF 4
 
 /* Pyramid Elevator */
     /* oAction */

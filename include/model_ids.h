@@ -8,11 +8,8 @@
 #define ACT_5 (1 << 4)
 #define ACT_6 (1 << 5)
 
-// If an object is set as active for the first 5 acts only, it is treated as always active.
-// It's possible that there were only planned to be 5 acts per level early in development.
-// Hence, they added a macro so they wouldn't have to change the acts for every object.
-#define ALL_ACTS_MACRO ACT_1 | ACT_2 | ACT_3 | ACT_4 | ACT_5
-#define ALL_ACTS       ACT_1 | ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6
+#define ACT_7 (1 << 6)
+#define ALL_ACTS (ACT_1 | ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6 | ACT_7 | ACT_7)
 
 #define MODEL_NONE                        0x00
 
@@ -538,7 +535,8 @@
 #define MODEL_BOWSER_KEY                  0xCC        // bowser_key_geo
 #define MODEL_EXPLOSION                   0xCD        // explosion_geo
 #define MODEL_SNUFIT                      0xCE        // snufit_geo
-#define MODEL_RED_SWITCH               0xCF        // red_switch_geo
+#define MODEL_RED_SWITCH                  0xCF        // red_switch_geo
+#define MODEL_STAR_SWITCH                 0xF1        // star_switch_geo
 #define MODEL_CASTLE_STAR_DOOR_30_STARS   0xD0        // castle_geo_000F00
 #define MODEL_CASTLE_STAR_DOOR_50_STARS   0xD1        // castle_geo_000F00
 #define MODEL_CCM_SNOWMAN_BASE            0xD2        // ccm_geo_0003F0
