@@ -81,7 +81,7 @@ s16 tilt_body_running(struct PlayerState *m) {
 
 void play_step_sound(struct PlayerState *m, s16 frame1, s16 frame2) {
     if (is_anim_past_frame(m, frame1) || is_anim_past_frame(m, frame2)) {
-        if (m->flags & MARIO_METAL_CAP) {
+        if (m->flags & PLAYER_METAL_CAP) {
             if (m->playerObj->header.gfx.animInfo.animID == MARIO_ANIM_TIPTOE) {
                 play_sound_and_spawn_particles(m, SOUND_ACTION_METAL_STEP_TIPTOE, 0);
             } else {
@@ -175,7 +175,7 @@ void slide_bonk(struct PlayerState *m, u32 fastAction, u32 slowAction) {
 }
 
 s32 set_triple_jump_action(struct PlayerState *m, UNUSED u32 action, UNUSED u32 actionArg) {
-    if (m->flags & MARIO_WING_CAP) {
+    if (m->flags & PLAYER_WING_CAP) {
         return set_player_action(m, ACT_FLYING_TRIPLE_JUMP, 0);
     } else if (m->forwardVel > 20.0f) {
         return set_player_action(m, ACT_TRIPLE_JUMP, 0);
@@ -441,13 +441,22 @@ s32 apply_slope_decel(struct PlayerState *m, f32 decelCoef) {
             decel = decelCoef * 0.2f;
             break;
         case SURFACE_CLASS_SLIPPERY:
-            decel = decelCoef * 0.7f;
+            if (curChar == 2)
+				decel = decelCoef * 0.4f;
+			else
+				decel = decelCoef * 0.7f;
             break;
         default:
-            decel = decelCoef * 2.0f;
+            if (curChar == 2)
+				decel = decelCoef * 0.7f;
+            else
+				decel = decelCoef * 2.0f;
             break;
         case SURFACE_CLASS_NOT_SLIPPERY:
-            decel = decelCoef * 3.0f;
+            if (curChar == 2)
+				decel = decelCoef * 1.0f;
+			else
+				decel = decelCoef * 3.0f;
             break;
     }
 
@@ -612,6 +621,7 @@ s32 begin_braking_action(struct PlayerState *m) {
 
 void anim_and_audio_for_walk(struct PlayerState *m) {
     s32 val14;
+    s32 val15;
     struct Object *playerObj = m->playerObj;
     s32 val0C = TRUE;
     s16 targetPitch = 0;
@@ -625,6 +635,7 @@ void anim_and_audio_for_walk(struct PlayerState *m) {
 
     if (m->quicksandDepth > 50.0f) {
         val14 = (s32)(val04 / 4.0f * 0x10000);
+        val15 = (s32)(val04 / 4.0f * 0x08000);
         set_player_anim_with_accel(m, MARIO_ANIM_MOVE_IN_QUICKSAND, val14);
         play_step_sound(m, 19, 93);
         m->actionTimer = 0;
@@ -676,9 +687,17 @@ void anim_and_audio_for_walk(struct PlayerState *m) {
                         val14 = (s32)(val04 / 4.0f * 0x10000);
 
                         if (configDash == 1 || configDash == 2) {
-                            set_player_anim_with_accel(m, MARIO_ANIM_WALKING, (val14 / 1.2));
+                            if (curChar == 1) {
+                                set_player_anim_with_accel(m, MARIO_ANIM_WALKING, (val14 / 1.2));
+                            } else if (curChar == 2) {
+                                set_player_anim_with_accel(m, LUIGI_ANIM_WALKING, (val14 / 1.2));
+                            }
                         } else {
-                            set_player_anim_with_accel(m, MARIO_ANIM_WALKING, val14);
+                            if (curChar == 1) {
+                                set_player_anim_with_accel(m, MARIO_ANIM_WALKING, val15);
+                            } else if (curChar == 2) {
+                                set_player_anim_with_accel(m, LUIGI_ANIM_WALKING, (val15 / 1.2));
+                            }
                         }
                         play_step_sound(m, 10, 49);
 
@@ -694,7 +713,11 @@ void anim_and_audio_for_walk(struct PlayerState *m) {
                     } else {
                         //! (Speed Crash) If Mario's speed is more than 2^17.
                         val14 = (s32)(val04 / 4.0f * 0x10000);
-                        set_player_anim_with_accel(m, MARIO_ANIM_RUNNING, val14);
+                        if (curChar == 1) {
+                            set_player_anim_with_accel(m, MARIO_ANIM_RUNNING, val14);
+                        } else if (curChar == 2) {
+                            set_player_anim_with_accel(m, LUIGI_ANIM_RUNNING, val14);
+                        }
                         play_step_sound(m, 9, 45);
                         targetPitch = tilt_body_running(m);
 
@@ -819,7 +842,7 @@ void tilt_body_walking(struct PlayerState *m, s16 startYaw) {
     UNUSED struct Object *playerObj = m->playerObj;
     s16 animID = m->playerObj->header.gfx.animInfo.animID;
 
-    if (((animID == MARIO_ANIM_WALKING & (configDash == 0))) || animID == MARIO_ANIM_RUNNING) {
+    if ((((animID == MARIO_ANIM_WALKING || animID == LUIGI_ANIM_WALKING) & (configDash == 0))) || (animID == MARIO_ANIM_RUNNING || animID == LUIGI_ANIM_RUNNING)) {
         s16 dYaw = m->faceAngle[1] - startYaw;
         //! (Speed Crash) These casts can cause a crash if (dYaw * forwardVel / 12) or
         //! (forwardVel * 170) exceed or equal 2^31.
@@ -1251,7 +1274,12 @@ s32 act_decelerating(struct PlayerState *m) {
             val0C = 0x1000;
         }
 
-        set_player_anim_with_accel(m, MARIO_ANIM_WALKING, val0C);
+        if (curChar == 1) {
+            set_player_anim_with_accel(m, MARIO_ANIM_WALKING, val0C);
+        } else if (curChar == 2) {
+            set_player_anim_with_accel(m, LUIGI_ANIM_WALKING, val0C);
+        }
+
         play_step_sound(m, 10, 49);
     }
 #if LEDGE_CLIMB_PROTECTION
@@ -1351,7 +1379,7 @@ s32 act_riding_shell_ground(struct PlayerState *m) {
 
         case GROUND_STEP_HIT_WALL:
             mario_stop_riding_object(m);
-            play_sound(m->flags & MARIO_METAL_CAP ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
+            play_sound(m->flags & PLAYER_METAL_CAP ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
                        m->playerObj->header.gfx.cameraToObject);
             m->particleFlags |= PARTICLE_VERTICAL_STAR;
             set_player_action(m, ACT_BACKWARD_GROUND_KB, 0);
@@ -1461,7 +1489,12 @@ s32 act_burning_ground(struct PlayerState *m) {
         set_player_action(m, ACT_BURNING_FALL, 0);
     }
 
-    set_player_anim_with_accel(m, MARIO_ANIM_RUNNING, (s32)(m->forwardVel / 2.0f * 0x10000));
+    if (curChar == 1) {
+        set_player_anim_with_accel(m, MARIO_ANIM_RUNNING, (s32)(m->forwardVel / 2.0f * 0x10000));
+    } else if (curChar == 2) {
+        set_player_anim_with_accel(m, LUIGI_ANIM_RUNNING, (s32)(m->forwardVel / 2.0f * 0x10000));
+    }
+
     play_step_sound(m, 9, 45);
 
     m->particleFlags |= PARTICLE_FIRE;

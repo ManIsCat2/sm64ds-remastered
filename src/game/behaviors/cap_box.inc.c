@@ -44,6 +44,7 @@ struct CapBoxContents sCapBoxContents[] = {
     { CAP_BOX_BP_STAR_ACT_4,       0, STAR_INDEX_ACT_4, MODEL_STAR,             bhvSpawnedStar           },
     { CAP_BOX_BP_STAR_ACT_5,       0, STAR_INDEX_ACT_5, MODEL_STAR,             bhvSpawnedStar           },
     { CAP_BOX_BP_STAR_ACT_6,       0, STAR_INDEX_ACT_6, MODEL_STAR,             bhvSpawnedStar           },
+    { CAP_BOX_BP_POWER_FLOWER,     0,                0, MODEL_POWER_FLOWER,     bhvPowerFlower           },
     { CAP_BOX_BP_END,              0,                0, MODEL_NONE,             NULL                     },
 };
 
@@ -117,6 +118,7 @@ void cap_box_act_3(void) {
     UNUSED u8 filler[4];
 
     cur_obj_move_using_fvel_and_gravity();
+    set_camera_shake_from_hit_or_cap_block(2);
 
     if (o->oVelY < 0.0f) {
         o->oVelY = 0.0f;
@@ -157,13 +159,7 @@ void cap_box_spawn_contents(struct CapBoxContents *contentsList, u8 boxType) {
 
 void cap_box_act_4(void) {
     if (!configGlobalCapBlocks && (o->oBhvParams2ndByte <= CAP_BOX_BP_SPECIAL_CAP_END)) {
-        if (curChar == 2) {
-            cap_box_spawn_contents(sCapBoxContents, CAP_BOX_BP_VANISH_CAP);
-        } else if (curChar == 3) {
-            cap_box_spawn_contents(sCapBoxContents, CAP_BOX_BP_METAL_CAP);
-        } else {
-            cap_box_spawn_contents(sCapBoxContents, CAP_BOX_BP_WING_CAP);
-        }
+        cap_box_spawn_contents(sCapBoxContents, CAP_BOX_BP_POWER_FLOWER);
     } else {
         cap_box_spawn_contents(sCapBoxContents, o->oBhvParams2ndByte);
     }

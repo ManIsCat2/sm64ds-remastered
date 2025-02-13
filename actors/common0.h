@@ -184,4 +184,6 @@ extern const Collision unknown_seg8_collision_080262F8[];
 
 #include "cap_box/collision_header.h"
 
+#include "power_flower/geo_header.h"
+
 #endif

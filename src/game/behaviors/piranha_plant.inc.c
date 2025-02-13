@@ -268,7 +268,7 @@ void piranha_plant_act_biting(void) {
 
     // If the player is wearing the Metal Cap and interacts with the Piranha
     // Plant, the Piranha Plant will die.
-    if ((o->oInteractStatus & INT_STATUS_INTERACTED) && (gPlayerState->flags & MARIO_METAL_CAP)) {
+    if ((o->oInteractStatus & INT_STATUS_INTERACTED) && (gPlayerState->flags & PLAYER_METAL_CAP)) {
         o->oAction = PIRANHA_PLANT_ACT_ATTACKED;
     }
 }

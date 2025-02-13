@@ -71,6 +71,7 @@
 #define TEXT_OPT_DS_DASH   _("DS Dash")
 #define TEXT_OPT_DS_DIVE   _("DS Dive")
 #define TEXT_OPT_DS_BLOCK  _("Global Cap Blocks")
+#define TEXT_OPT_JHEIGHT   _("DS Jump Height")
 #define TEXT_OPT_DS_SRUN   _("Y To Run")
 #define TEXT_OPT_DS_SWALK  _("Y To Walk")
 

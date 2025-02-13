@@ -173,9 +173,9 @@ void set_debug_free_move_action(struct PlayerState *m) {
 }
 
 void set_debug_cap_changer(void) {
-    debug_update_player_cap(CONT_LEFT, MARIO_WING_CAP, 1800, SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP));
-    debug_update_player_cap(CONT_UP, MARIO_METAL_CAP, 600, SEQUENCE_ARGS(4, SEQ_EVENT_METAL_CAP));
-    debug_update_player_cap(CONT_RIGHT, MARIO_VANISH_CAP, 600, SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP));
+    debug_update_player_cap(CONT_LEFT, PLAYER_WING_CAP, 1800, SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP));
+    debug_update_player_cap(CONT_UP, PLAYER_METAL_CAP, 600, SEQUENCE_ARGS(4, SEQ_EVENT_METAL_CAP));
+    debug_update_player_cap(CONT_RIGHT, PLAYER_VANISH_CAP, 600, SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP));
 }
 
 #ifdef TARGET_N64

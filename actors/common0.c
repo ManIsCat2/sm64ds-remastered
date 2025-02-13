@@ -83,3 +83,4 @@ UNUSED static const u64 binid_18 = 18;
 #include "star_switch/collision.inc.c"
 #include "question_box/model.inc.c"
 #include "cap_box/collision.inc.c"
+#include "power_flower/model.inc.c"

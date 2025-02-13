@@ -304,7 +304,7 @@ void play_sound_and_spawn_particles(struct PlayerState *m, u32 soundBits, u32 wa
         }
     }
 
-    if ((m->flags & MARIO_METAL_CAP) || soundBits == SOUND_ACTION_UNSTUCK_FROM_GROUND
+    if ((m->flags & PLAYER_METAL_CAP) || soundBits == SOUND_ACTION_UNSTUCK_FROM_GROUND
         || soundBits == SOUND_MARIO_PUNCH_HOO) {
         play_sound(soundBits, m->playerObj->header.gfx.cameraToObject);
     } else {
@@ -327,7 +327,7 @@ void play_player_action_sound(struct PlayerState *m, u32 soundBits, u32 wavePart
  */
 void play_mario_landing_sound(struct PlayerState *m, u32 soundBits) {
     play_sound_and_spawn_particles(
-        m, (m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_LANDING : soundBits, 1);
+        m, (m->flags & PLAYER_METAL_CAP) ? SOUND_ACTION_METAL_LANDING : soundBits, 1);
 }
 
 /**
@@ -337,7 +337,7 @@ void play_mario_landing_sound(struct PlayerState *m, u32 soundBits) {
  */
 void play_mario_landing_sound_once(struct PlayerState *m, u32 soundBits) {
     play_player_action_sound(
-        m, (m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_LANDING : soundBits, 1);
+        m, (m->flags & PLAYER_METAL_CAP) ? SOUND_ACTION_METAL_LANDING : soundBits, 1);
 }
 
 /**
@@ -345,7 +345,7 @@ void play_mario_landing_sound_once(struct PlayerState *m, u32 soundBits) {
  */
 void play_mario_heavy_landing_sound(struct PlayerState *m, u32 soundBits) {
     play_sound_and_spawn_particles(
-        m, (m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_HEAVY_LANDING : soundBits, 1);
+        m, (m->flags & PLAYER_METAL_CAP) ? SOUND_ACTION_METAL_HEAVY_LANDING : soundBits, 1);
 }
 
 /**
@@ -355,7 +355,7 @@ void play_mario_heavy_landing_sound(struct PlayerState *m, u32 soundBits) {
  */
 void play_mario_heavy_landing_sound_once(struct PlayerState *m, u32 soundBits) {
     play_player_action_sound(
-        m, (m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_HEAVY_LANDING : soundBits, 1);
+        m, (m->flags & PLAYER_METAL_CAP) ? SOUND_ACTION_METAL_HEAVY_LANDING : soundBits, 1);
 }
 
 /**
@@ -363,7 +363,7 @@ void play_mario_heavy_landing_sound_once(struct PlayerState *m, u32 soundBits) {
  */
 void play_mario_sound(struct PlayerState *m, s32 actionSound, s32 marioSound) {
     if (actionSound == SOUND_ACTION_TERRAIN_JUMP) {
-        play_player_action_sound(m, (m->flags & MARIO_METAL_CAP) ? (s32) SOUND_ACTION_METAL_JUMP
+        play_player_action_sound(m, (m->flags & PLAYER_METAL_CAP) ? (s32) SOUND_ACTION_METAL_JUMP
                                                                 : (s32) SOUND_ACTION_TERRAIN_JUMP, 1);
     } else {
         play_sound_if_no_flag(m, actionSound, MARIO_ACTION_SOUND_PLAYED);
@@ -1122,7 +1122,7 @@ s32 set_jump_from_landing(struct PlayerState *m) {
                 case ACT_DOUBLE_JUMP_LAND:
                     // If Mario has a wing cap, he ignores the typical speed
                     // requirement for a triple jump.
-                    if (m->flags & MARIO_WING_CAP) {
+                    if (m->flags & PLAYER_WING_CAP) {
                         set_player_action(m, ACT_FLYING_TRIPLE_JUMP, 0);
                     } else if (m->forwardVel > 20.0f) {
                         set_player_action(m, ACT_TRIPLE_JUMP, 0);
@@ -1379,8 +1379,8 @@ void update_player_button_inputs(struct PlayerState *m) {
     }
 
     if (m->controller->buttonPressed & L_TRIG) {
-        if (curChar >= 4) {
-            curChar = -1;
+        if (curChar > 1) {
+            curChar = 0;
         }
         curChar = curChar + 1;
     }
@@ -1388,7 +1388,7 @@ void update_player_button_inputs(struct PlayerState *m) {
     if (curChar == MARIO) {
         m->playerObj->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_MARIO];
     } else if (curChar == LUIGI) {
-        m->playerObj->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_MARIO]; // Todo: Make "MODEL_MARIO" MODEL_LUIGI
+        m->playerObj->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_LUIGI];
     } else if (curChar == WARIO) {
         m->playerObj->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_MARIO]; // Todo: Make "MODEL_MARIO" MODEL_WARIO
     } else if (curChar == WALUIGI) {
@@ -1591,7 +1591,7 @@ void update_player_health(struct PlayerState *m) {
         // When already healing or hurting Mario, Mario's HP is not changed any more here.
         if (((u32) m->healCounter | (u32) m->hurtCounter) == 0) {
             if ((m->input & INPUT_IN_POISON_GAS) && !(m->action & ACT_FLAG_INTANGIBLE)) {
-                if (!(m->flags & MARIO_METAL_CAP) && !gDebugLevelSelect) {
+                if (!(m->flags & PLAYER_METAL_CAP) && !gDebugLevelSelect) {
                     m->health -= 4;
                 }
             } else {
@@ -1751,11 +1751,11 @@ void mario_update_hitbox_and_cap_model(struct PlayerState *m) {
     struct PlayerBodyState *bodyState = m->playerBodyState;
     s32 flags = update_and_return_cap_flags(m);
 
-    if (flags & MARIO_VANISH_CAP) {
+    if (flags & PLAYER_VANISH_CAP) {
         bodyState->modelState = MODEL_STATE_NOISE_ALPHA;
     }
 
-    if (flags & MARIO_METAL_CAP) {
+    if (flags & PLAYER_METAL_CAP) {
         bodyState->modelState |= MODEL_STATE_METAL;
     }
 
@@ -1771,7 +1771,7 @@ void mario_update_hitbox_and_cap_model(struct PlayerState *m) {
     }
 
     if (flags & MARIO_CAP_IN_HAND) {
-        if (flags & MARIO_WING_CAP) {
+        if (flags & PLAYER_WING_CAP) {
             bodyState->handState = MARIO_HAND_HOLDING_WING_CAP;
         } else {
             bodyState->handState = MARIO_HAND_HOLDING_CAP;
@@ -1779,7 +1779,7 @@ void mario_update_hitbox_and_cap_model(struct PlayerState *m) {
     }
 
     if (flags & MARIO_CAP_ON_HEAD) {
-        if (flags & MARIO_WING_CAP) {
+        if (flags & PLAYER_WING_CAP) {
             bodyState->capState = MARIO_HAS_WING_CAP_ON;
         } else {
             bodyState->capState = MARIO_HAS_DEFAULT_CAP_ON;

@@ -840,4 +840,5 @@ UNUSED s8 debug_sequence_tracker(s16 debugInputSequence[]) {
 #include "behaviors/decorative_pendulum.inc.c"
 #include "behaviors/treasure_chest.inc.c"
 #include "behaviors/mips.inc.c"
+#include "behaviors/power_flower.inc.c"
 #include "behaviors/timed_star_spawn.inc.c"

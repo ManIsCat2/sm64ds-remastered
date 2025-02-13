@@ -114,7 +114,7 @@ void mario_bonk_reflection(struct PlayerState *m, u32 negateSpeed) {
         s16 wallAngle = atan2s(m->wall->normal.z, m->wall->normal.x);
         m->faceAngle[1] = wallAngle - (s16)(m->faceAngle[1] - wallAngle);
 
-        play_sound((m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
+        play_sound((m->flags & PLAYER_METAL_CAP) ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
                    m->playerObj->header.gfx.cameraToObject);
     } else {
         play_sound(SOUND_ACTION_HIT, m->playerObj->header.gfx.cameraToObject);
@@ -927,7 +927,7 @@ void apply_gravity(struct PlayerState *m) {
         if (m->vel[1] < -16.0f) {
             m->vel[1] = -16.0f;
         }
-    } else if ((m->flags & MARIO_WING_CAP) && m->vel[1] < 0.0f && (m->input & INPUT_A_DOWN)) {
+    } else if ((m->flags & PLAYER_WING_CAP) && m->vel[1] < 0.0f && (m->input & INPUT_A_DOWN)) {
         m->playerBodyState->wingFlutter = TRUE;
 
         m->vel[1] -= 2.0f;

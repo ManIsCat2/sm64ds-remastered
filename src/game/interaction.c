@@ -145,11 +145,11 @@ u32 get_player_cap_flag(struct Object *capObject) {
     if (script == bhvNormalCap) {
         return MARIO_NORMAL_CAP;
     } else if (script == bhvMetalCap) {
-        return MARIO_METAL_CAP;
+        return PLAYER_METAL_CAP;
     } else if (script == bhvWingCap) {
-        return MARIO_WING_CAP;
+        return PLAYER_WING_CAP;
     } else if (script == bhvVanishCap) {
-        return MARIO_VANISH_CAP;
+        return PLAYER_VANISH_CAP;
     }
 
     return 0;
@@ -528,7 +528,7 @@ void bounce_off_object(struct PlayerState *m, struct Object *o, f32 velY) {
 
 void hit_object_from_below(struct PlayerState *m, UNUSED struct Object *o) {
     m->vel[1] = 0.0f;
-    set_camera_shake_from_hit(SHAKE_HIT_FROM_BELOW);
+    set_camera_shake_from_hit_or_cap_block(SHAKE_HIT_FROM_BELOW);
 }
 
 UNUSED static u32 unused_determine_knockback_action(struct PlayerState *m) {
@@ -671,7 +671,7 @@ void bounce_back_from_attack(struct PlayerState *m, u32 interaction) {
             mario_set_forward_vel(m, -48.0f);
         }
 
-        set_camera_shake_from_hit(SHAKE_ATTACK);
+        set_camera_shake_from_hit_or_cap_block(SHAKE_ATTACK);
         m->particleFlags |= PARTICLE_TRIANGLE;
     }
 
@@ -705,7 +705,7 @@ u32 take_damage_from_interact_object(struct PlayerState *m) {
         damage += (damage + 1) / 2;
     }
 
-    if (m->flags & MARIO_METAL_CAP) {
+    if (m->flags & PLAYER_METAL_CAP) {
         damage = 0;
     }
 
@@ -713,7 +713,7 @@ u32 take_damage_from_interact_object(struct PlayerState *m) {
 #ifdef RUMBLE_FEEDBACK
     queue_rumble_data(5, 80);
 #endif    
-    set_camera_shake_from_hit(shake);
+    set_camera_shake_from_hit_or_cap_block(shake);
 
     return damage;
 }
@@ -721,7 +721,7 @@ u32 take_damage_from_interact_object(struct PlayerState *m) {
 u32 take_damage_and_knock_back(struct PlayerState *m, struct Object *o) {
     u32 damage;
 
-    if (!sInvulnerable && !(m->flags & MARIO_VANISH_CAP)
+    if (!sInvulnerable && !(m->flags & PLAYER_VANISH_CAP)
         && !(o->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
         o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_ATTACKED_MARIO;
         m->interactObj = o;
@@ -1163,7 +1163,7 @@ u32 interact_strong_wind(struct PlayerState *m, UNUSED u32 interactType, struct 
 u32 interact_flame(struct PlayerState *m, UNUSED u32 interactType, struct Object *o) {
     u32 burningAction = ACT_BURNING_JUMP;
 
-    if (!sInvulnerable && !(m->flags & MARIO_METAL_CAP) && !(m->flags & MARIO_VANISH_CAP)
+    if (!sInvulnerable && !(m->flags & PLAYER_METAL_CAP) && !(m->flags & PLAYER_VANISH_CAP)
         && !(o->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
 #ifdef RUMBLE_FEEDBACK
         queue_rumble_data(5, 80);
@@ -1191,8 +1191,8 @@ u32 interact_flame(struct PlayerState *m, UNUSED u32 interactType, struct Object
 }
 
 u32 interact_snufit_bullet(struct PlayerState *m, UNUSED u32 interactType, struct Object *o) {
-    if (!sInvulnerable && !(m->flags & MARIO_VANISH_CAP)) {
-        if (m->flags & MARIO_METAL_CAP) {
+    if (!sInvulnerable && !(m->flags & PLAYER_VANISH_CAP)) {
+        if (m->flags & PLAYER_METAL_CAP) {
             o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_WAS_ATTACKED;
             play_sound(SOUND_ACTION_SNUFFIT_BULLET_HIT_METAL, m->playerObj->header.gfx.cameraToObject);
         } else {
@@ -1235,7 +1235,7 @@ u32 interact_bully(struct PlayerState *m, UNUSED u32 interactType, struct Object
     UNUSED u8 filler[4];
 
     u32 interaction;
-    if (m->flags & MARIO_METAL_CAP) {
+    if (m->flags & PLAYER_METAL_CAP) {
         interaction = INT_FAST_ATTACK_OR_SHELL;
     } else {
         interaction = determine_interaction(m, o);
@@ -1258,7 +1258,7 @@ u32 interact_bully(struct PlayerState *m, UNUSED u32 interactType, struct Object
         return TRUE;
     }
 
-    else if (!sInvulnerable && !(m->flags & MARIO_VANISH_CAP)
+    else if (!sInvulnerable && !(m->flags & PLAYER_VANISH_CAP)
              && !(o->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
         o->oInteractStatus = INT_STATUS_INTERACTED;
         m->invincTimer = 2;
@@ -1279,7 +1279,7 @@ u32 interact_bully(struct PlayerState *m, UNUSED u32 interactType, struct Object
 }
 
 u32 interact_shock(struct PlayerState *m, UNUSED u32 interactType, struct Object *o) {
-    if (!sInvulnerable && !(m->flags & MARIO_VANISH_CAP)
+    if (!sInvulnerable && !(m->flags & PLAYER_VANISH_CAP)
         && !(o->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
         u32 actionArg = (m->action & (ACT_FLAG_AIR | ACT_FLAG_ON_POLE | ACT_FLAG_HANGING)) == 0;
 
@@ -1338,7 +1338,7 @@ u32 interact_mr_blizzard(struct PlayerState *m, UNUSED u32 interactType, struct 
 #endif
 u32 interact_hit_from_below(struct PlayerState *m, UNUSED u32 interactType, struct Object *o) {
     u32 interaction;
-    if (m->flags & MARIO_METAL_CAP) {
+    if (m->flags & PLAYER_METAL_CAP) {
         interaction = INT_FAST_ATTACK_OR_SHELL;
     } else {
         interaction = determine_interaction(m, o);
@@ -1378,7 +1378,7 @@ u32 interact_hit_from_below(struct PlayerState *m, UNUSED u32 interactType, stru
 
 u32 interact_bounce_top(struct PlayerState *m, UNUSED u32 interactType, struct Object *o) {
     u32 interaction;
-    if (m->flags & MARIO_METAL_CAP) {
+    if (m->flags & PLAYER_METAL_CAP) {
         interaction = INT_FAST_ATTACK_OR_SHELL;
     } else {
         interaction = determine_interaction(m, o);
@@ -1612,17 +1612,17 @@ u32 interact_cap(struct PlayerState *m, UNUSED u32 interactType, struct Object *
         m->flags |= capFlag;
 
         switch (capFlag) {
-            case MARIO_VANISH_CAP:
+            case PLAYER_VANISH_CAP:
                 capTime = VC_TIME;
                 capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP);
                 break;
 
-            case MARIO_METAL_CAP:
+            case PLAYER_METAL_CAP:
                 capTime = MC_TIME;
                 capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_METAL_CAP);
                 break;
 
-            case MARIO_WING_CAP:
+            case PLAYER_WING_CAP:
                 capTime = WC_TIME;
                 capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP);
                 break;
@@ -1855,7 +1855,7 @@ void check_lava_boost(struct PlayerState *m) {
 #endif
 
     if (!(m->action & ACT_FLAG_GROUP_NO_LAVA_BOOST) && m->pos[1] < m->floorHeight + 10.0f) {
-        if (!(m->flags & MARIO_METAL_CAP)) {
+        if (!(m->flags & PLAYER_METAL_CAP)) {
             m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
         }
         

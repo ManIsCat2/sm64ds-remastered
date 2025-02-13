@@ -469,7 +469,7 @@ static void skip_camera_interpolation(void) {
 /**
  * Starts a camera shake triggered by an interaction
  */
-void set_camera_shake_from_hit(s16 shake) {
+void set_camera_shake_from_hit_or_cap_block(s16 shake) {
     switch (shake) {
         // Makes the camera stop for a bit
         case SHAKE_ATTACK:
@@ -2918,7 +2918,7 @@ void update_lakitu(struct Camera *c) {
         shake_camera_handheld(gLakituState.pos, gLakituState.focus);
 
         if (sMarioCamState->action == ACT_DIVE && gLakituState.lastFrameAction != ACT_DIVE) {
-            set_camera_shake_from_hit(SHAKE_HIT_FROM_BELOW);
+            set_camera_shake_from_hit_or_cap_block(SHAKE_HIT_FROM_BELOW);
         }
 
         gLakituState.roll += sHandheldShakeRoll;

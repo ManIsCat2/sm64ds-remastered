@@ -993,7 +993,11 @@ s32 act_entering_star_door(struct PlayerState *m) {
         m->pos[0] += m->playerObj->oPlayerReadingSignDPosX;
         m->pos[2] += m->playerObj->oPlayerReadingSignDPosZ;
 
-        set_player_anim_with_accel(m, MARIO_ANIM_WALKING, 0x00028000);
+        if (curChar == 1) {
+            set_player_anim_with_accel(m, MARIO_ANIM_WALKING, 0x00028000);
+        } else if (curChar == 1) {
+            set_player_anim_with_accel(m, LUIGI_ANIM_WALKING, 0x00028000);
+        }
     }
 
     else {
@@ -1006,7 +1010,11 @@ s32 act_entering_star_door(struct PlayerState *m) {
         m->pos[0] += 12.0f * sins(m->faceAngle[1]);
         m->pos[2] += 12.0f * coss(m->faceAngle[1]);
 
-        set_player_anim_with_accel(m, MARIO_ANIM_WALKING, 0x00028000);
+        if (curChar == 1) {
+            set_player_anim_with_accel(m, MARIO_ANIM_WALKING, 0x00028000);
+        } else if (curChar == 2) {
+            set_player_anim_with_accel(m, LUIGI_ANIM_WALKING, 0x00018000);
+        }
     }
 
     stop_and_set_height_to_floor(m);
@@ -1510,7 +1518,7 @@ s32 act_bbh_enter_jump(struct PlayerState *m) {
     f32 cageDist;
 
     play_player_action_sound(
-        m, m->flags & MARIO_METAL_CAP ? SOUND_ACTION_METAL_JUMP : SOUND_ACTION_TERRAIN_JUMP, 1);
+        m, m->flags & PLAYER_METAL_CAP ? SOUND_ACTION_METAL_JUMP : SOUND_ACTION_TERRAIN_JUMP, 1);
     play_mario_jump_sound(m);
 
     if (m->actionState == 0) {
@@ -1597,7 +1605,7 @@ s32 act_teleport_fade_in(struct PlayerState *m) {
 s32 act_shocked(struct PlayerState *m) {
     play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_ACTION_SOUND_PLAYED);
     play_sound(SOUND_MOVING_SHOCKED, m->playerObj->header.gfx.cameraToObject);
-    set_camera_shake_from_hit(SHAKE_SHOCK);
+    set_camera_shake_from_hit_or_cap_block(SHAKE_SHOCK);
 
     if (set_player_animation(m, MARIO_ANIM_SHOCKED) == 0) {
         m->actionTimer++;
@@ -1654,7 +1662,7 @@ s32 act_squished(struct PlayerState *m) {
                 vec3f_set(m->playerObj->header.gfx.scale, 2.0f - squishAmount, squishAmount, 2.0f - squishAmount);
 #endif
             } else {
-                if (!(m->flags & MARIO_METAL_CAP) && m->invincTimer == 0) {
+                if (!(m->flags & PLAYER_METAL_CAP) && m->invincTimer == 0) {
                     // cap on: 3 units; cap off: 4.5 units
                     m->hurtCounter += m->flags & MARIO_CAP_ON_HEAD ? 12 : 18;
                     play_sound_if_no_flag(m, SOUND_MARIO_ATTACKED, MARIO_MARIO_SOUND_PLAYED);
@@ -1969,7 +1977,7 @@ static s32 act_intro_cutscene(struct PlayerState *m) {
 static void jumbo_star_cutscene_falling(struct PlayerState *m) {
     if (m->actionState == 0) {
         m->input |= INPUT_A_DOWN;
-        m->flags |= (MARIO_WING_CAP | MARIO_CAP_ON_HEAD);
+        m->flags |= (PLAYER_WING_CAP | MARIO_CAP_ON_HEAD);
 
         m->faceAngle[1] = -0x8000;
         m->pos[0] = 0.0f;
@@ -2162,7 +2170,7 @@ static void end_peach_cutscene_mario_falling(struct PlayerState *m) {
     }
 
     m->input |= INPUT_A_DOWN;
-    m->flags |= (MARIO_WING_CAP | MARIO_CAP_ON_HEAD);
+    m->flags |= (PLAYER_WING_CAP | MARIO_CAP_ON_HEAD);
 
     set_player_animation(m, MARIO_ANIM_GENERAL_FALL);
     mario_set_forward_vel(m, 0.0f);
@@ -2318,7 +2326,11 @@ static void end_peach_cutscene_run_to_peach(struct PlayerState *m) {
 
     m->pos[1] = m->floorHeight;
 
-    set_player_anim_with_accel(m, MARIO_ANIM_RUNNING, 0x00080000);
+    if (curChar == 1) { 
+        set_player_anim_with_accel(m, MARIO_ANIM_RUNNING, 0x00080000);
+    } else if (curChar == 2) {
+        set_player_anim_with_accel(m, LUIGI_ANIM_RUNNING, 0x00080000);
+    }
     play_step_sound(m, 9, 45);
 
     vec3f_copy(m->playerObj->header.gfx.pos, m->pos);
