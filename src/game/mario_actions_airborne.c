@@ -9,7 +9,7 @@
 #include "game_init.h"
 #include "interaction.h"
 #include "level_update.h"
-#include "mario.h"
+#include "player.h"
 #include "mario_step.h"
 #include "rumble_init.h"
 #include "save_file.h"

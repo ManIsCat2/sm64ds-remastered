@@ -9,7 +9,7 @@
 #include "buffers/zbuffer.h"
 #include "game/area.h"
 #include "game/game_init.h"
-#include "game/mario.h"
+#include "game/player.h"
 #include "game/memory.h"
 #include "game/object_helpers.h"
 #include "game/object_list_processor.h"

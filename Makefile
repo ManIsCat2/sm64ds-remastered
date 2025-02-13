@@ -34,6 +34,9 @@ TARGET_N3DS ?= 0
 # Build for Nintendo Switch
 TARGET_SWITCH ?= 0
 
+# Developer Mode
+DEV ?= 0
+
 # Compiler to use for N64 (and other targets if required)
 #   gcc - uses the GNU C Compiler
 #   clang - uses clang C/C++ frontend for LLVM
@@ -362,6 +365,11 @@ endif
 # OpenGL defines
 ifeq ($(USE_GLES),1) # GLES can be used outside Raspberry Pi, Android or Switch
   DEFINES += USE_GLES=1
+endif
+
+# Developer mdoe define
+ifeq ($(DEV),1)
+  DEFINES += DEV=1
 endif
 
 # Libultra defines
@@ -1205,7 +1213,7 @@ EXTRACT_DATA_FOR_MIO := $(OBJCOPY) -O binary --only-section=.data
 
 # Common build print status function
 define print
-  @$(PRINT) "$(GREEN)$(1) $(YELLOW)$(2)$(GREEN) -> $(BLUE)$(3)$(NO_COL)\n"
+  @$(PRINT) "$(RED)$(1) $(YELLOW)$(2)$(RED) -> $(GREEN)$(3)$(NO_COL)\n"
 endef
 
 #==============================================================================#
@@ -1224,12 +1232,12 @@ all: $(ALL_FILE)
 	@$(SHA1SUM) $(ALL_FILE)
 	@$(PRINT) "${BLINK}Build succeeded.\n$(NO_COL)"
 	@$(PRINT) "==== Build Details ====$(NO_COL)\n"
-	@$(PRINT) "${GREEN}File:           $(BLUE)$(ALL_FILE)$(NO_COL)\n"
-	@$(PRINT) "${GREEN}Version:        $(BLUE)$(VERSION)$(NO_COL)\n"
+	@$(PRINT) "${RED}File:           $(GREEN)$(ALL_FILE)$(NO_COL)\n"
+	@$(PRINT) "${RED}Version:        $(GREEN)$(VERSION)$(NO_COL)\n"
 ifeq ($(TARGET_N64),1)
-	@$(PRINT) "${GREEN}Microcode:      $(BLUE)$(GRUCODE)$(NO_COL)\n"
+	@$(PRINT) "${RED}Microcode:      $(GREEN)$(GRUCODE)$(NO_COL)\n"
 endif
-	@$(PRINT) "${GREEN}Target:         $(BLUE)$(TARGET_NAME)$(NO_COL)\n"
+	@$(PRINT) "${RED}Target:         $(GREEN)$(TARGET_NAME)$(NO_COL)\n"
 
 ifeq ($(TARGET_ANDROID),1)
   EXE_DEPEND := $(APK_SIGNED)
@@ -1260,7 +1268,7 @@ res: $(BASEPACK_PATH)
 
 # prepares the basepack.lst
 $(BASEPACK_LST): $(EXE_DEPEND)
-	@$(PRINT) "$(GREEN)Generating external data list: $(BLUE)$@ $(NO_COL)\n"
+	@$(PRINT) "$(RED)Generating external data list: $(GREEN)$@ $(NO_COL)\n"
 	@mkdir -p $(BUILD_DIR)/$(BASEDIR)
 	@echo "$(BUILD_DIR)/sound/bank_sets sound/bank_sets" > $(BASEPACK_LST)
 	@echo "$(BUILD_DIR)/sound/sequences.bin sound/sequences.bin" >> $(BASEPACK_LST)
@@ -1515,7 +1523,7 @@ $(BUILD_DIR)/%.aifc: $(BUILD_DIR)/%.table %.aiff
 
 # Endianness and bit width
 $(ENDIAN_BITWIDTH): $(TOOLS_DIR)/determine-endian-bitwidth.c
-	@$(PRINT) "$(GREEN)Generating endian-bitwidth $(NO_COL)\n"
+	@$(PRINT) "$(RED)Generating endian-bitwidth $(NO_COL)\n"
 	$(V)$(CC) -c $(CFLAGS) -o $@.dummy2 $< 2>$@.dummy1; true
 	$(V)grep -o 'msgbegin --endian .* --bitwidth .* msgend' $@.dummy1 > $@.dummy2
 	$(V)head -n1 <$@.dummy2 | cut -d' ' -f2-5 > $@
@@ -1523,7 +1531,7 @@ $(ENDIAN_BITWIDTH): $(TOOLS_DIR)/determine-endian-bitwidth.c
 	$(V)$(RM) $@.dummy2
 
 $(SOUND_BIN_DIR)/sound_data.ctl: sound/sound_banks/ $(SOUND_BANK_FILES) $(SOUND_SAMPLE_AIFCS) $(ENDIAN_BITWIDTH)
-	@$(PRINT) "$(GREEN)Generating: $(BLUE)$@ $(NO_COL)\n"
+	@$(PRINT) "$(RED)Generating: $(GREEN)$@ $(NO_COL)\n"
 	$(V)$(PYTHON) $(TOOLS_DIR)/assemble_sound.py $(BUILD_DIR)/sound/samples/ sound/sound_banks/ $(SOUND_BIN_DIR)/sound_data.ctl $(SOUND_BIN_DIR)/ctl_header $(SOUND_BIN_DIR)/sound_data.tbl $(SOUND_BIN_DIR)/tbl_header $(C_DEFINES) $$(cat $(ENDIAN_BITWIDTH))
 
 $(SOUND_BIN_DIR)/sound_data.tbl: $(SOUND_BIN_DIR)/sound_data.ctl
@@ -1536,7 +1544,7 @@ $(SOUND_BIN_DIR)/tbl_header: $(SOUND_BIN_DIR)/sound_data.ctl
 	@true
 
 $(SOUND_BIN_DIR)/sequences.bin: $(SOUND_BANK_FILES) sound/sequences.json $(SOUND_SEQUENCE_DIRS) $(SOUND_SEQUENCE_FILES) $(ENDIAN_BITWIDTH)
-	@$(PRINT) "$(GREEN)Generating: $(BLUE)$@ $(NO_COL)\n"
+	@$(PRINT) "$(RED)Generating: $(GREEN)$@ $(NO_COL)\n"
 	$(V)$(PYTHON) $(TOOLS_DIR)/assemble_sound.py --sequences $@ $(SOUND_BIN_DIR)/sequences_header $(SOUND_BIN_DIR)/bank_sets sound/sound_banks/ sound/sequences.json $(SOUND_SEQUENCE_FILES) $(C_DEFINES) $$(cat $(ENDIAN_BITWIDTH))
 
 $(SOUND_BIN_DIR)/bank_sets: $(SOUND_BIN_DIR)/sequences.bin
@@ -1574,12 +1582,12 @@ $(BUILD_DIR)/%.inc.c: $(BUILD_DIR)/%
 
 # Generate animation data
 $(BUILD_DIR)/assets/mario_anim_data.c: $(wildcard assets/anims/*.inc.c)
-	@$(PRINT) "$(GREEN)Generating animation data $(NO_COL)\n"
+	@$(PRINT) "$(RED)Generating animation data $(NO_COL)\n"
 	$(V)$(PYTHON) tools/mario_anims_converter.py > $@
 
 # Generate demo input data
 $(BUILD_DIR)/assets/demo_data.c: assets/demo_data.json $(wildcard assets/demos/*.bin)
-	@$(PRINT) "$(GREEN)Generating demo data $(NO_COL)\n"
+	@$(PRINT) "$(RED)Generating demo data $(NO_COL)\n"
 	$(V)$(PYTHON) tools/demo_data_converter.py assets/demo_data.json $(DEF_INC_CFLAGS) > $@
 
 # Encode in-game text strings
@@ -1596,13 +1604,13 @@ $(BUILD_DIR)/include/text_menu_strings.h: include/text_menu_strings.h.in
 	$(call print,Encoding:,$<,$@)
 	$(V)$(TEXTCONV) charmap_menu.txt $< $@
 $(BUILD_DIR)/text/%/define_courses.inc.c: text/define_courses.inc.c text/%/courses.h
-	@$(PRINT) "$(GREEN)Preprocessing: $(BLUE)$@ $(NO_COL)\n"
+	@$(PRINT) "$(RED)Preprocessing: $(GREEN)$@ $(NO_COL)\n"
 	$(V)$(CPP) $(CPPFLAGS) $< -o - -I text/$*/ | $(TEXTCONV) $(BUILD_DIR)/$(CHARMAP) - $@
 $(BUILD_DIR)/text/%/define_text.inc.c: text/define_text.inc.c text/%/courses.h text/%/dialogs.h
-	@$(PRINT) "$(GREEN)Preprocessing: $(BLUE)$@ $(NO_COL)\n"
+	@$(PRINT) "$(RED)Preprocessing: $(GREEN)$@ $(NO_COL)\n"
 	$(V)$(CPP) $(CPPFLAGS) $< -o - -I text/$*/ | $(TEXTCONV) $(BUILD_DIR)/$(CHARMAP) - $@
 $(BUILD_DIR)/text/debug_text.raw.inc.c: text/debug_text.inc.c $(BUILD_DIR)/$(CHARMAP_DEBUG)
-	@$(PRINT) "$(GREEN)Preprocessing: $(BLUE)$@ $(NO_COL)\n"
+	@$(PRINT) "$(RED)Preprocessing: $(GREEN)$@ $(NO_COL)\n"
 	$(V)$(CPP) $(CPPFLAGS) $< -o - -I text/$*/ | $(TEXTCONV) $(BUILD_DIR)/$(CHARMAP_DEBUG) - $@
 
 ifeq ($(EXT_OPTIONS_MENU),1)
@@ -1677,7 +1685,7 @@ endif
 ifeq ($(TARGET_N64),1)
 # Link libgcc
 $(BUILD_DIR)/libgcc.a: $(LIBGCC_O_FILES)
-	@$(PRINT) "$(GREEN)Linking libgcc:  $(BLUE)$@ $(NO_COL)\n"
+	@$(PRINT) "$(RED)Linking libgcc:  $(GREEN)$@ $(NO_COL)\n"
 	$(V)$(AR) rcs -o $@ $(LIBGCC_O_FILES)
 
 LIB_GCC_FILE := $(BUILD_DIR)/libgcc.a
@@ -1694,13 +1702,13 @@ $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT) $(GODDARD_TXT_INC)
 
 # Link libultra
 $(BUILD_DIR)/libultra.a: $(ULTRA_O_FILES)
-	@$(PRINT) "$(GREEN)Linking libultra: $(BLUE)$@ $(NO_COL)\n"
+	@$(PRINT) "$(RED)Linking libultra: $(GREEN)$@ $(NO_COL)\n"
 	$(V)$(AR) rcs -o $@ $(ULTRA_O_FILES)
 
 ifeq ($(GODDARD_MFACE),1)
 # Link libgoddard
 $(BUILD_DIR)/libgoddard.a: $(GODDARD_O_FILES)
-	@$(PRINT) "$(GREEN)Linking libgoddard: $(BLUE)$@ $(NO_COL)\n"
+	@$(PRINT) "$(RED)Linking libgoddard: $(GREEN)$@ $(NO_COL)\n"
 	$(V)$(AR) rcs -o $@ $(GODDARD_O_FILES)
 
 LIB_GD_FILE := $(BUILD_DIR)/libgoddard.a
@@ -1712,7 +1720,7 @@ $(BUILD_DIR)/sm64_prelim.ld: $(LD_SCRIPT) $(O_FILES) $(MIO0_OBJ_FILES) $(SEG_FIL
 	$(V)$(CPP) $(CPPFLAGS) -DPRELIMINARY=1 -DBUILD_DIR=$(BUILD_DIR) -MMD -MP -MT $@ -MF $@.d -o $@ $<
 
 $(BUILD_DIR)/sm64_prelim.elf: $(BUILD_DIR)/sm64_prelim.ld
-	@$(PRINT) "$(GREEN)Linking Preliminary ELF file: $(BLUE)$@ $(NO_COL)\n"
+	@$(PRINT) "$(RED)Linking Preliminary ELF file: $(GREEN)$@ $(NO_COL)\n"
     # Slightly edited version of LDFLAGS
 	$(V)$(LD) -L $(BUILD_DIR) -T $< -Map $(BUILD_DIR)/sm64_prelim.map $(SYMBOL_LINKING_FLAGS) -o $@ $(O_FILES) -lultra $(LIB_GD_FLAG) $(LIB_GCC_FLAG)
 
@@ -1726,7 +1734,7 @@ endif # GODDARD_MFACE
 
 # Link SM64 ELF file
 $(ELF): $(LIB_GD_PRE_ELF) $(O_FILES) $(MIO0_OBJ_FILES) $(SEG_FILES) $(BUILD_DIR)/$(LD_SCRIPT) $(BUILD_DIR)/libultra.a $(LIB_GD_FILE) $(LIB_GCC_FILE)
-	@$(PRINT) "$(GREEN)Linking ELF file: $(BLUE)$@ $(NO_COL)\n"
+	@$(PRINT) "$(RED)Linking ELF file: $(GREEN)$@ $(NO_COL)\n"
 	$(V)$(LD) -L $(BUILD_DIR) $(LDFLAGS) $(GODDARD_TXT_INC) -o $@ $(O_FILES) -lultra $(LIB_GD_FLAG) $(LIB_GCC_FLAG)
 
 # Build ROM
@@ -1739,7 +1747,7 @@ $(BUILD_DIR)/$(TARGET).objdump: $(ELF)
 
 else ifeq ($(TARGET_WII_U),1)
 $(ELF): $(O_FILES) $(MIO0_FILES:.mio0=.o) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(BUILD_DIR)/$(RPC_LIBS)
-	@$(PRINT) "$(GREEN)Linking ELF file: $(BLUE)$@ $(NO_COL)\n"
+	@$(PRINT) "$(RED)Linking ELF file: $(GREEN)$@ $(NO_COL)\n"
 	$(V)$(LD) -L $(BUILD_DIR) -o $@ $(O_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(LDFLAGS)
 
 $(EXE): $(ELF)
@@ -1757,7 +1765,7 @@ $(BUILD_DIR)/src/pc/gfx/shader.shbin.o : src/pc/gfx/shader.v.pica
 	$(V)$(DEVKITPRO)/tools/bin/bin2s $(BUILD_DIR)/src/pc/gfx/shader.shbin | $(AS) -o $@
 
 $(ELF): $(O_FILES) $(MIO0_FILES:.mio0=.o) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(BUILD_DIR)/src/pc/gfx/shader.shbin.o $(SMDH_ICON)
-	@$(PRINT) "$(GREEN)Linking ELF file: $(BLUE)$@ $(NO_COL)\n"
+	@$(PRINT) "$(RED)Linking ELF file: $(GREEN)$@ $(NO_COL)\n"
 	$(V)$(LD) -L $(BUILD_DIR) -o $@ $(O_FILES) $(BUILD_DIR)/src/pc/gfx/shader.shbin.o $(MINIMAP_T3X_O) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(LDFLAGS)
 
 $(EXE): $(ELF)
@@ -1799,7 +1807,7 @@ $(BUILD_DIR)/src/pc/gfx/gfx_3ds_menu.o: $(MINIMAP_T3X_HEADERS)
 
 else ifeq ($(TARGET_SWITCH),1)
 $(ELF): $(O_FILES) $(MIO0_FILES:.mio0=.o) $(ULTRA_O_FILES) $(GODDARD_O_FILES)
-	@$(PRINT) "$(GREEN)Linking ELF file: $(BLUE)$@ $(NO_COL)\n"
+	@$(PRINT) "$(RED)Linking ELF file: $(GREEN)$@ $(NO_COL)\n"
 	$(V)$(LD) -L $(BUILD_DIR) -o $@ $(O_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(LDFLAGS)
 
 $(EXE): $(ELF)
@@ -1814,7 +1822,7 @@ ifeq ($(TARGET_ANDROID),1)
 APK_FILES := $(shell find $(PLATFORM_DIR)/android/ -type f)
 
 $(APK): $(EXE) $(APK_FILES)
-	@$(PRINT) "$(GREEN)Packing game and libraries to an APK: $(BLUE)$@ $(NO_COL)\n"
+	@$(PRINT) "$(RED)Packing game and libraries to an APK: $(GREEN)$@ $(NO_COL)\n"
 	$(V)cp -r $(PLATFORM_DIR)/android $(BUILD_DIR)/$(PLATFORM_DIR)/ && \
 	cp $(PREFIX)/lib/libc++_shared.so $(BUILD_DIR)/$(PLATFORM_DIR)/android/lib/$(ARCH_APK)/ && \
 	cp $(EXE) $(BUILD_DIR)/$(PLATFORM_DIR)/android/lib/$(ARCH_APK)/ && \

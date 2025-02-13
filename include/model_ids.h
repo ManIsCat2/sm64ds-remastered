@@ -385,7 +385,7 @@
 
 // group 10
 #define MODEL_BIRDS                       0x54        // birds_geo
-#define MODEL_YOSHI                       0x55        // yoshi_geo
+#define MODEL_UNUSED                      0x55        // unused
 
 // group 11
 #define MODEL_ENEMY_LAKITU                0x54        // enemy_lakitu_geo

@@ -1,7 +1,7 @@
 #include <PR/ultratypes.h>
 
 #include "sm64.h"
-#include "mario.h"
+#include "player.h"
 #include "audio/external.h"
 #include "engine/math_util.h"
 #include "engine/surface_collision.h"

@@ -9,7 +9,7 @@
 #include "engine/surface_load.h"
 #include "ingame_menu.h"
 #include "screen_transition.h"
-#include "mario.h"
+#include "player.h"
 #include "mario_actions_cutscene.h"
 #include "print.h"
 #include "hud.h"

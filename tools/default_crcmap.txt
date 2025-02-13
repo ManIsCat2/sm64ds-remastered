@@ -408,9 +408,6 @@
 0x9fa93f54, actors/wooden_signpost/wooden_signpost_front.rgba16.png
 0x89f3f5a0, actors/yellow_sphere/yellow_sphere.rgba16.png
 0x89f3f5a0, actors/yellow_sphere_small/small_yellow_sphere.rgba16.png
-0x8c68c203, actors/yoshi/yoshi_eye.rgba16.png
-0xf56d22e8, actors/yoshi/yoshi_eye_blink.rgba16.png
-0xaeaecdf2, actors/yoshi/yoshi_nostril.rgba16.png
 0xdbc97799, actors/yoshi_egg/yoshi_egg_0_unused.rgba16.png
 0x65d071c5, actors/yoshi_egg/yoshi_egg_1_unused.rgba16.png
 0x05e4c57d, actors/yoshi_egg/yoshi_egg_2_unused.rgba16.png

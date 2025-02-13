@@ -23,7 +23,7 @@
 #include "game/game_init.h"
 #include "game/ingame_menu.h"
 #include "game/segment2.h"
-#include "game/mario.h"
+#include "game/player.h"
 #include "pc/gfx/gfx_window_manager_api.h"
 #include "pc/gfx/gfx_dxgi.h"
 #include "pc/gfx/gfx_sdl.h"

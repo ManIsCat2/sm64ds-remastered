@@ -210,8 +210,7 @@ s16 sHandheldShakeRoll;
  */
 u32 gCutsceneObjSpawn;
 /**
- * Controls when an object-based cutscene should end. It's only used in the star spawn cutscenes, but
- * Yoshi also toggles this.
+ * Controls when an object-based cutscene should end. It's only used in the star spawn cutscenes.
  */
 s32 gObjCutsceneDone;
 
@@ -2466,7 +2465,7 @@ void store_lakitu_cam_info_for_c_up(struct Camera *c) {
 }
 
 /**
- * Start C-Up mode. The actual mode change is handled in update_mario_inputs() in mario.c
+ * Start C-Up mode. The actual mode change is handled in update_mario_inputs() in player.c
  *
  * @see update_mario_inputs
  */

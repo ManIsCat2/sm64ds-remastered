@@ -20,7 +20,7 @@
 #include "level_update.h"
 #include "levels/bob/header.h"
 #include "levels/ttm/header.h"
-#include "mario.h"
+#include "player.h"
 #include "mario_actions_cutscene.h"
 #include "mario_misc.h"
 #include "memory.h"
@@ -68,21 +68,8 @@ static s8 sOrientObjWithFloor = TRUE;
  */
 s16 sPrevCheckMarioRoom = 0;
 
-/**
- * Tracks whether or not Yoshi has walked/jumped off the roof.
- */
-s8 sYoshiDead = FALSE;
-
 extern void *ccm_seg7_trajectory_snowman;
 extern void *inside_castle_seg7_trajectory_mips;
-
-/**
- * Resets yoshi as spawned/despawned upon new file select.
- * Possibly a function with stubbed code.
- */
-void set_yoshi_as_not_dead(void) {
-    sYoshiDead = FALSE;
-}
 
 /**
  * An unused geo function. Bears strong similarity to geo_bits_bowser_coloring, and relates something
@@ -853,5 +840,4 @@ UNUSED s8 debug_sequence_tracker(s16 debugInputSequence[]) {
 #include "behaviors/decorative_pendulum.inc.c"
 #include "behaviors/treasure_chest.inc.c"
 #include "behaviors/mips.inc.c"
-#include "behaviors/yoshi.inc.c"
 #include "behaviors/timed_star_spawn.inc.c"

@@ -17,7 +17,6 @@ extern const Trajectory KoopaTHI_path[];
 #include "src/extras/rm2c/star_pos.inc.c" //just defines
 #endif
 
-void set_yoshi_as_not_dead(void);
 s32 coin_step(s16 *collisionFlagsPtr);
 void moving_coin_flicker(void);
 void coin_collected(void);
@@ -170,5 +169,6 @@ void bhv_free_bowling_ball_loop(void); /* likely unused */
 void bhv_rr_cruiser_wing_init(void);
 void bhv_rr_cruiser_wing_loop(void);
 void spawn_default_star(f32 homeX, f32 homeY, f32 homeZ);
+void obj_move_xyz_using_fvel_and_yaw(struct Object *obj);
 
 #endif // OBJ_BEHAVIORS_H

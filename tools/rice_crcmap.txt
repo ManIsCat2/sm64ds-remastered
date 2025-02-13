@@ -1078,7 +1078,6 @@
 0x50964858, textures/sky/rr_textures.04800.rgba16.png
 0x5095921b, textures/segment2/segment2.12458.rgba16.png
 0x508e888f, levels/lll/9.rgba16.png
-0x506d1a26, actors/yoshi/yoshi_eye.rgba16.png
 0x5050548f, textures/skybox_tiles/bidw.22.rgba16.png
 0x4fe1a0ed, actors/peach/peach_lips.rgba16.png
 0x4f503c6e, textures/skybox_tiles/bits.24.rgba16.png
@@ -1404,7 +1403,6 @@
 0x177d197c, levels/bitdw/3.rgba16.png
 0x176c2e93, actors/coin/coin_tilt_left.ia16.png
 0x17405808, levels/bbh/5.rgba16.png
-0x17060726, actors/yoshi/yoshi_nostril.rgba16.png
 0x16db7146, textures/skybox_tiles/cake.38.rgba16.png
 0x16ce5dc5, textures/intro_raw/mario_face_shine.ia8.png
 0x167cac52, levels/ttm/7.rgba16.png
@@ -1476,7 +1474,6 @@
 0x0b962372, levels/lll/2.rgba16.png
 0x0b6d2926, actors/explosion/explosion_3.rgba16.png
 0x0ad7a8f7, textures/spooky/bbh_textures.08800.rgba16.png
-0x0ab43f69, actors/yoshi/yoshi_eye_blink.rgba16.png
 0x0a45ef5b, textures/skybox_tiles/wdw.48.rgba16.png
 0x0a18adca, textures/skybox_tiles/bits.28.rgba16.png
 0x0a10018c, textures/skybox_tiles/clouds.3.rgba16.png

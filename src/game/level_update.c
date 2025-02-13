@@ -16,7 +16,7 @@
 #include "area.h"
 #include "save_file.h"
 #include "sound_init.h"
-#include "mario.h"
+#include "player.h"
 #include "camera.h"
 #include "object_list_processor.h"
 #include "ingame_menu.h"
@@ -1329,7 +1329,6 @@ s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
     disable_warp_checkpoint();
     save_file_move_cap_to_default_location();
     select_mario_cam_mode();
-    set_yoshi_as_not_dead();
 
 #ifdef COMMAND_LINE_OPTIONS
     if (gCLIOpts.LevelNumOverride) {
