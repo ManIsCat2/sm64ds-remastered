@@ -297,7 +297,7 @@ s32 render_screen_transition(s8 fadeTimer, s8 transType, u8 transTime, struct Wa
         case WARP_TRANSITION_FADE_INTO_CIRCLE:
             return render_textured_transition(fadeTimer, transTime, transData, TEX_TRANS_CIRCLE, TRANS_TYPE_MIRROR);
             break;
-        case WARP_TRANSITION_FADE_FROM_MARIO:
+        case WARP_TRANSITION_FADE_FROM_PLAYER:
             return render_textured_transition(fadeTimer, transTime, transData, TEX_TRANS_MARIO, TRANS_TYPE_CLAMP);
             break;
         case WARP_TRANSITION_FADE_INTO_MARIO:

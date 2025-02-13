@@ -10,7 +10,7 @@
 #include "levels/ending/header.h"
 #include "levels/rr/header.h"
 #include "player.h"
-#include "mario_actions_cutscene.h"
+#include "player_actions_cutscene.h"
 #include "memory.h"
 #include "object_list_processor.h"
 #include "rendering_graph_node.h"
@@ -167,7 +167,7 @@ Gfx *geo_exec_flying_carpet_create(s32 callContext, struct GraphNode *node, UNUS
         gSPEndDisplayList(displayListHead);
 
         curGraphNodeObject = (struct Object *) gCurGraphNodeObject;
-        if (gMarioObject->platform == curGraphNodeObject) {
+        if (gPlayerObject->platform == curGraphNodeObject) {
             gFlyingCarpetState = FLYING_CARPET_MOVING_WITH_MARIO;
         } else if (curGraphNodeObject->oForwardVel != 0.0) {
             gFlyingCarpetState = FLYING_CARPET_MOVING_WITHOUT_MARIO;

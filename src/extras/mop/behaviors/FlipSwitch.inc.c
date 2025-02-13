@@ -7,18 +7,18 @@ void bhv_flipswitch_panel_loop(void){
 		o->oAnimState = 2;
 	} else {
 		switch(o->oAction){
-			//mario is not on
+			// the player is not on
 			case 0:
-				if (cur_obj_is_mario_on_platform()) {
+				if (cur_obj_is_player_on_platform()) {
 					o->oAction = 1;
 					o->parentObj->oHiddenStarTriggerCounter += 1-(2*o->oAnimState);
 					o->oAnimState ^= 1;
 					cur_obj_play_sound_1(SOUND_GENERAL_BIG_CLOCK);
 				}
 				break;
-			//mario is on
+			// the player is on
 			case 1:
-				if(!cur_obj_is_mario_on_platform()) {
+				if(!cur_obj_is_player_on_platform()) {
 					o->oAction=0;
 				}
 				break;

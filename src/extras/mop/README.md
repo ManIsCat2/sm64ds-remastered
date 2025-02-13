@@ -11,7 +11,7 @@ Mostly similar from the original, these are just small breakable boxes using tho
 
 **Beta Trampoline**
 
-Different from the original, it was properly finished by Kaze and nim using the leftover code, one thing i changed is that it doesn't rely on `stub_mario_step_2` anymore.
+Different from the original, it was properly finished by Kaze and nim using the leftover code, one thing i changed is that it doesn't rely on `stub_player_step_2` anymore.
 
 **Noteblock**
 

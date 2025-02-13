@@ -118,7 +118,7 @@ void bhv_moving_blue_coin_loop(void) {
 
     switch (o->oAction) {
         case MOV_BCOIN_ACT_STILL:
-            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1500)) {
+            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1500)) {
                 o->oAction = MOV_BCOIN_ACT_MOVING;
             }
             break;
@@ -157,11 +157,11 @@ void bhv_blue_coin_sliding_jumping_init(void) {
     obj_set_hitbox(o, &sMovingBlueCoinHitbox);
 }
 
-void blue_coin_sliding_away_from_mario(void) {
+void blue_coin_sliding_away_from_player(void) {
     s16 collisionFlags;
 
     o->oForwardVel = 15.0;
-    o->oMoveAngleYaw = o->oAngleToMario + 0x8000;
+    o->oMoveAngleYaw = o->oAngleToPlayer + 0x8000;
 
     if (coin_step(&collisionFlags)) {
         o->oVelY += 18.0f;
@@ -171,7 +171,7 @@ void blue_coin_sliding_away_from_mario(void) {
         o->oAction = 3;
     }
 
-    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
+    if (!is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
         o->oAction = 2;
     }
 }
@@ -181,7 +181,7 @@ void blue_coin_sliding_slow_down(void) {
 
     coin_step(&collisionFlags);
 
-    if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 500) == TRUE) {
+    if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 500) == TRUE) {
         o->oAction = 1;
     }
 
@@ -195,7 +195,7 @@ void bhv_blue_coin_sliding_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 500) == TRUE) {
+            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 500) == TRUE) {
                 o->oAction = 1;
             }
 
@@ -203,7 +203,7 @@ void bhv_blue_coin_sliding_loop(void) {
             break;
 
         case 1:
-            blue_coin_sliding_away_from_mario();
+            blue_coin_sliding_away_from_player();
             break;
 
         case 2:
@@ -260,7 +260,7 @@ void bhv_blue_coin_jumping_loop(void) {
             break;
 
         case 1:
-            blue_coin_sliding_away_from_mario();
+            blue_coin_sliding_away_from_player();
             break;
 
         case 2:

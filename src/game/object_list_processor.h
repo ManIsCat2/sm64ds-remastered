@@ -87,7 +87,7 @@ extern struct Object gObjectPool[];
 extern struct ObjectNode *gObjectLists;
 extern struct ObjectNode gFreeObjectList;
 
-extern struct Object *gMarioObject;
+extern struct Object *gPlayerObject;
 extern struct Object *gLuigiObject;
 extern struct Object *gCurrentObject;
 
@@ -124,17 +124,17 @@ struct TransitionRoomData {
 
 extern struct TransitionRoomData gDoorAdjacentRooms[MAX_NUM_TRANSITION_ROOMS];
 
-extern s16 gMarioCurrentRoom;
+extern s16 gPlayerCurrentRoom;
 extern s16 D_8035FEE2;
 extern s16 gNumDoorRenderCount;
 extern s16 gTHIWaterDrained;
 extern s16 gTTCSpeedSetting;
-extern s16 gMarioShotFromCannon;
+extern s16 gPlayerShotFromCannon;
 extern s16 gCCMEnteredSlide;
 extern s16 gNumRoomedObjectsInMarioRoom;
 extern s16 gNumRoomedObjectsNotInMarioRoom;
 extern s16 gWDWWaterLevelChanging;
-extern s16 gMarioOnMerryGoRound;
+extern s16 gPlayerOnMerryGoRound;
 
 void bhv_mario_update(void);
 void set_object_respawn_info_bits(struct Object *obj, u8 bits);

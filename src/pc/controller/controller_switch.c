@@ -48,7 +48,7 @@ static void controller_switch_nx_init(void) {
 static void controller_switch_nx_read(OSContPad *pad) {
     padUpdate(&padState);
 
-    switch(gMarioState->action) {
+    switch(gPlayerState->action) {
         case ACT_IN_CANNON:
         case ACT_FIRST_PERSON:
             if(!isSixAxis) start_six_axis();

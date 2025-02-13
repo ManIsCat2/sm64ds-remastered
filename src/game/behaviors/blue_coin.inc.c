@@ -86,8 +86,8 @@ void bhv_blue_coin_switch_loop(void) {
         case BLUE_COIN_SWITCH_ACT_IDLE:
             // If Mario is on the switch and has ground-pounded,
             // recede and get ready to start ticking.
-            if (gMarioObject->platform == o) {
-                if (gMarioStates[0].action == ACT_GROUND_POUND_LAND) {
+            if (gPlayerObject->platform == o) {
+                if (gPlayerStates[0].action == ACT_GROUND_POUND_LAND) {
                     // Set to BLUE_COIN_SWITCH_ACT_RECEDING
                     o->oAction++;
                     // Recede at a rate of VEL_Y_MOVE units/frame.
@@ -120,7 +120,7 @@ void bhv_blue_coin_switch_loop(void) {
                 o->oVelY = 0.0f;
                 o->oGravity = 0.0f;
 #else
-                o->oPosY = gMarioObject->oPosY - (VEL_Y_MOVE * 2);
+                o->oPosY = gPlayerObject->oPosY - (VEL_Y_MOVE * 2);
 #endif
 
                 // Spawn particles.

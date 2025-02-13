@@ -1263,16 +1263,16 @@ void gdm_maketestdl(s32 id) {
             break;
         case 2: // normal Mario head
             if (sMarioSceneGrp == NULL) {
-                load_mario_head(animate_mario_head_normal);
-                sMarioSceneGrp = gMarioFaceGrp; // gMarioFaceGrp set by load_mario_head
+                load_player_head(animate_mario_head_normal);
+                sMarioSceneGrp = gPlayerFaceGrp; // gPlayerFaceGrp set by load_player_head
                 gd_setup_cursor(NULL);
             }
             sMSceneView = make_view_withgrp("mscene", sMarioSceneGrp);
             break;
         case 3: // game over Mario head
             if (sMarioSceneGrp == NULL) {
-                load_mario_head(animate_mario_head_gameover);
-                sMarioSceneGrp = gMarioFaceGrp;
+                load_player_head(animate_mario_head_gameover);
+                sMarioSceneGrp = gPlayerFaceGrp;
                 gd_setup_cursor(NULL);
             }
             sMSceneView = make_view_withgrp("mscene", sMarioSceneGrp);

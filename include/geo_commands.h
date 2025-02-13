@@ -7,8 +7,8 @@
 #include "game/object_helpers.h"
 #include "game/behavior_actions.h"
 #include "game/segment2.h"
-#include "game/mario_misc.h"
-#include "game/mario_actions_cutscene.h"
+#include "game/player_misc.h"
+#include "game/player_actions_cutscene.h"
 
 // sky background params
 #define BACKGROUND_OCEAN_SKY        0

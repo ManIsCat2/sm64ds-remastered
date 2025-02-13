@@ -28,8 +28,8 @@
 #include "levels/hmc/header.h"
 #include "main.h"
 #include "player.h"
-#include "mario_actions_cutscene.h"
-#include "mario_step.h"
+#include "player_actions_cutscene.h"
+#include "player_step.h"
 #include "obj_behaviors.h"
 #include "obj_behaviors_2.h"
 #include "object_constants.h"
@@ -136,7 +136,7 @@ void spawn_mist_particles_variable(s32 count, s32 offsetY, f32 size) {
 #include "behaviors/flamethrower.inc.c"
 #include "behaviors/bouncing_fireball.inc.c"
 #include "behaviors/shock_wave.inc.c"
-#include "behaviors/flame_mario.inc.c"
+#include "behaviors/flame_player.inc.c"
 #include "behaviors/beta_fish_splash_spawner.inc.c"
 #include "behaviors/spindrift.inc.c"
 #include "behaviors/tower_platform.inc.c"
@@ -151,11 +151,11 @@ void spawn_mist_particles_variable(s32 count, s32 offsetY, f32 size) {
 #include "behaviors/breakable_box.inc.c"
 
 // not sure what this is doing here. not in a behavior file.
-Gfx *geo_move_mario_part_from_parent(s32 run, UNUSED struct GraphNode *node, Mat4 mtx) {
+Gfx *geo_move_player_part_from_parent(s32 run, UNUSED struct GraphNode *node, Mat4 mtx) {
     if (run == TRUE) {
         Mat4 sp20;
         struct Object *obj = (struct Object *) gCurGraphNodeObject;
-        if (obj == gMarioObject && obj->prevObj != NULL) {
+        if (obj == gPlayerObject && obj->prevObj != NULL) {
             create_transformation_from_matrices(sp20, mtx, *gCurGraphNodeCamera->matrixPtr);
             obj_update_pos_from_parent_transformation(sp20, obj->prevObj);
             obj_set_gfx_pos_from_pos(obj->prevObj);

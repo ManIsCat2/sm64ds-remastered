@@ -41,9 +41,9 @@ void bhv_seesaw_platform_update(void) {
         cur_obj_play_sound_1(SOUND_ENV_BOAT_ROCKING1);
     }
 
-    if (gMarioObject->platform == o) {
+    if (gPlayerObject->platform == o) {
         // Rotate toward mario
-        f32 rotation = o->oDistanceToMario * coss(o->oAngleToMario - o->oMoveAngleYaw);
+        f32 rotation = o->oDistanceToPlayer * coss(o->oAngleToPlayer - o->oMoveAngleYaw);
         UNUSED u8 filler[4];
 
         // Deceleration is faster than acceleration

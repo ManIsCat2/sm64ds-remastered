@@ -179,10 +179,10 @@ static u8 textEraseFileButton[][16] = { {TEXT_ERASE_FILE}, {TEXT_ERASE_FILE_FR},
 static u8 textSoundModes[][8] = { { TEXT_STEREO }, { TEXT_MONO }, { TEXT_HEADSET } };
 #endif
 
-static u8 textMarioA[] = { TEXT_FILE_MARIO_A };
-static u8 textMarioB[] = { TEXT_FILE_MARIO_B };
-static u8 textMarioC[] = { TEXT_FILE_MARIO_C };
-static u8 textMarioD[] = { TEXT_FILE_MARIO_D };
+static u8 textPlayerA[] = { TEXT_FILE_MARIO_A };
+static u8 textPlayerB[] = { TEXT_FILE_MARIO_B };
+static u8 textPlayerC[] = { TEXT_FILE_MARIO_C };
+static u8 textPlayerD[] = { TEXT_FILE_MARIO_D };
 
 #ifndef VERSION_EU
 static u8 textNew[] = { TEXT_NEW };
@@ -282,7 +282,7 @@ static u8 textEraseFile[][17] = {
     { TEXT_ERASE_FILE_BUTTON }, { TEXT_ERASE_FILE_BUTTON_FR }, { TEXT_ERASE_FILE_BUTTON_DE }
 };
 static u8 textSure[][8] = {{ TEXT_SURE }, { TEXT_SURE_FR }, { TEXT_SURE_DE }};
-static u8 textMarioAJustErased[][20] = {
+static u8 textPlayerAJustErased[][20] = {
     { TEXT_FILE_MARIO_A_JUST_ERASED }, { TEXT_FILE_MARIO_A_JUST_ERASED_FR }, { TEXT_FILE_MARIO_A_JUST_ERASED_DE }
 };
 
@@ -302,7 +302,7 @@ static u8 textSoundModes[][10] = {
 
 static u8 textLanguage[][9] = {{ TEXT_ENGLISH }, { TEXT_FRENCH }, { TEXT_GERMAN }};
 
-static u8 textMario[] = { TEXT_MARIO };
+static u8 textPlayer[] = { TEXT_MARIO };
 static u8 textHiScore[][15] = {{ TEXT_HI_SCORE }, { TEXT_HI_SCORE_FR }, { TEXT_HI_SCORE_DE }};
 static u8 textMyScore[][10] = {{ TEXT_MY_SCORE }, { TEXT_MY_SCORE_FR }, { TEXT_MY_SCORE_DE }};
 
@@ -1945,10 +1945,10 @@ void print_main_menu_strings(void) {
     // Print file names
     gSPDisplayList(gDisplayListHead++, FILE_SELECT_TEXT_DL_BEGIN);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
-    FILE_SELECT_PRINT_STRING(MARIOTEXT_X1, MARIOTEXT_Y1, textMarioA);
-    FILE_SELECT_PRINT_STRING(MARIOTEXT_X2, MARIOTEXT_Y1, textMarioB);
-    FILE_SELECT_PRINT_STRING(MARIOTEXT_X1, MARIOTEXT_Y2, textMarioC);
-    FILE_SELECT_PRINT_STRING(MARIOTEXT_X2, MARIOTEXT_Y2, textMarioD);
+    FILE_SELECT_PRINT_STRING(MARIOTEXT_X1, MARIOTEXT_Y1, textPlayerA);
+    FILE_SELECT_PRINT_STRING(MARIOTEXT_X2, MARIOTEXT_Y1, textPlayerB);
+    FILE_SELECT_PRINT_STRING(MARIOTEXT_X1, MARIOTEXT_Y2, textPlayerC);
+    FILE_SELECT_PRINT_STRING(MARIOTEXT_X2, MARIOTEXT_Y2, textPlayerD);
     gSPDisplayList(gDisplayListHead++, FILE_SELECT_TEXT_DL_END);
 }
 
@@ -2119,10 +2119,10 @@ void print_score_menu_strings(void) {
 #else
     gSPDisplayList(gDisplayListHead++, FILE_SELECT_TEXT_DL_BEGIN);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
-    FILE_SELECT_PRINT_STRING(89, SCORE_FILE_Y1, textMarioA);
-    FILE_SELECT_PRINT_STRING(211, SCORE_FILE_Y1, textMarioB);
-    FILE_SELECT_PRINT_STRING(89, SCORE_FILE_Y2, textMarioC);
-    FILE_SELECT_PRINT_STRING(211, SCORE_FILE_Y2, textMarioD);
+    FILE_SELECT_PRINT_STRING(89, SCORE_FILE_Y1, textPlayerA);
+    FILE_SELECT_PRINT_STRING(211, SCORE_FILE_Y1, textPlayerB);
+    FILE_SELECT_PRINT_STRING(89, SCORE_FILE_Y2, textPlayerC);
+    FILE_SELECT_PRINT_STRING(211, SCORE_FILE_Y2, textPlayerD);
     gSPDisplayList(gDisplayListHead++, FILE_SELECT_TEXT_DL_END);
 #endif
 }
@@ -2322,10 +2322,10 @@ void print_copy_menu_strings(void) {
 #else
     gSPDisplayList(gDisplayListHead++, FILE_SELECT_TEXT_DL_BEGIN);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
-    FILE_SELECT_PRINT_STRING(89, COPY_FILE_Y1, textMarioA);
-    FILE_SELECT_PRINT_STRING(211, COPY_FILE_Y1, textMarioB);
-    FILE_SELECT_PRINT_STRING(89, COPY_FILE_Y2, textMarioC);
-    FILE_SELECT_PRINT_STRING(211, COPY_FILE_Y2, textMarioD);
+    FILE_SELECT_PRINT_STRING(89, COPY_FILE_Y1, textPlayerA);
+    FILE_SELECT_PRINT_STRING(211, COPY_FILE_Y1, textPlayerB);
+    FILE_SELECT_PRINT_STRING(89, COPY_FILE_Y2, textPlayerC);
+    FILE_SELECT_PRINT_STRING(211, COPY_FILE_Y2, textPlayerD);
     gSPDisplayList(gDisplayListHead++, FILE_SELECT_TEXT_DL_END);
 #endif
 }
@@ -2489,7 +2489,7 @@ void erase_menu_display_message(s8 messageID) {
     u8 textEraseFile[] = { TEXT_ERASE_FILE };
     u8 textSure[] = { TEXT_SURE };
     u8 textNoSavedDataExists[] = { TEXT_NO_SAVED_DATA_EXISTS };
-    u8 textMarioAJustErased[] = { TEXT_FILE_MARIO_A_JUST_ERASED };
+    u8 textPlayerAJustErased[] = { TEXT_FILE_MARIO_A_JUST_ERASED };
     u8 textSavedDataExists[] = { TEXT_SAVED_DATA_EXISTS };
 #endif
 
@@ -2511,11 +2511,11 @@ void erase_menu_display_message(s8 messageID) {
             print_generic_string_fade(NOSAVE_DATA_X3, 190, LANGUAGE_ARRAY(textNoSavedDataExists));
             break;
         case ERASE_MSG_MARIO_ERASED:
-            LANGUAGE_ARRAY(textMarioAJustErased)[MARIO_ERASED_VAR] = sSelectedFileIndex + 10;
+            LANGUAGE_ARRAY(textPlayerAJustErased)[MARIO_ERASED_VAR] = sSelectedFileIndex + 10;
 #ifdef VERSION_EU
-            centeredX = get_str_x_pos_from_center(160, textMarioAJustErased[sLanguageMode], 10.0f);
+            centeredX = get_str_x_pos_from_center(160, textPlayerAJustErased[sLanguageMode], 10.0f);
 #endif
-            print_generic_string_fade(MARIO_ERASED_X, 190, LANGUAGE_ARRAY(textMarioAJustErased));
+            print_generic_string_fade(MARIO_ERASED_X, 190, LANGUAGE_ARRAY(textPlayerAJustErased));
             break;
         case ERASE_MSG_SAVE_EXISTS: // unused
 #ifdef VERSION_EU
@@ -2634,10 +2634,10 @@ void print_erase_menu_strings(void) {
 #else
     gSPDisplayList(gDisplayListHead++, FILE_SELECT_TEXT_DL_BEGIN);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
-    FILE_SELECT_PRINT_STRING(89, ERASE_FILE_Y1, textMarioA);
-    FILE_SELECT_PRINT_STRING(211, ERASE_FILE_Y1, textMarioB);
-    FILE_SELECT_PRINT_STRING(89, ERASE_FILE_Y2, textMarioC);
-    FILE_SELECT_PRINT_STRING(211, ERASE_FILE_Y2, textMarioD);
+    FILE_SELECT_PRINT_STRING(89, ERASE_FILE_Y1, textPlayerA);
+    FILE_SELECT_PRINT_STRING(211, ERASE_FILE_Y1, textPlayerB);
+    FILE_SELECT_PRINT_STRING(89, ERASE_FILE_Y2, textPlayerC);
+    FILE_SELECT_PRINT_STRING(211, ERASE_FILE_Y2, textPlayerD);
     gSPDisplayList(gDisplayListHead++, FILE_SELECT_TEXT_DL_END);
 #endif
 }
@@ -2932,7 +2932,7 @@ void print_save_file_scores(s8 fileIndex) {
     u8 tensDigPad;
 #endif
 #ifndef VERSION_EU
-    u8 textMario[] = { TEXT_MARIO };
+    u8 textPlayer[] = { TEXT_MARIO };
     u8 textHiScore[] = { TEXT_HI_SCORE };
     u8 textMyScore[] = { TEXT_MY_SCORE };
 #ifdef VERSION_CN
@@ -2968,7 +2968,7 @@ void print_save_file_scores(s8 fileIndex) {
     // Print file name at top
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
-    print_hud_lut_string(HUD_LUT_DIFF, GFX_DIMENSIONS_FROM_LEFT_EDGE(MARIO_X), MARIO_Y, textMario);
+    print_hud_lut_string(HUD_LUT_DIFF, GFX_DIMENSIONS_FROM_LEFT_EDGE(MARIO_X), MARIO_Y, textPlayer);
     print_hud_lut_string(HUD_LUT_GLOBAL, GFX_DIMENSIONS_FROM_LEFT_EDGE(FILE_LETTER_X), 15, textFileLetter);
 
     // Print save file star count at top

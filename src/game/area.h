@@ -97,7 +97,7 @@ struct WarpTransitionData {
 #define WARP_TRANSITION_FADE_INTO_STAR   0x09
 #define WARP_TRANSITION_FADE_FROM_CIRCLE 0x0A
 #define WARP_TRANSITION_FADE_INTO_CIRCLE 0x0B
-#define WARP_TRANSITION_FADE_FROM_MARIO  0x10
+#define WARP_TRANSITION_FADE_FROM_PLAYER  0x10
 #define WARP_TRANSITION_FADE_INTO_MARIO  0x11
 #define WARP_TRANSITION_FADE_FROM_BOWSER 0x12
 #define WARP_TRANSITION_FADE_INTO_BOWSER 0x13
@@ -155,7 +155,7 @@ extern s16 gMenuOptSelectIndex;
 extern s16 gSaveOptSelectIndex;
 extern s16 gGlobalGameSkips;
 
-extern struct SpawnInfo *gMarioSpawnInfo;
+extern struct SpawnInfo *gPlayerSpawnInfo;
 
 extern struct Area *gAreas;
 extern struct Area *gCurrentArea;
@@ -166,14 +166,14 @@ extern s16 gCurrLevelNum;
 
 void override_viewport_and_clip(Vp *a, Vp *b, u8 c, u8 d, u8 e);
 void print_intro_text(void);
-u32 get_mario_spawn_type(struct Object *o);
+u32 get_player_spawn_type(struct Object *o);
 struct ObjectWarpNode *area_get_warp_node(u8 id);
 void clear_areas(void);
 void clear_area_graph_nodes(void);
 void load_area(s32 index);
 void unload_area(void);
-void load_mario_area(void);
-void unload_mario_area(void);
+void load_player_area(void);
+void unload_player_area(void);
 void change_area(s32 index);
 void area_update_objects(void);
 void play_transition(s16 transType, s16 time, u8 red, u8 green, u8 blue);

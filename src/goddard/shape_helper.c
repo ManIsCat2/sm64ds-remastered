@@ -17,7 +17,7 @@
 #include "skin.h"
 
 // data
-struct ObjGroup *gMarioFaceGrp = NULL;     // @ 801A82E0; returned by load_dynlist
+struct ObjGroup *gPlayerFaceGrp = NULL;     // @ 801A82E0; returned by load_dynlist
 struct ObjShape *gSpotShape = NULL;        // Shape used for drawing lights?
 static struct ObjShape *sGrabJointTestShape = NULL; // Test shape for showing grab joints. This isn't rendered due to make_grabber_joint setting the drawFlags to OBJ_INVISIBLE.
 struct ObjShape *gShapeRedSpark = NULL;    // @ 801A82EC
@@ -1293,7 +1293,7 @@ void animate_mario_head_normal(struct ObjAnimator *self) {
  * Loads the Mario head from `dynlist_mario_master`, sets up grabbers, and makes
  * sparkle particles
  */
-s32 load_mario_head(void (*aniFn)(struct ObjAnimator *)) {
+s32 load_player_head(void (*aniFn)(struct ObjAnimator *)) {
     struct ObjNet *sp54; // net made with sp48 group
     UNUSED u8 filler1[8];
     struct ObjGroup *sp48; // Joint group
@@ -1316,7 +1316,7 @@ s32 load_mario_head(void (*aniFn)(struct ObjAnimator *)) {
     animator->controlFunc = aniFn;
     d_use_integer_names(FALSE);
     // FIXME: make segment address work once seg4 is disassembled
-    gMarioFaceGrp = (struct ObjGroup *) load_dynlist(dynlist_mario_master);
+    gPlayerFaceGrp = (struct ObjGroup *) load_dynlist(dynlist_mario_master);
     stop_memtracker("mario face");
 
     // Make camera
@@ -1329,8 +1329,8 @@ s32 load_mario_head(void (*aniFn)(struct ObjAnimator *)) {
     camera->lookAt.y = 200.0f;
     camera->lookAt.z = 0.0f;
 
-    addto_group(gMarioFaceGrp, &camera->header);
-    addto_group(gMarioFaceGrp, &animator->header);
+    addto_group(gPlayerFaceGrp, &camera->header);
+    addto_group(gPlayerFaceGrp, &animator->header);
 
     d_set_name_suffix(NULL);  // stop adding "l" to generated dynobj names
 
@@ -1426,8 +1426,8 @@ s32 load_mario_head(void (*aniFn)(struct ObjAnimator *)) {
     sp48 = make_group_of_type(OBJ_TYPE_JOINTS, sp38, NULL);
     sp54 = make_net(0, NULL, sp48, NULL, NULL);
     sp54->netType = 3;
-    addto_group(gMarioFaceGrp, &sp48->header);
-    addto_groupfirst(gMarioFaceGrp, &sp54->header);
+    addto_group(gPlayerFaceGrp, &sp48->header);
+    addto_groupfirst(gPlayerFaceGrp, &sp54->header);
 
     return 0;
 }

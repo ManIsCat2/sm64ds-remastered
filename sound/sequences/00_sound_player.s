@@ -6889,12 +6889,12 @@ sound_ref .sound_menu_enter_hole
 sound_ref .sound_menu_click_change_view
 sound_ref .sound_menu_camera_unused1
 sound_ref .sound_menu_camera_unused2
-sound_ref .sound_menu_mario_castle_warp
+sound_ref .sound_menu_player_castle_warp
 sound_ref .sound_menu_star_sound
 sound_ref .sound_menu_thank_you_playing_my_game
 sound_ref .sound_menu_read_a_sign
 sound_ref .sound_menu_exit_a_sign
-sound_ref .sound_menu_mario_castle_warp2
+sound_ref .sound_menu_player_castle_warp2
 sound_ref .sound_menu_star_sound_okey_dokey
 sound_ref .sound_menu_star_sound_lets_a_go
 sound_ref .sound_menu_yoshi_gain_lives
@@ -7499,7 +7499,7 @@ layer_portamento 0x81, 39, 255
 layer_note1 3, 0x64, 127
 layer_end
 
-.sound_menu_mario_castle_warp:
+.sound_menu_player_castle_warp:
 chan_setbank 9
 chan_setnotepriority 14
 chan_setpanmix 0
@@ -7652,7 +7652,7 @@ layer_note1 46, 0x3, 90
 layer_note1 46, 0x3, 30
 layer_end
 
-.sound_menu_mario_castle_warp2:
+.sound_menu_player_castle_warp2:
 chan_reservenotes 6
 chan_setbank 9
 chan_setnotepriority 14

@@ -15,7 +15,7 @@ static struct ObjectHitbox sBubbaHitbox = {
 void bubba_act_0(void) {
     f32 sp24 = cur_obj_lateral_dist_to_home();
 
-    treat_far_home_as_mario(2000.0f);
+    treat_far_home_as_player(2000.0f);
     o->oAnimState = 0;
 
     o->oBubbaUnk1AC = obj_get_pitch_to_home(sp24);
@@ -27,14 +27,14 @@ void bubba_act_0(void) {
             o->oBubbaUnkFC = 0;
         }
     } else {
-        if (o->oDistanceToMario >= 25000.0f) {
-            o->oBubbaUnk1AE = o->oAngleToMario;
+        if (o->oDistanceToPlayer >= 25000.0f) {
+            o->oBubbaUnk1AE = o->oAngleToPlayer;
             o->oBubbaUnkF8 = random_linear_offset(20, 30);
         }
 
         if ((o->oBubbaUnkFC = o->oMoveFlags & OBJ_MOVE_HIT_WALL)) {
             o->oBubbaUnk1AE = cur_obj_reflect_move_angle_off_wall();
-        } else if (o->oTimer > 30 && o->oDistanceToMario < 2000.0f) {
+        } else if (o->oTimer > 30 && o->oDistanceToPlayer < 2000.0f) {
             o->oAction = 1;
         } else if (o->oBubbaUnkF8 != 0) {
             o->oBubbaUnkF8--;
@@ -46,9 +46,9 @@ void bubba_act_0(void) {
 }
 
 void bubba_act_1(void) {
-    treat_far_home_as_mario(2500.0f);
+    treat_far_home_as_player(2500.0f);
 
-    if (o->oDistanceToMario > 2500.0f) {
+    if (o->oDistanceToPlayer > 2500.0f) {
         o->oAction = 0;
     } else if (o->oBubbaUnk100 != 0) {
         if (--o->oBubbaUnk100 == 0) {
@@ -64,27 +64,27 @@ void bubba_act_1(void) {
             obj_compute_vel_from_move_pitch(o->oBubbaUnkF4);
             o->oAnimState = 0;
         } else {
-            o->oBubbaUnk1AE = o->oAngleToMario;
+            o->oBubbaUnk1AE = o->oAngleToPlayer;
             o->oBubbaUnk1AC = o->oBubbaUnk104;
 
             cur_obj_rotate_yaw_toward(o->oBubbaUnk1AE, 400);
             obj_move_pitch_approach(o->oBubbaUnk1AC, 400);
         }
     } else {
-        if (abs_angle_diff(gMarioObject->oFaceAngleYaw, o->oAngleToMario) < 0x3000) {
-            s16 val04 = 0x4000 - atan2s(800.0f, o->oDistanceToMario - 800.0f);
-            if ((s16)(o->oMoveAngleYaw - o->oAngleToMario) < 0) {
+        if (abs_angle_diff(gPlayerObject->oFaceAngleYaw, o->oAngleToPlayer) < 0x3000) {
+            s16 val04 = 0x4000 - atan2s(800.0f, o->oDistanceToPlayer - 800.0f);
+            if ((s16)(o->oMoveAngleYaw - o->oAngleToPlayer) < 0) {
                 val04 = -val04;
             }
 
-            o->oBubbaUnk1AE = o->oAngleToMario + val04;
+            o->oBubbaUnk1AE = o->oAngleToPlayer + val04;
         } else {
-            o->oBubbaUnk1AE = o->oAngleToMario;
+            o->oBubbaUnk1AE = o->oAngleToPlayer;
         }
 
         o->oBubbaUnk1AC = o->oBubbaUnk104;
 
-        if (obj_is_near_to_and_facing_mario(500.0f, 3000)
+        if (obj_is_near_to_and_facing_player(500.0f, 3000)
             && abs_angle_diff(o->oBubbaUnk1AC, o->oMoveAnglePitch) < 3000) {
             o->oBubbaUnk100 = 30;
             o->oBubbaUnkF4 = 0;
@@ -99,11 +99,11 @@ void bhv_bubba_loop(void) {
     UNUSED u8 filler[4];
 
     o->oInteractionSubtype &= ~INT_SUBTYPE_EATS_MARIO;
-    o->oBubbaUnk104 = obj_turn_pitch_toward_mario(120.0f, 0);
+    o->oBubbaUnk104 = obj_turn_pitch_toward_player(120.0f, 0);
 
-    if (abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw) < 0x1000
+    if (abs_angle_diff(o->oAngleToPlayer, o->oMoveAngleYaw) < 0x1000
         && abs_angle_diff(o->oBubbaUnk104 + 0x800, o->oMoveAnglePitch) < 0x2000) {
-        if (o->oAnimState != 0 && o->oDistanceToMario < 250.0f) {
+        if (o->oAnimState != 0 && o->oDistanceToPlayer < 250.0f) {
             o->oInteractionSubtype |= INT_SUBTYPE_EATS_MARIO;
         }
 

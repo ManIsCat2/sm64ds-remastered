@@ -259,7 +259,7 @@ void bhv_coin_formation_loop(void) {
     switch (o->oAction) {
         case COIN_FORMATION_ACT_SPAWN_COINS:
 #ifndef NODRAWINGDISTANCE
-            if (o->oDistanceToMario < 2000.0f) {
+            if (o->oDistanceToPlayer < 2000.0f) {
 #endif
                 for (coinIndex = 0; coinIndex <= 7; coinIndex++) {
                     if (!(o->oCoinCollectedFlags & (1 << coinIndex))) {
@@ -274,7 +274,7 @@ void bhv_coin_formation_loop(void) {
 
         case COIN_FORMATION_ACT_IDLE:
 #ifndef NODRAWINGDISTANCE
-            if (o->oDistanceToMario > 2100.0f) {
+            if (o->oDistanceToPlayer > 2100.0f) {
                 o->oAction++;
             }
 #endif
@@ -330,7 +330,7 @@ void coin_inside_boo_act_0(void) {
 
     if (parent->oBooDeathStatus == BOO_DEATH_STATUS_DYING) {
         o->oAction = 1;
-        sp26 = gMarioObject->oMoveAngleYaw;
+        sp26 = gPlayerObject->oMoveAngleYaw;
         sp20 = 3.0f;
         o->oVelX = sins(sp26) * sp20;
         o->oVelZ = coss(sp26) * sp20;

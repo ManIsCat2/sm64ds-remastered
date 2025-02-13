@@ -31,7 +31,7 @@
 
 #define TEXT_OPT_VANILLA_CAM      _("VANILLA CAMERA")
 #define TEXT_OPT_LAKITU_PARALLEL  _("Parallel Lakitu Cam")
-#define TEXT_OPT_SR_MARIO_CAM     _("Star Road Mario Cam")
+#define TEXT_OPT_SR_MARIO_CAM     _("Star Road Cam")
 #define TEXT_OPT_CAM_C_UP_SOUNDS  _("Camera Sound Effects")
 #define TEXT_OPT_CAM_PARALLEL_COL _("Parallel Cam Collision")
 

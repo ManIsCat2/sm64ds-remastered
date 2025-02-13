@@ -105,8 +105,8 @@ try:
             if order_mapping[values] < order_mapping[indices]:
                 raise SyntaxError("Error: values array must be written after indices array for " + name)
             values_num_values = len_mapping[values]
-            offset_to_struct = "offsetof(struct MarioAnimsObj, " + name + ")"
-            offset_to_end = "offsetof(struct MarioAnimsObj, " + values + ") + sizeof(gMarioAnims." + values + ")"
+            offset_to_struct = "offsetof(struct PlayerAnimsObj, " + name + ")"
+            offset_to_end = "offsetof(struct PlayerAnimsObj, " + values + ") + sizeof(gPlayerAnims." + values + ")"
             structobj.append("{" + offset_to_struct + ", " + offset_to_end + " - " + offset_to_struct + "},")
     structobj.append("},")
 
@@ -116,8 +116,8 @@ try:
             v1, v2, v3, v4, v5, values, indices = obj
             indices_len = len_mapping[indices] // 6 - 1
             values_num_values = len_mapping[values]
-            offset_to_struct = "offsetof(struct MarioAnimsObj, " + name + ")"
-            offset_to_end = "offsetof(struct MarioAnimsObj, " + values + ") + sizeof(gMarioAnims." + values + ")"
+            offset_to_struct = "offsetof(struct PlayerAnimsObj, " + name + ")"
+            offset_to_end = "offsetof(struct PlayerAnimsObj, " + values + ") + sizeof(gPlayerAnims." + values + ")"
             structdef.append("struct Animation " + name + ";")
             structobj.append("{" + ", ".join([
                 str(v1),
@@ -126,8 +126,8 @@ try:
                 str(v4),
                 str(v5),
                 str(indices_len),
-                "(const s16 *)(offsetof(struct MarioAnimsObj, " + values + ") - " + offset_to_struct + ")",
-                "(const u16 *)(offsetof(struct MarioAnimsObj, " + indices + ") - " + offset_to_struct + ")",
+                "(const s16 *)(offsetof(struct PlayerAnimsObj, " + values + ") - " + offset_to_struct + ")",
+                "(const u16 *)(offsetof(struct PlayerAnimsObj, " + indices + ") - " + offset_to_struct + ")",
                 offset_to_end + " - " + offset_to_struct
             ]) + "},")
         else:
@@ -140,16 +140,16 @@ try:
     print("#include <stddef.h>")
     print("")
 
-    print("const struct MarioAnimsObj {")
+    print("const struct PlayerAnimsObj {")
     for s in structdef:
         print(s)
-    print("} gMarioAnims = {")
+    print("} gPlayerAnims = {")
     for s in structobj:
         print(s)
     print("};")
 
 except Exception as e:
-    note = "NOTE! The mario animation C files are not processed by a normal C compiler, but by the script in tools/mario_anims_converter.py. The format is much more strict than normal C, so please follow the syntax of existing files.\n"
+    note = "NOTE! The mario animation C files are not processed by a normal C compiler, but by the script in tools/player_anims_converter.py. The format is much more strict than normal C, so please follow the syntax of existing files.\n"
     if e is SyntaxError:
         e.msg = note + e.msg
     else:

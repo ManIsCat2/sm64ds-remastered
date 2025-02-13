@@ -66,7 +66,7 @@ void bhv_activated_back_and_forth_platform_update(void) {
 
     // oVelY is used for vertical platforms' movement and also for
     // horizontal platforms' dipping up/down when Mario gets on/off them
-    if (gMarioObject->platform == o) {
+    if (gPlayerObject->platform == o) {
         o->oVelY = -6.0f;
     } else {
         o->oVelY = 6.0f;
@@ -92,7 +92,7 @@ void bhv_activated_back_and_forth_platform_update(void) {
                           o->oActivatedBackAndForthPlatformMaxOffset)
                 ||
                 // The platform will not reset if Mario goes far away and it's travelling backwards
-                (o->oActivatedBackAndForthPlatformVel > 0.0f && o->oDistanceToMario > 3000.0f)) {
+                (o->oActivatedBackAndForthPlatformVel > 0.0f && o->oDistanceToPlayer > 3000.0f)) {
                 // Reset the wait timer
                 o->oActivatedBackAndForthPlatformCountdown = 20;
 

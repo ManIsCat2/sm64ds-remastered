@@ -33,7 +33,7 @@
 #include "levels/ttc/header.h"
 #include "levels/vcutm/header.h"
 #include "player.h"
-#include "mario_actions_cutscene.h"
+#include "player_actions_cutscene.h"
 #include "memory.h"
 #include "obj_behaviors.h"
 #include "obj_behaviors_2.h"
@@ -102,7 +102,7 @@ static s32 obj_update_race_proposition_dialog(s16 dialogID) {
         (DIALOG_FLAG_TURN_TO_MARIO | DIALOG_FLAG_TIME_STOP_ENABLED), CUTSCENE_RACE_DIALOG, dialogID);
 
     if (dialogResponse == DIALOG_RESPONSE_NO) {
-        set_mario_npc_dialog(MARIO_DIALOG_STOP);
+        set_player_npc_dialog(MARIO_DIALOG_STOP);
         disable_time_stop_including_mario();
     }
 
@@ -114,9 +114,9 @@ static void obj_set_dist_from_home(f32 distFromHome) {
     o->oPosZ = o->oHomeZ + distFromHome * sins(o->oMoveAngleYaw);
 }
 
-static s32 obj_is_near_to_and_facing_mario(f32 maxDist, s16 maxAngleDiff) {
-    if (o->oDistanceToMario < maxDist
-        && abs_angle_diff(o->oMoveAngleYaw, o->oAngleToMario) < maxAngleDiff) {
+static s32 obj_is_near_to_and_facing_player(f32 maxDist, s16 maxAngleDiff) {
+    if (o->oDistanceToPlayer < maxDist
+        && abs_angle_diff(o->oMoveAngleYaw, o->oAngleToPlayer) < maxAngleDiff) {
         return TRUE;
     }
     return FALSE;
@@ -381,11 +381,11 @@ static s32 cur_obj_play_sound_at_anim_range(s8 arg0, s8 arg1, u32 sound) {
     return FALSE;
 }
 
-static s16 obj_turn_pitch_toward_mario(f32 targetOffsetY, s16 turnAmount) {
+static s16 obj_turn_pitch_toward_player(f32 targetOffsetY, s16 turnAmount) {
     s16 targetPitch;
 
     o->oPosY -= targetOffsetY;
-    targetPitch = obj_turn_toward_object(o, gMarioObject, O_MOVE_ANGLE_PITCH_INDEX, turnAmount);
+    targetPitch = obj_turn_toward_object(o, gPlayerObject, O_MOVE_ANGLE_PITCH_INDEX, turnAmount);
     o->oPosY += targetOffsetY;
 
     return targetPitch;
@@ -571,7 +571,7 @@ static s32 obj_resolve_object_collisions(s32 *targetYaw) {
     if (o->numCollidedObjs != 0) {
         for (i = 0; i < o->numCollidedObjs; i++) {
             otherObject = o->collidedObjs[i];
-            if (otherObject == gMarioObject) continue;
+            if (otherObject == gPlayerObject) continue;
             if (otherObject->oInteractType & INTERACT_MASK_NO_OBJ_COLLISIONS) continue;
             dx             = (o->oPosX - otherObject->oPosX);
             dz             = (o->oPosZ - otherObject->oPosZ);
@@ -593,7 +593,7 @@ static s32 obj_resolve_object_collisions(s32 *targetYaw) {
 
     if (o->numCollidedObjs != 0) {
         otherObject = o->collidedObjs[0];
-        if (otherObject != gMarioObject) {
+        if (otherObject != gPlayerObject) {
             //! If one object moves after collisions are detected and this code
             //  runs, the objects can move toward each other (transport cloning)
 
@@ -697,7 +697,7 @@ static void obj_set_knockback_action(s32 attackType) {
     }
 
     o->oFlags &= ~OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
-    o->oMoveAngleYaw = obj_angle_to_object(gMarioObject, o);
+    o->oMoveAngleYaw = obj_angle_to_object(gPlayerObject, o);
 }
 
 static void obj_set_squished_action(void) {
@@ -890,12 +890,12 @@ static s32 obj_move_for_one_second(s32 endAction) {
 }
 
 /**
- * If we are far from home (> threshold away), then set oAngleToMario to the
- * angle to home and oDistanceToMario to 25000.
+ * If we are far from home (> threshold away), then set oAngleToPlayer to the
+ * angle to home and oDistanceToPlayer to 25000.
  * If we are close to home, but Mario is far from us (> threshold away), then
- * keep oAngleToMario the same and set oDistanceToMario to 20000.
- * If we are close to both home and Mario, then keep both oAngleToMario and
- * oDistanceToMario the same.
+ * keep oAngleToPlayer the same and set oDistanceToPlayer to 20000.
+ * If we are close to both home and Mario, then keep both oAngleToPlayer and
+ * oDistanceToPlayer the same.
  *
  * The point of this function is to avoid having to write extra code to get
  * the object to return to home. When Mario is far away and the object is far
@@ -907,23 +907,23 @@ static s32 obj_move_for_one_second(s32 endAction) {
  * attack Mario (e.g. fly guy shooting fire or lunging), especially when combined
  * with partial updates.
  */
-static void treat_far_home_as_mario(f32 threshold) {
+static void treat_far_home_as_player(f32 threshold) {
     f32 dx = o->oHomeX - o->oPosX;
     f32 dy = o->oHomeY - o->oPosY;
     f32 dz = o->oHomeZ - o->oPosZ;
     f32 distance = sqrtf(dx * dx + dy * dy + dz * dz);
 
     if (distance > threshold) {
-        o->oAngleToMario = atan2s(dz, dx);
-        o->oDistanceToMario = 25000.0f;
+        o->oAngleToPlayer = atan2s(dz, dx);
+        o->oDistanceToPlayer = 25000.0f;
     } else {
-        dx = o->oHomeX - gMarioObject->oPosX;
-        dy = o->oHomeY - gMarioObject->oPosY;
-        dz = o->oHomeZ - gMarioObject->oPosZ;
+        dx = o->oHomeX - gPlayerObject->oPosX;
+        dy = o->oHomeY - gPlayerObject->oPosY;
+        dz = o->oHomeZ - gPlayerObject->oPosZ;
         distance = sqrtf(dx * dx + dy * dy + dz * dz);
 
         if (distance > threshold) {
-            o->oDistanceToMario = 20000.0f;
+            o->oDistanceToPlayer = 20000.0f;
         }
     }
 }

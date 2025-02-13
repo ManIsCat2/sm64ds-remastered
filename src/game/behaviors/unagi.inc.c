@@ -41,7 +41,7 @@ void bhv_unagi_init(void) {
 }
 
 void unagi_act_0(void) {
-    if (o->oDistanceToMario > 4500.0f && o->oSubAction != 0) {
+    if (o->oDistanceToPlayer > 4500.0f && o->oSubAction != 0) {
         o->oAction = 1;
         o->oPosX = o->oPathedStartWaypoint->pos[0];
         o->oPosY = o->oPathedStartWaypoint->pos[1];
@@ -151,13 +151,13 @@ void bhv_unagi_loop(void) {
 
     if (o->oUnagiUnk1B2 == 0) {
         o->oUnagiUnk1AC = 99999.0f;
-        if (o->oDistanceToMario < 3000.0f) {
+        if (o->oDistanceToPlayer < 3000.0f) {
             for (i = -4; i < 4; i++) {
                 spawn_object_relative(i, 0, 0, 0, o, MODEL_NONE, bhvUnagiSubobject);
             }
             o->oUnagiUnk1B2 = 1;
         }
-    } else if (o->oDistanceToMario > 4000.0f) {
+    } else if (o->oDistanceToPlayer > 4000.0f) {
         o->oUnagiUnk1B2 = 0;
     }
 
@@ -193,7 +193,7 @@ void bhv_unagi_subobject_loop(void) {
         o->oPosZ = o->parentObj->oPosZ + val04 * coss(o->parentObj->oFaceAngleYaw);
 
         if (o->oBhvParams2ndByte == -4) {
-            if (o->parentObj->oAnimState != 0 && o->oDistanceToMario < 150.0f) {
+            if (o->parentObj->oAnimState != 0 && o->oDistanceToPlayer < 150.0f) {
                 o->oBhvParams = o->parentObj->oBhvParams;
                 spawn_default_star(6833.0f, -3654.0f, 2230.0f);
                 o->parentObj->oAnimState = 0;
@@ -201,7 +201,7 @@ void bhv_unagi_subobject_loop(void) {
         } else {
             obj_check_attacks(&sUnagiHitbox, o->oAction);
             if (o->oBhvParams2ndByte == 3) {
-                o->parentObj->oUnagiUnk1AC = o->oDistanceToMario;
+                o->parentObj->oUnagiUnk1AC = o->oDistanceToPlayer;
             }
         }
     }

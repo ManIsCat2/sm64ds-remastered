@@ -25,7 +25,7 @@ static struct ObjectHitbox sEnemyLakituHitbox = {
  */
 static void enemy_lakitu_act_uninitialized(void) {
 #ifndef NODRAWINGDISTANCE
-    if (o->oDistanceToMario < 2000.0f) {
+    if (o->oDistanceToPlayer < 2000.0f) {
 #endif
         spawn_object_relative_with_scale(CLOUD_BP_LAKITU_CLOUD, 0, 0, 0, 2.0f, o, MODEL_MIST, bhvCloud);
 
@@ -49,7 +49,7 @@ static void enemy_lakitu_update_vel_y(f32 offsetY) {
         margin = 3.0f;
     }
 
-    if (o->oPosY < gMarioObject->oPosY + offsetY + margin) {
+    if (o->oPosY < gPlayerObject->oPosY + offsetY + margin) {
         obj_y_vel_approach(4.0f, 0.4f);
     } else {
         obj_y_vel_approach(-4.0f, 0.4f);
@@ -64,16 +64,16 @@ static void enemy_lakitu_update_speed_and_angle(void) {
     f32 minSpeed;
     s16 turnSpeed;
 
-    f32 distToMario = o->oDistanceToMario;
-    if (distToMario > 500.0f) {
-        distToMario = 500.0f;
+    f32 distToPlayer = o->oDistanceToPlayer;
+    if (distToPlayer > 500.0f) {
+        distToPlayer = 500.0f;
     }
 
     // Move faster the farther away mario is and the faster mario is moving
-    if ((minSpeed = 1.2f * gMarioStates[0].forwardVel) < 8.0f) {
+    if ((minSpeed = 1.2f * gPlayerStates[0].forwardVel) < 8.0f) {
         minSpeed = 8.0f;
     }
-    o->oForwardVel = distToMario * 0.04f;
+    o->oForwardVel = distToPlayer * 0.04f;
     clamp_f32(&o->oForwardVel, minSpeed, 40.0f);
 
     // Accelerate toward mario vertically
@@ -83,13 +83,13 @@ static void enemy_lakitu_update_speed_and_angle(void) {
     if (o->oEnemyLakituFaceForwardCountdown != 0) {
         o->oEnemyLakituFaceForwardCountdown--;
     } else {
-        obj_face_yaw_approach(o->oAngleToMario, 0x600);
+        obj_face_yaw_approach(o->oAngleToPlayer, 0x600);
     }
 
     // Change move angle toward mario faster when farther from mario
-    turnSpeed = (s16)(distToMario * 2);
+    turnSpeed = (s16)(distToPlayer * 2);
     clamp_s16(&turnSpeed, 200, 4000);
-    cur_obj_rotate_yaw_toward(o->oAngleToMario, turnSpeed);
+    cur_obj_rotate_yaw_toward(o->oAngleToPlayer, turnSpeed);
 }
 
 /**
@@ -101,8 +101,8 @@ static void enemy_lakitu_sub_act_no_spiny(void) {
 
     if (o->oEnemyLakituSpinyCooldown != 0) {
         o->oEnemyLakituSpinyCooldown--;
-    } else if (o->oEnemyLakituNumSpinies < 3 && o->oDistanceToMario < 800.0f
-               && abs_angle_diff(o->oAngleToMario, o->oFaceAngleYaw) < 0x4000) {
+    } else if (o->oEnemyLakituNumSpinies < 3 && o->oDistanceToPlayer < 800.0f
+               && abs_angle_diff(o->oAngleToPlayer, o->oFaceAngleYaw) < 0x4000) {
         struct Object *spiny = spawn_object(o, MODEL_SPINY_BALL, bhvSpiny);
         if (spiny != NULL) {
             o->prevObj = spiny;
@@ -127,9 +127,9 @@ static void enemy_lakitu_sub_act_hold_spiny(void) {
         o->oEnemyLakituSpinyCooldown--;
     }
     // TODO: Check if anything interesting happens if we bypass this with speed
-    else if (o->oDistanceToMario > o->oDrawingDistance - 100.0f
-             || (o->oDistanceToMario < 500.0f
-                 && abs_angle_diff(o->oAngleToMario, o->oFaceAngleYaw) < 0x2000)) {
+    else if (o->oDistanceToPlayer > o->oDrawingDistance - 100.0f
+             || (o->oDistanceToPlayer < 500.0f
+                 && abs_angle_diff(o->oAngleToPlayer, o->oFaceAngleYaw) < 0x2000)) {
         o->oSubAction = ENEMY_LAKITU_SUB_ACT_THROW_SPINY;
         o->oEnemyLakituFaceForwardCountdown = 20;
     }
@@ -192,7 +192,7 @@ static void enemy_lakitu_act_main(void) {
 void bhv_enemy_lakitu_update(void) {
     // PARTIAL_UPDATE
 
-    treat_far_home_as_mario(2000.0f);
+    treat_far_home_as_player(2000.0f);
 
     switch (o->oAction) {
         case ENEMY_LAKITU_ACT_UNINITIALIZED:

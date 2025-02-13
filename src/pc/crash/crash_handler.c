@@ -509,14 +509,14 @@ static void crash_handler(const int signalNum, siginfo_t *info, ucontext_t *cont
                     }
 
                     // Reference
-                    if (memcmp(newSymbol->name, "set_mario_action", sizeof("set_mario_action")) == 0) {
+                    if (memcmp(newSymbol->name, "set_player_action", sizeof("set_player_action")) == 0) {
                         symbol0 = newSymbol;
                     }
                 }
             }
             fclose(f);
         }
-        uintptr_t addr0 = (symbol0 ? ((uintptr_t) set_mario_action - symbol0->offset) : 0);
+        uintptr_t addr0 = (symbol0 ? ((uintptr_t) set_player_action - symbol0->offset) : 0);
 
         // Unwind and print call stack
         void *stack[64];

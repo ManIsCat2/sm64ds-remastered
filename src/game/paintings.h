@@ -124,10 +124,10 @@ struct PaintingMeshVertex {
     /*0x06*/ s8 norm[3];
 };
 
-extern s16 gPaintingMarioFloorType;
-extern f32 gPaintingMarioXPos;
-extern f32 gPaintingMarioYPos;
-extern f32 gPaintingMarioZPos;
+extern s16 gPaintingPlayerFloorType;
+extern f32 gPaintingPlayerXPos;
+extern f32 gPaintingPlayerYPos;
+extern f32 gPaintingPlayerZPos;
 
 extern struct PaintingMeshVertex *gPaintingMesh;
 extern Vec3f *gPaintingTriNorms;

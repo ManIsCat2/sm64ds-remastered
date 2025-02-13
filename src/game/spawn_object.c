@@ -318,7 +318,7 @@ struct Object *allocate_object(struct ObjectNode *objList) {
     obj->respawnInfo = 0;
     obj->respawnInfoPointer = NULL;
 
-    obj->oDistanceToMario = F32_MAX;
+    obj->oDistanceToPlayer = F32_MAX;
     obj->oRoom = -1;
 
     // ex-alo change

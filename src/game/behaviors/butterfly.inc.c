@@ -42,23 +42,23 @@ void butterfly_step(s32 speed) {
 }
 
 void butterfly_calculate_angle(void) {
-    gMarioObject->oPosX += 5 * o->oButterflyYPhase / 4;
-    gMarioObject->oPosZ += 5 * o->oButterflyYPhase / 4;
-    obj_turn_toward_object(o, gMarioObject, 16, 0x300);
-    gMarioObject->oPosX -= 5 * o->oButterflyYPhase / 4;
-    gMarioObject->oPosZ -= 5 * o->oButterflyYPhase / 4;
+    gPlayerObject->oPosX += 5 * o->oButterflyYPhase / 4;
+    gPlayerObject->oPosZ += 5 * o->oButterflyYPhase / 4;
+    obj_turn_toward_object(o, gPlayerObject, 16, 0x300);
+    gPlayerObject->oPosX -= 5 * o->oButterflyYPhase / 4;
+    gPlayerObject->oPosZ -= 5 * o->oButterflyYPhase / 4;
 
-    gMarioObject->oPosY += (5 * o->oButterflyYPhase + 0x100) / 4;
-    obj_turn_toward_object(o, gMarioObject, 15, 0x500);
-    gMarioObject->oPosY -= (5 * o->oButterflyYPhase + 0x100) / 4;
+    gPlayerObject->oPosY += (5 * o->oButterflyYPhase + 0x100) / 4;
+    obj_turn_toward_object(o, gPlayerObject, 15, 0x500);
+    gPlayerObject->oPosY -= (5 * o->oButterflyYPhase + 0x100) / 4;
 }
 
 void butterfly_act_rest(void) {
-    if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
+    if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
         cur_obj_init_animation(0);
 
         o->oAction = BUTTERFLY_ACT_FOLLOW_MARIO;
-        o->oMoveAngleYaw = gMarioObject->header.gfx.angle[1];
+        o->oMoveAngleYaw = gPlayerObject->header.gfx.angle[1];
     }
 }
 
@@ -67,7 +67,7 @@ void butterfly_act_follow_mario(void) {
 
     butterfly_step(7);
 
-    if (!is_point_within_radius_of_mario(o->oHomeX, o->oHomeY, o->oHomeZ, 1200)) {
+    if (!is_point_within_radius_of_player(o->oHomeX, o->oHomeY, o->oHomeZ, 1200)) {
         o->oAction = BUTTERFLY_ACT_RETURN_HOME;
     }
 }

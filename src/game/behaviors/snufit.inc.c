@@ -67,9 +67,9 @@ Gfx *geo_snufit_scale_body(s32 callContext, struct GraphNode *node, UNUSED Mat4 
  * then prepares to shoot after a period.
  */
 void snufit_act_idle(void) {
-    f32 marioDist = (o->oDistanceToMario / 10.0f);
+    f32 playerDist = (o->oDistanceToPlayer / 10.0f);
 
-    if (o->oTimer > marioDist && o->oDistanceToMario < 800.0f) {
+    if (o->oTimer > playerDist && o->oDistanceToPlayer < 800.0f) {
 
         // Controls an alternating scaling factor in a cos.
         o->oSnufitBodyScalePeriod
@@ -116,8 +116,8 @@ void bhv_snufit_loop(void) {
         o->oDeathSound = SOUND_OBJ_SNUFIT_SKEETER_DEATH;
 
         // Face Mario if he is within range.
-        if (o->oDistanceToMario < 800.0f) {
-            obj_turn_pitch_toward_mario(120.0f, 2000);
+        if (o->oDistanceToPlayer < 800.0f) {
+            obj_turn_pitch_toward_player(120.0f, 2000);
 
             if ((s16) o->oMoveAnglePitch > 0x2000) {
                 o->oMoveAnglePitch = 0x2000;
@@ -125,7 +125,7 @@ void bhv_snufit_loop(void) {
                 o->oMoveAnglePitch = -0x2000;
             }
 
-            cur_obj_rotate_yaw_toward(o->oAngleToMario, 2000);
+            cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 2000);
         } else {
             obj_move_pitch_approach(0, 0x200);
             o->oMoveAngleYaw += 200;
@@ -172,7 +172,7 @@ void bhv_snufit_balls_loop(void) {
     // If far from Mario or in a different room, despawn.
     if ((o->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM)
 #ifndef NODRAWINGDISTANCE
-        || (o->oTimer != 0 && o->oDistanceToMario > 1500.0f)
+        || (o->oTimer != 0 && o->oDistanceToPlayer > 1500.0f)
 #endif
             ){
         obj_mark_for_deletion(o);

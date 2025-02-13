@@ -6,17 +6,17 @@ void bhv_green_switchboard_loop(void) {
 	struct Object *gearObj = o->oMopGreenSwitchboardGear;
 	f32 dot;
 	f32 dotH;
-	if (cur_obj_is_mario_on_platform()){
-		f32 dx = gMarioState->pos[0] - o->oPosX;
-		f32 dz = gMarioState->pos[2] - o->oPosZ;
+	if (cur_obj_is_player_on_platform()){
+		f32 dx = gPlayerState->pos[0] - o->oPosX;
+		f32 dz = gPlayerState->pos[2] - o->oPosZ;
 		f32 dHx = o->oPosX - o->oHomeX;
 		f32 dHz = o->oPosZ - o->oHomeZ;
 		f32 facingZ = coss(o->oFaceAngleYaw);
 		f32 facingX = sins(o->oFaceAngleYaw);
-		//if dot is positive, mario is on front arrow
+		// if dot is positive, the player is on front arrow
 		dot = facingZ*dz+facingX*dx;
 		dotH = facingZ*dHz+facingX*dHx;
-		//debug
+		// debug
 		// sprintf(buf,"dotH %f",dotH);
 		// print_text(32,32,buf);
 		// sprintf(buf,"dot %f",dot);

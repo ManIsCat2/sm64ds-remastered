@@ -1,9 +1,9 @@
-#ifndef MARIO_ANIMATION_IDS_H
-#define MARIO_ANIMATION_IDS_H
+#ifndef PLAYER_ANIMATION_IDS_H
+#define PLAYER_ANIMATION_IDS_H
 
 /* Mario Animation IDs */
 
-enum MarioAnimID {
+enum PlayerAnimID {
     /* 0x00 */ MARIO_ANIM_SLOW_LEDGE_GRAB,
     /* 0x01 */ MARIO_ANIM_FALL_OVER_BACKWARDS,
     /* 0x02 */ MARIO_ANIM_BACKWARD_AIR_KB,
@@ -215,4 +215,4 @@ enum MarioAnimID {
     /* 0xD0 */ MARIO_ANIM_TRIPLE_JUMP_FLY
 };
 
-#endif // MARIO_ANIMATION_IDS_H
+#endif // PLAYER_ANIMATION_IDS_H

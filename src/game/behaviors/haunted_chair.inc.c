@@ -60,7 +60,7 @@ void haunted_chair_act_0(void) {
                              4000.0f, 20.0f, 2.0f);
         }
     } else if (o->oHauntedChairUnkF4 != 0) {
-        if (o->oDistanceToMario < 500.0f) {
+        if (o->oDistanceToPlayer < 500.0f) {
             o->oHauntedChairUnkF4--;
         }
 
@@ -93,7 +93,7 @@ void haunted_chair_act_0(void) {
         }
     }
 
-    cur_obj_push_mario_away_from_cylinder(80.0f, 120.0f);
+    cur_obj_push_player_away_from_cylinder(80.0f, 120.0f);
 }
 
 void haunted_chair_act_1(void) {
@@ -115,8 +115,8 @@ void haunted_chair_act_1(void) {
             if (--o->oHauntedChairUnkF4 == 0) {
                 cur_obj_play_sound_2(SOUND_GENERAL_HAUNTED_CHAIR_SPIN);
 
-                o->oMoveAnglePitch = obj_turn_pitch_toward_mario(120.0f, 0);
-                o->oMoveAngleYaw = o->oAngleToMario;
+                o->oMoveAnglePitch = obj_turn_pitch_toward_player(120.0f, 0);
+                o->oMoveAngleYaw = o->oAngleToPlayer;
 
                 obj_compute_vel_from_move_pitch(50.0f);
             } else if (o->oHauntedChairUnkF4 > 20) {

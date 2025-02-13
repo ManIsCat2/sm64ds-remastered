@@ -1231,7 +1231,7 @@ struct AnimDataInfo anim_mario_eyelid_right[] = {
     END_ANIMDATA_INFO_ARR,
 };
 
-static s16 animdata_mario_intro_1[][6] = {
+static s16 animdata_player_intro_1[][6] = {
     { 1128, 0, 0, 0, 0, -20010 },
     { 1123, 0, 0, 0, -2, -19891 },
     { 1108, 0, 0, 0, -7, -19548 },
@@ -2054,7 +2054,7 @@ static s16 animdata_mario_intro_1[][6] = {
     { 0, 30, 0, 0, 0, -10 },
 };
 
-static s16 animdata_mario_intro_2[][6] = {
+static s16 animdata_player_intro_2[][6] = {
     { 0, 0, 10, 0, 0, -20000 },
     { 0, 0, 3584, 19, -3, -19864 },
     { 0, 0, 3541, 71, -14, -19484 },
@@ -2223,9 +2223,9 @@ static s16 animdata_mario_intro_2[][6] = {
     { 0, 0, 0, 0, 0, 0 },
 };
 
-struct AnimDataInfo anim_mario_intro[] = {
-    { ARRAY_COUNT(animdata_mario_intro_1), GD_ANIM_ROT3S_POS3S, animdata_mario_intro_1 },
-    { ARRAY_COUNT(animdata_mario_intro_2), GD_ANIM_ROT3S_POS3S, animdata_mario_intro_2 },
+struct AnimDataInfo anim_player_intro[] = {
+    { ARRAY_COUNT(animdata_player_intro_1), GD_ANIM_ROT3S_POS3S, animdata_player_intro_1 },
+    { ARRAY_COUNT(animdata_player_intro_2), GD_ANIM_ROT3S_POS3S, animdata_player_intro_2 },
     END_ANIMDATA_INFO_ARR,
 };
 

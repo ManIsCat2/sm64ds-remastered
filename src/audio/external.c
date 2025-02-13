@@ -1831,37 +1831,37 @@ void process_level_music_dynamics(void) {
         for (j = 0; j < condIndex; j++) {
             switch (conditionTypes[j]) {
                 case MARIO_X_GE: {
-                    if (((s16) gMarioStates[0].pos[0]) < conditionValues[j]) {
+                    if (((s16) gPlayerStates[0].pos[0]) < conditionValues[j]) {
                         j = condIndex + 1;
                     }
                     break;
                 }
                 case MARIO_Y_GE: {
-                    if (((s16) gMarioStates[0].pos[1]) < conditionValues[j]) {
+                    if (((s16) gPlayerStates[0].pos[1]) < conditionValues[j]) {
                         j = condIndex + 1;
                     }
                     break;
                 }
                 case MARIO_Z_GE: {
-                    if (((s16) gMarioStates[0].pos[2]) < conditionValues[j]) {
+                    if (((s16) gPlayerStates[0].pos[2]) < conditionValues[j]) {
                         j = condIndex + 1;
                     }
                     break;
                 }
                 case MARIO_X_LT: {
-                    if (((s16) gMarioStates[0].pos[0]) >= conditionValues[j]) {
+                    if (((s16) gPlayerStates[0].pos[0]) >= conditionValues[j]) {
                         j = condIndex + 1;
                     }
                     break;
                 }
                 case MARIO_Y_LT: {
-                    if (((s16) gMarioStates[0].pos[1]) >= conditionValues[j]) {
+                    if (((s16) gPlayerStates[0].pos[1]) >= conditionValues[j]) {
                         j = condIndex + 1;
                     }
                     break;
                 }
                 case MARIO_Z_LT: {
-                    if (((s16) gMarioStates[0].pos[2]) >= conditionValues[j]) {
+                    if (((s16) gPlayerStates[0].pos[2]) >= conditionValues[j]) {
                         j = condIndex + 1;
                     }
                     break;
@@ -1873,7 +1873,7 @@ void process_level_music_dynamics(void) {
                     break;
                 }
                 case MARIO_IS_IN_ROOM: {
-                    if (gMarioCurrentRoom != conditionValues[j]) {
+                    if (gPlayerCurrentRoom != conditionValues[j]) {
                         j = condIndex + 1;
                     }
                     break;

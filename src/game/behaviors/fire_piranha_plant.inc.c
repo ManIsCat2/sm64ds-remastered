@@ -80,7 +80,7 @@ static void fire_piranha_plant_act_hide(void) {
                 set_object_respawn_info_bits(o, 1);
             }
         } else if (sNumActiveFirePiranhaPlants < 2 && o->oTimer > 100
-                   && o->oDistanceToMario > 100.0f && o->oDistanceToMario < 800.0f) {
+                   && o->oDistanceToPlayer > 100.0f && o->oDistanceToPlayer < 800.0f) {
             cur_obj_play_sound_2(SOUND_OBJ_PIRANHA_PLANT_APPEAR);
 
             o->oFirePiranhaPlantActive = TRUE;
@@ -88,7 +88,7 @@ static void fire_piranha_plant_act_hide(void) {
 
             cur_obj_unhide();
             o->oAction = FIRE_PIRANHA_PLANT_ACT_GROW;
-            o->oMoveAngleYaw = o->oAngleToMario;
+            o->oMoveAngleYaw = o->oAngleToPlayer;
         } else {
             cur_obj_hide();
         }
@@ -107,7 +107,7 @@ static void fire_piranha_plant_act_grow(void) {
             o->oAction = FIRE_PIRANHA_PLANT_ACT_HIDE;
             cur_obj_init_animation_with_sound(0);
         } else if (o->oTimer < 50) {
-            cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x400);
+            cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 0x400);
         } else if (obj_is_rendering_enabled() && cur_obj_check_anim_frame(56)) {
             cur_obj_play_sound_2(SOUND_OBJ_FLAME_BLOWN);
             obj_spit_fire(0, (s32)(30.0f * o->oFirePiranhaPlantNeutralScale),

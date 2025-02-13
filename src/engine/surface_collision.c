@@ -186,7 +186,7 @@ static s32 find_wall_collisions_from_list(struct SurfaceNode *surfaceNode, struc
                 }
 
                 // If Mario has a vanish cap, pass through the vanish cap wall.
-                if (gCurrentObject == gMarioObject && (gMarioState->flags & MARIO_VANISH_CAP)) {
+                if (gCurrentObject == gPlayerObject && (gPlayerState->flags & MARIO_VANISH_CAP)) {
                     continue;
                 }
             }
@@ -279,7 +279,7 @@ static s32 find_wall_collisions_from_list(struct SurfaceNode *surfaceNode, struc
         data->z = pos[2] += (nz * (radius - offset));
     #else
         //! (Wall Overlaps) Because this doesn't update the x and z local variables,
-        //  multiple walls can push mario more than is required.
+        //  multiple walls can push the player more than is required.
         data->x += nx * (radius - offset);
         data->z += nz * (radius - offset);
     #endif
@@ -970,7 +970,7 @@ s32 find_water_level_and_floor(s32 x, s32 z, struct Surface **pfloor) {
     s32 loX, hiX, loZ, hiZ;
     TerrainData *p = gEnvironmentRegions;
     struct Surface *floor = NULL;
-    s32 waterLevel = find_water_floor(x, ((gCollisionFlags & COLLISION_FLAG_CAMERA) ? gLakituState.pos[1] : gMarioState->pos[1]), z, &floor);
+    s32 waterLevel = find_water_floor(x, ((gCollisionFlags & COLLISION_FLAG_CAMERA) ? gLakituState.pos[1] : gPlayerState->pos[1]), z, &floor);
 
     if (p != NULL && waterLevel == FLOOR_LOWER_LIMIT) {
         s32 numRegions = *p++;
@@ -1011,7 +1011,7 @@ f32 find_water_level(f32 x, f32 z) {
 
 #if WATER_SURFACES
     struct Surface *floor;
-    f32 waterLevel = find_water_floor(x, ((gCollisionFlags & COLLISION_FLAG_CAMERA) ? gLakituState.pos[1] : gMarioState->pos[1]), z, &floor);
+    f32 waterLevel = find_water_floor(x, ((gCollisionFlags & COLLISION_FLAG_CAMERA) ? gLakituState.pos[1] : gPlayerState->pos[1]), z, &floor);
     if (p != NULL && waterLevel == FLOOR_LOWER_LIMIT)
 #else
     f32 waterLevel = FLOOR_LOWER_LIMIT;
@@ -1167,7 +1167,7 @@ s32 ray_surface_intersect(Vec3f orig, Vec3f dir, f32 dir_length, struct Surface 
         return FALSE;
 
     //Ignore hangable surface if Mario is hanging
-    if (surface->type == SURFACE_HANGABLE && gMarioState->action & ACT_FLAG_HANGING)
+    if (surface->type == SURFACE_HANGABLE && gPlayerState->action & ACT_FLAG_HANGING)
         return FALSE;
 
     // Convert the vertices to Vec3f.

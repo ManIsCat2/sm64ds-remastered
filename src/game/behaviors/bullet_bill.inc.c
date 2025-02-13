@@ -20,8 +20,8 @@ void bullet_bill_act_0(void) {
 }
 
 void bullet_bill_act_1(void) {
-    s16 sp1E = abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw);
-    if (sp1E < 0x2000 && 400.0f < o->oDistanceToMario && o->oDistanceToMario < 1500.0f) {
+    s16 sp1E = abs_angle_diff(o->oAngleToPlayer, o->oMoveAngleYaw);
+    if (sp1E < 0x2000 && 400.0f < o->oDistanceToPlayer && o->oDistanceToPlayer < 1500.0f) {
         o->oAction = 2;
     }
 }
@@ -43,8 +43,8 @@ void bullet_bill_act_2(void) {
         spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
         o->oForwardVel = 30.0f;
 
-        if (o->oDistanceToMario > 300.0f) {
-            cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x100);
+        if (o->oDistanceToPlayer > 300.0f) {
+            cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 0x100);
         }
 
         if (o->oTimer == 50) {

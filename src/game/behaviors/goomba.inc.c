@@ -76,7 +76,7 @@ void bhv_goomba_triplet_spawner_update(void) {
     // spawn them
     if (o->oAction == GOOMBA_TRIPLET_SPAWNER_ACT_UNLOADED) {
 #ifndef NODRAWINGDISTANCE
-        if (o->oDistanceToMario < 3000.0f) {
+        if (o->oDistanceToPlayer < 3000.0f) {
 #endif
             // The spawner is capable of spawning more than 3 goombas, but this
             // is not used in the game
@@ -98,7 +98,7 @@ void bhv_goomba_triplet_spawner_update(void) {
             o->oAction++;
 #ifndef NODRAWINGDISTANCE
         }
-    } else if (o->oDistanceToMario > 4000.0f) {
+    } else if (o->oDistanceToPlayer > 4000.0f) {
         // If mario is too far away, enter the unloaded action. The goombas
         // will detect this and unload themselves
         o->oAction = GOOMBA_TRIPLET_SPAWNER_ACT_UNLOADED;
@@ -151,7 +151,7 @@ static void mark_goomba_as_dead(void) {
  * chase him.
  */
 static void goomba_act_walk(void) {
-    treat_far_home_as_mario(1000.0f);
+    treat_far_home_as_player(1000.0f);
 
     obj_forward_vel_approach(o->oGoombaRelativeSpeed * o->oGoombaScale, 0.4f);
 
@@ -171,14 +171,14 @@ static void goomba_act_walk(void) {
         o->oGoombaTurningAwayFromWall = obj_resolve_collisions_and_turn(o->oGoombaTargetYaw, 0x200);
     } else {
         // If far from home, walk toward home.
-        if (o->oDistanceToMario >= 25000.0f) {
-            o->oGoombaTargetYaw = o->oAngleToMario;
+        if (o->oDistanceToPlayer >= 25000.0f) {
+            o->oGoombaTargetYaw = o->oAngleToPlayer;
             o->oGoombaWalkTimer = random_linear_offset(20, 30);
         }
 
         if (!(o->oGoombaTurningAwayFromWall =
                   obj_bounce_off_walls_edges_objects(&o->oGoombaTargetYaw))) {
-            if (o->oDistanceToMario < 500.0f) {
+            if (o->oDistanceToPlayer < 500.0f) {
                 // If close to mario, begin chasing him. If not already chasing
                 // him, jump first
 
@@ -186,7 +186,7 @@ static void goomba_act_walk(void) {
                     goomba_begin_jump();
                 }
 
-                o->oGoombaTargetYaw = o->oAngleToMario;
+                o->oGoombaTargetYaw = o->oAngleToPlayer;
                 o->oGoombaRelativeSpeed = 20.0f;
             } else {
                 // If mario is far away, walk at a normal pace, turning randomly
@@ -233,7 +233,7 @@ static void goomba_act_attacked_mario(void) {
         //  hard to chain these in practice
         goomba_begin_jump();
 #endif
-        o->oGoombaTargetYaw = o->oAngleToMario;
+        o->oGoombaTargetYaw = o->oAngleToPlayer;
         o->oGoombaTurningAwayFromWall = FALSE;
     }
 }

@@ -7,15 +7,15 @@
 #endif
 
 void bhv_celebration_star_init(void) {
-    o->oHomeX = gMarioObject->header.gfx.pos[0];
-    o->oPosY = gMarioObject->header.gfx.pos[1] + 30.0f;
-    o->oHomeZ = gMarioObject->header.gfx.pos[2];
-    o->oMoveAngleYaw = gMarioObject->header.gfx.angle[1] + 0x8000;
+    o->oHomeX = gPlayerObject->header.gfx.pos[0];
+    o->oPosY = gPlayerObject->header.gfx.pos[1] + 30.0f;
+    o->oHomeZ = gPlayerObject->header.gfx.pos[2];
+    o->oMoveAngleYaw = gPlayerObject->header.gfx.angle[1] + 0x8000;
     o->oCelebStarDiameterOfRotation = 100;
     o->oFaceAnglePitch = 0;
 #if BUGFIX_STAR_BOWSER_KEY
     #if OBJ_HOLD_TRANSPARENT_STAR
-    if (obj_has_model(gMarioState->interactObj, MODEL_BOWSER_KEY))
+    if (obj_has_model(gPlayerState->interactObj, MODEL_BOWSER_KEY))
     #else
     if (gCurrLevelNum == LEVEL_BOWSER_1 || gCurrLevelNum == LEVEL_BOWSER_2)
     #endif
@@ -72,12 +72,12 @@ void celeb_star_act_face_camera(void) {
 #if FLY_UP_COLLECTED_STARS
     } else if (o->oTimer >= 59) {
         o->oFaceAngleYaw += (o->oTimer - 58) * 0x180;
-        if ((o->oPosY += (o->oTimer - 58) * 0.65f) >= gMarioObject->header.gfx.pos[1] + 2000.0f) {
+        if ((o->oPosY += (o->oTimer - 58) * 0.65f) >= gPlayerObject->header.gfx.pos[1] + 2000.0f) {
             o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
         }
 #endif
     } else {
-        o->oFaceAngleYaw = gMarioObject->header.gfx.angle[1];
+        o->oFaceAngleYaw = gPlayerObject->header.gfx.angle[1];
     }
 
 #if !FLY_UP_COLLECTED_STARS

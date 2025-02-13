@@ -207,7 +207,7 @@ void print_checkinfo(void) {
 }
 
 void print_surfaceinfo(void) {
-    debug_surface_list_info(gMarioObject->oPosX, gMarioObject->oPosZ);
+    debug_surface_list_info(gPlayerObject->oPosX, gPlayerObject->oPosZ);
 }
 
 void print_stageinfo(void) {
@@ -410,8 +410,8 @@ void stub_debug_5(void) {
  * information depending on the debug sys ID. Additional information (updated obj
  * count, floor misses, and an unknown wall counter) is also printed.
  */
-void try_print_debug_mario_object_info(void) {
-    if (gMarioObject != NULL) {
+void try_print_debug_player_object_info(void) {
+    if (gPlayerObject != NULL) {
         switch (sDebugPage) {
             case DEBUG_PAGE_CHECKSURFACEINFO:
                 print_surfaceinfo();
@@ -442,7 +442,7 @@ void try_print_debug_mario_object_info(void) {
  * Similar to above, but with level information. (checkinfo, mapinfo,
  * stageinfo)
  */
-void try_print_debug_mario_level_info(void) {
+void try_print_debug_player_level_info(void) {
     switch (sDebugPage) {
         case DEBUG_PAGE_OBJECTINFO:
             break; // no info list is printed for obj info.

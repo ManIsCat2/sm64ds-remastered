@@ -34,7 +34,7 @@ void bhv_pole_base_loop(void);
 void bhv_thi_huge_island_top_loop(void);
 void bhv_thi_tiny_island_top_loop(void);
 void bhv_king_bobomb_loop(void);
-void bhv_bobomb_anchor_mario_loop(void);
+void bhv_bobomb_anchor_player_loop(void);
 void bhv_beta_chest_bottom_init(void);
 void bhv_beta_chest_bottom_loop(void);
 void bhv_beta_chest_lid_loop(void);
@@ -51,9 +51,9 @@ void bhv_fish_group_loop(void);
 void bhv_cannon_base_loop(void);
 void bhv_cannon_barrel_loop(void);
 void bhv_cannon_base_unused_loop(void);
-void common_anchor_mario_behavior(f32 sp28, f32 sp2C, s32 sp30);
+void common_anchor_player_behavior(f32 sp28, f32 sp2C, s32 sp30);
 void bhv_chuckya_loop(void);
-void bhv_chuckya_anchor_mario_loop(void);
+void bhv_chuckya_anchor_player_loop(void);
 void bhv_rotating_platform_loop(void);
 void bhv_wf_breakable_wall_loop(void);
 void bhv_kickable_board_loop(void);
@@ -107,8 +107,8 @@ void bhv_flamethrower_flame_loop(void);
 void bhv_bouncing_fireball_loop(void);
 void bhv_bouncing_fireball_flame_loop(void);
 void bhv_bowser_shock_wave_loop(void);
-void bhv_flame_mario_loop(void);
-void bhv_black_smoke_mario_loop(void);
+void bhv_flame_player_loop(void);
+void bhv_black_smoke_player_loop(void);
 void bhv_black_smoke_bowser_loop(void);
 void bhv_black_smoke_upward_loop(void);
 void bhv_beta_fish_splash_spawner_loop(void);
@@ -131,7 +131,7 @@ void bhv_yellow_coin_init(void);
 void bhv_yellow_coin_loop(void);
 void bhv_squarish_path_moving_loop(void);
 void bhv_heave_ho_loop(void);
-void bhv_heave_ho_throw_mario_loop(void);
+void bhv_heave_ho_throw_player_loop(void);
 void bhv_ccm_touched_star_spawn_loop(void);
 void bhv_unused_poundable_platform(void);
 void bhv_beta_trampoline_top_loop(void);
@@ -191,7 +191,7 @@ void bhv_lll_sinking_square_platforms_loop(void);
 void bhv_koopa_shell_loop(void);
 void bhv_koopa_shell_flame_loop(void);
 void bhv_tox_box_loop(void);
-s32 mario_moving_fast_enough_to_make_piranha_plant_bite(void);
+s32 player_moving_fast_enough_to_make_piranha_plant_bite(void);
 void bhv_piranha_plant_loop(void);
 void bhv_lll_bowser_puzzle_piece_loop(void);
 void bhv_lll_bowser_puzzle_loop(void);
@@ -558,7 +558,7 @@ void bhv_star_switch_spawn_condition_loop(void);
 void bhv_2d_physics_loop(void);
 void uv_update_scroll(void);
 
-Gfx *geo_move_mario_part_from_parent(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
+Gfx *geo_move_player_part_from_parent(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 
 // Bowser
 Gfx *geo_bits_bowser_coloring(s32 run, struct GraphNode *node, UNUSED s32 a2);
@@ -569,7 +569,7 @@ Gfx *geo_switch_bowser_eyes(s32 run, struct GraphNode *node, UNUSED Mat4 *mtx);
 Gfx *geo_switch_tuxie_mother_eyes(s32 run, struct GraphNode *node, UNUSED Mat4 *mtx);
 
 // Cap switch
-Gfx *geo_update_held_mario_pos(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
+Gfx *geo_update_held_player_pos(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 
 // Snufit
 Gfx *geo_snufit_move_mask(s32 callContext, struct GraphNode *node, UNUSED Mat4 *c);

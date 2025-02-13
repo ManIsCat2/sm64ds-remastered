@@ -21,8 +21,8 @@
 #include "levels/bob/header.h"
 #include "levels/ttm/header.h"
 #include "player.h"
-#include "mario_actions_cutscene.h"
-#include "mario_misc.h"
+#include "player_actions_cutscene.h"
+#include "player_misc.h"
 #include "memory.h"
 #include "obj_behaviors.h"
 #include "object_helpers.h"
@@ -474,10 +474,10 @@ void obj_move_xyz_using_fvel_and_yaw(struct Object *obj) {
 /**
  * Checks if a point is within distance from Mario's graphical position. Test is exclusive.
  */
-s8 is_point_within_radius_of_mario(f32 x, f32 y, f32 z, s32 dist) {
-    f32 mGfxX = gMarioObject->header.gfx.pos[0];
-    f32 mGfxY = gMarioObject->header.gfx.pos[1];
-    f32 mGfxZ = gMarioObject->header.gfx.pos[2];
+s8 is_point_within_radius_of_player(f32 x, f32 y, f32 z, s32 dist) {
+    f32 mGfxX = gPlayerObject->header.gfx.pos[0];
+    f32 mGfxY = gPlayerObject->header.gfx.pos[1];
+    f32 mGfxZ = gPlayerObject->header.gfx.pos[2];
 
     if ((x - mGfxX) * (x - mGfxX) + (y - mGfxY) * (y - mGfxY) + (z - mGfxZ) * (z - mGfxZ)
         < (f32)(dist * dist)) {
@@ -513,7 +513,7 @@ void set_object_visibility(struct Object *obj, s32 dist) {
     f32 objZ = obj->oPosZ;
 
 
-    if (is_point_within_radius_of_mario(objX, objY, objZ, dist) == TRUE) {
+    if (is_point_within_radius_of_player(objX, objY, objZ, dist) == TRUE) {
         obj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
     } else {
         obj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
@@ -533,7 +533,7 @@ s8 obj_return_home_if_safe(struct Object *obj, f32 homeX, f32 y, f32 homeZ, s32 
     f32 homeDistZ = homeZ - obj->oPosZ;
     s16 angleTowardsHome = atan2s(homeDistZ, homeDistX);
 
-    if (is_point_within_radius_of_mario(homeX, y, homeZ, dist) == TRUE) {
+    if (is_point_within_radius_of_player(homeX, y, homeZ, dist) == TRUE) {
         return TRUE;
     } else {
         obj->oMoveAngleYaw = approach_s16_symmetric(obj->oMoveAngleYaw, angleTowardsHome, 320);
@@ -644,20 +644,20 @@ s8 current_mario_room_check(s16 room) {
 
     // Since object surfaces have room 0, this tests if the surface is an
     // object first and uses the last room if so.
-    if (gMarioCurrentRoom == 0) {
+    if (gPlayerCurrentRoom == 0) {
         if (room == sPrevCheckMarioRoom) {
             return TRUE;
         } else {
             return FALSE;
         }
     } else {
-        if (room == gMarioCurrentRoom) {
+        if (room == gPlayerCurrentRoom) {
             result = TRUE;
         } else {
             result = FALSE;
         }
 
-        sPrevCheckMarioRoom = gMarioCurrentRoom;
+        sPrevCheckMarioRoom = gPlayerCurrentRoom;
     }
 
     return result;
@@ -667,16 +667,16 @@ s8 current_mario_room_check(s16 room) {
  * Triggers dialog when Mario is facing an object and controls it while in the dialog.
  */
 s16 trigger_obj_dialog_when_facing(s32 *inDialog, s16 dialogID, f32 dist, s32 actionArg) {
-    if ((is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, (s32) dist) == TRUE
-         && obj_check_if_facing_toward_angle(o->oFaceAngleYaw, gMarioObject->header.gfx.angle[1] + 0x8000, 0x1000) == TRUE
-         && obj_check_if_facing_toward_angle(o->oMoveAngleYaw, o->oAngleToMario, 0x1000) == TRUE)
+    if ((is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, (s32) dist) == TRUE
+         && obj_check_if_facing_toward_angle(o->oFaceAngleYaw, gPlayerObject->header.gfx.angle[1] + 0x8000, 0x1000) == TRUE
+         && obj_check_if_facing_toward_angle(o->oMoveAngleYaw, o->oAngleToPlayer, 0x1000) == TRUE)
         || (*inDialog == TRUE)) {
         *inDialog = TRUE;
 
-        if (set_mario_npc_dialog(actionArg) == MARIO_DIALOG_STATUS_SPEAK) { //If Mario is speaking.
+        if (set_player_npc_dialog(actionArg) == MARIO_DIALOG_STATUS_SPEAK) { //If Mario is speaking.
             s16 dialogResponse = cutscene_object_with_dialog(CUTSCENE_DIALOG, o, dialogID);
             if (dialogResponse != DIALOG_RESPONSE_NONE) {
-                set_mario_npc_dialog(MARIO_DIALOG_STOP);
+                set_player_npc_dialog(MARIO_DIALOG_STOP);
                 *inDialog = FALSE;
                 return dialogResponse;
             }

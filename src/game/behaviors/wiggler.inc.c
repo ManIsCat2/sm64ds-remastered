@@ -223,7 +223,7 @@ static void wiggler_act_walk(void) {
 
         // If Mario is positioned below the wiggler, assume he entered through the
         // lower cave entrance, so don't display text.
-        if (gMarioObject->oPosY < o->oPosY || cur_obj_update_dialog_with_cutscene(
+        if (gPlayerObject->oPosY < o->oPosY || cur_obj_update_dialog_with_cutscene(
             MARIO_DIALOG_LOOK_UP, DIALOG_FLAG_NONE, CUTSCENE_DIALOG, DIALOG_150)) {
             o->oWigglerTextStatus = WIGGLER_TEXT_STATUS_COMPLETED_DIALOG;
         }
@@ -237,9 +237,9 @@ static void wiggler_act_walk(void) {
         if (o->oWigglerWalkAwayFromWallTimer != 0) {
             o->oWigglerWalkAwayFromWallTimer--;
         } else {
-            if (o->oDistanceToMario >= 25000.0f) {
+            if (o->oDistanceToPlayer >= 25000.0f) {
                 // If >1200 away from home, turn to home
-                o->oWigglerTargetYaw = o->oAngleToMario;
+                o->oWigglerTargetYaw = o->oAngleToPlayer;
             }
 
             if (obj_bounce_off_walls_edges_objects(&o->oWigglerTargetYaw)) {
@@ -249,7 +249,7 @@ static void wiggler_act_walk(void) {
                 o->oWigglerWalkAwayFromWallTimer = random_linear_offset(30, 30);
             } else {
                 if (o->oHealth < 4) {
-                    o->oWigglerTargetYaw = o->oAngleToMario;
+                    o->oWigglerTargetYaw = o->oAngleToPlayer;
                 } else if (o->oWigglerTimeUntilRandomTurn != 0) {
                     o->oWigglerTimeUntilRandomTurn--;
                 } else {
@@ -408,7 +408,7 @@ void bhv_wiggler_update(void) {
         if (o->oAction == WIGGLER_ACT_FALL_THROUGH_FLOOR) {
             wiggler_act_fall_through_floor();
         } else {
-            treat_far_home_as_mario(1200.0f);
+            treat_far_home_as_player(1200.0f);
 
             // Walking animation and sound
             cur_obj_init_animation_with_accel_and_sound(0, o->oWigglerWalkAnimSpeed);

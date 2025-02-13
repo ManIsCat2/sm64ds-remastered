@@ -2,7 +2,7 @@
 
 #include "sm64.h"
 #include "rendering_graph_node.h"
-#include "mario_misc.h"
+#include "player_misc.h"
 #include "skybox.h"
 #include "engine/math_util.h"
 #include "camera.h"

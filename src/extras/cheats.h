@@ -12,7 +12,7 @@
 #include "game/print.h"
 #include "game/segment2.h"
 #include "game/save_file.h"
-#include "game/mario_misc.h"
+#include "game/player_misc.h"
 
 #include "options_menu.h"
 
@@ -48,7 +48,7 @@ struct CheatList {
     bool    Responsive;
     bool    ExitAnywhere;
     bool    NoFallDamage;
-    u32     MarioSize;
+    u32     PlayerSize;
     struct CheatListWalkOn WalkOn;
     struct CheatListBljAny BljAny;
 };
@@ -57,9 +57,9 @@ extern struct CheatList Cheats;
 
 extern struct SubMenu menuCheats;
 
-extern void cheats_mario_inputs(struct MarioState *m);
-extern void cheats_mario_action(struct MarioState *m);
-extern void cheats_mario_size(struct MarioState *m);
+extern void cheats_player_inputs(struct PlayerState *m);
+extern void cheats_player_action(struct PlayerState *m);
+extern void cheats_player_size(struct PlayerState *m);
 extern f32 cheats_walk_on_environment(f32 height, f32 x, f32 z);
 
 #endif // CHEATS_H

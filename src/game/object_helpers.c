@@ -18,7 +18,7 @@
 #include "level_table.h"
 #include "level_update.h"
 #include "player.h"
-#include "mario_actions_cutscene.h"
+#include "player_actions_cutscene.h"
 #include "memory.h"
 #include "obj_behaviors.h"
 #include "object_helpers.h"
@@ -156,8 +156,8 @@ Gfx *geo_switch_area(s32 callContext, struct GraphNode *node, UNUSED void *conte
     #define ROOM_ID(r) floor->r
 #endif
 
-    if (callContext == GEO_CONTEXT_RENDER && gMarioObject != NULL) {
-        Vec3f focusPos = { gMarioObject->oPosX, gMarioObject->oPosY, gMarioObject->oPosZ };
+    if (callContext == GEO_CONTEXT_RENDER && gPlayerObject != NULL) {
+        Vec3f focusPos = { gPlayerObject->oPosX, gPlayerObject->oPosY, gPlayerObject->oPosZ };
 
 #if BETTER_ROOM_CHECKS
         room = get_room_at_pos(focusPos[0], focusPos[1], focusPos[2]);
@@ -165,14 +165,14 @@ Gfx *geo_switch_area(s32 callContext, struct GraphNode *node, UNUSED void *conte
         if (gCurrentArea->surfaceRooms != NULL) {
             find_room_floor(focusPos[0], focusPos[1], focusPos[2], &floor);
         } else {
-            floor = gMarioState->floor;
+            floor = gPlayerState->floor;
         }
 #endif
 
         print_debug_top_down_objectinfo("areainfo %d", ROOM_ID(room));
 
         if (ROOM_ID(room) > 0) {
-            gMarioCurrentRoom = ROOM_ID(room);
+            gPlayerCurrentRoom = ROOM_ID(room);
             switchCase->selectedCase = (ROOM_ID(room) - 1);
         }
     } else {
@@ -819,8 +819,8 @@ void cur_obj_change_action(s32 action) {
     cur_obj_reset_timer_and_subaction();
 }
 
-void cur_obj_set_vel_from_mario_vel(f32 objBaseForwardVel, f32 multiplier) {
-    f32 marioForwardVel = gMarioStates[0].forwardVel;
+void cur_obj_set_vel_from_player_vel(f32 objBaseForwardVel, f32 multiplier) {
+    f32 marioForwardVel = gPlayerStates[0].forwardVel;
     f32 objForwardVel = objBaseForwardVel * multiplier;
 
     if (marioForwardVel < objForwardVel) {
@@ -907,16 +907,16 @@ s32 cur_obj_check_frame_prior_current_frame(s16 *a0) {
     return FALSE;
 }
 
-s32 mario_is_in_air_action(void) {
-    if (gMarioStates[0].action & ACT_FLAG_AIR) {
+s32 player_is_in_air_action(void) {
+    if (gPlayerStates[0].action & ACT_FLAG_AIR) {
         return TRUE;
     } else {
         return FALSE;
     }
 }
 
-s32 mario_is_dive_sliding(void) {
-    if (gMarioStates[0].action == ACT_DIVE_SLIDE) {
+s32 player_is_dive_sliding(void) {
+    if (gPlayerStates[0].action == ACT_DIVE_SLIDE) {
         return TRUE;
     } else {
         return FALSE;
@@ -948,7 +948,7 @@ static void cur_obj_move_after_thrown_or_dropped(f32 forwardVel, f32 velY) {
         o->oPosY = o->oFloorHeight;
     } else if (o->oFloorHeight < FLOOR_LOWER_LIMIT_MISC) {
         //! OoB failsafe
-        obj_copy_pos(o, gMarioObject);
+        obj_copy_pos(o, gPlayerObject);
         o->oFloorHeight = find_floor_height(o->oPosX, o->oPosY, o->oPosZ);
     }
 
@@ -994,7 +994,7 @@ void cur_obj_set_model(ModelID16 modelID) {
 }
 
 void mario_set_flag(s32 flag) {
-    gMarioStates[0].flags |= flag;
+    gPlayerStates[0].flags |= flag;
 }
 
 s32 cur_obj_clear_interact_status_flag(s32 flag) {
@@ -1339,10 +1339,10 @@ s32 obj_has_behavior(struct Object *obj, const BehaviorScript *behavior) {
     }
 }
 
-f32 cur_obj_lateral_dist_from_mario_to_home(void) {
+f32 cur_obj_lateral_dist_from_player_to_home(void) {
     f32 dist;
-    f32 dx = o->oHomeX - gMarioObject->oPosX;
-    f32 dz = o->oHomeZ - gMarioObject->oPosZ;
+    f32 dx = o->oHomeX - gPlayerObject->oPosX;
+    f32 dz = o->oHomeZ - gPlayerObject->oPosZ;
 
     dist = sqrtf(dx * dx + dz * dz);
     return dist;
@@ -1428,9 +1428,9 @@ void cur_obj_start_cam_event(UNUSED struct Object *obj, s32 cameraEvent) {
 }
 
 // unused, self explanatory, maybe oInteractStatus originally had TRUE/FALSE statements
-void set_mario_interact_true_if_in_range(UNUSED s32 arg0, UNUSED s32 arg1, f32 range) {
-    if (o->oDistanceToMario < range) {
-        gMarioObject->oInteractStatus = TRUE;
+void set_player_interact_true_if_in_range(UNUSED s32 arg0, UNUSED s32 arg1, f32 range) {
+    if (o->oDistanceToPlayer < range) {
+        gPlayerObject->oInteractStatus = TRUE;
     }
 }
 
@@ -1487,7 +1487,7 @@ void obj_spawn_loot_yellow_coins(struct Object *obj, s32 numCoins, f32 baseVelY)
     obj_spawn_loot_coins(obj, numCoins, baseVelY, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
 }
 
-void cur_obj_spawn_loot_coin_at_mario_pos(void) {
+void cur_obj_spawn_loot_coin_at_player_pos(void) {
     struct Object *coin;
     if (o->oNumLootCoins <= 0) {
         return;
@@ -1498,7 +1498,7 @@ void cur_obj_spawn_loot_coin_at_mario_pos(void) {
     coin = spawn_object(o, MODEL_YELLOW_COIN, bhvSingleCoinGetsSpawned);
     coin->oVelY = 30.0f;
 
-    obj_copy_pos(coin, gMarioObject);
+    obj_copy_pos(coin, gPlayerObject);
 }
 
 f32 cur_obj_abs_y_dist_to_home(void) {
@@ -2007,9 +2007,9 @@ s32 cur_obj_wait_then_blink(s32 timeUntilBlinking, s32 numBlinks) {
     return done;
 }
 
-s32 cur_obj_is_mario_ground_pounding_platform(void) {
-    if (gMarioObject->platform == o) {
-        if (gMarioStates[0].action == ACT_GROUND_POUND_LAND) {
+s32 cur_obj_is_player_ground_pounding_platform(void) {
+    if (gPlayerObject->platform == o) {
+        if (gPlayerStates[0].action == ACT_GROUND_POUND_LAND) {
             return TRUE;
         }
     }
@@ -2026,28 +2026,28 @@ void spawn_mist_particles_with_sound(u32 soundMagic) {
     create_sound_spawner(soundMagic);
 }
 
-void cur_obj_push_mario_away(f32 radius) {
-    f32 marioRelX = gMarioObject->oPosX - o->oPosX;
-    f32 marioRelZ = gMarioObject->oPosZ - o->oPosZ;
-    f32 marioDist = sqrtf(sqr(marioRelX) + sqr(marioRelZ));
+void cur_obj_push_player_away(f32 radius) {
+    f32 marioRelX = gPlayerObject->oPosX - o->oPosX;
+    f32 marioRelZ = gPlayerObject->oPosZ - o->oPosZ;
+    f32 playerDist = sqrtf(sqr(marioRelX) + sqr(marioRelZ));
 
-    if (marioDist < radius) {
+    if (playerDist < radius) {
         //! If this function pushes Mario out of bounds, it will trigger Mario's
         //  oob failsafe
-        gMarioStates[0].pos[0] += (radius - marioDist) / radius * marioRelX;
-        gMarioStates[0].pos[2] += (radius - marioDist) / radius * marioRelZ;
+        gPlayerStates[0].pos[0] += (radius - playerDist) / radius * marioRelX;
+        gPlayerStates[0].pos[2] += (radius - playerDist) / radius * marioRelZ;
     }
 }
 
-void cur_obj_push_mario_away_from_cylinder(f32 radius, f32 extentY) {
-    f32 marioRelY = gMarioObject->oPosY - o->oPosY;
+void cur_obj_push_player_away_from_cylinder(f32 radius, f32 extentY) {
+    f32 marioRelY = gPlayerObject->oPosY - o->oPosY;
 
     if (marioRelY < 0.0f) {
         marioRelY = -marioRelY;
     }
 
     if (marioRelY < extentY) {
-        cur_obj_push_mario_away(radius);
+        cur_obj_push_player_away(radius);
     }
 }
 
@@ -2119,8 +2119,8 @@ void cur_obj_set_pos_to_home_with_debug(void) {
 void stub_obj_helpers_4(void) {
 }
 
-s32 cur_obj_is_mario_on_platform(void) {
-    if (gMarioObject->platform == o) {
+s32 cur_obj_is_player_on_platform(void) {
+    if (gPlayerObject->platform == o) {
         return TRUE;
     } else {
         return FALSE;
@@ -2171,24 +2171,24 @@ void spawn_base_star_with_no_lvl_exit(void) {
 }
 
 s32 cur_obj_mario_far_away(void) {
-    f32 dx = o->oHomeX - gMarioObject->oPosX;
-    f32 dy = o->oHomeY - gMarioObject->oPosY;
-    f32 dz = o->oHomeZ - gMarioObject->oPosZ;
-    f32 marioDistToHome = sqrtf(dx * dx + dy * dy + dz * dz);
+    f32 dx = o->oHomeX - gPlayerObject->oPosX;
+    f32 dy = o->oHomeY - gPlayerObject->oPosY;
+    f32 dz = o->oHomeZ - gPlayerObject->oPosZ;
+    f32 playerDistToHome = sqrtf(dx * dx + dy * dy + dz * dz);
 
-    if (o->oDistanceToMario > 2000.0f && marioDistToHome > 2000.0f) {
+    if (o->oDistanceToPlayer > 2000.0f && playerDistToHome > 2000.0f) {
         return TRUE;
     } else {
         return FALSE;
     }
 }
 
-s32 is_mario_moving_fast_or_in_air(s32 speedThreshold) {
-    if (gMarioStates[0].forwardVel > speedThreshold) {
+s32 is_player_moving_fast_or_in_air(s32 speedThreshold) {
+    if (gPlayerStates[0].forwardVel > speedThreshold) {
         return TRUE;
     }
 
-    if (gMarioStates[0].action & ACT_FLAG_AIR) {
+    if (gPlayerStates[0].action & ACT_FLAG_AIR) {
         return TRUE;
     } else {
         return FALSE;
@@ -2226,11 +2226,11 @@ void bhv_init_room(void) {
 }
 #endif
 
-s32 cur_obj_is_mario_in_room(void) {
-    if (o->oRoom != -1 && gMarioCurrentRoom != 0) {
-        if (gMarioCurrentRoom == o->oRoom // Object is in Mario's room.
-            || gDoorAdjacentRooms[gMarioCurrentRoom].forwardRoom  == o->oRoom // Object is in the transition room's forward  room.
-            || gDoorAdjacentRooms[gMarioCurrentRoom].backwardRoom == o->oRoom // Object is in the transition room's backward room.
+s32 cur_obj_is_player_in_room(void) {
+    if (o->oRoom != -1 && gPlayerCurrentRoom != 0) {
+        if (gPlayerCurrentRoom == o->oRoom // Object is in Mario's room.
+            || gDoorAdjacentRooms[gPlayerCurrentRoom].forwardRoom  == o->oRoom // Object is in the transition room's forward  room.
+            || gDoorAdjacentRooms[gPlayerCurrentRoom].backwardRoom == o->oRoom // Object is in the transition room's backward room.
         ) {
             return MARIO_INSIDE_ROOM;
         }
@@ -2300,7 +2300,7 @@ void cur_obj_if_hit_wall_bounce_away(void) {
 }
 
 s32 cur_obj_hide_if_mario_far_away_y(f32 distY) {
-    if (absf(o->oPosY - gMarioObject->oPosY) < distY) {
+    if (absf(o->oPosY - gPlayerObject->oPosY) < distY) {
         cur_obj_unhide();
         return FALSE;
     } else {
@@ -2357,12 +2357,12 @@ void clear_time_stop_flags(s32 flags) {
 }
 
 s32 cur_obj_can_mario_activate_textbox(f32 radius, f32 height, UNUSED s32 unused) {
-    if (o->oDistanceToMario < 1500.0f) {
-        f32 latDistToMario = lateral_dist_between_objects(o, gMarioObject);
-        UNUSED s16 angleFromMario = obj_angle_to_object(gMarioObject, o);
+    if (o->oDistanceToPlayer < 1500.0f) {
+        f32 latDistToPlayer = lateral_dist_between_objects(o, gPlayerObject);
+        UNUSED s16 angleFromPlayer = obj_angle_to_object(gPlayerObject, o);
 
-        if (latDistToMario < radius && o->oPosY < gMarioObject->oPosY + 160.0f
-            && gMarioObject->oPosY < o->oPosY + height && !(gMarioStates[0].action & ACT_FLAG_AIR)
+        if (latDistToPlayer < radius && o->oPosY < gPlayerObject->oPosY + 160.0f
+            && gPlayerObject->oPosY < o->oPosY + height && !(gPlayerStates[0].action & ACT_FLAG_AIR)
             && mario_ready_to_speak()) {
             return TRUE;
         }
@@ -2381,7 +2381,7 @@ static void cur_obj_end_dialog(s32 dialogFlags, s32 dialogResult) {
     o->oDialogState++;
 
     if (!(dialogFlags & DIALOG_FLAG_TIME_STOP_ENABLED)) {
-        set_mario_npc_dialog(MARIO_DIALOG_STOP);
+        set_player_npc_dialog(MARIO_DIALOG_STOP);
     }
 }
 
@@ -2394,7 +2394,7 @@ s32 cur_obj_update_dialog(s32 actionArg, s32 dialogFlags, s32 dialogID, UNUSED s
         case DIALOG_STATUS_ENABLE_TIME_STOP:
             // Patched :(
             // Wait for Mario to be ready to speak, and then enable time stop
-            if (mario_ready_to_speak() || gMarioState->action == ACT_READING_NPC_DIALOG) {
+            if (mario_ready_to_speak() || gPlayerState->action == ACT_READING_NPC_DIALOG) {
                 gTimeStopState |= TIME_STOP_ENABLED;
                 o->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
                 o->oDialogState++;
@@ -2408,7 +2408,7 @@ s32 cur_obj_update_dialog(s32 actionArg, s32 dialogFlags, s32 dialogID, UNUSED s
             //! We enable time stop even if Mario is not ready to speak. This
             //  allows us to move during time stop as long as Mario never enters
             //  an action that can be interrupted with text.
-            if (gMarioState->health >= 0x100) {
+            if (gPlayerState->health >= 0x100) {
                 gTimeStopState |= TIME_STOP_ENABLED;
                 o->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
                 o->oDialogState++;
@@ -2417,7 +2417,7 @@ s32 cur_obj_update_dialog(s32 actionArg, s32 dialogFlags, s32 dialogID, UNUSED s
 #endif
         case DIALOG_STATUS_INTERRUPT:
             // Interrupt until Mario is actually speaking with the NPC
-            if (set_mario_npc_dialog(actionArg) == MARIO_DIALOG_STATUS_SPEAK) {
+            if (set_player_npc_dialog(actionArg) == MARIO_DIALOG_STATUS_SPEAK) {
                 o->oDialogState++;
             }
             break;
@@ -2454,7 +2454,7 @@ s32 cur_obj_update_dialog(s32 actionArg, s32 dialogFlags, s32 dialogID, UNUSED s
             // speaking or the flag is defined, then we enable it again.
             // Usually, an object disables time stop using a separate function
             // after a certain condition is met.
-            if (gMarioState->action != ACT_READING_NPC_DIALOG || (dialogFlags & DIALOG_FLAG_TIME_STOP_ENABLED)) {
+            if (gPlayerState->action != ACT_READING_NPC_DIALOG || (dialogFlags & DIALOG_FLAG_TIME_STOP_ENABLED)) {
                 gTimeStopState &= ~TIME_STOP_ENABLED;
                 o->activeFlags &= ~ACTIVE_FLAG_INITIATED_TIME_STOP;
                 dialogResponse = o->oDialogResponse;
@@ -2478,7 +2478,7 @@ s32 cur_obj_update_dialog_with_cutscene(s32 actionArg, s32 dialogFlags, s32 cuts
 #if BUGFIX_DIALOG_TIME_STOP
         case DIALOG_STATUS_ENABLE_TIME_STOP:
             // Wait for Mario to be ready to speak, and then enable time stop
-            if (mario_ready_to_speak() || gMarioState->action == ACT_READING_NPC_DIALOG) {
+            if (mario_ready_to_speak() || gPlayerState->action == ACT_READING_NPC_DIALOG) {
                 gTimeStopState |= TIME_STOP_ENABLED;
                 o->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
                 o->oDialogState++;
@@ -2493,7 +2493,7 @@ s32 cur_obj_update_dialog_with_cutscene(s32 actionArg, s32 dialogFlags, s32 cuts
             //! We enable time stop even if Mario is not ready to speak. This
             //  allows us to move during time stop as long as Mario never enters
             //  an action that can be interrupted with text.
-            if (gMarioState->health >= 0x0100) {
+            if (gPlayerState->health >= 0x0100) {
                 gTimeStopState |= TIME_STOP_ENABLED;
                 o->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
                 o->oDialogState++;
@@ -2504,7 +2504,7 @@ s32 cur_obj_update_dialog_with_cutscene(s32 actionArg, s32 dialogFlags, s32 cuts
         case DIALOG_STATUS_INTERRUPT:
             // Additional flag that makes the NPC rotate towards to Mario
             if (dialogFlags & DIALOG_FLAG_TURN_TO_MARIO) {
-                doneTurning = cur_obj_rotate_yaw_toward(obj_angle_to_object(o, gMarioObject), 0x800);
+                doneTurning = cur_obj_rotate_yaw_toward(obj_angle_to_object(o, gPlayerObject), 0x800);
                 // Failsafe just in case it takes more than 33 frames somehow
                 if (o->oDialogResponse >= 33) {
                     doneTurning = TRUE;
@@ -2512,7 +2512,7 @@ s32 cur_obj_update_dialog_with_cutscene(s32 actionArg, s32 dialogFlags, s32 cuts
             }
             // Interrupt status until Mario is actually speaking with the NPC and if the
             // object is done turning to Mario
-            if (set_mario_npc_dialog(actionArg) == MARIO_DIALOG_STATUS_SPEAK && doneTurning) {
+            if (set_player_npc_dialog(actionArg) == MARIO_DIALOG_STATUS_SPEAK && doneTurning) {
                 o->oDialogResponse = 0;
                 o->oDialogState++;
             } else {
@@ -2542,16 +2542,16 @@ s32 cur_obj_update_dialog_with_cutscene(s32 actionArg, s32 dialogFlags, s32 cuts
             if (dialogFlags & DIALOG_FLAG_TIME_STOP_ENABLED) {
                 dialogResponse = o->oDialogResponse;
                 o->oDialogState = DIALOG_STATUS_ENABLE_TIME_STOP;
-            } else if (gMarioState->action != ACT_READING_NPC_DIALOG) {
+            } else if (gPlayerState->action != ACT_READING_NPC_DIALOG) {
                 // Disable time stop, then enable time stop for a frame
-                // until the set_mario_npc_dialog function disables it
+                // until the set_player_npc_dialog function disables it
                 gTimeStopState &= ~TIME_STOP_ENABLED;
                 o->activeFlags &= ~ACTIVE_FLAG_INITIATED_TIME_STOP;
                 dialogResponse = o->oDialogResponse;
                 o->oDialogState = DIALOG_STATUS_ENABLE_TIME_STOP;
             } else {
                 // And finally stop Mario dialog status
-                set_mario_npc_dialog(MARIO_DIALOG_STOP);
+                set_player_npc_dialog(MARIO_DIALOG_STOP);
             }
             break;
     }
@@ -2583,12 +2583,12 @@ void cur_obj_align_gfx_with_floor(void) {
     }
 }
 
-s32 mario_is_within_rectangle(s16 minX, s16 maxX, s16 minZ, s16 maxZ) {
-    if (gMarioObject->oPosX < minX || maxX < gMarioObject->oPosX) {
+s32 player_is_within_rectangle(s16 minX, s16 maxX, s16 minZ, s16 maxZ) {
+    if (gPlayerObject->oPosX < minX || maxX < gPlayerObject->oPosX) {
         return FALSE;
     }
 
-    if (gMarioObject->oPosZ < minZ || maxZ < gMarioObject->oPosZ) {
+    if (gPlayerObject->oPosZ < minZ || maxZ < gPlayerObject->oPosZ) {
         return FALSE;
     }
 
@@ -2608,7 +2608,7 @@ s32 obj_attack_collided_from_other_object(struct Object *obj) {
     if (numCollidedObjs != 0) {
         other = obj->collidedObjs[0];
 
-        if (other != gMarioObject) {
+        if (other != gPlayerObject) {
             other->oInteractStatus |= ATTACK_PUNCH | INT_STATUS_WAS_ATTACKED | INT_STATUS_INTERACTED
                                       | INT_STATUS_TOUCHED_BOB_OMB;
             touchedOtherObject = TRUE;
@@ -2626,7 +2626,7 @@ s32 cur_obj_was_attacked_or_ground_pounded(void) {
         attacked = TRUE;
     }
 
-    if (cur_obj_is_mario_ground_pounding_platform()) {
+    if (cur_obj_is_player_ground_pounding_platform()) {
         attacked = TRUE;
     }
 
@@ -2746,8 +2746,8 @@ ModelID32 obj_get_model(struct Object *obj) {
     return MODEL_NONE;
 }
 
-s32 mario_is_close_to_a_ceiling(void) {   
-    if (gMarioStates[0].pos[1] + 160.0f + FIND_SURFACE_BUFFER >= gMarioStates[0].ceilHeight) {
+s32 player_is_close_to_a_ceiling(void) {   
+    if (gPlayerStates[0].pos[1] + 160.0f + FIND_SURFACE_BUFFER >= gPlayerStates[0].ceilHeight) {
         return TRUE;
     }
 

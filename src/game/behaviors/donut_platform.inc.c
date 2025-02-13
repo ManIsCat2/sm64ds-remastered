@@ -20,9 +20,9 @@ void bhv_donut_platform_spawner_update(void) {
 
     for (i = 0, platformFlag = 1; i < ARRAY_COUNT(sDonutPlatformPositions); i++, platformFlag = platformFlag << 1) {
         if (!(o->oDonutPlatformSpawnerSpawnedPlatforms & platformFlag)) {
-            f32 dx = gMarioObject->oPosX - sDonutPlatformPositions[i][0];
-            f32 dy = gMarioObject->oPosY - sDonutPlatformPositions[i][1];
-            f32 dz = gMarioObject->oPosZ - sDonutPlatformPositions[i][2];
+            f32 dx = gPlayerObject->oPosX - sDonutPlatformPositions[i][0];
+            f32 dy = gPlayerObject->oPosY - sDonutPlatformPositions[i][1];
+            f32 dz = gPlayerObject->oPosZ - sDonutPlatformPositions[i][2];
             f32 marioSqDist = dx * dx + dy * dy + dz * dz;
 
             // dist > 1000 and dist < 2000
@@ -38,12 +38,12 @@ void bhv_donut_platform_spawner_update(void) {
 }
 
 void bhv_donut_platform_update(void) {
-    if (o->oTimer != 0 && ((o->oMoveFlags & OBJ_MOVE_MASK_ON_GROUND) || o->oDistanceToMario > 2500.0f)) {
+    if (o->oTimer != 0 && ((o->oMoveFlags & OBJ_MOVE_MASK_ON_GROUND) || o->oDistanceToPlayer > 2500.0f)) {
         o->parentObj->oDonutPlatformSpawnerSpawnedPlatforms =
             o->parentObj->oDonutPlatformSpawnerSpawnedPlatforms
             & ((1 << o->oBhvParams2ndByte) ^ 0xFFFFFFFF);
 
-        if (o->oDistanceToMario > 2500.0f) {
+        if (o->oDistanceToPlayer > 2500.0f) {
             obj_mark_for_deletion(o);
         } else {
             obj_explode_and_spawn_coins(150.0f, 1);
@@ -51,7 +51,7 @@ void bhv_donut_platform_update(void) {
         }
     } else {
         if (o->oGravity == 0.0f) {
-            if (gMarioObject->platform == o) {
+            if (gPlayerObject->platform == o) {
                 cur_obj_shake_y(4.0f);
                 if (o->oTimer > 15) {
                     o->oGravity = -0.1f;

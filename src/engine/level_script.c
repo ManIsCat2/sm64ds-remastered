@@ -300,7 +300,7 @@ static void free_for_goddard(void *ptr) {
 }
 #endif
 
-static void level_cmd_load_mario_head(void) {
+static void level_cmd_load_player_head(void) {
 #ifdef GODDARD_MFACE
 
 #ifdef USE_SYSTEM_MALLOC
@@ -452,17 +452,17 @@ static void level_cmd_23(void) {
     sCurrentCmd = CMD_NEXT;
 }
 
-static void level_cmd_init_mario(void) {
-    vec3s_set(gMarioSpawnInfo->startPos, 0, 0, 0);
-    vec3s_set(gMarioSpawnInfo->startAngle, 0, 0, 0);
+static void level_cmd_init_player(void) {
+    vec3s_set(gPlayerSpawnInfo->startPos, 0, 0, 0);
+    vec3s_set(gPlayerSpawnInfo->startAngle, 0, 0, 0);
 
-    gMarioSpawnInfo->activeAreaIndex = -1;
-    gMarioSpawnInfo->areaIndex = 0;
-    gMarioSpawnInfo->respawnInfo = 0;
-    gMarioSpawnInfo->behaviorArg = CMD_GET(u32, 4);
-    gMarioSpawnInfo->behaviorScript = CMD_GET(void *, 8);
-    gMarioSpawnInfo->model = gLoadedGraphNodes[CMD_GET(ModelID16, 0x2)];
-    gMarioSpawnInfo->next = NULL;
+    gPlayerSpawnInfo->activeAreaIndex = -1;
+    gPlayerSpawnInfo->areaIndex = 0;
+    gPlayerSpawnInfo->respawnInfo = 0;
+    gPlayerSpawnInfo->behaviorArg = CMD_GET(u32, 4);
+    gPlayerSpawnInfo->behaviorScript = CMD_GET(void *, 8);
+    gPlayerSpawnInfo->model = gLoadedGraphNodes[CMD_GET(ModelID16, 0x2)];
+    gPlayerSpawnInfo->next = NULL;
 
     sCurrentCmd = CMD_NEXT;
 }
@@ -681,21 +681,21 @@ static void level_cmd_unload_area(void) {
     sCurrentCmd = CMD_NEXT;
 }
 
-static void level_cmd_set_mario_start_pos(void) {
-    gMarioSpawnInfo->areaIndex = CMD_GET(u8, 2);
+static void level_cmd_set_player_start_pos(void) {
+    gPlayerSpawnInfo->areaIndex = CMD_GET(u8, 2);
 
 #if IS_64_BIT
-    vec3s_set(gMarioSpawnInfo->startPos, CMD_GET(s16, 6), CMD_GET(s16, 8), CMD_GET(s16, 10));
+    vec3s_set(gPlayerSpawnInfo->startPos, CMD_GET(s16, 6), CMD_GET(s16, 8), CMD_GET(s16, 10));
 #else
-    vec3s_copy(gMarioSpawnInfo->startPos, CMD_GET(Vec3s, 6));
+    vec3s_copy(gPlayerSpawnInfo->startPos, CMD_GET(Vec3s, 6));
 #endif
-    vec3s_set(gMarioSpawnInfo->startAngle, 0, CMD_GET(s16, 4) * 0x8000 / 180, 0);
+    vec3s_set(gPlayerSpawnInfo->startAngle, 0, CMD_GET(s16, 4) * 0x8000 / 180, 0);
 
     sCurrentCmd = CMD_NEXT;
 }
 
 static void level_cmd_2C(void) {
-    unload_mario_area();
+    unload_player_area();
     sCurrentCmd = CMD_NEXT;
 }
 
@@ -817,7 +817,7 @@ static void (*LevelScriptJumpTable[])(void) = {
     /*16*/ level_cmd_load_to_fixed_address,
     /*17*/ level_cmd_load_raw,
     /*18*/ level_cmd_load_mio0,
-    /*19*/ level_cmd_load_mario_head,
+    /*19*/ level_cmd_load_player_head,
     /*1A*/ level_cmd_load_mio0_texture,
     /*1B*/ level_cmd_init_level,
     /*1C*/ level_cmd_clear_level,
@@ -829,13 +829,13 @@ static void (*LevelScriptJumpTable[])(void) = {
     /*22*/ level_cmd_load_model_from_geo,
     /*23*/ level_cmd_23,
     /*24*/ level_cmd_place_object,
-    /*25*/ level_cmd_init_mario,
+    /*25*/ level_cmd_init_player,
     /*26*/ level_cmd_create_warp_node,
     /*27*/ level_cmd_create_painting_warp_node,
     /*28*/ level_cmd_create_instant_warp,
     /*29*/ level_cmd_load_area,
     /*2A*/ level_cmd_unload_area,
-    /*2B*/ level_cmd_set_mario_start_pos,
+    /*2B*/ level_cmd_set_player_start_pos,
     /*2C*/ level_cmd_2C,
     /*2D*/ level_cmd_2D,
     /*2E*/ level_cmd_set_terrain_data,

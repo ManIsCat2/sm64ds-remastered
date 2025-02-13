@@ -23,7 +23,7 @@ struct TumblingBridgeData sTumblingBridgeData[] = {
 void bhv_tumbling_bridge_platform_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (gMarioObject->platform == o) {
+            if (gPlayerObject->platform == o) {
                 o->oAction++;
                 o->oTumblingBridgeUnkF4 = random_sign() * 0x80;
             }
@@ -103,7 +103,7 @@ void tumbling_bridge_act_2(void) {
     cur_obj_hide();
     if (cur_obj_has_behavior(bhvLLLTumblingBridge)) {
         cur_obj_unhide();
-    } else if (o->oDistanceToMario > 1200.0f) {
+    } else if (o->oDistanceToPlayer > 1200.0f) {
         o->oAction = 3;
         cur_obj_unhide();
     }
@@ -115,7 +115,7 @@ void tumbling_bridge_act_3(void) {
 }
 
 void tumbling_bridge_act_0(void) {
-    if (cur_obj_has_behavior(bhvLLLTumblingBridge) || o->oDistanceToMario < 1000.0f) {
+    if (cur_obj_has_behavior(bhvLLLTumblingBridge) || o->oDistanceToPlayer < 1000.0f) {
         o->oAction = 1;
     }
 }

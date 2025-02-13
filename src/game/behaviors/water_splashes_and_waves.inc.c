@@ -90,10 +90,10 @@ void bhv_water_droplet_loop(void) {
 }
 
 void bhv_idle_water_wave_loop(void) {
-    obj_copy_pos(o, gMarioObject);
-    o->oPosY = gMarioStates[0].waterLevel + 5;
-    if (!(gMarioObject->oMarioParticleFlags & ACTIVE_PARTICLE_IDLE_WATER_WAVE)) {
-        gMarioObject->oActiveParticleFlags &= (u16) ~ACTIVE_PARTICLE_IDLE_WATER_WAVE;
+    obj_copy_pos(o, gPlayerObject);
+    o->oPosY = gPlayerStates[0].waterLevel + 5;
+    if (!(gPlayerObject->oPlayerParticleFlags & ACTIVE_PARTICLE_IDLE_WATER_WAVE)) {
+        gPlayerObject->oActiveParticleFlags &= (u16) ~ACTIVE_PARTICLE_IDLE_WATER_WAVE;
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
 }

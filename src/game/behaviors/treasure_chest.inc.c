@@ -68,8 +68,8 @@ void bhv_treasure_chest_bottom_init(void) {
 void bhv_treasure_chest_bottom_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (obj_check_if_facing_toward_angle(o->oMoveAngleYaw, gMarioObject->header.gfx.angle[1] + 0x8000, 0x3000)
-                && is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 150)
+            if (obj_check_if_facing_toward_angle(o->oMoveAngleYaw, gPlayerObject->header.gfx.angle[1] + 0x8000, 0x3000)
+                && is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 150)
                 && !o->parentObj->oTreasureChestUnkF8) {
                 if (o->parentObj->oTreasureChestUnkF4 == o->oBhvParams2ndByte) {
                     play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
@@ -93,13 +93,13 @@ void bhv_treasure_chest_bottom_loop(void) {
 
         case 2:
             cur_obj_become_intangible();
-            if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 500)) {
+            if (!is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 500)) {
                 o->parentObj->oTreasureChestUnkF8 = FALSE;
                 o->oAction = 0;
             }
     }
 
-    cur_obj_push_mario_away_from_cylinder(150.0f, 150.0f);
+    cur_obj_push_player_away_from_cylinder(150.0f, 150.0f);
     o->oInteractStatus = 0;
 }
 

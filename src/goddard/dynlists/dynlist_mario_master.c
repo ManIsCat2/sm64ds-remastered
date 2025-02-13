@@ -1092,7 +1092,7 @@ struct DynList dynlist_mario_master[] = {
 
         // whole head animator?
         MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_HEAD_ANIMDATA_GROUP),
-            LinkWithPtr(&anim_mario_intro),
+            LinkWithPtr(&anim_player_intro),
         MakeDynObj(D_ANIMATOR, DYNOBJ_MARIO_HEAD_ANIMATOR),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(DYNOBJ_MARIO_HEAD_ANIMDATA_GROUP),

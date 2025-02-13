@@ -808,8 +808,8 @@ void load_object_collision_model(void) {
     struct Object* obj = gCurrentObject;
     TerrainData *collisionData = obj->collisionData;
     f32 sqrLateralDist;
-    vec3f_get_lateral_dist_squared(&obj->oPosX, &gMarioObject->oPosX, &sqrLateralDist);
-    f32 verticalMarioDiff = (gMarioObject->oPosY - obj->oPosY);
+    vec3f_get_lateral_dist_squared(&obj->oPosX, &gPlayerObject->oPosX, &sqrLateralDist);
+    f32 verticalPlayerDiff = (gPlayerObject->oPosY - obj->oPosY);
     f32 colDist;
 
     if (collisionData == NULL) {
@@ -839,8 +839,8 @@ void load_object_collision_model(void) {
         drawDist = colDist;
     } s32 inColRadius = (
            (sqrLateralDist < sqr(colDist))
-        && (verticalMarioDiff > 0 || verticalMarioDiff > -colDist)
-        && (verticalMarioDiff < 0 || verticalMarioDiff < (colDist + 2000.0f))
+        && (verticalPlayerDiff > 0 || verticalPlayerDiff > -colDist)
+        && (verticalPlayerDiff < 0 || verticalPlayerDiff < (colDist + 2000.0f))
     );
 
     // Update if no Time Stop, in range, and in the current room.
@@ -855,15 +855,15 @@ void load_object_collision_model(void) {
         }
     }
 
-    f32 marioDist = obj->oDistanceToMario;
+    f32 playerDist = obj->oDistanceToPlayer;
     // On an object's first frame, the distance is set to F32_MAX.
     // If the distance hasn't been updated, update it now.
-    if (marioDist == F32_MAX) {
-        marioDist = dist_between_objects(obj, gMarioObject);
+    if (playerDist == F32_MAX) {
+        playerDist = dist_between_objects(obj, gPlayerObject);
     }
 
 #ifndef NODRAWINGDISTANCE
-    if (marioDist < drawDist) {
+    if (playerDist < drawDist) {
         obj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
     } else {
         obj->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;

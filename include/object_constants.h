@@ -226,7 +226,7 @@
     #define BOBOMB_BUDDY_CANNON_OPENED       2
     #define BOBOMB_BUDDY_CANNON_STOP_TALKING 3
 
-    /* oBobombBuddyHasTalkedToMario */
+    /* oBobombBuddyHasTalkedToPlayer */
     #define BOBOMB_BUDDY_HAS_NOT_TALKED 0
     #define BOBOMB_BUDDY_HAS_TALKED     2
 
@@ -524,8 +524,8 @@
 /* BBH Tilting Trap Platform */
     /* oAction */
     // Unused in original Japanese version
-    #define BBH_TILTING_TRAP_PLATFORM_ACT_MARIO_ON  0
-    #define BBH_TILTING_TRAP_PLATFORM_ACT_MARIO_OFF 1
+    #define BBH_TILTING_TRAP_PLATFORM_ACT_PLAYER_ON  0
+    #define BBH_TILTING_TRAP_PLATFORM_ACT_PLAYER_OFF 1
 
 /* Boo */
     /* oBooDeathStatus */
@@ -557,11 +557,11 @@
 
 /* Boo Cage */
     /* oAction */
-    #define BOO_CAGE_ACT_IN_BOO           0
-    #define BOO_CAGE_ACT_FALLING          1
-    #define BOO_CAGE_ACT_ON_GROUND        2
-    #define BOO_CAGE_ACT_MARIO_JUMPING_IN 3
-    #define BOO_CAGE_ACT_USELESS          4
+    #define BOO_CAGE_ACT_IN_BOO            0
+    #define BOO_CAGE_ACT_FALLING           1
+    #define BOO_CAGE_ACT_ON_GROUND         2
+    #define BOO_CAGE_ACT_PLAYER_JUMPING_IN 3
+    #define BOO_CAGE_ACT_USELESS           4
 
 /* BBH Haunted Bookshelf */
     /* oAction */
@@ -569,7 +569,7 @@
     #define HAUNTED_BOOKSHELF_ACT_RECEDE 1
 
 /* BBH Merry-Go-Round */
-    /* gMarioCurrentRoom */
+    /* gPlayerCurrentRoom */
     #define BBH_NEAR_MERRY_GO_ROUND_ROOM 10
     #define BBH_DYNAMIC_SURFACE_ROOM     0
     #define BBH_OUTSIDE_ROOM             13
@@ -603,11 +603,11 @@
     #define KOOPA_UNSHELLED_ACT_LYING   2
     #define KOOPA_UNSHELLED_ACT_UNUSED3 3
 
-    #define KOOPA_SHELLED_ACT_STOPPED        0
-    #define KOOPA_SHELLED_ACT_WALK           1
-    #define KOOPA_SHELLED_ACT_RUN_FROM_MARIO 2
-    #define KOOPA_SHELLED_ACT_LYING          3
-    #define KOOPA_SHELLED_ACT_DIE            4
+    #define KOOPA_SHELLED_ACT_STOPPED         0
+    #define KOOPA_SHELLED_ACT_WALK            1
+    #define KOOPA_SHELLED_ACT_RUN_FROM_PLAYER 2
+    #define KOOPA_SHELLED_ACT_LYING           3
+    #define KOOPA_SHELLED_ACT_DIE             4
 
     #define KOOPA_THE_QUICK_ACT_WAIT_BEFORE_RACE 0
     #define KOOPA_THE_QUICK_ACT_UNUSED1          1

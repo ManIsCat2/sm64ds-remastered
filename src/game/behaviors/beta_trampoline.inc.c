@@ -67,22 +67,22 @@ void bhv_beta_trampoline_top_loop(void) {
         trampolinePart->oPosY -= 150.0f;
     }
 
-    // Update o->oBetaTrampolineMarioOnTrampoline, and reset
+    // Update o->oBetaTrampolinePlayerOnTrampoline, and reset
     // the trampoline's position if Mario's not on it.
     // Since the trampoline never moves, this doesn't do anything.
     // Maybe they intended to decrease the trampoline's position
     // when Mario's on it in this if statement?
-    if (gMarioObject->platform == o) {
-        o->oBetaTrampolineMarioOnTrampoline = TRUE;
+    if (gPlayerObject->platform == o) {
+        o->oBetaTrampolinePlayerOnTrampoline = TRUE;
     } else {
-        o->oBetaTrampolineMarioOnTrampoline = FALSE;
+        o->oBetaTrampolinePlayerOnTrampoline = FALSE;
         o->oPosY = o->oHomeY;
     }
 
-    // This function is from mario_step.c, and is empty.
+    // This function is from player_step.c, and is empty.
     // It was probably intended to be used to "let the game know"
     // that the trampoline is currently in use. This potential
-    // trampoline infrastructure is found in mario_step.c. See
+    // trampoline infrastructure is found in player_step.c. See
     // that file for more details.
-    stub_mario_step_2();
+    stub_player_step_2();
 }

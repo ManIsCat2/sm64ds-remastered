@@ -22,7 +22,7 @@ void cap_switch_act_0(void) {
 }
 
 void cap_switch_act_1(void) {
-    if (cur_obj_is_mario_on_platform()) {
+    if (cur_obj_is_player_on_platform()) {
         save_file_set_flags(sCapSaveFlags[o->oBhvParams2ndByte]);
         o->oAction = 2;
         cur_obj_play_sound_2(SOUND_GENERAL_ACTIVATE_CAP_SWITCH);

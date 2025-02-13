@@ -13,6 +13,6 @@ struct PlatformDisplacementInfo {
 	s32 prevTimer;
 };
 
-void update_mario_platform(void);
+void update_player_platform(void);
 void apply_platform_displacement(struct PlatformDisplacementInfo *displaceInfo, Vec3f pos, s16 *yaw, struct Object *platform);
-void apply_mario_platform_displacement(void);
+void apply_player_platform_displacement(void);

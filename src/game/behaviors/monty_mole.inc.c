@@ -49,16 +49,16 @@ static struct Object *link_objects_with_behavior(const BehaviorScript *behavior)
 }
 
 /**
- * Select a random hole that is within minDistToMario and 1500 of mario, and
+ * Select a random hole that is within minDistToPlayer and 1500 of mario, and
  * whose cooldown is zero. Return NULL if no hole is available.
  */
-static struct Object *monty_mole_select_available_hole(f32 minDistToMario) {
+static struct Object *monty_mole_select_available_hole(f32 minDistToPlayer) {
     struct Object *hole = sMontyMoleHoleList;
     s32 numAvailableHoles = 0;
 
     while (hole != NULL) {
         if (hole->oMontyMoleHoleCooldown == 0) {
-            if (hole->oDistanceToMario < 1500.0f && hole->oDistanceToMario > minDistToMario) {
+            if (hole->oDistanceToPlayer < 1500.0f && hole->oDistanceToPlayer > minDistToPlayer) {
                 numAvailableHoles++;
             }
         }
@@ -74,7 +74,7 @@ static struct Object *monty_mole_select_available_hole(f32 minDistToMario) {
 
         while (hole != NULL) {
             if (hole->oMontyMoleHoleCooldown == 0) {
-                if (hole->oDistanceToMario < 1500.0f && hole->oDistanceToMario > minDistToMario) {
+                if (hole->oDistanceToPlayer < 1500.0f && hole->oDistanceToPlayer > minDistToPlayer) {
                     if (numAvailableHoles == selectedHole) {
                         return hole;
                     }
@@ -140,18 +140,18 @@ void bhv_monty_mole_init(void) {
  * either the rise from hole or jump out of hole action.
  */
 static void monty_mole_act_select_hole(void) {
-    f32 minDistToMario;
+    f32 minDistToPlayer;
 
     if (o->oBhvParams2ndByte != MONTY_MOLE_BP_NO_ROCK) {
-        minDistToMario = 200.0f;
-    } else if (gMarioStates[0].forwardVel < 8.0f) {
-        minDistToMario = 100.0f;
+        minDistToPlayer = 200.0f;
+    } else if (gPlayerStates[0].forwardVel < 8.0f) {
+        minDistToPlayer = 100.0f;
     } else {
-        minDistToMario = 500.0f;
+        minDistToPlayer = 500.0f;
     }
 
     // Select a hole to pop out of
-    if ((o->oMontyMoleCurrentHole = monty_mole_select_available_hole(minDistToMario)) != NULL) {
+    if ((o->oMontyMoleCurrentHole = monty_mole_select_available_hole(minDistToPlayer)) != NULL) {
         cur_obj_play_sound_2(SOUND_OBJ2_MONTY_MOLE_APPEAR);
 
         // Mark hole as unavailable
@@ -163,9 +163,9 @@ static void monty_mole_act_select_hole(void) {
         o->oPosZ = o->oMontyMoleCurrentHole->oPosZ;
 
         o->oFaceAnglePitch = 0;
-        o->oMoveAngleYaw = o->oMontyMoleCurrentHole->oAngleToMario;
+        o->oMoveAngleYaw = o->oMontyMoleCurrentHole->oAngleToPlayer;
 
-        if (o->oDistanceToMario > 500.0f || minDistToMario > 100.0f || random_sign() < 0) {
+        if (o->oDistanceToPlayer > 500.0f || minDistToPlayer > 100.0f || random_sign() < 0) {
             o->oAction = MONTY_MOLE_ACT_RISE_FROM_HOLE;
             o->oVelY = 3.0f;
             o->oGravity = 0.0f;
@@ -207,7 +207,7 @@ static void monty_mole_act_spawn_rock(void) {
 
     if (cur_obj_init_anim_and_check_if_end(2)) {
         if (o->oBhvParams2ndByte != MONTY_MOLE_BP_NO_ROCK
-            && abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw) < 0x4000
+            && abs_angle_diff(o->oAngleToPlayer, o->oMoveAngleYaw) < 0x4000
             && (rock = spawn_object(o, MODEL_PEBBLE, bhvMontyMoleRock)) != NULL) {
             o->prevObj = rock;
             o->oAction = MONTY_MOLE_ACT_THROW_ROCK;
@@ -222,7 +222,7 @@ static void monty_mole_act_spawn_rock(void) {
  * into hole action.
  */
 static void monty_mole_act_begin_jump_into_hole(void) {
-    if (cur_obj_init_anim_and_check_if_end(3) || obj_is_near_to_and_facing_mario(1000.0f, 0x4000)) {
+    if (cur_obj_init_anim_and_check_if_end(3) || obj_is_near_to_and_facing_player(1000.0f, 0x4000)) {
         o->oAction = MONTY_MOLE_ACT_JUMP_INTO_HOLE;
         o->oVelY = 40.0f;
         o->oGravity = -6.0f;
@@ -417,18 +417,18 @@ static void monty_mole_rock_act_held(void) {
     o->oParentRelativePosZ = 0.0f;
 
     if (o->parentObj->prevObj == NULL) {
-        f32 distToMario = o->oDistanceToMario;
-        if (distToMario > 600.0f) {
-            distToMario = 600.0f;
+        f32 distToPlayer = o->oDistanceToPlayer;
+        if (distToPlayer > 600.0f) {
+            distToPlayer = 600.0f;
         }
 
         o->oAction = MONTY_MOLE_ROCK_ACT_MOVE;
 
         // The angle is adjusted to compensate for the start position offset
-        o->oMoveAngleYaw = (s32)(o->parentObj->oMoveAngleYaw + 500 - distToMario * 0.1f);
+        o->oMoveAngleYaw = (s32)(o->parentObj->oMoveAngleYaw + 500 - distToPlayer * 0.1f);
 
         o->oForwardVel = 40.0f;
-        o->oVelY = distToMario * 0.08f + 8.0f;
+        o->oVelY = distToPlayer * 0.08f + 8.0f;
 
         o->oMoveFlags = 0;
     }

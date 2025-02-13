@@ -26,7 +26,7 @@ void koopa_shell_spawn_water_drop(void) {
 
     spawn_object(o, MODEL_WAVE_TRAIL, bhvObjectWaveTrail);
 
-    if (gMarioStates[0].forwardVel > 10.0f) {
+    if (gPlayerStates[0].forwardVel > 10.0f) {
         struct Object *drop = spawn_object_with_scale(o, MODEL_WHITE_PARTICLE_SMALL,
                                                       bhvWaterDroplet, 1.5f);
         drop->oVelY = random_float() * 30.0f;
@@ -91,11 +91,11 @@ void bhv_koopa_shell_loop(void) {
             break;
 
         case 1:
-            obj_copy_pos(o, gMarioObject);
+            obj_copy_pos(o, gPlayerObject);
             // ex-alo change
             // copy Mario's floor and floorHeight as well
-            o->oFloor       = gMarioState->floor;
-            o->oFloorHeight = gMarioState->floorHeight;
+            o->oFloor       = gPlayerState->floor;
+            o->oFloorHeight = gPlayerState->floorHeight;
 
             if (absf(find_water_level(o->oPosX, o->oPosZ) - o->oPosY) < 10.0f) {
                 koopa_shell_spawn_water_drop();
@@ -109,7 +109,7 @@ void bhv_koopa_shell_loop(void) {
                 koopa_shell_spawn_sparkles(10.0f);
             }
 
-            o->oFaceAngleYaw = gMarioObject->oMoveAngleYaw;
+            o->oFaceAngleYaw = gPlayerObject->oMoveAngleYaw;
 
             if (o->oInteractStatus & INT_STATUS_STOP_RIDING) {
                 SWAP_PARTICLE_CALL(obj_mark_for_deletion(o), spawn_mist_particles());

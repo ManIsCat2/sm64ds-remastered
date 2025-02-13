@@ -80,7 +80,7 @@ enum SoundBank {
 #define SOUND_STATUS_PLAYING        2
 
 /**
- * Terrain types. mario_get_terrain_sound_addend computes a
+ * Terrain types. player_get_terrain_sound_addend computes a
  * sound terrain type between 0 and 7, depending on the terrain type of the
  * level and the floor type that Mario is standing on. That value is then added
  * to the sound ID for the TERRAIN_* sounds.

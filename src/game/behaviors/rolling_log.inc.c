@@ -20,9 +20,9 @@ void bhv_ttm_rolling_log_init(void) {
 }
 
 void rolling_log_roll_log(void) {
-    if (gMarioObject->platform == o) {
-        f32 sp24 = (gMarioObject->header.gfx.pos[2] - o->oPosZ) * coss(-1*o->oMoveAngleYaw)
-                   - (gMarioObject->header.gfx.pos[0] - o->oPosX) * sins(-1*o->oMoveAngleYaw);
+    if (gPlayerObject->platform == o) {
+        f32 sp24 = (gPlayerObject->header.gfx.pos[2] - o->oPosZ) * coss(-1*o->oMoveAngleYaw)
+                   - (gPlayerObject->header.gfx.pos[0] - o->oPosX) * sins(-1*o->oMoveAngleYaw);
         if (sp24 > 0) {
             o->oAngleVelPitch += 0x10;
         } else {
@@ -123,7 +123,7 @@ void volcano_act_3(void) {
 void bhv_volcano_trap_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
+            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
                 o->oAction = 1;
                 cur_obj_play_sound_2(SOUND_GENERAL_VOLCANO_TRAP_FALL);
             }

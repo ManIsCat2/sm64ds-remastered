@@ -112,7 +112,7 @@ index b961ca52..adfde049 100644
 +        case DEMOREC_STATUS_NOT_RECORDING:
 +            break;
 +        case DEMOREC_STATUS_PREPARING:
-+            if (gMarioObject != NULL && gCurrLevelNum != LEVEL_NONE) { // If the game is in an active level
++            if (gPlayerObject != NULL && gCurrLevelNum != LEVEL_NONE) { // If the game is in an active level
 +                gRecordingStatus = DEMOREC_STATUS_RECORDING;
 +
 +                // First 4 values in demo inputs are used to define level ID

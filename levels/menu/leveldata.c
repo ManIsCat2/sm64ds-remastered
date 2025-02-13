@@ -27,12 +27,12 @@ ALIGNED8 static const Texture texture_menu_dark_stone[] = {
 };
 
 // 0x07001018 - 0x07002018
-ALIGNED8 static const Texture texture_menu_mario_save[] = {
+ALIGNED8 static const Texture texture_menu_player_save[] = {
 #include "levels/menu/main_menu_seg7.01018.rgba16.inc.c"
 };
 
 // 0x07002018 - 0x07003018
-ALIGNED8 static const Texture texture_menu_mario_new[] = {
+ALIGNED8 static const Texture texture_menu_player_new[] = {
 #include "levels/menu/main_menu_seg7.02018.rgba16.inc.c"
 };
 
@@ -138,13 +138,13 @@ static const Gfx dl_vertex_menu_save_button_back[] = {
 };
 
 // 0x07003330 - 0x07003380
-const Gfx dl_menu_mario_save_button_base[] = {
+const Gfx dl_menu_player_save_button_base[] = {
     gsSPDisplayList(dl_tex_block_menu_save_button_base),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_menu_stone),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPDisplayList(dl_vertex_menu_save_button_borders),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_menu_mario_save),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_menu_player_save),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPDisplayList(dl_vertex_menu_save_button_front),
@@ -152,13 +152,13 @@ const Gfx dl_menu_mario_save_button_base[] = {
 };
 
 // 0x07003380 - 0x070033D0
-const Gfx dl_menu_mario_new_button_base[] = {
+const Gfx dl_menu_player_new_button_base[] = {
     gsSPDisplayList(dl_tex_block_menu_save_button_base),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_menu_stone),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPDisplayList(dl_vertex_menu_save_button_borders),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_menu_mario_new),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_menu_player_new),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPDisplayList(dl_vertex_menu_save_button_front),

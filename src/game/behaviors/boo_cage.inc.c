@@ -88,14 +88,14 @@ void bhv_boo_cage_loop(void) {
             // The other useless scale
             cur_obj_scale(1.0f);
 
-            // Set the action to BOO_CAGE_ACT_MARIO_JUMPING_IN when Mario jumps in.
-            if (obj_check_if_collided_with_object(o, gMarioObject)) {
+            // Set the action to BOO_CAGE_ACT_PLAYER_JUMPING_IN when Mario jumps in.
+            if (obj_check_if_collided_with_object(o, gPlayerObject)) {
                 o->oAction++;
             }
 
             break;
 
-        case BOO_CAGE_ACT_MARIO_JUMPING_IN:
+        case BOO_CAGE_ACT_PLAYER_JUMPING_IN:
             // All this action does is wait 100 frames after Mario starts
             // jumping into the cage to set the action to BOO_CAGE_ACT_USELESS,
             // which does nothing. By extension, this action is also useless.

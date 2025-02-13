@@ -198,7 +198,7 @@ void play_painting_eject_sound(void) {
         // ripple when Mario enters painting
         if (!sPaintingEjectSoundPlayed) {
             play_sound(SOUND_GENERAL_PAINTING_EJECT,
-                       gMarioStates[0].marioObj->header.gfx.cameraToObject);
+                       gPlayerStates[0].playerObj->header.gfx.cameraToObject);
         }
         sPaintingEjectSoundPlayed = TRUE;
     } else {
@@ -213,9 +213,9 @@ void play_infinite_stairs_music(void) {
     u8 shouldPlay = FALSE;
 
     /* Infinite stairs? */
-    if (gCurrLevelNum == LEVEL_CASTLE && gCurrAreaIndex == 2 && gMarioState->numStars < 70) {
-        if (gMarioState->floor != NULL && gMarioState->floor->room == 6) {
-            if (gMarioState->pos[2] < 2540.0f) {
+    if (gCurrLevelNum == LEVEL_CASTLE && gCurrAreaIndex == 2 && gPlayerState->numStars < 70) {
+        if (gPlayerState->floor != NULL && gPlayerState->floor->room == 6) {
+            if (gPlayerState->pos[2] < 2540.0f) {
                 shouldPlay = TRUE;
             }
         }

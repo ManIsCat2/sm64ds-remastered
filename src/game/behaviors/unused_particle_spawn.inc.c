@@ -15,7 +15,7 @@ void bhv_unused_particle_spawn_loop(void) {
         obj_mark_for_deletion(o);
     }
 
-    if (obj_check_if_collided_with_object(o, gMarioObject)) {
+    if (obj_check_if_collided_with_object(o, gPlayerObject)) {
     SWAP_PARTICLE_CALL(
         obj_mark_for_deletion(o);
         ,

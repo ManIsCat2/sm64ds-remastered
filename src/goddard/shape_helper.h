@@ -6,7 +6,7 @@
 #include "gd_types.h"
 
 // data
-extern struct ObjGroup *gMarioFaceGrp;
+extern struct ObjGroup *gPlayerFaceGrp;
 extern struct ObjShape *gSpotShape;
 extern struct ObjShape *gShapeRedSpark;
 extern struct ObjShape *gShapeSilverSpark;
@@ -22,7 +22,7 @@ void scale_verts_in_shape(struct ObjShape *shape, f32 x, f32 y, f32 z);
 struct ObjNet *make_netfromshape(struct ObjShape *shape);
 void animate_mario_head_gameover(struct ObjAnimator *self);
 void animate_mario_head_normal(struct ObjAnimator *self);
-s32 load_mario_head(void (*aniFn)(struct ObjAnimator *));
+s32 load_player_head(void (*aniFn)(struct ObjAnimator *));
 void load_shapes2(void);
 
 // see bad_declarations.h

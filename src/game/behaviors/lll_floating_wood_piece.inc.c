@@ -19,7 +19,7 @@ void bhv_lll_floating_wood_bridge_loop(void) {
     switch (o->oAction) {
         case 0:
 #ifndef NODRAWINGDISTANCE
-            if (o->oDistanceToMario < 2500.0f) {
+            if (o->oDistanceToPlayer < 2500.0f) {
 #endif
                 for (i = 1; i < 4; i++) {
                     sp3C = spawn_object_relative(0, (i - 2) * 300, 0, 0, o,
@@ -34,7 +34,7 @@ void bhv_lll_floating_wood_bridge_loop(void) {
 
         case 1:
 #ifndef NODRAWINGDISTANCE
-            if (o->oDistanceToMario > 2600.0f) {
+            if (o->oDistanceToPlayer > 2600.0f) {
                 o->oAction = 2;
             }
 #endif

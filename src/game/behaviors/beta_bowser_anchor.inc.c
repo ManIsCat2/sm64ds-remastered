@@ -15,7 +15,7 @@
 void bhv_beta_bowser_anchor_loop(void) {
     // Set the object's position to be 30 units above Mario's feet,
     // and 300 units in front of him.
-    cur_obj_set_pos_relative(gMarioObject, 0, 30.0f, 300.0f);
+    cur_obj_set_pos_relative(gPlayerObject, 0, 30.0f, 300.0f);
 
     o->hitboxRadius = gDebugInfo[DEBUG_PAGE_EFFECTINFO][0] + 100;
     o->hitboxHeight = gDebugInfo[DEBUG_PAGE_EFFECTINFO][1] + 300;

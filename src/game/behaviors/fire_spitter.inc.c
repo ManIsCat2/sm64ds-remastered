@@ -3,7 +3,7 @@
 static void fire_spitter_act_idle(void) {
     approach_f32_ptr(&o->header.gfx.scale[0], 0.2f, 0.002f);
 
-    if (o->oTimer > 150 && o->oDistanceToMario < 800.0f && !(o->oMoveFlags & OBJ_MOVE_MASK_IN_WATER)) {
+    if (o->oTimer > 150 && o->oDistanceToPlayer < 800.0f && !(o->oMoveFlags & OBJ_MOVE_MASK_IN_WATER)) {
         o->oAction = FIRE_SPITTER_ACT_SPIT_FIRE;
         o->oFireSpitterScaleVel = 0.05f;
     }
@@ -12,7 +12,7 @@ static void fire_spitter_act_idle(void) {
 static void fire_spitter_act_spit_fire(void) {
     s32 scaleStatus;
 
-    o->oMoveAngleYaw = o->oAngleToMario;
+    o->oMoveAngleYaw = o->oAngleToPlayer;
 
     // Increase scale by 0.05, 0.04, ..., -0.03. Then wait ~8 frames, then
     // starting moving scale by 0.05 each frame toward 0.1. The first time

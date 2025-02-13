@@ -102,8 +102,8 @@ static void homing_amp_appear_loop(void) {
  */
 static void homing_amp_chase_loop(void) {
     // Lock on to Mario if he ever goes within 11.25 degrees of the amp's line of sight
-    if ((o->oAngleToMario - 0x400 < o->oMoveAngleYaw)
-        && (o->oMoveAngleYaw < o->oAngleToMario + 0x400)) {
+    if ((o->oAngleToPlayer - 0x400 < o->oMoveAngleYaw)
+        && (o->oMoveAngleYaw < o->oAngleToPlayer + 0x400)) {
         o->oHomingAmpLockedOn = TRUE;
         o->oTimer = 0;
     }
@@ -117,10 +117,10 @@ static void homing_amp_chase_loop(void) {
         // Mario's head. Mario's graphics' Y + 150 is around the top of his head.
         // Note that the average Y will slowly go down to approach his head if the amp
         // is above his head, but if the amp is below it will instantly snap up.
-        if (o->oHomingAmpAvgY > gMarioObject->header.gfx.pos[1] + 150.0f) {
+        if (o->oHomingAmpAvgY > gPlayerObject->header.gfx.pos[1] + 150.0f) {
             o->oHomingAmpAvgY -= 10.0f;
         } else {
-            o->oHomingAmpAvgY = gMarioObject->header.gfx.pos[1] + 150.0f;
+            o->oHomingAmpAvgY = gPlayerObject->header.gfx.pos[1] + 150.0f;
         }
 
         if (o->oTimer > 30) {
@@ -131,12 +131,12 @@ static void homing_amp_chase_loop(void) {
         // while curving towards him.
         o->oForwardVel = 10.0f;
 
-        obj_turn_toward_object(o, gMarioObject, 16, 0x400);
+        obj_turn_toward_object(o, gPlayerObject, 16, 0x400);
 
         // The amp's average Y will approach Mario's graphical Y position + 250
         // at a rate of 10 units per frame. Interestingly, this is different from
         // the + 150 used while chasing him. Could this be a typo?
-        if (o->oHomingAmpAvgY < gMarioObject->header.gfx.pos[1] + 250.0f) {
+        if (o->oHomingAmpAvgY < gPlayerObject->header.gfx.pos[1] + 250.0f) {
             o->oHomingAmpAvgY += 10.0f;
         }
     }
@@ -148,7 +148,7 @@ static void homing_amp_chase_loop(void) {
     check_amp_attack();
 
     // Give up if Mario goes further than 1500 units from the amp's original position
-    if (!is_point_within_radius_of_mario(o->oHomeX, o->oHomeY, o->oHomeZ, 1500)) {
+    if (!is_point_within_radius_of_player(o->oHomeX, o->oHomeY, o->oHomeZ, 1500)) {
         o->oAction = HOMING_AMP_ACT_GIVE_UP;
     }
 }
@@ -202,7 +202,7 @@ static void amp_attack_cooldown_loop(void) {
 void bhv_homing_amp_loop(void) {
     switch (o->oAction) {
         case HOMING_AMP_ACT_INACTIVE:
-            if (is_point_within_radius_of_mario(o->oHomeX, o->oHomeY, o->oHomeZ, 800) == TRUE) {
+            if (is_point_within_radius_of_player(o->oHomeX, o->oHomeY, o->oHomeZ, 800) == TRUE) {
                 // Make the amp start to appear, and un-hide it.
                 o->oAction = HOMING_AMP_ACT_APPEAR;
                 o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
@@ -273,13 +273,13 @@ void bhv_circling_amp_init(void) {
  */
 static void fixed_circling_amp_idle_loop(void) {
     // Turn towards Mario, in both yaw and pitch.
-    f32 xToMario = gMarioObject->header.gfx.pos[0] - o->oPosX;
-    f32 yToMario = gMarioObject->header.gfx.pos[1] + 120.0f - o->oPosY;
-    f32 zToMario = gMarioObject->header.gfx.pos[2] - o->oPosZ;
-    s16 vAngleToMario = atan2s(sqrtf(xToMario * xToMario + zToMario * zToMario), -yToMario);
+    f32 xToPlayer = gPlayerObject->header.gfx.pos[0] - o->oPosX;
+    f32 yToPlayer = gPlayerObject->header.gfx.pos[1] + 120.0f - o->oPosY;
+    f32 zToPlayer = gPlayerObject->header.gfx.pos[2] - o->oPosZ;
+    s16 vAngleToPlayer = atan2s(sqrtf(xToPlayer * xToPlayer + zToPlayer * zToPlayer), -yToPlayer);
 
-    obj_turn_toward_object(o, gMarioObject, 19, 0x1000);
-    o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, vAngleToMario, 0x1000);
+    obj_turn_toward_object(o, gPlayerObject, 19, 0x1000);
+    o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, vAngleToPlayer, 0x1000);
 
     // Oscillate 40 units up and down.
     // Interestingly, 0x458 (1112 in decimal) is a magic number with no apparent significance.

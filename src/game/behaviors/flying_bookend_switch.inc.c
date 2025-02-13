@@ -36,7 +36,7 @@ struct ObjectHitbox sBookSwitchHitbox = {
 };
 
 void flying_bookend_act_0(void) {
-    if (obj_is_near_to_and_facing_mario(400.0f, 0x3000)) {
+    if (obj_is_near_to_and_facing_player(400.0f, 0x3000)) {
         cur_obj_play_sound_2(SOUND_OBJ_DEFAULT_DEATH);
 
         o->oAction = 1;
@@ -76,9 +76,9 @@ void flying_bookend_act_2(void) {
     cur_obj_update_floor_and_walls();
 
     if (o->oForwardVel == 0.0f) {
-        obj_turn_pitch_toward_mario(120.0f, 1000);
+        obj_turn_pitch_toward_player(120.0f, 1000);
         o->oFaceAnglePitch = o->oMoveAnglePitch + 0x7FFF;
-        cur_obj_rotate_yaw_toward(o->oAngleToMario, 1000);
+        cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 1000);
 
         if (o->oTimer > 30) {
             obj_compute_vel_from_move_pitch(50.0f);
@@ -134,7 +134,7 @@ void bhv_flying_bookend_loop(void) {
 
 void bhv_bookend_spawn_loop(void) {
     if (!(o->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM)) {
-        if (o->oTimer > 40 && obj_is_near_to_and_facing_mario(600.0f, 0x2000)) {
+        if (o->oTimer > 40 && obj_is_near_to_and_facing_player(600.0f, 0x2000)) {
             struct Object *sp1C = spawn_object(o, MODEL_BOOKEND, bhvFlyingBookend);
 
             if (sp1C != NULL) {
@@ -162,7 +162,7 @@ void bookshelf_manager_act_0(void) {
 
 void bookshelf_manager_act_1(void) {
     if (o->oBookSwitchManagerUnkF8 == 0) {
-        if (obj_is_near_to_and_facing_mario(500.0f, 0x3000)) {
+        if (obj_is_near_to_and_facing_player(500.0f, 0x3000)) {
             o->oBookSwitchManagerUnkF8 = 1;
         }
     } else if (o->oTimer > 60) {
@@ -245,7 +245,7 @@ void bhv_book_switch_loop(void) {
         s32 attackType = obj_check_attacks(&sBookSwitchHitbox, o->oAction);
 
         if (o->parentObj->oBookSwitchManagerUnkF8 != 0 || o->oAction == 1) {
-            if (o->oDistanceToMario < 100.0f) {
+            if (o->oDistanceToPlayer < 100.0f) {
                 cur_obj_become_tangible();
             } else {
                 cur_obj_become_intangible();
@@ -276,7 +276,7 @@ void bhv_book_switch_loop(void) {
                 } else {
                     struct Object *sp38;
                     s16 sp36 = random_u16() & 0x1;
-                    s16 sp34 = gMarioObject->oPosZ + 1.5f * gMarioStates[0].vel[2];
+                    s16 sp34 = gPlayerObject->oPosZ + 1.5f * gPlayerStates[0].vel[2];
 
                     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
 
@@ -301,6 +301,6 @@ void bhv_book_switch_loop(void) {
 
         o->oPosX += o->parentObj->oForwardVel;
         o->oPosZ = o->oHomeZ - o->oBookSwitchUnkF4;
-        cur_obj_push_mario_away_from_cylinder(70.0f, 70.0f);
+        cur_obj_push_player_away_from_cylinder(70.0f, 70.0f);
     }
 }

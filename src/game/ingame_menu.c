@@ -2625,7 +2625,7 @@ void render_pause_my_score_coins(void) {
 #endif
 
 void render_pause_camera_options(s16 x, s16 y, s8 *index, s16 xIndex) {
-    UNUSED_CN u8 textLakituMario[] = { TEXT_LAKITU_MARIO };
+    UNUSED_CN u8 textLakituPlayer[] = { TEXT_LAKITU_MARIO };
     UNUSED_CN u8 textLakituStop[] = { TEXT_LAKITU_STOP };
 #ifdef VERSION_EU
     u8 textNormalUpClose[][20] = {
@@ -2652,7 +2652,7 @@ void render_pause_camera_options(s16 x, s16 y, s8 *index, s16 xIndex) {
     print_generic_string(x + 14, y + 2, textNormalUpClose);
     print_generic_string(x + 124, y + 2, textNormalFixed);
 #else
-    print_generic_string(x + 14, y + 2, textLakituMario);
+    print_generic_string(x + 14, y + 2, textLakituPlayer);
     print_generic_string(x + TXT1_X, y - 13, LANGUAGE_ARRAY(textNormalUpClose));
     print_generic_string(x + 124, y + 2, textLakituStop);
     print_generic_string(x + TXT2_X, y - 13, LANGUAGE_ARRAY(textNormalFixed));
@@ -2967,7 +2967,7 @@ s8 gHudFlash = 0;
 #if EXIT_COURSE_ANYWHERE
 #define should_render_pause_options(m) TRUE
 #else
-u8 should_render_pause_options(struct MarioState *m) {
+u8 should_render_pause_options(struct PlayerState *m) {
     return (m->action & ACT_FLAG_PAUSE_EXIT)
 #ifdef CHEATS_ACTIONS
     || (Cheats.EnableCheats && Cheats.ExitAnywhere) // Added support for the "Exit course at any time" cheat
@@ -3006,7 +3006,7 @@ s16 render_pause_screen(void) {
             render_pause_my_score_coins();
             render_pause_red_coins();
 
-            if (should_render_pause_options(gMarioState)) {
+            if (should_render_pause_options(gPlayerState)) {
                 render_pause_course_options(99, 93, &gMenuLineNum, 15);
             }
 
@@ -3148,7 +3148,7 @@ void print_hud_course_complete_coins(s16 x, s16 y) {
 #endif
             {
                 play_sound(SOUND_GENERAL_COLLECT_1UP, gGlobalSoundSource);
-                gMarioState->numLives++;
+                gPlayerState->numLives++;
             }
         }
 

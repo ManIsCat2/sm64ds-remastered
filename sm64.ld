@@ -443,8 +443,8 @@ SECTIONS
     /* 4E9FA0-? [?] */
     BEGIN_SEG(assets, __romPos)
     {
-        BUILD_DIR/assets/mario_anim_data.o(.data);
-        BUILD_DIR/assets/mario_anim_data.o(.rodata);
+        BUILD_DIR/assets/player_anim_data.o(.data);
+        BUILD_DIR/assets/player_anim_data.o(.rodata);
         BUILD_DIR/assets/demo_data.o(.data);
         BUILD_DIR/sound/sound_data.o(.data);
     }

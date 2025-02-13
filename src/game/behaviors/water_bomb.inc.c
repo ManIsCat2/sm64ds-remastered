@@ -29,14 +29,14 @@ static struct ObjectHitbox sWaterBombHitbox = {
  * Spawn water bombs targeting mario when he comes in range.
  */
 void bhv_water_bomb_spawner_update(void) {
-    f32 latDistToMario;
+    f32 latDistToPlayer;
     f32 spawnerRadius = 50 * (u16)(o->oBhvParams >> 16) + 200.0f;
 
-    latDistToMario = lateral_dist_between_objects(o, gMarioObject);
+    latDistToPlayer = lateral_dist_between_objects(o, gPlayerObject);
 
     // When mario is in range and a water bomb isn't already active
-    if (!o->oWaterBombSpawnerBombActive && latDistToMario < spawnerRadius
-        && gMarioObject->oPosY - o->oPosY < 1000.0f) {
+    if (!o->oWaterBombSpawnerBombActive && latDistToPlayer < spawnerRadius
+        && gPlayerObject->oPosY - o->oPosY < 1000.0f) {
         if (o->oWaterBombSpawnerTimeToSpawn != 0) {
             o->oWaterBombSpawnerTimeToSpawn--;
         } else {
@@ -45,14 +45,14 @@ void bhv_water_bomb_spawner_update(void) {
 
             if (waterBomb != NULL) {
                 // Drop farther ahead of mario when he is moving faster
-                f32 waterBombDistToMario = 28.0f * gMarioStates[0].forwardVel + 100.0f;
+                f32 waterBombDistToPlayer = 28.0f * gPlayerStates[0].forwardVel + 100.0f;
 
                 waterBomb->oAction = WATER_BOMB_ACT_INIT;
 
                 waterBomb->oPosX =
-                    gMarioObject->oPosX + waterBombDistToMario * sins(gMarioObject->oMoveAngleYaw);
+                    gPlayerObject->oPosX + waterBombDistToPlayer * sins(gPlayerObject->oMoveAngleYaw);
                 waterBomb->oPosZ =
-                    gMarioObject->oPosZ + waterBombDistToMario * coss(gMarioObject->oMoveAngleYaw);
+                    gPlayerObject->oPosZ + waterBombDistToPlayer * coss(gPlayerObject->oMoveAngleYaw);
 
                 spawn_object(waterBomb, MODEL_WATER_BOMB_SHADOW, bhvWaterBombShadow);
 
@@ -128,7 +128,7 @@ static void water_bomb_act_drop(void) {
             set_camera_shake_from_point(SHAKE_POS_SMALL, o->oPosX, o->oPosY, o->oPosZ);
 
             // Move toward mario
-            o->oMoveAngleYaw = o->oAngleToMario;
+            o->oMoveAngleYaw = o->oAngleToPlayer;
             o->oForwardVel = 10.0f;
             o->oWaterBombStretchSpeed = -40.0f;
         }

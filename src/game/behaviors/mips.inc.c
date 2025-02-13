@@ -44,7 +44,7 @@ s16 bhv_mips_find_furthest_waypoint_to_mario(void) {
     s16 x, y, z;
     s16 furthestWaypointIndex = -1;
     f32 furthestWaypointDistance = -10000.0f;
-    f32 distanceToMario;
+    f32 distanceToPlayer;
     struct Waypoint **pathBase = segmented_to_virtual(&inside_castle_seg7_trajectory_mips);
 
     // For each waypoint in MIPS path...
@@ -57,11 +57,11 @@ s16 bhv_mips_find_furthest_waypoint_to_mario(void) {
         // Is the waypoint within 800 units of MIPS?
         if (is_point_close_to_object(o, x, y, z, 800)) {
             // Is this further from Mario than the last waypoint?
-            distanceToMario =
-                sqr(x - gMarioObject->header.gfx.pos[0]) + sqr(z - gMarioObject->header.gfx.pos[2]);
-            if (furthestWaypointDistance < distanceToMario) {
+            distanceToPlayer =
+                sqr(x - gPlayerObject->header.gfx.pos[0]) + sqr(z - gPlayerObject->header.gfx.pos[2]);
+            if (furthestWaypointDistance < distanceToPlayer) {
                 furthestWaypointIndex = i;
-                furthestWaypointDistance = distanceToMario;
+                furthestWaypointDistance = distanceToPlayer;
             }
         }
     }
@@ -81,7 +81,7 @@ void bhv_mips_act_wait_for_nearby_mario(void) {
     collisionFlags = object_step();
 
     // If Mario is within 500 units...
-    if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 500)) {
+    if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 500)) {
         // If we fail to find a suitable waypoint...
         if (bhv_mips_find_furthest_waypoint_to_mario() == -1) {
             // Call it quits.
@@ -208,7 +208,7 @@ void bhv_mips_held(void) {
 
     o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
     cur_obj_init_animation(4); // Held animation.
-    cur_obj_set_pos_relative(gMarioObject, 0, 60.0f, 100.0f);
+    cur_obj_set_pos_relative(gPlayerObject, 0, 60.0f, 100.0f);
     cur_obj_become_intangible();
 
     // If MIPS hasn't spawned his star yet...
@@ -220,13 +220,13 @@ void bhv_mips_held(void) {
             dialogID = DIALOG_162;
         }
 
-        if (set_mario_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
+        if (set_player_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
             o->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
             if (cutscene_object_with_dialog(CUTSCENE_DIALOG, o, dialogID) != 0) {
                 o->oInteractionSubtype |= INT_SUBTYPE_DROP_IMMEDIATELY;
                 o->activeFlags &= ~ACTIVE_FLAG_INITIATED_TIME_STOP;
                 o->oMipsStarStatus = MIPS_STAR_STATUS_SHOULD_SPAWN_STAR;
-                set_mario_npc_dialog(MARIO_DIALOG_STOP);
+                set_player_npc_dialog(MARIO_DIALOG_STOP);
             }
         }
     }

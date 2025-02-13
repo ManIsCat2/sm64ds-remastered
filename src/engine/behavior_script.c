@@ -773,7 +773,7 @@ static s32 bhv_cmd_set_obj_physics(void) {
 }
 
 // Command 0x33: Performs a bit clear on the object's parent's field with the specified value.
-// Used for clearing active particle flags fron Mario's object.
+// Used for clearing active particle flags from the players object.
 // Usage: PARENT_BIT_CLEAR(field, value)
 static s32 bhv_cmd_parent_bit_clear(void) {
     u8 field = BHV_CMD_GET_2ND_U8(0);
@@ -879,11 +879,11 @@ static BhvCommandProc BehaviorCmdTable[] = {
 // Execute the behavior script of the current object, process the object flags, and other miscellaneous code for updating objects.
 void cur_obj_update(void) {
     u32 objFlags = gCurrentObject->oFlags;
-    f32 distanceFromMario;
+    f32 distanceFromPlayer;
     BhvCommandProc bhvCmdProc;
     s32 bhvProcResult;
 
-    s32 inRoom = cur_obj_is_mario_in_room();
+    s32 inRoom = cur_obj_is_player_in_room();
 
 #if PROCESS_ONLY_ON_ROOM_PARENT
     // Activates objects only if is inside a room associated with it.
@@ -895,15 +895,15 @@ void cur_obj_update(void) {
 
     // Calculate the distance from the object to Mario.
     if (objFlags & OBJ_FLAG_COMPUTE_DIST_TO_MARIO) {
-        gCurrentObject->oDistanceToMario = dist_between_objects(gCurrentObject, gMarioObject);
-        distanceFromMario = gCurrentObject->oDistanceToMario;
+        gCurrentObject->oDistanceToPlayer = dist_between_objects(gCurrentObject, gPlayerObject);
+        distanceFromPlayer = gCurrentObject->oDistanceToPlayer;
     } else {
-        distanceFromMario = 0.0f;
+        distanceFromPlayer = 0.0f;
     }
 
     // Calculate the angle from the object to Mario.
     if (objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO) {
-        gCurrentObject->oAngleToMario = obj_angle_to_object(gCurrentObject, gMarioObject);
+        gCurrentObject->oAngleToPlayer = obj_angle_to_object(gCurrentObject, gPlayerObject);
     }
 
     // If the object's action has changed, reset the action timer.
@@ -986,7 +986,7 @@ void cur_obj_update(void) {
     if (gCurrentObject->oRoom != -1) {
         // If the object is in a room, only show it when Mario is in the room.
 #ifndef NODRAWINGDISTANCE
-        if ((objFlags & OBJ_FLAG_ACTIVE_FROM_AFAR)|| distanceFromMario < gCurrentObject->oDrawingDistance)
+        if ((objFlags & OBJ_FLAG_ACTIVE_FROM_AFAR)|| distanceFromPlayer < gCurrentObject->oDrawingDistance)
 #endif
         {
             if (inRoom == MARIO_OUTSIDE_ROOM) {
@@ -1006,13 +1006,13 @@ void cur_obj_update(void) {
         if (!(objFlags & OBJ_FLAG_ACTIVE_FROM_AFAR)) {
             // If the object has a render distance, check if it should be shown.
 #ifndef NODRAWINGDISTANCE
-            if (distanceFromMario > gCurrentObject->oDrawingDistance) {
+            if (distanceFromPlayer > gCurrentObject->oDrawingDistance) {
                 // Out of render distance, hide the object.
                 gCurrentObject->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
                 gCurrentObject->activeFlags |= ACTIVE_FLAG_FAR_AWAY;
             } else if (gCurrentObject->oHeldState == HELD_FREE)
 #else
-            if (distanceFromMario <= gCurrentObject->oDrawingDistance && gCurrentObject->oHeldState == HELD_FREE)
+            if (distanceFromPlayer <= gCurrentObject->oDrawingDistance && gCurrentObject->oHeldState == HELD_FREE)
 #endif
             {
                 // In render distance (and not being held), show the object.

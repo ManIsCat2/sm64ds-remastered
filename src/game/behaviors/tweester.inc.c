@@ -53,7 +53,7 @@ void tweester_act_idle(void) {
         o->oTweesterUnused = 0;
 
         // If Mario is within range, change to the growth sub-action.
-        if (o->oDistanceToMario < 1500.0f) {
+        if (o->oDistanceToPlayer < 1500.0f) {
             o->oSubAction++;
         }
 
@@ -77,14 +77,14 @@ void tweester_act_chase(void) {
     o->oAngleToHome = cur_obj_angle_to_home();
     cur_obj_play_sound_1(SOUND_ENV_WIND1);
 
-    if (cur_obj_lateral_dist_from_mario_to_home() < activationRadius
+    if (cur_obj_lateral_dist_from_player_to_home() < activationRadius
         && o->oSubAction == TWEESTER_SUB_ACT_CHASE) {
 
         o->oForwardVel = 20.0f;
-        cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x200);
+        cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 0x200);
         print_debug_top_down_objectinfo("off ", 0);
 
-        if (gMarioStates[0].action == ACT_TWIRLING) {
+        if (gPlayerStates[0].action == ACT_TWIRLING) {
             o->oSubAction++;
         }
     } else {
@@ -96,7 +96,7 @@ void tweester_act_chase(void) {
         }
     }
 
-    if (o->oDistanceToMario > 3000.0f) {
+    if (o->oDistanceToPlayer > 3000.0f) {
         o->oAction = TWEESTER_ACT_HIDE;
     }
 
@@ -121,7 +121,7 @@ void tweester_act_hide(void) {
         tweester_scale_and_move(shrinkTimer / 60.0f);
     } else {
         cur_obj_become_intangible();
-        if (cur_obj_lateral_dist_from_mario_to_home() > 2500.0f) {
+        if (cur_obj_lateral_dist_from_player_to_home() > 2500.0f) {
             o->oAction = TWEESTER_ACT_IDLE;
         }
         if (o->oTimer > 360) {

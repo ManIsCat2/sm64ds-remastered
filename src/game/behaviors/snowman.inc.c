@@ -63,10 +63,10 @@ void snowmans_bottom_act_1(void) {
     }
 
     if (followStatus == PATH_REACHED_END) {
-        UNUSED s16 sp1E = (u16) o->oAngleToMario - (u16) o->oMoveAngleYaw;
-        if (obj_check_if_facing_toward_angle(o->oMoveAngleYaw, o->oAngleToMario, 0x2000) == TRUE
+        UNUSED s16 sp1E = (u16) o->oAngleToPlayer - (u16) o->oMoveAngleYaw;
+        if (obj_check_if_facing_toward_angle(o->oMoveAngleYaw, o->oAngleToPlayer, 0x2000) == TRUE
             && o->oSnowmansBottomUnk1AC == 1) {
-            o->oSnowmansBottomUnkF8 = o->oAngleToMario;
+            o->oSnowmansBottomUnkF8 = o->oAngleToPlayer;
         } else {
             o->oSnowmansBottomUnkF8 = o->oMoveAngleYaw;
         }
@@ -119,13 +119,13 @@ void snowmans_bottom_act_3(void) {
 void bhv_snowmans_bottom_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 400) == 1
-                && set_mario_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
+            if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 400) == 1
+                && set_player_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
                 s16 response = cutscene_object_with_dialog(CUTSCENE_DIALOG, o, DIALOG_110);
                 if (response != DIALOG_RESPONSE_NONE) {
                     o->oForwardVel = 10.0f;
                     o->oAction = 1;
-                    set_mario_npc_dialog(MARIO_DIALOG_STOP);
+                    set_player_npc_dialog(MARIO_DIALOG_STOP);
                 }
             }
             break;
@@ -147,7 +147,7 @@ void bhv_snowmans_bottom_loop(void) {
             break;
 
         case 4:
-            cur_obj_push_mario_away_from_cylinder(210.0f, 550);
+            cur_obj_push_player_away_from_cylinder(210.0f, 550);
             break;
     }
 
@@ -217,11 +217,11 @@ void bhv_snowmans_head_loop(void) {
             break;
     }
 
-    cur_obj_push_mario_away_from_cylinder(180.0f, 150.0f);
+    cur_obj_push_player_away_from_cylinder(180.0f, 150.0f);
 }
 
 void bhv_snowmans_body_checkpoint_loop(void) {
-    if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 800)) {
+    if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 800)) {
         o->parentObj->oSnowmansBottomUnk1AC++;
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }

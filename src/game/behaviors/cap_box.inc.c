@@ -143,7 +143,7 @@ void cap_box_spawn_contents(struct CapBoxContents *contentsList, u8 boxType) {
     contentsObj->oVelY = 20.0f;
     contentsObj->oForwardVel = 3.0f;
 
-    contentsObj->oMoveAngleYaw = gMarioObject->oMoveAngleYaw;
+    contentsObj->oMoveAngleYaw = gPlayerObject->oMoveAngleYaw;
     o->oBhvParams |= contents->bhvParams1stByte << 24;
     if (contents->model == MODEL_STAR) {
         o->oFlags |= OBJ_FLAG_PERSISTENT_RESPAWN;

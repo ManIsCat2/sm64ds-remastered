@@ -78,7 +78,7 @@ void bully_act_chase_mario(void) {
 
     if (o->oTimer < 10) {
         o->oForwardVel = 3.0;
-        obj_turn_toward_object(o, gMarioObject, 16, 0x1000);
+        obj_turn_toward_object(o, gPlayerObject, 16, 0x1000);
     } else if (o->oBhvParams2ndByte == BULLY_BP_SIZE_SMALL) {
         o->oForwardVel = 20.0;
         if (o->oTimer > 30) {
@@ -91,7 +91,7 @@ void bully_act_chase_mario(void) {
         }
     }
 
-    if (!is_point_within_radius_of_mario(homeX, posY, homeZ, 1000)) {
+    if (!is_point_within_radius_of_player(homeX, posY, homeZ, 1000)) {
         o->oAction = BULLY_ACT_PATROL;
         cur_obj_init_animation(0);
     }
@@ -103,7 +103,7 @@ void bully_act_knockback(void) {
         o->oBullyKBTimerAndMinionKOCounter++;
         o->oFlags |= OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
         o->oMoveAngleYaw = o->oFaceAngleYaw;
-        obj_turn_toward_object(o, gMarioObject, 16, 0x500);
+        obj_turn_toward_object(o, gPlayerObject, 16, 0x500);
     } else {
         o->header.gfx.animInfo.animFrame = 0;
     }

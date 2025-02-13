@@ -15,14 +15,14 @@ void bhv_bbh_tilting_trap_platform_loop(void) {
     // if statement, while immediately setting it over here.
     // This was done so that Mario leaving or getting on the platform
     // resets oTimer to 0.
-    if (gMarioObject->platform == o) {
-        o->oAction = BBH_TILTING_TRAP_PLATFORM_ACT_MARIO_ON;
+    if (gPlayerObject->platform == o) {
+        o->oAction = BBH_TILTING_TRAP_PLATFORM_ACT_PLAYER_ON;
     } else {
-        o->oAction = BBH_TILTING_TRAP_PLATFORM_ACT_MARIO_OFF;
+        o->oAction = BBH_TILTING_TRAP_PLATFORM_ACT_PLAYER_OFF;
     }
 
-    if (o->oAction == BBH_TILTING_TRAP_PLATFORM_ACT_MARIO_ON) {
-        o->oAngleVelPitch = (s32)(o->oDistanceToMario * coss(o->oAngleToMario));
+    if (o->oAction == BBH_TILTING_TRAP_PLATFORM_ACT_PLAYER_ON) {
+        o->oAngleVelPitch = (s32)(o->oDistanceToPlayer * coss(o->oAngleToPlayer));
         o->oFaceAnglePitch += o->oAngleVelPitch;
     } else
         // In the post-JP versions, if the platform has tilted more than 3000 angle units

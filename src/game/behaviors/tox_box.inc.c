@@ -78,7 +78,7 @@ s8 *sToxBoxActionTables[] = {
 };
 
 void tox_box_shake_screen(void) {
-    if (o->oDistanceToMario < 3000.0f) {
+    if (o->oDistanceToPlayer < 3000.0f) {
         cur_obj_shake_screen(SHAKE_POS_SMALL);
     }
 }

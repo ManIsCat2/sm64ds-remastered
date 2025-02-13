@@ -136,11 +136,11 @@
 #define RESET_TIMER 100
 
 /// A copy of the type of floor Mario is standing on.
-s16 gPaintingMarioFloorType;
+s16 gPaintingPlayerFloorType;
 // A copy of Mario's position
-f32 gPaintingMarioXPos;
-f32 gPaintingMarioYPos;
-f32 gPaintingMarioZPos;
+f32 gPaintingPlayerXPos;
+f32 gPaintingPlayerYPos;
+f32 gPaintingPlayerZPos;
 
 /**
  * When a painting is rippling, this mesh is generated each frame using the Painting's parameters.
@@ -243,7 +243,7 @@ void stop_other_paintings(s16 *idptr, struct Painting *paintingGroup[]) {
 f32 painting_mario_y(struct Painting *painting) {
     //! Unnecessary use of double constants
     // Add 50 to make the ripple closer to Mario's center of mass.
-    f32 relY = gPaintingMarioYPos - painting->posY + 50.0;
+    f32 relY = gPaintingPlayerYPos - painting->posY + 50.0;
 
     if (relY < 0.0) {
         relY = 0.0;
@@ -257,7 +257,7 @@ f32 painting_mario_y(struct Painting *painting) {
  * @return Mario's z position inside the painting (bounded).
  */
 f32 painting_mario_z(struct Painting *painting) {
-    f32 relZ = painting->posZ - gPaintingMarioZPos;
+    f32 relZ = painting->posZ - gPaintingPlayerZPos;
 
     if (relZ < 0.0) {
         relZ = 0.0;
@@ -320,7 +320,7 @@ f32 painting_nearest_4th(struct Painting *painting) {
  * @return Mario's x position inside the painting (bounded).
  */
 f32 painting_mario_x(struct Painting *painting) {
-    f32 relX = gPaintingMarioXPos - painting->posX;
+    f32 relX = gPaintingPlayerXPos - painting->posX;
 
     if (relX < 0.0) {
         relX = 0.0;
@@ -382,7 +382,7 @@ void painting_state(s8 state, struct Painting *painting, struct Painting *painti
     painting->state = state;
     painting->rippleX = painting_ripple_x(painting, xSource);
     painting->rippleY = painting_ripple_y(painting, ySource);
-    gPaintingMarioYEntry = gPaintingMarioYPos;
+    gPaintingPlayerYEntry = gPaintingPlayerYPos;
 
     // Because true or false would be too simple...
     if (resetTimer == RESET_TIMER) {
@@ -563,22 +563,22 @@ void painting_update_floors(struct Painting *painting) {
     \* and sets a bitfield accordingly.                                               */
 
     // check if Mario's current floor is one of the special floors
-    if (gPaintingMarioFloorType == paintingId * 3 + SURFACE_PAINTING_WOBBLE_A6) {
+    if (gPaintingPlayerFloorType == paintingId * 3 + SURFACE_PAINTING_WOBBLE_A6) {
         rippleLeft = RIPPLE_LEFT;
     }
-    if (gPaintingMarioFloorType == paintingId * 3 + SURFACE_PAINTING_WOBBLE_A7) {
+    if (gPaintingPlayerFloorType == paintingId * 3 + SURFACE_PAINTING_WOBBLE_A7) {
         rippleMiddle = RIPPLE_MIDDLE;
     }
-    if (gPaintingMarioFloorType == paintingId * 3 + SURFACE_PAINTING_WOBBLE_A8) {
+    if (gPaintingPlayerFloorType == paintingId * 3 + SURFACE_PAINTING_WOBBLE_A8) {
         rippleRight = RIPPLE_RIGHT;
     }
-    if (gPaintingMarioFloorType == paintingId * 3 + SURFACE_PAINTING_WARP_D3) {
+    if (gPaintingPlayerFloorType == paintingId * 3 + SURFACE_PAINTING_WARP_D3) {
         enterLeft = ENTER_LEFT;
     }
-    if (gPaintingMarioFloorType == paintingId * 3 + SURFACE_PAINTING_WARP_D4) {
+    if (gPaintingPlayerFloorType == paintingId * 3 + SURFACE_PAINTING_WARP_D4) {
         enterMiddle = ENTER_MIDDLE;
     }
-    if (gPaintingMarioFloorType == paintingId * 3 + SURFACE_PAINTING_WARP_D5) {
+    if (gPaintingPlayerFloorType == paintingId * 3 + SURFACE_PAINTING_WARP_D5) {
         enterRight = ENTER_RIGHT;
     }
 
@@ -592,7 +592,7 @@ void painting_update_floors(struct Painting *painting) {
 
     painting->marioWasUnder = painting->marioIsUnder;
     // Check if Mario has fallen below the painting (used for floor paintings)
-    if (gPaintingMarioYPos < painting->posY) {
+    if (gPaintingPlayerYPos < painting->posY) {
         painting->marioIsUnder = TRUE;
     } else {
         painting->marioIsUnder = FALSE;
@@ -1330,11 +1330,11 @@ Gfx *geo_painting_update(s32 callContext, UNUSED struct GraphNode *node, UNUSED 
         gPaintingUpdateCounter = gAreaUpdateCounter;
 
         // Store Mario's floor and position
-        find_floor(gMarioObject->oPosX, gMarioObject->oPosY, gMarioObject->oPosZ, &surface);
-        gPaintingMarioFloorType = surface->type;
-        gPaintingMarioXPos = gMarioObject->oPosX;
-        gPaintingMarioYPos = gMarioObject->oPosY;
-        gPaintingMarioZPos = gMarioObject->oPosZ;
+        find_floor(gPlayerObject->oPosX, gPlayerObject->oPosY, gPlayerObject->oPosZ, &surface);
+        gPaintingPlayerFloorType = surface->type;
+        gPaintingPlayerXPos = gPlayerObject->oPosX;
+        gPaintingPlayerYPos = gPlayerObject->oPosY;
+        gPaintingPlayerZPos = gPlayerObject->oPosZ;
     }
     return NULL;
 }

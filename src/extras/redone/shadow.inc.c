@@ -9,7 +9,7 @@
 
 #include "behavior_data.h"
 #include "game/level_update.h"
-#include "game/mario_misc.h"
+#include "game/player_misc.h"
 
 /**
  * An array consisting of all the hardcoded rectangle shadows in the game.
@@ -86,7 +86,7 @@ static s32 linearly_interpolate_negative(u8 initialSolidity, s16 curr, s16 start
  */
 s32 set_player_shadow_scale_solidity(Vec3f scaleVec, f32 distToShadow, s16 shadowScale, u8 solidity) {
     // Set the shadow solidity manually for certain Mario animations.
-    struct AnimInfo *animInfo = &gMarioObject->header.gfx.animInfo;
+    struct AnimInfo *animInfo = &gPlayerObject->header.gfx.animInfo;
     s16 animFrame = animInfo->animFrame;
 
     shadowScale = scale_shadow_with_distance(shadowScale, distToShadow);
@@ -201,7 +201,7 @@ static Gfx *shadow_display_list(s8 shadowType, u8 solidity, s8 isDecal) {
 }
 
 f32 get_shadow_floor(f32 x, f32 y, f32 z, struct Surface** floor, struct Object* obj, s8 isPlayer, s8* shifted) {
-    struct MarioState *m = gMarioState;
+    struct PlayerState *m = gPlayerState;
     f32 floorHeight = FLOOR_LOWER_LIMIT_MISC;
     s8 notHeldObj = (gCurGraphNodeHeldObject == NULL);
 
@@ -254,7 +254,7 @@ Gfx *create_shadow_below_xyz(Vec3f pos, Vec3f floorNormal, Vec3f scaleVec, s16 s
     f32 x = pos[0];
     f32 y = pos[1];
     f32 z = pos[2];
-    s8 isPlayer = (obj == gMarioObject);
+    s8 isPlayer = (obj == gPlayerObject);
 
     // The y-position of the floor (or water or lava) underneath the object.
     f32 floorHeight = get_shadow_floor(x, y, z, &floor, obj, isPlayer, &shifted);

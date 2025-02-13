@@ -58,13 +58,13 @@ void bhv_beta_trampoline_top_loop(void) {
         trampolinePart->oPosY -= 150.0f;
     }
 
-    // Update o->oBetaTrampolineMarioOnTrampoline, and reset
+    // Update o->oBetaTrampolinePlayerOnTrampoline, and reset
     // the trampoline's position if Mario's not on it.
     // Since the trampoline never moves, this doesn't do anything.
     // Maybe they intended to decrease the trampoline's position
     // when Mario's on it in this if statement?/*
-    if (gMarioObject->platform == o) {
-        o->oBetaTrampolineMarioOnTrampoline = TRUE;
+    if (gPlayerObject->platform == o) {
+        o->oBetaTrampolinePlayerOnTrampoline = TRUE;
 
         o->oVelY -= 4.f;
 
@@ -72,11 +72,11 @@ void bhv_beta_trampoline_top_loop(void) {
             ((o->oBhvParams2ndByte >> 4) / 2.0f)
             + ((o->oHomeY - o->oPosY) / ((o->oBhvParams2ndByte & 0x0F) / 2.0f));
     } else {
-        if (o->oBetaTrampolineMarioOnTrampoline) {
-            gMarioStates[0].vel[1] += o->oBetaTrampolineAdditiveYVel;
+        if (o->oBetaTrampolinePlayerOnTrampoline) {
+            gPlayerStates[0].vel[1] += o->oBetaTrampolineAdditiveYVel;
             cur_obj_play_sound_2(SOUND_GENERAL_BOING_UNUSED);
 
-            o->oBetaTrampolineMarioOnTrampoline = FALSE;
+            o->oBetaTrampolinePlayerOnTrampoline = FALSE;
         } else {
             o->oBetaTrampolineAdditiveYVel = 0;
         }

@@ -26,7 +26,7 @@ extern struct AnimDataInfo anim_mario_lips_5[];
 extern struct AnimDataInfo anim_mario_lips_6[];
 extern struct AnimDataInfo anim_mario_eyelid_left[];
 extern struct AnimDataInfo anim_mario_eyelid_right[];
-extern struct AnimDataInfo anim_mario_intro[];
+extern struct AnimDataInfo anim_player_intro[];
 extern struct AnimDataInfo anim_silver_star[];
 extern struct AnimDataInfo anim_red_star[];
 
