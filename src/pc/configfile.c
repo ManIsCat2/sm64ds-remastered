@@ -109,6 +109,7 @@ bool configSkipIntro = false;
 bool configHUD = true;
 bool configWallslide = true;
 bool configDive = true;
+bool configGlobalCapBlocks = false;
 
 unsigned int configDash = 2;
 
@@ -161,6 +162,7 @@ static const struct ConfigOption options[] = {
     {.name = "wallslide",              .type = CONFIG_TYPE_BOOL, .boolValue = &configWallslide},
     {.name = "y_to_dash",              .type = CONFIG_TYPE_UINT, .uintValue = &configDash},
     {.name = "dive",                   .type = CONFIG_TYPE_BOOL, .boolValue = &configDive},
+    {.name = "globalcapblocks",        .type = CONFIG_TYPE_BOOL, .boolValue = &configGlobalCapBlocks},
 #ifdef TOUCH_CONTROLS
     {.name = "touch_autohide",       .type = CONFIG_TYPE_BOOL, .boolValue = &configAutohideTouch},
 #endif

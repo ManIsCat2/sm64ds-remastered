@@ -69,6 +69,7 @@ extern bool configPrecacheRes;
 extern bool         configHUD;
 extern bool         configWallslide;
 extern bool         configDive;
+extern bool         configGlobalCapBlocks;
 extern unsigned int configDash;
 extern bool         configSkipIntro;
 #ifdef DISCORDRPC

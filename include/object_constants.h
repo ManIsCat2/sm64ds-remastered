@@ -1229,38 +1229,38 @@
     #define HIDDEN_OBJECT_BP_UNBREAKABLE_BOX_UNUSED_1 1
     #define HIDDEN_OBJECT_BP_UNBREAKABLE_BOX_UNUSED_2 2
 
-/* Exclamation Box */
+/* Cap Box */
     /* oAnimState */
-    #define EXCLAMATION_BOX_ANIM_STATE_WING_CAP   0
-    #define EXCLAMATION_BOX_ANIM_STATE_METAL_CAP  1
-    #define EXCLAMATION_BOX_ANIM_STATE_VANISH_CAP 2
-    #define EXCLAMATION_BOX_ANIM_STATE_DEFAULT    3
+    #define CAP_BOX_ANIM_STATE_WING_CAP   0
+    #define CAP_BOX_ANIM_STATE_METAL_CAP  1
+    #define CAP_BOX_ANIM_STATE_VANISH_CAP 2
+    #define CAP_BOX_ANIM_STATE_DEFAULT    3
 
     /* oBhvParams2ndByte */
-    #define EXCLAMATION_BOX_BP_WING_CAP         0
-    #define EXCLAMATION_BOX_BP_METAL_CAP        1
-    #define EXCLAMATION_BOX_BP_VANISH_CAP       2
-    #define EXCLAMATION_BOX_BP_KOOPA_SHELL      3
-    #define EXCLAMATION_BOX_BP_SPECIAL_CAP_END  EXCLAMATION_BOX_BP_VANISH_CAP
+    #define CAP_BOX_BP_WING_CAP         0
+    #define CAP_BOX_BP_METAL_CAP        1
+    #define CAP_BOX_BP_VANISH_CAP       2
+    #define CAP_BOX_BP_KOOPA_SHELL      3
+    #define CAP_BOX_BP_SPECIAL_CAP_END  CAP_BOX_BP_VANISH_CAP
 
 #if KOOPA_SHELL_BOXES_RESPAWN
-    #define EXCLAMATION_BOX_BP_RESPAWN_END      EXCLAMATION_BOX_BP_KOOPA_SHELL
+    #define CAP_BOX_BP_RESPAWN_END      CAP_BOX_BP_KOOPA_SHELL
 #else
-    #define EXCLAMATION_BOX_BP_RESPAWN_END      EXCLAMATION_BOX_BP_VANISH_CAP
+    #define CAP_BOX_BP_RESPAWN_END      CAP_BOX_BP_VANISH_CAP
 #endif
 
-    #define EXCLAMATION_BOX_BP_ONE_COIN         4
-    #define EXCLAMATION_BOX_BP_THREE_COINS      5
-    #define EXCLAMATION_BOX_BP_TEN_COINS        6
-    #define EXCLAMATION_BOX_BP_1UP_WALKING      7
-    #define EXCLAMATION_BOX_BP_STAR_ACT_1       8
-    #define EXCLAMATION_BOX_BP_1UP_RUNNING_AWAY 9
-    #define EXCLAMATION_BOX_BP_STAR_ACT_2       10
-    #define EXCLAMATION_BOX_BP_STAR_ACT_3       11
-    #define EXCLAMATION_BOX_BP_STAR_ACT_4       12
-    #define EXCLAMATION_BOX_BP_STAR_ACT_5       13
-    #define EXCLAMATION_BOX_BP_STAR_ACT_6       14
-    #define EXCLAMATION_BOX_BP_END              99
+    #define CAP_BOX_BP_ONE_COIN         4
+    #define CAP_BOX_BP_THREE_COINS      5
+    #define CAP_BOX_BP_TEN_COINS        6
+    #define CAP_BOX_BP_1UP_WALKING      7
+    #define CAP_BOX_BP_STAR_ACT_1       8
+    #define CAP_BOX_BP_1UP_RUNNING_AWAY 9
+    #define CAP_BOX_BP_STAR_ACT_2       10
+    #define CAP_BOX_BP_STAR_ACT_3       11
+    #define CAP_BOX_BP_STAR_ACT_4       12
+    #define CAP_BOX_BP_STAR_ACT_5       13
+    #define CAP_BOX_BP_STAR_ACT_6       14
+    #define CAP_BOX_BP_END              99
 
 /* Cap Switch */
     /* oBhvParams2ndByte */

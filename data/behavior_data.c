@@ -2637,16 +2637,16 @@ const BehaviorScript bhvBub[] = {
     END_LOOP(),
 };
 
-const BehaviorScript bhvExclamationBox[] = {
+const BehaviorScript bhvCapBox[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_COLLISION_DATA(exclamation_box_outline_seg8_collision_08025F78),
+    LOAD_COLLISION_DATA(cap_box_collision),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_FLOAT(oCollisionDistance, 300),
     SET_HOME(),
     CALL_NATIVE(bhv_init_room), // added, common object
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_exclamation_box_loop),
+        CALL_NATIVE(bhv_cap_box_loop),
     END_LOOP(),
 };
 
@@ -2655,7 +2655,7 @@ const BehaviorScript bhvRotatingExclamationMark[] = {
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SCALE(/*Unused*/ 0, /*Field*/ 200),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_rotating_exclamation_box_loop),
+        CALL_NATIVE(bhv_rotating_cap_box_loop),
         ADD_INT(oMoveAngleYaw, 0x800),
     END_LOOP(),
 };

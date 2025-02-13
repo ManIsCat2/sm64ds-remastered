@@ -288,7 +288,7 @@ extern const BehaviorScript bhvChirpChirp[];
 extern const BehaviorScript bhvChirpChirpUnused[];
 extern const BehaviorScript bhvBub[];
 extern const BehaviorScript bhvCheepCheep[];
-extern const BehaviorScript bhvExclamationBox[];
+extern const BehaviorScript bhvCapBox[];
 extern const BehaviorScript bhvRotatingExclamationMark[];
 extern const BehaviorScript bhvPlaysSound[];
 extern const BehaviorScript bhvSoundSpawner[];

@@ -1,7 +1,6 @@
-// Exclamation Box Outline
+// Cap Box Outline
 
-// 0x08025F78 - 0x08025FFC
-const Collision exclamation_box_outline_seg8_collision_08025F78[] = {
+const Collision cap_box_outline_collision[] = {
     COL_INIT(),
     COL_VERTEX_INIT(0x8),
     COL_VERTEX(-26, 30, -26),

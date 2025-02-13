@@ -355,6 +355,26 @@ sound_ref .sound_action_jump_default
 sound_ref .sound_action_jump_default
 sound_ref .sound_action_jump_default
 sound_ref .sound_action_jump_default
+sound_ref .sound_timed_star_spawn_00
+sound_ref .sound_timed_star_despawn_01
+
+.sound_timed_star_spawn_00:
+chan_setbank 11
+chan_setinstr 0
+chan_setlayer 0, .layer_timed_star_spawn_00
+chan_end
+.layer_timed_star_spawn_00:
+layer_note1 39, 0xc8, 127
+layer_end
+
+.sound_timed_star_despawn_01:
+chan_setbank 11
+chan_setinstr 0
+chan_setlayer 0, .layer_timed_star_despawn_01
+chan_end
+.layer_timed_star_despawn_01:
+layer_note1 39, 0xc8, 127
+layer_end
 
 .sound_action_jump_default:
 chan_setbank 1
@@ -1978,7 +1998,7 @@ layer_jump .layer_BAA
 sound_ref .sound_mario_jump_yah
 sound_ref .sound_mario_jump_wah
 sound_ref .sound_mario_jump_hoo
-sound_ref .sound_mario_hoohoo
+sound_ref .sound_mario_muh
 sound_ref .sound_mario_yahoo
 sound_ref .sound_mario_uh
 sound_ref .sound_mario_hrmm
@@ -2079,18 +2099,14 @@ layer_portamento 0x82, 39, 200
 layer_note1 38, 0x24, 120
 layer_end
 
-.sound_mario_hoohoo:
+.sound_mario_muh:
 chan_setbank 10
 chan_setinstr 1
 chan_setlayer 0, .layer_C6C
 chan_end
 
 .layer_C6C:
-#if defined(VERSION_EU) || defined(VERSION_SH) || defined(VERSION_CN)
-  layer_transpose 1
-#endif
-layer_portamento 0x82, 44, 200
-layer_note1 39, 0x30, 127
+layer_note1 39, 0xc8, 127
 layer_end
 
 .sound_mario_yahoo:
