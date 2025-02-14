@@ -241,4 +241,6 @@ extern const Collision wooden_signpost_seg3_collision_0302DD80[];
 
 #include "mario_winged_metal_cap/geo_header.h"
 
+#include "mips_key/geo_header.h"
+
 #endif

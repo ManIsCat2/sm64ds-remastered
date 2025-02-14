@@ -95,7 +95,7 @@ void king_bobomb_act_2(void) {
 void king_bobomb_act_3(void) {
     if (o->oSubAction == 0) {
         o->oForwardVel = 0.0f;
-        o->oKingBobombUnk104 = 0;
+        o->oKingBobombHitCount = 0;
         o->oKingBobombUnkFC = 0;
 
         if (o->oTimer == 0) {
@@ -120,13 +120,13 @@ void king_bobomb_act_3(void) {
         } else {
             o->oForwardVel = 3.0f;
 
-            if (o->oKingBobombUnk104 > 20 && cur_obj_rotate_yaw_toward(0, 0x400)) {
+            if (o->oKingBobombHitCount > 20 && cur_obj_rotate_yaw_toward(0, 0x400)) {
                 o->oSubAction++;
                 cur_obj_init_animation_and_anim_frame(9, 22);
             }
         }
 
-        o->oKingBobombUnk104++;
+        o->oKingBobombHitCount++;
     } else {
         cur_obj_init_animation_with_sound(9);
 
@@ -161,7 +161,7 @@ void king_bobomb_act_1(void) {
 void king_bobomb_act_6(void) {
     if (o->oSubAction == 0) {
         if (o->oTimer == 0) {
-            o->oKingBobombUnk104 = 0;
+            o->oKingBobombHitCount = 0;
 
             cur_obj_play_sound_2(SOUND_OBJ_KING_BOBOMB);
             cur_obj_play_sound_2(SOUND_OBJ2_KING_BOBOMB_DAMAGE);
@@ -174,10 +174,10 @@ void king_bobomb_act_6(void) {
         }
 
         if (cur_obj_init_animation_and_check_if_near_end(2)) {
-            o->oKingBobombUnk104++;
+            o->oKingBobombHitCount++;
         }
 
-        if (o->oKingBobombUnk104 > 3) {
+        if (o->oKingBobombHitCount > 3) {
             o->oSubAction++;
         }
     } else if (o->oSubAction == 1) {

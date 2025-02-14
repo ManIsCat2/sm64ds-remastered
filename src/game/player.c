@@ -262,16 +262,32 @@ void play_sound_if_no_flag(struct PlayerState *m, u32 soundBits, u32 flags) {
     }
 }
 
+int yahOrWah;
+int yahooOrYippe;
+
 /**
  * Plays a jump sound if one has not been played since the last action change.
  */
-void play_mario_jump_sound(struct PlayerState *m) {
+void play_player_jump_sound(struct PlayerState *m) {
     if (!(m->flags & MARIO_MARIO_SOUND_PLAYED)) {
         if (m->action == ACT_TRIPLE_JUMP) {
-            play_sound(SOUND_MARIO_YAHOO_WAHA_YIPPEE + ((gAudioRandom % 5) << 16),
-                       m->playerObj->header.gfx.cameraToObject);
+            if (yahOrWah == 0) {
+                play_sound(SOUND_MARIO_YAHOO, m->playerObj->header.gfx.cameraToObject);
+                yahooOrYippe++;
+            } else {
+                play_sound((SOUND_MARIO_YAHOO_WAHA_YIPPEE), m->playerObj->header.gfx.cameraToObject);
+                yahooOrYippe--;
+            }
+        } else if ((m->action == ACT_JUMP) || (m->action == ACT_DIVE)) {
+            if (yahOrWah == 0) {
+                play_sound(SOUND_MARIO_YAH, m->playerObj->header.gfx.cameraToObject);
+                yahOrWah++;
+            } else {
+                play_sound(SOUND_MARIO_WAH, m->playerObj->header.gfx.cameraToObject);
+                yahOrWah--;
+            }
         } else {
-            play_sound(SOUND_MARIO_YAH_WAH_HOO + ((gAudioRandom % 3) << 16),
+            play_sound(SOUND_MARIO_YAH + ((gAudioRandom % 3) << 16),
                        m->playerObj->header.gfx.cameraToObject);
         }
         m->flags |= MARIO_MARIO_SOUND_PLAYED;
@@ -325,17 +341,17 @@ void play_player_action_sound(struct PlayerState *m, u32 soundBits, u32 wavePart
 /**
  * Plays a landing sound, accounting for metal cap.
  */
-void play_mario_landing_sound(struct PlayerState *m, u32 soundBits) {
+void play_player_landing_sound(struct PlayerState *m, u32 soundBits) {
     play_sound_and_spawn_particles(
         m, (m->flags & PLAYER_METAL_CAP) ? SOUND_ACTION_METAL_LANDING : soundBits, 1);
 }
 
 /**
- * Plays a landing sound, accounting for metal cap. Unlike play_mario_landing_sound,
+ * Plays a landing sound, accounting for metal cap. Unlike play_player_landing_sound,
  * this function uses play_player_action_sound, making sure the sound is only
  * played once per action.
  */
-void play_mario_landing_sound_once(struct PlayerState *m, u32 soundBits) {
+void play_player_landing_sound_once(struct PlayerState *m, u32 soundBits) {
     play_player_action_sound(
         m, (m->flags & PLAYER_METAL_CAP) ? SOUND_ACTION_METAL_LANDING : soundBits, 1);
 }
@@ -343,17 +359,17 @@ void play_mario_landing_sound_once(struct PlayerState *m, u32 soundBits) {
 /**
  * Plays a heavy landing (ground pound, etc.) sound, accounting for metal cap.
  */
-void play_mario_heavy_landing_sound(struct PlayerState *m, u32 soundBits) {
+void play_player_heavy_landing_sound(struct PlayerState *m, u32 soundBits) {
     play_sound_and_spawn_particles(
         m, (m->flags & PLAYER_METAL_CAP) ? SOUND_ACTION_METAL_HEAVY_LANDING : soundBits, 1);
 }
 
 /**
  * Plays a heavy landing (ground pound, etc.) sound, accounting for metal cap.
- * Unlike play_mario_heavy_landing_sound, this function uses play_player_action_sound,
+ * Unlike play_player_heavy_landing_sound, this function uses play_player_action_sound,
  * making sure the sound is only played once per action.
  */
-void play_mario_heavy_landing_sound_once(struct PlayerState *m, u32 soundBits) {
+void play_player_heavy_landing_sound_once(struct PlayerState *m, u32 soundBits) {
     play_player_action_sound(
         m, (m->flags & PLAYER_METAL_CAP) ? SOUND_ACTION_METAL_HEAVY_LANDING : soundBits, 1);
 }
@@ -361,7 +377,7 @@ void play_mario_heavy_landing_sound_once(struct PlayerState *m, u32 soundBits) {
 /**
  * Plays action and Mario sounds relevant to what was passed into the function.
  */
-void play_mario_sound(struct PlayerState *m, s32 actionSound, s32 marioSound) {
+void play_player_sound(struct PlayerState *m, s32 actionSound, s32 marioSound) {
     if (actionSound == SOUND_ACTION_TERRAIN_JUMP) {
         play_player_action_sound(m, (m->flags & PLAYER_METAL_CAP) ? (s32) SOUND_ACTION_METAL_JUMP
                                                                 : (s32) SOUND_ACTION_TERRAIN_JUMP, 1);
@@ -370,7 +386,7 @@ void play_mario_sound(struct PlayerState *m, s32 actionSound, s32 marioSound) {
     }
 
     if (marioSound == 0) {
-        play_mario_jump_sound(m);
+        play_player_jump_sound(m);
     }
 
     if (marioSound != -1) {
@@ -1509,7 +1525,7 @@ void update_player_inputs(struct PlayerState *m) {
     print_text_fmt_int(210, 92, "1 %d", m->playerObj->oPosX);
     print_text_fmt_int(210, 72, "2 %d", m->playerObj->oPosY);
     print_text_fmt_int(210, 52, "3 %d", m->playerObj->oPosZ);
-    print_text_fmt_int(210, 120, "Character - %d", curChar);
+    print_text_fmt_int(210, 120, "Jump Sound - %d", yahOrWah);
     #endif
 #ifdef CHEATS_ACTIONS
     cheats_player_inputs(m);
@@ -1752,7 +1768,8 @@ void mario_update_hitbox_and_cap_model(struct PlayerState *m) {
     s32 flags = update_and_return_cap_flags(m);
 
     if (flags & PLAYER_VANISH_CAP) {
-        bodyState->modelState = MODEL_STATE_NOISE_ALPHA;
+        //bodyState->modelState = MODEL_STATE_NOISE_ALPHA;
+        // Note: This is disabled due to ds's vanish effect simply being a texture swap.
     }
 
     if (flags & PLAYER_METAL_CAP) {

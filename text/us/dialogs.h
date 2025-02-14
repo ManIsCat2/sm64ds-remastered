@@ -2079,3 +2079,26 @@ meet certain disaster."))
 DEFINE_DIALOG(DIALOG_170, 1, 5, 95, 200, _("\
 You need a key to\n\
 open this door."))
+
+DEFINE_DIALOG(DIALOG_171, 1, 5, 95, 200, _("\
+Aaaaargh!\n\
+No, don't eat me! All\n\
+I did was tease you a\n\
+little. C'mon, let\n\
+me go."))
+
+DEFINE_DIALOG(DIALOG_172, 1, 5, 85, 200, _("\
+Aiyeeeee!\n\
+I thought it was the\n\
+end for little old me...\n\
+My entire life flashed\n\
+before my eyes.\n\
+Talk about scary!\n\
+Anyway, here, take the\n\
+key. It's just slowing\n\
+me down."))
+
+DEFINE_DIALOG(DIALOG_173, 1, 5, 85, 200, _("\
+Give me a break. I\n\
+already gave\n\
+you back the key."))

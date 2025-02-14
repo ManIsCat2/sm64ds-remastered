@@ -29,3 +29,4 @@
 #include "mario_metal_cap/geo.inc.c"
 #include "mario_wing_cap/geo.inc.c"
 #include "mario_winged_metal_cap/geo.inc.c"
+#include "mips_key/geo.inc.c"

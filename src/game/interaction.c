@@ -15,6 +15,7 @@
 #include "level_update.h"
 #include "player.h"
 #include "player_step.h"
+#include "player_actions_cutscene.h"
 #include "memory.h"
 #include "obj_behaviors.h"
 #include "object_helpers.h"
@@ -27,6 +28,14 @@
 
 #ifdef CHEATS_ACTIONS
 #include "extras/cheats.h"
+#endif
+
+#ifdef EXT_OPTIONS_MENU
+#ifndef TARGET_N64
+#include "pc/configfile.h"
+#else
+extern int configGlobalCapBlocks = FALSE;
+#endif
 #endif
 
 #define INT_GROUND_POUND_OR_TWIRL (1 << 0) // 0x01
@@ -940,8 +949,8 @@ u32 interact_warp_door(struct PlayerState *m, UNUSED u32 interactType, struct Ob
             doorAction = ACT_UNLOCKING_KEY_DOOR;
         }
 
-        if (warpDoorId == 3 && !(saveFlags & SAVE_FLAG_UNLOCKED_BASEMENT_DOOR)) {
-            if (!(saveFlags & SAVE_FLAG_HAVE_KEY_1)) {
+        if (warpDoorId == 3 && !(saveFlags & SAVE_FLAG_UNLOCKED_CASTLE_DOOR)) {
+            if (!(saveFlags & SAVE_FLAG_HAVE_KEY_BUNNY)) {
                 if (!sDisplayingDoorText) {
                     castleKeyRead = TRUE;
                     set_player_action(m, ACT_READING_AUTOMATIC_DIALOG,
@@ -1650,7 +1659,11 @@ u32 interact_cap(struct PlayerState *m, UNUSED u32 interactType, struct Object *
 
         if ((m->action & ACT_FLAG_IDLE) || m->action == ACT_WALKING) {
             m->flags |= MARIO_CAP_IN_HAND;
-            set_player_action(m, ACT_PUTTING_ON_CAP, 0);
+            if (configGlobalCapBlocks) {
+                set_player_action(m, ACT_PUTTING_ON_CAP, 0);
+            } else {
+                cutscene_put_cap_on(m);
+            }
         } else {
             m->flags |= MARIO_CAP_ON_HEAD;
         }

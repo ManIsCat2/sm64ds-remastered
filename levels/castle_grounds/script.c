@@ -37,6 +37,7 @@ static const LevelScript script_func_local_1[] = {
     WARP_NODE(/*id*/ WARP_NODE_14, /*destLevel*/ LEVEL_CASTLE_GROUNDS, /*destArea*/ 1, /*destNode*/ WARP_NODE_14, /*flags*/ WARP_NO_CHECKPOINT),
     OBJECT(/*model*/ MODEL_NONE, /*pos*/  4997, -1250,  2258, /*angle*/ 0, 210, 0, /*bhvParam*/ BPARAM2(WARP_NODE_1E), /*bhv*/ bhvSwimmingWarp),
     WARP_NODE(/*id*/ WARP_NODE_1E, /*destLevel*/ LEVEL_CASTLE_GROUNDS, /*destArea*/ 1, /*destNode*/ WARP_NODE_1E, /*flags*/ WARP_NO_CHECKPOINT),
+    OBJECT(/*model*/ MODEL_MIPS, /*pos*/ -1127,  260,   3620, /*angle*/ 0,   0, 0, /*bhvParam*/ BPARAM2(MIPS_BP_CASTLE_KEY), /*bhv*/ bhvMips),
     RETURN(),
 };
 

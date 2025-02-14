@@ -19,6 +19,8 @@ void bhv_power_flower_init(void) {
 }
 
 void bhv_power_flower_loop(struct PlayerState *m) {
+    obj_set_hitbox(o, &sPowerFlowerHitbox);
+
     switch (o->oAction) {
         // Falling States
         case 0:
@@ -48,6 +50,7 @@ void bhv_power_flower_loop(struct PlayerState *m) {
     }
 
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
-        obj_mark_for_deletion(o);
+        o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+        o->oInteractStatus = 0;
     }
 }

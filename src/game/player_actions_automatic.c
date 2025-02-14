@@ -737,7 +737,7 @@ s32 act_ledge_climb_fast(struct PlayerState *m) {
     update_ledge_climb(m, MARIO_ANIM_FAST_LEDGE_GRAB, ACT_IDLE);
 
     if (m->playerObj->header.gfx.animInfo.animFrame == 8) {
-        play_mario_landing_sound(m, SOUND_ACTION_TERRAIN_LANDING);
+        play_player_landing_sound(m, SOUND_ACTION_TERRAIN_LANDING);
     }
     update_ledge_climb_camera(m);
 
