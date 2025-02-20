@@ -6,6 +6,10 @@ set MSYS2_DIR=C:\msys64
 set MSYS2_INSTALLER=msys2-x86_64-20241208.exe
 set MSYS2_URL=https://github.com/msys2/msys2-installer/releases/download/2024-12-08/msys2-x86_64-20241208.exe
 
+:: Set Git installation details
+set GIT_INSTALLER=Git-2.48.1-64-bit.exe
+set GIT_URL=https://github.com/git-for-windows/git/releases/download/v2.48.1.windows.1/Git-2.48.1-64-bit.exe
+
 :: Set GitHub repo details
 set REPO_URL=https://github.com/ExcellentGamer/sm64ds-remastered.git
 set CLONE_DIR=%CD%\sm64ds-remastered
@@ -34,9 +38,22 @@ if not exist "%MSYS2_DIR%\mingw64.exe" (
 :: Check if Git is installed
 where git >nul 2>nul
 if %errorlevel% neq 0 (
-    echo Git is not installed. Please install Git and rerun this script.
-    pause
-    exit /b 1
+    echo Git is not installed. Downloading and installing Git...
+
+    :: Download Git installer
+    curl -L -o %GIT_INSTALLER% %GIT_URL%
+    
+    if exist %GIT_INSTALLER% (
+        echo Running Git installer...
+        start /wait %GIT_INSTALLER% /VERYSILENT /NORESTART
+        del %GIT_INSTALLER%
+    ) else (
+        echo Failed to download Git installer. Check your internet connection.
+        pause
+        exit /b 1
+    )
+) else (
+    echo Git is already installed.
 )
 
 :: Clone the repo if it does not exist, otherwise check for updates
