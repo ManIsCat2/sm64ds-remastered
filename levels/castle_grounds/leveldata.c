@@ -29,4 +29,3 @@
 #include "levels/castle_grounds/areas/1/7/collision.inc.c"
 #include "levels/castle_grounds/areas/1/8/collision.inc.c"
 #include "levels/castle_grounds/areas/1/movtext.inc.c"
-#include "levels/castle_grounds/areas/1/trajectory.inc.c"

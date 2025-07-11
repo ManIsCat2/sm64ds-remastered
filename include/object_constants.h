@@ -1160,7 +1160,6 @@
     /* oBhvParams2ndByte */
     #define MIPS_BP_15_STARS   0
     #define MIPS_BP_50_STARS   1
-    #define MIPS_BP_CASTLE_KEY 3
 
 /* Falling Pillar */
     /* oAction */

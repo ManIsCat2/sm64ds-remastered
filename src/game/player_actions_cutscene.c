@@ -684,25 +684,25 @@ void general_star_dance_handler(struct PlayerState *m, s32 isInWater) {
     if (m->actionState == 0) {
         switch (++m->actionTimer) {
             case 1:
-                #if OBJ_HOLD_TRANSPARENT_STAR
+#if OBJ_HOLD_TRANSPARENT_STAR
                 initObj = spawn_object(m->playerObj, MODEL_STAR, bhvCelebrationStar);
                 for (i = 0; i < (s16) ARRAY_COUNT(modelForDances); i++) {
                     if (gLoadedGraphNodes[modelForDances[i]] == m->interactObj->header.gfx.sharedChild) {
                         initObj->header.gfx.sharedChild = m->interactObj->header.gfx.sharedChild;
                     }
                 }
-                #else
+#else
                 spawn_object(m->playerObj, MODEL_STAR, bhvCelebrationStar);
-                #endif
+#endif
                 disable_background_sound();
                 if (m->actionArg & 1) {
                     play_course_clear();
                 } else {
-                    #if OBJ_HOLD_TRANSPARENT_STAR
+#if OBJ_HOLD_TRANSPARENT_STAR
                     if (gPlayerState->interactObj->header.gfx.sharedChild == gLoadedGraphNodes[MODEL_BOWSER_KEY])
-                    #else
+#else
                     if (gCurrLevelNum == LEVEL_BOWSER_1 || gCurrLevelNum == LEVEL_BOWSER_2)
-                    #endif
+#endif
                     {
                         play_music(SEQ_PLAYER_ENV, SEQUENCE_ARGS(15, SEQ_EVENT_CUTSCENE_COLLECT_KEY), 0);
                     } else {
@@ -897,11 +897,7 @@ s32 act_unlocking_key_door(struct PlayerState *m) {
     }
 
     if (m->actionTimer == 0) {
-        if (m->usedObj->oBhvParams >> 24 == 3) {
-            spawn_obj_at_player_rel_yaw(m, MODEL_MIPS_KEY_CUTSCENE, bhvBowserKeyUnlockDoor, 0);
-        } else {
-            spawn_obj_at_player_rel_yaw(m, MODEL_BOWSER_KEY_CUTSCENE, bhvBowserKeyUnlockDoor, 0);
-        }
+        spawn_obj_at_player_rel_yaw(m, MODEL_BOWSER_KEY_CUTSCENE, bhvBowserKeyUnlockDoor, 0);
         set_player_animation(m, MARIO_ANIM_UNLOCK_DOOR);
     }
 
@@ -921,12 +917,9 @@ s32 act_unlocking_key_door(struct PlayerState *m) {
         if (m->usedObj->oBhvParams >> 24 == 1) {
             save_file_set_flags(SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR);
             save_file_clear_flags(SAVE_FLAG_HAVE_KEY_2);
-        } else if (m->usedObj->oBhvParams >> 24 == 2) {
+        } else {
             save_file_set_flags(SAVE_FLAG_UNLOCKED_BASEMENT_DOOR);
             save_file_clear_flags(SAVE_FLAG_HAVE_KEY_1);
-        } else {
-            save_file_set_flags(SAVE_FLAG_UNLOCKED_CASTLE_DOOR);
-            save_file_clear_flags(SAVE_FLAG_HAVE_KEY_BUNNY);
         }
         set_player_action(m, ACT_WALKING, 0);
     }
@@ -1284,11 +1277,7 @@ s32 act_exit_land_save_dialog(struct PlayerState *m) {
             animFrame = set_player_animation(m, MARIO_ANIM_THROW_CATCH_KEY);
             switch (animFrame) {
                 case -1:
-                    if (m->usedObj->oBhvParams >> 24 == 3) {
-                        spawn_obj_at_player_rel_yaw(m, MODEL_MIPS_KEY_CUTSCENE, bhvBowserKeyCourseExit, -32768);
-                    } else {
-                        spawn_obj_at_player_rel_yaw(m, MODEL_BOWSER_KEY_CUTSCENE, bhvBowserKeyCourseExit, -32768);
-                    }
+                    spawn_obj_at_player_rel_yaw(m, MODEL_BOWSER_KEY_CUTSCENE, bhvBowserKeyCourseExit, -32768);
                     BREAK;
                 case 67:
                     play_sound(SOUND_ACTION_KEY_SWISH, m->playerObj->header.gfx.cameraToObject);

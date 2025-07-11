@@ -120,7 +120,7 @@
 #define TINY_GOOMBA_DROP_COIN (0 || QOL_FEATURES)
 
 /// Clams don't hurt Mario unless they are moving (opening/closing)
-#define CLAMS_ONLY_HURT_WHEN_MOVING (0 || QOL_FEATURES)
+#define CLAMS_ONLY_HURT_WHEN_MOVING (0)
 
 /// Makes speed of a platform on a track be controlled by standing near the front or back of it
 #define CONTROLLABLE_PLATFORM_SPEED (0 || QOL_FEATURES)

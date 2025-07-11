@@ -114,8 +114,6 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_FLAG_COLLECTED_TOAD_STAR_3  /* 0x004000000 */ (1 << 26)
 #define SAVE_FLAG_COLLECTED_MIPS_STAR_1  /* 0x008000000 */ (1 << 27)
 #define SAVE_FLAG_COLLECTED_MIPS_STAR_2  /* 0x010000000 */ (1 << 28)
-#define SAVE_FLAG_HAVE_KEY_BUNNY         /* 0x100000000 */ (1 << 29)
-#define SAVE_FLAG_UNLOCKED_CASTLE_DOOR   /* 0x200000000 */ (1 << 30)
 
 #define SAVE_FLAG_TO_STAR_FLAG(cmd) (((cmd) >> 24) & 0x7F)
 #define STAR_FLAG_TO_SAVE_FLAG(cmd) ((cmd) << 24)

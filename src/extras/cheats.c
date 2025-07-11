@@ -125,21 +125,12 @@ struct SubMenu menuCheats = DEF_SUBMENU( optCheatMenuStr[0], optsCheats );
 
 void cheats_moon_jump(struct PlayerState *m) {
     if (Cheats.MoonJump) {
-        if (m->controller->buttonDown & L_TRIG) {
-            
+        if (m->controller->buttonDown & X_BUTTON) {
             m->vel[1] = 40.0f;
-
-            if (m->action != ACT_JUMP && m->heldObj == NULL) {
-                set_player_action(m, ACT_JUMP, 0);
-            }
-
-            if (m->action != ACT_HOLD_JUMP && m->heldObj != NULL) {
-                set_player_action(m, ACT_HOLD_JUMP, 0);
-            }
-
-            
+            return TRUE;
         }
     }
+    return FALSE;
 }
 
 void cheats_blj_anywhere(struct PlayerState *m) {
