@@ -2103,7 +2103,7 @@ Give me a break. I\n\
 already gave\n\
 you back the key."))
 
-DEFINE_DIALOG(DIALOG_174, 1, 4, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_174, 1, 6, 30, 200, _("\
 The king refuses to be\n\
 dejected by a single\n\
 defeat. I'm back with a\n\
