@@ -20,8 +20,16 @@ void bhv_bobomb_anchor_player_loop(void) {
 }
 
 void king_bobomb_act_0(void) {
+    s16 dialogID;
+
     o->oForwardVel = 0.0f;
     o->oVelY = 0.0f;
+
+    if (o->oBhvParams2ndByte == BOBOMB_KING_BP_TYPE_1) {
+        dialogID = DIALOG_017;
+    } else {
+        dialogID = DIALOG_174;
+    }
 
     if (o->oSubAction == 0) {
         cur_obj_become_intangible();
@@ -35,7 +43,7 @@ void king_bobomb_act_0(void) {
             seq_player_lower_volume(SEQ_PLAYER_LEVEL, 60, 40);
         }
     } else if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP,
-        DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, DIALOG_017)) {
+        DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, dialogID)) {
         o->oAction = 2;
         o->oFlags |= OBJ_FLAG_HOLDABLE;
     }
@@ -212,11 +220,7 @@ void king_bobomb_act_7(void) {
         spawn_mist_particles_variable(0, 0, 200.0f);
         spawn_triangle_break_particles(20, MODEL_DIRT_ANIMATION, 3.0f, 4);
         cur_obj_shake_screen(SHAKE_POS_SMALL);
-#ifdef RM2C_HAS_CUSTOM_STAR_POS
-        cur_obj_spawn_star_at_y_offset(KingBobOmbStarPos, 200.0f);
-#else
         cur_obj_spawn_star_at_y_offset(2000.0f, 4500.0f, -4500.0f, 200.0f);
-#endif
         o->oAction = 8;
     }
 }

@@ -115,10 +115,10 @@ u8 sDialogSpeaker[] = {
     /*14*/ _,     _,     _,     _,     _,     _,     _,     _,     _,     _,
     /*15*/ WIGLR, WIGLR, WIGLR, _,     _,     _,     _,     _,     _,     _,
     /*16*/ _,     YOSHI, _,     _,     _,     _,     _,     _,     WIGLR, _,
-    /*17*/ BOWS1, _, _
+    /*17*/ BOWS1, _, _, KBOMB
 };
 #undef _
-STATIC_ASSERT(ARRAY_COUNT(sDialogSpeaker) == DIALOG_173,
+STATIC_ASSERT(ARRAY_COUNT(sDialogSpeaker) == DIALOG_174,
               "change this array if you are adding dialogs");
 
 s32 sDialogSpeakerVoice[] = {
@@ -133,12 +133,10 @@ s32 sDialogSpeakerVoice[] = {
     SOUND_OBJ2_BOSS_DIALOG_GRUNT,
     SOUND_OBJ_WIGGLER_TALK,
     SOUND_GENERAL_YOSHI_TALK,
-#if defined(VERSION_US)
     NO_SOUND,
     NO_SOUND,
     NO_SOUND,
     NO_SOUND,
-#endif
 };
 
 u8 sNumProcessedSoundRequests = 0;
