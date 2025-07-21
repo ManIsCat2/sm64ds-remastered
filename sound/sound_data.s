@@ -54,3 +54,5 @@ SKIP(4)
 .balign 16
 
 #endif
+
+.section .note.GNU-stack,"",@progbits

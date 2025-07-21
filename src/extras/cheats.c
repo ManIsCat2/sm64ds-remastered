@@ -117,7 +117,7 @@ struct Option optsCheats[] = {
 
 struct SubMenu menuCheats = DEF_SUBMENU( optCheatMenuStr[0], optsCheats );
 
-void cheats_moon_jump(struct PlayerState *m) {
+s32 cheats_moon_jump(struct PlayerState *m) {
     if (Cheats.MoonJump) {
         if (m->controller->buttonDown &
 #ifndef TARGET_N64
