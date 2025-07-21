@@ -4,7 +4,7 @@ void bhv_blargg_mop(void) {
 
     switch (o->oAction) {
         case 0:
-            // swim after Mario
+            // swim after Player
             cur_obj_init_animation_with_sound(0);
             if (cur_obj_lateral_dist_from_player_to_home() < 1400.f) {
                 o->oPosY = approach_f32(o->oPosY, o->oHomeY - 140.f, 5.0f, 5.0f);

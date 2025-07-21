@@ -41,6 +41,7 @@ void bhv_hidden_star_trigger_loop(void) {
             if (hiddenStar->oHiddenStarTriggerCounter != 5) {
                 spawn_orange_number(hiddenStar->oHiddenStarTriggerCounter, 0, 0, 0);
             }
+
             play_sound(SOUND_MENU_COLLECT_SECRET
                        + (((u8) hiddenStar->oHiddenStarTriggerCounter - 1) << 16), gGlobalSoundSource);
         }
@@ -54,7 +55,7 @@ void bhv_bowser_course_red_coin_star_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (o->oHiddenStarTriggerCounter == REDS_BOWSER_REQ) {
+            if (o->oHiddenStarTriggerCounter == REDS_REQ) {
                 o->oAction = 1;
             }
             break;

@@ -81,11 +81,7 @@ void bhv_moving_yellow_coin_loop(void) {
             break;
 
         case MOV_YCOIN_ACT_LAVA_DEATH:
-#if QOL_FEATURE_COIN_LAVA_FLICKER
-            moving_coin_flicker();
-#else
             o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
-#endif
             break;
 
         case MOV_YCOIN_ACT_DEATH_PLANE_DEATH:
@@ -93,16 +89,11 @@ void bhv_moving_yellow_coin_loop(void) {
             break;
     }
 
-#if QOL_FEATURE_COIN_LAVA_FLICKER
-    if (o->oMoveFlags & OBJ_MOVE_ABOVE_LAVA) {
-        moving_coin_flicker();
-    }
-#endif
-
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         coin_collected();
         o->oInteractStatus = 0;
     }
+    o->oFaceAngleYaw += 0x0950;
 }
 
 void bhv_moving_blue_coin_init(void) {
@@ -147,6 +138,7 @@ void bhv_moving_blue_coin_loop(void) {
         coin_collected();
         o->oInteractStatus = 0;
     }
+    o->oFaceAngleYaw += 0x0950;
 }
 
 void bhv_blue_coin_sliding_jumping_init(void) {
@@ -223,11 +215,7 @@ void bhv_blue_coin_sliding_loop(void) {
             break;
 
         case 100:
-#if QOL_FEATURE_COIN_LAVA_FLICKER
-            o->oAction = 4;
-#else
             o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
-#endif
             break;
 
         case 101:
@@ -239,6 +227,7 @@ void bhv_blue_coin_sliding_loop(void) {
         coin_collected();
         o->oInteractStatus = 0;
     }
+    o->oFaceAngleYaw += 0x0950;
 }
 
 void bhv_blue_coin_jumping_loop(void) {
@@ -284,4 +273,5 @@ void bhv_blue_coin_jumping_loop(void) {
         coin_collected();
         o->oInteractStatus = 0;
     }
+    o->oFaceAngleYaw += 0x0950;
 }

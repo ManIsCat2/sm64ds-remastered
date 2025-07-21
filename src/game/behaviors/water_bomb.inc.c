@@ -1,7 +1,7 @@
 
 /**
  * Behaviors for bhvWaterBombSpawner, bhvWaterBomb, and bhvWaterBombShadow.
- * The spawner spawns the water bombs that fall on mario from above. These ones
+ * The spawner spawns the water bombs that fall on player from above. These ones
  * start in the WATER_BOMB_ACT_INIT action.
  * Water bombs can also be shot by cannons. These ones stay in the
  * WATER_BOMB_ACT_SHOT_FROM_CANNON action.
@@ -26,7 +26,7 @@ static struct ObjectHitbox sWaterBombHitbox = {
 
 /**
  * Update function for bhvWaterBombSpawner.
- * Spawn water bombs targeting mario when he comes in range.
+ * Spawn water bombs targeting player when he comes in range.
  */
 void bhv_water_bomb_spawner_update(void) {
     f32 latDistToPlayer;
@@ -34,7 +34,7 @@ void bhv_water_bomb_spawner_update(void) {
 
     latDistToPlayer = lateral_dist_between_objects(o, gPlayerObject);
 
-    // When mario is in range and a water bomb isn't already active
+    // When player is in range and a water bomb isn't already active
     if (!o->oWaterBombSpawnerBombActive && latDistToPlayer < spawnerRadius
         && gPlayerObject->oPosY - o->oPosY < 1000.0f) {
         if (o->oWaterBombSpawnerTimeToSpawn != 0) {
@@ -44,7 +44,7 @@ void bhv_water_bomb_spawner_update(void) {
                 spawn_object_relative(0, 0, 2000, 0, o, MODEL_WATER_BOMB, bhvWaterBomb);
 
             if (waterBomb != NULL) {
-                // Drop farther ahead of mario when he is moving faster
+                // Drop farther ahead of player when he is moving faster
                 f32 waterBombDistToPlayer = 28.0f * gPlayerStates[0].forwardVel + 100.0f;
 
                 waterBomb->oAction = WATER_BOMB_ACT_INIT;
@@ -127,7 +127,7 @@ static void water_bomb_act_drop(void) {
 
             set_camera_shake_from_point(SHAKE_POS_SMALL, o->oPosX, o->oPosY, o->oPosZ);
 
-            // Move toward mario
+            // Move toward player
             o->oMoveAngleYaw = o->oAngleToPlayer;
             o->oForwardVel = 10.0f;
             o->oWaterBombStretchSpeed = -40.0f;

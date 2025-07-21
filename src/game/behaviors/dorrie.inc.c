@@ -62,6 +62,7 @@ void dorrie_begin_head_raise(s32 liftingPlayer) {
 void dorrie_act_lower_head(void) {
     if (cur_obj_init_anim_check_frame(2, 35)) {
         cur_obj_reverse_animation();
+
         if (gPlayerObject->platform == o) {
             if (o->oDorrieOffsetY == -17.0f && o->oDorrieForwardDistToPlayer > 780.0f
                 && set_player_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_START) {
@@ -72,6 +73,7 @@ void dorrie_act_lower_head(void) {
         } else if (o->oTimer > 150) {
             dorrie_begin_head_raise(FALSE);
         }
+
     } else {
         o->oDorrieNeckAngle += 0x115;
     }

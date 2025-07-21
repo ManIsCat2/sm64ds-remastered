@@ -57,7 +57,7 @@ static void platform_on_track_reset(void) {
  * If this platform is the kind that disappears, pause for a while, then
  * begin blinking, and finally reset.
  */
-static void platform_on_track_mario_not_on_platform(void) {
+static void platform_on_track_player_not_on_platform(void) {
     if (!((u16)(o->oBhvParams >> 16) & PLATFORM_ON_TRACK_BP_DONT_DISAPPEAR)) {
         // Once oTimer reaches 150, blink 40 times
         if (cur_obj_wait_then_blink(150, 40)) {
@@ -104,7 +104,7 @@ void bhv_platform_on_track_init(void) {
 
 /**
  * Move to the start waypoint, spawn the first track balls, and enter the
- * wait for mario action.
+ * wait for player action.
  */
 static void platform_on_track_act_init(void) {
     s32 i;
@@ -135,7 +135,7 @@ static void platform_on_track_act_init(void) {
 }
 
 /**
- * Wait for mario to stand on the platform for 20 frames, then begin moving.
+ * Wait for player to stand on the platform for 20 frames, then begin moving.
  */
 static void platform_on_track_act_wait_for_player(void) {
     if (gPlayerObject->platform == o) {
@@ -250,7 +250,7 @@ static void platform_on_track_act_move_along_track(void) {
     }
 
     if (gPlayerObject->platform != o) {
-        platform_on_track_mario_not_on_platform();
+        platform_on_track_player_not_on_platform();
     } else {
         o->oTimer = 0;
         o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
@@ -274,7 +274,7 @@ static void platform_on_track_act_fall(void) {
     cur_obj_move_using_vel_and_gravity();
 
     if (gPlayerObject->platform != o) {
-        platform_on_track_mario_not_on_platform();
+        platform_on_track_player_not_on_platform();
     } else {
         o->oTimer = 0;
         //! Doesn't ensure visibility
@@ -290,7 +290,7 @@ static void platform_on_track_rock_ski_lift(void) {
 
     o->oFaceAngleRoll += (s32) o->oPlatformOnTrackSkiLiftRollVel;
 
-    // Tilt away from the moving direction and toward mario
+    // Tilt away from the moving direction and toward player
     if (gPlayerObject->platform == o) {
         targetRoll = o->oForwardVel * sins(o->oMoveAngleYaw) * -50.0f
                      + (s32)(o->oDistanceToPlayer * sins(o->oAngleToPlayer - o->oFaceAngleYaw) * -4.0f);

@@ -155,7 +155,7 @@ index b961ca52..adfde049 100644
 +
 +// Main function that should be called from thread5_game_loop()
 +void recordingDemo(void) {
-+    // Mario needs to enter directly into a level and not from a warp,
++    // The player needs to enter directly into a level and not from a warp,
 +    // so the debug level select is used for that.
 +    gDebugLevelSelect = TRUE;
 +

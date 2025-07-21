@@ -1,7 +1,7 @@
 #ifndef PLAYER_ANIMATION_IDS_H
 #define PLAYER_ANIMATION_IDS_H
 
-/* Mario Animation IDs */
+/* Player Animation IDs */
 
 enum PlayerAnimID {
     /* 0x00 */ MARIO_ANIM_SLOW_LEDGE_GRAB,

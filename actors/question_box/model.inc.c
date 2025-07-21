@@ -219,3 +219,4 @@ Gfx question_box_displaylist_mesh_layer_1[] = {
 	gsDPSetAlphaCompare(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
+

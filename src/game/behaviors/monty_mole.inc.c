@@ -49,7 +49,7 @@ static struct Object *link_objects_with_behavior(const BehaviorScript *behavior)
 }
 
 /**
- * Select a random hole that is within minDistToPlayer and 1500 of mario, and
+ * Select a random hole that is within minDistToPlayer and 1500 of player, and
  * whose cooldown is zero. Return NULL if no hole is available.
  */
 static struct Object *monty_mole_select_available_hole(f32 minDistToPlayer) {
@@ -199,7 +199,7 @@ static void monty_mole_act_rise_from_hole(void) {
 }
 
 /**
- * If mario is close enough, then spawn a rock and enter the throw rock action.
+ * If player is close enough, then spawn a rock and enter the throw rock action.
  * Otherwise, enter the begin jump into hole action.
  */
 static void monty_mole_act_spawn_rock(void) {
@@ -218,7 +218,7 @@ static void monty_mole_act_spawn_rock(void) {
 }
 
 /**
- * Wait until mario is relatively close, then set vely to 40 and enter the jump
+ * Wait until player is relatively close, then set vely to 40 and enter the jump
  * into hole action.
  */
 static void monty_mole_act_begin_jump_into_hole(void) {
@@ -278,7 +278,7 @@ static void monty_mole_hide_in_hole(void) {
     //  for a bob-omb to interact with it later in the frame (since bob-ombs
     //  come after monty moles in processing order).
     //  This means that the monty mole can be attacked while in the select hole
-    //  action. If no hole is available (e.g. because mario is too far away),
+    //  action. If no hole is available (e.g. because player is too far away),
     //  the game will crash because of the line above that accesses
     //  oMontyMoleCurrentHole.
     cur_obj_become_intangible();

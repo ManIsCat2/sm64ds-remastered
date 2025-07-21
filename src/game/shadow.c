@@ -12,5 +12,4 @@
 #include "rendering_graph_node.h"
 #include "segment2.h"
 #include "shadow.h"
-
 #include "extras/redone/shadow.inc.c"

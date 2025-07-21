@@ -6,7 +6,7 @@
 sequence_start:
 seq_setmutebhv 0x60
 seq_setmutescale 0
-#if defined(VERSION_SH) || defined(VERSION_CN)
+#ifdef VERSION_SH
   seq_setvol 100
 #else
   seq_setvol 127
@@ -2067,7 +2067,7 @@ chan_setlayer 0, .layer_C3C
 chan_end
 
 .layer_C3C:
-#if defined(VERSION_EU) || defined(VERSION_SH) || defined(VERSION_CN)
+#if defined(VERSION_EU) || defined(VERSION_SH)
   layer_transpose 2
 #endif
 layer_portamento 0x82, 41, 127
@@ -2680,7 +2680,7 @@ chan_end
 layer_note1 39, 0x50, 127
 layer_end
 
-#if defined(VERSION_EU) || defined(VERSION_SH) || defined(VERSION_CN)
+#if defined(VERSION_EU) || defined(VERSION_SH)
   .chan_unused_F9A_eu:
   chan_setbank 8
   chan_setinstr 0
@@ -3376,7 +3376,7 @@ chan_setbank 9
 chan_setinstr 3
 chan_setval 40
 chan_call .set_reverb
-#if defined(VERSION_SH) || defined(VERSION_CN)
+#ifdef VERSION_SH
   chan_setreverb 40
 #endif
 chan_setlayer 0, .layer_141A
@@ -3384,7 +3384,7 @@ chan_end
 
 .layer_141A:
 layer_transpose 24
-#if defined(VERSION_SH) || defined(VERSION_CN)
+#ifdef VERSION_SH
   layer_note1 51, 0xc, 90
 #endif
 layer_note1 39, 0x4, 90
@@ -4107,7 +4107,7 @@ layer_note1 31, 0x14, 127
 layer_end
 
 .sound_general_red_coin:
-#if defined(VERSION_EU) || defined(VERSION_SH) || defined(VERSION_CN)
+#if defined(VERSION_EU) || defined(VERSION_SH)
   chan_setbank 9
   chan_setinstr 3
 #else
@@ -4459,6 +4459,7 @@ chan_end
 .layer_1B53:
 layer_somethingon
 layer_delay 0x4
+
 .layer_1B56:
 layer_note1 41, 0x12c, 95
 layer_jump .layer_1B56
@@ -6889,12 +6890,12 @@ sound_ref .sound_menu_enter_hole
 sound_ref .sound_menu_click_change_view
 sound_ref .sound_menu_camera_unused1
 sound_ref .sound_menu_camera_unused2
-sound_ref .sound_menu_player_castle_warp
+sound_ref .sound_menu_mario_castle_warp
 sound_ref .sound_menu_star_sound
 sound_ref .sound_menu_thank_you_playing_my_game
 sound_ref .sound_menu_read_a_sign
 sound_ref .sound_menu_exit_a_sign
-sound_ref .sound_menu_player_castle_warp2
+sound_ref .sound_menu_mario_castle_warp2
 sound_ref .sound_menu_star_sound_okey_dokey
 sound_ref .sound_menu_star_sound_lets_a_go
 sound_ref .sound_menu_yoshi_gain_lives
@@ -7396,7 +7397,7 @@ layer_end
 chan_reservenotes 4
 chan_setbank 9
 chan_setinstr 2
-#if defined(VERSION_SH) || defined(VERSION_CN)
+#ifdef VERSION_SH
   chan_setval 15
   .set EXIT_PIPE_NOTE_VELOCITY, 106
 #else
@@ -7499,7 +7500,7 @@ layer_portamento 0x81, 39, 255
 layer_note1 3, 0x64, 127
 layer_end
 
-.sound_menu_player_castle_warp:
+.sound_menu_mario_castle_warp:
 chan_setbank 9
 chan_setnotepriority 14
 chan_setpanmix 0
@@ -7652,7 +7653,7 @@ layer_note1 46, 0x3, 90
 layer_note1 46, 0x3, 30
 layer_end
 
-.sound_menu_player_castle_warp2:
+.sound_menu_mario_castle_warp2:
 chan_reservenotes 6
 chan_setbank 9
 chan_setnotepriority 14
@@ -7717,7 +7718,7 @@ chan_end
 .layer_3146:
 layer_delay 0x6
 
-#if defined(VERSION_SH) || defined(VERSION_CN)
+#ifdef VERSION_SH
   .set RED_COIN_NOTE_VELOCITY_SUB, 10
 #else
   .set RED_COIN_NOTE_VELOCITY_SUB, 0
@@ -8036,7 +8037,7 @@ envelope_goto 2
 .envelope_341C:
 envelope_line 25 32760
 envelope_line 60 10000
-#if defined(VERSION_SH) || defined(VERSION_CN)
+#ifdef VERSION_SH
   envelope_hang
 #else
   envelope_goto 2

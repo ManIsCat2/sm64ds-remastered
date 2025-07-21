@@ -7,9 +7,8 @@
 #define ACT_4 (1 << 3)
 #define ACT_5 (1 << 4)
 #define ACT_6 (1 << 5)
-
 #define ACT_7 (1 << 6)
-#define ALL_ACTS (ACT_1 | ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6 | ACT_7 | ACT_7)
+#define ALL_ACTS (ACT_1 | ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6 | ACT_7)
 
 #define MODEL_NONE                        0x00
 
@@ -51,7 +50,7 @@
 #define MODEL_SL_SNOW_TREE                     0x19        // snow_tree_geo
 #define MODEL_UNKNOWN_TREE_1A                  0x1A        // referenced in special presets, undefined
 #define MODEL_SSL_PALM_TREE                    0x1B        // palm_tree_geo
-#define MODEL_CASTLE_CASTLE_DOOR_UNUSED        0x1C        // castle_door_geo - unused, original id
+//#define MODEL_CASTLE_CASTLE_DOOR_UNUSED        0x1C        // castle_door_geo - unused, original id
 #define MODEL_CASTLE_WOODEN_DOOR_UNUSED        0x1D        // wooden_door_geo - unused, original id
 #define MODEL_BBH_HAUNTED_DOOR                 0x1D        // haunted_door_geo
 #define MODEL_HMC_WOODEN_DOOR                  0x1D        // wooden_door_geo
@@ -116,7 +115,7 @@
 
 // bob
 #define MODEL_BOB_CHAIN_CHOMP_GATE             0x36        // bob_geo_000440
-#define MODEL_BOB_SEESAW_PLATFORM              0x37        // bob_geo_000458
+#define MODEL_BOB_SEESAW_PLATFORM              0x37        // bob_seesaw_platform
 #define MODEL_BOB_BARS_GRILLS                  0x38        // bob_geo_000470
 
 // sl
@@ -270,11 +269,11 @@
 #define MODEL_DDD_POLE                            0x38        // ddd_geo_000450
 
 // wf
-#define MODEL_WF_BREAKABLE_WALL_RIGHT             0x36        // wf_geo_000B78
-#define MODEL_WF_BREAKABLE_WALL_LEFT              0x37        // wf_geo_000B90
-#define MODEL_WF_KICKABLE_BOARD                   0x38        // wf_geo_000BA8
+#define MODEL_WF_BREAKABLE_WALL_RIGHT             0x36        // breakable_wall_right_geo
+#define MODEL_WF_BREAKABLE_WALL_LEFT              0x37        // breakable_wall_left_geo
+#define MODEL_WF_KICKABLE_BOARD                   0x38        // wf_kickable_board_geo
 #define MODEL_WF_TOWER_DOOR                       0x39        // wf_geo_000BE0
-#define MODEL_WF_KICKABLE_BOARD_FELLED            0x3A        // wf_geo_000BC8
+#define MODEL_WF_KICKABLE_BOARD_FELLED            0x3A        // wf_kickable_board_felled_geo
 #define MODEL_WF_TOWER_TRAPEZOID_PLATORM          0x3B        // wf_geo_000AF8 - unused
 #define MODEL_WF_TOWER_SQUARE_PLATORM             0x3C        // wf_geo_000B10
 #define MODEL_WF_TOWER_SQUARE_PLATORM_UNUSED      0x3D        // wf_geo_000B38 - unused & duplicated
@@ -444,9 +443,9 @@
 
 // other models
 #define MODEL_YELLOW_COIN                 0x74        // yellow_coin_geo
-#define MODEL_YELLOW_COIN_NO_SHADOW       0x75        // yellow_coin_no_shadow_geo
+#define MODEL_UNUSED_3                    0x75        // yellow_coin_no_shadow_geo
 #define MODEL_BLUE_COIN                   0x76        // blue_coin_geo
-#define MODEL_BLUE_COIN_NO_SHADOW         0x77        // blue_coin_no_shadow_geo
+#define MODEL_UNUSED_4                    0x77        // blue_coin_no_shadow_geo
 #define MODEL_HEART                       0x78        // heart_geo
 #define MODEL_TRANSPARENT_STAR            0x79        // transparent_star_geo
 #define MODEL_STAR                        0x7A        // star_geo
@@ -458,13 +457,20 @@
 #define MODEL_CANNON_BASE                 0x80        // cannon_base_geo
 #define MODEL_BREAKABLE_BOX               0x81        // breakable_box_geo
 #define MODEL_BREAKABLE_BOX_SMALL         0x82        // breakable_box_small_geo
-#define MODEL_CAP_BOX_OUTLINE     0x83        // cap_box_outline_geo
+#define MODEL_CAP_BOX_OUTLINE             0x83        // cap_box_outline_geo
 #define MODEL_EXCLAMATION_POINT           0x84        // exclamation_point_seg8_dl_08025F08
 #define MODEL_MARIOS_WINGED_METAL_CAP     0x85        // marios_winged_metal_cap_geo
 #define MODEL_MARIOS_METAL_CAP            0x86        // marios_metal_cap_geo
 #define MODEL_MARIOS_WING_CAP             0x87        // marios_wing_cap_geo
 #define MODEL_MARIOS_CAP                  0x88        // marios_cap_geo
-#define MODEL_CAP_BOX             0x89        // cap_box_geo
+
+#define MODEL_LUIGIS_CAP                  0xB5        // luigis_cap_geo
+#define MODEL_WARIOS_CAP                  0xB6        // warios_cap_geo
+
+// Todo: Use these unused ids
+#define MODEL_UNUSED_5                    0xD8        // red_coin_no_shadow_geo
+
+#define MODEL_CAP_BOX                     0x89        // cap_box_geo
 #define MODEL_DIRT_ANIMATION              0x8A        // dirt_animation_geo
 #define MODEL_CARTOON_STAR                0x8B        // cartoon_star_geo
 #define MODEL_BLUE_COIN_SWITCH            0x8C        // blue_coin_switch_geo
@@ -483,7 +489,6 @@
 // find me
 // find me
 // find me
-#define MODEL_BURN_SMOKE_UNUSED           0x9C        // burn_smoke_geo - unused & duplicated
 // find me
 #define MODEL_WHITE_PARTICLE_DL           0x9E        // white_particle_dl
 #define MODEL_SAND_DUST                   0x9F        // sand_seg3_dl_0302BCD0
@@ -500,21 +505,17 @@
 #define MODEL_PURPLE_MARBLE               0xAA        // purple_marble_geo
 // find me
 #define MODEL_UNKNOWN_AC                  0xAC        // according to an special preset, it was the original id of the castle floor trap
-#define MODEL_WF_SLIDING_PLATFORM         0xAD        // wf_geo_000A98
-#define MODEL_WF_SMALL_BOMP               0xAE        // wf_geo_000A00
+#define MODEL_WF_SLIDING_PLATFORM         0xAD        // wf_sliding_platform_geo
+#define MODEL_WF_SMALL_BOMP               0xAE        // small_bomp_geo
 #define MODEL_WF_ROTATING_WOODEN_PLATFORM 0xAF        // wf_geo_000A58
 #define MODEL_WF_TUMBLING_BRIDGE_PART     0xB0        // wf_geo_000AB0
-#define MODEL_WF_LARGE_BOMP               0xB1        // wf_geo_000A40
+#define MODEL_WF_LARGE_BOMP               0xB1        // large_bomp_geo
 #define MODEL_WF_TUMBLING_BRIDGE          0xB2        // wf_geo_000AC8
 #define MODEL_BOWSER_BOMB                 0xB3        // bowser_bomb_geo
 #define MODEL_WATER_MINE                  0xB3        // water_mine_geo
 #define MODEL_BOWLING_BALL                0xB4        // bowling_ball_geo
-#define MODEL_TRAMPOLINE                  0xB5        // springboard_top_geo (unused)
-#define MODEL_TRAMPOLINE_CENTER           0xB6        // springboard_spring_geo (unused)
-#define MODEL_TRAMPOLINE_BASE             0xB7        // springboard_bottom_geo (unused)
 #define MODEL_UNKNOWN_B8                  0xB8        // referenced in special presets as a static object. Unknown usage
 #define MODEL_FISH                        0xB9        // fish_geo - fish without shadow, used
-#define MODEL_FISH_SHADOW                 0xBA        // fish_shadow_geo - fish with shadow, unused
 #define MODEL_BUTTERFLY                   0xBB        // butterfly_geo
 #define MODEL_BLACK_BOBOMB                0xBC        // black_bobomb_geo
 // find me
@@ -536,7 +537,6 @@
 #define MODEL_EXPLOSION                   0xCD        // explosion_geo
 #define MODEL_SNUFIT                      0xCE        // snufit_geo
 #define MODEL_RED_SWITCH                  0xCF        // red_switch_geo
-#define MODEL_STAR_SWITCH                 0xF1        // star_switch_geo
 #define MODEL_CASTLE_STAR_DOOR_30_STARS   0xD0        // castle_geo_000F00
 #define MODEL_CASTLE_STAR_DOOR_50_STARS   0xD1        // castle_geo_000F00
 #define MODEL_CCM_SNOWMAN_BASE            0xD2        // ccm_geo_0003F0
@@ -545,7 +545,6 @@
 #define MODEL_CASTLE_STAR_DOOR_8_STARS    0xD5        // castle_geo_000F00
 #define MODEL_CASTLE_STAR_DOOR_70_STARS   0xD6        // castle_geo_000F00
 #define MODEL_RED_COIN                    0xD7        // red_coin_geo
-#define MODEL_RED_COIN_NO_SHADOW          0xD8        // red_coin_no_shadow_geo
 #define MODEL_METAL_BOX                   0xD9        // metal_box_geo
 #define MODEL_METAL_BOX_DL                0xDA        // metal_box_dl
 #define MODEL_NUMBER                      0xDB        // number_geo
@@ -557,19 +556,21 @@
 #define MODEL_TRAJECTORY_MARKER_BALL      0xE1        // bowling_ball_track_geo - duplicate used in SSL Pyramid small sized and as a track ball
 
 // DS Specific
-#define MODEL_POWER_FLOWER                0xE2        // power_flower_geo
+#define MODEL_POWER_FLOWER                0x9C        // power_flower_geo
+#define MODEL_SILVER_STAR                 0xB7        // silver_star_geo
+#define MODEL_STAR_SWITCH                 0xBA        // star_switch_geo
 
 // Menu Models (overwrites Level Geometry IDs)
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0
 #define MODEL_MAIN_MENU_RED_ERASE_BUTTON          MODEL_LEVEL_GEOMETRY_04   // main_menu_geo_000290
 #define MODEL_MAIN_MENU_BLUE_COPY_BUTTON          MODEL_LEVEL_GEOMETRY_05   // main_menu_geo_0002B8
-#define MODEL_MAIN_MENU_YELLOW_FILE_BUTTON        MODEL_LEVEL_GEOMETRY_06   // main_menu_geo_0002E0
-#define MODEL_MAIN_MENU_GREEN_SCORE_BUTTON        MODEL_LEVEL_GEOMETRY_07   // main_menu_geo_000308
-#define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON_FADE    MODEL_LEVEL_GEOMETRY_08   // main_menu_geo_000200
-#define MODEL_MAIN_MENU_MARIO_NEW_BUTTON          MODEL_LEVEL_GEOMETRY_09   // main_menu_geo_000230
-#define MODEL_MAIN_MENU_MARIO_NEW_BUTTON_FADE     MODEL_LEVEL_GEOMETRY_0A   // main_menu_geo_000260
-#define MODEL_MAIN_MENU_PURPLE_SOUND_BUTTON       MODEL_LEVEL_GEOMETRY_0B   // main_menu_geo_000330
-#define MODEL_MAIN_MENU_GENERIC_BUTTON            MODEL_LEVEL_GEOMETRY_0C   // main_menu_geo_000358
+#define MODEL_FILE_SELECT_BACKGROUND              MODEL_LEVEL_GEOMETRY_06   // file_select_bg_geo
+#define MODEL_MAIN_MENU_REC_ROOM                  MODEL_LEVEL_GEOMETRY_07   // geo_menu_rec_room
+#define MODEL_MAIN_MENU_FILE_OPTIONS              MODEL_LEVEL_GEOMETRY_08   // file_options_geo
+#define MODEL_MAIN_MENU_FILE_BUTTON_A             MODEL_LEVEL_GEOMETRY_09   // file_a_geo
+#define MODEL_MAIN_MENU_FILE_BUTTON_B             MODEL_LEVEL_GEOMETRY_0A   // file_b_geo
+#define MODEL_MAIN_MENU_FILE_BUTTON_C             MODEL_LEVEL_GEOMETRY_0B   // file_c_geo
+#define MODEL_MAIN_MENU_FILE_RETURN               MODEL_LEVEL_GEOMETRY_0C   // file_return_geo
 
 // level model aliases to level geometry IDs. Possibly a relic from an older level
 // format that used to rely on level geometry objects. (seen in WF, LLL, etc)

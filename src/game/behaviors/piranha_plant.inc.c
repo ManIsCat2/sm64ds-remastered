@@ -2,12 +2,12 @@
 /**
  * Behavior for bhvPiranhaPlant.
  * This controls Piranha Plants, which alternate between sleeping, attacking,
- * and dying, primarily depending on Mario's proximity and interaction state.
+ * and dying, primarily depending on Player's proximity and interaction state.
  */
 
 /**
  * Reset the Piranha Plant back to a sleeping animation, no matter what state
- * it was in previously, and make it intangible. If Mario is close, transition
+ * it was in previously, and make it intangible. If Player is close, transition
  * directly to the sleeping state.
  */
 void piranha_plant_act_idle(void) {
@@ -62,8 +62,8 @@ s32 piranha_plant_check_interactions(void) {
 }
 
 /**
- * Make the Piranha Plant sleep. If Mario moves too quickly, move the Piranha
- * Plant to the woken up state. Otherwise, play the lullaby if Mario is close
+ * Make the Piranha Plant sleep. If Player moves too quickly, move the Piranha
+ * Plant to the woken up state. Otherwise, play the lullaby if Player is close
  * enough. If the player interacts with the Piranha Plant, it will act according
  * to piranha_plant_check_interactions().
  */
@@ -196,7 +196,7 @@ void piranha_plant_act_shrink_and_die(void) {
 }
 
 /**
- * Wait for Mario to move far away, then respawn the Piranha Plant.
+ * Wait for Player to move far away, then respawn the Piranha Plant.
  */
 void piranha_plant_act_wait_to_respawn(void) {
     if (o->oDistanceToPlayer > 1200.0f) {

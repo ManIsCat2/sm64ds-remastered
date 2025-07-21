@@ -23,10 +23,10 @@ void bhv_donut_platform_spawner_update(void) {
             f32 dx = gPlayerObject->oPosX - sDonutPlatformPositions[i][0];
             f32 dy = gPlayerObject->oPosY - sDonutPlatformPositions[i][1];
             f32 dz = gPlayerObject->oPosZ - sDonutPlatformPositions[i][2];
-            f32 marioSqDist = dx * dx + dy * dy + dz * dz;
+            f32 playerSqDist = dx * dx + dy * dy + dz * dz;
 
             // dist > 1000 and dist < 2000
-            if (marioSqDist > 1000000.0f && marioSqDist < 4000000.0f) {
+            if (playerSqDist > 1000000.0f && playerSqDist < 4000000.0f) {
                 if (spawn_object_relative(i, sDonutPlatformPositions[i][0],
                                           sDonutPlatformPositions[i][1], sDonutPlatformPositions[i][2],
                                           o, MODEL_RR_DONUT_PLATFORM, bhvDonutPlatform) != NULL) {

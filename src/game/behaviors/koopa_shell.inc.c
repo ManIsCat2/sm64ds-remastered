@@ -93,7 +93,7 @@ void bhv_koopa_shell_loop(void) {
         case 1:
             obj_copy_pos(o, gPlayerObject);
             // ex-alo change
-            // copy Mario's floor and floorHeight as well
+            // copy Player's floor and floorHeight as well
             o->oFloor       = gPlayerState->floor;
             o->oFloorHeight = gPlayerState->floorHeight;
 

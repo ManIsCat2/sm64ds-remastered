@@ -34,7 +34,7 @@ static u8 sSpinyWalkAttackHandlers[] = {
 };
 
 /**
- * If the spiny was spawned by lakitu and mario is far away, despawn.
+ * If the spiny was spawned by lakitu and player is far away, despawn.
  */
 static s32 spiny_check_active(void) {
     if (o->parentObj != o) {
@@ -109,14 +109,14 @@ static void spiny_act_walk(void) {
         cur_obj_move_standard(-78);
 
         if (obj_handle_attacks(&sSpinyHitbox, SPINY_ACT_ATTACKED_MARIO, sSpinyWalkAttackHandlers)) {
-            // When attacked by mario, lessen the knockback
+            // When attacked by player, lessen the knockback
             o->oAction = SPINY_ACT_WALK;
             o->oForwardVel *= 0.1f;
             o->oVelY *= 0.7f;
 
             o->oMoveFlags = 0; // weird flex but okay
 
-            // Don't allow mario to punch the spiny two frames in a row?
+            // Don't allow player to punch the spiny two frames in a row?
             o->oInteractType = INTERACT_MR_BLIZZARD;
         } else {
             o->oInteractType = INTERACT_UNKNOWN_08;

@@ -29,3 +29,7 @@
 #include "mario_metal_cap/geo.inc.c"
 #include "mario_wing_cap/geo.inc.c"
 #include "mario_winged_metal_cap/geo.inc.c"
+
+#include "luigi_cap/geo.inc.c"
+#include "wario_cap/geo.inc.c"
+#include "silver_star/geo.inc.c"

@@ -44,7 +44,7 @@ void one_up_loop_in_air(void) {
     }
 }
 
-void pole_1up_move_towards_mario(void) {
+void pole_1up_move_towards_player(void) {
     f32 sp34 = gPlayerObject->header.gfx.pos[0] - o->oPosX;
     f32 sp30 = gPlayerObject->header.gfx.pos[1] + 120.0f - o->oPosY;
     f32 sp2C = gPlayerObject->header.gfx.pos[2] - o->oPosZ;
@@ -292,7 +292,7 @@ void bhv_1up_hidden_in_pole_loop(void) {
             break;
 
         case 1:
-            pole_1up_move_towards_mario();
+            pole_1up_move_towards_player();
             collisionFlags = object_step();
             break;
 

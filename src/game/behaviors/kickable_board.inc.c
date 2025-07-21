@@ -1,6 +1,6 @@
 // kickable_board.inc.c
 
-s32 check_mario_attacking(UNUSED s32 unused) {
+s32 check_player_attacking(UNUSED s32 unused) {
     if (obj_check_if_collided_with_object(o, gPlayerObject)
         && abs_angle_diff(o->oMoveAngleYaw, gPlayerObject->oMoveAngleYaw) > 0x6000) {
         if (gPlayerStates[0].action == ACT_SLIDE_KICK) {
@@ -38,7 +38,7 @@ void bhv_kickable_board_loop(void) {
         case 0:
             o->oFaceAnglePitch = 0;
 
-            if (check_mario_attacking(0) != 0) {
+            if (check_player_attacking(0) != 0) {
                 init_kickable_board_rock();
                 o->oAction++;
             }
@@ -51,7 +51,7 @@ void bhv_kickable_board_loop(void) {
             load_object_collision_model();
             o->oFaceAnglePitch = -sins(o->oKickableBoardF4) * o->oKickableBoardF8;
 
-            if (o->oTimer > 30 && (sp24 = check_mario_attacking(0))) {
+            if (o->oTimer > 30 && (sp24 = check_player_attacking(0))) {
                 if (gPlayerObject->oPosY > o->oPosY + 160.0f && sp24 == 2) {
                     o->oAction++;
                     cur_obj_play_sound_2(SOUND_GENERAL_BUTTON_PRESS_2);

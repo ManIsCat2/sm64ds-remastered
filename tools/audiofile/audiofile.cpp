@@ -3552,17 +3552,6 @@ struct IntTypes<kInt24> { typedef int32_t SignedType; typedef uint32_t UnsignedT
 template <>
 struct IntTypes<kInt32> { typedef int32_t SignedType; typedef uint32_t UnsignedType; };
 
-namespace compat
-{
-	template<typename Arg, typename R>
-	class unary_function
-	{
-	public:
-		using argument_type = Arg;
-		using result_type = R;
-	};
-}
-
 template <FormatCode Format>
 struct signConverter
 {
@@ -3573,13 +3562,13 @@ struct signConverter
 	static const int kMaxSignedValue = (((1 << (kScaleBits - 1)) - 1) << 1) + 1;
 	static const int kMinSignedValue = -kMaxSignedValue - 1;
 
-	struct signedToUnsigned : public compat::unary_function<SignedType, UnsignedType>
- 	{
+	struct signedToUnsigned : public std::unary_function<SignedType, UnsignedType>
+	{
 		UnsignedType operator()(SignedType x) { return x - kMinSignedValue; }
 	};
 
-	struct unsignedToSigned : public compat::unary_function<SignedType, UnsignedType>
- 	{
+	struct unsignedToSigned : public std::unary_function<SignedType, UnsignedType>
+	{
 		SignedType operator()(UnsignedType x) { return x + kMinSignedValue; }
 	};
 };
@@ -3771,7 +3760,7 @@ private:
 };
 
 template <typename Arg, typename Result>
-struct intToFloat : public compat::unary_function<Arg, Result>
+struct intToFloat : public std::unary_function<Arg, Result>
 {
 	Result operator()(Arg x) const { return x; }
 };
@@ -3837,13 +3826,13 @@ private:
 };
 
 template <typename Arg, typename Result, unsigned shift>
-struct lshift : public compat::unary_function<Arg, Result>
+struct lshift : public std::unary_function<Arg, Result>
 {
 	Result operator()(const Arg &x) const { return x << shift; }
 };
 
 template <typename Arg, typename Result, unsigned shift>
-struct rshift : public compat::unary_function<Arg, Result>
+struct rshift : public std::unary_function<Arg, Result>
 {
 	Result operator()(const Arg &x) const { return x >> shift; }
 };
@@ -3939,7 +3928,7 @@ private:
 };
 
 template <typename Arg, typename Result>
-struct floatToFloat : public compat::unary_function<Arg, Result>
+struct floatToFloat : public std::unary_function<Arg, Result>
 {
 	Result operator()(Arg x) const { return x; }
 };
@@ -6816,7 +6805,7 @@ static const _AFfilesetup aiffDefaultFileSetup =
 	NULL,			/* tracks */
 	1,			/* instrumentCount */
 	NULL,			/* instruments */
-	0,			/* miscellaneousCount */
+    0,			/* miscellaneousCount */
 	NULL			/* miscellaneous */
 };
 
@@ -8063,7 +8052,7 @@ static char s_tmpSampleBuf[2048];
 std::string AudioFormat::description() const
 {
 	std::string d;
-
+              
 	/* sampleRate, channelCount */
 	snprintf(s_tmpSampleBuf, sizeof(s_tmpSampleBuf), "{ %7.2f Hz %d ch ", sampleRate, channelCount);
 	d += s_tmpSampleBuf;
@@ -9992,9 +9981,9 @@ static const _AFfilesetup rawDefaultFileSetup =
 	true,	// miscellaneousSet
 	1,		// trackCount
 	NULL,	// tracks
-	0,		// instrumentCount
+    0,		// instrumentCount
 	NULL,	// instruments
-	0,		// miscellaneousCount
+    0,		// miscellaneousCount
 	NULL	// miscellaneous
 };
 
@@ -10183,13 +10172,13 @@ static const _AFfilesetup _af_default_file_setup =
 	NULL,		/* tracks */
 	1,		/* instrumentCount */
 	NULL,		/* instruments */
-	0,		/* miscellaneousCount */
+    0,		/* miscellaneousCount */
 	NULL		/* miscellaneous */
 };
 
 static const InstrumentSetup _af_default_instrumentsetup =
 {
-	0,		/* id */
+    0,		/* id */
 	2,		/* loopCount */
 	NULL,		/* loops */
 	false		/* loopSet */
@@ -10197,7 +10186,7 @@ static const InstrumentSetup _af_default_instrumentsetup =
 
 static const TrackSetup _af_default_tracksetup =
 {
-	0,
+    0,
 	{
         // ex-alo note: Originally 44100.0 (44.1 kHz), since we are using audiofile
         // on an old game (Super Mario 64), 32 kHz should be enough by default.
@@ -10223,7 +10212,7 @@ static const TrackSetup _af_default_tracksetup =
 
 	4,		/* markerCount */
 	NULL,		/* markers */
-	0,		/* dataOffset */
+    0,		/* dataOffset */
 	0		/* frameCount */
 };
 
@@ -11040,9 +11029,9 @@ static const _AFfilesetup waveDefaultFileSetup =
 	true,			/* miscellaneousSet  */
 	1,			/* trackCount */
 	NULL,			/* tracks */
-	0,			/* instrumentCount */
+    0,			/* instrumentCount */
 	NULL,			/* instruments */
-	0,			/* miscellaneousCount */
+    0,			/* miscellaneousCount */
 	NULL			/* miscellaneous */
 };
 
@@ -15452,10 +15441,10 @@ const Unit _af_units[_AF_NUM_UNITS] =
 		AF_SAMPFMT_TWOSCOMP, 16,
 		_AF_RAW_NUM_COMPTYPES,
 		_af_raw_compression_types,
-		0,	/* maximum marker count */
-		0,	/* maximum instrument count */
-		0,	/* maxium number of loops per instrument */
-		0, NULL,
+	    0,	/* maximum marker count */
+	    0,	/* maximum instrument count */
+	    0,	/* maxium number of loops per instrument */
+	    0, NULL,
 	},
 	{
 		AF_FILE_AIFFC,
@@ -15479,7 +15468,7 @@ const Unit _af_units[_AF_NUM_UNITS] =
 		AIFFFile::completeSetup,
 		AIFFFile::recognizeAIFF,
 		AF_SAMPFMT_TWOSCOMP, 16,
-		0,	/* supported compression types */
+	    0,	/* supported compression types */
 		NULL,
 		65535,	/* maximum marker count */
 		1,	/* maximum instrument count */

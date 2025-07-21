@@ -140,7 +140,7 @@ struct Animation {
     /*0x0A*/ s16 unusedBoneCount;
     /*0x0C*/ const s16 *values;
     /*0x10*/ const u16 *index;
-    /*0x14*/ u32 length; // only used with Mario animations to determine how much to load. 0 otherwise.
+    /*0x14*/ u32 length; // only used with the players animations to determine how much to load. 0 otherwise.
 };
 
 #define ANIMINDEX_NUMPARTS(animindex) (sizeof(animindex) / sizeof(u16) / 6 - 1)
@@ -307,10 +307,10 @@ struct Surface {
 
 struct PlayerBodyState {
     /*0x00*/ u32 action;
-    /*0x04*/ s8 capState; /// see MarioCapGSCId
+    /*0x04*/ s8 capState; /// see PlayerCapGSCId
     /*0x05*/ s8 eyeState;
     /*0x06*/ s8 handState;
-    /*0x07*/ s8 wingFlutter; /// whether Mario's wing cap wings are fluttering
+    /*0x07*/ s8 wingFlutter; /// whether the player's wing cap wings are fluttering
     /*0x08*/ s16 modelState;
     /*0x0A*/ s8 grabPos;
     /*0x0B*/ u8 punchState; /// 2 bits for type of punch, 6 bits for punch animation timer

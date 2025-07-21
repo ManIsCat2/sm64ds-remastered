@@ -16,6 +16,7 @@
 #include "levels/castle_inside/star_door/geo.inc.c"
 #include "levels/castle_inside/trap_door/geo.inc.c"
 #include "levels/castle_inside/areas/1/geo.inc.c"
+#include "levels/castle_inside/areas/4/geo.inc.c"
 #include "levels/castle_inside/areas/2/pendulum/geo.inc.c" // Another weird case
 #include "levels/castle_inside/clock_minute_hand/geo.inc.c"
 #include "levels/castle_inside/clock_hour_hand/geo.inc.c"

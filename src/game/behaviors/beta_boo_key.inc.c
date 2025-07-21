@@ -125,7 +125,7 @@ static void beta_boo_key_drop(void) {
 
         o->oAction = BETA_BOO_KEY_ACT_DROPPED;
 
-        // Make the key move laterally away from Mario at 3 units/frame
+        // Make the key move laterally away from Player at 3 units/frame
         // (as if he transferred kinetic energy to it)
         velocityDirection = gPlayerObject->oMoveAngleYaw;
         velocityMagnitude = 3.0f;

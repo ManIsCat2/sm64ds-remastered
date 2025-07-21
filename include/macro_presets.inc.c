@@ -7,7 +7,7 @@ struct MacroPreset {
 };
 
 static struct MacroPreset sMacroObjectPresets[] = {
-    /* macro_yellow_coin_1               */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
+    /* macro_yellow_coin               */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
     /* macro_yellow_coin_2               */ { bhvOneCoin, MODEL_YELLOW_COIN, 0 },
     /* macro_moving_blue_coin            */ { bhvMovingBlueCoin, MODEL_BLUE_COIN, 0 },
     /* macro_sliding_blue_coin           */ { bhvBlueCoinSliding, MODEL_BLUE_COIN, 0 }, // unused
@@ -48,7 +48,7 @@ static struct MacroPreset sMacroObjectPresets[] = {
     /* macro_homing_amp                  */ { bhvHomingAmp, MODEL_AMP, 0 },
     /* macro_circling_amp                */ { bhvCirclingAmp, MODEL_AMP, AMP_BP_ROT_RADIUS_200 },
     /* macro_unknown_40                  */ { bhvCarrySomething1, MODEL_UNKNOWN_7D, 0 }, // unused
-    /* macro_unknown_41                  */ { bhvBetaTrampolineTop, MODEL_TRAMPOLINE, 0 }, // unused
+    /* macro_unknown_41                  */ { bhvBetaTrampolineTop, 0/*MODEL_TRAMPOLINE*/, 0 }, // unused
     /* macro_free_bowling_ball           */ { bhvFreeBowlingBall, MODEL_BOWLING_BALL, 0 }, // unused
     /* macro_snufit                      */ { bhvSnufit, MODEL_SNUFIT, 0 },
     /* macro_recovery_heart              */ { bhvRecoveryHeart, MODEL_HEART, 0 },
@@ -113,7 +113,7 @@ static struct MacroPreset sMacroObjectPresets[] = {
     /* macro_empty_103                   */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
     /* macro_empty_104                   */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
     /* macro_empty_105                   */ { bhvYellowCoin, MODEL_YELLOW_COIN, 0 },
-    /* macro_wooden_post_1               */ { bhvWoodenPost, MODEL_WOODEN_POST, 0 },
+    /* macro_wooden_post               */ { bhvWoodenPost, MODEL_WOODEN_POST, 0 },
     /* macro_water_bomb_spawner          */ { bhvWaterBombSpawner, MODEL_NONE, 0 },
     /* macro_enemy_lakitu                */ { bhvEnemyLakitu, MODEL_ENEMY_LAKITU, 0 },
     /* macro_bob_koopa_the_quick         */ { bhvKoopa, MODEL_KOOPA_WITH_SHELL, KOOPA_BP_KOOPA_THE_QUICK_BOB }, // unused

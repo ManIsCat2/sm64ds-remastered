@@ -1,0 +1,7 @@
+extern u8 castle_jrb_room_part3_geo_sky_rgba16[];
+extern Vtx castle_jrb_room_part3_geo__20__castle_jrb_room_part3_geo_mesh_vtx_cull[8];
+extern Vtx castle_jrb_room_part3_geo__20__castle_jrb_room_part3_geo_mesh_vtx_0[16];
+extern Gfx castle_jrb_room_part3_geo__20__castle_jrb_room_part3_geo_mesh_tri_0[];
+extern Gfx mat_castle_jrb_room_part3_geo_mat_sky_7_f3d[];
+extern Gfx mat_revert_castle_jrb_room_part3_geo_mat_sky_7_f3d[];
+extern Gfx castle_jrb_room_part3_geo[];

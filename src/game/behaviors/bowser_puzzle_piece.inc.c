@@ -128,7 +128,7 @@ void bhv_lll_bowser_puzzle_loop(void) {
             break;
 
         case BOWSER_PUZZLE_ACT_WAIT_FOR_COMPLETE:
-            // If both completion flags are set and Mario is within 1000 units...
+            // If both completion flags are set and Player is within 1000 units...
             if (o->oBowserPuzzleCompletionFlags == 3 && o->oDistanceToPlayer < 1000.0f) {
                 // Spawn 5 coins.
                 for (i = 0; i < 5; i++) {
@@ -169,7 +169,7 @@ void bhv_lll_bowser_puzzle_piece_action_1(void) {
 void bhv_lll_bowser_puzzle_piece_update(void) {
     s8 *nextAction = o->oBowserPuzzlePieceNextAction;
 
-    // If Mario is standing on this puzzle piece, set a flag in the parent.
+    // If Player is standing on this puzzle piece, set a flag in the parent.
     if (gPlayerObject->platform == o) {
         o->parentObj->oBowserPuzzleCompletionFlags = 1;
     }

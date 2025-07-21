@@ -361,3 +361,4 @@ Gfx star_switch_switch_mesh_layer_1[] = {
 	gsDPSetAlphaCompare(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
+

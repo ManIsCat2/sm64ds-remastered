@@ -1,7 +1,7 @@
 // bub.inc.c
 
 // NOTE: These first set of functions spawn a school of bub depending on objF4's
-// value. The later action functions seem to check Y distance to Mario and proceed
+// value. The later action functions seem to check Y distance to Player and proceed
 // to do nothing, which indicates this behavior set is incomplete.
 
 void bub_spawner_act_0(void) {

@@ -44,12 +44,6 @@ static u8 optmenu_bind_idx = 0;
 /* Keeps track of how many times the user has pressed L while in the options menu, so cheats can be unlocked */
 static s32 l_counter = 0;
 
-#ifdef VERSION_CN // hack, todo remove
-#define SIZEOPTC(n) n * 2
-#else
-#define SIZEOPTC(n) n
-#endif
-
 // How to add stuff:
 // strings: add them to include/text_strings.h.in
 //          and to optMainStr[] / opts*Str[]
@@ -57,19 +51,19 @@ static s32 l_counter = 0;
 // menus:   add a new submenu definition and a new
 //          option to the optsMain list
 
-static const u8 toggleStr[][SIZEOPTC(16)] = {
+static const u8 toggleStr[][16] = {
     { TEXT_OPT_DISABLED },
     { TEXT_OPT_ENABLED },
 };
 
-static const u8 optSmallStr[][SIZEOPTC(32)] = {
+static const u8 optSmallStr[][32] = {
     { TEXT_OPT_BUTTON1 },
     { TEXT_OPT_BUTTON2 },
     { TEXT_OPT_L_HIGHLIGHT },
     { TEXT_OPT_R_HIGHLIGHT },
 };
 
-static const u8 optMainStr[][SIZEOPTC(32)] = {
+static const u8 optMainStr[][32] = {
     { TEXT_OPT_OPTIONS },
     { TEXT_OPT_CAMERA },
     { TEXT_OPT_CONTROLS },
@@ -77,10 +71,9 @@ static const u8 optMainStr[][SIZEOPTC(32)] = {
     { TEXT_OPT_AUDIO },
     { TEXT_OPT_SETTINGS },
     { TEXT_OPT_DS_SETTINGS },
-    { TEXT_EXIT_GAME },
 };
 
-const u8 optsCameraStr[][SIZEOPTC(32)] = {
+const u8 optsCameraStr[][32] = {
     { TEXT_OPT_VANILLA_CAM },
     { TEXT_OPT_LAKITU_PARALLEL },
     { TEXT_OPT_SR_MARIO_CAM },
@@ -89,7 +82,7 @@ const u8 optsCameraStr[][SIZEOPTC(32)] = {
 };
 
 #ifndef TARGET_N64
-static const u8 optsVideoStr[][SIZEOPTC(32)] = {
+static const u8 optsVideoStr[][32] = {
     { TEXT_OPT_FSCREEN },
     { TEXT_OPT_TEXMODE },
     { TEXT_OPT_DS },
@@ -100,14 +93,14 @@ static const u8 optsVideoStr[][SIZEOPTC(32)] = {
 };
 #endif
 
-static const u8 optsAudioStr[][SIZEOPTC(32)] = {
+static const u8 optsAudioStr[][32] = {
     { TEXT_OPT_MVOLUME },
     { TEXT_OPT_MUSVOLUME },
     { TEXT_OPT_SFXVOLUME },
     { TEXT_OPT_ENVVOLUME },
 };
 
-static const u8 optsSettingsStr[][SIZEOPTC(32)] = {
+static const u8 optsSettingsStr[][32] = {
     { TEXT_OPT_HUD },
     { TEXT_OPT_MOUSE },
 };
@@ -118,12 +111,13 @@ static const u8 optsDsSettingsStr[][32] = {
     { TEXT_OPT_DS_DIVE },
     { TEXT_OPT_DS_BLOCK },
     { TEXT_OPT_JHEIGHT },
+    { TEXT_OPT_NERF },
     { TEXT_OPT_DS_SWALK },
     { TEXT_OPT_DS_SRUN },
 };
 
 #if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
-static const u8 optBindStr[][SIZEOPTC(32)] = {
+static const u8 optBindStr[][32] = {
     { TEXT_OPT_UNBOUND },
     { TEXT_OPT_PRESSKEY },
     { TEXT_BIND_A },
@@ -150,16 +144,6 @@ static const u8 optBindStr[][SIZEOPTC(32)] = {
     { TEXT_OPT_DEADZONE },
     { TEXT_OPT_RUMBLE },
 };
-
-#ifdef TOUCH_CONTROLS
-extern struct SubMenu menuTouch;
-
-static const u8 optTouchStr[][SIZEOPTC(32)] = {
-    { TEXT_TOUCH_CONTROLS },
-    { TEXT_TOUCH_AUTOHIDE },
-};
-#endif
-
 #endif
 
 #ifndef TARGET_N64
@@ -171,8 +155,8 @@ static const u8 *filterChoices[] = {
 
 static const u8 *movementChoices[] = {
     toggleStr[0],
-    optsDsSettingsStr[5],
     optsDsSettingsStr[6],
+    optsDsSettingsStr[7],
 };
 
 /* button action functions */
@@ -200,9 +184,6 @@ static void optvideo_apply(UNUSED struct Option *self, s32 arg) {
 /* submenu option lists */
 #if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
 static struct Option optsControls[] = {
-#ifdef TOUCH_CONTROLS
-    DEF_OPT_SUBMENU( optTouchStr[0], &menuTouch ),
-#endif
     DEF_OPT_BIND( optBindStr[ 2], configKeyA ),
     DEF_OPT_BIND( optBindStr[ 3], configKeyB ),
     DEF_OPT_BIND( optBindStr[ 4], configKeyX ),
@@ -231,15 +212,6 @@ static struct Option optsControls[] = {
     DEF_OPT_SCROLL( optBindStr[24], &configRumbleStrength, 0, 100, 1),
 #endif
 };
-
-#ifdef TOUCH_CONTROLS
-static struct Option optsTouch[] = {
-    DEF_OPT_TOGGLE( optTouchStr[1], &configAutohideTouch ),
-};
-
-struct SubMenu menuTouch = DEF_SUBMENU( optTouchStr[0], optsTouch );
-#endif
-
 #endif
 
 #if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
@@ -267,15 +239,17 @@ static struct Option optsSettings[] = {
 static struct Option optsDsSettings[] = {
 #ifndef TARGET_N64
     DEF_OPT_CHOICE( optsVideoStr[1], &configFiltering, filterChoices ),
-#endif
     DEF_OPT_CHOICE( optsDsSettingsStr[1], &configDash, movementChoices ),
+#endif
     DEF_OPT_TOGGLE( optsDsSettingsStr[0], &configWallslide ),
     DEF_OPT_TOGGLE( optsDsSettingsStr[2], &configDive ),
     DEF_OPT_TOGGLE( optsDsSettingsStr[3], &configGlobalCapBlocks ),
     DEF_OPT_TOGGLE( optsDsSettingsStr[4], &configJHeight ),
+    DEF_OPT_TOGGLE( optsDsSettingsStr[5], &configNerfs ),
 };
 
 /* submenu definitions */
+
 #if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
 static struct SubMenu menuControls = DEF_SUBMENU( optMainStr[2], optsControls );
 #endif
@@ -306,10 +280,6 @@ static struct Option optsMain[] = {
 #ifdef EXT_DEBUG_MENU
     // NOTE: always keep cheats the last option here because of the half-assed way I toggle them
     DEF_OPT_SUBMENU( optDebugMenuStr[0], &menuDebug ),
-#endif
-
-#if !defined(TARGET_N64) && (defined(TARGET_SWITCH) || !defined(TARGET_PORT_CONSOLE))
-    DEF_OPT_BUTTON ( optMainStr[7], optmenu_act_exit ),
 #endif
 
 #ifdef CHEATS_ACTIONS
@@ -344,8 +314,8 @@ static void uint_to_hex(u32 num, u8 *dst) {
     dst[4] = DIALOG_CHAR_TERMINATOR;
 }
 
-static void optmenu_draw_text(s16 x, s16 y, const u8 *str, u8 col) {
-    const u8 textX = get_str_x_pos_from_center(x, (u8 *) str, 10.0f);
+static void optmenu_draw_text(s16 x, s16 y, const u8 str[], u8 col) {
+    u8 textX = get_str_x_pos_from_center(x, (u8 *) str, 10.0f);
     gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
     print_generic_string(textX + 1, y - 1, str);
     if (col == 0) {
@@ -356,23 +326,23 @@ static void optmenu_draw_text(s16 x, s16 y, const u8 *str, u8 col) {
     print_generic_string(textX, y, str);
 }
 
-static void optmenu_draw_opt_scroll(const struct Option *opt, s16 y) {
-    s16 maxvar = opt->scrMax - opt->scrMin;
-    s16 minvar = *opt->uval - opt->scrMin;
-    s16 yOffset = (SCREEN_HEIGHT - y);
-    s16 xVarPos = (((f32)minvar/maxvar)*128);
+// TODO: Fix the hardcoded values
+static void optmenu_draw_opt_scroll(const struct Option *opt, s16 i) {
+    s16 maxvar, minvar;
+    maxvar = opt->scrMax - opt->scrMin;
+    minvar = *opt->uval - opt->scrMin;
 
     // Grey bar
-    print_solid_color_quad(96, yOffset + 0, 224, yOffset + 6, 0x80, 0x80, 0x80, 0xFF);
+    print_solid_color_quad(96,111+(32*i)-(currentMenu->scroll*32),224,117+(32*i)-(currentMenu->scroll*32),0x80,0x80,0x80, 0xFF);
     // White bar
-    print_solid_color_quad(96, yOffset + 0, xVarPos + 96, yOffset + 6, 0xFF, 0xFF, 0xFF, 0xFF);
+    print_solid_color_quad(96,111+(32*i)-(currentMenu->scroll*32),96+(((f32)minvar/maxvar)*128),117+(32*i)-(currentMenu->scroll*32),0xFF,0xFF,0xFF, 0xFF);
     // Red middle bar
-    print_solid_color_quad(xVarPos + 94, yOffset - 2, xVarPos + 98, yOffset + 8, 0xFF, 0x00, 0x00, 0xFF);
+    print_solid_color_quad(94+(((f32)minvar/maxvar)*128),109+(32*i)-(currentMenu->scroll*32),98+(((f32)minvar/maxvar)*128),119+(32*i)-(currentMenu->scroll*32),0xFF,0x0,0x0, 0xFF);
     // To fix strings
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 }
 
-static void optmenu_draw_opt(const struct Option *opt, s16 x, s16 y, u8 sel) {
+static void optmenu_draw_opt(const struct Option *opt, s16 x, s16 y, u8 sel, s16 iScrl) {
     u8 buf[32] = { 0 };
 
     if (opt->type == OPT_SUBMENU || opt->type == OPT_BUTTON)
@@ -386,15 +356,13 @@ static void optmenu_draw_opt(const struct Option *opt, s16 x, s16 y, u8 sel) {
             break;
 
         case OPT_CHOICE:
-            *opt->uval = CLAMP(*opt->uval, 0, opt->numChoices - 1); // Avoid reading invalid string
             optmenu_draw_text(x, y-13, opt->choices[*opt->uval], sel);
             break;
 
         case OPT_SCROLL:
-            *opt->uval = CLAMP(*opt->uval, opt->scrMin, opt->scrMax); // Avoid bar going off limits
-            INT_TO_STR_DIFF(*opt->uval, buf);
+            int_to_str(*opt->uval, buf);
             optmenu_draw_text(x, y-13, buf, sel);
-            optmenu_draw_opt_scroll(opt, y-11);
+            optmenu_draw_opt_scroll(opt, iScrl);
             break;
 
 #if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
@@ -409,11 +377,7 @@ static void optmenu_draw_opt(const struct Option *opt, s16 x, s16 y, u8 sel) {
                     else
                         optmenu_draw_text(x, y-13, optBindStr[0], white);
                 } else {
-#ifdef VERSION_CN
-                    INT_TO_STR_DIFF(opt->uval[i], buf);
-#else
                     uint_to_hex(opt->uval[i], buf);
-#endif
                     optmenu_draw_text(x, y-13, buf, white);
                 }
             }
@@ -494,10 +458,11 @@ void optmenu_draw(void) {
     const s16 labelX = get_hudstr_centered_x(SCREEN_WIDTH / 2, currentMenu->label);
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
-    print_hud_lut_string(HUD_LUT_CNDIFF, labelX, 40, currentMenu->label);
+    print_hud_lut_string(HUD_LUT_GLOBAL, labelX, 40, currentMenu->label);
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 
-    if (currentMenu->numOpts > 4) {
+    if (currentMenu->numOpts > 4)
+    {
         print_solid_color_quad(272, 84, 280, 218, 0x80, 0x80, 0x80, 0xFF);
         scrollpos = (62)*((f32)currentMenu->scroll/(currentMenu->numOpts-4));
         print_solid_color_quad(272, 84 + scrollpos,280,156+scrollpos,0xFF,0xFF,0xFF, 0xFF);
@@ -509,7 +474,7 @@ void optmenu_draw(void) {
         scroll = 140-(32*i)+(currentMenu->scroll*32);
         // FIXME: just start from the first visible option bruh
         if (scroll <= 140 && scroll > 32)
-            optmenu_draw_opt(&currentMenu->opts[i], SCREEN_WIDTH / 2, scroll, (currentMenu->select == i));
+            optmenu_draw_opt(&currentMenu->opts[i], SCREEN_WIDTH / 2, scroll, (currentMenu->select == i), i);
     }
 
     sinpos = sins(gGlobalTimer*5000)*4;
@@ -520,6 +485,7 @@ void optmenu_draw(void) {
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 }
 
+
 //This has been separated for interesting reasons. Don't question it.
 void optmenu_draw_prompt(void) {
     u8 *str = (u8 *) optSmallStr[optmenu_open];
@@ -527,8 +493,8 @@ void optmenu_draw_prompt(void) {
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
-    print_generic_string_detail(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(57 + strW), 212, str, 255, 255, 255, gMenuTextAlpha, TRUE, 1);
-
+    print_generic_string_detail(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(57 + strW), 212, str, 255, 255, 255, 255, TRUE, 1);
+    
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 }
 

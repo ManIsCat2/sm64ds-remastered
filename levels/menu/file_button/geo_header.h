@@ -1,0 +1,18 @@
+extern const GeoLayout geo_menu_file_a[];
+extern const GeoLayout geo_menu_rec_room[];
+extern Lights1 file_button_New_File_A_1_layer4_lights;
+extern Lights1 file_button_New_File_A_2_layer4_lights;
+extern u8 file_button_File_A_1_rgba16[];
+extern u8 file_button_File_A_2_rgba16[];
+extern Vtx file_a_vtx_0[4];
+extern Gfx file_a_tri_0[];
+extern Vtx file_a_vtx_1[4];
+extern Gfx file_a_tri_1[];
+extern Gfx mat_file_button_New_File_A_1_layer4[];
+extern Gfx mat_revert_file_button_New_File_A_1_layer4[];
+extern Gfx mat_file_button_New_File_A_2_layer4[];
+extern Gfx mat_revert_file_button_New_File_A_2_layer4[];
+extern Gfx rec_room_button[];
+extern Gfx file_a[];
+extern Gfx file_b[];
+extern Gfx file_c[];

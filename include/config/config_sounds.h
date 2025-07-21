@@ -6,7 +6,7 @@
 /// Fixes missing sounds in key exit cutscene
 #define RESTORE_MISSING_SOUNDS_KEY_EXIT (0 || QOL_FIXES)
 
-/// Fixes drowning sound continuously playing while being Metal Mario
+/// Fixes drowning sound continuously playing while using the metal cap
 #define NO_DROWNING_SOUND_METAL (0 || QOL_FIXES)
 
 /// Do not restart the music on cap grabs

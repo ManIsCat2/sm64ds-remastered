@@ -150,16 +150,6 @@
 #define CAM_FLAG_UNUSED_CUTSCENE_ACTIVE  0x4000
 #define CAM_FLAG_BEHIND_MARIO_POST_DOOR  0x8000
 
-#define CAM_STATUS_NONE   0
-#define CAM_STATUS_MARIO  1 << 0
-#define CAM_STATUS_LAKITU 1 << 1
-#define CAM_STATUS_FIXED  1 << 2
-#define CAM_STATUS_C_DOWN 1 << 3
-#define CAM_STATUS_C_UP   1 << 4
-
-#define CAM_STATUS_MODE_GROUP   (CAM_STATUS_MARIO | CAM_STATUS_LAKITU | CAM_STATUS_FIXED)
-#define CAM_STATUS_C_MODE_GROUP (CAM_STATUS_C_DOWN | CAM_STATUS_C_UP)
-
 #define SHAKE_ATTACK         1
 #define SHAKE_GROUND_POUND   2
 #define SHAKE_SMALL_DAMAGE   3
@@ -270,22 +260,19 @@
 #define CAM_FOV_ZOOM_30     12
 #define CAM_FOV_SET_29      13
 
-enum CameraEvent {
-    CAM_EVENT_NONE,
-    CAM_EVENT_CANNON,
-    CAM_EVENT_SHOT_FROM_CANNON,
-    CAM_EVENT_NO_EXIT_STAR, // repurpose from unused
-    CAM_EVENT_BOWSER_INIT,
-    CAM_EVENT_DOOR_WARP,
-    CAM_EVENT_DOOR,
-    CAM_EVENT_BOWSER_JUMP,
-    CAM_EVENT_BOWSER_THROW_BOUNCE,
-    CAM_EVENT_START_INTRO,
-    CAM_EVENT_START_GRAND_STAR,
-    CAM_EVENT_START_ENDING,
-    CAM_EVENT_START_END_WAVING,
-    CAM_EVENT_START_CREDITS
-};
+#define CAM_EVENT_CANNON              1
+#define CAM_EVENT_SHOT_FROM_CANNON    2
+#define CAM_EVENT_UNUSED_3            3
+#define CAM_EVENT_BOWSER_INIT         4
+#define CAM_EVENT_DOOR_WARP           5
+#define CAM_EVENT_DOOR                6
+#define CAM_EVENT_BOWSER_JUMP         7
+#define CAM_EVENT_BOWSER_THROW_BOUNCE 8
+#define CAM_EVENT_START_INTRO         9
+#define CAM_EVENT_START_GRAND_STAR    10
+#define CAM_EVENT_START_ENDING        11
+#define CAM_EVENT_START_END_WAVING    12
+#define CAM_EVENT_START_CREDITS       13
 
 /**
  * A copy of player information that is relevant to the camera.
@@ -319,7 +306,7 @@ struct TransitionInfo {
     /*0x0A*/ s16 focYaw;
     /*0x0C*/ f32 focDist;
     /*0x10*/ s32 framesLeft;
-    /*0x14*/ Vec3f marioPos;
+    /*0x14*/ Vec3f playerPos;
     /*0x20*/ u8 unused; // for the structs to align, there has to be an extra unused variable here. type is unknown.
 };
 
@@ -658,11 +645,11 @@ extern u8 gRecentCutscene;
 
 // TODO: sort all of this extremely messy shit out after the split
 
-void set_camera_shake_from_hit_or_cap_block(s16 shake);
+void set_camera_shake_from_hit(s16 shake);
 void set_environmental_camera_shake(s16 shake);
 void set_camera_shake_from_point(s16 shake, f32 posX, f32 posY, f32 posZ);
 BAD_RETURN(f32) calc_y_to_curr_floor(f32 *posOff, f32 posMul, f32 posBound, f32 *focOff, f32 focMul, f32 focBound);
-void move_player_head_c_up(UNUSED struct Camera *c);
+void move_mario_head_c_up(UNUSED struct Camera *c);
 void transition_next_state(UNUSED struct Camera *c, s16 frames);
 void set_camera_mode(struct Camera *c, s16 mode, s16 frames);
 void update_camera(struct Camera *c);
@@ -680,7 +667,6 @@ s32 set_cam_angle(s32 mode);
 void set_handheld_shake(u8 mode);
 void shake_camera_handheld(Vec3f pos, Vec3f focus);
 s32 find_c_buttons_pressed(u16 currentState, u16 buttonsPressed, u16 buttonsDown);
-s32 update_camera_hud_status(struct Camera *c);
 s32 collide_with_walls(Vec3f pos, f32 offsetY, f32 radius);
 s32 clamp_pitch(Vec3f from, Vec3f to, s16 maxPitch, s16 minPitch);
 s32 is_within_100_units_of_player(f32 posX, f32 posY, f32 posZ);
@@ -724,7 +710,7 @@ void radial_camera_input(struct Camera *c);
 s32 trigger_cutscene_dialog(s32 trigger);
 void handle_c_button_movement(struct Camera *c);
 void start_cutscene(struct Camera *c, u8 cutscene);
-u8 get_cutscene_from_player_status(struct Camera *c);
+u8 get_cutscene_from_mario_status(struct Camera *c);
 void warp_camera(f32 displacementX, f32 displacementY, f32 displacementZ);
 void approach_camera_height(struct Camera *c, f32 goal, f32 inc);
 void offset_rotated(Vec3f dst, Vec3f from, Vec3f to, Vec3s rotation);
@@ -733,7 +719,7 @@ void set_fixed_cam_axis_sa_lobby(UNUSED s16 preset);
 s16 camera_course_processing(struct Camera *c);
 void resolve_geometry_collisions(Vec3f pos, UNUSED Vec3f lastGood);
 s32 rotate_camera_around_walls(struct Camera *c, Vec3f cPos, s16 *avoidYaw, s16 yawRange);
-void find_player_floor_and_ceil(struct PlayerGeometry *pg);
+void find_mario_floor_and_ceil(struct PlayerGeometry *pg);
 u8 start_object_cutscene_without_focus(u8 cutscene);
 s16 cutscene_object_with_dialog(u8 cutscene, struct Object *o, s16 dialogID);
 s16 cutscene_object_without_dialog(u8 cutscene, struct Object *o);

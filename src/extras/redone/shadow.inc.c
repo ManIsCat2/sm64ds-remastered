@@ -85,7 +85,7 @@ static s32 linearly_interpolate_negative(u8 initialSolidity, s16 curr, s16 start
  * Change a player shadow's solidity based on the current animation frame.
  */
 s32 set_player_shadow_scale_solidity(Vec3f scaleVec, f32 distToShadow, s16 shadowScale, u8 solidity) {
-    // Set the shadow solidity manually for certain Mario animations.
+    // Set the shadow solidity manually for certain Player animations.
     struct AnimInfo *animInfo = &gPlayerObject->header.gfx.animInfo;
     s16 animFrame = animInfo->animFrame;
 
@@ -111,7 +111,7 @@ s32 set_player_shadow_scale_solidity(Vec3f scaleVec, f32 distToShadow, s16 shado
  * Change an object shadow's solidity and scale
  */
 s32 set_object_shadow_scale_solidity(Vec3f scaleVec, f32 distToShadow, s16 shadowScale, s8 shadowType, u8 solidity) {
-    // No shadow if the non-Mario object is too high.
+    // No shadow if the non-Player object is too high.
     if (distToShadow > 1024) {
         return 0;
     }
@@ -207,11 +207,11 @@ f32 get_shadow_floor(f32 x, f32 y, f32 z, struct Surface** floor, struct Object*
 
     // Attempt to use existing floors before finding a new one.
     if (notHeldObj && isPlayer && m->floor) {
-        // The object is Mario and has a referenced floor.
+        // The object is Player and has a referenced floor.
         *floor      = m->floor;
         floorHeight = m->floorHeight;
-    } else if (notHeldObj && (gCurGraphNodeObject != &gMirrorMario) && obj->oFloor) {
-        // The object is not Mario but has a referenced floor.
+    } else if (notHeldObj && (gCurGraphNodeObject != &gMirrorPlayer) && obj->oFloor) {
+        // The object is not Player but has a referenced floor.
         //! Some objects only get their oFloor from bhv_init_room, which skips dynamic floors.
         *floor      = obj->oFloor;
         floorHeight = obj->oFloorHeight;

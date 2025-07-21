@@ -44,7 +44,7 @@ enum ShadowType {
 enum ShadowSolidity {
     /**
      * Constant to indicate that a shadow should not be drawn.
-     * This is used to disable shadows during specific frames of Mario's
+     * This is used to disable shadows during specific frames of Player's
      * animations.
      */
     SHADOW_SOLIDITY_NO_SHADOW,

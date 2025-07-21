@@ -3,7 +3,7 @@
  * Behavior file for bhvSnufit and bhvSnufitBalls.
  * Snufits are present in HMC and CotMC, and are the fly guy
  * like enemies that shoot bullets. The balls are the little pellets
- * the snufit shoots at Mario.
+ * the snufit shoots at Player.
  */
 
 struct ObjectHitbox sSnufitHitbox = {
@@ -63,7 +63,7 @@ Gfx *geo_snufit_scale_body(s32 callContext, struct GraphNode *node, UNUSED Mat4 
 }
 
 /**
- * Snufit's idle action. It rotates in a circle until Mario is near,
+ * Snufit's idle action. It rotates in a circle until Player is near,
  * then prepares to shoot after a period.
  */
 void snufit_act_idle(void) {
@@ -111,11 +111,11 @@ void snufit_act_shoot(void) {
  * and the action brain of the object.
  */
 void bhv_snufit_loop(void) {
-    // Only update if Mario is in the current room.
+    // Only update if Player is in the current room.
     if (!(o->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM)) {
         o->oDeathSound = SOUND_OBJ_SNUFIT_SKEETER_DEATH;
 
-        // Face Mario if he is within range.
+        // Face Player if he is within range.
         if (o->oDistanceToPlayer < 800.0f) {
             obj_turn_pitch_toward_player(120.0f, 2000);
 
@@ -169,7 +169,7 @@ void bhv_snufit_loop(void) {
  * Snufit bullets live to run into stuff and die when they do.
  */
 void bhv_snufit_balls_loop(void) {
-    // If far from Mario or in a different room, despawn.
+    // If far from Player or in a different room, despawn.
     if ((o->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM)
 #ifndef NODRAWINGDISTANCE
         || (o->oTimer != 0 && o->oDistanceToPlayer > 1500.0f)
@@ -178,13 +178,13 @@ void bhv_snufit_balls_loop(void) {
         obj_mark_for_deletion(o);
     }
 
-    // Gravity =/= 0 after it has hit Mario while metal.
+    // Gravity =/= 0 after it has hit Player while metal.
     if (o->oGravity == 0.0f) {
         cur_obj_update_floor_and_walls();
 
         obj_compute_vel_from_move_pitch(40.0f);
         if (obj_check_attacks(&sSnufitBulletHitbox, 1) != 0) {
-            // We hit Mario while he is metal!
+            // We hit Player while he is metal!
             // Bounce off, and fall until the first check is true.
             o->oMoveAngleYaw += 0x8000;
             o->oForwardVel *= 0.05f;
@@ -194,7 +194,7 @@ void bhv_snufit_balls_loop(void) {
             cur_obj_become_intangible();
         } else if (o->oAction == 1
                    || (o->oMoveFlags & (OBJ_MOVE_MASK_ON_GROUND | OBJ_MOVE_HIT_WALL))) {
-            // The Snufit shot Mario and has fulfilled its lonely existance.
+            // The Snufit shot Player and has fulfilled its lonely existance.
             //! The above check could theoretically be avoided by finding a geometric
             //! situation that does not trigger those flags (Water?). If found,
             //! this would be a route to hang the game via too many snufit bullets.

@@ -149,7 +149,7 @@ try:
     print("};")
 
 except Exception as e:
-    note = "NOTE! The mario animation C files are not processed by a normal C compiler, but by the script in tools/player_anims_converter.py. The format is much more strict than normal C, so please follow the syntax of existing files.\n"
+    note = "NOTE! The player animation C files are not processed by a normal C compiler, but by the script in tools/player_anims_converter.py. The format is much more strict than normal C, so please follow the syntax of existing files.\n"
     if e is SyntaxError:
         e.msg = note + e.msg
     else:

@@ -33,7 +33,6 @@
 0xfc10a1b3, textures/segment2/segment2.02400.rgba16.png
 0xfc0dd433, textures/skybox_tiles/bits.54.rgba16.png
 0xfbec7687, textures/skybox_tiles/cake.8.rgba16.png
-0xfbe08cab, actors/coin/coin_tilt_right.ia16.png
 0xfbcb7598, levels/menu/main_menu_seg7.04C68.rgba16.png
 0xfba28e17, actors/water_wave/water_wave_0.ia16.png
 0xfb4e7d3c, textures/skybox_tiles/cloud_floor.17.rgba16.png
@@ -156,12 +155,10 @@
 0xe60ffd91, actors/treasure_chest/treasure_chest_lock.rgba16.png
 0xe6061d88, textures/skybox_tiles/bitfs.40.rgba16.png
 0xe5d87cd6, levels/menu/main_menu_seg7.04468.rgba16.png
-0xe5bcf46e, actors/coin/coin_side.ia16.png
 0xe56f0bbf, textures/cave/hmc_textures.02800.rgba16.png
 0xe559fc96, levels/bbh/0.rgba16.png
 0xe52ee127, actors/snowman/mr_blizzard_mouth.rgba16.png
 0xe52ee127, levels/ccm/5.rgba16.png
-0xe4bd5580, textures/segment2/segment2.00200.rgba16.png
 0xe49dcfb8, textures/fire/lll_textures.03000.rgba16.png
 0xe48f835f, levels/ccm/6.rgba16.png
 0xe48f835f, actors/snowman/mr_blizzard_eye.rgba16.png
@@ -189,7 +186,6 @@
 0xe127cedd, actors/sushi/sushi_eye.rgba16.png
 0xe0c22a3c, textures/mountain/ttm_textures.0A000.rgba16.png
 0xe0c22a3c, textures/sky/rr_textures.06000.rgba16.png
-0xe0bb9b61, actors/cannon_lid/cannon_lid.rgba16.png
 0xe0901c5a, textures/skybox_tiles/cloud_floor.5.rgba16.png
 0xe075472a, textures/skybox_tiles/wdw.53.rgba16.png
 0xe04ef9fc, textures/skybox_tiles/water.21.rgba16.png
@@ -383,7 +379,6 @@
 0xc3941398, textures/skybox_tiles/clouds.22.rgba16.png
 0xc3459917, textures/water/jrb_textures.07800.rgba16.png
 0xc30b4fe2, textures/skybox_tiles/bidw.40.rgba16.png
-0xc2e48c81, actors/tree/pine_tree.rgba16.png
 0xc20fc383, levels/wf/1.rgba16.png
 0xc2050f68, actors/bomb/bomb_right_side.rgba16.png
 0xc2050f68, actors/water_mine/water_mine_right_side_unused.rgba16.png
@@ -458,7 +453,6 @@
 0xb484b601, textures/skybox_tiles/cloud_floor.7.rgba16.png
 0xb45578dc, textures/skybox_tiles/bbh.34.rgba16.png
 0xb453cc4a, textures/skybox_tiles/bitfs.24.rgba16.png
-0xb452cbbe, actors/tree/tree_right_side.rgba16.png
 0xb416574c, textures/skybox_tiles/cloud_floor.24.rgba16.png
 0xb401e19f, levels/ttm/3.rgba16.png
 0xb3f25163, textures/skybox_tiles/bbh.24.rgba16.png
@@ -512,7 +506,6 @@
 0xa742c5e3, textures/skybox_tiles/wdw.60.rgba16.png
 0xa7398f08, textures/segment2/segment2.081D0.rgba16.png
 0xa72c7c50, textures/skybox_tiles/wdw.46.rgba16.png
-0xa71d06b9, actors/bobomb/bob-omb_left_side.rgba16.png
 0xa6e20840, textures/outside/castle_grounds_textures.08800.rgba16.png
 0xa6d0d0cc, textures/skybox_tiles/ssl.61.rgba16.png
 0xa65a6e86, levels/menu/main_menu_seg7_us.0B1C0.ia8.png
@@ -626,7 +619,6 @@
 0x964a7e66, levels/menu/main_menu_seg7_us.0B200.ia8.png
 0x962278d5, textures/segment2/segment2.06500.rgba16.png
 0x95c4562e, levels/castle_inside/20.rgba16.png
-0x9513887c, textures/segment2/segment2.00600.rgba16.png
 0x94776f27, actors/cannon_barrel/cannon_barrel.rgba16.png
 0x946f580c, actors/metal_box/metal_box_side.rgba16.png
 0x946e561b, levels/castle_inside/18.rgba16.png
@@ -647,7 +639,6 @@
 0x930392d9, textures/skybox_tiles/bits.44.rgba16.png
 0x92f79940, textures/cave/hmc_textures.07000.rgba16.png
 0x92e17e06, textures/skybox_tiles/wdw.3.rgba16.png
-0x92ad1eef, textures/segment2/segment2.05600.rgba16.png
 0x92a6e121, textures/skybox_tiles/ccm.46.rgba16.png
 0x928d4e78, actors/water_splash/water_splash_3.rgba16.png
 0x92828a2b, actors/walk_smoke/walk_smoke_2.ia16.png
@@ -710,7 +701,6 @@
 0x88898880, levels/menu/main_menu_seg7_us.0B680.ia8.png
 0x8886887e, levels/menu/main_menu_seg7_us.0B180.ia8.png
 0x88788776, levels/menu/main_menu_seg7_us.0AFC0.ia8.png
-0x88703c55, textures/segment2/segment2.05800.rgba16.png
 0x886b2ff9, actors/king_bobomb/king_bob-omb_left_side.rgba16.png
 0x88654139, textures/machine/ttc_textures.07000.rgba16.png
 0x8853b016, textures/skybox_tiles/wdw.12.rgba16.png
@@ -801,14 +791,12 @@
 0x7cb09e26, textures/skybox_tiles/water.34.rgba16.png
 0x7c9e686e, levels/menu/main_menu_seg7_us.0B500.ia8.png
 0x7c98dfa7, textures/skybox_tiles/cloud_floor.8.rgba16.png
-0x7c2d13c9, textures/segment2/segment2.00400.rgba16.png
 0x7b8e4ac2, actors/peach/peach_eye_mostly_closed.rgba16.png
 0x7b8e447d, levels/ddd/3.rgba16.png
 0x7b84a495, actors/bowser/bowser_eye_left_1.rgba16.png
 0x7b84a495, actors/bowser/bowser_eye_left_0.rgba16.png
 0x7b7a6ad1, actors/chuckya/chuckya_hand_antenna.rgba16.png
 0x7af76431, textures/skybox_tiles/bidw.45.rgba16.png
-0x7af18328, actors/tree/palm_tree.rgba16.png
 0x7ae8e843, levels/lll/28.rgba16.png
 0x7ab277b8, textures/segment2/segment2.02A00.rgba16.png
 0x7a96785c, levels/menu/main_menu_seg7_us.0AD80.ia8.png
@@ -870,7 +858,6 @@
 0x6fa30457, textures/fire/lll_textures.08000.rgba16.png
 0x6f7df292, actors/amp/amp_body.rgba16.png
 0x6f5155ba, textures/grass/wf_textures.0B800.ia16.png
-0x6f32a4fb, textures/segment2/segment2.07B50.rgba16.png
 0x6f146752, textures/skybox_tiles/water.51.rgba16.png
 0x6eb6822e, textures/skybox_tiles/bidw.49.rgba16.png
 0x6eb46458, levels/menu/main_menu_seg7_us.0B800.ia8.png
@@ -908,7 +895,6 @@
 0x6bc75681, textures/segment2/segment2.02E00.rgba16.png
 0x6b3a40a5, actors/bowser/bowser_eye_center_0.rgba16.png
 0x6b3a40a5, actors/bowser/bowser_eye_center_1.rgba16.png
-0x6b1fc91a, textures/segment2/segment2.00000.rgba16.png
 0x6af6b17f, actors/bowser/bowser_eyebrow.rgba16.png
 0x6aca7d17, textures/skybox_tiles/water.38.rgba16.png
 0x6ac8d5d1, actors/skeeter/skeeter_eye.rgba16.png
@@ -925,7 +911,6 @@
 0x6a17a436, textures/skybox_tiles/ssl.11.rgba16.png
 0x69553f79, levels/ttm/6.rgba16.png
 0x6926316a, textures/skybox_tiles/cake.27.rgba16.png
-0x6906c074, actors/coin/coin_front.ia16.png
 0x6905fbf2, textures/skybox_tiles/ccm.30.rgba16.png
 0x68cbbcd3, textures/skybox_tiles/bits.9.rgba16.png
 0x68c4a756, textures/skybox_tiles/bidw.35.rgba16.png
@@ -945,7 +930,6 @@
 0x678bbbc1, levels/castle_inside/10.rgba16.png
 0x677cf935, textures/skybox_tiles/cloud_floor.43.rgba16.png
 0x677a5e03, textures/skybox_tiles/bits.41.rgba16.png
-0x676b6cf3, textures/segment2/segment2.07F50.rgba16.png
 0x674fa5c8, actors/water_splash/water_splash_2.rgba16.png
 0x6695e997, actors/whomp/whomp_face.rgba16.png
 0x66799dcc, levels/menu/main_menu_seg7.06328.rgba16.png
@@ -991,7 +975,6 @@
 0x5f328955, textures/outside/castle_grounds_textures.09800.rgba16.png
 0x5f035ec5, actors/koopa_shell/koopa_shell_back.rgba16.png
 0x5f035ec5, actors/koopa/koopa_shell_back.rgba16.png
-0x5ef65dd9, textures/segment2/segment2.00A00.rgba16.png
 0x5e819c11, textures/skybox_tiles/bbh.5.rgba16.png
 0x5dfa73ac, actors/bubble/mr_i_bubble.rgba16.png
 0x5ddd4bf0, textures/skybox_tiles/bbh.8.rgba16.png
@@ -1029,7 +1012,6 @@
 0x58a11d1e, textures/skybox_tiles/bits.37.rgba16.png
 0x585285d7, actors/bobomb/bob-omb_buddy_left_side.rgba16.png
 0x585285d7, actors/king_bobomb/bob-omb_buddy_left_side_unused.rgba16.png
-0x580e00a9, textures/segment2/segment2.05A00.rgba16.png
 0x57f55b58, actors/sparkle/sparkle_2.rgba16.png
 0x57dd4de0, textures/skybox_tiles/cloud_floor.34.rgba16.png
 0x57c29c7d, textures/machine/ttc_textures.02800.rgba16.png
@@ -1092,7 +1074,6 @@
 0x4eb8714c, actors/door/rough_wooden_door_overlay.rgba16.png
 0x4e80fa6f, textures/skybox_tiles/bidw.15.rgba16.png
 0x4e6eca8d, textures/cave/hmc_textures.0A000.rgba16.png
-0x4e4571c1, textures/segment2/segment2.00800.rgba16.png
 0x4e43931b, actors/wiggler/wiggler_nose_left_side.rgba16.png
 0x4e0a3338, levels/lll/16.rgba16.png
 0x4dedbc41, actors/whomp/whomp_hand.rgba16.png
@@ -1145,7 +1126,6 @@
 0x444b37f6, actors/water_splash/water_splash_1.rgba16.png
 0x4446f65d, actors/stomp_smoke/stomp_smoke_3.ia16.png
 0x4443d529, actors/haunted_cage/bbh_cage_double_ornament.rgba16.png
-0x438cc5be, textures/segment2/segment2.07D50.rgba16.png
 0x431e1944, levels/menu/main_menu_seg7.03C68.rgba16.png
 0x42f2325a, textures/skybox_tiles/bits.13.rgba16.png
 0x42a20f7e, actors/explosion/explosion_5.rgba16.png
@@ -1169,7 +1149,6 @@
 0x4010bae8, levels/jrb/2.rgba16.png
 0x3ffa0be7, textures/skybox_tiles/ccm.59.rgba16.png
 0x3ff93da3, levels/ccm/11.rgba16.png
-0x3fb69c59, actors/tree/snowy_pine_tree.rgba16.png
 0x3f817c21, textures/fire/lll_textures.09000.rgba16.png
 0x3f817c21, textures/segment2/segment2.13C58.rgba16.png
 0x3ec818de, textures/skybox_tiles/wdw.11.rgba16.png
@@ -1209,7 +1188,6 @@
 0x38ec1b66, textures/skybox_tiles/ssl.29.rgba16.png
 0x38afcd8f, textures/segment2/segment2.06580.rgba16.png
 0x38afccee, levels/ssl/6.rgba16.png
-0x38894888, actors/bobomb/bob-omb_right_side.rgba16.png
 0x386a9785, actors/bowser/bowser_shell.rgba16.png
 0x3867cbee, actors/wiggler/wiggler_segment_left_side.rgba16.png
 0x385055f4, textures/skybox_tiles/wdw.37.rgba16.png
@@ -1224,7 +1202,6 @@
 0x36f00556, textures/cave/hmc_textures.0A800.rgba16.png
 0x36d9c81e, actors/bully/bully_right_side.rgba16.png
 0x36b1482f, actors/pokey/pokey_face_blink.rgba16.png
-0x362e3e52, textures/segment2/segment2.05C00.rgba16.png
 0x35bbd200, actors/bullet_bill/bullet_bill_eye.rgba16.png
 0x3556a0c8, textures/skybox_tiles/bbh.4.rgba16.png
 0x35456b51, actors/bobomb/bob-omb_eyes_blink.rgba16.png
@@ -1239,7 +1216,6 @@
 0x33b314af, levels/wmotr/1.rgba16.png
 0x33ae70aa, levels/castle_inside/40.rgba16.png
 0x339b3765, textures/skybox_tiles/bbh.31.rgba16.png
-0x336d534a, textures/segment2/segment2.00E00.rgba16.png
 0x3342ae2e, textures/skybox_tiles/bitfs.18.rgba16.png
 0x32da5c54, textures/skybox_tiles/cloud_floor.48.rgba16.png
 0x32beb053, textures/skybox_tiles/ssl.6.rgba16.png
@@ -1288,7 +1264,6 @@
 0x2a9f12c7, textures/skybox_tiles/bits.14.rgba16.png
 0x2a93afc0, actors/mr_i_iris/mr_i_iris_open.rgba16.png
 0x2a83d55a, levels/lll/0.rgba16.png
-0x2a359204, textures/segment2/segment2.01000.rgba16.png
 0x2a283a6a, actors/sparkle_animation/sparkle_animation_2.ia16.png
 0x29f15a68, actors/piranha_plant/piranha_plant_stem.rgba16.png
 0x29c0c7d2, actors/koopa/koopa_eyes_closed.rgba16.png
@@ -1297,7 +1272,6 @@
 0x292e5fd8, actors/bobomb/bob-omb_buddy_right_side.rgba16.png
 0x292c40a1, textures/skybox_tiles/cake.13.rgba16.png
 0x28df6c96, actors/flame/flame_1.ia16.png
-0x28a7f52b, textures/segment2/segment2.01200.rgba16.png
 0x2811c57f, textures/segment2/segment2.06880.rgba16.png
 0x28061018, levels/ttm/5.rgba16.png
 0x27ece31d, textures/outside/castle_grounds_textures.04000.rgba16.png
@@ -1387,7 +1361,6 @@
 0x19d0a651, textures/skybox_tiles/wdw.36.rgba16.png
 0x19cf329b, textures/skybox_tiles/ssl.57.rgba16.png
 0x19bb64c1, textures/machine/ttc_textures.03000.rgba16.png
-0x192fa726, actors/tree/tree_left_side.rgba16.png
 0x19132bcc, textures/skybox_tiles/water.6.rgba16.png
 0x18a7104c, textures/skybox_tiles/bits.19.rgba16.png
 0x188b6465, textures/intro_raw/white_star_6.rgba16.png
@@ -1401,7 +1374,6 @@
 0x17ea3392, textures/snow/ccm_textures.09000.ia16.png
 0x17cde57d, actors/thwomp/thwomp_face.rgba16.png
 0x177d197c, levels/bitdw/3.rgba16.png
-0x176c2e93, actors/coin/coin_tilt_left.ia16.png
 0x17405808, levels/bbh/5.rgba16.png
 0x16db7146, textures/skybox_tiles/cake.38.rgba16.png
 0x16ce5dc5, textures/intro_raw/mario_face_shine.ia8.png
@@ -1441,7 +1413,6 @@
 0x11543850, textures/skybox_tiles/bits.62.rgba16.png
 0x112c8257, textures/skybox_tiles/water.44.rgba16.png
 0x10f30b26, actors/power_meter/power_meter_four_segments.rgba16.png
-0x10e998f8, actors/star/star_eye.rgba16.png
 0x10e998f8, actors/wiggler/wiggler_eye.rgba16.png
 0x10e452c9, textures/fire/lll_textures.01000.rgba16.png
 0x10c87d57, textures/skybox_tiles/cake.23.rgba16.png
@@ -1504,7 +1475,6 @@
 0x0702fde6, textures/inside/inside_castle_textures.0B000.rgba16.png
 0x06ab9733, textures/skybox_tiles/ssl.21.rgba16.png
 0x06682e2e, levels/hmc/3.rgba16.png
-0x0659ab56, textures/segment2/segment2.00C00.rgba16.png
 0x064f172d, actors/sparkle_animation/sparkle_animation_4.ia16.png
 0x064b5c5f, levels/castle_grounds/3.rgba16.png
 0x06343afc, actors/monty_mole/monty_mole_claw.rgba16.png

@@ -7,11 +7,6 @@ struct Position GetDefaultJoystickPos() {
     return ret;
 }
 
-struct Position GetDefaultJoystickAnalogPos() {
-    struct Position ret = { .x = GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(60) << 2, .y = 290 };
-    return ret;
-}
-
 struct Position GetDefaultStartPos() {
     struct Position ret = { .x = SCREEN_WIDTH_API / 2, .y = 900 };
     return ret;
@@ -63,8 +58,7 @@ struct Position GetDefaultRightPos() {
 }
 
 static struct ControlElement ControlElementsDefault[] = {
-{.type = Joystick, .GetPos = GetDefaultJoystickPos, .isJoyAnalog = FALSE},
-{.type = Joystick, .GetPos = GetDefaultJoystickAnalogPos, .isJoyAnalog = TRUE},
+{.type = Joystick, .GetPos = GetDefaultJoystickPos},
 {.type = Button, .GetPos = GetDefaultStartPos, .character = 's', .buttonID = START_BUTTON},
 {.type = Button, .GetPos = GetDefaultAPos, .character = 'a', .buttonID = A_BUTTON},
 {.type = Button, .GetPos = GetDefaultBPos, .character = 'b', .buttonID = B_BUTTON},

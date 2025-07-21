@@ -1,7 +1,7 @@
 // fishing_boo.inc.c
 
 // Unused behavior file for the Fishing Boo enemy.
-// The fire circles around mario and would make it
+// The fire circles around player and would make it
 // hard for him to jump or platform.
 // There is also a stubbed behavior script next to
 // the scripts associated with this, indicating

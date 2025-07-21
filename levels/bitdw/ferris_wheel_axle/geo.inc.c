@@ -1,8 +1,12 @@
-// 0x0E000570
+#include "src/game/envfx_snow.h"
+
 const GeoLayout geo_bitdw_000570[] = {
-    GEO_CULLING_RADIUS(600),
-    GEO_OPEN_NODE(),
-        GEO_DISPLAY_LIST(LAYER_OPAQUE, bitdw_seg7_dl_0700B8D8),
-    GEO_CLOSE_NODE(),
-    GEO_END(),
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_CULLING_RADIUS(600),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(LAYER_OPAQUE, ferris_wheel_axle_000_displaylist_mesh_layer_1),
+		GEO_CLOSE_NODE(),
+	GEO_CLOSE_NODE(),
+	GEO_END(),
 };

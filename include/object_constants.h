@@ -469,11 +469,6 @@
     #define BOMP_ACT_RETRACT  3
 
 /* WF Sliding Brick Platform */
-    /* oBhvParams2ndByte */
-    #define WF_SLID_BRICK_PTFM_BP_MOV_VEL_10 1
-    #define WF_SLID_BRICK_PTFM_BP_MOV_VEL_15 2
-    #define WF_SLID_BRICK_PTFM_BP_MOV_VEL_20 3
-
     /* oAction */
     #define WF_SLID_BRICK_PTFM_ACT_WAIT    0
     #define WF_SLID_BRICK_PTFM_ACT_EXTEND  1
@@ -529,8 +524,8 @@
 /* BBH Tilting Trap Platform */
     /* oAction */
     // Unused in original Japanese version
-    #define BBH_TILTING_TRAP_PLATFORM_ACT_PLAYER_ON  0
-    #define BBH_TILTING_TRAP_PLATFORM_ACT_PLAYER_OFF 1
+    #define BBH_TILTING_TRAP_PLATFORM_ACT_MARIO_ON  0
+    #define BBH_TILTING_TRAP_PLATFORM_ACT_MARIO_OFF 1
 
 /* Boo */
     /* oBooDeathStatus */
@@ -562,11 +557,11 @@
 
 /* Boo Cage */
     /* oAction */
-    #define BOO_CAGE_ACT_IN_BOO            0
-    #define BOO_CAGE_ACT_FALLING           1
-    #define BOO_CAGE_ACT_ON_GROUND         2
-    #define BOO_CAGE_ACT_PLAYER_JUMPING_IN 3
-    #define BOO_CAGE_ACT_USELESS           4
+    #define BOO_CAGE_ACT_IN_BOO           0
+    #define BOO_CAGE_ACT_FALLING          1
+    #define BOO_CAGE_ACT_ON_GROUND        2
+    #define BOO_CAGE_ACT_MARIO_JUMPING_IN 3
+    #define BOO_CAGE_ACT_USELESS          4
 
 /* BBH Haunted Bookshelf */
     /* oAction */
@@ -608,11 +603,11 @@
     #define KOOPA_UNSHELLED_ACT_LYING   2
     #define KOOPA_UNSHELLED_ACT_UNUSED3 3
 
-    #define KOOPA_SHELLED_ACT_STOPPED         0
-    #define KOOPA_SHELLED_ACT_WALK            1
-    #define KOOPA_SHELLED_ACT_RUN_FROM_PLAYER 2
-    #define KOOPA_SHELLED_ACT_LYING           3
-    #define KOOPA_SHELLED_ACT_DIE             4
+    #define KOOPA_SHELLED_ACT_STOPPED        0
+    #define KOOPA_SHELLED_ACT_WALK           1
+    #define KOOPA_SHELLED_ACT_RUN_FROM_MARIO 2
+    #define KOOPA_SHELLED_ACT_LYING          3
+    #define KOOPA_SHELLED_ACT_DIE            4
 
     #define KOOPA_THE_QUICK_ACT_WAIT_BEFORE_RACE 0
     #define KOOPA_THE_QUICK_ACT_UNUSED1          1
@@ -1084,7 +1079,7 @@
     #define KLEPTO_ANIM_STATE_HOLDING_NOTHING          0
     #define KLEPTO_ANIM_STATE_HOLDING_CAP              1
     #define KLEPTO_ANIM_STATE_HOLDING_STAR             2
-    #define KLEPTO_ANIM_STATE_HOLDING_TRANSPARENT_STAR 3
+    #define KLEPTO_ANIM_STATE_HOLDING_SILVER_STAR      3
 
 /* Bird */
     /* oAction */
@@ -1142,12 +1137,19 @@
     /* oAction */
     // Loading
     #define WATER_LEVEL_DIAMOND_ACT_INIT               0
-    // Idling when Mario isn't inside its hitbox
+    // Idling when the player isn't inside its hitbox
     #define WATER_LEVEL_DIAMOND_ACT_IDLE               1
     // While the water level is changing
     #define WATER_LEVEL_DIAMOND_ACT_CHANGE_WATER_LEVEL 2
-    // After the water level has changed but Mario hasn't left its hitbox yet
+    // After the water level has changed but the player hasn't left its hitbox yet
     #define WATER_LEVEL_DIAMOND_ACT_IDLE_SPINNING      3
+/* Castle Mips */
+    /* oMipsKeyStatus*/
+    #define MIPS_KEY_STATUS_HAVENT_GIVEN_KEY    0
+    #define MIPS_KEY_STATUS_SHOULD_GIVE_KEY     1
+
+    /* oBhvParams2ndByte */
+    #define MIPS_BP_CASTLE_KEY 0
 
 /* Mips */
     /* oAction */
@@ -1230,6 +1232,7 @@
     #define CAP_BOX_ANIM_STATE_METAL_CAP  1
     #define CAP_BOX_ANIM_STATE_VANISH_CAP 2
     #define CAP_BOX_ANIM_STATE_DEFAULT    3
+    #define CAP_BOX_ANIM_STATE_QUESTION   4
 
     /* oBhvParams2ndByte */
     #define CAP_BOX_BP_WING_CAP         0

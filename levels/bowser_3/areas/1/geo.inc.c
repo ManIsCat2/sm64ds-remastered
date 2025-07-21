@@ -1,3 +1,6 @@
+#include "src/game/envfx_snow.h"
+#include "src/game/envfx_skybox.h"
+
 // 0x0E000398
 const GeoLayout bowser_3_geo_000398[] = {
     GEO_NODE_SCREEN_AREA(10, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, SCREEN_WIDTH/2, SCREEN_HEIGHT/2),
@@ -18,6 +21,7 @@ const GeoLayout bowser_3_geo_000398[] = {
                     GEO_DISPLAY_LIST(LAYER_OPAQUE, bowser_3_seg7_dl_070046B0),
                     GEO_RENDER_OBJ(),
                     GEO_ASM(0, geo_envfx_main),
+					GEO_ASM(0, sky_3d),
                 GEO_CLOSE_NODE(),
             GEO_CLOSE_NODE(),
         GEO_CLOSE_NODE(),

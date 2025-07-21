@@ -73,7 +73,7 @@ s32 set_pole_position(struct PlayerState *m, f32 offsetY) {
     s32 result = POLE_NONE;
 
     if (poleObj == NULL) {
-        // If Mario is no longer interacting with the pole, stop the pole holding action.
+        // If Player is no longer interacting with the pole, stop the pole holding action.
         set_player_action(m, ACT_FREEFALL, 0);
         return POLE_FELL_OFF;
     }
@@ -86,12 +86,12 @@ s32 set_pole_position(struct PlayerState *m, f32 offsetY) {
     f32 poleBottom = -poleObj->hitboxDownOffset;
 #endif
 
-    // Keep Mario on the pole if he reaches the top.
+    // Keep Player on the pole if he reaches the top.
     if (playerObj->oPlayerPolePos > poleTop) {
         playerObj->oPlayerPolePos = poleTop;
     }
 
-    // Set Mario's position to the pole + oPlayerPolePos.
+    // Set Player's position to the pole + oPlayerPolePos.
     m->pos[0] = poleObj->oPosX;
     m->pos[2] = poleObj->oPosZ;
     m->pos[1] = poleObj->oPosY + playerObj->oPlayerPolePos + offsetY;
@@ -100,7 +100,7 @@ s32 set_pole_position(struct PlayerState *m, f32 offsetY) {
     s32 collided = f32_find_wall_collision(&m->pos[0], &m->pos[1], &m->pos[2], 60.0f, 50.0f)
                  + f32_find_wall_collision(&m->pos[0], &m->pos[1], &m->pos[2], 30.0f, 24.0f);
 
-    // Prevent Mario from climbing into a ceiling.
+    // Prevent Player from climbing into a ceiling.
     struct Surface *ceil;
     f32 ceilHeight = vec3f_find_ceil(m->pos, m->pos[1], &ceil);
     if (m->pos[1] > ceilHeight - 160.0f) {
@@ -112,27 +112,27 @@ s32 set_pole_position(struct PlayerState *m, f32 offsetY) {
     struct Surface *floor;
     f32 floorHeight = find_floor(m->pos[0], m->pos[1], m->pos[2], &floor);
     if (floor == NULL) {
-        // Mario doesn't have a floor below the pole.
+        // Player doesn't have a floor below the pole.
         set_player_action(m, ACT_FREEFALL, 0);
         return POLE_FELL_OFF;
     } else if (m->pos[1] < floorHeight) {
-        // Mario touched the floor.
+        // Player touched the floor.
         m->pos[1] = floorHeight;
         set_player_action(m, ACT_IDLE, 0);
         result = POLE_TOUCHED_FLOOR;
     } else if (playerObj->oPlayerPolePos < poleBottom) {
-        // Mario left the pole via the bottom.
+        // Player left the pole via the bottom.
         m->pos[1] = poleObj->oPosY + poleBottom;
         set_player_action(m, ACT_FREEFALL, 0);
         result = POLE_FELL_OFF;
     } else if (collided > 0) {
         if (m->pos[1] > floorHeight + 20.0f) {
-            // Mario touched a wall.
+            // Player touched a wall.
             m->forwardVel = -2.0f;
             set_player_action(m, ACT_SOFT_BONK, 0);
             result = POLE_FELL_OFF;
         } else {
-            // Mario touched a wall and the floor.
+            // Player touched a wall and the floor.
             set_player_action(m, ACT_IDLE, 0);
             result = POLE_TOUCHED_FLOOR;
         }
@@ -378,11 +378,11 @@ s32 update_hang_moving(struct PlayerState *m) {
 #if BETTER_HANGING
     s16 turnRange = 0x800;
     s16 dYaw = abs_angle_diff(m->faceAngle[1], m->intendedYaw); // 0x0 is turning forwards, 0x8000 is turning backwards
-    if (m->forwardVel < 0.0f) { // Don't modify Mario's speed and turn radius if Mario is moving backwards
-        // Flip controls when moving backwards so Mario still moves towards intendedYaw
+    if (m->forwardVel < 0.0f) { // Don't modify Player's speed and turn radius if Player is moving backwards
+        // Flip controls when moving backwards so Player still moves towards intendedYaw
         m->intendedYaw += 0x8000;
-    } else if (dYaw > 0x4000) { // Only modify Mario's speed and turn radius if Mario is turning around
-        // Reduce Mario's forward speed by the turn amount, so Mario won't move off sideward from the intended angle when turning around.
+    } else if (dYaw > 0x4000) { // Only modify Player's speed and turn radius if Player is turning around
+        // Reduce Player's forward speed by the turn amount, so Player won't move off sideward from the intended angle when turning around.
         m->forwardVel *= ((coss(dYaw) + 1.0f) / 2.0f); // 1.0f is turning forwards, 0.0f is turning backwards
         // Increase turn speed if forwardVel is lower and intendedMag is higher
         turnRange     *= (2.0f - (ABS(m->forwardVel) / MAX(m->intendedMag, NEAR_ZERO))); // 1.0f front, 2.0f back
@@ -632,7 +632,7 @@ void update_ledge_climb(struct PlayerState *m, s32 animation, u32 endAction) {
 s32 act_ledge_grab(struct PlayerState *m) {
     f32 heightAboveFloor;
     s16 intendedDYaw = m->intendedYaw - m->faceAngle[1];
-    s32 hasSpaceForMario = (m->ceilHeight - m->floorHeight >= 160.0f);
+    s32 hasSpaceForPlayer = (m->ceilHeight - m->floorHeight >= 160.0f);
 
     if (m->actionTimer < 10) {
         m->actionTimer++;
@@ -648,7 +648,7 @@ s32 act_ledge_grab(struct PlayerState *m) {
         return let_go_of_ledge(m);
     }
 
-    if ((m->input & INPUT_A_PRESSED) && hasSpaceForMario) {
+    if ((m->input & INPUT_A_PRESSED) && hasSpaceForPlayer) {
         return set_player_action(m, ACT_LEDGE_CLIMB_FAST, 0);
     }
 
@@ -665,7 +665,7 @@ s32 act_ledge_grab(struct PlayerState *m) {
 #endif
     ) {
         if (intendedDYaw >= -0x4000 && intendedDYaw <= 0x4000) {
-            if (hasSpaceForMario) {
+            if (hasSpaceForPlayer) {
                 return set_player_action(m, ACT_LEDGE_CLIMB_SLOW_1, 0);
             }
         } else {
@@ -674,7 +674,7 @@ s32 act_ledge_grab(struct PlayerState *m) {
     }
 
     heightAboveFloor = m->pos[1] - find_floor_height_relative_polar(m, -0x8000, 30.0f);
-    if (hasSpaceForMario && heightAboveFloor < 100.0f) {
+    if (hasSpaceForPlayer && heightAboveFloor < 100.0f) {
         return set_player_action(m, ACT_LEDGE_CLIMB_FAST, 0);
     }
 
@@ -802,10 +802,10 @@ s32 act_in_cannon(struct PlayerState *m) {
             m->faceAngle[0] -= (s16)(m->controller->stickY * 10.0f);
             playerObj->oPlayerCannonInputYaw -= (s16)(m->controller->stickX * 10.0f);
 #ifdef MOUSE_ACTIONS
-            mouse_has_center_control = TRUE;
+            gMouseHasCenterControl = TRUE;
 
-            m->faceAngle[0] -= (s16)(mouse_y * 10.0f);
-            playerObj->oPlayerCannonInputYaw -= (s16)(mouse_x * 10.0f);
+            m->faceAngle[0] -= (s16)(gMouseYPos * 10.0f);
+            playerObj->oPlayerCannonInputYaw -= (s16)(gMouseXPos * 10.0f);
 #endif
 
             if (m->faceAngle[0] > 0x38E3) {
@@ -838,7 +838,7 @@ s32 act_in_cannon(struct PlayerState *m) {
                 m->playerObj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
 
 #ifdef MOUSE_ACTIONS
-                mouse_has_center_control = FALSE;
+                gMouseHasCenterControl = FALSE;
 #endif
 
                 set_player_action(m, ACT_SHOT_FROM_CANNON, 0);
@@ -950,7 +950,7 @@ s32 check_common_automatic_cancels(struct PlayerState *m) {
     return FALSE;
 }
 
-s32 mario_execute_automatic_action(struct PlayerState *m) {
+s32 player_execute_automatic_action(struct PlayerState *m) {
     s32 cancel = FALSE;
 
     if (check_common_automatic_cancels(m)) {

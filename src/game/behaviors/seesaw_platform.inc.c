@@ -42,7 +42,7 @@ void bhv_seesaw_platform_update(void) {
     }
 
     if (gPlayerObject->platform == o) {
-        // Rotate toward mario
+        // Rotate toward player
         f32 rotation = o->oDistanceToPlayer * coss(o->oAngleToPlayer - o->oMoveAngleYaw);
         UNUSED u8 filler[4];
 

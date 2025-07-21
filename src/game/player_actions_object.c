@@ -11,7 +11,7 @@
 #include "rumble_init.h"
 
 /**
- * Used by act_punching() to determine Mario's forward velocity during each
+ * Used by act_punching() to determine Player's forward velocity during each
  * animation frame.
  */
 s8 sPunchingForwardVelocities[8] = { 0, 1, 1, 2, 3, 5, 7, 10 };
@@ -24,7 +24,7 @@ void animated_stationary_ground_step(struct PlayerState *m, s32 animation, u32 e
     }
 }
 
-s32 mario_update_punch_sequence(struct PlayerState *m) {
+s32 player_update_punch_sequence(struct PlayerState *m) {
     u32 endAction, crouchEndAction;
     s32 animFrame;
 
@@ -162,12 +162,12 @@ s32 act_punching(struct PlayerState *m) {
         m->actionTimer = 7;
     }
 
-    mario_set_forward_vel(m, sPunchingForwardVelocities[m->actionTimer]);
+    player_set_forward_vel(m, sPunchingForwardVelocities[m->actionTimer]);
     if (m->actionTimer > 0) {
         m->actionTimer--;
     }
 
-    mario_update_punch_sequence(m);
+    player_update_punch_sequence(m);
     perform_ground_step(m);
     return FALSE;
 }
@@ -185,7 +185,7 @@ s32 act_picking_up(struct PlayerState *m) {
         //! While the animation is playing, it is possible for the used object
         // to unload. This allows you to pick up a vacant or newly loaded object
         // slot (cloning via fake object).
-        mario_grab_used_object(m);
+        player_grab_used_object(m);
         play_sound_if_no_flag(m, SOUND_MARIO_HRMM, MARIO_MARIO_SOUND_PLAYED);
         m->actionState = 1;
     }
@@ -216,7 +216,7 @@ s32 act_dive_picking_up(struct PlayerState *m) {
     }
 
     //! Hands-free holding. Landing on a slope or being pushed off a ledge while
-    // landing from a dive grab sets Mario's action to a non-holding action
+    // landing from a dive grab sets Player's action to a non-holding action
     // without dropping the object, causing the hands-free holding glitch.
     if (m->input & INPUT_OFF_FLOOR) {
         return set_player_action(m, ACT_FREEFALL, 0);
@@ -240,7 +240,7 @@ s32 act_placing_down(struct PlayerState *m) {
     }
 
     if (++m->actionTimer == 8) {
-        mario_drop_held_object(m);
+        player_drop_held_object(m);
     }
 
     animated_stationary_ground_step(m, MARIO_ANIM_PLACE_LIGHT_OBJ, ACT_IDLE);
@@ -261,7 +261,7 @@ s32 act_throwing(struct PlayerState *m) {
     }
 
     if (++m->actionTimer == 7) {
-        mario_throw_held_object(m);
+        player_throw_held_object(m);
         play_sound_if_no_flag(m, SOUND_MARIO_WAH2, MARIO_MARIO_SOUND_PLAYED);
         play_sound_if_no_flag(m, SOUND_ACTION_THROW, MARIO_ACTION_SOUND_PLAYED);
 #ifdef RUMBLE_FEEDBACK
@@ -283,7 +283,7 @@ s32 act_heavy_throw(struct PlayerState *m) {
     }
 
     if (++m->actionTimer == 13) {
-        mario_drop_held_object(m);
+        player_drop_held_object(m);
         play_sound_if_no_flag(m, SOUND_MARIO_WAH2, MARIO_MARIO_SOUND_PLAYED);
         play_sound_if_no_flag(m, SOUND_ACTION_THROW, MARIO_ACTION_SOUND_PLAYED);
 #ifdef RUMBLE_FEEDBACK
@@ -317,7 +317,7 @@ s32 act_picking_up_bowser(struct PlayerState *m) {
         m->actionState = 1;
         m->angleVel[1] = 0;
         m->playerBodyState->grabPos = GRAB_POS_BOWSER;
-        mario_grab_used_object(m);
+        player_grab_used_object(m);
 #ifdef RUMBLE_FEEDBACK
         queue_rumble_data(5, 80);
 #endif
@@ -420,12 +420,12 @@ s32 act_releasing_bowser(struct PlayerState *m) {
 #ifdef RUMBLE_FEEDBACK
             queue_rumble_data(5, 50);
 #endif
-            mario_throw_held_object(m);
+            player_throw_held_object(m);
         } else {
 #ifdef RUMBLE_FEEDBACK
             queue_rumble_data(4, 50);
 #endif
-            mario_drop_held_object(m);
+            player_drop_held_object(m);
         }
     }
 
@@ -451,14 +451,14 @@ s32 check_common_object_cancels(struct PlayerState *m) {
     return FALSE;
 }
 
-s32 mario_execute_object_action(struct PlayerState *m) {
+s32 player_execute_object_action(struct PlayerState *m) {
     s32 cancel = FALSE;
 
     if (check_common_object_cancels(m)) {
         return TRUE;
     }
 
-    if (mario_update_quicksand(m, 0.5f)) {
+    if (player_update_quicksand(m, 0.5f)) {
         return TRUE;
     }
 

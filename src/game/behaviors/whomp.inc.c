@@ -63,7 +63,7 @@ void whomp_turn(void) {
 }
 
 void whomp_patrol(void) {
-    s16 marioAngle = abs_angle_diff(o->oAngleToPlayer, o->oMoveAngleYaw);
+    s16 playerAngle = abs_angle_diff(o->oAngleToPlayer, o->oMoveAngleYaw);
     f32 distWalked = cur_obj_lateral_dist_to_home();
     f32 patrolDist;
 
@@ -78,7 +78,7 @@ void whomp_patrol(void) {
 
     if (distWalked > patrolDist) {
         o->oAction = 7;
-    } else if (marioAngle < 0x2000) {
+    } else if (playerAngle < 0x2000) {
         if (o->oDistanceToPlayer < 1500.0f) {
             o->oForwardVel = 9.0f;
             cur_obj_init_animation_with_accel_and_sound(0, 3.0f);
@@ -97,8 +97,8 @@ void king_whomp_chase(void) {
     cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 0x200);
 
     if (o->oTimer > 30) {
-        s16 marioAngle = abs_angle_diff(o->oAngleToPlayer, o->oMoveAngleYaw);
-        if (marioAngle < 0x2000) {
+        s16 playerAngle = abs_angle_diff(o->oAngleToPlayer, o->oMoveAngleYaw);
+        if (playerAngle < 0x2000) {
             if (o->oDistanceToPlayer < 1500.0f) {
                 o->oForwardVel = 9.0f;
                 cur_obj_init_animation_with_accel_and_sound(0, 3.0f);
@@ -298,9 +298,9 @@ void bhv_whomp_loop(void) {
         // o->oBhvParams2ndByte here seems to be a flag
         // indicating whether this is a normal or king whomp
         if (o->oBhvParams2ndByte != WHOMP_BP_SMALL) {
-            cur_obj_hide_if_mario_far_away_y(2000.0f);
+            cur_obj_hide_if_player_far_away_y(2000.0f);
         } else {
-            cur_obj_hide_if_mario_far_away_y(1000.0f);
+            cur_obj_hide_if_player_far_away_y(1000.0f);
         }
 #endif
         load_object_collision_model();

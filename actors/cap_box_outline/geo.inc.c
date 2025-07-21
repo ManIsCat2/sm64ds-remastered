@@ -1,3 +1,4 @@
+// 0x0F000A5A
 const GeoLayout cap_box_outline_geo[] = {
     GEO_CULLING_RADIUS(300),
     GEO_OPEN_NODE(),

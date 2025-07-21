@@ -13,10 +13,10 @@ void bhv_green_switchboard_loop(void) {
 		f32 dHz = o->oPosZ - o->oHomeZ;
 		f32 facingZ = coss(o->oFaceAngleYaw);
 		f32 facingX = sins(o->oFaceAngleYaw);
-		// if dot is positive, the player is on front arrow
+		//if dot is positive, the player is on front arrow
 		dot = facingZ*dz+facingX*dx;
 		dotH = facingZ*dHz+facingX*dHx;
-		// debug
+		//debug
 		// sprintf(buf,"dotH %f",dotH);
 		// print_text(32,32,buf);
 		// sprintf(buf,"dot %f",dot);

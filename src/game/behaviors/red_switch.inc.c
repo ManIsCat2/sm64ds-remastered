@@ -3,16 +3,14 @@
  * Behavior for bhvFloorSwitchHardcodedModel, bhvFloorSwitchGrills, and
  * bhvFloorSwitchAnimatesObject.
  *
- * This controls the purple switches that Mario can step on to affect parts of
+ * This controls the red switches that Player can step on to affect parts of
  * the environment.
  */
 
 void bhv_red_switch_loop(void) {
-    UNUSED u8 filler[4];
-
     switch (o->oAction) {
         /**
-         * Set the switch's model and scale. If Mario is standing near the
+         * Set the switch's model and scale. If Player is standing near the
          * switch's middle section, transition to the pressed state.
          */
         case SWITCH_ACT_IDLE:
@@ -74,7 +72,7 @@ void bhv_red_switch_loop(void) {
             break;
 
         /**
-         * Mario is standing on the switch, but time has expired. Wait for
+         * Player is standing on the switch, but time has expired. Wait for
          * him to get off the switch, and when he does so, transition to the
          * unpressed state.
          */

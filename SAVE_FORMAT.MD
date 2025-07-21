@@ -47,8 +47,8 @@ This section contains all main game flags (walkthought milestones).
 | vanish_cap | **Blue Switch** is pressed. 
 | key_1 | Key is found in **Bowser in the Dark World**
 | key_2 | Key is found in **Bowser in the Fire Sea**
-| basement_door | The player unlocked castle's basement door
-| upstairs_door | The player unlocked castle's upper floors
+| basement_door | Player unlocked castle's basement door
+| upstairs_door | Player unlocked castle's upper floors
 | ddd_moved_back | **Dire Dire Docks** painting is moved back 
 | moat_drained | Water is drained in the moat of the castle
 | pps_door | **Princess's Secret Slide** window is unlocked
@@ -134,7 +134,7 @@ pss = 10
 ```
 ___
 ## Cap Section - [cap]
-This section contains information about where the okayer lost their cap and who take it.
+This section contains information about where the player lost their cap and who take it.
 | Flag | Value | Description |
 |---|---|---|
 | type | ground, klepto, ukiki, mrblizzard | The one who or what took the cap from the player. Default flag is **"ground"**

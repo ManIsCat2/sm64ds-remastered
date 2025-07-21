@@ -5,7 +5,8 @@
 #include <PR/gbi.h>
 
 // from main menu segment 7
-extern u8 dl_menu_idle_hand[];
+extern u8 dl_menu_cursor[];
+extern u8 dl_file_select_arrow[];
 extern u8 dl_menu_grabbing_hand[];
 extern u8 menu_hud_lut[];
 extern u8 menu_font_lut[];
@@ -24,8 +25,8 @@ extern const u8 eu_course_strings_de_table[];
 #endif
 
 // from intro_segment7
-extern Gfx *intro_seg7_dl_logo;
-extern Gfx *intro_seg7_dl_copyright;
+extern Gfx *intro_seg7_dl_0700B3A0;
+extern Gfx *intro_seg7_dl_0700C6A0;
 extern f32 intro_seg7_table_0700C790[];
 extern f32 intro_seg7_table_0700C880[];
 

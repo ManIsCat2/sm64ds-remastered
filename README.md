@@ -21,7 +21,7 @@ Fork of [AloXado320/sm64ex-alo](https://github.com/AloUltraExt/sm64ex-alo)
  
  ```sh
  git config core.fileMode false
- chmod -R 775 .
+ chmod -R 777 .
  ```
  
  ### Copy baserom(s) for asset extraction:
@@ -37,7 +37,7 @@ Fork of [AloXado320/sm64ex-alo](https://github.com/AloUltraExt/sm64ex-alo)
 
   #### Install build dependencies:
   ```sh
-  sudo apt install -y binutils-mips-linux-gnu build-essential git pkgconf python3 gcc-mips-linux-gnu
+  sudo apt install -y binutils-mips-linux-gnu build-essential git libcapstone-dev pkgconf python3 gcc-mips-linux-gnu
   ```
 
   #### Build:
@@ -66,7 +66,7 @@ Fork of [AloXado320/sm64ex-alo](https://github.com/AloUltraExt/sm64ex-alo)
 
   #### Install build dependencies
   ```sh
-  pkg install git wget make python getconf zip apksigner clang binutils which libglvnd-dev
+  pkg install git wget make python getconf zip apksigner clang binutils
   ```
 
   #### Copy in your baserom:
@@ -89,11 +89,9 @@ Fork of [AloXado320/sm64ex-alo](https://github.com/AloUltraExt/sm64ex-alo)
   make -j4
   ```
 
- #### Copying and Installing apk:
- 
- Do this to move the apk to the root of your storage then open it using a file manager.
+ #### Install apk:
   ```sh
-  xdg-open build/us_android/sm64dsr.us.(currentver).apk /sdcard/sm64dsr.us.(currentver).apk
+  xdg-open build/us_android/sm64dsr.us.(currentver).apk
   ```
  
 </details>

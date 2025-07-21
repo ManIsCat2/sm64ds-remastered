@@ -10,12 +10,11 @@
 #include "game/paintings.h"
 #include "menu/debug_level_select.h"
 #include "menu/intro_geo.h"
-
 #include "make_const_nonconst.h"
 
 #include "levels/intro/header.h"
 
-#if defined(TARGET_N64) && defined(N64_USE_EXTENDED_RAM)
+#if defined(TARGET_N64) && defined(USE_EXT_RAM)
 const GeoLayout intro_geo_error_screen[] = {
     GEO_NODE_SCREEN_AREA(0, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, SCREEN_WIDTH/2, SCREEN_HEIGHT/2),
     GEO_OPEN_NODE(),
@@ -52,7 +51,7 @@ const GeoLayout intro_geo_0002D0[] = {
             GEO_OPEN_NODE(),
                 GEO_CAMERA(0, 0, 0, 3200, 0, 0, 0, 0x00000000),
                 GEO_OPEN_NODE(),
-                    GEO_ASM(0, geo_intro_super_mario_64_logo),
+                    GEO_ASM(0, geo_intro_super_player_64_logo),
                 GEO_CLOSE_NODE(),
             GEO_CLOSE_NODE(),
         GEO_CLOSE_NODE(),

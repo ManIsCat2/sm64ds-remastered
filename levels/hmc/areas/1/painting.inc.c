@@ -525,7 +525,7 @@ struct Painting cotmc_painting = {
     /* id */ 0x000E,
     /* Image Count */ 0x01,
     /* Texture Type */ PAINTING_ENV_MAP,
-    /* Floor Status */ 0x00, 0x00 , 0x00 /* which of the painting's nearby special floors Mario's on */,
+    /* Floor Status */ 0x00, 0x00 , 0x00 /* which of the painting's nearby special floors Player's on */,
     /* Ripple Status */ 0x00,
     /* Rotation */ 270.0f,  0.0f,
     /* Position */ 2989.055908f, -4485.120117f, 5135.359863f,
@@ -543,6 +543,6 @@ struct Painting cotmc_painting = {
     /* Ripple DList */ hmc_seg7_painting_dl_070242D0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_CONTINUOUS,
     /* Alpha */ 0xFF,
-    /* Mario Below */  0x00, 0x00, 0x00, /* Whether or not Mario is below the painting */
+    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not Player is below the painting */
     /* Size */  723.968018f,
 };

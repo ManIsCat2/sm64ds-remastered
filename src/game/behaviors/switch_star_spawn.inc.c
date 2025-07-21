@@ -23,6 +23,7 @@ void bhv_star_switch_spawn_condition_loop(void) {
         // Spawn star
         case 1: {
             struct Object *star = spawn_object_abs_with_rot(o, 0, MODEL_STAR, bhvTimedStarSpawnCoordinates, o->oHomeX, o->oHomeY, o->oHomeZ, 0, 0, 0);
+            struct Object *transparentStar = spawn_object_abs_with_rot(o, 0, MODEL_TRANSPARENT_STAR, bhvTimedStarSpawnCoordinates, o->oHomeX, o->oHomeY, o->oHomeZ, 0, 0, 0);
             star->oBhvParams = o->oBhvParams;
             star->oHomeX = o->oHomeX;
             star->oHomeY = o->oHomeY;

@@ -132,6 +132,7 @@ u8 red_switch_switch_box_cmp4_ci8[] = {
 	0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x00, 0x03, 
 	0x01, 0x48, 0x48, 0x4c, 0x4e, 0x4e, 0x4e, 0x4e, 
 	0x4f, 0x4f, 0x4f, 0x4f, 0x4f, 0x4f, 0x4f, 0x4f, 
+	
 };
 
 Gfx red_switch_switch_box_cmp4_pal_rgba16_aligner[] = {gsSPEndDisplayList()};
@@ -192,6 +193,7 @@ Gfx red_switch_switch_mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
+
 Gfx mat_red_switch_switch[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
@@ -228,3 +230,4 @@ Gfx red_switch_switch_mesh_layer_1[] = {
 	gsDPSetAlphaCompare(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
+

@@ -3585,3 +3585,4 @@ Gfx luigi_000_displaylist_right_foot_mesh_layer_1_mat_override_metal_mat_0[] = {
 	gsDPSetAlphaCompare(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
+

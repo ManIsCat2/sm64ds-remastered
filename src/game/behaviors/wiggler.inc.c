@@ -205,9 +205,9 @@ void wiggler_init_segments(void) {
 }
 
 /**
- * Show text if necessary. Then walk toward mario if not at full health, and
+ * Show text if necessary. Then walk toward the player if not at full health, and
  * otherwise wander in random directions.
- * If attacked by mario, enter either the jumped on or knockback action.
+ * If attacked by the player, enter either the jumped on or knockback action.
  */
 static void wiggler_act_walk(void) {
     s16 yawTurnSpeed;
@@ -221,7 +221,7 @@ static void wiggler_act_walk(void) {
             o->oWigglerTextStatus = WIGGLER_TEXT_STATUS_SHOWING_DIALOG;
         }
 
-        // If Mario is positioned below the wiggler, assume he entered through the
+        // If Player is positioned below the wiggler, assume he entered through the
         // lower cave entrance, so don't display text.
         if (gPlayerObject->oPosY < o->oPosY || cur_obj_update_dialog_with_cutscene(
             MARIO_DIALOG_LOOK_UP, DIALOG_FLAG_NONE, CUTSCENE_DIALOG, DIALOG_150)) {
@@ -244,7 +244,7 @@ static void wiggler_act_walk(void) {
 
             if (obj_bounce_off_walls_edges_objects(&o->oWigglerTargetYaw)) {
                 //! If the wiggler could self-intersect, or intersect a different
-                //  non-mario object, this could potentially be used to force
+                //  non-player object, this could potentially be used to force
                 //  the wiggler to walk straight - past his usual radius
                 o->oWigglerWalkAwayFromWallTimer = random_linear_offset(30, 30);
             } else {

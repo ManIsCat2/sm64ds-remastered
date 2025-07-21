@@ -113,7 +113,7 @@ void tuxies_mother_act_0(void) {
     } else {
         switch (o->oSubAction) {
             case 0:
-                if (cur_obj_can_mario_activate_textbox_2(300.0f, 100.0f) && !sp2C) {
+                if (cur_obj_can_player_activate_textbox_2(300.0f, 100.0f) && !sp2C) {
                     o->oSubAction++;
                 }
                 break;
@@ -151,7 +151,7 @@ void bhv_tuxies_mother_loop(void) {
     o->oInteractStatus = 0;
 }
 
-void small_penguin_dive_with_mario(void) {
+void small_penguin_dive_with_player(void) {
     if (player_is_dive_sliding()) {
         o->oSmallPenguinUnk100 = o->oAction;
         o->oAction = 3;
@@ -171,7 +171,7 @@ void small_penguin_act_2(void) {
     if (o->oDistanceToPlayer > o->oSmallPenguinUnk108 + 500.0f) {
         o->oAction = 0;
     }
-    small_penguin_dive_with_mario();
+    small_penguin_dive_with_player();
     if (sp1C) {
         o->oAction = 5;
     }
@@ -187,7 +187,7 @@ void small_penguin_act_1(void) {
     if (o->oDistanceToPlayer > 1100.0f) {
         o->oAction = 0;
     }
-    small_penguin_dive_with_mario();
+    small_penguin_dive_with_player();
 }
 
 void small_penguin_act_3(void) {
@@ -233,7 +233,7 @@ void small_penguin_act_0(void) {
     if (sp1C) {
         o->oAction = 5;
     }
-    if (cur_obj_mario_far_away()) {
+    if (cur_obj_player_far_away()) {
         cur_obj_set_pos_to_home();
     }
 }
@@ -262,7 +262,7 @@ void small_penguin_act_5(void) {
         cur_obj_init_animation_with_sound(0);
     }
 
-    small_penguin_dive_with_mario();
+    small_penguin_dive_with_player();
 }
 
 void (*sSmallPenguinActions[])(void) = {
@@ -342,9 +342,9 @@ Gfx *geo_switch_tuxie_mother_eyes(s32 run, struct GraphNode *node, UNUSED Mat4 *
             switchCase->selectedCase = 1;
         }
 
-        /** make Tuxie's Mother have angry eyes if Mario takes the correct baby
+        /** make Tuxie's Mother have angry eyes if Player takes the correct baby
          * after giving it back. The easiest way to check this is to see if she's
-         * moving, since she only does when she's chasing Mario.
+         * moving, since she only does when she's chasing Player.
          */
         if (obj->behavior == segmented_to_virtual(bhvTuxiesMother)) {
             if (obj->oForwardVel > 5.0f) {

@@ -195,7 +195,7 @@ void play_menu_sounds(s16 soundMenuFlags) {
  */
 void play_painting_eject_sound(void) {
     if (gRipplingPainting != NULL && gRipplingPainting->state == PAINTING_ENTERED) {
-        // ripple when Mario enters painting
+        // ripple when Player enters painting
         if (!sPaintingEjectSoundPlayed) {
             play_sound(SOUND_GENERAL_PAINTING_EJECT,
                        gPlayerStates[0].playerObj->header.gfx.cameraToObject);

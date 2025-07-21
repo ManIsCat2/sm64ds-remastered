@@ -142,10 +142,10 @@ void bhv_door_rendering_loop(void) {
     struct TransitionRoomData* transitionRoom = &gDoorAdjacentRooms[gPlayerCurrentRoom];
 
     o->oDoorIsRendering = (
-        gPlayerCurrentRoom            == 0                    || // Mario is in the "global" room.
-        gPlayerCurrentRoom            == o->oDoorSelfRoom     || // Mario is in the same room as the door.
-        gPlayerCurrentRoom            == o->oDoorForwardRoom  || // Mario is in the door's  forward room.
-        gPlayerCurrentRoom            == o->oDoorBackwardRoom || // Mario is in the door's backward room.
+        gPlayerCurrentRoom            == 0                    || // Player is in the "global" room.
+        gPlayerCurrentRoom            == o->oDoorSelfRoom     || // Player is in the same room as the door.
+        gPlayerCurrentRoom            == o->oDoorForwardRoom  || // Player is in the door's  forward room.
+        gPlayerCurrentRoom            == o->oDoorBackwardRoom || // Player is in the door's backward room.
         transitionRoom->forwardRoom  == o->oDoorForwardRoom  || // The transition room's  forward room is in the same room as this door's  forward room.
         transitionRoom->forwardRoom  == o->oDoorBackwardRoom || // The transition room's  forward room is in the same room as this door's backward room.
         transitionRoom->backwardRoom == o->oDoorForwardRoom  || // The transition room's backward room is in the same room as this door's  forward room.

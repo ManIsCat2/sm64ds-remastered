@@ -69,13 +69,12 @@ extern f32 gSineTable[];
 #define RAD_PER_DEG (M_PI / 180.0f)
 #define DEG_PER_RAD (180.0f / M_PI)
 
-// Extra int casts for macros converting to angle to ensure clang ARM64 properly returns these values
-#define angle_to_degrees(x)  ((f32)(((Angle)(x) / 65536.0f) * 360.0f))
-#define degrees_to_angle(x)  ((Angle)((int)(((f32)(x) * 0x10000) / 360)))
-#define angle_to_radians(x)  ((f32)(((Angle)(x) * M_PI) / 0x8000))
-#define radians_to_angle(x)  ((Angle)((int)(((f32)(x) / M_PI) * 0x8000)))
-#define degrees_to_radians(x) ((f32)((f32)(x) * RAD_PER_DEG))
-#define radians_to_degrees(x) ((f32)((f32)(x) * DEG_PER_RAD))
+#define angle_to_degrees(x) (f32)((Angle)(x) * 360.0f / (f32)0x10000)
+#define degrees_to_angle(x) (Angle)((f32)(x) * (f32)0x10000 / 360.0f)
+#define angle_to_radians(x) (f32)((Angle)(x) * M_PI / (f32)0x8000)
+#define radians_to_angle(x) (Angle)((f32)(x) * (f32)0x8000 / M_PI)
+#define degrees_to_radians(x) (f32)((f32)(x) * M_PI / 180.0f)
+#define radians_to_degrees(x) (f32)((f32)(x) * 180.0f / M_PI)
 
 /**
  * Converts an angle in degrees to sm64's s16 angle units. For example, DEGREES(90) == 0x4000
@@ -622,7 +621,6 @@ void mtxf_identity(Mat4 mtx);
 void mtxf_lookat(Mat4 mtx, Vec3f from, Vec3f to, s32 roll);
 void mtxf_held_object(Mat4 dest, Mat4 src, Mat4 throwMatrix, Vec3f translation, Vec3f scale);
 void mtxf_billboard(Mat4 dest, Mat4 src, Vec3f position, Vec3f scale, s32 roll);
-void mtxf_cylboard(Mat4 dest, Mat4 src, Vec3f position, Vec3f scale, s32 roll); // defined by BETTERCAMERA
 void mtxf_shadow(Mat4 dest, Mat4 src, Vec3f upDir, Vec3f pos, Vec3f scale, s32 yaw);
 void mtxf_align_terrain_normal(Mat4 dest, Vec3f normal, Vec3f pos, s32 yaw);
 void mtxf_align_terrain_triangle(Mat4 mtx, Vec3f pos, s32 yaw, f32 radius);
@@ -710,6 +708,7 @@ s16 length_sins(s16 length, s16 direction);
 s16 length_coss(s16 length, s16 direction);
 float smooth_step(float edge0, float edge1, float x);
 float soft_clamp(float x, float a, float b);
+void mtxf_cylboard(Mat4 dest, Mat4 src, Vec3f position, Vec3f scale, s32 roll);
 
 ALWAYS_INLINE f32 remap(f32 x, f32 fromA, f32 toA, f32 fromB, f32 toB) {
     return (x - fromA) / (toA - fromA) * (toB - fromB) + fromB;

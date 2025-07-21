@@ -24,23 +24,23 @@ static struct ObjectHitbox sFlyGuyHitbox = {
 static s16 sFlyGuyJitterAmounts[] = { 0x1000, -0x2000, 0x2000 };
 
 /**
- * Return to regular size. When mario is close enough or home is far enough,
- * turn toward mario/home and enter the approach mario action.
+ * Return to regular size. When player is close enough or home is far enough,
+ * turn toward player/home and enter the approach player action.
  */
 static void fly_guy_act_idle(void) {
     o->oForwardVel = 0.0f;
 
     if (approach_f32_ptr(&o->header.gfx.scale[0], 1.5f, 0.02f)) {
-        // If we are >2000 units from home or Mario is <2000 units from us
+        // If we are >2000 units from home or Player is <2000 units from us
         if (o->oDistanceToPlayer >= 25000.0f || o->oDistanceToPlayer < 2000.0f) {
-            // Turn toward home or Mario
+            // Turn toward home or Player
             obj_face_yaw_approach(o->oAngleToPlayer, 0x300);
 
             if (cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 0x300)) {
                 o->oAction = FLY_GUY_ACT_APPROACH_MARIO;
             }
         } else {
-            // Randomly enter the approach mario action - but this doesn't
+            // Randomly enter the approach player action - but this doesn't
             // really do anything since we come right back to idle
             if (o->oFlyGuyIdleTimer >= 3 || o->oFlyGuyIdleTimer == (random_u16() & 1) + 2) {
                 o->oFlyGuyIdleTimer = 0;
@@ -54,19 +54,19 @@ static void fly_guy_act_idle(void) {
 }
 
 /**
- * Turn toward mario or home, and when positioned nicely, either lunge or shoot
- * fire. If mario is far away, stop and return to the idle action.
+ * Turn toward player or home, and when positioned nicely, either lunge or shoot
+ * fire. If player is far away, stop and return to the idle action.
  */
-static void fly_guy_act_approach_mario(void) {
-    // If we are >2000 units from home or Mario is <2000 units from us
+static void fly_guy_act_approach_player(void) {
+    // If we are >2000 units from home or Player is <2000 units from us
     if (o->oDistanceToPlayer >= 25000.0f || o->oDistanceToPlayer < 2000.0f) {
         obj_forward_vel_approach(10.0f, 0.5f);
 
-        // Turn toward home or Mario
+        // Turn toward home or Player
         obj_face_yaw_approach(o->oAngleToPlayer, 0x400);
         cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 0x200);
 
-        // If facing toward mario and we are either near mario laterally or
+        // If facing toward player and we are either near player laterally or
         // far above him
         if (abs_angle_diff(o->oAngleToPlayer, o->oFaceAngleYaw) < 0x2000
             && (o->oPosY - gPlayerObject->oPosY > 400.0f || o->oDistanceToPlayer < 400.0f)) {
@@ -89,7 +89,7 @@ static void fly_guy_act_approach_mario(void) {
 }
 
 /**
- * Lunge downward at mario, then twirl back up. Enter the approach mario action
+ * Lunge downward at player, then twirl back up. Enter the approach player action
  * afterward.
  */
 static void fly_guy_act_lunge(void) {
@@ -114,7 +114,7 @@ static void fly_guy_act_lunge(void) {
         o->oMoveAngleYaw -= o->oFaceAngleRoll / 4;
         obj_face_yaw_approach(o->oMoveAngleYaw, 0x800);
 
-        // Continue moving upward until at least 200 units above mario
+        // Continue moving upward until at least 200 units above player
         if (o->oPosY < gPlayerObject->oPosY + 200.0f) {
             obj_y_vel_approach(20.0f, 0.5f);
         } else if (obj_y_vel_approach(0.0f, 0.5f)) {
@@ -129,7 +129,7 @@ static void fly_guy_act_lunge(void) {
 }
 
 /**
- * Turn toward mario, then shoot fire. Then enter the idle action.
+ * Turn toward player, then shoot fire. Then enter the idle action.
  */
 static void fly_guy_act_shoot_fire(void) {
     o->oForwardVel = 0.0f;
@@ -201,7 +201,7 @@ void bhv_fly_guy_update(void) {
                 fly_guy_act_idle();
                 break;
             case FLY_GUY_ACT_APPROACH_MARIO:
-                fly_guy_act_approach_mario();
+                fly_guy_act_approach_player();
                 break;
             case FLY_GUY_ACT_LUNGE:
                 fly_guy_act_lunge();

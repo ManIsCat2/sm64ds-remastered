@@ -786,7 +786,7 @@ static s32 check_water_grab(struct PlayerState *m) {
 
         if (dAngleToObject >= -0x2AAA && dAngleToObject <= 0x2AAA) {
             m->usedObj = object;
-            mario_grab_used_object(m);
+            player_grab_used_object(m);
             m->playerBodyState->grabPos = GRAB_POS_LIGHT_OBJ;
             return TRUE;
         }
@@ -808,7 +808,7 @@ static s32 act_water_throw(struct PlayerState *m) {
     m->playerBodyState->headAngle[0] = approach_s32(m->playerBodyState->headAngle[0], 0, 0x200, 0x200);
 
     if (m->actionTimer++ == 5) {
-        mario_throw_held_object(m);
+        player_throw_held_object(m);
 #ifdef RUMBLE_FEEDBACK
         queue_rumble_data(3, 50);
 #endif
@@ -896,7 +896,7 @@ static s32 act_forward_water_kb(struct PlayerState *m) {
 static s32 act_water_shocked(struct PlayerState *m) {
     play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_ACTION_SOUND_PLAYED);
     play_sound(SOUND_MOVING_SHOCKED, m->playerObj->header.gfx.cameraToObject);
-    set_camera_shake_from_hit_or_cap_block(SHAKE_SHOCK);
+    set_camera_shake_from_hit(SHAKE_SHOCK);
 
     if (set_player_animation(m, MARIO_ANIM_SHOCKED) == 0) {
         m->actionTimer++;
@@ -1511,7 +1511,7 @@ static s32 check_common_submerged_cancels(struct PlayerState *m) {
         if (waterHeight > m->floorHeight) {
 #if FIX_WATER_PLUNGE_UPWARP
             if (m->pos[1] - waterHeight < 50) {
-                m->pos[1] = waterHeight; // lock mario to top if the falloff isn't big enough
+                m->pos[1] = waterHeight; // lock player to top if the falloff isn't big enough
             } else {
                 return transition_submerged_to_airborne(m);
             }
@@ -1541,7 +1541,7 @@ static s32 check_common_submerged_cancels(struct PlayerState *m) {
     return FALSE;
 }
 
-s32 mario_execute_submerged_action(struct PlayerState *m) {
+s32 player_execute_submerged_action(struct PlayerState *m) {
     s32 cancel = FALSE;
 
     if (check_common_submerged_cancels(m)) {

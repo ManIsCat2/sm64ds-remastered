@@ -23,19 +23,13 @@
 
 struct CheatList Cheats;
 
-#ifdef VERSION_CN // hack, todo remove
-#define SIZEOPTC(n) n * 2
-#else
-#define SIZEOPTC(n) n
-#endif
-
-const u8 optCheatMenuStr[][200] = {
+const u8 optCheatMenuStr[][32] = {
     { TEXT_OPT_CHEATS },
     { TEXT_OPT_CHEATS_WALKON },
     { TEXT_OPT_CHEATS_BLJANY },
 };
 
-static const u8 optsCheatsStr[][SIZEOPTC(64)] = {
+static const u8 optsCheatsStr[][64] = {
     { TEXT_OPT_CHEAT0 },
     { TEXT_OPT_CHEAT1 },
     { TEXT_OPT_CHEAT2 },
@@ -50,7 +44,7 @@ static const u8 optsCheatsStr[][SIZEOPTC(64)] = {
     { TEXT_OPT_CHEAT11 },
 };
 
-static const u8 optsPlayerSizeCheatStr[][SIZEOPTC(64)] = {
+static const u8 optsPlayerSizeCheatStr[][64] = {
     { TEXT_CHEAT_MSIZE0 },
     { TEXT_CHEAT_MSIZE1 },
     { TEXT_CHEAT_MSIZE2 },
@@ -62,7 +56,7 @@ static const u8 *cheatChoicesPlayerSize[] = {
     optsPlayerSizeCheatStr[2],
 };
 
-static const u8 optsWalkOnCheatStr[][SIZEOPTC(64)] = {
+static const u8 optsWalkOnCheatStr[][64] = {
     { TEXT_CHEAT_WALKON0 },
     { TEXT_CHEAT_WALKON1 },
     { TEXT_CHEAT_WALKON2 },
@@ -71,7 +65,7 @@ static const u8 optsWalkOnCheatStr[][SIZEOPTC(64)] = {
     { TEXT_CHEAT_WALKON5 },
 };
 
-static const u8 optsBljOptAnyCheatStr[][SIZEOPTC(64)] = {
+static const u8 optsBljOptAnyCheatStr[][64] = {
     { TEXT_CHEAT_BLJOPT0 },
     { TEXT_CHEAT_BLJOPT1 },
     { TEXT_CHEAT_BLJOPT2 },
@@ -83,7 +77,7 @@ static const u8 *cheatChoicesBljOptAny[] = {
     optsBljOptAnyCheatStr[2],
 };
 
-static const u8 optsBljAnyCheatStr[][SIZEOPTC(64)] = {
+static const u8 optsBljAnyCheatStr[][64] = {
     { TEXT_CHEAT_BLJANY0 },
     { TEXT_CHEAT_BLJANY1 },
 };
@@ -125,7 +119,13 @@ struct SubMenu menuCheats = DEF_SUBMENU( optCheatMenuStr[0], optsCheats );
 
 void cheats_moon_jump(struct PlayerState *m) {
     if (Cheats.MoonJump) {
-        if (m->controller->buttonDown & X_BUTTON) {
+        if (m->controller->buttonDown &
+#ifndef TARGET_N64
+        X_BUTTON
+#else
+        L_TRIG
+#endif
+        ) {
             m->vel[1] = 40.0f;
             return TRUE;
         }
@@ -143,7 +143,7 @@ void cheats_blj_anywhere(struct PlayerState *m) {
                 }
                 break;
             case 2: // Holding
-                if (m->controller->buttonDown & (A_BUTTON | (ZL_TRIG | ZR_TRIG))) {
+                if (m->controller->buttonDown & (A_BUTTON | ZL_TRIG | ZR_TRIG)) {
                     m->forwardVel -= (Cheats.BljAny.VelForce + 1) * 2.5f;
                     m->vel[1] -= 50.0f;
 

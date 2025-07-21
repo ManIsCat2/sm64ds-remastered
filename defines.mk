@@ -20,8 +20,6 @@ GODDARD_MFACE ?= 1
 VANILLA_CHECKS ?= 1
 # Enable extended bounds
 EXTENDED_BOUNDS ?= 0
-# Enable Mouse support
-MOUSE_ACTIONS ?= 1
 # Accept RM2C level folder output
 RM2C ?= 0
 
@@ -40,7 +38,7 @@ QOL_FEATURES ?= 1
 
 # Enable 60 fps interpolation
 HIGH_FPS_PC ?= 1
-# Disable text-based save-files by default
+# Enable text-based save-files by default
 TEXTSAVES ?= 0
 # Load resources from external files
 EXTERNAL_DATA ?= 0
@@ -85,18 +83,18 @@ ifeq ($(EXTERNAL_DATA),1)
   endif
 endif
 
-ifeq ($(WINDOW_API),SDL2)
+# Use PC-only exclusive defines
+ifeq ($(TARGET_ANDROID),1)
   # Check for touch controls
   ifeq ($(TOUCH_CONTROLS),1)
     CUSTOM_C_DEFINES += -DTOUCH_CONTROLS
   endif
 endif
 
-# Use PC-only exclusive defines
 ifeq ($(TARGET_PORT_CONSOLE),0)
 
-  # Check for Mouse Option
-  ifeq ($(MOUSE_ACTIONS),1)
+  # Check for Mouse Option (no DirectX yet)
+  ifneq ($(WINDOW_API),DXGI)
     CUSTOM_C_DEFINES += -DMOUSE_ACTIONS
   endif
 
@@ -104,7 +102,7 @@ ifeq ($(TARGET_PORT_CONSOLE),0)
   ifeq ($(DISCORDRPC),1)
     CUSTOM_C_DEFINES += -DDISCORDRPC
   endif
-
+  
   # Check for Command Line Options
   ifeq ($(COMMAND_LINE_OPTIONS),1)
     CUSTOM_C_DEFINES += -DCOMMAND_LINE_OPTIONS

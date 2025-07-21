@@ -25,28 +25,6 @@ extern const Gfx butterfly_seg3_dl_03005408[];
 extern const Gfx butterfly_seg3_dl_030054A0[];
 extern const struct Animation *const butterfly_seg3_anims_030056B0[];
 
-// coin
-extern const GeoLayout yellow_coin_geo[];
-extern const GeoLayout yellow_coin_no_shadow_geo[];
-extern const GeoLayout blue_coin_geo[];
-extern const GeoLayout blue_coin_no_shadow_geo[];
-extern const GeoLayout red_coin_geo[];
-extern const GeoLayout red_coin_no_shadow_geo[];
-extern const Gfx coin_seg3_dl_03007780[];
-extern const Gfx coin_seg3_dl_030077D0[];
-extern const Gfx coin_seg3_dl_03007800[];
-extern const Gfx coin_seg3_dl_03007828[];
-extern const Gfx coin_seg3_dl_03007850[];
-extern const Gfx coin_seg3_dl_03007878[];
-extern const Gfx coin_seg3_dl_030078A0[];
-extern const Gfx coin_seg3_dl_030078C8[];
-extern const Gfx coin_seg3_dl_030078F0[];
-extern const Gfx coin_seg3_dl_03007918[];
-extern const Gfx coin_seg3_dl_03007940[];
-extern const Gfx coin_seg3_dl_03007968[];
-extern const Gfx coin_seg3_dl_03007990[];
-extern const Gfx coin_seg3_dl_030079B8[];
-
 // dirt
 extern const GeoLayout dirt_animation_geo[];
 extern const GeoLayout cartoon_star_geo[];
@@ -179,18 +157,6 @@ extern const Gfx dl_power_meter_health_segments_end[];
 // sand
 extern const Gfx sand_seg3_dl_0302BCD0[];
 
-// star
-extern const GeoLayout star_geo[];
-extern const Gfx star_seg3_dl_0302B7B0[];
-extern const Gfx star_seg3_dl_0302B870[];
-extern const Gfx star_seg3_dl_0302B9C0[];
-extern const Gfx star_seg3_dl_0302BA18[];
-
-// transparent_star
-extern const GeoLayout transparent_star_geo[];
-extern const Gfx transparent_star_seg3_dl_0302C560[];
-extern const Gfx transparent_star_seg3_dl_0302C620[];
-
 // tree
 extern const GeoLayout bubbly_tree_geo[];
 extern const GeoLayout spiky_tree_geo[];
@@ -240,5 +206,19 @@ extern const Collision wooden_signpost_seg3_collision_0302DD80[];
 #include "mario_wing_cap/geo_header.h"
 
 #include "mario_winged_metal_cap/geo_header.h"
+
+#include "coin/geo_header.h"
+
+#include "star/geo_header.h"
+
+#include "transparent_star/geo_header.h"
+
+#include "luigi_cap/geo_header.h"
+
+#include "wario_cap/geo_header.h"
+
+#include "silver_star/geo_header.h"
+
+#include "wooden_signpost/geo_header.h"
 
 #endif

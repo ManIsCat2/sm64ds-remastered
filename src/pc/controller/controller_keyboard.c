@@ -1,3 +1,5 @@
+#ifndef TARGET_WII_U
+
 #include <stdbool.h>
 #include <ultra64.h>
 
@@ -9,9 +11,6 @@
 
 #include "../configfile.h"
 #include "controller_keyboard.h"
-#ifdef TOUCH_CONTROLS
-#include "controller_touchscreen.h"
-#endif
 
 static int keyboard_buttons_down;
 
@@ -97,9 +96,6 @@ static void keyboard_init(void) {
 
 static void keyboard_read(OSContPad *pad) {
     pad->button |= keyboard_buttons_down;
-#ifdef TOUCH_CONTROLS
-    if (keyboard_buttons_down) gTouchControlsInUse = FALSE;
-#endif
     const u32 xstick = keyboard_buttons_down & STICK_XMASK;
     const u32 ystick = keyboard_buttons_down & STICK_YMASK;
     if (xstick == STICK_LEFT)
@@ -131,3 +127,5 @@ struct ControllerAPI controller_keyboard = {
     keyboard_bindkeys,
     keyboard_shutdown
 };
+
+#endif

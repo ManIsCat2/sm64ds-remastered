@@ -31,7 +31,7 @@ enum WarpOperation {
     WARP_OP_DEMO_END
 };
 
-enum MarioSpawnType {
+enum PlayerSpawnType {
     MARIO_SPAWN_NONE,
     MARIO_SPAWN_DOOR_WARP,
     MARIO_SPAWN_IDLE,
@@ -82,7 +82,9 @@ enum WarpNodes {
     WARP_NODE_0F,
     WARP_NODE_10,
     WARP_NODE_11,
-    WARP_NODE_14 = 0x14,
+    WARP_NODE_12,
+    WARP_NODE_13,
+    WARP_NODE_14,
     WARP_NODE_15,
     WARP_NODE_16,
     WARP_NODE_17,
@@ -139,8 +141,8 @@ struct CreditsEntry {
     u8 areaIndex;
     u8 posVpAndText;
     u8 actNum;
-    s8 marioAngle;
-    Vec3s marioPos;
+    s8 playerAngle;
+    Vec3s playerPos;
     const char **string;
 };
 

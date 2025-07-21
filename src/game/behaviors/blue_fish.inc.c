@@ -96,7 +96,7 @@ void bhv_blue_fish_movement_loop(void) {
 }
 
 /**
- * Spawns fifteen fish if Mario resides in room fifteen or seven.
+ * Spawns fifteen fish if Player resides in room fifteen or seven.
  * They move at random within 200.0f
  */
 void bhv_tank_fish_group_loop(void) {
@@ -118,7 +118,7 @@ void bhv_tank_fish_group_loop(void) {
             }
             break;
 
-        // Sets next oAction phase if Mario is not in rooms fifteen and seven.
+        // Sets next oAction phase if Player is not in rooms fifteen and seven.
         case BLUE_FISH_ACT_ROOM:
             if (gPlayerCurrentRoom != 15 && gPlayerCurrentRoom != 7) {
                 o->oAction++;

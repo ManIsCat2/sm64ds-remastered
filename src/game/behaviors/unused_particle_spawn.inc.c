@@ -2,7 +2,7 @@
 /**
  * Behavior for bhvUnusedParticleSpawn.
  *
- * This unused behavior spawns 10 purple particles if Mario collides with its
+ * This unused behavior spawns 10 purple particles if Player collides with its
  * associated object.
  */
 

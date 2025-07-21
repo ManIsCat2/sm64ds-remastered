@@ -59,7 +59,7 @@ void bhv_coffin_spawner_loop(void) {
 
 /**
  * The main action for the coffins. Coffins with COFFIN_BP_STATIC skip the behavior, while
- * the other coffins will enter a standing action when Mario is near.
+ * the other coffins will enter a standing action when Player is near.
  * Also controls laying the coffin down after it has stood up.
  */
 void coffin_act_idle(void) {
@@ -94,7 +94,7 @@ void coffin_act_idle(void) {
             f32 distSideways = dz * yawCos - dx * yawSin;
 
             // This checks a box around the coffin and if it has been a bit since it stood up.
-            // It also checks in the case Mario is squished, so he doesn't get permanently squished.
+            // It also checks in the case Player is squished, so he doesn't get permanently squished.
             if (o->oTimer > 60
                 && (o->oDistanceToPlayer > 100.0f || gPlayerState->action == ACT_SQUISHED)
                 && gPlayerObject->oPosY - o->oPosY < 200.0f && absf(distForwards) < 140.0f

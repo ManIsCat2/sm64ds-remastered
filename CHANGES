@@ -297,7 +297,7 @@ Refresh #4
 7.) process_level_music_dynamics: slightly better stack and regalloc (#746)
 8.) move level order specific definitions out to levels/level_defines.h (#743)
 9.) Renamed some mislabelled sound effects (#748)
-10.) Very minor white space fixes in player.c (#752)
+10.) Very minor white space fixes in Mario.c (#752)
 11.) Renamed GRAVITY to OBJ_PHYSICS (#755)
 12.) Use defined macros instead of literal values for interactions in behavior_data.c (#754)
 13.) iQue Player console detection + full support (#756) 

@@ -9,7 +9,7 @@ extern const GeoLayout castle_grounds_geo_000660[];
 extern const GeoLayout castle_grounds_geo_0006F4[];
 extern const GeoLayout castle_grounds_geo_00070C[];
 extern const GeoLayout castle_grounds_geo_000724[];
-extern const GeoLayout castle_grounds_geo_00073C[];
+extern const GeoLayout castle_grounds_area_1[];
 
 // leveldata
 extern const Gfx castle_grounds_seg7_dl_07006D70[];
@@ -30,8 +30,9 @@ extern const Gfx castle_grounds_seg7_dl_0700C768[];
 extern const struct Animation *const castle_grounds_seg7_anims_flags[];
 extern const Gfx castle_grounds_seg7_dl_0700EA58[];
 extern const Gfx castle_grounds_seg7_us_dl_0700F2E8[];
-extern const Collision castle_grounds_seg7_collision_level[];
-extern const MacroObject castle_grounds_seg7_macro_objs[];
+extern const Collision castle_grounds_area_1_collision[];
+extern const MacroObject castle_grounds_area_1_macro_objs[];
+extern const Trajectory *const castle_grounds_trajectory_mips[];
 extern const Collision castle_grounds_seg7_collision_moat_grills[];
 extern const Collision castle_grounds_seg7_collision_cannon_grill[];
 extern const struct MovtexQuadCollection castle_grounds_movtex_water[];
@@ -40,5 +41,7 @@ extern const Gfx castle_grounds_dl_waterfall[];
 
 // script
 extern const LevelScript level_castle_grounds_entry[];
+
+#include "levels/castle_grounds/ds_mesh/geo_header.h"
 
 #endif

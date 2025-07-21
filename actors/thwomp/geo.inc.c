@@ -14,9 +14,8 @@ const GeoLayout thwomp_switch_opt2[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-
 const GeoLayout thwomp_geo[] = {
-    GEO_NODE_START(),
+	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_SHADOW(10, 180, 300),
 		GEO_OPEN_NODE(),

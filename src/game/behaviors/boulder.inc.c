@@ -55,7 +55,7 @@ void bhv_big_boulder_generator_loop(void) {
         o->oTimer = 0;
     }
 
-    if (!current_mario_room_check(4)
+    if (!current_player_room_check(4)
         || is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 1500)) {
         return;
     }

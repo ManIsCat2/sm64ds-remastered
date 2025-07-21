@@ -80,7 +80,7 @@ void bobomb_act_patrol(void) {
     obj_check_floor_death(collisionFlags, sObjFloor);
 }
 
-void bobomb_act_chase_mario(void) {
+void bobomb_act_chase_player(void) {
     UNUSED u8 filler[4];
     s16 animFrame = ++o->header.gfx.animInfo.animFrame;
     s16 collisionFlags;
@@ -115,7 +115,7 @@ void generic_bobomb_free_loop(void) {
             break;
 
         case BOBOMB_ACT_CHASE_MARIO:
-            bobomb_act_chase_mario();
+            bobomb_act_chase_player();
             break;
 
         case BOBOMB_ACT_EXPLODE:
@@ -322,10 +322,10 @@ void bobomb_buddy_act_idle(void) {
 /**
  * Function for the Bob-omb Buddy cannon guy.
  * dialogFirstText is the first dialogID called when Bob-omb Buddy
- * starts to talk to Mario to prepare the cannon(s) for him.
+ * starts to talk to Player to prepare the cannon(s) for him.
  * Then the camera goes to the nearest cannon, to play the "prepare cannon" cutscene
  * dialogSecondText is called after Bob-omb Buddy has the cannon(s) ready and
- * then tells Mario that is "Ready for blastoff".
+ * then tells Player that is "Ready for blastoff".
  */
 void bobomb_buddy_cannon_dialog(s16 dialogFirstText, s16 dialogSecondText) {
     struct Object *cannonClosed;
@@ -335,6 +335,7 @@ void bobomb_buddy_cannon_dialog(s16 dialogFirstText, s16 dialogSecondText) {
         case BOBOMB_BUDDY_CANNON_UNOPENED:
             buddyText = cutscene_object_with_dialog(CUTSCENE_DIALOG, o, dialogFirstText);
             if (buddyText != DIALOG_RESPONSE_NONE) {
+                save_file_set_cannon_unlocked();
                 cannonClosed = cur_obj_nearest_object_with_behavior(bhvCannonClosed);
                 if (cannonClosed != NULL) {
                     o->oBobombBuddyCannonStatus = BOBOMB_BUDDY_CANNON_OPENING;

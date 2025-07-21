@@ -82,7 +82,7 @@ enum SoundBank {
 /**
  * Terrain types. player_get_terrain_sound_addend computes a
  * sound terrain type between 0 and 7, depending on the terrain type of the
- * level and the floor type that Mario is standing on. That value is then added
+ * level and the floor type that the player is standing on. That value is then added
  * to the sound ID for the TERRAIN_* sounds.
  */
 #define SOUND_TERRAIN_DEFAULT   0 // e.g. air
@@ -233,7 +233,6 @@ enum SoundBank {
 // A random number 0-4 is added to the sound ID before playing, producing one of
 // Yahoo! (60% chance), Waha! (20%), or Yippee! (20%).
 #define SOUND_MARIO_YAHOO_WAHA_YIPPEE            /* 0x242B8081 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x2B, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE)
-
 #define SOUND_MARIO_DOH                          /* 0x24308081 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x30, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE)
 #define SOUND_MARIO_GAME_OVER                    /* 0x2431FF81 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x31, 0xFF, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE)
 #define SOUND_MARIO_HELLO                        /* 0x2432FF81 */ SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x32, 0xFF, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE)
@@ -562,7 +561,7 @@ enum SoundBank {
 // to play two channel 3 sounds at once (since just one sound from each channel
 // can play at a given time).
 #define SOUND_GENERAL2_BOBOMB_EXPLOSION          /* 0x802E2081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL2, 0x2E, 0x20, SOUND_DISCRETE)
-#define SOUND_GENERAL2_SWITCH                    /* 0x803EC081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL2, 0x3E, 0xC0, SOUND_DISCRETE)
+#define SOUND_GENERAL2_SWITCH             /* 0x803EC081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL2, 0x3E, 0xC0, SOUND_DISCRETE)
 #define SOUND_GENERAL2_ROTATING_BLOCK_CLICK      /* 0x80400081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL2, 0x40, 0x00, SOUND_DISCRETE)
 #define SOUND_GENERAL2_SPINDEL_ROLL              /* 0x80482081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL2, 0x48, 0x20, SOUND_DISCRETE)
 #define SOUND_GENERAL2_PYRAMID_TOP_SPIN          /* 0x814BE081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL2, 0x4B, 0xE0, SOUND_NO_VOLUME_LOSS | SOUND_DISCRETE)

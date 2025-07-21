@@ -1,0 +1,7 @@
+extern u8 castle_wf_room_rails_geo_tesuri_rgba16[];
+extern Vtx castle_wf_room_rails_geo__16__castle_wf_room_rails_geo_mesh_vtx_cull[8];
+extern Vtx castle_wf_room_rails_geo__16__castle_wf_room_rails_geo_mesh_vtx_0[24];
+extern Gfx castle_wf_room_rails_geo__16__castle_wf_room_rails_geo_mesh_tri_0[];
+extern Gfx mat_castle_wf_room_rails_geo_mat_tesuri_5_f3d[];
+extern Gfx mat_revert_castle_wf_room_rails_geo_mat_tesuri_5_f3d[];
+extern Gfx castle_wf_room_rails_geo[];

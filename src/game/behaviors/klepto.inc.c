@@ -76,17 +76,10 @@ static void klepto_anim_dive(void) {
 }
 
 void bhv_klepto_init(void) {
-    if (o->oBhvParams2ndByte != 0) {
-#if OBJ_HOLD_TRANSPARENT_STAR
-        u8 bp1 = o->oBhvParams >> 24; // Star ID - Star 1 by default
-        if (save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum)) & (1 << bp1)) {
-            o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_TRANSPARENT_STAR;
-        } else {
-            o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_STAR;
-        }
-#else
+    if (o->oBhvParams2ndByte == 1)
         o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_STAR;
-#endif
+    else if (o->oBhvParams2ndByte == 2) {
+        o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_SILVER_STAR;
     } else {
         o->oKleptoStartPosX = o->oPosX;
         o->oKleptoStartPosY = o->oPosY;
@@ -213,7 +206,7 @@ static void klepto_act_turn_toward_player(void) {
     obj_face_yaw_approach(o->oAngleToPlayer, 1000);
 }
 
-static void klepto_act_dive_at_mario(void) {
+static void klepto_act_dive_at_player(void) {
     approach_f32_ptr(&o->oKleptoSpeed, 60.0f, 10.0f);
 
     if (o->oSoundStateID == 2) {
@@ -253,7 +246,7 @@ static void klepto_act_dive_at_mario(void) {
             if (gPlayerStates[0].action != ACT_SLEEPING
                 && !(gPlayerStates[0].action & (ACT_FLAG_SHORT_HITBOX | ACT_FLAG_BUTT_OR_STOMACH_SLIDE))
                 && o->oDistanceToPlayer < 200.0f && dy > 50.0f && dy < 90.0f
-                && mario_lose_cap_to_enemy(1)) {
+                && player_lose_cap_to_enemy(1)) {
                 o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_CAP;
             }
         }
@@ -264,7 +257,7 @@ static void klepto_act_dive_at_mario(void) {
     obj_rotate_yaw_and_bounce_off_walls(o->oKleptoYawToTarget, 600);
 }
 
-static void klepto_act_struck_by_mario(void) {
+static void klepto_act_struck_by_player(void) {
     cur_obj_init_animation_with_sound(1);
 
     obj_face_pitch_approach(0, 800);
@@ -338,7 +331,7 @@ void bhv_klepto_update(void) {
     o->oKleptoYawToTarget = cur_obj_angle_to_home();
 
     if (o->oAction == KLEPTO_ACT_STRUCK_BY_MARIO) {
-        klepto_act_struck_by_mario();
+        klepto_act_struck_by_player();
     } else {
         obj_compute_vel_from_move_pitch(o->oKleptoSpeed);
 
@@ -356,7 +349,7 @@ void bhv_klepto_update(void) {
                 klepto_act_turn_toward_player();
                 break;
             case KLEPTO_ACT_DIVE_AT_MARIO:
-                klepto_act_dive_at_mario();
+                klepto_act_dive_at_player();
                 break;
             case KLEPTO_ACT_RESET_POSITION:
                 klepto_act_reset_position();
@@ -372,16 +365,10 @@ void bhv_klepto_update(void) {
             if (o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_CAP) {
                 save_file_clear_flags(SAVE_FLAG_CAP_ON_KLEPTO);
                 spawn_object(o, MODEL_MARIOS_CAP, bhvNormalCap);
-            } else if (o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_STAR
-            #if QOL_FEATURE_KLEPTO_HOLDING_BLUE_STAR
-            || o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_TRANSPARENT_STAR
-            #endif
-            ) {
-                #ifdef RM2C_HAS_CUSTOM_STAR_POS
-                spawn_default_star(KleptoStarPos);
-                #else
+            } else if (o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_STAR) {
                 spawn_default_star(-5550.0f, 300.0f, -930.0f);
-                #endif
+            } else if (o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_SILVER_STAR) {
+                spawn_object(o, MODEL_SILVER_STAR, bhvSilverStar); // ds come back
             }
 
             o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_NOTHING;

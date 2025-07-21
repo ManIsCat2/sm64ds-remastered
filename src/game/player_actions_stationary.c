@@ -18,9 +18,9 @@
 #include "rumble_init.h"
 
 s32 check_common_idle_cancels(struct PlayerState *m) {
-    mario_drop_held_object(m);
+    player_drop_held_object(m);
     if (m->floor->normal.y < 0.29237169f) {
-        return mario_push_off_steep_floor(m, ACT_FREEFALL, 0);
+        return player_push_off_steep_floor(m, ACT_FREEFALL, 0);
     }
 
     if (m->input & INPUT_STOMPED) {
@@ -61,7 +61,7 @@ s32 check_common_idle_cancels(struct PlayerState *m) {
 
 s32 check_common_hold_idle_cancels(struct PlayerState *m) {
     if (m->floor->normal.y < 0.29237169f) {
-        return mario_push_off_steep_floor(m, ACT_HOLD_FREEFALL, 0);
+        return player_push_off_steep_floor(m, ACT_HOLD_FREEFALL, 0);
     }
 
     if (m->heldObj->oInteractionSubtype & INT_SUBTYPE_DROP_IMMEDIATELY) {
@@ -75,7 +75,7 @@ s32 check_common_hold_idle_cancels(struct PlayerState *m) {
     }
 
     if (m->input & INPUT_A_PRESSED) {
-        return set_jumping_action(m, ACT_HOLD_JUMP, 0);
+        return set_jumping_action(m, ACT_HOLD_JUMP, 0); 
     }
 
     if (m->input & INPUT_OFF_FLOOR) {
@@ -147,17 +147,17 @@ s32 act_idle(struct PlayerState *m) {
         if (is_anim_at_end(m)) {
             // Fall asleep after 10 head turning cycles.
             // act_start_sleeping is triggered earlier in the function
-            // when actionState == 3. This happens when Mario's done
+            // when actionState == 3. This happens when Player's done
             // turning his head back and forth. However, we do some checks
-            // here to make sure that Mario would be able to sleep here,
+            // here to make sure that Player would be able to sleep here,
             // and that he's gone through 10 cycles before sleeping.
             // actionTimer is used to track how many cycles have passed.
             if (++m->actionState == 3) {
-                f32 deltaYOfFloorBehindMario = m->pos[1] - find_floor_height_relative_polar(m, -0x8000, 60.0f);
-                if (deltaYOfFloorBehindMario < -24.0f || 24.0f < deltaYOfFloorBehindMario || m->floor->flags & SURFACE_FLAG_DYNAMIC) {
+                f32 deltaYOfFloorBehindPlayer = m->pos[1] - find_floor_height_relative_polar(m, -0x8000, 60.0f);
+                if (deltaYOfFloorBehindPlayer < -24.0f || 24.0f < deltaYOfFloorBehindPlayer || m->floor->flags & SURFACE_FLAG_DYNAMIC) {
                     m->actionState = 0;
                 } else {
-                    // If Mario hasn't turned his head 10 times yet, stay idle instead of going to sleep.
+                    // If Player hasn't turned his head 10 times yet, stay idle instead of going to sleep.
                     m->actionTimer++;
                     if (m->actionTimer < 10) {
                         m->actionState = 0;
@@ -195,15 +195,18 @@ s32 act_start_sleeping(struct PlayerState *m) {
 
     switch (m->actionState) {
         case 0:
-            animFrame = set_player_animation(m, MARIO_ANIM_START_SLEEP_IDLE);
+            animFrame =
+            set_player_animation(m, MARIO_ANIM_START_SLEEP_IDLE);
             break;
 
         case 1:
-            animFrame = set_player_animation(m, MARIO_ANIM_START_SLEEP_SCRATCH);
+            animFrame =
+            set_player_animation(m, MARIO_ANIM_START_SLEEP_SCRATCH);
             break;
 
         case 2:
-            animFrame = set_player_animation(m, MARIO_ANIM_START_SLEEP_YAWN);
+            animFrame =
+            set_player_animation(m, MARIO_ANIM_START_SLEEP_YAWN);
             m->playerBodyState->eyeState = MARIO_EYES_HALF_CLOSED;
             break;
 
@@ -781,7 +784,7 @@ s32 act_shockwave_bounce(struct PlayerState *m) {
 
     sp1E = (m->actionTimer % 16) << 12;
     sp18 = (f32)(((f32)(6 - m->actionTimer / 8) * 8.0f) + 4.0f);
-    mario_set_forward_vel(m, 0);
+    player_set_forward_vel(m, 0);
     vec3f_set(m->vel, 0.0f, 0.0f, 0.0f);
     if (sins(sp1E) >= 0.0f) {
         m->pos[1] = sins(sp1E) * sp18 + m->floorHeight;
@@ -969,7 +972,7 @@ s32 act_air_throw_land(struct PlayerState *m) {
     }
 
     if (++m->actionTimer == 4) {
-        mario_throw_held_object(m);
+        player_throw_held_object(m);
     }
 
     landing_step(m, MARIO_ANIM_THROW_LIGHT_OBJECT, ACT_IDLE);
@@ -1085,14 +1088,14 @@ s32 check_common_stationary_cancels(struct PlayerState *m) {
     return FALSE;
 }
 
-s32 mario_execute_stationary_action(struct PlayerState *m) {
+s32 player_execute_stationary_action(struct PlayerState *m) {
     s32 cancel = FALSE;
 
     if (check_common_stationary_cancels(m)) {
         return TRUE;
     }
 
-    if (mario_update_quicksand(m, 0.5f)) {
+    if (player_update_quicksand(m, 0.5f)) {
         return TRUE;
     }
 

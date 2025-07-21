@@ -304,7 +304,7 @@ enum LevelCommandsIDList {
     CMD_BBBB(LVL_SCRIPT_CMD_26, 0x08, id, destLevel), \
     CMD_BBBB(destArea, destNode, flags, 0x00)
 
-#define PAINTING_WARP_NODE(id, destLevel, destArea, destNode, flags) \
+#define P_WARP_NODE(id, destLevel, destArea, destNode, flags) \
     CMD_BBBB(LVL_SCRIPT_CMD_27, 0x08, id, destLevel), \
     CMD_BBBB(destArea, destNode, flags, 0x00)
 

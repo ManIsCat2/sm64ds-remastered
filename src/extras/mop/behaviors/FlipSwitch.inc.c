@@ -7,7 +7,7 @@ void bhv_flipswitch_panel_loop(void){
 		o->oAnimState = 2;
 	} else {
 		switch(o->oAction){
-			// the player is not on
+			//player is not on
 			case 0:
 				if (cur_obj_is_player_on_platform()) {
 					o->oAction = 1;
@@ -16,7 +16,7 @@ void bhv_flipswitch_panel_loop(void){
 					cur_obj_play_sound_1(SOUND_GENERAL_BIG_CLOCK);
 				}
 				break;
-			// the player is on
+			//player is on
 			case 1:
 				if(!cur_obj_is_player_on_platform()) {
 					o->oAction=0;

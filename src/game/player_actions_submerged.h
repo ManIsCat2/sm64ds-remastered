@@ -5,6 +5,6 @@
 
 #include "types.h"
 
-s32 mario_execute_submerged_action(struct PlayerState *m);
+s32 player_execute_submerged_action(struct PlayerState *m);
 
 #endif // MARIO_ACTIONS_SUBMERGED_H

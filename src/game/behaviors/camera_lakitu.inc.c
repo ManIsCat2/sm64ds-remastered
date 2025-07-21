@@ -23,7 +23,7 @@ void bhv_camera_lakitu_init(void) {
 }
 
 /**
- * Wait for mario to stand on the bridge, then interrupt his action and enter
+ * Wait for player to stand on the bridge, then interrupt his action and enter
  * the spawn cloud action.
  */
 static void camera_lakitu_intro_act_trigger_cutscene(void) {
@@ -57,7 +57,7 @@ static void camera_lakitu_intro_act_spawn_cloud(void) {
 }
 
 /**
- * Circle down to mario, show the dialog, then fly away.
+ * Circle down to player, show the dialog, then fly away.
  */
 static void camera_lakitu_intro_act_show_dialog(void) {
     s16 targetMovePitch = 0;
@@ -65,7 +65,7 @@ static void camera_lakitu_intro_act_show_dialog(void) {
 
     cur_obj_play_sound_1(SOUND_AIR_LAKITU_FLY);
 
-    // Face toward mario
+    // Face toward player
     o->oFaceAnglePitch = obj_turn_pitch_toward_player(120.0f, 0);
     o->oFaceAngleYaw = o->oAngleToPlayer;
 
@@ -75,6 +75,7 @@ static void camera_lakitu_intro_act_show_dialog(void) {
         if (o->oDistanceToPlayer > 6000.0f) {
             obj_mark_for_deletion(o);
         }
+
         targetMovePitch = -0x3000;
         targetMoveYaw = -0x6000;
     } else {
@@ -110,7 +111,8 @@ static void camera_lakitu_intro_act_show_dialog(void) {
                     }
                 }
             }
-        } else if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP, DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, DIALOG_034)) {
+        } else if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP, DIALOG_FLAG_TURN_TO_MARIO,
+                                                       CUTSCENE_DIALOG, DIALOG_034)) {
             o->oCameraLakituFinishedDialog = TRUE;
         }
 

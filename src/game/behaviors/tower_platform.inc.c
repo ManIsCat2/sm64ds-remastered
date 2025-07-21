@@ -110,13 +110,13 @@ void spawn_wf_platform_group(void) {
 }
 
 void bhv_tower_platform_group_loop(void) {
-    f32 marioY = gPlayerObject->oPosY;
+    f32 playerY = gPlayerObject->oPosY;
 
     o->oDistanceToPlayer = dist_between_objects(o, gPlayerObject);
 
     switch (o->oAction) {
         case 0:
-            if (marioY > o->oHomeY - 1000.0f) {
+            if (playerY > o->oHomeY - 1000.0f) {
                 o->oAction++;
             }
             break;
@@ -127,7 +127,7 @@ void bhv_tower_platform_group_loop(void) {
             break;
 
         case 2:
-            if (marioY < o->oHomeY - 1000.0f) {
+            if (playerY < o->oHomeY - 1000.0f) {
                 o->oAction++;
             }
             break;

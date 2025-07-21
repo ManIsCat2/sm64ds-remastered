@@ -1,0 +1,17 @@
+extern const GeoLayout red_coin_geo[];
+extern const GeoLayout blue_coin_geo[];
+extern const GeoLayout yellow_coin_geo[];
+extern Lights1 coin_coin_yellow_lights;
+extern Lights1 coin_coin_red_lights;
+extern Lights1 coin_coin_blue_lights;
+extern u8 coin_coin_yellow01_rgba16[];
+extern u8 coin_coin_redstar01_rgba16[];
+extern u8 coin_coin_bluestar01_rgba16[];
+extern Vtx coin_displaylist_mesh_layer_1_vtx_0[37];
+extern Gfx coin_displaylist_mesh_layer_1_tri_0[];
+extern Gfx mat_coin_coin_yellow[];
+extern Gfx mat_coin_coin_red[];
+extern Gfx mat_coin_coin_blue[];
+extern Gfx coin_displaylist_mesh_layer_1[];
+extern Gfx coin_displaylist_mesh_layer_1_mat_override_coin_red_0[];
+extern Gfx coin_displaylist_mesh_layer_1_mat_override_coin_blue_1[];

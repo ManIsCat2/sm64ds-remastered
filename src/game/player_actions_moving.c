@@ -21,7 +21,7 @@
 #ifndef TARGET_N64
 #include "pc/configfile.h"
 #else
-unsigned int configDash = 2;
+unsigned int configDash = 0;
 #endif
 #endif
 
@@ -123,7 +123,7 @@ void align_with_floor(struct PlayerState *m) {
 
 s32 begin_walking_action(struct PlayerState *m, f32 forwardVel, u32 action, u32 actionArg) {
     m->faceAngle[1] = m->intendedYaw;
-    mario_set_forward_vel(m, forwardVel);
+    player_set_forward_vel(m, forwardVel);
     return set_player_action(m, action, actionArg);
 }
 
@@ -166,10 +166,10 @@ void check_ledge_climb_down(struct PlayerState *m) {
 
 void slide_bonk(struct PlayerState *m, u32 fastAction, u32 slowAction) {
     if (m->forwardVel > 16.0f) {
-        mario_bonk_reflection(m, TRUE);
+        player_bonk_reflection(m, TRUE);
         drop_and_set_player_action(m, fastAction, 0);
     } else {
-        mario_set_forward_vel(m, 0.0f);
+        player_set_forward_vel(m, 0.0f);
         set_player_action(m, slowAction, 0);
     }
 }
@@ -232,8 +232,8 @@ void update_sliding_angle(struct PlayerState *m, f32 accel, f32 lossFactor) {
     m->vel[1] = 0.0f;
     m->vel[2] = m->slideVelZ;
 
-    mario_update_moving_sand(m);
-    mario_update_windy_ground(m);
+    player_update_moving_sand(m);
+    player_update_windy_ground(m);
 
     //! Speed is capped a frame late (butt slide HSG)
     m->forwardVel = sqrtf(m->slideVelX * m->slideVelX + m->slideVelZ * m->slideVelZ);
@@ -296,7 +296,7 @@ s32 update_sliding(struct PlayerState *m, f32 stopSpeed) {
     m->slideVelX += modSlideVelX;
     m->slideVelZ -= modSlideVelZ;
 #else
-    //! This is attempting to use trig derivatives to rotate Mario's speed.
+    //! This is attempting to use trig derivatives to rotate Player's speed.
     // It is slightly off/asymmetric since it uses the new X speed, but the old
     // Z speed.
     m->slideVelX += m->slideVelZ * (m->intendedMag / 32.0f) * sideward * 0.05f;
@@ -313,7 +313,7 @@ s32 update_sliding(struct PlayerState *m, f32 stopSpeed) {
     update_sliding_angle(m, accel, lossFactor);
 
     if (!player_floor_is_slope(m) && m->forwardVel * m->forwardVel < stopSpeed * stopSpeed) {
-        mario_set_forward_vel(m, 0.0f);
+        player_set_forward_vel(m, 0.0f);
         stopped = TRUE;
     }
 
@@ -367,8 +367,8 @@ void apply_slope_accel(struct PlayerState *m) {
     m->vel[1] = 0.0f;
     m->vel[2] = m->slideVelZ;
 
-    mario_update_moving_sand(m);
-    mario_update_windy_ground(m);
+    player_update_moving_sand(m);
+    player_update_windy_ground(m);
 }
 
 s32 apply_landing_accel(struct PlayerState *m, f32 frictionFactor) {
@@ -379,7 +379,7 @@ s32 apply_landing_accel(struct PlayerState *m, f32 frictionFactor) {
     if (!player_floor_is_slope(m)) {
         m->forwardVel *= frictionFactor;
         if (m->forwardVel * m->forwardVel < 1.0f) {
-            mario_set_forward_vel(m, 0.0f);
+            player_set_forward_vel(m, 0.0f);
             stopped = TRUE;
         }
     }
@@ -475,9 +475,9 @@ s32 update_decelerating_speed(struct PlayerState *m) {
         stopped = TRUE;
     }
 
-    mario_set_forward_vel(m, m->forwardVel);
-    mario_update_moving_sand(m);
-    mario_update_windy_ground(m);
+    player_set_forward_vel(m, m->forwardVel);
+    player_update_moving_sand(m);
+    player_update_windy_ground(m);
 
     return stopped;
 }
@@ -522,13 +522,8 @@ void update_walking_speed(struct PlayerState *m) {
         m->forwardVel += 1.1f;
     } else if (m->forwardVel <= targetSpeed) {
 #if FIX_INITIAL_WALKING_SPEED
-        // When starting a walk, make a few checks and set Mario's speed to 8 on the first frame.
-        // This ensures Mario's speed is set consistently when starting a walk.
-        // We use m->actionTimer since it's set to 0 on the first frame of walking.
-        // Disable walking speed fix on vanilla demos to prevent major desyncs as well.
-        if (gCurrDemoInput == NULL && m->forwardVel <= 8.0f && m->actionTimer == 0 && !player_floor_is_steep(m)) {
-            // Same fix as melee dashback, 8.9 vel on first frame, 5.0 when holding an object.
-            m->forwardVel = MIN(m->intendedMag, m->heldObj != NULL ? 4.0f : 8.0f);
+        if (m->forwardVel <= 8.0f && !player_floor_is_slope(m)) {
+            m->forwardVel = MIN(m->intendedMag, 8.0f);
         }
 #endif
         m->forwardVel += 1.1f - m->forwardVel / 43.0f;
@@ -545,24 +540,7 @@ void update_walking_speed(struct PlayerState *m) {
         m->faceAngle[1] = m->intendedYaw;
     } else {
 #endif
-    #if VELOCITY_BASED_TURN_SPEED
-    if ((m->heldObj == NULL) && !(m->action & ACT_FLAG_SHORT_HITBOX)) {
-        if (m->forwardVel >= 16.0f) {
-            s16 turnRange = abs_angle_diff(m->faceAngle[1], m->intendedYaw);
-            f32 fac = (m->forwardVel + m->intendedMag);
-            turnRange *= (1.0f - (CLAMP(fac, 0.0f, 32.0f) / 32.0f));
-            turnRange = MAX(turnRange, 0x800);
-
-            approach_angle_bool(&m->faceAngle[1], m->intendedYaw, turnRange);
-        } else {
-            m->faceAngle[1] = m->intendedYaw;
-        }
-    } else {
-        m->faceAngle[1] = m->intendedYaw - approach_s32((s16)(m->intendedYaw - m->faceAngle[1]), 0, 0x800, 0x800);
-    }
-    #else
     m->faceAngle[1] = m->intendedYaw - approach_s32((s16)(m->intendedYaw - m->faceAngle[1]), 0, 0x800, 0x800);
-    #endif
 #ifdef CHEATS_ACTIONS
     }
 #endif
@@ -605,7 +583,7 @@ s32 check_ground_dive_or_punch(struct PlayerState *m) {
 }
 
 s32 begin_braking_action(struct PlayerState *m) {
-    mario_drop_held_object(m);
+    player_drop_held_object(m);
 
     if (m->actionState == 1) {
         m->faceAngle[1] = m->actionArg;
@@ -635,7 +613,6 @@ void anim_and_audio_for_walk(struct PlayerState *m) {
 
     if (m->quicksandDepth > 50.0f) {
         val14 = (s32)(val04 / 4.0f * 0x10000);
-        val15 = (s32)(val04 / 4.0f * 0x08000);
         set_player_anim_with_accel(m, MARIO_ANIM_MOVE_IN_QUICKSAND, val14);
         play_step_sound(m, 19, 93);
         m->actionTimer = 0;
@@ -646,7 +623,7 @@ void anim_and_audio_for_walk(struct PlayerState *m) {
                     if (val04 > 8.0f) {
                         m->actionTimer = 2;
                     } else {
-                        //! (Speed Crash) If Mario's speed is more than 2^17.
+                        //! (Speed Crash) If Player's speed is more than 2^17.
                         if ((val14 = (s32)(val04 / 4.0f * 0x10000)) < 0x1000) {
                             val14 = 0x1000;
                         }
@@ -664,7 +641,7 @@ void anim_and_audio_for_walk(struct PlayerState *m) {
                     if (val04 > 8.0f) {
                         m->actionTimer = 2;
                     } else {
-                        //! (Speed Crash) If Mario's speed is more than 2^17.
+                        //! (Speed Crash) If Player's speed is more than 2^17.
                         if ((val14 = (s32)(val04 * 0x10000)) < 0x1000) {
                             val14 = 0x1000;
                         }
@@ -683,22 +660,23 @@ void anim_and_audio_for_walk(struct PlayerState *m) {
                     } else if (!(gPlayer1Controller->buttonDown & Y_BUTTON) && (configDash == 1) || (val04 > 22.0f && (configDash == 0))) {
                         m->actionTimer = 3;
                     } else {
-                        //! (Speed Crash) If Mario's speed is more than 2^17.
+                        //! (Speed Crash) If Player's speed is more than 2^17.
                         val14 = (s32)(val04 / 4.0f * 0x10000);
+                        val15 = (s32)(val04 / 4.0f * 0x08000);
 
-                        if (configDash == 1 || configDash == 2) {
-                            if (curChar == 1) {
-                                set_player_anim_with_accel(m, MARIO_ANIM_WALKING, (val14 / 1.2));
-                            } else if (curChar == 2) {
-                                set_player_anim_with_accel(m, LUIGI_ANIM_WALKING, (val14 / 1.2));
-                            }
-                        } else {
-                            if (curChar == 1) {
-                                set_player_anim_with_accel(m, MARIO_ANIM_WALKING, val15);
-                            } else if (curChar == 2) {
-                                set_player_anim_with_accel(m, LUIGI_ANIM_WALKING, (val15 / 1.2));
-                            }
+                    if (configDash == 1 || configDash == 2) {
+                        if (curChar == 1) {
+                            set_player_anim_with_accel(m, MARIO_ANIM_WALKING, (val14 / 1.2));
+                        } else if (curChar == 2) {
+                            set_player_anim_with_accel(m, LUIGI_ANIM_WALKING, (val14 / 1.2));
                         }
+                    } else {
+                        if (curChar == 1) {
+                            set_player_anim_with_accel(m, MARIO_ANIM_WALKING, val15);
+                        } else if (curChar == 2) {
+                            set_player_anim_with_accel(m, LUIGI_ANIM_WALKING, (val15 / 1.2));
+                        }
+                    }
                         play_step_sound(m, 10, 49);
 
                         val0C = FALSE;
@@ -706,12 +684,12 @@ void anim_and_audio_for_walk(struct PlayerState *m) {
                     break;
 
                 case 3:
-                if ((!(gPlayer1Controller->buttonDown & Y_BUTTON) && (configDash == 2)) || (val04 < 18.0f && (configDash == 0))) {
-                    m->actionTimer = 2;
-                } else if (((gPlayer1Controller->buttonDown & Y_BUTTON) && (configDash == 1)) || (val04 < 18.0f && (configDash == 0))) {
+                    if ((!(gPlayer1Controller->buttonDown & Y_BUTTON) && (configDash == 2)) || (val04 < 18.0f && (configDash == 0))) {
+                        m->actionTimer = 2;
+                    } else if (((gPlayer1Controller->buttonDown & Y_BUTTON) && (configDash == 1)) || (val04 < 18.0f && (configDash == 0))) {
                         m->actionTimer = 2;
                     } else {
-                        //! (Speed Crash) If Mario's speed is more than 2^17.
+                        //! (Speed Crash) If Player's speed is more than 2^17.
                         val14 = (s32)(val04 / 4.0f * 0x10000);
                         if (curChar == 1) {
                             set_player_anim_with_accel(m, MARIO_ANIM_RUNNING, val14);
@@ -750,7 +728,7 @@ void anim_and_audio_for_hold_walk(struct PlayerState *m) {
                 if (val04 > 6.0f) {
                     m->actionTimer = 1;
                 } else {
-                    //! (Speed Crash) Crashes if Mario's speed exceeds or equals 2^15.
+                    //! (Speed Crash) Crashes if Player's speed exceeds or equals 2^15.
                     val0C = (s32)(val04 * 0x10000);
                     set_player_anim_with_accel(m, MARIO_ANIM_SLOW_WALK_WITH_LIGHT_OBJ, val0C);
                     play_step_sound(m, 12, 62);
@@ -765,7 +743,7 @@ void anim_and_audio_for_hold_walk(struct PlayerState *m) {
                 } else if (val04 > 11.0f) {
                     m->actionTimer = 2;
                 } else {
-                    //! (Speed Crash) Crashes if Mario's speed exceeds or equals 2^15.
+                    //! (Speed Crash) Crashes if Player's speed exceeds or equals 2^15.
                     val0C = (s32)(val04 * 0x10000);
                     set_player_anim_with_accel(m, MARIO_ANIM_WALK_WITH_LIGHT_OBJ, val0C);
                     play_step_sound(m, 12, 62);
@@ -778,7 +756,7 @@ void anim_and_audio_for_hold_walk(struct PlayerState *m) {
                 if (val04 < 8.0f) {
                     m->actionTimer = 1;
                 } else {
-                    //! (Speed Crash) Crashes if Mario's speed exceeds or equals 2^16.
+                    //! (Speed Crash) Crashes if Player's speed exceeds or equals 2^16.
                     val0C = (s32)(val04 / 2.0f * 0x10000);
                     set_player_anim_with_accel(m, MARIO_ANIM_RUN_WITH_LIGHT_OBJ, val0C);
                     play_step_sound(m, 10, 49);
@@ -806,7 +784,7 @@ void push_or_sidle_wall(struct PlayerState *m, Vec3f startPos) {
     s32 val04 = (s32)(movedDistance * 2.0f * 0x10000);
 
     if (m->forwardVel > 6.0f) {
-        mario_set_forward_vel(m, 6.0f);
+        player_set_forward_vel(m, 6.0f);
     }
 
     if (m->wall != NULL) {
@@ -907,7 +885,7 @@ s32 act_walking(struct PlayerState *m) {
     Vec3f startPos;
     s16 startYaw = m->faceAngle[1];
 
-    mario_drop_held_object(m);
+    player_drop_held_object(m);
 
     if (should_begin_sliding(m)) {
         return set_player_action(m, ACT_BEGIN_SLIDING, 0);
@@ -984,7 +962,7 @@ s32 act_move_punching(struct PlayerState *m) {
 
     m->actionState = 1;
 
-    mario_update_punch_sequence(m);
+    player_update_punch_sequence(m);
 
     if (m->forwardVel >= 0.0f) {
         apply_slope_decel(m, 0.5f);
@@ -1048,7 +1026,7 @@ s32 act_hold_walking(struct PlayerState *m) {
 
         case GROUND_STEP_HIT_WALL:
             if (m->forwardVel > 16.0f) {
-                mario_set_forward_vel(m, 16.0f);
+                player_set_forward_vel(m, 16.0f);
             }
             break;
     }
@@ -1086,7 +1064,7 @@ s32 act_hold_heavy_walking(struct PlayerState *m) {
 
         case GROUND_STEP_HIT_WALL:
             if (m->forwardVel > 10.0f) {
-                mario_set_forward_vel(m, 10.0f);
+                player_set_forward_vel(m, 10.0f);
             }
             break;
     }
@@ -1256,9 +1234,9 @@ s32 act_decelerating(struct PlayerState *m) {
 
         case GROUND_STEP_HIT_WALL:
             if (slopeClass == SURFACE_CLASS_VERY_SLIPPERY) {
-                mario_bonk_reflection(m, TRUE);
+                player_bonk_reflection(m, TRUE);
             } else {
-                mario_set_forward_vel(m, 0.0f);
+                player_set_forward_vel(m, 0.0f);
             }
             break;
     }
@@ -1273,7 +1251,7 @@ s32 act_decelerating(struct PlayerState *m) {
         if ((val0C = (s32)(m->forwardVel / 4.0f * 0x10000)) < 0x1000) {
             val0C = 0x1000;
         }
-
+        
         if (curChar == 1) {
             set_player_anim_with_accel(m, MARIO_ANIM_WALKING, val0C);
         } else if (curChar == 2) {
@@ -1329,9 +1307,9 @@ s32 act_hold_decelerating(struct PlayerState *m) {
 
         case GROUND_STEP_HIT_WALL:
             if (slopeClass == SURFACE_CLASS_VERY_SLIPPERY) {
-                mario_bonk_reflection(m, TRUE);
+                player_bonk_reflection(m, TRUE);
             } else {
-                mario_set_forward_vel(m, 0.0f);
+                player_set_forward_vel(m, 0.0f);
             }
             break;
     }
@@ -1342,7 +1320,7 @@ s32 act_hold_decelerating(struct PlayerState *m) {
         adjust_sound_for_speed(m);
         m->particleFlags |= PARTICLE_DUST;
     } else {
-        //! (Speed Crash) This crashes if Mario has more speed than 2^15 speed.
+        //! (Speed Crash) This crashes if Player has more speed than 2^15 speed.
         if ((val0C = (s32)(m->forwardVel * 0x10000)) < 0x1000) {
             val0C = 0x1000;
         }
@@ -1362,9 +1340,9 @@ s32 act_riding_shell_ground(struct PlayerState *m) {
     }
 
     if (m->input & INPUT_Z_PRESSED) {
-        mario_stop_riding_object(m);
+        player_stop_riding_object(m);
         if (m->forwardVel < 24.0f) {
-            mario_set_forward_vel(m, 24.0f);
+            player_set_forward_vel(m, 24.0f);
         }
         return set_player_action(m, ACT_CROUCH_SLIDE, 0);
     }
@@ -1378,7 +1356,7 @@ s32 act_riding_shell_ground(struct PlayerState *m) {
             break;
 
         case GROUND_STEP_HIT_WALL:
-            mario_stop_riding_object(m);
+            player_stop_riding_object(m);
             play_sound(m->flags & PLAYER_METAL_CAP ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
                        m->playerObj->header.gfx.cameraToObject);
             m->particleFlags |= PARTICLE_VERTICAL_STAR;
@@ -1439,7 +1417,7 @@ s32 act_crawling(struct PlayerState *m) {
 
         case GROUND_STEP_HIT_WALL:
             if (m->forwardVel > 10.0f) {
-                mario_set_forward_vel(m, 10.0f);
+                player_set_forward_vel(m, 10.0f);
             }
             //! Possibly unintended missing break
 
@@ -1528,7 +1506,7 @@ void common_slide_action(struct PlayerState *m, u32 endAction, u32 airAction, s3
     switch (perform_ground_step(m)) {
         case GROUND_STEP_LEFT_GROUND:
 #if LEDGE_CLIMB_PROTECTION
-            mario_set_forward_vel(m, m->forwardVel + 8.0f);
+            player_set_forward_vel(m, m->forwardVel + 8.0f);
 #endif
             set_player_action(m, airAction, 0);
             if (m->forwardVel < -50.0f || 50.0f < m->forwardVel) {
@@ -1670,7 +1648,7 @@ s32 act_slide_kick_slide(struct PlayerState *m) {
             break;
 
         case GROUND_STEP_HIT_WALL:
-            mario_bonk_reflection(m, TRUE);
+            player_bonk_reflection(m, TRUE);
             m->particleFlags |= PARTICLE_VERTICAL_STAR;
             set_player_action(m, ACT_BACKWARD_GROUND_KB, 0);
             break;
@@ -1721,11 +1699,7 @@ s32 act_hold_stomach_slide(struct PlayerState *m) {
 
 s32 act_dive_slide(struct PlayerState *m) {
     if ((m->input & (INPUT_A_PRESSED | INPUT_B_PRESSED)) &&
-#if DIVE_SLIDE_ROLLOUT
-        (m->forwardVel > -8.0f)
-#else
         !(m->input & INPUT_ABOVE_SLIDE)
-#endif
     ) {
 #ifdef RUMBLE_FEEDBACK
         queue_rumble_data(5, 80);
@@ -1736,17 +1710,17 @@ s32 act_dive_slide(struct PlayerState *m) {
     play_player_landing_sound_once(m, SOUND_ACTION_TERRAIN_BODY_HIT_GROUND);
 
     //! If the dive slide ends on the same frame that we pick up on object,
-    // Mario will not be in the dive slide action for the call to
+    // Player will not be in the dive slide action for the call to
     // player_check_object_grab, and so will end up in the regular picking action,
     // rather than the picking up after dive action.
 
     if (update_sliding(m, 8.0f) && is_anim_at_end(m)) {
-        mario_set_forward_vel(m, 0.0f);
+        player_set_forward_vel(m, 0.0f);
         set_player_action(m, ACT_STOMACH_SLIDE_STOP, 0);
     }
 
     if (player_check_object_grab(m)) {
-        mario_grab_used_object(m);
+        player_grab_used_object(m);
         m->playerBodyState->grabPos = GRAB_POS_LIGHT_OBJ;
         return TRUE;
     }
@@ -1779,9 +1753,9 @@ s32 common_ground_knockback_action(struct PlayerState *m, s32 animation, s32 arg
     if (animFrame < arg2) {
         apply_landing_accel(m, 0.9f);
     } else if (m->forwardVel >= 0.0f) {
-        mario_set_forward_vel(m, 0.1f);
+        player_set_forward_vel(m, 0.1f);
     } else {
-        mario_set_forward_vel(m, -0.1f);
+        player_set_forward_vel(m, -0.1f);
     }
 
     if (perform_ground_step(m) == GROUND_STEP_LEFT_GROUND) {
@@ -1923,10 +1897,10 @@ s32 common_landing_cancels(struct PlayerState *m, struct LandingAction *landingA
                            s32 (*setAPressAction)(struct PlayerState *, u32, u32)) {
 
     //! Everything here, including floor steepness, is checked before checking
-    // if Mario is actually on the floor. This leads to e.g. remote sliding.
+    // if Player is actually on the floor. This leads to e.g. remote sliding.
 
     if (m->floor->normal.y < 0.2923717f) {
-        return mario_push_off_steep_floor(m, landingAction->verySteepAction, 0);
+        return player_push_off_steep_floor(m, landingAction->verySteepAction, 0);
     }
 
     m->doubleJumpTimer = landingAction->unk02;
@@ -2010,12 +1984,9 @@ s32 act_hold_freefall_land(struct PlayerState *m) {
 }
 
 s32 act_long_jump_land(struct PlayerState *m) {
-#if defined(VERSION_SH) || defined(VERSION_CN)
-    // BLJ (Backwards Long Jump) speed build up fix, crushing SimpleFlips's dreams since July 1997
-    if (m->forwardVel < 0.0f) {
+    if (configNerfs && m->forwardVel < 0.0f) {
         m->forwardVel = 0.0f;
     }
-#endif
 
 #if FIX_ACTION_LAND_EAT_INPUT
     sLongJumpLandAction.aPressedAction = m->input & INPUT_Z_DOWN ? ACT_LONG_JUMP : ACT_JUMP;
@@ -2147,14 +2118,14 @@ s32 check_common_moving_cancels(struct PlayerState *m) {
     return FALSE;
 }
 
-s32 mario_execute_moving_action(struct PlayerState *m) {
+s32 player_execute_moving_action(struct PlayerState *m) {
     s32 cancel = FALSE;
 
     if (check_common_moving_cancels(m)) {
         return TRUE;
     }
 
-    if (mario_update_quicksand(m, 0.25f)) {
+    if (player_update_quicksand(m, 0.25f)) {
         return TRUE;
     }
 

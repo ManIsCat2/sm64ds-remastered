@@ -44,7 +44,7 @@ void bhv_chain_chomp_chain_part_update(void) {
 }
 
 /**
- * When mario gets close enough, allocate chain segments and spawn their objects.
+ * When player gets close enough, allocate chain segments and spawn their objects.
  */
 static void chain_chomp_act_uninitialized(void) {
     struct ChainSegment *segments;
@@ -166,7 +166,7 @@ static void chain_chomp_restore_normal_chain_lengths(void) {
 }
 
 /**
- * Turn toward mario. Wait a bit and then enter the lunging sub-action.
+ * Turn toward player. Wait a bit and then enter the lunging sub-action.
  */
 static void chain_chomp_sub_act_turn(void) {
     o->oGravity = -4.0f;
@@ -252,7 +252,7 @@ static void chain_chomp_sub_act_lunge(void) {
 }
 
 /**
- * Fall to the ground and interrupt mario into a cutscene action.
+ * Fall to the ground and interrupt player into a cutscene action.
  */
 static void chain_chomp_released_trigger_cutscene(void) {
     o->oForwardVel = 0.0f;
@@ -268,7 +268,7 @@ static void chain_chomp_released_trigger_cutscene(void) {
 }
 
 /**
- * Lunge 4 times, each time moving toward mario +/- 0x2000 angular units.
+ * Lunge 4 times, each time moving toward player +/- 0x2000 angular units.
  * Finally, begin a lunge toward x=1450, z=562 (near the gate).
  */
 static void chain_chomp_released_lunge_around(void) {
@@ -276,7 +276,7 @@ static void chain_chomp_released_lunge_around(void) {
 
     // Finish bounce
     if (o->oMoveFlags & OBJ_MOVE_MASK_ON_GROUND) {
-        // Before first bounce, turn toward mario and wait 2 seconds
+        // Before first bounce, turn toward player and wait 2 seconds
         if (o->oChainChompNumLunges == 0) {
             if (cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 800)) {
                 if (o->oTimer > 60) {
@@ -342,7 +342,7 @@ static void chain_chomp_released_jump_away(void) {
 }
 
 /**
- * Release mario and transition to the unload chain action.
+ * Release player and transition to the unload chain action.
  */
 static void chain_chomp_released_end_cutscene(void) {
     if (cutscene_object(CUTSCENE_STAR_SPAWN, o) == -1) {
@@ -358,7 +358,7 @@ static void chain_chomp_released_end_cutscene(void) {
 static void chain_chomp_act_move(void) {
     f32 maxDistToPivot;
 
-    // Unload chain if mario is far enough
+    // Unload chain if player is far enough
 #ifndef NODRAWINGDISTANCE
     if (o->oChainChompReleaseStatus == CHAIN_CHOMP_NOT_RELEASED && o->oDistanceToPlayer > 4000.0f) {
         o->oAction = CHAIN_CHOMP_ACT_UNLOAD_CHAIN;
@@ -439,7 +439,7 @@ static void chain_chomp_act_move(void) {
 
         chain_chomp_update_chain_segments();
 
-        // Begin a lunge if mario tries to attack
+        // Begin a lunge if player tries to attack
         if (obj_check_attacks(&sChainChompHitbox, o->oAction) != 0) {
             o->oSubAction = CHAIN_CHOMP_SUB_ACT_LUNGE;
             o->oChainChompMaxDistFromPivotPerChainPart = 900.0f / 5;
@@ -489,37 +489,41 @@ void bhv_chain_chomp_update(void) {
  * Update function for wooden post.
  */
 void bhv_wooden_post_update(void) {
-    // When ground pounded by mario, drop by -45 + -20
-    if (!o->oWoodenPostMarioPounding) {
-        if ((o->oWoodenPostMarioPounding = cur_obj_is_player_ground_pounding_platform())) {
+    // When ground pounded by player, drop by -45 + -20
+    if (!o->oWoodenPostPlayerPounding) {
+        if ((o->oWoodenPostPlayerPounding = cur_obj_is_player_ground_pounding_platform())) {
             cur_obj_play_sound_2(SOUND_GENERAL_POUND_WOOD_POST);
             o->oWoodenPostSpeedY = -70.0f;
         }
     } else if (approach_f32_ptr(&o->oWoodenPostSpeedY, 0.0f, 25.0f)) {
-        // Stay still until mario is done ground pounding
-        o->oWoodenPostMarioPounding = cur_obj_is_player_ground_pounding_platform();
+        // Stay still until player is done ground pounding
+        o->oWoodenPostPlayerPounding = cur_obj_is_player_ground_pounding_platform();
     } else if ((o->oWoodenPostOffsetY += o->oWoodenPostSpeedY) < -190.0f) {
         // Once pounded, if this is the chain chomp's post, release the chain
         // chomp
         o->oWoodenPostOffsetY = -190.0f;
+
         if (o->parentObj != o) {
             play_puzzle_jingle();
             o->parentObj->oChainChompReleaseStatus = CHAIN_CHOMP_RELEASED_TRIGGER_CUTSCENE;
             o->parentObj = o;
+        } else {
+            obj_spawn_loot_yellow_coins(o, 5, 20.0f);
+            set_object_respawn_info_bits(o, 1);
         }
     }
 
     if (o->oWoodenPostOffsetY != 0.0f) {
         o->oPosY = o->oHomeY + o->oWoodenPostOffsetY;
     } else if (!(o->respawnInfo & 1)) {
-        // Reset the timer once mario is far enough
+        // Reset the timer once player is far enough
         if (o->oDistanceToPlayer > 400.0f) {
-            o->oTimer = o->oWoodenPostTotalMarioAngle = 0;
+            o->oTimer = o->oWoodenPostTotalPlayerAngle = 0;
         } else {
-            // When mario runs around the post 3 times within 200 frames, spawn
+            // When player runs around the post 3 times within 200 frames, spawn
             // coins
-            o->oWoodenPostTotalMarioAngle += (s16)(o->oAngleToPlayer - o->oWoodenPostPrevAngleToPlayer);
-            if (absi(o->oWoodenPostTotalMarioAngle) > 0x30000 && o->oTimer < 200) {
+            o->oWoodenPostTotalPlayerAngle += (s16)(o->oAngleToPlayer - o->oWoodenPostPrevAngleToPlayer);
+            if (absi(o->oWoodenPostTotalPlayerAngle) > 0x30000 && o->oTimer < 200) {
                 obj_spawn_loot_yellow_coins(o, 5, 20.0f);
                 set_object_respawn_info_bits(o, 1);
             }
@@ -533,18 +537,22 @@ void bhv_wooden_post_update(void) {
  * Init function for chain chomp gate.
  */
 void bhv_chain_chomp_gate_init(void) {
-    o->parentObj = cur_obj_nearest_object_with_behavior(bhvChainChomp);
+    if (o->oBhvParams2ndByte != 2) {
+        o->parentObj = cur_obj_nearest_object_with_behavior(bhvChainChomp);
+    }
 }
 
 /**
  * Update function for chain chomp gate
  */
 void bhv_chain_chomp_gate_update(void) {
-    if (o->parentObj->oChainChompHitGate) {
-        spawn_mist_particles_with_sound(SOUND_GENERAL_WALL_EXPLOSION);
-        set_camera_shake_from_point(SHAKE_POS_SMALL, o->oPosX, o->oPosY, o->oPosZ);
-        spawn_mist_particles_variable(0, 127, 200.0f);
-        spawn_triangle_break_particles(30, MODEL_DIRT_ANIMATION, 3.0f, 4);
-        obj_mark_for_deletion(o);
+    if (o->oBhvParams2ndByte != 2) {
+        if (o->parentObj->oChainChompHitGate) {
+            spawn_mist_particles_with_sound(SOUND_GENERAL_WALL_EXPLOSION);
+            set_camera_shake_from_point(SHAKE_POS_SMALL, o->oPosX, o->oPosY, o->oPosZ);
+            spawn_mist_particles_variable(0, 127, 200.0f);
+            spawn_triangle_break_particles(30, MODEL_DIRT_ANIMATION, 3.0f, 4);
+            obj_mark_for_deletion(o);
+        }
     }
 }

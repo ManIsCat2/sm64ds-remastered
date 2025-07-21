@@ -140,7 +140,7 @@ it, fair and square!"))
 DEFINE_DIALOG(DIALOG_008, 1, 4, 30, 200, _("\
 BEWARE OF CHAIN CHOMP\n\
 Extreme Danger!\n\
-Get close and press [C]▲\n\
+Get close and press [C]^\n\
 for a better look.\n\
 Scary, huh?\n\
 See the Red Coin on top\n\
@@ -239,36 +239,32 @@ ride wherever you want to\n\
 go! Shred those enemies!"))
 
 DEFINE_DIALOG(DIALOG_017, 1, 4, 30, 200, _("\
-I'm the Big Bob-omb, lord\n\
-of all blasting matter,\n\
-king of ka-booms the\n\
-world over!\n\
-How dare you scale my\n\
-mountain? By what right\n\
-do you set foot on my\n\
-imperial mountaintop?\n\
-You may have eluded my\n\
-guards, but you'll never\n\
-escape my grasp...\n\
+I'm the Big Bob-omb,\n\
+baron of all blasting\n\
+matter, king of\n\
+ka-booms worldwide!\n\
+Look at my splendid\n\
+mustache. It's fit for\n\
+a king! Ho ho!\n\
 \n\
-...and you'll never take\n\
-away my Power Star. I\n\
-hereby challenge you,\n\
-Mario!\n\
-If you want the Star I\n\
-hold, you must prove\n\
-yourself in battle.\n\
-\n\
-Can you pick me up from\n\
-the back and hurl me to\n\
-this royal turf? I think\n\
-that you cannot!"))
+Your mustache makes\n\
+you look like the\n\
+peasant you are. What\n\
+a sad little thing.\n\
+If you want the Power\n\
+Star, you must defeat\n\
+me in battle.\n\
+Ha Ha Ha!\n\
+But there's no way I'd\n\
+ever lose to a puny\n\
+mustache like that."))
 
-DEFINE_DIALOG(DIALOG_018, 1, 4, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_018, 1, 5, 30, 200, _("\
 I'm sleeping because...\n\
-...I'm sleepy. I don't\n\
-like being disturbed.\n\
-Please walk quietly."))
+...I'm sleepy. I don't like\n\
+being disturbed. Please\n\
+walk quietly. And please\n\
+don't throw eggs at me!"))
 
 DEFINE_DIALOG(DIALOG_019, 1, 2, 30, 200, _("\
 Shhh! Please walk\n\
@@ -352,8 +348,8 @@ order to walk quietly.\n\
 And wrapping up filming\n\
 techniques reported on\n\
 earlier, you can take a\n\
-look around using [C]▶ and\n\
-[C]◀. Press [C]▼ to view the\n\
+look around using [C]> and\n\
+[C]<. Press [C]| to view the\n\
 action from a distance.\n\
 When you can't move the\n\
 camera any farther, the\n\
@@ -413,7 +409,7 @@ Yoshi?"))
 
 DEFINE_DIALOG(DIALOG_035, 1, 5, 30, 200, _("\
 There are four camera, or\n\
-『[C],』 Buttons. Press [C]▲\n\
+『[C],』 Buttons. Press [C]^\n\
 to look around using the\n\
 Control Stick.\n\
 \n\
@@ -423,31 +419,22 @@ It is the camera\n\
 recommended for normal\n\
 play.\n\
 You can change angles by\n\
-pressing [C]▶. If you press\n\
+pressing [C]>. If you press\n\
 [R], the view switches to\n\
 Mario's camera, which\n\
 is directly behind him.\n\
 Press [R] again to return\n\
 to Lakitu's camera. Press\n\
-[C]▼ to see Mario from\n\
+[C]| to see Mario from\n\
 afar, using either\n\
 Lakitu's or Mario's view."))
 
 DEFINE_DIALOG(DIALOG_036, 1, 5, 30, 200, _("\
 OBSERVATION PLATFORM\n\
-Press [C]▲ to take a look\n\
-around. Don't miss\n\
-anything!\n\
-\n\
-Press [R] to switch to\n\
-Mario's camera. It\n\
-always follows Mario.\n\
-Press [R] again to switch\n\
-to Lakitu's camera.\n\
-Pause the game and\n\
-switch the mode to 『fix』\n\
-the camera in place while\n\
-holding [R]. Give it a try!"))
+Press [C]^ to switch\n\
+to first-person view\n\
+and take a look around.\n\
+Don't miss anything!"))
 
 DEFINE_DIALOG(DIALOG_037, 1, 2, 30, 200, _("\
 I win! You lose!\n\
@@ -497,23 +484,26 @@ messin' with Koopa the\n\
 Quick.\n\
 Better luck next time!"))
 
-DEFINE_DIALOG(DIALOG_042, 1, 4, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_042, 1, 5, 30, 200, _("\
 Caution! Narrow Bridge!\n\
 Cross slowly!\n\
 \n\
 \n\
+\n\
 You can jump to the edge\n\
-of the cliff and hang on,\n\
-and you can climb off the\n\
-edge if you move slowly.\n\
-When you want to let go,\n\
-either press [Z] or press\n\
+of the cliff and hang\n\
+on, and you can climb\n\
+off the edge if you\n\
+move slowly.\n\
+To let go, crouch or press\n\
 the Control Stick in the\n\
-direction of Mario's back.\n\
-To climb up, press Up on\n\
-the Control Stick. To\n\
-scurry up quickly, press\n\
-the [A] Button."))
+direction of your back.\n\
+\n\
+\n\
+To climb up the edge\n\
+press [B]. You can also\n\
+press up on the Control\n\
+Stick."))
 
 DEFINE_DIALOG(DIALOG_043, 1, 5, 30, 200, _("\
 If you jump and hold the\n\
@@ -611,22 +601,31 @@ then jump to do a\n\
 Long Jump! Or crouch and\n\
 walk to...never mind."))
 
-DEFINE_DIALOG(DIALOG_051, 1, 6, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_051, 1, 5, 30, 200, _("\
 Climbing's easy! When you\n\
-jump at trees, poles or\n\
+jump at trees, poles, or\n\
 pillars, you'll grab them\n\
-automatically. Press [A] to\n\
-jump off backward.\n\
+automatically.\n\
+Press the Control Stick\n\
+Up or Down to climb.\n\
+Crouch to stop climbing.\n\
+\n\
 \n\
 To rotate around the\n\
 object, press Right or\n\
-Left on the Control Stick.\n\
+Left on the Control Stick\n\
+\n\
+\n\
+Leap toward the\n\
+character's back to jump\n\
+off in that direction.\n\
+\n\
+\n\
 When you reach the top,\n\
-press Up to do a\n\
-handstand!\n\
-Jump off from the\n\
-handstand for a high,\n\
-stylin' dismount."))
+press Up on the Control Stick\n\
+to do a handstand! Jump off\n\
+from the handstand for a\n\
+high, stylin' dismount."))
 
 DEFINE_DIALOG(DIALOG_052, 1, 5, 30, 200, _("\
 Stop and press [Z] to\n\
@@ -1184,17 +1183,22 @@ Please recover the Stars\n\
 that were stolen by\n\
 Bowser in this course."))
 
-DEFINE_DIALOG(DIALOG_096, 1, 4, 30, 200, _("\
-The path is narrow here.\n\
-Easy does it! No one is\n\
-allowed on top of the\n\
-mountain!\n\
+DEFINE_DIALOG(DIALOG_096, 1, 5, 30, 200, _("\
+The path is narrow\n\
+here. Easy does it!\n\
+No one is allowed on\n\
+the top of the mountain!\n\
+\n\
 And if you know what's\n\
-good for you, you won't\n\
-wake anyone who's\n\
-sleeping!\n\
+good for you, you\n\
+won't wake anyone\n\
+who's sleeping!\n\
+\n\
 Move slowly,\n\
-tread lightly."))
+Tread lightly.\n\
+And definitely don't\n\
+throw eggs at the\n\
+sleepers!"))
 
 DEFINE_DIALOG(DIALOG_097, 1, 5, 30, 200, _("\
 Don't be a pushover!\n\
@@ -1248,12 +1252,13 @@ one must alight...\n\
 Then at the peak\n\
 shall shine the light..."))
 
-DEFINE_DIALOG(DIALOG_104, 1, 5, 30, 200, _("\
-The shadowy star in front\n\
-of you is a 『Star\n\
-Marker.』 When you collect\n\
-all 8 Red Coins, the Star\n\
-will appear here."))
+DEFINE_DIALOG(DIALOG_104, 1, 6, 30, 200, _("\
+The shadowy star in\n\
+front of you is a\n\
+Star Marker. When\n\
+you collect all 8 red\n\
+coins, a Star will\n\
+appear here."))
 
 DEFINE_DIALOG(DIALOG_105, 1, 3, 95, 200, _("\
 Ready for blastoff! Come\n\
@@ -2122,3 +2127,48 @@ up from behind and\n\
 fling me down. And\n\
 that will never happen!\n\
 Bring it, shorty!"))
+
+DEFINE_DIALOG(DIALOG_175, 1, 4, 30, 200, _("\
+Hello!\n\
+Please take a look\n\
+at the map below.\n\
+Memorized it?\n\
+If you are lost.\n\
+please talk to\n\
+me again."))
+
+DEFINE_DIALOG(DIALOG_176, 1, 6, 30, 200, _("\
+When you step on the\n\
+strange ? Switch\n\
+hidden in the castle,\n\
+the ? Blocks will\n\
+become solid.\n\
+\n\
+Some of these blocks\n\
+have useful items inside\n\
+Get the items by\n\
+breaking the blocks.\n\
+But beware! Some\n\
+blocks are duds."))
+
+DEFINE_DIALOG(DIALOG_177, 1, 5, 30, 220, _("\
+Crouch while jumping to\n\
+pound the ground and smash\n\
+certain objects. Ground-pound\n\
+blue Switches to make blue\n\
+coins appear.\n\
+Each blue coin is worth 5\n\
+yellow coins. But you have\n\
+to hurry! The coins will\n\
+disappear if you're not quick\n\
+enough to collect them!"))
+
+DEFINE_DIALOG(DIALOG_178, 1, 3, 30, 200, _("\
+Press [L] to center\n\
+the camera behind you.\n\
+\n\
+Even when it's hard to\n\
+see what's around you,\n\
+relax and press [L].\n\
+A word of advice:\n\
+keep going but don't rush."))

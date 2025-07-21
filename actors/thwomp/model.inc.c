@@ -1334,3 +1334,4 @@ Gfx thwomp_thwomp_mesh_layer_1_mat_override__3_1[] = {
 	gsDPSetAlphaCompare(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
+

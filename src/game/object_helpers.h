@@ -142,7 +142,7 @@ void cur_obj_unrender_set_action_and_anim(s32 sp18, s32 sp1C);
 void cur_obj_get_thrown_or_placed(f32 forwardVel, f32 velY, s32 thrownAction);
 void cur_obj_get_dropped(void);
 void cur_obj_set_model(ModelID16 modelID);
-void mario_set_flag(s32 flag);
+void player_set_flag(s32 flag);
 s32 cur_obj_clear_interact_status_flag(s32 flag);
 void obj_mark_for_deletion(struct Object *obj);
 void cur_obj_disable(void);
@@ -211,7 +211,7 @@ enum PathStatus {
     PATH_REACHED_WAYPOINT,
 };
 
-enum MarioRoomStates {
+enum PlayerRoomStates {
     MARIO_ROOM_UNDEFINED = -1,
     MARIO_OUTSIDE_ROOM,
     MARIO_INSIDE_ROOM
@@ -233,7 +233,7 @@ s32 cur_obj_is_player_on_platform(void);
 s32 jiggle_bbh_stair(s32 a0);
 void cur_obj_call_action_function(void (*actionFunctions[])(void));
 void spawn_base_star_with_no_lvl_exit(void);
-s32 cur_obj_mario_far_away(void);
+s32 cur_obj_player_far_away(void);
 s32 is_player_moving_fast_or_in_air(s32 speedThreshold);
 s32 is_item_in_array(s8 item, s8 *array);
 s32 cur_obj_is_player_in_room(void);
@@ -243,7 +243,7 @@ s32 cur_obj_set_hitbox_and_die_if_attacked(struct ObjectHitbox *hitbox, s32 deat
 void obj_explode_and_spawn_coins(f32 mistParticleSize, s32 sp1C);
 void obj_set_collision_data(struct Object *obj, const void *segAddr);
 void cur_obj_if_hit_wall_bounce_away(void);
-s32 cur_obj_hide_if_mario_far_away_y(f32 distY);
+s32 cur_obj_hide_if_player_far_away_y(f32 distY);
 Gfx *geo_offset_klepto_held_object(s32 callContext, struct GraphNode *node, UNUSED Mat4 mtx);
 Gfx *geo_offset_klepto_debug(s32 callContext, struct GraphNode *node, UNUSED Mat4 mtx);
 s32 obj_is_hidden(struct Object *obj);
@@ -251,8 +251,8 @@ void enable_time_stop(void);
 void disable_time_stop(void);
 void set_time_stop_flags(s32 flags);
 void clear_time_stop_flags(s32 flags);
-s32 cur_obj_can_mario_activate_textbox(f32 radius, f32 height, UNUSED s32 unused);
-s32 cur_obj_can_mario_activate_textbox_2(f32 radius, f32 height);
+s32 cur_obj_can_player_activate_textbox(f32 radius, f32 height, UNUSED s32 unused);
+s32 cur_obj_can_player_activate_textbox_2(f32 radius, f32 height);
 s32 cur_obj_update_dialog(s32 actionArg, s32 dialogFlags, s32 dialogID, UNUSED s32 unused);
 s32 cur_obj_update_dialog_with_cutscene(s32 actionArg, s32 dialogFlags, s32 cutsceneTable, s32 dialogID);
 s32 cur_obj_has_model(ModelID16 modelID);
@@ -265,14 +265,13 @@ void obj_copy_behavior_params(struct Object *dst, struct Object *src);
 void cur_obj_init_animation_and_anim_frame(s32 animIndex, s32 animFrame);
 s32 cur_obj_init_animation_and_check_if_near_end(s32 animIndex);
 void cur_obj_init_animation_and_extend_if_at_end(s32 animIndex);
-s32 cur_obj_check_grabbed_mario(void);
+s32 cur_obj_check_grabbed_player(void);
 s32 player_performed_grab_escape_action(void);
 void cur_obj_unused_play_footstep_sound(s32 animFrame1, s32 animFrame2, s32 sound);
-void enable_time_stop_including_mario(void);
-void disable_time_stop_including_mario(void);
+void enable_time_stop_including_player(void);
+void disable_time_stop_including_player(void);
 s32 cur_obj_check_interacted(void);
 void cur_obj_spawn_loot_blue_coin(void);
-
 void cur_obj_spawn_star_at_y_offset(f32 targetX, f32 targetY, f32 targetZ, f32 offsetY);
 
 // Extra functions

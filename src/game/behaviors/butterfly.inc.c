@@ -62,7 +62,7 @@ void butterfly_act_rest(void) {
     }
 }
 
-void butterfly_act_follow_mario(void) {
+void butterfly_act_follow_player(void) {
     butterfly_calculate_angle();
 
     butterfly_step(7);
@@ -101,7 +101,7 @@ void bhv_butterfly_loop(void) {
             break;
 
         case BUTTERFLY_ACT_FOLLOW_MARIO:
-            butterfly_act_follow_mario();
+            butterfly_act_follow_player();
             break;
 
         case BUTTERFLY_ACT_RETURN_HOME:

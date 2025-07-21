@@ -1,0 +1,21 @@
+const MacroObject si_area_1_macro_objs[] = {
+	MACRO_OBJECT               (/*preset*/ macro_red_coin,                    /*yaw*/   0, /*pos*/ -2400, -4607, -2400),
+    MACRO_OBJECT               (/*preset*/ macro_red_coin,                    /*yaw*/   0, /*pos*/ -2400, -4607,  2400),
+    MACRO_OBJECT               (/*preset*/ macro_red_coin,                    /*yaw*/   0, /*pos*/  2400, -4607,  2400),
+    MACRO_OBJECT               (/*preset*/ macro_red_coin,                    /*yaw*/   0, /*pos*/  2400, -4607, -2400),
+    MACRO_OBJECT               (/*preset*/ macro_red_coin,                    /*yaw*/   0, /*pos*/     0, -2200, -1500),
+    MACRO_OBJECT               (/*preset*/ macro_red_coin,                    /*yaw*/   0, /*pos*/ -1500, -2200,     0),
+    MACRO_OBJECT               (/*preset*/ macro_red_coin,                    /*yaw*/   0, /*pos*/     0, -2200,  1500),
+    MACRO_OBJECT               (/*preset*/ macro_red_coin,                    /*yaw*/   0, /*pos*/  1500, -2200,     0),
+    MACRO_OBJECT               (/*preset*/ macro_fish_spawner_few_blue,       /*yaw*/   0, /*pos*/  1927, -2909,     0),
+    MACRO_OBJECT               (/*preset*/ macro_coin_ring_vertical_flying,   /*yaw*/  90, /*pos*/     0, -2400, -1500),
+    MACRO_OBJECT               (/*preset*/ macro_coin_ring_vertical_flying,   /*yaw*/   0, /*pos*/ -1500, -2400,     0),
+    MACRO_OBJECT               (/*preset*/ macro_coin_ring_vertical_flying,   /*yaw*/  90, /*pos*/     0, -2400,  1500),
+    MACRO_OBJECT               (/*preset*/ macro_coin_ring_vertical_flying,   /*yaw*/   0, /*pos*/  1500, -2400,     0),
+    MACRO_OBJECT               (/*preset*/ macro_hidden_1up_trigger,          /*yaw*/   0, /*pos*/     0, -3500,     0),
+    MACRO_OBJECT_WITH_BEH_PARAM(/*preset*/ macro_hidden_1up,                  /*yaw*/   0, /*pos*/     0, -3800,     0, /*bhvParam*/ 1),
+    MACRO_OBJECT               (/*preset*/ macro_coin_ring_horizontal_flying, /*yaw*/   0, /*pos*/     0, -3500,     0),
+    MACRO_OBJECT               (/*preset*/ macro_fish_spawner_few_cyan,       /*yaw*/   0, /*pos*/ -1000, -4080, -1740),
+    MACRO_OBJECT_END(),
+};
+

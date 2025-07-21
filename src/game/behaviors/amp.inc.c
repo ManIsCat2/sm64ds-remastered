@@ -1,7 +1,7 @@
 
 /**
  * Behavior for bhvHomingAmp and bhvCirclingAmp.
- * These are distinct objects; one chases (homes in on) Mario,
+ * These are distinct objects; one chases (homes in on) Player,
  * while the other circles around a fixed location with a radius
  * of 200, 300, 400, or 0 (stationary).
  */
@@ -31,10 +31,10 @@ void bhv_homing_amp_init(void) {
     o->oHomingAmpAvgY = o->oHomeY;
 
     // Homing amps start at 1/10th their normal size.
-    // They grow when they "appear" to Mario.
+    // They grow when they "appear" to Player.
     cur_obj_scale(0.1f);
 
-    // Hide the amp (until Mario gets near).
+    // Hide the amp (until Player gets near).
     o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
 }
 
@@ -65,12 +65,12 @@ static void check_amp_attack(void) {
 }
 
 /**
- * Unhide the amp and grow until normal size, then begin chasing Mario.
+ * Unhide the amp and grow until normal size, then begin chasing Player.
  */
 static void homing_amp_appear_loop(void) {
     // gLakituState.goalPos is the position lakitu is moving towards.
-    // In Lakitu and Mario cam, it is usually very close to the current camera position.
-    // In Fixed cam, it is the point behind Mario the camera will go to when transitioning
+    // In Lakitu and Player cam, it is usually very close to the current camera position.
+    // In Fixed cam, it is the point behind Player the camera will go to when transitioning
     // to Lakitu cam. Homing amps will point themselves towards this point when appearing.
     f32 relativeTargetX = gLakituState.goalPos[0] - o->oPosX;
     f32 relativeTargetZ = gLakituState.goalPos[2] - o->oPosZ;
@@ -89,7 +89,7 @@ static void homing_amp_appear_loop(void) {
     }
 
     // Once the timer becomes greater than 90, i.e. 91 frames have passed,
-    // reset the amp's size and start chasing Mario.
+    // reset the amp's size and start chasing Player.
     if (o->oTimer > 90) {
         cur_obj_scale(1.0f);
         o->oAction = HOMING_AMP_ACT_CHASE;
@@ -98,23 +98,23 @@ static void homing_amp_appear_loop(void) {
 }
 
 /**
- * Chase Mario.
+ * Chase Player.
  */
 static void homing_amp_chase_loop(void) {
-    // Lock on to Mario if he ever goes within 11.25 degrees of the amp's line of sight
+    // Lock on to Player if he ever goes within 11.25 degrees of the amp's line of sight
     if ((o->oAngleToPlayer - 0x400 < o->oMoveAngleYaw)
         && (o->oMoveAngleYaw < o->oAngleToPlayer + 0x400)) {
         o->oHomingAmpLockedOn = TRUE;
         o->oTimer = 0;
     }
 
-    // If the amp is locked on to Mario, start "chasing" him by moving
+    // If the amp is locked on to Player, start "chasing" him by moving
     // in a straight line at 15 units/second for 32 frames.
     if (o->oHomingAmpLockedOn == TRUE) {
         o->oForwardVel = 15.0f;
 
         // Move the amp's average Y (the Y value it oscillates around) to align with
-        // Mario's head. Mario's graphics' Y + 150 is around the top of his head.
+        // Player's head. Player's graphics' Y + 150 is around the top of his head.
         // Note that the average Y will slowly go down to approach his head if the amp
         // is above his head, but if the amp is below it will instantly snap up.
         if (o->oHomingAmpAvgY > gPlayerObject->header.gfx.pos[1] + 150.0f) {
@@ -127,13 +127,13 @@ static void homing_amp_chase_loop(void) {
             o->oHomingAmpLockedOn = FALSE;
         }
     } else {
-        // If the amp is not locked on to Mario, move forward at 10 units/second
+        // If the amp is not locked on to Player, move forward at 10 units/second
         // while curving towards him.
         o->oForwardVel = 10.0f;
 
         obj_turn_toward_object(o, gPlayerObject, 16, 0x400);
 
-        // The amp's average Y will approach Mario's graphical Y position + 250
+        // The amp's average Y will approach Player's graphical Y position + 250
         // at a rate of 10 units per frame. Interestingly, this is different from
         // the + 150 used while chasing him. Could this be a typo?
         if (o->oHomingAmpAvgY < gPlayerObject->header.gfx.pos[1] + 250.0f) {
@@ -147,14 +147,14 @@ static void homing_amp_chase_loop(void) {
     // Handle attacks
     check_amp_attack();
 
-    // Give up if Mario goes further than 1500 units from the amp's original position
+    // Give up if Player goes further than 1500 units from the amp's original position
     if (!is_point_within_radius_of_player(o->oHomeX, o->oHomeY, o->oHomeZ, 1500)) {
         o->oAction = HOMING_AMP_ACT_GIVE_UP;
     }
 }
 
 /**
- * Give up on chasing Mario.
+ * Give up on chasing Player.
  */
 static void homing_amp_give_up_loop(void) {
     UNUSED u8 filler[8];
@@ -179,7 +179,7 @@ static void homing_amp_give_up_loop(void) {
  * Cool down after a successful attack, shared by both types of amp.
  */
 static void amp_attack_cooldown_loop(void) {
-    // Turn intangible and wait for 90 frames before chasing Mario again after hitting him.
+    // Turn intangible and wait for 90 frames before chasing Player again after hitting him.
     o->header.gfx.animInfo.animFrame += 2;
     o->oForwardVel = 0.0f;
 
@@ -272,7 +272,7 @@ void bhv_circling_amp_init(void) {
  * Fixed amps are a sub-species of circling amps, with circle radius 0.
  */
 static void fixed_circling_amp_idle_loop(void) {
-    // Turn towards Mario, in both yaw and pitch.
+    // Turn towards Player, in both yaw and pitch.
     f32 xToPlayer = gPlayerObject->header.gfx.pos[0] - o->oPosX;
     f32 yToPlayer = gPlayerObject->header.gfx.pos[1] + 120.0f - o->oPosY;
     f32 zToPlayer = gPlayerObject->header.gfx.pos[2] - o->oPosZ;

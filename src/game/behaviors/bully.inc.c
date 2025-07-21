@@ -51,7 +51,7 @@ void bhv_big_bully_init(void) {
     obj_set_hitbox(o, &sBigBullyHitbox);
 }
 
-void bully_check_mario_collision(void) {
+void bully_check_player_collision(void) {
     if (
 #if BUGFIX_BULLY_NO_INTERACT_DEATH
     o->oAction != BULLY_ACT_LAVA_DEATH && o->oAction != BULLY_ACT_DEATH_PLANE_DEATH &&
@@ -67,11 +67,11 @@ void bully_check_mario_collision(void) {
         o->oAction = BULLY_ACT_KNOCKBACK;
         o->oFlags &= ~OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
         cur_obj_init_animation(3);
-        o->oBullyMarioCollisionAngle = o->oMoveAngleYaw;
+        o->oBullyPlayerCollisionAngle = o->oMoveAngleYaw;
     }
 }
 
-void bully_act_chase_mario(void) {
+void bully_act_chase_player(void) {
     f32 homeX = o->oHomeX;
     f32 posY = o->oPosY;
     f32 homeZ = o->oHomeZ;
@@ -126,7 +126,7 @@ void bully_act_back_up(void) {
     //! bully_backup_check() happens after this function, and has the potential to reset
     //  the bully's action to BULLY_ACT_BACK_UP. Because the back up action is only
     //  set to end when the timer EQUALS 15, if this happens on that frame, the bully
-    //  will be stuck in BULLY_ACT_BACK_UP forever until Mario hits it or its death
+    //  will be stuck in BULLY_ACT_BACK_UP forever until Player hits it or its death
     //  conditions are activated. However because its angle is set to its facing angle,
     //  it will walk forward instead of backing up.
 
@@ -200,7 +200,7 @@ void bully_spawn_coin(void) {
     coin->oForwardVel = 10.0f;
     coin->oVelY = 100.0f;
     coin->oPosY = o->oPosY + 310.0f;
-    coin->oMoveAngleYaw = (f32)(o->oBullyMarioCollisionAngle + 0x8000) + random_float() * 1024.0f;
+    coin->oMoveAngleYaw = (f32)(o->oBullyPlayerCollisionAngle + 0x8000) + random_float() * 1024.0f;
 }
 
 void bully_act_level_death(void) {
@@ -237,11 +237,11 @@ void bhv_bully_loop(void) {
     o->oBullyPrevY = o->oPosY;
     o->oBullyPrevZ = o->oPosZ;
 
-    //! Because this function runs no matter what, Mario is able to interrupt the bully's
+    //! Because this function runs no matter what, Player is able to interrupt the bully's
     //  death action by colliding with it. Since the bully hitbox is tall enough to collide
-    //  with Mario even when it is under a lava floor, this can get the bully stuck OOB
+    //  with Player even when it is under a lava floor, this can get the bully stuck OOB
     //  if there is nothing under the lava floor.
-    bully_check_mario_collision();
+    bully_check_player_collision();
 
     switch (o->oAction) {
         case BULLY_ACT_PATROL:
@@ -256,7 +256,7 @@ void bhv_bully_loop(void) {
             break;
 
         case BULLY_ACT_CHASE_MARIO:
-            bully_act_chase_mario();
+            bully_act_chase_player();
             bully_step();
             break;
 
@@ -315,7 +315,7 @@ void bhv_big_bully_with_minions_loop(void) {
     o->oBullyPrevY = o->oPosY;
     o->oBullyPrevZ = o->oPosZ;
 
-    bully_check_mario_collision();
+    bully_check_player_collision();
 
     switch (o->oAction) {
         case BULLY_ACT_PATROL:
@@ -330,7 +330,7 @@ void bhv_big_bully_with_minions_loop(void) {
             break;
 
         case BULLY_ACT_CHASE_MARIO:
-            bully_act_chase_mario();
+            bully_act_chase_player();
             bully_step();
             break;
 

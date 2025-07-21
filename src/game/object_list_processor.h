@@ -35,7 +35,7 @@
  * they are processed and which objects they can collide with.
  */
 enum ObjectList {
-    OBJ_LIST_PLAYER,      //  (0) Mario
+    OBJ_LIST_PLAYER,      //  (0) Player
     OBJ_LIST_UNUSED_1,    //  (1) (unused)
     OBJ_LIST_DESTRUCTIVE, //  (2) things that can be used to destroy other objects, like
                           //      bob-ombs and corkboxes
@@ -52,7 +52,7 @@ enum ObjectList {
     OBJ_LIST_SURFACE,     //  (9) surface objects. objects that specifically have surface
                           //      collision and not object collision. (thwomp, whomp, etc)
     OBJ_LIST_POLELIKE,    // (10) polelike objects. objects that attract or otherwise
-                          //      "cling" Mario similar to a pole action. (hoot,
+                          //      "cling" Player similar to a pole action. (hoot,
                           //      whirlpool, trees/poles, etc)
     OBJ_LIST_SPAWNER,     // (11) spawners
     OBJ_LIST_UNIMPORTANT, // (12) unimportant objects. objects that will not load
@@ -131,12 +131,12 @@ extern s16 gTHIWaterDrained;
 extern s16 gTTCSpeedSetting;
 extern s16 gPlayerShotFromCannon;
 extern s16 gCCMEnteredSlide;
-extern s16 gNumRoomedObjectsInMarioRoom;
-extern s16 gNumRoomedObjectsNotInMarioRoom;
+extern s16 gNumRoomedObjectsInPlayerRoom;
+extern s16 gNumRoomedObjectsNotInPlayerRoom;
 extern s16 gWDWWaterLevelChanging;
 extern s16 gPlayerOnMerryGoRound;
 
-void bhv_mario_update(void);
+void bhv_player_update(void);
 void set_object_respawn_info_bits(struct Object *obj, u8 bits);
 void unload_objects_from_area(UNUSED s32 unused, s32 areaIndex);
 void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo);

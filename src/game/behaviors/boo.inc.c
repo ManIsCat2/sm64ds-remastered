@@ -133,16 +133,16 @@ static void boo_oscillate(s32 ignoreOpacity) {
 
 static s32 boo_vanish_or_appear(void) {
     s16 relativeAngleToPlayer = abs_angle_diff(o->oAngleToPlayer, o->oMoveAngleYaw);
-    s16 relativeMarioFaceAngle = abs_angle_diff(o->oMoveAngleYaw, gPlayerObject->oFaceAngleYaw);
+    s16 relativePlayerFaceAngle = abs_angle_diff(o->oMoveAngleYaw, gPlayerObject->oFaceAngleYaw);
     // magic?
     s16 relativeAngleToPlayerThreshhold = 0x1568;
-    s16 relativeMarioFaceAngleThreshhold = 0x6B58;
+    s16 relativePlayerFaceAngleThreshhold = 0x6B58;
     s32 doneAppearing = FALSE;
 
     o->oVelY = 0.0f;
 
     if (relativeAngleToPlayer > relativeAngleToPlayerThreshhold
-        || relativeMarioFaceAngle < relativeMarioFaceAngleThreshhold) {
+        || relativePlayerFaceAngle < relativePlayerFaceAngleThreshhold) {
         if (o->oOpacity == 40) {
             o->oBooTargetOpacity = 255;
             cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
@@ -251,7 +251,7 @@ static s32 big_boo_update_during_nonlethal_hit(f32 a0) {
     return FALSE;
 }
 
-// called every frame once mario lethally hits the boo until the boo is deleted,
+// called every frame once player lethally hits the boo until the boo is deleted,
 // returns whether death is complete
 static s32 boo_update_during_death(void) {
     if (o->oTimer == 0) {
@@ -321,7 +321,7 @@ static s32 boo_get_attack_status(void) {
 }
 
 // boo idle/chasing movement?
-static void boo_chase_mario(f32 a0, s16 turnSpeed, f32 velMultiplier) {
+static void boo_chase_player(f32 a0, s16 turnSpeed, f32 velMultiplier) {
     f32 dy;
     s16 targetYaw;
 
@@ -405,7 +405,7 @@ static void boo_act_1(void) {
         o->oBooTurningSpeed = (s32)(random_float() * 128.0f);
     }
 
-    boo_chase_mario(-100.0f, o->oBooTurningSpeed + 0x180, 0.5f);
+    boo_chase_player(-100.0f, o->oBooTurningSpeed + 0x180, 0.5f);
 
     attackStatus = boo_get_attack_status();
 
@@ -535,7 +535,7 @@ static void big_boo_act_1(void) {
         turnSpeed = 0x300; velMultiplier = 0.8f;
     }
 
-    boo_chase_mario(-100.0f, turnSpeed, velMultiplier);
+    boo_chase_player(-100.0f, turnSpeed, velMultiplier);
 
     attackStatus = boo_get_attack_status();
 
@@ -694,7 +694,7 @@ static void boo_with_cage_act_0(void) {
 static void boo_with_cage_act_1(void) {
     s32 attackStatus;
 
-    boo_chase_mario(100.0f, 0x200, 0.5f);
+    boo_chase_player(100.0f, 0x200, 0.5f);
 
     attackStatus = boo_get_attack_status();
 

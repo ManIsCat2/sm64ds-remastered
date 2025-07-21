@@ -45,6 +45,6 @@ s32 act_twirl_land(struct PlayerState *m);
 s32 act_ground_pound_land(struct PlayerState *m);
 s32 act_first_person(struct PlayerState *m);
 s32 check_common_stationary_cancels(struct PlayerState *m);
-s32 mario_execute_stationary_action(struct PlayerState *m);
+s32 player_execute_stationary_action(struct PlayerState *m);
 
 #endif // MARIO_ACTIONS_STATIONARY

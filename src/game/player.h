@@ -27,7 +27,7 @@ void play_player_landing_sound_once(struct PlayerState *m, u32 soundBits);
 void play_player_heavy_landing_sound(struct PlayerState *m, u32 soundBits);
 void play_player_heavy_landing_sound_once(struct PlayerState *m, u32 soundBits);
 void play_player_sound(struct PlayerState *m, s32 primarySoundBits, s32 scondarySoundBits);
-void mario_set_forward_vel(struct PlayerState *m, f32 speed);
+void player_set_forward_vel(struct PlayerState *m, f32 speed);
 s32 player_get_floor_class(struct PlayerState *m);
 u32 player_get_terrain_sound_addend(struct PlayerState *m);
 struct Surface *resolve_and_return_wall_collisions(Vec3f pos, f32 offset, f32 radius);

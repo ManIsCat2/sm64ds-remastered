@@ -1,0 +1,7 @@
+extern u8 dl_castle_aquarium_light_hikari_cus_rgba16[];
+extern Vtx dl_castle_aquarium_light__22__dl_castle_aquarium_light_mesh_mesh_vtx_cull[8];
+extern Vtx dl_castle_aquarium_light__22__dl_castle_aquarium_light_mesh_mesh_vtx_0[32];
+extern Gfx dl_castle_aquarium_light__22__dl_castle_aquarium_light_mesh_mesh_tri_0[];
+extern Gfx mat_dl_castle_aquarium_light_mat_hikari_f3d[];
+extern Gfx mat_revert_dl_castle_aquarium_light_mat_hikari_f3d[];
+extern Gfx dl_castle_aquarium_light[];

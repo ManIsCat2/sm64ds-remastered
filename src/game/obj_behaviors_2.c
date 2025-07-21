@@ -32,6 +32,7 @@
 #include "levels/thi/header.h"
 #include "levels/ttc/header.h"
 #include "levels/vcutm/header.h"
+#include "levels/si/header.h"
 #include "player.h"
 #include "player_actions_cutscene.h"
 #include "memory.h"
@@ -91,9 +92,9 @@ static s16 obj_get_pitch_from_vel(void) {
 
 /**
  * Show dialog proposing a race.
- * If the player accepts the race, then leave time stop enabled and Mario in the
+ * If the player accepts the race, then leave time stop enabled and Player in the
  * text action so that the racing object can wait before starting the race.
- * If the player declines the race, then disable time stop and allow Mario to
+ * If the player declines the race, then disable time stop and allow Player to
  * move again.
  */
 static s32 obj_update_race_proposition_dialog(s16 dialogID) {
@@ -103,7 +104,7 @@ static s32 obj_update_race_proposition_dialog(s16 dialogID) {
 
     if (dialogResponse == DIALOG_RESPONSE_NO) {
         set_player_npc_dialog(MARIO_DIALOG_STOP);
-        disable_time_stop_including_mario();
+        disable_time_stop_including_player();
     }
 
     return dialogResponse;
@@ -726,7 +727,7 @@ static s32 obj_die_if_above_lava_and_health_non_positive(void) {
     return TRUE;
 }
 
-static s32 obj_handle_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioAction,
+static s32 obj_handle_attacks(struct ObjectHitbox *hitbox, s32 attackedPlayerAction,
                               u8 *attackHandlers) {
     s32 attackType;
 
@@ -737,8 +738,8 @@ static s32 obj_handle_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioActi
         return 1;
     } else if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         if (o->oInteractStatus & INT_STATUS_ATTACKED_MARIO) {
-            if (o->oAction != attackedMarioAction) {
-                o->oAction = attackedMarioAction;
+            if (o->oAction != attackedPlayerAction) {
+                o->oAction = attackedPlayerAction;
                 o->oTimer = 0;
             }
         } else {
@@ -850,7 +851,7 @@ static s32 obj_update_standard_actions(f32 scale) {
     }
 }
 
-static s32 obj_check_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioAction) {
+static s32 obj_check_attacks(struct ObjectHitbox *hitbox, s32 attackedPlayerAction) {
     s32 attackType;
 
     obj_set_hitbox(o, hitbox);
@@ -860,8 +861,8 @@ static s32 obj_check_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioActio
         return 1;
     } else if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         if (o->oInteractStatus & INT_STATUS_ATTACKED_MARIO) {
-            if (o->oAction != attackedMarioAction) {
-                o->oAction = attackedMarioAction;
+            if (o->oAction != attackedPlayerAction) {
+                o->oAction = attackedPlayerAction;
                 o->oTimer = 0;
             }
         } else {
@@ -892,19 +893,19 @@ static s32 obj_move_for_one_second(s32 endAction) {
 /**
  * If we are far from home (> threshold away), then set oAngleToPlayer to the
  * angle to home and oDistanceToPlayer to 25000.
- * If we are close to home, but Mario is far from us (> threshold away), then
+ * If we are close to home, but Player is far from us (> threshold away), then
  * keep oAngleToPlayer the same and set oDistanceToPlayer to 20000.
- * If we are close to both home and Mario, then keep both oAngleToPlayer and
+ * If we are close to both home and Player, then keep both oAngleToPlayer and
  * oDistanceToPlayer the same.
  *
  * The point of this function is to avoid having to write extra code to get
- * the object to return to home. When Mario is far away and the object is far
- * from home, it could theoretically re-use the "approach Mario" logic to approach
+ * the object to return to home. When Player is far away and the object is far
+ * from home, it could theoretically re-use the "approach Player" logic to approach
  * its home instead.
  * However, most objects that use this function handle the far-from-home case
  * separately anyway.
  * This function causes seemingly erroneous behavior in some objects that try to
- * attack Mario (e.g. fly guy shooting fire or lunging), especially when combined
+ * attack Player (e.g. fly guy shooting fire or lunging), especially when combined
  * with partial updates.
  */
 static void treat_far_home_as_player(f32 threshold) {

@@ -6,17 +6,17 @@
 #include "../dynlist_proc.h"
 #include "../shape_helper.h"
 
-struct DynList dynlist_mario_master[] = {
+struct DynList dynlist_player_master[] = {
     BeginList(),
     UseIntegerNames(TRUE),  // Specify all object names as integers
 
     StartGroup(DYNOBJ_MARIO_MAIN_SHAPES_GROUP),
         CallList(dynlist_mario_face_shape),
-        CallList(dynlist_mario_eye_right_shape),
-        CallList(dynlist_mario_eye_left_shape),
-        CallList(dynlist_mario_eyebrow_right_shape),
-        CallList(dynlist_mario_eyebrow_left_shape),
-        CallList(dynlist_mario_mustache_shape),
+        CallList(dynlist_player_eye_right_shape),
+        CallList(dynlist_player_eye_left_shape),
+        CallList(dynlist_player_eyebrow_right_shape),
+        CallList(dynlist_player_eyebrow_left_shape),
+        CallList(dynlist_player_mustache_shape),
     EndGroup(DYNOBJ_MARIO_MAIN_SHAPES_GROUP),
 
     MakeDynObj(D_LIGHT, DYNOBJ_SILVER_STAR_LIGHT),
@@ -928,7 +928,7 @@ struct DynList dynlist_mario_master[] = {
 
         // right mustache animator
         MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_RIGHT_MUSTACHE_ANIMDATA_GROUP),
-            LinkWithPtr(&anim_mario_mustache_right),
+            LinkWithPtr(&anim_player_mustache_right),
         MakeDynObj(D_ANIMATOR, DYNOBJ_MARIO_RIGHT_MUSTACHE_ANIMATOR),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(DYNOBJ_MARIO_RIGHT_MUSTACHE_ANIMDATA_GROUP),
@@ -936,7 +936,7 @@ struct DynList dynlist_mario_master[] = {
 
         // left mustache animator
         MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_LEFT_MUSTACHE_ANIMDATA_GROUP),
-            LinkWithPtr(&anim_mario_mustache_left),
+            LinkWithPtr(&anim_player_mustache_left),
         MakeDynObj(D_ANIMATOR, DYNOBJ_MARIO_LEFT_MUSTACHE_ANIMATOR),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(DYNOBJ_MARIO_LEFT_MUSTACHE_ANIMDATA_GROUP),
@@ -944,19 +944,19 @@ struct DynList dynlist_mario_master[] = {
 
         // left eyebrow animators
         MakeDynObj(D_DATA_GRP, 32),
-            LinkWithPtr(&anim_mario_lips_1),
+            LinkWithPtr(&anim_player_lips_1),
         MakeDynObj(D_ANIMATOR, 33),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(32),
             LinkWith(DYNOBJ_MARIO_LEFT_EYEBROW_MPART_JOINT_1),
         MakeDynObj(D_DATA_GRP, 41),
-            LinkWithPtr(&anim_mario_lips_2),
+            LinkWithPtr(&anim_player_lips_2),
         MakeDynObj(D_ANIMATOR, 42),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(41),
             LinkWith(DYNOBJ_MARIO_LEFT_EYEBROW_RPART_JOINT_1),
         MakeDynObj(D_DATA_GRP, 50),
-            LinkWithPtr(&anim_mario_eyebrows_1),
+            LinkWithPtr(&anim_player_eyebrows_1),
         MakeDynObj(D_ANIMATOR, 51),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(50),
@@ -964,31 +964,31 @@ struct DynList dynlist_mario_master[] = {
 
         // right eyebrow animators
         MakeDynObj(D_DATA_GRP, 63),
-            LinkWithPtr(&anim_mario_eyebrows_equalizer),
+            LinkWithPtr(&anim_player_eyebrows_equalizer),
         MakeDynObj(D_ANIMATOR, 64),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(63),
             LinkWith(DYNOBJ_MARIO_RIGHT_EYEBROW_MPART_JOINT_2),
         MakeDynObj(D_DATA_GRP, 66),
-            LinkWithPtr(&anim_mario_eyebrows_2),
+            LinkWithPtr(&anim_player_eyebrows_2),
         MakeDynObj(D_ANIMATOR, 67),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(66),
             LinkWith(DYNOBJ_MARIO_RIGHT_EYEBROW_MPART_JOINT_1),
         MakeDynObj(D_DATA_GRP, 72),
-            LinkWithPtr(&anim_mario_eyebrows_3),
+            LinkWithPtr(&anim_player_eyebrows_3),
         MakeDynObj(D_ANIMATOR, 73),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(72),
             LinkWith(DYNOBJ_MARIO_RIGHT_EYEBROW_LPART_JOINT_2),
         MakeDynObj(D_DATA_GRP, 75),
-            LinkWithPtr(&anim_mario_eyebrows_4),
+            LinkWithPtr(&anim_player_eyebrows_4),
         MakeDynObj(D_ANIMATOR, 76),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(75),
             LinkWith(DYNOBJ_MARIO_RIGHT_EYEBROW_LPART_JOINT_1),
         MakeDynObj(D_DATA_GRP, 84),
-            LinkWithPtr(&anim_mario_eyebrows_5),
+            LinkWithPtr(&anim_player_eyebrows_5),
         MakeDynObj(D_ANIMATOR, 85),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(84),
@@ -996,7 +996,7 @@ struct DynList dynlist_mario_master[] = {
 
         // left eye animator
         MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_LEFT_EYE_ANIMDATA_GROUP),
-            LinkWithPtr(&anim_mario_eye_left),
+            LinkWithPtr(&anim_player_eye_left),
         MakeDynObj(D_ANIMATOR, DYNOBJ_MARIO_LEFT_EYE_ANIMATOR),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(DYNOBJ_MARIO_LEFT_EYE_ANIMDATA_GROUP),
@@ -1004,7 +1004,7 @@ struct DynList dynlist_mario_master[] = {
 
         // right eye animator
         MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_RIGHT_EYE_ANIMDATA_GROUP),
-            LinkWithPtr(&anim_mario_eye_right),
+            LinkWithPtr(&anim_player_eye_right),
         MakeDynObj(D_ANIMATOR, DYNOBJ_MARIO_RIGHT_EYE_ANIMATOR),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(DYNOBJ_MARIO_RIGHT_EYE_ANIMDATA_GROUP),
@@ -1012,7 +1012,7 @@ struct DynList dynlist_mario_master[] = {
 
         // cap animator
         MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_CAP_ANIMDATA_GROUP),
-            LinkWithPtr(&anim_mario_cap),
+            LinkWithPtr(&anim_player_cap),
         MakeDynObj(D_ANIMATOR, DYNOBJ_MARIO_CAP_ANIMATOR),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(DYNOBJ_MARIO_CAP_ANIMDATA_GROUP),
@@ -1020,7 +1020,7 @@ struct DynList dynlist_mario_master[] = {
 
         // left lip corner animator
         MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_LEFT_LIP_CORNER_ANIMDATA_GROUP),
-            LinkWithPtr(&anim_mario_lips_3),
+            LinkWithPtr(&anim_player_lips_3),
         MakeDynObj(D_ANIMATOR, DYNOBJ_MARIO_LEFT_LIP_CORNER_ANIMATOR),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(DYNOBJ_MARIO_LEFT_LIP_CORNER_ANIMDATA_GROUP),
@@ -1028,7 +1028,7 @@ struct DynList dynlist_mario_master[] = {
 
         // right lip corner animator
         MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_RIGHT_LIP_CORNER_ANIMDATA_GROUP),
-            LinkWithPtr(&anim_mario_lips_4),
+            LinkWithPtr(&anim_player_lips_4),
         MakeDynObj(D_ANIMATOR, DYNOBJ_MARIO_RIGHT_LIP_CORNER_ANIMATOR),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(DYNOBJ_MARIO_RIGHT_LIP_CORNER_ANIMDATA_GROUP),
@@ -1036,7 +1036,7 @@ struct DynList dynlist_mario_master[] = {
 
         // left ear animator
         MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_LEFT_EAR_ANIMDATA_GROUP),
-            LinkWithPtr(&anim_mario_ear_left),
+            LinkWithPtr(&anim_player_ear_left),
         MakeDynObj(D_ANIMATOR, DYNOBJ_MARIO_LEFT_EAR_ANIMATOR),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(DYNOBJ_MARIO_LEFT_EAR_ANIMDATA_GROUP),
@@ -1044,7 +1044,7 @@ struct DynList dynlist_mario_master[] = {
 
         // right ear animator
         MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_RIGHT_EAR_ANIMADATA_GROUP),
-            LinkWithPtr(&anim_mario_ear_right),
+            LinkWithPtr(&anim_player_ear_right),
         MakeDynObj(D_ANIMATOR, DYNOBJ_MARIO_RIGHT_EAR_ANIMATOR),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(DYNOBJ_MARIO_RIGHT_EAR_ANIMADATA_GROUP),
@@ -1052,7 +1052,7 @@ struct DynList dynlist_mario_master[] = {
 
         // nose animator
         MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_NOSE_ANIMDATA_GROUP),
-            LinkWithPtr(&anim_mario_nose),
+            LinkWithPtr(&anim_player_nose),
         MakeDynObj(D_ANIMATOR, DYNOBJ_MARIO_NOSE_ANIMATOR),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(DYNOBJ_MARIO_NOSE_ANIMDATA_GROUP),
@@ -1060,7 +1060,7 @@ struct DynList dynlist_mario_master[] = {
 
         // animator for left side of jaw
         MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_LEFT_JAW_ANIMDATA_GROUP),
-            LinkWithPtr(&anim_mario_lips_5),
+            LinkWithPtr(&anim_player_lips_5),
         MakeDynObj(D_ANIMATOR, DYNOBJ_MARIO_LEFT_JAW_ANIMATOR),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(DYNOBJ_MARIO_LEFT_JAW_ANIMDATA_GROUP),
@@ -1068,7 +1068,7 @@ struct DynList dynlist_mario_master[] = {
 
         // animator for right side of jaw
         MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_RIGHT_JAW_ANIMDATA_GROUP),
-            LinkWithPtr(&anim_mario_lips_6),
+            LinkWithPtr(&anim_player_lips_6),
         MakeDynObj(D_ANIMATOR, DYNOBJ_MARIO_RIGHT_JAW_ANIMATOR),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(DYNOBJ_MARIO_RIGHT_JAW_ANIMDATA_GROUP),
@@ -1076,7 +1076,7 @@ struct DynList dynlist_mario_master[] = {
 
         // left eyelid animator
         MakeDynObj(D_DATA_GRP, DYNOBJ_LEFT_EYELID_ANIMDATA_GROUP),
-            LinkWithPtr(&anim_mario_eyelid_left),
+            LinkWithPtr(&anim_player_eyelid_left),
         MakeDynObj(D_ANIMATOR, DYNOBJ_LEFT_EYELID_ANIMATOR),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(DYNOBJ_LEFT_EYELID_ANIMDATA_GROUP),
@@ -1084,7 +1084,7 @@ struct DynList dynlist_mario_master[] = {
 
         // right eyelid animator
         MakeDynObj(D_DATA_GRP, DYNOBJ_RIGHT_EYELID_ANIMDATA_GROUP),
-            LinkWithPtr(&anim_mario_eyelid_right),
+            LinkWithPtr(&anim_player_eyelid_right),
         MakeDynObj(D_ANIMATOR, DYNOBJ_RIGHT_EYELID_ANIMATOR),
             AttachTo(0x0, DYNOBJ_MARIO_MAIN_ANIMATOR),
             SetNodeGroup(DYNOBJ_RIGHT_EYELID_ANIMDATA_GROUP),

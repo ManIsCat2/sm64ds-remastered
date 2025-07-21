@@ -13,7 +13,7 @@ const GeoLayout power_flower_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_CULLING_RADIUS(431),
 		GEO_OPEN_NODE(),
-			GEO_SHADOW(1, 180, 70),
+			GEO_SHADOW(1, 178, 70),
 			GEO_OPEN_NODE(),
 				GEO_SWITCH_CASE(2, geo_switch_anim_state),
 				GEO_OPEN_NODE(),

@@ -6,7 +6,7 @@
  * a fish that would splash up when the player walked through it.
  * This functionality was probably moved; in the final game,
  * an identical fish splash can occur with a 1/256 chance every time
- * Mario splashes in water.
+ * Player splashes in water.
  */
 
 /**

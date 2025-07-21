@@ -4,7 +4,7 @@
  * INTERACTION SETTINGS *
  ***********************/
 
-/// Fixes cap cloning when Mario takes a fade warp
+/// Fixes cap cloning when the player takes a fade warp
 #define FIX_HAT_CLONE_FADE (0 || QOL_FIXES)
 
 /// Fixes fake pole grab on the bottom of it, allowing to be properly grabbed
@@ -13,7 +13,7 @@
 /// Fixes missing surface wind in obj_check_floor_death
 #define FIX_OBJ_FLOOR_WIND_DEATH (0 || QOL_FIXES)
 
-/// Fixes Mario interact shell start action while in air
+/// Fixes the player interact shell start action while in air
 #define FIX_MARIO_KOOPA_SHELL_ACTION (0 || QOL_FIXES)
 
 /// Hold A when bouncing on an enemy to go higher like in classic games
@@ -56,7 +56,7 @@
 /// Fixes one frame timer when bully backs up
 #define FIX_BULLY_BACK_UP_TIMER (0 || QOL_FIXES)
 
-/// Properly adjusts Mario's head to look at bosses
+/// Properly adjusts the players head to look at bosses
 #define FIX_MARIO_LOOK_HEAD_BOSSES (0 || QOL_FIXES)
 
 /// Fixes mist and purple particles not being spawned after specific objects are deleted
@@ -110,16 +110,13 @@
 /// Changes WF breakable wall by safely landing back if the proper wall is broken
 #define BETTER_WF_BREAKEABLE_WALL (0 || QOL_FEATURES)
 
-/// Changes blue coin switch to respawn instead of disappearing
-#define RESPAWN_BLUE_COIN_SWITCH (0 || QOL_FEATURES)
-
 /// Makes leaf particles occasionally fall from trees which contain Hoot 
 #define HOOT_TREE_PARTICLES (0 || QOL_FEATURES)
 
 /// Makes Tiny Goombas (from THI) always drop their coin
 #define TINY_GOOMBA_DROP_COIN (0 || QOL_FEATURES)
 
-/// Clams don't hurt Mario unless they are moving (opening/closing)
+/// Clams don't hurt the player unless they are moving (opening/closing)
 #define CLAMS_ONLY_HURT_WHEN_MOVING (0)
 
 /// Makes speed of a platform on a track be controlled by standing near the front or back of it
@@ -136,9 +133,6 @@
 
 /// Makes an object active only if it's on it's room if it exists
 #define PROCESS_ONLY_ON_ROOM_PARENT (0 || QOL_FEATURES)
-
-/// Makes collected stars fly up instead of disappearing
-#define FLY_UP_COLLECTED_STARS (0 || QOL_FEATURES)
 
 /// Makes coin formation on ground have better coin position, fixes misaligned coins
 #define BETTER_COIN_FORMATION_GROUND (0 || QOL_FEATURES || COLLISION_FIXES)

@@ -131,7 +131,7 @@ s32 envfx_init_snow(s32 mode) {
  * For water snow, this is dependent on how deep underwater you are.
  * Blizzard snows starts at the maximum amount and doesn't change.
  */
-void envfx_update_snowflake_count(s32 mode, Vec3s marioPos) {
+void envfx_update_snowflake_count(s32 mode, Vec3s playerPos) {
     s32 globalTimer = gGlobalTimer;
     f32 waterLevel;
 
@@ -145,10 +145,10 @@ void envfx_update_snowflake_count(s32 mode, Vec3s marioPos) {
             break;
 
         case ENVFX_SNOW_WATER:
-            waterLevel = find_water_level(marioPos[0], marioPos[2]);
+            waterLevel = find_water_level(playerPos[0], playerPos[2]);
 
             gSnowParticleCount =
-                (((s32)((waterLevel - 400.0f - (f32) marioPos[1]) * 0.001) << 0x10) >> 0x10) * 5;
+                (((s32)((waterLevel - 400.0f - (f32) playerPos[1]) * 0.001) << 0x10) >> 0x10) * 5;
 
             if (gSnowParticleCount < 0) {
                 gSnowParticleCount = 0;
@@ -307,7 +307,7 @@ void envfx_update_snow_blizzard(s32 snowCylinderX, s32 snowCylinderY, s32 snowCy
 
 /*! Unused function. Checks whether a position is laterally within 3000 units
  *  to the point (x: 3380, z: -520). Considering there is an unused blizzard
- *  snow mode, this could have been used to check whether Mario is in a
+ *  snow mode, this could have been used to check whether Player is in a
  *  'blizzard area'. In Cool, Cool Mountain and Snowman's Land the area lies
  *  near the starting point and doesn't seem meaningful. Notably, the point is
  *  close to the entrance of SL, so maybe there were plans for an extra hint to
@@ -442,7 +442,7 @@ void append_snowflake_vertex_buffer(Gfx *gfx, s32 index, Vec3s vertex1, Vec3s ve
 #if NO_ENV_SNOW_CEILING
 /**
  * Makes snow particles disappear if there's a ceiling 
- * on top of Mario and the camera
+ * on top of Player and the camera
  */
 void envfx_update_ceiling_count(void) {
     struct Surface *ceil;
@@ -475,7 +475,7 @@ void envfx_update_ceiling_count(void) {
  * Updates positions of snow particles and returns a pointer to a display list
  * drawing all snowflakes.
  */
-Gfx *envfx_update_snow(s32 snowMode, Vec3s marioPos, Vec3s camFrom, Vec3s camTo) {
+Gfx *envfx_update_snow(s32 snowMode, Vec3s playerPos, Vec3s camFrom, Vec3s camTo) {
     s32 i;
     s16 radius, pitch, yaw;
     Vec3s snowCylinderPos;
@@ -498,7 +498,7 @@ Gfx *envfx_update_snow(s32 snowMode, Vec3s marioPos, Vec3s camFrom, Vec3s camTo)
     envfx_update_ceiling_count();
 #endif
 
-    envfx_update_snowflake_count(snowMode, marioPos);
+    envfx_update_snowflake_count(snowMode, playerPos);
 
     // Note: to and from are inverted here, so the resulting vector goes towards the camera
     orbit_from_positions(camTo, camFrom, &radius, &pitch, &yaw);
@@ -570,7 +570,7 @@ Gfx *envfx_update_snow(s32 snowMode, Vec3s marioPos, Vec3s camFrom, Vec3s camTo)
  * Updates the environment effects (snow, flowers, bubbles)
  * and returns a display list drawing them.
  */
-Gfx *envfx_update_particles(s32 mode, Vec3s marioPos, Vec3s camTo, Vec3s camFrom) {
+Gfx *envfx_update_particles(s32 mode, Vec3s playerPos, Vec3s camTo, Vec3s camFrom) {
     Gfx *gfx;
 
     if (get_dialog_id() != DIALOG_NONE) {
@@ -582,7 +582,7 @@ Gfx *envfx_update_particles(s32 mode, Vec3s marioPos, Vec3s camTo, Vec3s camFrom
     }
 
     if (mode >= ENVFX_BUBBLE_START) {
-        gfx = envfx_update_bubbles(mode, marioPos, camTo, camFrom);
+        gfx = envfx_update_bubbles(mode, playerPos, camTo, camFrom);
         return gfx;
     }
 
@@ -596,15 +596,15 @@ Gfx *envfx_update_particles(s32 mode, Vec3s marioPos, Vec3s camTo, Vec3s camFrom
             return NULL;
 
         case ENVFX_SNOW_NORMAL:
-            gfx = envfx_update_snow(1, marioPos, camFrom, camTo);
+            gfx = envfx_update_snow(1, playerPos, camFrom, camTo);
             break;
 
         case ENVFX_SNOW_WATER:
-            gfx = envfx_update_snow(2, marioPos, camFrom, camTo);
+            gfx = envfx_update_snow(2, playerPos, camFrom, camTo);
             break;
 
         case ENVFX_SNOW_BLIZZARD:
-            gfx = envfx_update_snow(3, marioPos, camFrom, camTo);
+            gfx = envfx_update_snow(3, playerPos, camFrom, camTo);
             break;
 
         default:

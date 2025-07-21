@@ -1,3 +1,4 @@
+#include "texscroll.h"
 #include <ultra64.h>
 #ifndef TARGET_N64
 #include <stdbool.h>
@@ -42,6 +43,11 @@
 #include "pc/cliopts.h"
 #endif
 
+#ifdef EXT_OPTIONS_MENU
+#ifdef TARGET_N64
+extern int configGlobalCapBlocks;
+#endif
+#endif
 
 // TODO: Make these ifdefs better
 const char *credits01[] = { "1GAME DIRECTOR", "SHIGERU MIYAMOTO" };
@@ -49,7 +55,7 @@ const char *credits02[] = { "2ASSISTANT DIRECTORS", "YOSHIAKI KOIZUMI", "TAKASHI
 const char *credits03[] = { "2SYSTEM PROGRAMMERS", "YASUNARI NISHIDA", "YOSHINORI TANIMOTO" };
 const char *credits04[] = { "3PROGRAMMERS", "HAJIME YAJIMA", "DAIKI IWAMOTO", "TOSHIO IWAWAKI" };
 
-#if defined(VERSION_SH) || defined(VERSION_CN)
+#if defined(VERSION_SH)
 
 const char *credits05[] = { "1CAMERA PROGRAMMER", "TAKUMI KAWAGOE" };
 const char *credits06[] = { "1MARIO FACE PROGRAMMER", "GILES GODDARD" };
@@ -58,7 +64,7 @@ const char *credits08[] = { "2COURSE DESIGNERS", "KENTA USUI", "NAOKI MORI" };
 const char *credits09[] = { "3COURSE DESIGNERS", "YOSHIKI HARUHANA", "MAKOTO MIYANAGA", "KATSUHIKO KANNO" };
 const char *credits10[] = { "1SOUND COMPOSER", "KOJI KONDO" };
 
-// Shindou and iQue combine sound effects and sound programmer in order to make room for Mario voice and Peach voice
+// Shindou combines sound effects and sound programmer in order to make room for Player voice and Peach voice
 const char *credits11[] = { "4SOUND EFFECTS", "SOUND PROGRAMMER", "YOJI INAGAKI", "HIDEAKI SHIMIZU" };
 const char *credits12[] = { "23D ANIMATORS", "YOSHIAKI KOIZUMI", "SATORU TAKIZAWA" };
 const char *credits13[] = { "1CG DESIGNER", "MASANAO ARIMOTO" };
@@ -67,7 +73,7 @@ const char *credits15[] = { "1TECHNICAL SUPPORT", "SGI. 64PROJECT STAFF" };
 const char *credits16[] = { "2PROGRESS MANAGEMENT", "KIMIYOSHI FUKUI", "KEIZO KATO" };
 
 #else // VERSION_US || VERSION_EU
-// US and EU combine camera programmer and Mario face programmer...
+// US and EU combine camera programmer and Player face programmer...
 const char *credits05[] = { "4CAMERA PROGRAMMER", "MARIO FACE PROGRAMMER", "TAKUMI KAWAGOE", "GILES GODDARD" };
 const char *credits06[] = { "2COURSE DIRECTORS", "YOICHI YAMADA", "YASUHISA YAMAMURA" };
 const char *credits07[] = { "2COURSE DESIGNERS", "KENTA USUI", "NAOKI MORI" };
@@ -75,7 +81,7 @@ const char *credits08[] = { "3COURSE DESIGNERS", "YOSHIKI HARUHANA", "MAKOTO MIY
 
 #ifdef VERSION_US
 const char *credits09[] = { "1SOUND COMPOSER", "KOJI KONDO" };
-// ...as well as sound effects and sound programmer in order to make room for screen text writer, Mario voice, and Peach voice
+// ...as well as sound effects and sound programmer in order to make room for screen text writer, Player voice, and Peach voice
 const char *credits10[] = { "4SOUND EFFECTS", "SOUND PROGRAMMER", "YOJI INAGAKI", "HIDEAKI SHIMIZU" };
 const char *credits11[] = { "23-D ANIMATORS", "YOSHIAKI KOIZUMI", "SATORU TAKIZAWA" };
 const char *credits12[] = { "1ADDITIONAL GRAPHICS", "MASANAO ARIMOTO" };
@@ -86,7 +92,7 @@ const char *credits16[] = { "5SCREEN TEXT WRITER", "TRANSLATION", "LESLIE SWAN",
 #else // VERSION_EU
 // ...as well as sound composer, sound effects, and sound programmer, and...
 const char *credits09[] = { "7SOUND COMPOSER", "SOUND EFFECTS", "SOUND PROGRAMMER", "KOJI KONDO", "YOJI INAGAKI", "HIDEAKI SHIMIZU" };
-// ...3D animators and additional graphics in order to make room for screen text writer(s), Mario voice, and Peach voice
+// ...3D animators and additional graphics in order to make room for screen text writer(s), Player voice, and Peach voice
 const char *credits10[] = { "63-D ANIMATORS", "ADDITIONAL GRAPHICS", "YOSHIAKI KOIZUMI", "SATORU TAKIZAWA", "MASANAO ARIMOTO" };
 const char *credits11[] = { "3TECHNICAL SUPPORT", "TAKAO SAWANO", "HIROHITO YOSHIMOTO", "HIROTO YADA" };
 const char *credits12[] = { "1TECHNICAL SUPPORT", "SGI N64 PROJECT STAFF" };
@@ -100,23 +106,15 @@ const char *credits16[] = { "4SCREEN TEXT WRITER", "GERMAN TRANSLATION", "THOMAS
 
 const char *credits17[] = { "4MARIO VOICE", "PEACH VOICE", "CHARLES MARTINET", "LESLIE SWAN" };
 
-#if defined(VERSION_SH) || defined(VERSION_CN)
-// iQue uses this despite Jyoho Kaihatubu being Japanese
+#if defined(VERSION_SH)
 const char *credits18[] = { "3SPECIAL THANKS TO", "JYOHO KAIHATUBU", "ALL NINTENDO", "MARIO CLUB STAFF" };
 #elif defined(VERSION_US)
 const char *credits18[] = { "3SPECIAL THANKS TO", "EAD STAFF", "ALL NINTENDO PERSONNEL", "MARIO CLUB STAFF" };
 #else // VERSION_EU
 const char *credits18[] = { "3SPECIAL THANKS TO", "EAD STAFF", "ALL NINTENDO PERSONNEL", "SUPER MARIO CLUB STAFF" };
 #endif
-
-#ifdef VERSION_CN
-// iQue combines producer and executive producer in order to make room for China production
-const char *credits19[] = { "4PRODUCER", "EXECUTIVE PRODUCER", "SHIGERU MIYAMOTO", "HIROSHI YAMAUCHI" };
-const char *credits20[] = { "1CHINA PRODUCTION", "IQUE ENGINEERING" };
-#else
 const char *credits19[] = { "1PRODUCER", "SHIGERU MIYAMOTO" };
 const char *credits20[] = { "1EXECUTIVE PRODUCER", "HIROSHI YAMAUCHI" };
-#endif
 
 // Screen top left - Bottom text
 #define CREDITS_POS_ONE 0*16
@@ -241,7 +239,7 @@ void stub_level_update_1(void) {
 
 void load_level_init_text(u32 arg) {
     s32 gotAchievement;
-    s32 dialogID = gCurrentArea->dialog[arg];
+    u32 dialogID = gCurrentArea->dialog[arg];
 
     switch (dialogID) {
         case DIALOG_129:
@@ -254,6 +252,10 @@ void load_level_init_text(u32 arg) {
 
         case DIALOG_131:
             gotAchievement = save_file_get_flags() & SAVE_FLAG_HAVE_WING_CAP;
+
+            if (configGlobalCapBlocks) {
+                gotAchievement = save_file_get_flags() & SAVE_FLAG_HAVE_POWER_FLOWER;
+            }
             break;
 
         case (u8)DIALOG_NONE: // 255, cast value to u8 to match (-1)
@@ -282,7 +284,7 @@ void init_door_warp(struct SpawnInfo *spawnInfo, u32 arg1) {
 }
 
 void set_player_initial_cap_powerup(struct PlayerState *m) {
-    s32 capCourseIndex = gCurrCourseNum - COURSE_CAP_COURSES;
+    u32 capCourseIndex = gCurrCourseNum - COURSE_CAP_COURSES;
 
     switch (capCourseIndex) {
         case COURSE_COTMC - COURSE_CAP_COURSES:
@@ -368,7 +370,7 @@ void set_player_initial_action(struct PlayerState *m, u32 spawnType, u32 actionA
 // Comments were added to clarify what's changed
 void init_player_after_warp(void) {
     struct ObjectWarpNode *spawnNode = area_get_warp_node(sWarpDest.nodeId);
-    u32 marioSpawnType = get_player_spawn_type(spawnNode->object);
+    u32 playerSpawnType = get_player_spawn_type(spawnNode->object);
 
     if (gPlayerState->action != ACT_UNINITIALIZED) {
         gPlayerSpawnInfos[0].startPos[0] = (s16) spawnNode->object->oPosX;
@@ -379,7 +381,7 @@ void init_player_after_warp(void) {
         gPlayerSpawnInfos[0].startAngle[1] = spawnNode->object->oMoveAngleYaw;
         gPlayerSpawnInfos[0].startAngle[2] = 0;
 
-        if (marioSpawnType == MARIO_SPAWN_DOOR_WARP) {
+        if (playerSpawnType == MARIO_SPAWN_DOOR_WARP) {
             init_door_warp(&gPlayerSpawnInfos[0], sWarpDest.arg);
         }
 
@@ -388,7 +390,7 @@ void init_player_after_warp(void) {
             load_player_area();
         }
 
-        // Don't reset Mario on the same warp area, preserves cap powerup like in SM64DS
+        // Don't reset Player on the same warp area, preserves cap powerup like in SM64DS
         if (sWarpDest.type != WARP_TYPE_SAME_AREA) {
             init_player();
         } else {
@@ -396,7 +398,7 @@ void init_player_after_warp(void) {
             vec3s_to_vec3f(gPlayerState->pos, gPlayerSpawnInfo->startPos);
         }
 
-        set_player_initial_action(gPlayerState, marioSpawnType, sWarpDest.arg);
+        set_player_initial_action(gPlayerState, playerSpawnType, sWarpDest.arg);
 
         gPlayerState->interactObj = spawnNode->object;
         gPlayerState->usedObj = spawnNode->object;
@@ -413,7 +415,7 @@ void init_player_after_warp(void) {
     sWarpDest.type = WARP_TYPE_NOT_WARPING;
     sDelayedWarpOp = WARP_OP_NONE;
 
-    switch (marioSpawnType) {
+    switch (playerSpawnType) {
         case MARIO_SPAWN_PIPE:
             play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x10, 0x00, 0x00, 0x00);
             break;
@@ -496,19 +498,19 @@ void warp_level(void) {
 }
 
 void warp_credits(void) {
-    s32 marioAction = ACT_UNINITIALIZED;
+    s32 playerAction = ACT_UNINITIALIZED;
 
     switch (sWarpDest.nodeId) {
         case WARP_NODE_CREDITS_START:
-            marioAction = ACT_END_PEACH_CUTSCENE;
+            playerAction = ACT_END_PEACH_CUTSCENE;
             break;
 
         case WARP_NODE_CREDITS_NEXT:
-            marioAction = ACT_CREDITS_CUTSCENE;
+            playerAction = ACT_CREDITS_CUTSCENE;
             break;
 
         case WARP_NODE_CREDITS_END:
-            marioAction = ACT_END_WAVING_CUTSCENE;
+            playerAction = ACT_END_WAVING_CUTSCENE;
             break;
     }
 
@@ -516,17 +518,17 @@ void warp_credits(void) {
 
     load_area(sWarpDest.areaIdx);
 
-    vec3s_set(gPlayerSpawnInfos[0].startPos, gCurrCreditsEntry->marioPos[0],
-              gCurrCreditsEntry->marioPos[1], gCurrCreditsEntry->marioPos[2]);
+    vec3s_set(gPlayerSpawnInfos[0].startPos, gCurrCreditsEntry->playerPos[0],
+              gCurrCreditsEntry->playerPos[1], gCurrCreditsEntry->playerPos[2]);
 
-    vec3s_set(gPlayerSpawnInfos[0].startAngle, 0, 0x100 * gCurrCreditsEntry->marioAngle, 0);
+    vec3s_set(gPlayerSpawnInfos[0].startAngle, 0, 0x100 * gCurrCreditsEntry->playerAngle, 0);
 
     gPlayerSpawnInfos[0].areaIndex = sWarpDest.areaIdx;
 
     load_player_area();
     init_player();
 
-    set_player_action(gPlayerState, marioAction, 0);
+    set_player_action(gPlayerState, playerAction, 0);
 
     reset_camera(gCurrentArea->camera);
 
@@ -638,7 +640,7 @@ void initiate_warp(s16 destLevel, s16 destArea, s16 destWarpNode, s32 warpFlags)
 #define PAINTING_WARP_INDEX_END 0x2D   // Value less than Surface 0xFD
 
 /**
- * Check if Mario is above and close to a painting warp floor, and return the
+ * Check if Player is above and close to a painting warp floor, and return the
  * corresponding warp node.
  */
 struct WarpNode *get_painting_warp_node(void) {
@@ -656,7 +658,7 @@ struct WarpNode *get_painting_warp_node(void) {
 }
 
 /**
- * Check is Mario has entered a painting, and if so, initiate a warp.
+ * Check is Player has entered a painting, and if so, initiate a warp.
  */
 void initiate_painting_warp(void) {
     if (gCurrentArea->paintingWarpNodes != NULL && gPlayerState->floor != NULL) {
@@ -696,7 +698,7 @@ void initiate_painting_warp(void) {
 
 /**
  * If there is not already a delayed warp, schedule one. The source node is
- * based on the warp operation and sometimes Mario's used object.
+ * based on the warp operation and sometimes Player's used object.
  * Return the time left until the delayed warp is initiated.
  */
 s16 level_trigger_warp(struct PlayerState *m, s32 warpOp) {
@@ -1162,7 +1164,7 @@ s32 update_level(void) {
 
     switch (sCurrPlayMode) {
         case PLAY_MODE_NORMAL:
-            changeLevel = play_mode_normal();
+            changeLevel = play_mode_normal(); scroll_textures();
             break;
         case PLAY_MODE_PAUSED:
             changeLevel = play_mode_paused();
@@ -1219,7 +1221,11 @@ s32 init_level(void) {
     }
 #endif
 
-    gHudDisplay.flags = gCurrCreditsEntry == NULL ? HUD_DISPLAY_DEFAULT : HUD_DISPLAY_NONE;
+    if (gCurrCreditsEntry == NULL) {
+        gHudDisplay.flags = HUD_DISPLAY_DEFAULT;
+    } else {
+        gHudDisplay.flags = HUD_DISPLAY_NONE;
+    }
 
     sTimerRunning = FALSE;
 
@@ -1328,7 +1334,7 @@ s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
     init_player_from_save_file();
     disable_warp_checkpoint();
     save_file_move_cap_to_default_location();
-    select_mario_cam_mode();
+    select_player_cam_mode();
 
 #ifdef COMMAND_LINE_OPTIONS
     if (gCLIOpts.LevelNumOverride) {
@@ -1348,6 +1354,10 @@ s32 lvl_set_current_level(UNUSED s16 arg0, s32 levelNum) {
     sWarpCheckpointActive = FALSE;
     gCurrLevelNum = levelNum;
     gCurrCourseNum = gLevelToCourseNumTable[levelNum - 1];
+	if (gCurrLevelNum == LEVEL_SI) return 0;
+	if (gCurrLevelNum == LEVEL_CASTLE_COURTYARD) return 0;
+	if (gCurrLevelNum == LEVEL_BITDW) return 0;
+	if (gCurrLevelNum == LEVEL_CASTLE_GROUNDS) return 0;
 
     if (gCurrDemoInput != NULL || gCurrCreditsEntry != NULL || gCurrCourseNum == COURSE_NONE) {
         return 0;

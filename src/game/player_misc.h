@@ -6,7 +6,7 @@
 #include "macros.h"
 #include "types.h"
 
-extern struct GraphNodeObject gMirrorMario;
+extern struct GraphNodeObject gMirrorPlayer;
 extern struct PlayerBodyState gBodyStates[2];
 
 #ifdef GODDARD_MFACE

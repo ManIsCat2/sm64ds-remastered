@@ -406,7 +406,7 @@ void stub_debug_5(void) {
 }
 
 /*
- * If Mario's object exists, this function tries to print available object debug
+ * If Player's object exists, this function tries to print available object debug
  * information depending on the debug sys ID. Additional information (updated obj
  * count, floor misses, and an unknown wall counter) is also printed.
  */
@@ -472,7 +472,7 @@ void try_print_debug_player_level_info(void) {
  * debug controls with try_modify_debug_controls and setting
  * [5][7] (b7 in the string array) to 1 to enable debug spawn.
  */
-void try_do_mario_debug_object_spawn(void) {
+void try_do_player_debug_object_spawn(void) {
     UNUSED u8 filler[4];
 
     if (sDebugPage == DEBUG_PAGE_STAGEINFO && gDebugInfo[DEBUG_PAGE_ENEMYINFO][7] == 1) {

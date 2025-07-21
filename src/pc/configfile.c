@@ -62,7 +62,7 @@ ConfigWindow configWindow       = {
 #endif
 };
 
-unsigned int configFiltering = 0; // 0 = force nearest, 1 = linear
+unsigned int configFiltering    = 0;          // 0=force nearest, 1=linear
 unsigned int configMasterVolume = MAX_VOLUME; // 0 - MAX_VOLUME
 unsigned int configMusicVolume = MAX_VOLUME;
 unsigned int configSfxVolume = MAX_VOLUME;
@@ -93,10 +93,6 @@ unsigned int configKeyStickRight[MAX_BINDS] = { 0x0020,     VK_INVALID, VK_INVAL
 unsigned int configStickDeadzone = 16; // 16*DEADZONE_STEP=4960 (the original default deadzone)
 unsigned int configRumbleStrength = 50;
 
-#ifdef TOUCH_CONTROLS
-bool configAutohideTouch = false;
-#endif
-
 #ifdef EXTERNAL_DATA
 bool configPrecacheRes = true;
 #endif
@@ -108,66 +104,64 @@ bool configDiscordRPC = true;
 bool configSkipIntro = false;
 bool configHUD = true;
 bool configWallslide = true;
+bool configNerfs = true;
+unsigned int configDash = 2;
 bool configDive = true;
 bool configJHeight = true;
 bool configGlobalCapBlocks = false;
 
-unsigned int configDash = 2;
-
 static const struct ConfigOption options[] = {
 #ifndef TARGET_PORT_CONSOLE
-    {.name = "fullscreen",             .type = CONFIG_TYPE_BOOL, .boolValue = &configWindow.fullscreen},
-    {.name = "window_x",               .type = CONFIG_TYPE_UINT, .uintValue = &configWindow.x},
-    {.name = "window_y",               .type = CONFIG_TYPE_UINT, .uintValue = &configWindow.y},
-    {.name = "window_w",               .type = CONFIG_TYPE_UINT, .uintValue = &configWindow.w},
-    {.name = "window_h",               .type = CONFIG_TYPE_UINT, .uintValue = &configWindow.h},
-    {.name = "vsync",                  .type = CONFIG_TYPE_BOOL, .boolValue = &configWindow.vsync},
+    {.name = "fullscreen",           .type = CONFIG_TYPE_BOOL, .boolValue = &configWindow.fullscreen},
+    {.name = "window_x",             .type = CONFIG_TYPE_UINT, .uintValue = &configWindow.x},
+    {.name = "window_y",             .type = CONFIG_TYPE_UINT, .uintValue = &configWindow.y},
+    {.name = "window_w",             .type = CONFIG_TYPE_UINT, .uintValue = &configWindow.w},
+    {.name = "window_h",             .type = CONFIG_TYPE_UINT, .uintValue = &configWindow.h},
+    {.name = "vsync",                .type = CONFIG_TYPE_BOOL, .boolValue = &configWindow.vsync},
 #endif
-    {.name = "texture_filtering",      .type = CONFIG_TYPE_UINT, .uintValue = &configFiltering},
-    {.name = "master_volume",          .type = CONFIG_TYPE_UINT, .uintValue = &configMasterVolume},
-    {.name = "music_volume",           .type = CONFIG_TYPE_UINT, .uintValue = &configMusicVolume},
-    {.name = "sfx_volume",             .type = CONFIG_TYPE_UINT, .uintValue = &configSfxVolume},
-    {.name = "env_volume",             .type = CONFIG_TYPE_UINT, .uintValue = &configEnvVolume},
+    {.name = "texture_filtering",    .type = CONFIG_TYPE_UINT, .uintValue = &configFiltering},
+    {.name = "master_volume",        .type = CONFIG_TYPE_UINT, .uintValue = &configMasterVolume},
+    {.name = "music_volume",         .type = CONFIG_TYPE_UINT, .uintValue = &configMusicVolume},
+    {.name = "sfx_volume",           .type = CONFIG_TYPE_UINT, .uintValue = &configSfxVolume},
+    {.name = "env_volume",           .type = CONFIG_TYPE_UINT, .uintValue = &configEnvVolume},
 #ifndef TARGET_PORT_CONSOLE
-    {.name = "key_a",                  .type = CONFIG_TYPE_BIND, .uintValue = configKeyA},
-    {.name = "key_b",                  .type = CONFIG_TYPE_BIND, .uintValue = configKeyB},
-    {.name = "key_x",                  .type = CONFIG_TYPE_BIND, .uintValue = configKeyX},
-    {.name = "key_y",                  .type = CONFIG_TYPE_BIND, .uintValue = configKeyY},
-    {.name = "key_start",              .type = CONFIG_TYPE_BIND, .uintValue = configKeyStart},
-    {.name = "key_l",                  .type = CONFIG_TYPE_BIND, .uintValue = configKeyL},
-    {.name = "key_r",                  .type = CONFIG_TYPE_BIND, .uintValue = configKeyR},
-    {.name = "key_zl",                 .type = CONFIG_TYPE_BIND, .uintValue = configKeyZL},
-    {.name = "key_zr",                 .type = CONFIG_TYPE_BIND, .uintValue = configKeyZR},
-    {.name = "key_cup",                .type = CONFIG_TYPE_BIND, .uintValue = configKeyCUp},
-    {.name = "key_cdown",              .type = CONFIG_TYPE_BIND, .uintValue = configKeyCDown},
-    {.name = "key_cleft",              .type = CONFIG_TYPE_BIND, .uintValue = configKeyCLeft},
-    {.name = "key_cright",             .type = CONFIG_TYPE_BIND, .uintValue = configKeyCRight},
-    {.name = "key_dup",                .type = CONFIG_TYPE_BIND, .uintValue = configKeyDUp },
-    {.name = "key_ddown",              .type = CONFIG_TYPE_BIND, .uintValue = configKeyDDown },
-    {.name = "key_dleft",              .type = CONFIG_TYPE_BIND, .uintValue = configKeyDLeft },
-    {.name = "key_dright",             .type = CONFIG_TYPE_BIND, .uintValue = configKeyDRight },
-    {.name = "key_stickup",            .type = CONFIG_TYPE_BIND, .uintValue = configKeyStickUp},
-    {.name = "key_stickdown",          .type = CONFIG_TYPE_BIND, .uintValue = configKeyStickDown},
-    {.name = "key_stickleft",          .type = CONFIG_TYPE_BIND, .uintValue = configKeyStickLeft},
-    {.name = "key_stickright",         .type = CONFIG_TYPE_BIND, .uintValue = configKeyStickRight},
-    {.name = "stick_deadzone",         .type = CONFIG_TYPE_UINT, .uintValue = &configStickDeadzone},
-    {.name = "rumble_strength",        .type = CONFIG_TYPE_UINT, .uintValue = &configRumbleStrength},
+    {.name = "key_a",                .type = CONFIG_TYPE_BIND, .uintValue = configKeyA},
+    {.name = "key_b",                .type = CONFIG_TYPE_BIND, .uintValue = configKeyB},
+    {.name = "key_x",                .type = CONFIG_TYPE_BIND, .uintValue = configKeyX},
+    {.name = "key_y",                .type = CONFIG_TYPE_BIND, .uintValue = configKeyY},
+    {.name = "key_start",            .type = CONFIG_TYPE_BIND, .uintValue = configKeyStart},
+    {.name = "key_l",                .type = CONFIG_TYPE_BIND, .uintValue = configKeyL},
+    {.name = "key_r",                .type = CONFIG_TYPE_BIND, .uintValue = configKeyR},
+    {.name = "key_zl",               .type = CONFIG_TYPE_BIND, .uintValue = configKeyZL},
+    {.name = "key_zr",               .type = CONFIG_TYPE_BIND, .uintValue = configKeyZR},
+    {.name = "key_cup",              .type = CONFIG_TYPE_BIND, .uintValue = configKeyCUp},
+    {.name = "key_cdown",            .type = CONFIG_TYPE_BIND, .uintValue = configKeyCDown},
+    {.name = "key_cleft",            .type = CONFIG_TYPE_BIND, .uintValue = configKeyCLeft},
+    {.name = "key_cright",           .type = CONFIG_TYPE_BIND, .uintValue = configKeyCRight},
+    {.name = "key_dup",              .type = CONFIG_TYPE_BIND, .uintValue = configKeyDUp },
+    {.name = "key_ddown",            .type = CONFIG_TYPE_BIND, .uintValue = configKeyDDown },
+    {.name = "key_dleft",            .type = CONFIG_TYPE_BIND, .uintValue = configKeyDLeft },
+    {.name = "key_dright",           .type = CONFIG_TYPE_BIND, .uintValue = configKeyDRight },
+    {.name = "key_stickup",          .type = CONFIG_TYPE_BIND, .uintValue = configKeyStickUp},
+    {.name = "key_stickdown",        .type = CONFIG_TYPE_BIND, .uintValue = configKeyStickDown},
+    {.name = "key_stickleft",        .type = CONFIG_TYPE_BIND, .uintValue = configKeyStickLeft},
+    {.name = "key_stickright",       .type = CONFIG_TYPE_BIND, .uintValue = configKeyStickRight},
+    {.name = "stick_deadzone",       .type = CONFIG_TYPE_UINT, .uintValue = &configStickDeadzone},
+    {.name = "rumble_strength",      .type = CONFIG_TYPE_UINT, .uintValue = &configRumbleStrength},
 #endif
     #ifdef EXTERNAL_DATA
-    {.name = "precache",               .type = CONFIG_TYPE_BOOL, .boolValue = &configPrecacheRes},
+    {.name = "precache",             .type = CONFIG_TYPE_BOOL, .boolValue = &configPrecacheRes},
     #endif
     #ifdef DISCORDRPC
-    {.name = "discordrpc_enable",      .type = CONFIG_TYPE_BOOL, .boolValue = &configDiscordRPC},
+    {.name = "discordrpc_enable",    .type = CONFIG_TYPE_BOOL, .boolValue = &configDiscordRPC},
     #endif
-    {.name = "skip_intro",             .type = CONFIG_TYPE_BOOL, .boolValue = &configSkipIntro},
-    {.name = "wallslide",              .type = CONFIG_TYPE_BOOL, .boolValue = &configWallslide},
-    {.name = "y_to_dash",              .type = CONFIG_TYPE_UINT, .uintValue = &configDash},
-    {.name = "dive",                   .type = CONFIG_TYPE_BOOL, .boolValue = &configDive},
-    {.name = "ds_jump_height",         .type = CONFIG_TYPE_BOOL, .boolValue = &configJHeight},
-    {.name = "globalcapblocks",        .type = CONFIG_TYPE_BOOL, .boolValue = &configGlobalCapBlocks},
-#ifdef TOUCH_CONTROLS
-    {.name = "touch_autohide",       .type = CONFIG_TYPE_BOOL, .boolValue = &configAutohideTouch},
-#endif
+    {.name = "skip_intro",           .type = CONFIG_TYPE_BOOL, .boolValue = &configSkipIntro},
+    {.name = "wallslide",            .type = CONFIG_TYPE_BOOL, .boolValue = &configWallslide},
+    {.name = "y_to_dash",            .type = CONFIG_TYPE_BOOL, .boolValue = &configDash},
+    {.name = "dive",                 .type = CONFIG_TYPE_BOOL, .boolValue = &configDive},
+    {.name = "ds_jump_height",       .type = CONFIG_TYPE_BOOL, .boolValue = &configJHeight},
+    {.name = "ds_nerfs",             .type = CONFIG_TYPE_BOOL, .boolValue = &configNerfs},
+    {.name = "globalcapblocks",      .type = CONFIG_TYPE_BOOL, .boolValue = &configGlobalCapBlocks},
 };
 
 // Reads an entire line from a file (excluding the newline character) and returns an allocated string

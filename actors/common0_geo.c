@@ -27,6 +27,7 @@
 #include "metal_box/geo.inc.c"
 #include "cap_box_outline/geo.inc.c"
 #include "koopa_shell/geo.inc.c"
+
 #include "star_switch/geo.inc.c"
 #include "question_box/geo.inc.c"
 #include "power_flower/geo.inc.c"

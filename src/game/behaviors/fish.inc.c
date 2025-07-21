@@ -37,7 +37,7 @@ static void fish_spawner_act_spawn(void) {
             break;
     }
 
-    // Spawn and animate the schoolQuantity of fish if Mario enters render distance
+    // Spawn and animate the schoolQuantity of fish if Player enters render distance
     // or the stage is Secret Aquarium.
     // Fish moves randomly within a range of 700.0f.
 #ifndef NODRAWINGDISTANCE
@@ -57,7 +57,7 @@ static void fish_spawner_act_spawn(void) {
 
 /**
  * Sets the spawner to respawn fish if the stage is not Secret Aquarium and
- * Mario is more than 2000 units higher.
+ * Player is more than 2000 units higher.
  */
 static void fish_spawner_act_idle(void) {
 #ifndef NODRAWINGDISTANCE
@@ -132,7 +132,7 @@ static void fish_act_roam(void) {
 
     o->oFishGoalY = gPlayerObject->oPosY + o->oFishHeightOffset;
 
-    // Rotate the fish towards Mario.
+    // Rotate the fish towards Player.
     cur_obj_rotate_yaw_toward(o->oAngleToPlayer, 0x400);
 
     if (o->oPosY < o->oFishWaterLevel - 50.0f) {
@@ -153,14 +153,14 @@ static void fish_act_roam(void) {
         }
     }
 
-    // Flee from Mario if the fish gets too close.
+    // Flee from Player if the fish gets too close.
     if (o->oDistanceToPlayer < o->oFishRoamDistance + 150.0f) {
         o->oAction = FISH_ACT_FLEE;
     }
 }
 
 /**
- * Interactively maneuver fish in relation to its distance from other fish and Mario.
+ * Interactively maneuver fish in relation to its distance from other fish and Player.
  */
 static void fish_act_flee(void) {
     f32 fishY = o->oPosY - gPlayerObject->oPosY;
@@ -199,7 +199,7 @@ static void fish_act_flee(void) {
 
     o->oFishGoalY = gPlayerObject->oPosY + o->oFishHeightOffset;
 
-    // Rotate fish away from Mario.
+    // Rotate fish away from Player.
     cur_obj_rotate_yaw_toward(o->oAngleToPlayer + 0x8000, o->oFishYawVel);
 
     if (o->oPosY < o->oFishWaterLevel - 50.0f) {
@@ -221,7 +221,7 @@ static void fish_act_flee(void) {
         }
     }
 
-    // If distance to Mario is too great, then set fish to active.
+    // If distance to Player is too great, then set fish to active.
     if (o->oDistanceToPlayer > o->oFishActiveDistance + 500.0f) {
         o->oAction = FISH_ACT_ROAM;
     }

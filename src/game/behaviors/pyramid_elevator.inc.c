@@ -23,7 +23,7 @@ void bhv_pyramid_elevator_init(void) {
 void bhv_pyramid_elevator_loop(void) {
     switch (o->oAction) {
         /**
-         * Do not move until Mario stands on the elevator. When he does,
+         * Do not move until Player stands on the elevator. When he does,
          * transition to the starting state.
          */
         case PYRAMID_ELEVATOR_ACT_IDLE:

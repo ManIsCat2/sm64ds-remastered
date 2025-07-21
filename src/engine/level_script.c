@@ -300,7 +300,7 @@ static void free_for_goddard(void *ptr) {
 }
 #endif
 
-static void level_cmd_load_player_head(void) {
+static void level_cmd_load_mario_head(void) {
 #ifdef GODDARD_MFACE
 
 #ifdef USE_SYSTEM_MALLOC
@@ -318,7 +318,6 @@ static void level_cmd_load_player_head(void) {
         gdm_setup();
         gdm_maketestdl(CMD_GET(s16, 2));
     } else {
-        CN_DEBUG_PRINTF(("face anime memory overflow\n"));
     }
 #endif
 
@@ -712,7 +711,6 @@ static void level_cmd_set_transition(void) {
 }
 
 static void level_cmd_nop(void) {
-    CN_DEBUG_PRINTF(("BAD: seqBlankColor\n"));
     sCurrentCmd = CMD_NEXT;
 }
 
@@ -817,7 +815,7 @@ static void (*LevelScriptJumpTable[])(void) = {
     /*16*/ level_cmd_load_to_fixed_address,
     /*17*/ level_cmd_load_raw,
     /*18*/ level_cmd_load_mio0,
-    /*19*/ level_cmd_load_player_head,
+    /*19*/ level_cmd_load_mario_head,
     /*1A*/ level_cmd_load_mio0_texture,
     /*1B*/ level_cmd_init_level,
     /*1C*/ level_cmd_clear_level,
@@ -864,9 +862,6 @@ struct LevelCommand *level_script_execute(struct LevelCommand *cmd) {
     sCurrentCmd = cmd;
 
     while (sScriptStatus == SCRIPT_RUNNING) {
-        CN_DEBUG_PRINTF(("%08X: ", sCurrentCmd));
-        CN_DEBUG_PRINTF(("%02d\n", sCurrentCmd->type));
-
         LevelScriptJumpTable[sCurrentCmd->type]();
     }
 

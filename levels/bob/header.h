@@ -5,7 +5,7 @@
 
 // geo
 extern const GeoLayout bob_geo_000440[];
-extern const GeoLayout bob_geo_000458[];
+extern const GeoLayout bob_seesaw_platform[];
 extern const GeoLayout bob_geo_000470[];
 extern const GeoLayout bob_geo_000488[];
 
@@ -30,5 +30,11 @@ extern const Trajectory bob_seg7_trajectory_koopa[];
 
 // script
 extern const LevelScript level_bob_entry[];
+
+#include "levels/bob/level_model/geo_header.h"
+
+#include "levels/bob/collision/collision_header.h"
+
+#include "levels/bob/seesaw_platform/geo_header.h"
 
 #endif

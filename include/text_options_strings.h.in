@@ -11,13 +11,12 @@
 #define TEXT_OPT_VIDEO     _("DISPLAY")
 #define TEXT_OPT_AUDIO     _("SOUND")
 #define TEXT_OPT_SETTINGS  _("SETTINGS")
-#define TEXT_TOUCH_CONTROLS _("TOUCH CONTROLS")
 #define TEXT_OPT_DS_SETTINGS _("DS SETTINGS")
 
 // Markers
 
-#define TEXT_OPT_L_HIGHLIGHT _("▶")
-#define TEXT_OPT_R_HIGHLIGHT _("◀")
+#define TEXT_OPT_L_HIGHLIGHT _(">")
+#define TEXT_OPT_R_HIGHLIGHT _("<")
 #define TEXT_OPT_UNBOUND   _("NONE")
 #define TEXT_OPT_PRESSKEY  _("...")
 
@@ -31,13 +30,12 @@
 
 #define TEXT_OPT_VANILLA_CAM      _("VANILLA CAMERA")
 #define TEXT_OPT_LAKITU_PARALLEL  _("Parallel Lakitu Cam")
-#define TEXT_OPT_SR_MARIO_CAM     _("Star Road Cam")
+#define TEXT_OPT_SR_MARIO_CAM     _("Star Road Player Cam")
 #define TEXT_OPT_CAM_C_UP_SOUNDS  _("Camera Sound Effects")
 #define TEXT_OPT_CAM_PARALLEL_COL _("Parallel Cam Collision")
 
 #define TEXT_OPT_CAMSCHEME _("Control Scheme")
 #define TEXT_OPT_CAMANALOG _("Analogue Camera")
-#define TEXT_OPT_CAMLEGACY _("Legacy Camera")
 #define TEXT_OPT_CAMMOUSE  _("Mouse Camera")
 #define TEXT_OPT_CAMDEBUG  _("Debug Camera")
 #define TEXT_OPT_CAMSENSX  _("Camera Sensitivity")
@@ -72,6 +70,7 @@
 #define TEXT_OPT_DS_DIVE   _("DS Dive")
 #define TEXT_OPT_DS_BLOCK  _("Global Cap Blocks")
 #define TEXT_OPT_JHEIGHT   _("DS Jump Height")
+#define TEXT_OPT_NERF      _("DS Nerfs")
 #define TEXT_OPT_DS_SRUN   _("Y To Run")
 #define TEXT_OPT_DS_SWALK  _("Y To Walk")
 
@@ -98,7 +97,5 @@
 #define TEXT_BIND_RIGHT    _("Stick Right")
 #define TEXT_OPT_DEADZONE  _("Stick Deadzone")
 #define TEXT_OPT_RUMBLE    _("Rumble Strength")
-
-#define TEXT_TOUCH_AUTOHIDE _("Autohide Touch Controls")
 
 #endif // TEXT_OPTIONS_STRINGS_H

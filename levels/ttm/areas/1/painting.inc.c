@@ -554,7 +554,7 @@ struct Painting ttm_slide_painting = {
     /* id */ 0x0000,
     /* Image Count */ 0x02,
     /* Texture Type */ PAINTING_IMAGE,
-    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Mario's on */,
+    /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Player's on */,
     /* Ripple Status */ 0x00,
     /* Rotation */    0.0f,   90.0f,
     /* Position */ 3072.0f, 921.6f, -819.2f,
@@ -572,6 +572,6 @@ struct Painting ttm_slide_painting = {
     /* Ripple DList */ ttm_seg7_painting_dl_07012430,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
     /* Alpha */ 0xFF,
-    /* Mario Below */  0x00, 0x00, 0x00, /* Whether or not Mario is below the painting */
+    /* Player Below */  0x00, 0x00, 0x00, /* Whether or not Player is below the painting */
     /* Size */  460.8f,
 };

@@ -4,11 +4,11 @@
  * bhvPyramidPillarTouchDetector.
  *
  * bhvPyramidTop controls Shifting Sand Land's pyramid's top piece, which
- *      rotates and explodes when Mario stands on all four pillars.
+ *      rotates and explodes when Player stands on all four pillars.
  * bhvPyramidTopFragment controls the shards that the pyramid's top emits when
  *      it is spinning and exploding.
  * bhvPyramidPillarTouchDetector controls the intangible collision boxes that
- *      Mario touches when on top of each pillar.
+ *      Player touches when on top of each pillar.
  */
 
 /**
@@ -139,7 +139,7 @@ void bhv_pyramid_top_fragment_loop(void) {
 }
 
 /**
- * If Mario touches a pillar's touch detector, count it towards the pyramid
+ * If Player touches a pillar's touch detector, count it towards the pyramid
  * top's total count of touched detectors, and deactivate the detector.
  */
 void bhv_pyramid_pillar_touch_detector_loop(void) {

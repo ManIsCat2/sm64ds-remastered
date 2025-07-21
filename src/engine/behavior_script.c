@@ -893,7 +893,7 @@ void cur_obj_update(void) {
     }
 #endif
 
-    // Calculate the distance from the object to Mario.
+    // Calculate the distance from the object to Player.
     if (objFlags & OBJ_FLAG_COMPUTE_DIST_TO_MARIO) {
         gCurrentObject->oDistanceToPlayer = dist_between_objects(gCurrentObject, gPlayerObject);
         distanceFromPlayer = gCurrentObject->oDistanceToPlayer;
@@ -901,7 +901,7 @@ void cur_obj_update(void) {
         distanceFromPlayer = 0.0f;
     }
 
-    // Calculate the angle from the object to Mario.
+    // Calculate the angle from the object to Player.
     if (objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO) {
         gCurrentObject->oAngleToPlayer = obj_angle_to_object(gCurrentObject, gPlayerObject);
     }
@@ -984,7 +984,7 @@ void cur_obj_update(void) {
 
     // Handle visibility of object
     if (gCurrentObject->oRoom != -1) {
-        // If the object is in a room, only show it when Mario is in the room.
+        // If the object is in a room, only show it when Player is in the room.
 #ifndef NODRAWINGDISTANCE
         if ((objFlags & OBJ_FLAG_ACTIVE_FROM_AFAR)|| distanceFromPlayer < gCurrentObject->oDrawingDistance)
 #endif

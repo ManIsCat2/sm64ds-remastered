@@ -5,7 +5,6 @@
 
 #include "types.h"
 #include "config.h"
-
 #include "extras/redone/platform_displacement.inc.h"
 
 #endif // PLATFORM_DISPLACEMENT_H

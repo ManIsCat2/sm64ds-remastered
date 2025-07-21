@@ -1,7 +1,7 @@
 // 0x07014F90 - 0x07015122
 const MacroObject bitfs_seg7_macro_objs[] = {
-    MACRO_OBJECT               (/*preset*/ macro_yellow_coin_1,               /*yaw*/   0, /*pos*/ -1990, -2780,  -590),
-    MACRO_OBJECT               (/*preset*/ macro_yellow_coin_1,               /*yaw*/   0, /*pos*/ -2860, -2780,  -580),
+    MACRO_OBJECT               (/*preset*/ macro_yellow_coin,               /*yaw*/   0, /*pos*/ -1990, -2780,  -590),
+    MACRO_OBJECT               (/*preset*/ macro_yellow_coin,               /*yaw*/   0, /*pos*/ -2860, -2780,  -580),
     MACRO_OBJECT               (/*preset*/ macro_coin_line_horizontal_flying, /*yaw*/   0, /*pos*/  1130, -3000,   400),
     MACRO_OBJECT               (/*preset*/ macro_1up,                         /*yaw*/   0, /*pos*/ -4320, -2640,  -500),
     MACRO_OBJECT               (/*preset*/ macro_small_bully,                 /*yaw*/   0, /*pos*/  2340, -2764,   580),

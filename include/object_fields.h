@@ -146,7 +146,7 @@
 #define /*0x10C*/ oMacroUnk10C OBJECT_FIELD_F32(0x21)
 #define /*0x110*/ oMacroUnk110 OBJECT_FIELD_F32(0x22)
 
-/* Mario */
+/* Player */
 #define /*0x0F4*/ oPlayerParticleFlags    OBJECT_FIELD_S32(0x1B)
 #define /*0x108*/ oPlayerPoleUnk108       OBJECT_FIELD_S32(0x20)
 #define /*0x108*/ oPlayerReadingSignDYaw  OBJECT_FIELD_S32(0x20)
@@ -331,7 +331,7 @@
 #define /*0x0FC*/ oBullyPrevY                     OBJECT_FIELD_F32(0x1D)
 #define /*0x100*/ oBullyPrevZ                     OBJECT_FIELD_F32(0x1E)
 #define /*0x104*/ oBullyKBTimerAndMinionKOCounter OBJECT_FIELD_S32(0x1F)
-#define /*0x108*/ oBullyMarioCollisionAngle       OBJECT_FIELD_S32(0x20)
+#define /*0x108*/ oBullyPlayerCollisionAngle       OBJECT_FIELD_S32(0x20)
 
 /* Butterfly */
 #define /*0x0F4*/ oButterflyYPhase OBJECT_FIELD_S32(0x1B)
@@ -570,7 +570,7 @@
 
 /* Hoot */
 #define /*0x0F4*/ oHootAvailability     OBJECT_FIELD_S32(0x1B)
-#define /*0x110*/ oHootMarioReleaseTime OBJECT_FIELD_S32(0x22)
+#define /*0x110*/ oHootPlayerReleaseTime OBJECT_FIELD_S32(0x22)
 
 /* Horizontal Movement */
 #define /*0x0F4*/ oHorizontalMovementUnkF4  OBJECT_FIELD_S32(0x1B)
@@ -584,12 +584,12 @@
 #define /*0x0F8*/ oKickableBoardF8 OBJECT_FIELD_S32(0x1C)
 
  /* King Bob-omb */
-#define /*0x088*/ oKingBobombUnk88    OBJECT_FIELD_S32(0x00)
-#define /*0x0F8*/ oKingBobombUnkF8    OBJECT_FIELD_S32(0x1C)
-#define /*0x0FC*/ oKingBobombUnkFC    OBJECT_FIELD_S32(0x1D)
-#define /*0x100*/ oKingBobombUnk100   OBJECT_FIELD_S32(0x1E)
-#define /*0x104*/ oKingBobombHitCount OBJECT_FIELD_S32(0x1F)
-#define /*0x108*/ oKingBobombUnk108   OBJECT_FIELD_S32(0x20)
+#define /*0x088*/ oKingBobombUnk88  OBJECT_FIELD_S32(0x00)
+#define /*0x0F8*/ oKingBobombUnkF8  OBJECT_FIELD_S32(0x1C)
+#define /*0x0FC*/ oKingBobombUnkFC  OBJECT_FIELD_S32(0x1D)
+#define /*0x100*/ oKingBobombUnk100 OBJECT_FIELD_S32(0x1E)
+#define /*0x104*/ oKingBobombUnk104 OBJECT_FIELD_S32(0x1F)
+#define /*0x108*/ oKingBobombUnk108 OBJECT_FIELD_S32(0x20)
 #if KING_BOBOMB_BLINK_EYES
 #define /*0x108*/ oKingBobombBlinkTimer OBJECT_FIELD_S32(0x21)
 #endif
@@ -664,7 +664,6 @@
 #define /*0x0FC*/ oMenuButtonOrigPosX    OBJECT_FIELD_F32(0x1D)
 #define /*0x100*/ oMenuButtonOrigPosY    OBJECT_FIELD_F32(0x1E)
 #define /*0x104*/ oMenuButtonOrigPosZ    OBJECT_FIELD_F32(0x1F)
-#define /*0x108*/ oMenuButtonScale       OBJECT_FIELD_F32(0x20)
 #define /*0x10C*/ oMenuButtonActionPhase OBJECT_FIELD_S32(0x21)
 
 /* Manta Ray */
@@ -674,11 +673,14 @@
 /* Merry-Go-Round */
 #define /*0x088*/ oMerryGoRoundStopped         OBJECT_FIELD_S32(0x00)
 #define /*0x0F8*/ oMerryGoRoundMusicShouldPlay OBJECT_FIELD_S32(0x1C)
-#define /*0x0FC*/ oMerryGoRoundMarioIsOutside  OBJECT_FIELD_S32(0x1D)
+#define /*0x0FC*/ oMerryGoRoundPlayerIsOutside  OBJECT_FIELD_S32(0x1D)
 
 /* Merry-Go-Round Boo Manager */
 #define /*0x088*/ oMerryGoRoundBooManagerNumBoosKilled  OBJECT_FIELD_S32(0x00)
 #define /*0x0FC*/ oMerryGoRoundBooManagerNumBoosSpawned OBJECT_FIELD_S32(0x1D)
+
+/* Mips Castle*/
+#define /*0x0F4*/ oMipsKeyStatus          OBJECT_FIELD_S32(0x1B)
 
 /* Mips */
 #define /*0x0F4*/ oMipsStarStatus         OBJECT_FIELD_S32(0x1B)
@@ -735,9 +737,9 @@
 // 0x1D-0x21 reserved for pathing
 #define /*0x110*/ oRacingPenguinWeightedNewTargetSpeed OBJECT_FIELD_F32(0x22)
 #define /*0x1AC*/ oRacingPenguinFinalTextbox           OBJECT_FIELD_S16(0x49, 0)
-#define /*0x1AE*/ oRacingPenguinMarioWon               OBJECT_FIELD_S16(0x49, 1)
+#define /*0x1AE*/ oRacingPenguinPlayerWon               OBJECT_FIELD_S16(0x49, 1)
 #define /*0x1B0*/ oRacingPenguinReachedBottom          OBJECT_FIELD_S16(0x4A, 0)
-#define /*0x1B2*/ oRacingPenguinMarioCheated           OBJECT_FIELD_S16(0x4A, 1)
+#define /*0x1B2*/ oRacingPenguinPlayerCheated           OBJECT_FIELD_S16(0x4A, 1)
 
 /* Small Penguin */
 #define /*0x088*/ oSmallPenguinUnk88  OBJECT_FIELD_S32(0x00)
@@ -927,7 +929,7 @@
 #define /*0x110*/ oUnlockDoorStarYawVel OBJECT_FIELD_S32(0x22)
 
 /* Celebration Star */
-#define /*0x0F4*/ oCelebStarIsBowserKey        OBJECT_FIELD_S32(0x1B)
+#define /*0x0F4*/ oCelebStarUnkF4              OBJECT_FIELD_S32(0x1B)
 #define /*0x108*/ oCelebStarDiameterOfRotation OBJECT_FIELD_S32(0x20)
 
 /* Star Selector */
@@ -1145,10 +1147,10 @@
 #define /*0x0F4*/ oLLLWoodPieceOscillationTimer OBJECT_FIELD_S32(0x1B)
 
 /* Wooden Post */
-#define /*0x0F4*/ oWoodenPostTotalMarioAngle  OBJECT_FIELD_S32(0x1B)
+#define /*0x0F4*/ oWoodenPostTotalPlayerAngle  OBJECT_FIELD_S32(0x1B)
 #define /*0x0F8*/ oWoodenPostPrevAngleToPlayer OBJECT_FIELD_S32(0x1C)
 #define /*0x0FC*/ oWoodenPostSpeedY           OBJECT_FIELD_F32(0x1D)
-#define /*0x100*/ oWoodenPostMarioPounding    OBJECT_FIELD_S32(0x1E)
+#define /*0x100*/ oWoodenPostPlayerPounding    OBJECT_FIELD_S32(0x1E)
 #define /*0x104*/ oWoodenPostOffsetY          OBJECT_FIELD_F32(0x1F)
 
 #endif // OBJECT_FIELDS_H
