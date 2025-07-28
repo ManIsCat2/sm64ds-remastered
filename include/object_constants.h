@@ -155,9 +155,10 @@
 
     /* oAction */
     #define BOBOMB_ACT_PATROL            0
-    #define BOBOMB_ACT_LAUNCHED          1
-    #define BOBOMB_ACT_CHASE_MARIO       2
-    #define BOBOMB_ACT_EXPLODE           3
+    #define BOBOMB_ACT_LEAP              1
+    #define BOBOMB_ACT_LAUNCHED          2
+    #define BOBOMB_ACT_CHASE_MARIO       3
+    #define BOBOMB_ACT_EXPLODE           4
     #define BOBOMB_ACT_LAVA_DEATH        100
     #define BOBOMB_ACT_DEATH_PLANE_DEATH 101
 

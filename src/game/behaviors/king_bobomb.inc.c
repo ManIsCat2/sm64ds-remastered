@@ -439,8 +439,6 @@ void bhv_king_bobomb_loop(void) {
         bobombInteracted = 1;
     }
 
-    print_text_fmt_int(210, 120, "Current Act - %d", o->oAction);
-
     switch (o->oHeldState) {
         case HELD_FREE:
             king_bobomb_move();
