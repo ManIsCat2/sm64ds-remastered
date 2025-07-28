@@ -136,7 +136,7 @@ const LevelScript level_wf_entry[] = {
     END_AREA(),
 
     FREE_LEVEL_POOL(),
-    MARIO_POS(1, 90, 3174, 949, 4506),
+    PLAYER_POS(1, 90, 3174, 949, 4506),
     CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
     CLEAR_LEVEL(),

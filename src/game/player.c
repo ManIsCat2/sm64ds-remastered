@@ -1524,7 +1524,7 @@ void update_player_inputs(struct PlayerState *m) {
 print_text_fmt_int(210, 92, "1 %d", m->playerObj->oPosX);
 print_text_fmt_int(210, 72, "2 %d", m->playerObj->oPosY);
 print_text_fmt_int(210, 52, "3 %d", m->playerObj->oPosZ);
-print_text_fmt_int(210, 120, "Jump Sound - %d", yahOrWah);
+//print_text_fmt_int(210, 120, "Jump Sound - %d", yahOrWah);
 #endif
 #ifdef CHEATS_ACTIONS
     cheats_player_inputs(m);

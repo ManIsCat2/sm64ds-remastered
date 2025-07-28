@@ -74,7 +74,7 @@ const LevelScript level_castle_courtyard_entry[] = {
 		OBJECT(MODEL_COURTYARD_SPIKY_TREE, 2438, -1263, -2326, 0, 0, 0, 0x00000000, bhvTree),
 		OBJECT(MODEL_COURTYARD_SPIKY_TREE, 2046, -1263, -3037, 0, 0, 0, 0x00000000, bhvTree),
 		OBJECT(MODEL_NONE, -1229, -788, 6963, 0, 90, 0, 0x000A0000, bhvSpinAirborneWarp),
-		MARIO_POS(0x01, 90, -1229, -788, 6963),
+		PLAYER_POS(0x01, 90, -1229, -788, 6963),
 		TERRAIN(castle_courtyard_area_1_collision),
 		MACRO_OBJECTS(castle_courtyard_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_SOUND_PLAYER),
@@ -82,7 +82,7 @@ const LevelScript level_castle_courtyard_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 90, -1229, -788, 6963),
+	PLAYER_POS(0x01, 90, -1229, -788, 6963),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

@@ -155,7 +155,7 @@ const LevelScript level_thi_entry[] = {
     END_AREA(),
 
     FREE_LEVEL_POOL(),
-    MARIO_POS(/*area*/ 1, /*yaw*/ 149, /*pos*/ -7372, -2969, 7373),
+    PLAYER_POS(/*area*/ 1, /*yaw*/ 149, /*pos*/ -7372, -2969, 7373),
     CALL(/*arg*/ 0, /*func*/ lvl_init_or_update),
     CALL_LOOP(/*arg*/ 1, /*func*/ lvl_init_or_update),
     CLEAR_LEVEL(),

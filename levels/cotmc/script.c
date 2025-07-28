@@ -45,7 +45,7 @@ const LevelScript level_cotmc_entry[] = {
 		OBJECT(MODEL_STAR, 0, 2177, -6144, 0, 0, 0, BPARAM1(STAR_INDEX_ACT_2), bhvStar),
 		OBJECT(MODEL_NONE, -4301, -618, -51, 0, 90, 0, BPARAM2(WARP_NODE_0A), bhvAirborneWarp),
 		OBJECT(MODEL_NONE, -31, -1427, -6952, 0, 0, 0, 0x00000000, bhvHiddenRedCoinStar),
-		MARIO_POS(0x01, 90, -4301, -618, -51),
+		PLAYER_POS(0x01, 90, -4301, -618, -51),
 		OBJECT(MODEL_NONE, -1, -1048, -7454, 0, 0, 0, 0x00000000, bhvWaterfallSoundLoop),
 		OBJECT(MODEL_NONE, -1, -1494, 3686, 0, 0, 0, 0x00000000, bhvWaterfallSoundLoop),
 		TERRAIN(cotmc_area_1_collision),
@@ -56,7 +56,7 @@ const LevelScript level_cotmc_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 90, -4301, -618, -51),
+	PLAYER_POS(0x01, 90, -4301, -618, -51),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

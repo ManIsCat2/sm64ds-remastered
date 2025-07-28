@@ -44,7 +44,6 @@ const LevelScript level_castle_grounds_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_FLAG, castle_grounds_geo_000660),
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_CANNON_GRILL, castle_grounds_geo_000724),
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_KEY_DOOR, key_door_geo),
-	LOAD_MODEL_FROM_GEO(MODEL_WHOMP, whomp_geo),
 
 	AREA(1, castle_grounds_area_1),
 		WARP_NODE(WARP_NODE_DEATH, LEVEL_CASTLE_GROUNDS, 1, WARP_NODE_03, WARP_NO_CHECKPOINT),
@@ -107,8 +106,7 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(MODEL_NONE, -3850, -2277, -3430, 0, 0, 0, BPARAM2(WARP_NODE_07), bhvSwimmingWarp),
 		OBJECT(MODEL_NONE, -3379, -1812, 24, 0, 0, 0, BPARAM1(60) | BPARAM2(WARP_NODE_05), bhvWarp),
 		OBJECT(MODEL_NONE, -1229, -788, 6963, 0, 180, 0, 0x000A0000, bhvSpinAirborneWarp),
-		OBJECT(MODEL_WHOMP, -1229, -788, 6963, 0, 180, 0, 0, bhvSmallWhomp),
-		MARIO_POS(0x01, -90, -1229, -788, 6963),
+		PLAYER_POS(0x01, -90, -1229, -788, 6963),
 		TERRAIN(castle_grounds_area_1_collision),
 		MACRO_OBJECTS(castle_grounds_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_SOUND_PLAYER),
@@ -116,7 +114,7 @@ const LevelScript level_castle_grounds_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 180, -1229, -788, 6963),
+	PLAYER_POS(0x01, 180, -1229, -788, 6963),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),
