@@ -1,5 +1,7 @@
 // bobomb.inc.c
 
+extern int bobombInteracted;
+
 static struct ObjectHitbox sBobombHitbox = {
     /* interactType:      */ INTERACT_GRABBABLE,
     /* downOffset:        */ 0,

@@ -1,5 +1,11 @@
 // king_bobomb.inc.c
 
+#include "behavior_data.h"
+#include "sm64.h"
+#include "object_fields.h"
+#include "object_constants.h"
+#include "game/object_list_processor.h"
+
 int bobombInteracted = 0; // Global flag to track if King Bobomb has been interacted with by a bobomb
 
 // Copy of geo_update_projectile_pos_from_parent
@@ -435,8 +441,23 @@ void bhv_king_bobomb_loop(void) {
 
     o->oInteractionSubtype |= INT_SUBTYPE_GRABS_MARIO;
 
-    if ((gPlayer1Controller->buttonPressed & X_BUTTON) && (o->oBhvParams2ndByte == BOBOMB_KING_BP_TYPE_1)) {
-        bobombInteracted = 1;
+    // Set bobombInteracted = 1 if a Bob-omb touches King Bob-omb
+    s32 i;
+    struct Object *obj;
+    for (i = 0; i < NUM_OBJ_LISTS; i++) {
+        for (obj = (struct Object *)gObjectLists[i].next; obj != (struct Object *)&gObjectLists[i]; obj = (struct Object *)obj->header.next) {
+            if (obj->behavior == segmented_to_virtual(bhvBobomb) && obj != o) {
+                f32 dx = obj->oPosX - o->oPosX;
+                f32 dy = obj->oPosY - o->oPosY;
+                f32 dz = obj->oPosZ - o->oPosZ;
+                f32 dist = dx*dx + dy*dy + dz*dz;
+                if (dist < 175.0f * 175.0f) {
+                    bobombInteracted = 1;
+                    obj->oAction = BOBOMB_ACT_EXPLODE;
+                    break;
+                }
+            }
+        }
     }
 
     switch (o->oHeldState) {
