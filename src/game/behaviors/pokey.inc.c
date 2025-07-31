@@ -32,6 +32,7 @@ static u8 sPokeyBodyPartAttackHandlers[] = {
     /* ATTACK_GROUND_POUND_OR_TWIRL: */ ATTACK_HANDLER_SQUISHED,
     /* ATTACK_FAST_ATTACK:           */ ATTACK_HANDLER_KNOCKBACK,
     /* ATTACK_FROM_BELOW:            */ ATTACK_HANDLER_KNOCKBACK,
+    /* ATTACK_LICK:                  */ ATTACK_HANDLER_KNOCKBACK,
 };
 
 /**

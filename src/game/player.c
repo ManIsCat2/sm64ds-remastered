@@ -45,7 +45,7 @@
 u32 unused80339F10;
 u8 unused80339F1C[20];
 
-int curChar = 1;
+int curChar = 0;
 
 #define YOSHI   0
 #define MARIO   1
@@ -1395,7 +1395,7 @@ void update_player_button_inputs(struct PlayerState *m) {
 
     if (m->controller->buttonPressed & L_TRIG) {
         if (curChar > 2) {
-            curChar = 0;
+            curChar = -1;
         }
         curChar = curChar + 1;
     }

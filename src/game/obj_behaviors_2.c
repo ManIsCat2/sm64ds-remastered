@@ -689,7 +689,11 @@ static void obj_set_knockback_action(s32 attackType) {
             o->oForwardVel = 20.0f;
             o->oVelY = 50.0f;
             break;
-
+        case ATTACK_LICK:
+            o->oAction = OBJ_ACT_HORIZONTAL_KNOCKBACK;
+            o->oForwardVel = -50.0f;
+            o->oVelY = 30.0f;
+            break;
         default:
             o->oAction = OBJ_ACT_HORIZONTAL_KNOCKBACK;
             o->oForwardVel = 50.0f;

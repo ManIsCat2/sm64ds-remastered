@@ -42,7 +42,7 @@ static struct GoombaProperties sGoombaProperties[] = {
 /**
  * Attack handlers for goombas.
  */
-static u8 sGoombaAttackHandlers[][6] = {
+static u8 sGoombaAttackHandlers[][7] = {
     // regular and tiny
     {
         /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_KNOCKBACK,
@@ -51,6 +51,7 @@ static u8 sGoombaAttackHandlers[][6] = {
         /* ATTACK_GROUND_POUND_OR_TWIRL: */ ATTACK_HANDLER_SQUISHED,
         /* ATTACK_FAST_ATTACK:           */ ATTACK_HANDLER_KNOCKBACK,
         /* ATTACK_FROM_BELOW:            */ ATTACK_HANDLER_KNOCKBACK,
+        /* ATTACK_LICK:                  */ ATTACK_HANDLER_KNOCKBACK,
     },
     // huge
     {
@@ -60,6 +61,7 @@ static u8 sGoombaAttackHandlers[][6] = {
         /* ATTACK_GROUND_POUND_OR_TWIRL: */ ATTACK_HANDLER_SQUISHED_WITH_BLUE_COIN,
         /* ATTACK_FAST_ATTACK:           */ ATTACK_HANDLER_SPECIAL_HUGE_GOOMBA_WEAKLY_ATTACKED,
         /* ATTACK_FROM_BELOW:            */ ATTACK_HANDLER_SPECIAL_HUGE_GOOMBA_WEAKLY_ATTACKED,
+        /* ATTACK_LICK:                  */ ATTACK_HANDLER_SPECIAL_HUGE_GOOMBA_WEAKLY_ATTACKED, 
     },
 };
 

@@ -31,6 +31,7 @@ static u8 sSpinyWalkAttackHandlers[] = {
     /* ATTACK_GROUND_POUND_OR_TWIRL: */ ATTACK_HANDLER_NOP,
     /* ATTACK_FAST_ATTACK:           */ ATTACK_HANDLER_KNOCKBACK,
     /* ATTACK_FROM_BELOW:            */ ATTACK_HANDLER_KNOCKBACK,
+    /* ATTACK_LICK:                  */ ATTACK_HANDLER_KNOCKBACK,
 };
 
 /**

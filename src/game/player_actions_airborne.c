@@ -166,7 +166,7 @@ s32 check_fall_damage(struct PlayerState *m, u32 hardFallAction) {
 
 s32 check_kick_or_dive_in_air(struct PlayerState *m) {
     float velocityThreshhold = 28.0f;
-    if (m->input & INPUT_B_PRESSED) {
+    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
         if (configDive) {
             if (m->forwardVel >= 28.0f) {
                 m->vel[1] = 30.0f;
@@ -176,9 +176,12 @@ s32 check_kick_or_dive_in_air(struct PlayerState *m) {
             else if (m->forwardVel < 28.0f) {
                 return set_player_action(m, ACT_JUMP_KICK, 0);
             }
-        }
-        else if (!configDive) {
+        } else if (!configDive) {
             return set_player_action(m, m->forwardVel > velocityThreshhold ? ACT_DIVE : ACT_JUMP_KICK, 0);
+        }
+    } else if ((m->input & INPUT_B_PRESSED) && (curChar == 0)) {
+        if (m->forwardVel <= 10.0f) {
+            return set_player_action(m, ACT_YOSHI_LICK, 0);
         }
     }
     return FALSE;
@@ -662,7 +665,7 @@ s32 act_triple_jump(struct PlayerState *m) {
         return set_player_action(m, ACT_SPECIAL_TRIPLE_JUMP, 0);
     }
 
-    if (m->input & INPUT_B_PRESSED) {
+    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
         return set_player_action(m, ACT_DIVE, 0);
     }
 
@@ -721,7 +724,7 @@ s32 act_backflip(struct PlayerState *m) {
 s32 act_freefall(struct PlayerState *m) {
     s32 animation = MARIO_ANIM_GENERAL_FALL;
 
-    if (m->input & INPUT_B_PRESSED) {
+    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
         return set_player_action(m, ACT_DIVE, 0);
     }
 
@@ -796,7 +799,7 @@ s32 act_hold_freefall(struct PlayerState *m) {
 // add missing += 0x8000 angle changes on these first 2 checks
 
 s32 act_side_flip(struct PlayerState *m) {
-    if (m->input & INPUT_B_PRESSED) {
+    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
         m->playerObj->header.gfx.angle[1] += 0x8000;
         return set_player_action(m, ACT_DIVE, 0);
     }
@@ -823,7 +826,7 @@ s32 act_side_flip(struct PlayerState *m) {
 s32 act_wall_kick_air(struct PlayerState *m) {
     s32 animFrame;
 
-    if (m->input & INPUT_B_PRESSED) {
+    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
         return set_player_action(m, ACT_DIVE, 0);
     }
 
@@ -1099,7 +1102,7 @@ s32 act_hold_water_jump(struct PlayerState *m) {
 }
 
 s32 act_steep_jump(struct PlayerState *m) {
-    if (m->input & INPUT_B_PRESSED) {
+    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
         return set_player_action(m, ACT_DIVE, 0);
     }
 
@@ -2091,7 +2094,7 @@ s32 act_flying_triple_jump(struct PlayerState *m) {
         if (m->area->camera->mode == CAMERA_MODE_BEHIND_MARIO) {
             set_camera_mode(m->area->camera, m->area->camera->defMode, 1);
         }
-        if (m->input & INPUT_B_PRESSED) {
+        if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
             return set_player_action(m, ACT_DIVE, 0);
         } else {
             return set_player_action(m, ACT_GROUND_POUND, 0);
@@ -2201,7 +2204,7 @@ s32 act_vertical_wind(struct PlayerState *m) {
 }
 
 s32 act_special_triple_jump(struct PlayerState *m) {
-    if (m->input & INPUT_B_PRESSED) {
+    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
         return set_player_action(m, ACT_DIVE, 0);
     }
 
