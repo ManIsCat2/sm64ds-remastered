@@ -180,9 +180,7 @@ s32 check_kick_or_dive_in_air(struct PlayerState *m) {
             return set_player_action(m, m->forwardVel > velocityThreshhold ? ACT_DIVE : ACT_JUMP_KICK, 0);
         }
     } else if ((m->input & INPUT_B_PRESSED) && (curChar == 0)) {
-        if (m->forwardVel <= 10.0f) {
-            return set_player_action(m, ACT_YOSHI_LICK, 0);
-        }
+        return set_player_action(m, ACT_YOSHI_LICK, 0);
     }
     return FALSE;
 }
@@ -639,6 +637,10 @@ s32 act_double_jump(struct PlayerState *m) {
         return set_player_action(m, ACT_GROUND_POUND, 0);
     }
 
+    if ((m->input & INPUT_B_PRESSED) && (curChar == 0)) {
+        return set_player_action(m, ACT_YOSHI_LICK, 0);
+    }
+
     if (configJHeight) {
         m->vel[1] += 0.4f;
     }
@@ -667,6 +669,8 @@ s32 act_triple_jump(struct PlayerState *m) {
 
     if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
         return set_player_action(m, ACT_DIVE, 0);
+    } else if ((m->input & INPUT_B_PRESSED) && (curChar == 0)) {
+        return set_player_action(m, ACT_YOSHI_LICK, 0);
     }
 
     if (m->input & INPUT_Z_PRESSED) {
@@ -845,6 +849,10 @@ s32 act_long_jump(struct PlayerState *m) {
         animation = MARIO_ANIM_FAST_LONGJUMP;
     } else {
         animation = MARIO_ANIM_SLOW_LONGJUMP;
+    }
+
+    if ((m->input & INPUT_B_PRESSED) && (curChar == 0)) {
+        return set_player_action(m, ACT_YOSHI_LICK, 0);
     }
 
     play_player_sound(m, SOUND_ACTION_TERRAIN_JUMP, SOUND_MARIO_YAHOO);

@@ -159,7 +159,7 @@ s32 yoshi_update_lick_sequence(struct PlayerState *m) {
             play_sound(SOUND_MARIO_PUNCH_YAH, m->playerObj->header.gfx.cameraToObject);
             // fallthrough
         case 1:
-            set_player_animation(m, MARIO_ANIM_FIRST_PUNCH);
+            set_player_animation(m, MARIO_ANIM_START_CROUCHING);
             if (is_anim_past_end(m)) {
                 m->actionArg = 2;
             } else {
@@ -180,7 +180,7 @@ s32 yoshi_update_lick_sequence(struct PlayerState *m) {
             break;
 
         case 2:
-            set_player_animation(m, MARIO_ANIM_FIRST_PUNCH_FAST);
+            set_player_animation(m, MARIO_ANIM_START_CROUCHING);
 
             if (m->playerObj->header.gfx.animInfo.animFrame <= 0) {
                 m->flags |= YOSHI_LICKING;
@@ -204,7 +204,7 @@ s32 act_punching(struct PlayerState *m) {
         return check_common_action_exits(m);
     }
 
-    if (m->actionState == 0 && (m->input & INPUT_A_DOWN)) {
+    if ((m->actionState == 0 && (m->input & INPUT_A_DOWN)) && curChar != 0) {
         return set_player_action(m, ACT_JUMP_KICK, 0);
     }
 

@@ -958,7 +958,7 @@ s32 act_move_punching(struct PlayerState *m) {
         return set_player_action(m, ACT_BEGIN_SLIDING, 0);
     }
 
-    if (m->actionState == 0 && (m->input & INPUT_A_DOWN)) {
+    if ((m->actionState == 0 && (m->input & INPUT_A_DOWN)) && (curChar != 0)) {
         return set_player_action(m, ACT_JUMP_KICK, 0);
     }
 
