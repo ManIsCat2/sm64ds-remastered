@@ -12,6 +12,9 @@
 /// Restores ukiki blinking eyes.
 #define UKIKI_BLINK_EYES (0 || QOL_FEATURES)
 
+/// Restores King Bob-omb blinking eyes by creating display lists for it.
+#define KING_BOBOMB_BLINK_EYES (0 || QOL_FEATURES)
+
 /// Restores unused sad eyes for the penguin mother when its baby is lost.
 #define TUXIES_MOTHER_SAD_EYES (0 || QOL_FEATURES)
 

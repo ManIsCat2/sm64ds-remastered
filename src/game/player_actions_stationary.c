@@ -48,10 +48,8 @@ s32 check_common_idle_cancels(struct PlayerState *m) {
         return set_player_action(m, ACT_WALKING, 0);
     }
 
-    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
+    if (m->input & INPUT_B_PRESSED) {
         return set_player_action(m, ACT_PUNCHING, 0);
-    } else if ((m->input & INPUT_B_PRESSED) && (curChar == 0)) {
-        return set_player_action(m, ACT_YOSHI_LICK, 0);
     }
 
     if (m->input & INPUT_Z_DOWN) {
@@ -470,10 +468,8 @@ s32 act_standing_against_wall(struct PlayerState *m) {
         return set_player_action(m, ACT_FIRST_PERSON, 0);
     }
 
-    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
+    if (m->input & INPUT_B_PRESSED) {
         return set_player_action(m, ACT_PUNCHING, 0);
-    } else if ((m->input & INPUT_B_PRESSED) && (curChar == 0)) {
-        return set_player_action(m, ACT_YOSHI_LICK, 0);
     }
 
     set_player_animation(m, MARIO_ANIM_STAND_AGAINST_WALL);
@@ -529,10 +525,8 @@ s32 act_crouching(struct PlayerState *m) {
         return set_player_action(m, ACT_START_CRAWLING, 0);
     }
 
-    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
+    if (m->input & INPUT_B_PRESSED) {
         return set_player_action(m, ACT_PUNCHING, 9);
-    } else if ((m->input & INPUT_B_PRESSED) && (curChar == 0)) {
-        return set_player_action(m, ACT_YOSHI_LICK, 0);
     }
 
     stationary_ground_step(m);
@@ -603,10 +597,8 @@ s32 act_braking_stop(struct PlayerState *m) {
         return set_player_action(m, ACT_FREEFALL, 0);
     }
 
-    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
+    if (m->input & INPUT_B_PRESSED) {
         return set_player_action(m, ACT_PUNCHING, 0);
-    } else if ((m->input & INPUT_B_PRESSED) && (curChar == 0)) {
-        return set_player_action(m, ACT_YOSHI_LICK, 0);
     }
 
     if (!(m->input & INPUT_FIRST_PERSON)
@@ -836,10 +828,8 @@ s32 check_common_landing_cancels(struct PlayerState *m, u32 action) {
         return check_common_action_exits(m);
     }
 
-    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
+    if (m->input & INPUT_B_PRESSED) {
         return set_player_action(m, ACT_PUNCHING, 0);
-    } else if ((m->input & INPUT_B_PRESSED) && (curChar == 0)) {
-        return set_player_action(m, ACT_YOSHI_LICK, 0);
     }
 
     return FALSE;

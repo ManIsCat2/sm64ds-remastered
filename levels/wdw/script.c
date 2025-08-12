@@ -123,7 +123,7 @@ const LevelScript level_wdw_entry[] = {
     END_AREA(),
 
     FREE_LEVEL_POOL(),
-    PLAYER_POS(/*area*/ 1, /*yaw*/ 180, /*pos*/ 3395, 2580, 384),
+    MARIO_POS(/*area*/ 1, /*yaw*/ 180, /*pos*/ 3395, 2580, 384),
     CALL(/*arg*/ 0, /*func*/ lvl_init_or_update),
     CALL_LOOP(/*arg*/ 1, /*func*/ lvl_init_or_update),
     CLEAR_LEVEL(),

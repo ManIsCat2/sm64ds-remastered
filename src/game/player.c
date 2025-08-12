@@ -45,7 +45,7 @@
 u32 unused80339F10;
 u8 unused80339F1C[20];
 
-int curChar = 0;
+int curChar = 1;
 
 #define YOSHI   0
 #define MARIO   1
@@ -1395,7 +1395,7 @@ void update_player_button_inputs(struct PlayerState *m) {
 
     if (m->controller->buttonPressed & L_TRIG) {
         if (curChar > 2) {
-            curChar = -1;
+            curChar = 0;
         }
         curChar = curChar + 1;
     }
@@ -1524,7 +1524,7 @@ void update_player_inputs(struct PlayerState *m) {
 print_text_fmt_int(210, 92, "1 %d", m->playerObj->oPosX);
 print_text_fmt_int(210, 72, "2 %d", m->playerObj->oPosY);
 print_text_fmt_int(210, 52, "3 %d", m->playerObj->oPosZ);
-//print_text_fmt_int(210, 120, "Jump Sound - %d", yahOrWah);
+print_text_fmt_int(210, 120, "Jump Sound - %d", yahOrWah);
 #endif
 #ifdef CHEATS_ACTIONS
     cheats_player_inputs(m);

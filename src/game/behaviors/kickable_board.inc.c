@@ -21,12 +21,6 @@ s32 check_player_attacking(UNUSED s32 unused) {
         if (gPlayerStates[0].action == ACT_WALL_KICK_AIR) {
             return 2;
         }
-        if (gPlayerStates[0].action == ACT_YOSHI_LICK) {
-            return 1;
-        }
-        if (gPlayerStates[0].action == ACT_YOSHI_LICK_MOVING) {
-            return 1;
-        }
     }
 
     return 0;

@@ -1,13 +1,5 @@
 // king_bobomb.inc.c
 
-#include "behavior_data.h"
-#include "sm64.h"
-#include "object_fields.h"
-#include "object_constants.h"
-#include "game/object_list_processor.h"
-
-int bobombInteracted = 0; // Global flag to track if King Bobomb has been interacted with by a bobomb
-
 // Copy of geo_update_projectile_pos_from_parent
 Gfx *geo_update_held_player_pos(s32 run, UNUSED struct GraphNode *node, Mat4 mtx) {
     if (run == TRUE) {
@@ -27,7 +19,7 @@ void bhv_bobomb_anchor_player_loop(void) {
     common_anchor_player_behavior(50.0f, 50.0f, INT_STATUS_MARIO_UNK6);
 }
 
-void king_bobomb_act_idle(void) {
+void king_bobomb_act_0(void) {
     s16 dialogID;
 
     o->oForwardVel = 0.0f;
@@ -65,13 +57,8 @@ s32 player_is_far_below_object(f32 arg0) {
     }
 }
 
-void king_bobomb_act_walking(void) {
+void king_bobomb_act_2(void) {
     cur_obj_become_tangible();
-
-    if (bobombInteracted == 1) {
-        o->oAction = 4; // Set action to thrown
-        o->oHeldState = HELD_THROWN; // Ensure heldState matches thrown action
-    }
 
     if (o->oPosY - o->oHomeY < -100.0f) { // Thrown off hill
         o->oAction = 5;
@@ -113,7 +100,7 @@ void king_bobomb_act_walking(void) {
     }
 }
 
-void king_bobomb_act_holding(void) {
+void king_bobomb_act_3(void) {
     if (o->oSubAction == 0) {
         o->oForwardVel = 0.0f;
         o->oKingBobombUnk104 = 0;
@@ -161,7 +148,7 @@ void king_bobomb_act_holding(void) {
     }
 }
 
-void king_bobomb_act_held(void) {
+void king_bobomb_act_1(void) {
     o->oForwardVel = 0.0f;
     o->oVelY = 0.0f;
 
@@ -179,7 +166,7 @@ void king_bobomb_act_held(void) {
     }
 }
 
-void king_bobomb_act_getup(void) {
+void king_bobomb_act_6(void) {
     if (o->oSubAction == 0) {
         if (o->oTimer == 0) {
             o->oKingBobombUnk104 = 0;
@@ -223,7 +210,7 @@ void king_bobomb_act_getup(void) {
 #define MARIO_DIALOG_LOOK_BOSS MARIO_DIALOG_LOOK_UP
 #endif
 
-void king_bobomb_act_death_dialog(void) {
+void king_bobomb_act_7(void) {
     cur_obj_init_animation_with_sound(2);
     if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_BOSS,
         DIALOG_FLAG_TEXT_DEFAULT, CUTSCENE_DIALOG, DIALOG_116)) {
@@ -240,66 +227,33 @@ void king_bobomb_act_death_dialog(void) {
 
 #undef MARIO_DIALOG_LOOK_BOSS
 
-void king_bobomb_act_explode(void) {
+void king_bobomb_act_8(void) {
     if (o->oTimer == 60) {
         stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
     }
 }
 
-void king_bobomb_act_thrown(void) {
-    cur_obj_init_animation_with_sound(2);
-
+void king_bobomb_act_4(void) { // bobomb been thrown
     if (o->oPosY - o->oHomeY > -100.0f) { // not thrown off hill
-        if ((o->oHealth > KING_BOMB_HEALTH - 2) && (bobombInteracted == 1) && (o->oBhvParams2ndByte == BOBOMB_KING_BP_TYPE_1)) {
-            if (o->oKingBobombBounceCount == 0) {
-                o->oKingBobombBounceCount = 7; // Set bounce count to 7 on first entry
-            }
-            if ((o->oMoveFlags & OBJ_MOVE_LANDED) && o->oKingBobombBounceCount > 0) {
-                cur_obj_play_sound_2(SOUND_OBJ_KING_BOBOMB);
-                o->oVelY = 60.0f; // Bounce up
-                o->oMoveAngleYaw += 0x4000; // Rotate on bounce
-                // Occasionally add random rotation if not near map edge
-                if ((o->oKingBobombBounceCount % 2) == 0) { // every other bounce
-                    // Example map bounds, adjust as needed
-                    f32 mapMinX = -6000.0f, mapMaxX = 6000.0f, mapMinZ = -6000.0f, mapMaxZ = 6000.0f;
-                    if (o->oPosX > mapMinX + 500.0f && o->oPosX < mapMaxX - 500.0f &&
-                        o->oPosZ > mapMinZ + 500.0f && o->oPosZ < mapMaxZ - 500.0f) {
-                        // Not near edge, apply random rotation
-                        s16 randAngle = (s16)(random_float() * 0x8000) - 0x4000; // -90 to +90 deg
-                        o->oMoveAngleYaw += randAngle;
-                    }
-                }
-                o->oKingBobombBounceCount--;
-                if (o->oKingBobombBounceCount == 0) {
-                    o->oHealth--;
-                    o->oForwardVel = 0.0f;
-                    o->oVelY = 0.0f;
-                    if (o->oHealth != 0) {
-                        o->oAction = 6;
-                    } else {
-                        o->oAction = 7;
-                    }
-                    bobombInteracted = 0; // Reset interaction flag after bounce
-                }
-            }
-        } else {
-            // After first two attacks, take damage immediately when landed
-            if (o->oMoveFlags & OBJ_MOVE_LANDED) {
-                cur_obj_play_sound_2(SOUND_OBJ_KING_BOBOMB);
-                o->oHealth--;
-                o->oForwardVel = 0.0f;
-                o->oVelY = 0.0f;
-                if (o->oHealth != 0) {
-                    o->oAction = 6;
-                } else {
-                    o->oAction = 7;
-                }
+        if (o->oMoveFlags & OBJ_MOVE_LANDED) {
+            o->oHealth--;
+
+            o->oForwardVel = 0.0f;
+            o->oVelY = 0.0f;
+
+            cur_obj_play_sound_2(SOUND_OBJ_KING_BOBOMB);
+
+            if (o->oHealth != 0) {
+                o->oAction = 6;
+            } else {
+                o->oAction = 7;
             }
         }
     } else if (o->oSubAction == 0) {
         if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
             o->oForwardVel = 0.0f;
             o->oVelY = 0.0f;
+
             o->oSubAction++;
         } else if (o->oMoveFlags & OBJ_MOVE_LANDED) {
             cur_obj_play_sound_2(SOUND_OBJ_KING_BOBOMB);
@@ -308,7 +262,9 @@ void king_bobomb_act_thrown(void) {
         if (cur_obj_init_animation_and_check_if_near_end(10)) {
             o->oAction = 5; // Go back to top of hill
         }
+
         o->oSubAction++;
+
 #if FIX_KING_BOBOMB_MUSIC_THROWN_OFF
         if (o->oDistanceToPlayer > 2000.0f) {
             stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
@@ -317,7 +273,7 @@ void king_bobomb_act_thrown(void) {
     }
 }
 
-void king_bobomb_act_jump_up(void) { // bobomb returns home
+void king_bobomb_act_5(void) { // bobomb returns home
     switch (o->oSubAction) {
         case 0:
             if (o->oTimer == 0) {
@@ -387,15 +343,15 @@ void king_bobomb_act_jump_up(void) { // bobomb returns home
 }
 
 void (*sKingBobombActions[])(void) = {
-    king_bobomb_act_idle,
-    king_bobomb_act_held,
-    king_bobomb_act_walking,
-    king_bobomb_act_holding,
-    king_bobomb_act_thrown,
-    king_bobomb_act_jump_up,
-    king_bobomb_act_getup,
-    king_bobomb_act_death_dialog,
-    king_bobomb_act_explode,
+    king_bobomb_act_0,
+    king_bobomb_act_1,
+    king_bobomb_act_2,
+    king_bobomb_act_3,
+    king_bobomb_act_4,
+    king_bobomb_act_5,
+    king_bobomb_act_6,
+    king_bobomb_act_7,
+    king_bobomb_act_8,
 };
 struct SoundState sKingBobombSoundStates[] = {
     { 0, 0, 0, NO_SOUND },
@@ -441,25 +397,6 @@ void bhv_king_bobomb_loop(void) {
 
     o->oInteractionSubtype |= INT_SUBTYPE_GRABS_MARIO;
 
-    // Set bobombInteracted = 1 if a Bob-omb touches King Bob-omb
-    s32 i;
-    struct Object *obj;
-    for (i = 0; i < NUM_OBJ_LISTS; i++) {
-        for (obj = (struct Object *)gObjectLists[i].next; obj != (struct Object *)&gObjectLists[i]; obj = (struct Object *)obj->header.next) {
-            if (obj->behavior == segmented_to_virtual(bhvBobomb) && obj != o) {
-                f32 dx = obj->oPosX - o->oPosX;
-                f32 dy = obj->oPosY - o->oPosY;
-                f32 dz = obj->oPosZ - o->oPosZ;
-                f32 dist = dx*dx + dy*dy + dz*dz;
-                if (dist < 175.0f * 175.0f) {
-                    bobombInteracted = 1;
-                    obj->oAction = BOBOMB_ACT_EXPLODE;
-                    break;
-                }
-            }
-        }
-    }
-
     switch (o->oHeldState) {
         case HELD_FREE:
             king_bobomb_move();
@@ -474,6 +411,10 @@ void bhv_king_bobomb_loop(void) {
             o->oPosY += 20.0f;
             break;
     }
+
+#if KING_BOBOMB_BLINK_EYES
+    curr_obj_random_blink(&o->oKingBobombBlinkTimer);
+#endif
 
     o->oInteractStatus = 0;
 }

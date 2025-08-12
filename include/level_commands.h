@@ -319,7 +319,7 @@ enum LevelCommandsIDList {
 #define CMD2A(unk2) \
     CMD_BBBB(LVL_SCRIPT_CMD_2A, 0x04, unk2, 0x00)
 
-#define PLAYER_POS(area, yaw, posX, posY, posZ) \
+#define MARIO_POS(area, yaw, posX, posY, posZ) \
     CMD_BBBB(LVL_SCRIPT_CMD_2B, 0x0C, area, 0x00), \
     CMD_HH(yaw, posX), \
     CMD_HH(posY, posZ)

@@ -334,7 +334,7 @@ static s32 act_water_idle(struct PlayerState *m) {
         return set_player_action(m, ACT_METAL_WATER_FALLING, 1);
     }
 
-    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
+    if (m->input & INPUT_B_PRESSED) {
         return set_player_action(m, ACT_WATER_PUNCH, 0);
     }
 
@@ -376,7 +376,7 @@ static s32 act_water_action_end(struct PlayerState *m) {
         return set_player_action(m, ACT_METAL_WATER_FALLING, 1);
     }
 
-    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
+    if (m->input & INPUT_B_PRESSED) {
         return set_player_action(m, ACT_WATER_PUNCH, 0);
     }
 
@@ -523,7 +523,7 @@ static s32 act_breaststroke(struct PlayerState *m) {
         return set_player_action(m, ACT_METAL_WATER_FALLING, 1);
     }
 
-    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
+    if (m->input & INPUT_B_PRESSED) {
         return set_player_action(m, ACT_WATER_PUNCH, 0);
     }
 
@@ -577,7 +577,7 @@ static s32 act_swimming_end(struct PlayerState *m) {
         return set_player_action(m, ACT_METAL_WATER_FALLING, 1);
     }
 
-    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
+    if (m->input & INPUT_B_PRESSED) {
         return set_player_action(m, ACT_WATER_PUNCH, 0);
     }
 
@@ -614,7 +614,7 @@ static s32 act_flutter_kick(struct PlayerState *m) {
         return set_player_action(m, ACT_METAL_WATER_FALLING, 1);
     }
 
-    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
+    if (m->input & INPUT_B_PRESSED) {
         return set_player_action(m, ACT_WATER_PUNCH, 0);
     }
 

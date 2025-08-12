@@ -11,7 +11,7 @@
 #include "rumble_init.h"
 
 /**
- * Used by act_punching() or act_yoshi_licking() to determine Player's forward velocity during each
+ * Used by act_punching() to determine Player's forward velocity during each
  * animation frame.
  */
 s8 sPunchingForwardVelocities[8] = { 0, 1, 1, 2, 3, 5, 7, 10 };
@@ -51,7 +51,7 @@ s32 player_update_punch_sequence(struct PlayerState *m) {
                     return TRUE;
                 }
 
-                m->flags |= PLAYER_PUNCHING;
+                m->flags |= MARIO_PUNCHING;
             }
 
             if (m->actionArg == 2) {
@@ -63,7 +63,7 @@ s32 player_update_punch_sequence(struct PlayerState *m) {
             set_player_animation(m, MARIO_ANIM_FIRST_PUNCH_FAST);
 
             if (m->playerObj->header.gfx.animInfo.animFrame <= 0) {
-                m->flags |= PLAYER_PUNCHING;
+                m->flags |= MARIO_PUNCHING;
             }
 
             if (m->input & INPUT_B_PRESSED) {
@@ -87,7 +87,7 @@ s32 player_update_punch_sequence(struct PlayerState *m) {
             }
 
             if (m->playerObj->header.gfx.animInfo.animFrame > 0) {
-                m->flags |= PLAYER_PUNCHING;
+                m->flags |= MARIO_PUNCHING;
             }
 
             if (m->actionArg == 5) {
@@ -98,7 +98,7 @@ s32 player_update_punch_sequence(struct PlayerState *m) {
         case 5:
             set_player_animation(m, MARIO_ANIM_SECOND_PUNCH_FAST);
             if (m->playerObj->header.gfx.animInfo.animFrame <= 0) {
-                m->flags |= PLAYER_PUNCHING;
+                m->flags |= MARIO_PUNCHING;
             }
 
             if (m->input & INPUT_B_PRESSED) {
@@ -144,57 +144,6 @@ s32 player_update_punch_sequence(struct PlayerState *m) {
     return FALSE;
 }
 
-s32 yoshi_update_lick_sequence(struct PlayerState *m) {
-    u32 endAction, crouchEndAction;
-    s32 animFrame;
-
-    if (m->action & ACT_FLAG_MOVING) {
-        endAction = ACT_WALKING, crouchEndAction = ACT_CROUCH_SLIDE;
-    } else {
-        endAction = ACT_IDLE, crouchEndAction = ACT_CROUCHING;
-    }
-
-    switch (m->actionArg) {
-        case 0:
-            play_sound(SOUND_MARIO_PUNCH_YAH, m->playerObj->header.gfx.cameraToObject);
-            // fallthrough
-        case 1:
-            set_player_animation(m, MARIO_ANIM_START_CROUCHING);
-            if (is_anim_past_end(m)) {
-                m->actionArg = 2;
-            } else {
-                m->actionArg = 1;
-            }
-
-            if (m->playerObj->header.gfx.animInfo.animFrame >= 2) {
-                if (player_check_object_grab(m)) {
-                    return TRUE;
-                }
-
-                m->flags |= YOSHI_LICKING;
-            }
-
-            if (m->actionArg == 2) {
-                m->playerBodyState->punchState = (0 << 6) | 4;
-            }
-            break;
-
-        case 2:
-            set_player_animation(m, MARIO_ANIM_START_CROUCHING);
-
-            if (m->playerObj->header.gfx.animInfo.animFrame <= 0) {
-                m->flags |= YOSHI_LICKING;
-            }
-
-            if (is_anim_at_end(m)) {
-                set_player_action(m, endAction, 0);
-            }
-            break;
-    }
-
-    return FALSE;
-}
-
 s32 act_punching(struct PlayerState *m) {
     if (m->input & INPUT_STOMPED) {
         return drop_and_set_player_action(m, ACT_SHOCKWAVE_BOUNCE, 0);
@@ -204,7 +153,7 @@ s32 act_punching(struct PlayerState *m) {
         return check_common_action_exits(m);
     }
 
-    if ((m->actionState == 0 && (m->input & INPUT_A_DOWN)) && curChar != 0) {
+    if (m->actionState == 0 && (m->input & INPUT_A_DOWN)) {
         return set_player_action(m, ACT_JUMP_KICK, 0);
     }
 
@@ -219,25 +168,6 @@ s32 act_punching(struct PlayerState *m) {
     }
 
     player_update_punch_sequence(m);
-    perform_ground_step(m);
-    return FALSE;
-}
-
-s32 act_yoshi_lick(struct PlayerState *m) {
-    if (m->input & (INPUT_NONZERO_ANALOG | INPUT_A_PRESSED | INPUT_OFF_FLOOR | INPUT_ABOVE_SLIDE)) {
-        return check_common_action_exits(m);
-    }
-
-    m->actionState = 1;
-    if (m->actionArg == 0) {
-        m->actionTimer = 7;
-    }
-
-    if (m->actionTimer > 0) {
-        m->actionTimer--;
-    }
-
-    yoshi_update_lick_sequence(m);
     perform_ground_step(m);
     return FALSE;
 }
@@ -535,7 +465,6 @@ s32 player_execute_object_action(struct PlayerState *m) {
     /* clang-format off */
     switch (m->action) {
         case ACT_PUNCHING:           cancel = act_punching(m);           break;
-        case ACT_YOSHI_LICK:         cancel = act_yoshi_lick(m);         break;
         case ACT_PICKING_UP:         cancel = act_picking_up(m);         break;
         case ACT_DIVE_PICKING_UP:    cancel = act_dive_picking_up(m);    break;
         case ACT_STOMACH_SLIDE_STOP: cancel = act_stomach_slide_stop(m); break;

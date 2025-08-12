@@ -95,7 +95,7 @@ const LevelScript level_bitdw_entry[] = {
 		OBJECT(MODEL_STAR_SWITCH, 6810, 6528, -358, 0, 0, 0, BPARAM2(25), bhvStarSwitch),
 		OBJECT(MODEL_NONE, -998, 5761, -51, 0, 0, 0, BPARAM1(STAR_INDEX_ACT_2), bhvBitdwStarSwitchSpawnCondition),
 		OBJECT(MODEL_NONE, -7578, 1409, 3891, 0, 90, 0, BPARAM2(WARP_NODE_0A), bhvSpinAirborneWarp),
-		PLAYER_POS(0x01, 90, -7578, 1409, 3891),
+		MARIO_POS(0x01, 90, -7578, 1409, 3891),
 		OBJECT(MODEL_BITDW_WARP_PIPE, 6815, 6529, -6, 0, 0, 0, BPARAM2(WARP_NODE_0B), bhvWarpPipe),
 		OBJECT(MODEL_YELLOW_COIN, -1664, 693, 3584, 0, 0, 0, 0x00000000, bhvYellowCoin),
 		OBJECT(MODEL_YELLOW_COIN, -1869, 693, 3686, 0, 0, 0, 0x00000000, bhvYellowCoin),
@@ -160,7 +160,7 @@ const LevelScript level_bitdw_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	PLAYER_POS(0x01, 90, -7578, 1409, 3891),
+	MARIO_POS(0x01, 90, -7578, 1409, 3891),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

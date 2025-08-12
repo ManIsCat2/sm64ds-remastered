@@ -77,7 +77,6 @@
 #define ATTACK_GROUND_POUND_OR_TWIRL 4
 #define ATTACK_FAST_ATTACK           5
 #define ATTACK_FROM_BELOW            6
-#define ATTACK_LICK                  7
 
 #define INT_STATUS_ATTACK_MASK 0x000000FF
 

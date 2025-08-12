@@ -2609,7 +2609,7 @@ s32 obj_attack_collided_from_other_object(struct Object *obj) {
         other = obj->collidedObjs[0];
 
         if (other != gPlayerObject) {
-            other->oInteractStatus |= ATTACK_PUNCH | ATTACK_LICK | INT_STATUS_WAS_ATTACKED | INT_STATUS_INTERACTED
+            other->oInteractStatus |= ATTACK_PUNCH | INT_STATUS_WAS_ATTACKED | INT_STATUS_INTERACTED
                                       | INT_STATUS_TOUCHED_BOB_OMB;
             touchedOtherObject = TRUE;
         }

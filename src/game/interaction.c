@@ -15,7 +15,6 @@
 #include "level_update.h"
 #include "player.h"
 #include "player_step.h"
-#include "player_actions_cutscene.h"
 #include "memory.h"
 #include "obj_behaviors.h"
 #include "object_helpers.h"
@@ -37,18 +36,17 @@ extern int configGlobalCapBlocks;
 #endif
 #endif
 
-#define INT_GROUND_POUND_OR_TWIRL (1 << 0) // 0x010
-#define INT_PUNCH                 (1 << 1) // 0x020
-#define INT_KICK                  (1 << 2) // 0x040
-#define INT_TRIP                  (1 << 3) // 0x080
-#define INT_SLIDE_KICK            (1 << 4) // 0x100
-#define INT_FAST_ATTACK_OR_SHELL  (1 << 5) // 0x200
-#define INT_HIT_FROM_ABOVE        (1 << 6) // 0x400
-#define INT_HIT_FROM_BELOW        (1 << 7) // 0x800
-#define INT_LICK                  (1 << 8) // 0x100
+#define INT_GROUND_POUND_OR_TWIRL (1 << 0) // 0x01
+#define INT_PUNCH                 (1 << 1) // 0x02
+#define INT_KICK                  (1 << 2) // 0x04
+#define INT_TRIP                  (1 << 3) // 0x08
+#define INT_SLIDE_KICK            (1 << 4) // 0x10
+#define INT_FAST_ATTACK_OR_SHELL  (1 << 5) // 0x20
+#define INT_HIT_FROM_ABOVE        (1 << 6) // 0x40
+#define INT_HIT_FROM_BELOW        (1 << 7) // 0x80
 
 #define INT_ATTACK_NOT_FROM_BELOW                                                 \
-    (INT_GROUND_POUND_OR_TWIRL | INT_PUNCH | INT_LICK | INT_KICK | INT_TRIP | INT_SLIDE_KICK \
+    (INT_GROUND_POUND_OR_TWIRL | INT_PUNCH | INT_KICK | INT_TRIP | INT_SLIDE_KICK \
      | INT_FAST_ATTACK_OR_SHELL | INT_HIT_FROM_ABOVE)
 
 #define INT_ANY_ATTACK                                                            \
@@ -56,7 +54,7 @@ extern int configGlobalCapBlocks;
      | INT_FAST_ATTACK_OR_SHELL | INT_HIT_FROM_ABOVE | INT_HIT_FROM_BELOW)
 
 #define INT_ATTACK_NOT_WEAK_FROM_ABOVE                                                \
-    (INT_GROUND_POUND_OR_TWIRL | INT_PUNCH | INT_LICK | INT_KICK | INT_TRIP | INT_HIT_FROM_BELOW)
+    (INT_GROUND_POUND_OR_TWIRL | INT_PUNCH | INT_KICK | INT_TRIP | INT_HIT_FROM_BELOW)
 
 u8 sDelayInvincTimer;
 s16 sInvulnerable;
@@ -214,19 +212,13 @@ u32 determine_interaction(struct PlayerState *m, struct Object *o) {
     u32 action = m->action;
 
     if (action & ACT_FLAG_ATTACKING) {
-        if (action == ACT_PUNCHING || action == ACT_YOSHI_LICK || action == ACT_MOVE_PUNCHING || action == ACT_YOSHI_LICK_MOVING || action == ACT_JUMP_KICK) {
+        if (action == ACT_PUNCHING || action == ACT_MOVE_PUNCHING || action == ACT_JUMP_KICK) {
             s16 dYawToObject = player_obj_angle_to_object(m, o) - m->faceAngle[1];
 
-            if (m->flags & PLAYER_PUNCHING) {
+            if (m->flags & MARIO_PUNCHING) {
                 // 120 degrees total, or 60 each way
                 if (-0x2AAA <= dYawToObject && dYawToObject <= 0x2AAA) {
                     interaction = INT_PUNCH;
-                }
-            }
-            if (m->flags & YOSHI_LICKING) {
-                // 120 degrees total, or 60 each way
-                if (-0x2AAA <= dYawToObject && dYawToObject <= 0x2AAA) {
-                    interaction = INT_LICK;
                 }
             }
             if (m->flags & MARIO_KICKING) {
@@ -292,9 +284,6 @@ u32 attack_object(struct Object *o, s32 interaction) {
             break;
         case INT_PUNCH:
             attackType = ATTACK_PUNCH;
-            break;
-        case INT_LICK:
-            attackType = ATTACK_LICK;
             break;
         case INT_KICK:
         case INT_TRIP:
@@ -1409,8 +1398,6 @@ u32 interact_hit_from_below(struct PlayerState *m, UNUSED u32 interactType, stru
                 bounce_off_object(m, o, BOOST(m->input & INPUT_A_DOWN, 50.0f, 30.0f));
             }
         }
-    } else if (interaction & INT_LICK) {
-        attack_object(o, interaction);
     } else if (take_damage_and_knock_back(m, o)) {
         return TRUE;
     }
@@ -1466,8 +1453,6 @@ u32 interact_unknown_08(struct PlayerState *m, UNUSED u32 interactType, struct O
     if (interaction & INT_PUNCH) {
         o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_WAS_ATTACKED | ATTACK_PUNCH;
         bounce_back_from_attack(m, interaction);
-    } else if (interaction & INT_LICK) {
-        o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_WAS_ATTACKED | ATTACK_LICK;
     } else if (take_damage_and_knock_back(m, o)) {
         return TRUE;
     }
@@ -1820,7 +1805,7 @@ u32 interact_text(struct PlayerState *m, UNUSED u32 interactType, struct Object 
 }
 
 void check_kick_or_punch_wall(struct PlayerState *m) {
-    if (m->flags & (PLAYER_PUNCHING | MARIO_KICKING | MARIO_TRIPPING)) {
+    if (m->flags & (MARIO_PUNCHING | MARIO_KICKING | MARIO_TRIPPING)) {
         Vec3f detector;
         detector[0] = m->pos[0] + 50.0f * sins(m->faceAngle[1]);
         detector[2] = m->pos[2] + 50.0f * coss(m->faceAngle[1]);
@@ -1873,7 +1858,7 @@ void player_process_interactions(struct PlayerState *m) {
     //! If the kick/punch flags are set and an object collision changes Player's
     // action, he will get the kick/punch wall speed anyway.
     check_kick_or_punch_wall(m);
-    m->flags &= ~PLAYER_PUNCHING & ~YOSHI_LICKING & ~MARIO_KICKING & ~MARIO_TRIPPING;
+    m->flags &= ~MARIO_PUNCHING & ~MARIO_KICKING & ~MARIO_TRIPPING;
 
     if (!(m->playerObj->collidedObjInteractTypes & (INTERACT_WARP_DOOR | INTERACT_DOOR))) {
         sDisplayingDoorText = FALSE;

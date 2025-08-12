@@ -1,7 +1,5 @@
 // bobomb.inc.c
 
-extern int bobombInteracted;
-
 static struct ObjectHitbox sBobombHitbox = {
     /* interactType:      */ INTERACT_GRABBABLE,
     /* downOffset:        */ 0,
@@ -65,14 +63,6 @@ void bobomb_check_interactions(void) {
     }
 }
 
-void bobomb_act_leap(void) {
-    s16 collisionFlags = object_step();
-    if ((collisionFlags & OBJ_COL_FLAG_GROUNDED) == OBJ_COL_FLAG_GROUNDED) {
-        o->oForwardVel = 10.0f;
-        o->oAction = BOBOMB_ACT_CHASE_MARIO;
-    }
-}
-
 void bobomb_act_patrol(void) {
     UNUSED u8 filler[4];
     UNUSED s16 animFrame = o->header.gfx.animInfo.animFrame;
@@ -83,11 +73,10 @@ void bobomb_act_patrol(void) {
 
     if ((obj_return_home_if_safe(o, o->oHomeX, o->oHomeY, o->oHomeZ, 400) == TRUE)
         && (obj_check_if_facing_toward_angle(o->oMoveAngleYaw, o->oAngleToPlayer, 0x2000) == TRUE)) {
-        o->oVelY = 25.0f;
-        o->oForwardVel = 0.0f; // Don't move forward yet
         o->oBobombFuseLit = 1;
-        o->oAction = BOBOMB_ACT_LEAP;
+        o->oAction = BOBOMB_ACT_CHASE_MARIO;
     }
+
     obj_check_floor_death(collisionFlags, sObjFloor);
 }
 
@@ -119,10 +108,6 @@ void generic_bobomb_free_loop(void) {
     switch (o->oAction) {
         case BOBOMB_ACT_PATROL:
             bobomb_act_patrol();
-            break;
-
-        case BOBOMB_ACT_LEAP:
-            bobomb_act_leap();
             break;
 
         case BOBOMB_ACT_LAUNCHED:

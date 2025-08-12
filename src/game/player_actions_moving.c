@@ -569,7 +569,7 @@ s32 analog_stick_held_back(struct PlayerState *m) {
 s32 check_ground_dive_or_punch(struct PlayerState *m) {
     UNUSED u8 filler[4];
 
-    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
+    if (m->input & INPUT_B_PRESSED) {
         //! Speed kick (shoutouts to SimpleFlips)
         if (m->forwardVel >= 29.0f && m->controller->stickMag > 48.0f) {
             m->vel[1] = 20.0f;
@@ -577,8 +577,6 @@ s32 check_ground_dive_or_punch(struct PlayerState *m) {
         }
 
         return set_player_action(m, ACT_MOVE_PUNCHING, 0);
-    } else if ((m->input & INPUT_B_PRESSED) && (curChar == 0)) {
-        return set_player_action(m, ACT_YOSHI_LICK_MOVING, 0);
     }
 
     return FALSE;
@@ -958,44 +956,13 @@ s32 act_move_punching(struct PlayerState *m) {
         return set_player_action(m, ACT_BEGIN_SLIDING, 0);
     }
 
-    if ((m->actionState == 0 && (m->input & INPUT_A_DOWN)) && (curChar != 0)) {
+    if (m->actionState == 0 && (m->input & INPUT_A_DOWN)) {
         return set_player_action(m, ACT_JUMP_KICK, 0);
     }
 
     m->actionState = 1;
 
     player_update_punch_sequence(m);
-
-    if (m->forwardVel >= 0.0f) {
-        apply_slope_decel(m, 0.5f);
-    } else {
-        if ((m->forwardVel += 8.0f) >= 0.0f) {
-            m->forwardVel = 0.0f;
-        }
-        apply_slope_accel(m);
-    }
-
-    switch (perform_ground_step(m)) {
-        case GROUND_STEP_LEFT_GROUND:
-            set_player_action(m, ACT_FREEFALL, 0);
-            break;
-
-        case GROUND_STEP_NONE:
-            m->particleFlags |= PARTICLE_DUST;
-            break;
-    }
-
-    return FALSE;
-}
-
-s32 act_yoshi_lick_moving(struct PlayerState *m) {
-    if (should_begin_sliding(m)) {
-        return set_player_action(m, ACT_BEGIN_SLIDING, 0);
-    }
-
-    m->actionState = 1;
-
-    yoshi_update_lick_sequence(m);
 
     if (m->forwardVel >= 0.0f) {
         apply_slope_decel(m, 0.5f);
@@ -1197,10 +1164,8 @@ s32 act_braking(struct PlayerState *m) {
         return set_player_action(m, ACT_BRAKING_STOP, 0);
     }
 
-    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
+    if (m->input & INPUT_B_PRESSED) {
         return set_player_action(m, ACT_MOVE_PUNCHING, 0);
-    } else if ((m->input & INPUT_B_PRESSED) && (curChar == 0)) {
-        return set_player_action(m, ACT_YOSHI_LICK_MOVING, 0);
     }
 
     switch (perform_ground_step(m)) {
@@ -1636,17 +1601,11 @@ s32 act_crouch_slide(struct PlayerState *m) {
         }
     }
 
-    if ((m->input & INPUT_B_PRESSED) && (curChar != 0)) {
+    if (m->input & INPUT_B_PRESSED) {
         if (m->forwardVel >= 10.0f) {
             return set_player_action(m, ACT_SLIDE_KICK, 0);
         } else {
             return set_player_action(m, ACT_MOVE_PUNCHING, 0x0009);
-        }
-    } else if ((m->input & INPUT_B_PRESSED) && (curChar == 0)) {
-        if (m->forwardVel >= 10.0f) {
-            return set_player_action(m, ACT_SLIDE_KICK, 0);
-        } else {
-            return set_player_action(m, ACT_YOSHI_LICK_MOVING, 0x0009);
         }
     }
 
@@ -2189,7 +2148,6 @@ s32 player_execute_moving_action(struct PlayerState *m) {
         case ACT_HOLD_STOMACH_SLIDE:       cancel = act_hold_stomach_slide(m);       break;
         case ACT_DIVE_SLIDE:               cancel = act_dive_slide(m);               break;
         case ACT_MOVE_PUNCHING:            cancel = act_move_punching(m);            break;
-        case ACT_YOSHI_LICK_MOVING:        cancel = act_yoshi_lick_moving(m);        break;
         case ACT_CROUCH_SLIDE:             cancel = act_crouch_slide(m);             break;
         case ACT_SLIDE_KICK_SLIDE:         cancel = act_slide_kick_slide(m);         break;
         case ACT_HARD_BACKWARD_GROUND_KB:  cancel = act_hard_backward_ground_kb(m);  break;

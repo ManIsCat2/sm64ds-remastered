@@ -42,7 +42,7 @@ const LevelScript level_bowser_1_entry[] = {
 		OBJECT(MODEL_BOWSER_BOMB, 0, -408, 3154, 0, 0, 0, 0x00000000, bhvBowserBomb),
 		OBJECT(MODEL_BOWSER, -14, -741, -1537, 0, 0, 0, 0x00000000, bhvBowser),
 		OBJECT(MODEL_NONE, 0, 1307, 0, 0, 180, 0, BPARAM2(WARP_NODE_0A), bhvSpinAirborneCircleWarp),
-		PLAYER_POS(0x01, 180, 0, 78, 0),
+		MARIO_POS(0x01, 180, 0, 78, 0),
 		TERRAIN(bowser_1_area_1_collision),
 		MACRO_OBJECTS(bowser_1_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_BOSS_KOOPA),
@@ -50,7 +50,7 @@ const LevelScript level_bowser_1_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	PLAYER_POS(0x01, 180, 0, 78, 0),
+	MARIO_POS(0x01, 180, 0, 78, 0),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

@@ -584,13 +584,15 @@
 #define /*0x0F8*/ oKickableBoardF8 OBJECT_FIELD_S32(0x1C)
 
  /* King Bob-omb */
-#define /*0x088*/ oKingBobombUnk88       OBJECT_FIELD_S32(0x00)
-#define /*0x0F8*/ oKingBobombUnkF8       OBJECT_FIELD_S32(0x1C)
-#define /*0x0FC*/ oKingBobombUnkFC       OBJECT_FIELD_S32(0x1D)
-#define /*0x100*/ oKingBobombUnk100      OBJECT_FIELD_S32(0x1E)
-#define /*0x104*/ oKingBobombUnk104      OBJECT_FIELD_S32(0x1F)
-#define /*0x108*/ oKingBobombUnk108      OBJECT_FIELD_S32(0x20)
-#define /*0x110*/ oKingBobombBounceCount OBJECT_FIELD_S32(0x22)
+#define /*0x088*/ oKingBobombUnk88  OBJECT_FIELD_S32(0x00)
+#define /*0x0F8*/ oKingBobombUnkF8  OBJECT_FIELD_S32(0x1C)
+#define /*0x0FC*/ oKingBobombUnkFC  OBJECT_FIELD_S32(0x1D)
+#define /*0x100*/ oKingBobombUnk100 OBJECT_FIELD_S32(0x1E)
+#define /*0x104*/ oKingBobombUnk104 OBJECT_FIELD_S32(0x1F)
+#define /*0x108*/ oKingBobombUnk108 OBJECT_FIELD_S32(0x20)
+#if KING_BOBOMB_BLINK_EYES
+#define /*0x108*/ oKingBobombBlinkTimer OBJECT_FIELD_S32(0x21)
+#endif
 
 /* Klepto */
 #define /*0x0F4*/ oKleptoDistanceToTarget      OBJECT_FIELD_F32(0x1B)
@@ -1072,7 +1074,7 @@
 #define /*0x0F4*/ oWaterBombSpawnerBombActive  OBJECT_FIELD_S32(0x1B)
 #define /*0x0F8*/ oWaterBombSpawnerTimeToSpawn OBJECT_FIELD_S32(0x1C)
 
-/* Water Cannon */
+/* Water Bomb Cannon */
 #define /*0x0F4*/ oWaterCannonUnkF4  OBJECT_FIELD_S32(0x1B)
 #define /*0x0F8*/ oWaterCannonUnkF8  OBJECT_FIELD_S32(0x1C)
 #define /*0x0FC*/ oWaterCannonUnkFC  OBJECT_FIELD_S32(0x1D)

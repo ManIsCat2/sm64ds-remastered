@@ -111,7 +111,7 @@ const LevelScript level_ccm_entry[] = {
     END_AREA(),
 
     FREE_LEVEL_POOL(),
-    PLAYER_POS(/*area*/ 1, /*yaw*/ 140, /*pos*/ -1512, 2560, -2305),
+    MARIO_POS(/*area*/ 1, /*yaw*/ 140, /*pos*/ -1512, 2560, -2305),
     CALL(/*arg*/ 0, /*func*/ lvl_init_or_update),
     CALL_LOOP(/*arg*/ 1, /*func*/ lvl_init_or_update),
     CLEAR_LEVEL(),
