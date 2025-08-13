@@ -5056,7 +5056,7 @@ const BehaviorScript bhvDecorativePendulum[] = {
     END_LOOP(),
 };
 
-const BehaviorScript bhvTreasureChestsShip[] = {
+const BehaviorScript bhvTreasureChestShip[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     DROP_TO_FLOOR(),

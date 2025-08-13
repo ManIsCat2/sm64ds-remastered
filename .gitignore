@@ -84,6 +84,7 @@ sm64dsr_config.txt
 !/sound/**/01_mario_muh.aiff
 !/sound/samples/sfx_env/*.aiff
 !/textures/segment2/*font_graphics*
+!/textures/segment2/segment2.12458.rgba16.png
 !/textures/hud/*
 !/textures/hud_file_select/*
 !/textures/skybox/*

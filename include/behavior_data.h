@@ -522,7 +522,7 @@ extern const BehaviorScript bhvFallingPillarHitbox[];
 extern const BehaviorScript bhvPillarBase[];
 extern const BehaviorScript bhvJRBFloatingBox[];
 extern const BehaviorScript bhvDecorativePendulum[];
-extern const BehaviorScript bhvTreasureChestsShip[];
+extern const BehaviorScript bhvTreasureChestShip[];
 extern const BehaviorScript bhvTreasureChestsJRB[];
 extern const BehaviorScript bhvTreasureChestsDDD[];
 extern const BehaviorScript bhvTreasureChestBottom[];

@@ -27,7 +27,7 @@ void bhv_treasure_chest_top_loop(void) {
 
         case 1:
             if (o->oTimer == 0) {
-                if (sp34->oTreasureChestUnkFC == 0) {
+                if (sp34->oTreasureChestIsMainLevel == 0) {
                     spawn_object_relative(0, 0, -80, 120, o, MODEL_BUBBLE, bhvWaterAirBubble);
                     play_sound(SOUND_GENERAL_OPEN_CHEST_WATER, o->header.gfx.cameraToObject);
                 } else {
@@ -71,12 +71,12 @@ void bhv_treasure_chest_bottom_loop(void) {
             if (obj_check_if_facing_toward_angle(o->oMoveAngleYaw, gPlayerObject->header.gfx.angle[1] + 0x8000, 0x3000)
                 && is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 150)
                 && !o->parentObj->oTreasureChestUnkF8) {
-                if (o->parentObj->oTreasureChestUnkF4 == o->oBhvParams2ndByte) {
+                if (o->parentObj->oTreasureChestCurrentIndex == o->oBhvParams2ndByte) {
                     play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
-                    o->parentObj->oTreasureChestUnkF4++;
+                    o->parentObj->oTreasureChestCurrentIndex++;
                     o->oAction = 1;
                 } else {
-                    o->parentObj->oTreasureChestUnkF4 = 1;
+                    o->parentObj->oTreasureChestCurrentIndex = 1;
                     o->parentObj->oTreasureChestUnkF8 = TRUE;
                     o->oAction = 2;
                     cur_obj_become_tangible();
@@ -110,18 +110,15 @@ void spawn_treasure_chest(s8 sp3B, s32 x, s32 y, s32 z, s16 yaw) {
 }
 
 void bhv_treasure_chest_ship_init(void) {
-    spawn_treasure_chest(1, 400, -350, -2700, 0);
-    spawn_treasure_chest(2, 650, -350, -940, -0x6001);
-    spawn_treasure_chest(3, -550, -350, -770, 0x5FFF);
-    spawn_treasure_chest(4, 100, -350, -1700, 0);
-    o->oTreasureChestUnkF4 = 1;
-    o->oTreasureChestUnkFC = 0;
+    spawn_treasure_chest(1, 0, 0, -1997, 0);
+    o->oTreasureChestCurrentIndex = 1;
+    o->oTreasureChestIsMainLevel = 0;
 }
 
 void bhv_treasure_chest_ship_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oTreasureChestUnkF4 == 5) {
+            if (o->oTreasureChestCurrentIndex == 2) {
                 play_puzzle_jingle();
                 fade_volume_scale(0, 127, 1000);
                 o->oAction = 1;
@@ -150,14 +147,14 @@ void bhv_treasure_chest_jrb_init(void) {
     spawn_treasure_chest(2, -1150, -2812, -1550, 0x7FFF);
     spawn_treasure_chest(3, -2400, -2812, -1800, 0x7FFF);
     spawn_treasure_chest(4, -1800, -2812, -2100, 0x7FFF);
-    o->oTreasureChestUnkF4 = 1;
-    o->oTreasureChestUnkFC = 1;
+    o->oTreasureChestCurrentIndex = 1;
+    o->oTreasureChestIsMainLevel = 1;
 }
 
 void bhv_treasure_chest_jrb_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oTreasureChestUnkF4 == 5) {
+            if (o->oTreasureChestCurrentIndex == 5) {
                 play_puzzle_jingle();
                 o->oAction = 1;
             }
@@ -186,14 +183,14 @@ void bhv_treasure_chest_ddd_init(void) {
     spawn_treasure_chest(3, -4500, -5119, -1100, 9102);
     spawn_treasure_chest(4, -2400, -4607, 125, 16019);
 
-    o->oTreasureChestUnkF4 = 1;
-    o->oTreasureChestUnkFC = 0;
+    o->oTreasureChestCurrentIndex = 1;
+    o->oTreasureChestIsMainLevel = 0;
 }
 
 void bhv_treasure_chest_ddd_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oTreasureChestUnkF4 == 5) {
+            if (o->oTreasureChestCurrentIndex == 5) {
                 play_puzzle_jingle();
                 o->oAction = 1;
             }

@@ -106,11 +106,7 @@ static const LevelScript script_func_local_3[] = {
 };
 
 static const LevelScript script_func_local_4[] = {
-    OBJECT(/*model*/ MODEL_NONE,            /*pos*/  400,  -350, -2700, /*angle*/ 0, 0, 0, /*bhvParam*/ 0, /*bhv*/ bhvTreasureChestsShip),
-    RETURN(),
-};
-
-static const LevelScript script_func_local_5[] = {
+    OBJECT(/*model*/ MODEL_NONE,            /*pos*/  0, -351, -1997, /*angle*/ 0, 0, 0, /*bhvParam*/ 0, /*bhv*/ bhvTreasureChestShip),
     RETURN(),
 };
 
@@ -165,7 +161,6 @@ const LevelScript level_jrb_entry[] = {
         WARP_NODE(/*id*/ WARP_NODE_SUCCESS, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 1, /*destNode*/ WARP_NODE_35, /*flags*/ WARP_NO_CHECKPOINT),
         WARP_NODE(/*id*/ WARP_NODE_DEATH,   /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 1, /*destNode*/ WARP_NODE_67, /*flags*/ WARP_NO_CHECKPOINT),
         JUMP_LINK(script_func_local_4),
-        JUMP_LINK(script_func_local_5),
         TERRAIN(/*terrainData*/ jrb_seg7_area_2_collision),
         MACRO_OBJECTS(/*objList*/ jrb_seg7_area_2_macro_objs),
         SET_BACKGROUND_MUSIC(/*settingsPreset*/ 0x0003, /*seq*/ SEQ_LEVEL_WATER),
