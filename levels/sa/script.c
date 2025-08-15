@@ -15,17 +15,6 @@
 #include "make_const_nonconst.h"
 #include "levels/sa/header.h"
 
-static const LevelScript script_func_local_1[] = {
-    OBJECT(/*model*/ MODEL_NONE, /*pos*/ 0, -1000, 0, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM2(FISH_SPAWNER_BP_MANY_BLUE), /*bhv*/ bhvFishSpawner),
-    OBJECT(/*model*/ MODEL_NONE, /*pos*/ 0, -1000, 0, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM2(FISH_SPAWNER_BP_MANY_CYAN), /*bhv*/ bhvFishSpawner),
-    RETURN(),
-};
-
-static const LevelScript script_func_local_2[] = {
-    OBJECT(/*model*/ MODEL_NONE, /*pos*/ 0, -4250, 0, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM1(STAR_INDEX_ACT_1), /*bhv*/ bhvHiddenRedCoinStar),
-    RETURN(),
-};
-
 const LevelScript level_sa_entry[] = {
     INIT_LEVEL(),
     LOAD_MIO0        (/*seg*/ 0x07, _sa_segment_7SegmentRomStart, _sa_segment_7SegmentRomEnd),
@@ -42,12 +31,11 @@ const LevelScript level_sa_entry[] = {
     JUMP_LINK(script_func_global_14),
 
     AREA(/*index*/ 1, sa_geo_000170),
-        OBJECT(/*model*/ MODEL_NONE, /*pos*/ 0, -1535, 0, /*angle*/ 0, 90, 0, /*bhvParam*/ BPARAM2(WARP_NODE_0A), /*bhv*/ bhvSwimmingWarp),
+        OBJECT(MODEL_NONE, 0, 0, 0, 0, -180, 0, BPARAM2(WARP_NODE_0A), bhvSpinAirborneWarp),
         WARP_NODE(/*id*/ WARP_NODE_0A,      /*destLevel*/ LEVEL_SA,     /*destArea*/ 1, /*destNode*/ WARP_NODE_0A, /*flags*/ WARP_NO_CHECKPOINT),
         WARP_NODE(/*id*/ WARP_NODE_SUCCESS, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 1, /*destNode*/ WARP_NODE_27, /*flags*/ WARP_NO_CHECKPOINT),
         WARP_NODE(/*id*/ WARP_NODE_DEATH,   /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 1, /*destNode*/ WARP_NODE_28, /*flags*/ WARP_NO_CHECKPOINT),
-        JUMP_LINK(script_func_local_1),
-        JUMP_LINK(script_func_local_2),
+        OBJECT(MODEL_NONE, 0, -4352, 0, 0, 0, 0, 0, bhvHiddenRedCoinStar),
         TERRAIN(/*terrainData*/ sa_seg7_collision),
         MACRO_OBJECTS(/*objList*/ sa_seg7_macro_objs),
         SET_BACKGROUND_MUSIC(/*settingsPreset*/ 0x0003, /*seq*/ (SEQ_LEVEL_WATER | SEQ_VARIATION)),
@@ -55,7 +43,7 @@ const LevelScript level_sa_entry[] = {
     END_AREA(),
 
     FREE_LEVEL_POOL(),
-    MARIO_POS(/*area*/ 1, /*yaw*/ 90, /*pos*/ 0, -1535, 0),
+    MARIO_POS(1, -180, 0, 0, 0),
     CALL(/*arg*/ 0, /*func*/ lvl_init_or_update),
     CALL_LOOP(/*arg*/ 1, /*func*/ lvl_init_or_update),
     CLEAR_LEVEL(),

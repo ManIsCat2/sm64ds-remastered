@@ -15,7 +15,7 @@
 #ifndef DEV
 #define START_LEVEL LEVEL_CASTLE_GROUNDS
 #else
-#define START_LEVEL LEVEL_JRB
+#define START_LEVEL LEVEL_SA
 #endif
 #define COINS_REQ_COINSTAR 100
 #define REDS_REQ 8
