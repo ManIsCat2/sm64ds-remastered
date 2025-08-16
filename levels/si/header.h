@@ -14,4 +14,6 @@ extern const MacroObject si_area_1_macro_objs[];
 // script
 extern const LevelScript level_si_entry[];
 
+#include "levels/si/si_model/geo_header.h"
+
 #endif

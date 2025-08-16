@@ -20,6 +20,9 @@ const GeoLayout si_area_1[] = {
 			GEO_OPEN_NODE(),
 				GEO_CAMERA(CAMERA_MODE_FREE_ROAM, 0, 0, 0, 0, -1024, 0, geo_camera_main),
 				GEO_OPEN_NODE(),
+					GEO_DISPLAY_LIST(LAYER_OPAQUE, si_model_r0_node_mesh_layer_1),
+					GEO_DISPLAY_LIST(LAYER_ALPHA, si_model_r0_node_mesh_layer_4),
+					GEO_DISPLAY_LIST(LAYER_TRANSPARENT, si_model_r0_node_mesh_layer_5),
 					GEO_RENDER_OBJ(),
 					GEO_ASM(0, geo_envfx_main),
 #ifndef TARGET_N64

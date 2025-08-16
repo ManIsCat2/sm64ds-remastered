@@ -14,3 +14,5 @@
 #include "levels/si/header.h"
 
 #include "levels/si/areas/1/geo.inc.c"
+
+#include "levels/si/si_model/geo.inc.c"

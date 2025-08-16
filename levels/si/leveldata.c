@@ -12,3 +12,5 @@
 #include "levels/si/texture.inc.c"
 #include "levels/si/areas/1/collision.inc.c"
 #include "levels/si/areas/1/macro.inc.c"
+
+#include "levels/si/si_model/model.inc.c"
