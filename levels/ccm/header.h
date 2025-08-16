@@ -57,4 +57,6 @@ extern const Trajectory ccm_seg7_trajectory_penguin_race[];
 // script
 extern const LevelScript level_ccm_entry[];
 
+#include "levels/ccm/ds_ccm_slide_model/geo_header.h"
+
 #endif

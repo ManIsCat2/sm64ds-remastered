@@ -40,10 +40,10 @@ static const LevelScript script_func_local_3[] = {
 };
 
 static const LevelScript script_func_local_4[] = {
-    OBJECT_WITH_ACTS(/*model*/ MODEL_PENGUIN, /*pos*/ -4952,  6656, -6075, /*angle*/ 0, 270, 0, /*bhvParam*/ BPARAM1(STAR_INDEX_ACT_3) | BPARAM2(RACING_PENGUIN_BP_THIN), /*bhv*/ bhvRacingPenguin,   /*acts*/ ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6),
-    OBJECT          (/*model*/ MODEL_NONE,    /*pos*/ -6500, -5836, -6400, /*angle*/ 0,   0, 0, /*bhvParam*/ 0, /*bhv*/ bhvPenguinRaceFinishLine),
-    OBJECT          (/*model*/ MODEL_NONE,    /*pos*/ -6393,  -716,  7503, /*angle*/ 0,   0, 0, /*bhvParam*/ 0, /*bhv*/ bhvPenguinRaceShortcutCheck),
-    OBJECT          (/*model*/ MODEL_NONE,    /*pos*/ -4943,  1321,   667, /*angle*/ 0,   0, 0, /*bhvParam*/ 0, /*bhv*/ bhvPlaysMusicTrackWhenTouched),
+    OBJECT_WITH_ACTS(MODEL_PENGUIN, -5427, 6656, -6144, 0, -90, 0, BPARAM1(STAR_INDEX_ACT_3) | BPARAM2(RACING_PENGUIN_BP_THIN), bhvRacingPenguin, ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6),
+    OBJECT(MODEL_NONE, -6500, -5836, -6400, 0, 0, 0, 0, bhvPenguinRaceFinishLine),
+    OBJECT(MODEL_NONE, -4869, 1806, -622, 0, 0, 0, 0, bhvPenguinRaceShortcutCheck),
+    OBJECT(MODEL_NONE, -4943, 1321, 667, 0, 0, 0, 0, bhvPlaysMusicTrackWhenTouched),
     RETURN(),
 };
 
@@ -98,7 +98,7 @@ const LevelScript level_ccm_entry[] = {
     END_AREA(),
 
     AREA(/*index*/ 2, ccm_geo_0005E8),
-        OBJECT(/*model*/ MODEL_NONE, /*pos*/ -5836, 7465, -6143, /*angle*/ 0, 90, 0, /*bhvParam*/ BPARAM2(WARP_NODE_0A), /*bhv*/ bhvAirborneWarp),
+        OBJECT(/*model*/ MODEL_NONE, /*pos*/ -5837, 7927, -6144, /*angle*/ 0, 90, 0, /*bhvParam*/ BPARAM2(WARP_NODE_0A), /*bhv*/ bhvAirborneWarp),
         WARP_NODE(/*id*/ WARP_NODE_14,      /*destLevel*/ LEVEL_CCM,    /*destArea*/ 1, /*destNode*/ WARP_NODE_14, /*flags*/ WARP_NO_CHECKPOINT),
         WARP_NODE(/*id*/ WARP_NODE_0A,      /*destLevel*/ LEVEL_CCM,    /*destArea*/ 2, /*destNode*/ WARP_NODE_0A, /*flags*/ WARP_NO_CHECKPOINT),
         WARP_NODE(/*id*/ WARP_NODE_SUCCESS, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 1, /*destNode*/ WARP_NODE_33, /*flags*/ WARP_NO_CHECKPOINT),

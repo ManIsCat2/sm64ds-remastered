@@ -1918,11 +1918,7 @@ void pss_end_slide(struct PlayerState *m) {
         u16 slideTime = level_control_timer(TIMER_CONTROL_STOP);
         if (slideTime < SLIDE_TIME) {
             m->playerObj->oBhvParams = (STAR_INDEX_ACT_2 << 24);
-            #ifdef RM2C_HAS_CUSTOM_STAR_POS
-            spawn_default_star(PssSlideStarPos);
-            #else
             spawn_default_star(-6358.0f, -4300.0f, 4700.0f);
-            #endif
         }
         gPSSSlideStarted = FALSE;
     }

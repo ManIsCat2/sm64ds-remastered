@@ -13,9 +13,6 @@
 extern const Trajectory KoopaBoB_path[];
 extern const Trajectory KoopaTHI_path[]; 
 #endif
-#ifdef RM2C_HAS_CUSTOM_STAR_POS
-#include "src/extras/rm2c/star_pos.inc.c" //just defines
-#endif
 
 s32 coin_step(s16 *collisionFlagsPtr);
 void moving_coin_flicker(void);

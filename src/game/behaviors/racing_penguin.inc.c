@@ -149,11 +149,7 @@ static void racing_penguin_act_show_final_text(void) {
             o->oTimer = 0;
         }
     } else if (o->oRacingPenguinPlayerWon) {
-#ifdef RM2C_HAS_CUSTOM_STAR_POS
-        cur_obj_spawn_star_at_y_offset(RacingPenguinStarPos, 200.0f);
-#else
-        cur_obj_spawn_star_at_y_offset(-7339.0f, -5700.0f, -6774.0f, 200.0f);
-#endif
+        cur_obj_spawn_star_at_y_offset(-7322.0f, -5735.0f, -6707.0f, 200.0f); // New DS Star position
         o->oRacingPenguinPlayerWon = FALSE;
     }
 }

@@ -75,11 +75,7 @@ void tuxies_mother_act_1(void) {
             if (o->prevObj->oHeldState == HELD_FREE) {
                 o->prevObj->oInteractionSubtype &= ~INT_SUBTYPE_DROP_IMMEDIATELY;                
                 obj_set_behavior(o->prevObj, bhvUnused20E0);
-#ifdef RM2C_HAS_CUSTOM_STAR_POS
-                cur_obj_spawn_star_at_y_offset(TuxieMotherStarPos, 200.0f);
-#else
                 cur_obj_spawn_star_at_y_offset(3167.0f, -4300.0f, 5108.0f, 200.0f);
-#endif
                 o->oAction = 2;
             }
             break;
