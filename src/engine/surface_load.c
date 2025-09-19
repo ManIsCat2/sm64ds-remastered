@@ -846,15 +846,11 @@ void load_object_collision_model(void) {
         drawDist = colDist;
     }
 
-    f32 playerDist = obj->oDistanceToPlayer;
-
-    int isInit = (playerDist == F32_MAX);
-
     // A value higher than 500.0f causes crashes with surfaces
     s32 inColRadius = (
            (sqrLateralDist < sqr(colDist))
         && (verticalPlayerDiff > 0 || verticalPlayerDiff > -colDist)
-        && (verticalPlayerDiff < 0 || verticalPlayerDiff < (colDist + 500.0f))
+        && (verticalPlayerDiff < 0 || verticalPlayerDiff < (colDist + 2000.0f))
     );
 
     // Update if no Time Stop, in range, and in the current room.
@@ -869,9 +865,10 @@ void load_object_collision_model(void) {
         }
     }
 
+    f32 playerDist = obj->oDistanceToPlayer;
     // On an object's first frame, the distance is set to F32_MAX.
     // If the distance hasn't been updated, update it now.
-    if (isInit) {
+    if (playerDist == F32_MAX) {
         playerDist = dist_between_objects(obj, gPlayerObject);
     }
 

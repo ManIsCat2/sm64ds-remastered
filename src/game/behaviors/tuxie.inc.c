@@ -75,7 +75,7 @@ void tuxies_mother_act_1(void) {
             if (o->prevObj->oHeldState == HELD_FREE) {
                 o->prevObj->oInteractionSubtype &= ~INT_SUBTYPE_DROP_IMMEDIATELY;                
                 obj_set_behavior(o->prevObj, bhvUnused20E0);
-                cur_obj_spawn_star_at_y_offset(3167.0f, -4300.0f, 5108.0f, 200.0f);
+                cur_obj_spawn_star_at_y_offset(3174.4f, -3457.6f, 5273.6f, 200.0f);
                 o->oAction = 2;
             }
             break;

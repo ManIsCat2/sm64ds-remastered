@@ -723,18 +723,18 @@ void handle_menu_scrolling(s8 scrollDirection, s8 *currentIndex, s8 minIndex, s8
     u8 index = 0;
 
     if (scrollDirection == MENU_SCROLL_VERTICAL) {
-        if (gPlayer3Controller->rawStickY > 60) {
+        if (gPlayer1Controller->rawStickY > 60) {
             index |= 0b01; // Up
         }
-        if (gPlayer3Controller->rawStickY < -60) {
+        if (gPlayer1Controller->rawStickY < -60) {
             index |= 0b10; // Down
         }
     } else if (scrollDirection == MENU_SCROLL_HORIZONTAL) {
-        if (gPlayer3Controller->rawStickX > 60) {
+        if (gPlayer1Controller->rawStickX > 60) {
             index |= 0b10; // Right
         }
 
-        if (gPlayer3Controller->rawStickX < -60) {
+        if (gPlayer1Controller->rawStickX < -60) {
             index |= 0b01; // Left
         }
     }
@@ -1716,8 +1716,8 @@ void render_dialog_entries(void) {
         case MENU_STATE_DIALOG_OPEN:
             gDialogBoxAngle = 0.0f;
 
-            if ((gPlayer3Controller->buttonPressed & A_BUTTON)
-             || (gPlayer3Controller->buttonPressed & B_BUTTON)) {
+            if ((gPlayer1Controller->buttonPressed & A_BUTTON)
+             || (gPlayer1Controller->buttonPressed & B_BUTTON)) {
                 if (gNextDialogPageStartStrIndex == -1) {
                     handle_special_dialog_text(gDialogID);
                     gMenuState = MENU_STATE_DIALOG_CLOSING;
@@ -1801,15 +1801,7 @@ void render_dialog_entries(void) {
         render_dialog_triangle_choice();
     }
 
-    #ifdef VERSION_EU
-    #undef BORDER_HEIGHT
-    #define BORDER_HEIGHT 8
-    #endif
     gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 2, 2, SCREEN_WIDTH - BORDER_HEIGHT / 2, SCREEN_HEIGHT - BORDER_HEIGHT / 2);
-    #ifdef VERSION_EU
-    #undef BORDER_HEIGHT
-    #define BORDER_HEIGHT 1
-    #endif
 
     if (gNextDialogPageStartStrIndex != -1 && gMenuState == MENU_STATE_DIALOG_OPEN) {
         render_dialog_triangle_next(dialog->linesPerBox);
@@ -2531,6 +2523,20 @@ s32 gCourseCompleteScreenTimer = 0;
 s32 gCourseCompleteCoins = 0;
 s8 gHudFlash = 0;
 
+// ex-alo change
+// Make this a function due to diffs
+#if EXIT_COURSE_ANYWHERE
+#define should_render_pause_options(m) TRUE
+#else
+u8 should_render_pause_options(struct PlayerState *m) {
+    return (m->action & ACT_FLAG_PAUSE_EXIT)
+#ifdef CHEATS_ACTIONS
+    || (Cheats.EnableCheats && Cheats.ExitAnywhere) // Added support for the "Exit course at any time" cheat
+#endif
+    ;
+}
+#endif
+
 s16 render_pause_screen(void) {
     s16 index;
 
@@ -2560,19 +2566,11 @@ s16 render_pause_screen(void) {
             shade_screen();
             render_pause_my_score_coins();
 
-#if !EXIT_COURSE_ANYWHERE
-/* Added support for the "Exit course at any time" cheat */
-            if ((gPlayerStates[0].action & ACT_FLAG_PAUSE_EXIT) 
-#ifdef CHEATS_ACTIONS
-                || (Cheats.EnableCheats && Cheats.ExitAnywhere)
-#endif
-                ) {
+            if (should_render_pause_options(gPlayerState)) {
                 render_pause_course_options(99, 93, &gMenuLineNum, 15);
             }
-#endif
-            if (gPlayer3Controller->buttonPressed & A_BUTTON
-                || (gPlayer3Controller->buttonPressed & START_BUTTON))
-            {
+
+            if (gPlayer1Controller->buttonPressed & Z_BUTTON_DEF(A_BUTTON | START_BUTTON)) {
                 level_set_transition(0, NULL);
                 play_sound(SOUND_MENU_PAUSE_CLOSE, gGlobalSoundSource);
                 gMenuState = MENU_STATE_DEFAULT;
@@ -2594,7 +2592,7 @@ s16 render_pause_screen(void) {
             render_pause_castle_menu_box(160, 143);
             render_pause_castle_main_strings(104, 60);
 
-            if ((gPlayer3Controller->buttonPressed & A_BUTTON) || (gPlayer3Controller->buttonPressed & START_BUTTON)) {
+            if (gPlayer1Controller->buttonPressed & Z_BUTTON_DEF(A_BUTTON | START_BUTTON)) {
                 level_set_transition(0, NULL);
                 play_sound(SOUND_MENU_PAUSE_CLOSE, gGlobalSoundSource);
                 gMenuMode = MENU_MODE_NONE;
@@ -2604,10 +2602,6 @@ s16 render_pause_screen(void) {
             }
             break;
     }
-
-    if (gMenuTextAlpha < 250) {
-        gMenuTextAlpha += 25;
-    }
 #ifdef EXT_OPTIONS_MENU
     } else {
         shade_screen();
@@ -2616,6 +2610,9 @@ s16 render_pause_screen(void) {
     optmenu_check_buttons();
     optmenu_draw_prompt();
 #endif
+    if (gMenuTextAlpha < 250) {
+        gMenuTextAlpha += 25;
+    }
 
     return MENU_OPT_NONE;
 }
@@ -2988,8 +2985,7 @@ s16 render_course_complete_screen(void) {
             render_save_confirmation(100, 86, &gMenuLineNum, 20);
 #endif
 
-            if (gCourseCompleteScreenTimer > 110
-                && (gPlayer3Controller->buttonPressed & A_BUTTON || gPlayer3Controller->buttonPressed & START_BUTTON)) {
+            if (gCourseCompleteScreenTimer > 110 && (gPlayer1Controller->buttonPressed & Z_BUTTON_DEF(A_BUTTON | START_BUTTON))) {
                 level_set_transition(0, NULL);
                 play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
                 gMenuState = MENU_STATE_DEFAULT;

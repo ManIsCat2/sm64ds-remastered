@@ -18,6 +18,10 @@
 #include "../platform.h"
 #include "../fs/fs.h"
 
+#ifdef TOUCH_CONTROLS
+#include "controller_touchscreen.h"
+#endif
+
 #include "game/level_update.h"
 
 // mouse buttons are also in the controller namespace (why), just offset 0x100
@@ -243,6 +247,9 @@ static void controller_sdl_read(OSContPad *pad) {
 
     for (u32 i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i) {
         const bool new = SDL_GameControllerGetButton(sdl_cntrl, i);
+#ifdef TOUCH_CONTROLS
+        if (new) gTouchControlsInUse = FALSE;
+#endif
         update_button(i, new);
     }
 

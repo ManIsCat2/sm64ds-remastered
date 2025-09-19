@@ -47,3 +47,6 @@
 #include "levels/ccm/areas/2/trajectory.inc.c"
 
 #include "levels/ccm/ds_ccm_slide_model/model.inc.c"
+#include "levels/ccm/ds_ccm_model/model.inc.c"
+
+#include "levels/ccm/ds_ccm/collision.inc.c"

@@ -25,3 +25,4 @@
 #include "levels/ccm/areas/2/geo.inc.c"
 
 #include "levels/ccm/ds_ccm_slide_model/geo.inc.c"
+#include "levels/ccm/ds_ccm_model/geo.inc.c"

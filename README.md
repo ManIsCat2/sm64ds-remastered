@@ -37,7 +37,7 @@ Fork of [AloXado320/sm64ex-alo](https://github.com/AloUltraExt/sm64ex-alo)
 
   #### Install build dependencies:
   ```sh
-  sudo apt install -y binutils-mips-linux-gnu build-essential git libcapstone-dev pkgconf python3 gcc-mips-linux-gnu
+  sudo apt install -y binutils-mips-linux-gnu build-essential git pkgconf python3 gcc-mips-linux-gnu
   ```
 
   #### Build:

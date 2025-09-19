@@ -29,6 +29,10 @@
 #include "level_table.h"
 #include "pc/configfile.h"
 
+#ifdef TOUCH_CONTROLS
+#include "pc/controller/controller_touchscreen.h"
+#endif
+
 #define CBUTTON_MASK (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
 
 /**
@@ -3388,6 +3392,10 @@ void update_camera(struct Camera *c) {
     }
 
     update_lakitu(c);
+
+#ifdef TOUCH_CONTROLS
+    gTouchAnalogCamera = FALSE;
+#endif
 
     gLakituState.lastFrameAction = sPlayerCamState->action;
 }

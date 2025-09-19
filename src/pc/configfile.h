@@ -57,8 +57,13 @@ extern unsigned int configKeyStickLeft[];
 extern unsigned int configKeyStickRight[];
 extern unsigned int configStickDeadzone;
 extern unsigned int configRumbleStrength;
+
+#ifdef TOUCH_CONTROLS
+extern bool configAutohideTouch;
+#endif
+
 #ifdef EXTERNAL_DATA
-extern bool         configPrecacheRes;
+extern bool configPrecacheRes;
 #endif
 
 extern bool         configHUD;

@@ -93,6 +93,10 @@ unsigned int configKeyStickRight[MAX_BINDS] = { 0x0020,     VK_INVALID, VK_INVAL
 unsigned int configStickDeadzone = 16; // 16*DEADZONE_STEP=4960 (the original default deadzone)
 unsigned int configRumbleStrength = 50;
 
+#ifdef TOUCH_CONTROLS
+bool configAutohideTouch = false;
+#endif
+
 #ifdef EXTERNAL_DATA
 bool configPrecacheRes = true;
 #endif
@@ -162,6 +166,9 @@ static const struct ConfigOption options[] = {
     {.name = "ds_jump_height",       .type = CONFIG_TYPE_BOOL, .boolValue = &configJHeight},
     {.name = "ds_nerfs",             .type = CONFIG_TYPE_BOOL, .boolValue = &configNerfs},
     {.name = "globalcapblocks",      .type = CONFIG_TYPE_BOOL, .boolValue = &configGlobalCapBlocks},
+#ifdef TOUCH_CONTROLS
+    {.name = "touch_autohide",       .type = CONFIG_TYPE_BOOL, .boolValue = &configAutohideTouch},
+#endif
 };
 
 // Reads an entire line from a file (excluding the newline character) and returns an allocated string

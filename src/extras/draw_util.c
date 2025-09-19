@@ -293,7 +293,7 @@ void print_generic_string_ascii(s16 x, s16 y, const char *str) {
  */
 void print_generic_string_detail(s16 x, s16 y, u8 *str, u8 r, u8 g, u8 b, u8 a, s8 hasShadow, s8 shadowPad) {
     if (hasShadow) {
-        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, a);
         print_generic_string(x + shadowPad, y - shadowPad, str);
     }
 
@@ -307,7 +307,7 @@ void print_generic_string_detail(s16 x, s16 y, u8 *str, u8 r, u8 g, u8 b, u8 a, 
  */
 void print_generic_string_ascii_detail(s16 x, s16 y, const char *str, u8 r, u8 g, u8 b, u8 a, s8 hasShadow, s8 shadowPad) {
     if (hasShadow) {
-        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, a);
         print_generic_string_ascii(x + shadowPad, y - shadowPad, str);
     }
 

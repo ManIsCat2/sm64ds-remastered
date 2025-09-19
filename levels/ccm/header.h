@@ -59,4 +59,8 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/ds_ccm_slide_model/geo_header.h"
 
+#include "levels/ccm/ds_ccm_model/geo_header.h"
+
+#include "levels/ccm/ds_ccm/collision_header.h"
+
 #endif

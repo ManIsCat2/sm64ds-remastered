@@ -1,19 +1,18 @@
-FROM ubuntu:18.04 as build
+FROM ubuntu:22.04 as build
 
 RUN apt-get update && \
     apt-get install -y \
         binutils-mips-linux-gnu \
-        bsdmainutils \
+        bsdextrautils \
         build-essential \
         git \
         libsdl2-dev \
-        pkg-config \
-        python3 \
-        wget
+        pkgconf \
+        python3
 
-RUN mkdir /sm64
-WORKDIR /sm64
-ENV PATH="/sm64/tools:${PATH}"
+RUN mkdir /sm64ds-remastered
+WORKDIR /sm64ds-remastered
+ENV PATH="/sm64ds-remastered/tools:${PATH}"
 
-CMD echo 'usage: docker run --rm --mount type=bind,source="$(pwd)",destination=/sm64 sm64 make VERSION=us -j4\n' \
-         'see https://github.com/n64decomp/sm64/blob/master/README.md for advanced usage'
+CMD echo 'Usage: docker run --rm -v ${PWD}:/sm64ds-remastered sm64ds-remastered make VERSION=us -j4\n' \
+         'See https://github.com/ExcellentGamer/sm64ds-remastered/blob/master/README.md for more information'
