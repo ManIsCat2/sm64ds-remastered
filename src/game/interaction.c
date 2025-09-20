@@ -1628,6 +1628,8 @@ u32 interact_hoot(struct PlayerState *m, UNUSED u32 interactType, struct Object 
     return FALSE;
 }
 
+extern void cutscene_put_cap_on(struct PlayerState *m);
+
 u32 interact_cap(struct PlayerState *m, UNUSED u32 interactType, struct Object *o) {
     u32 capFlag = get_player_cap_flag(o);
     u16 capMusic = 0;
