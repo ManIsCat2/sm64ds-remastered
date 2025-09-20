@@ -9,14 +9,25 @@ static void tas_init(void) {
     fp = fopen("cont.m64", "rb");
     if (fp != NULL) {
         uint8_t buf[0x400];
-        fread(buf, 1, sizeof(buf), fp);
+        size_t got = fread(buf, 1, sizeof(buf), fp);
+        if (got != sizeof(buf)) {
+            // short read or EOF, close file
+            fclose(fp);
+            fp = NULL;
+        }
     }
 }
 
 static void tas_read(OSContPad *pad) {
     if (fp != NULL) {
         uint8_t bytes[4] = {0};
-        fread(bytes, 1, 4, fp);
+        size_t got = fread(bytes, 1, 4, fp);
+        if (got != 4) {
+            // EOF or read error, close file and zero inputs
+            fclose(fp);
+            fp = NULL;
+            bytes[0] = bytes[1] = bytes[2] = bytes[3] = 0;
+        }
         pad->button = (bytes[0] << 8) | bytes[1];
         pad->stick_x = bytes[2];
         pad->stick_y = bytes[3];

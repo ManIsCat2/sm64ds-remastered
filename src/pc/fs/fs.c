@@ -356,7 +356,20 @@ void *fs_load_file(const char *vpath, uint64_t *outsize) {
 
 const char *fs_get_write_path(const char *vpath) {
     static char path[SYS_MAX_PATH];
-    snprintf(path, sizeof(path), "%s/%s", fs_writepath, vpath);
+    size_t left = sizeof(path);
+    char *p = path;
+
+    size_t n = strnlen(fs_writepath, left);
+    if (n >= left) { path[0] = '\0'; return path; }
+    memcpy(p, fs_writepath, n);
+    p += n; left -= n;
+
+    if (left > 1) { *p++ = '/'; left--; }
+
+    n = strnlen(vpath, left);
+    if (n >= left) { *p = '\0'; return path; }
+    memcpy(p, vpath, n);
+    p += n; *p = '\0';
     return path;
 }
 

@@ -138,54 +138,168 @@ static inline bool copy_userdata(const char *userdir) {
     bool fileFound = false;
 
     // check if a save already exists in the new folder
-    snprintf(path, sizeof(path), "%s/" SAVE_FILENAME, userdir);
+    {
+        const size_t ulen = strlen(userdir);
+        const size_t flen = sizeof(SAVE_FILENAME) - 1;
+        if (ulen + 1 + flen + 1 > sizeof(path)) return false; // path would overflow
+        memcpy(path, userdir, ulen);
+        path[ulen] = '/';
+        memcpy(path + ulen + 1, SAVE_FILENAME, flen + 1);
+    }
     if (fs_sys_file_exists(path)) return false;
-    snprintf(path, sizeof(path), "%s/sm64dsr_save_file_0.sav", userdir);
+    {
+        const size_t ulen = strlen(userdir);
+        const size_t flen = sizeof(SAVE_FILENAME) - 1;
+        if (ulen + 1 + flen + 1 > sizeof(path)) return false; // would overflow
+        memcpy(path, userdir, ulen);
+        path[ulen] = '/';
+        memcpy(path + ulen + 1, SAVE_FILENAME, flen + 1);
+    }
     if (fs_sys_file_exists(path)) return false;
-    snprintf(path, sizeof(path), "%s/sm64dsr_save_file_1.sav", userdir);
+    {
+        const char *suffix = "sm64dsr_save_file_0.sav";
+        const size_t ulen = strlen(userdir);
+        const size_t slen = strlen(suffix);
+        if (ulen + 1 + slen + 1 > sizeof(path)) return false;
+        memcpy(path, userdir, ulen);
+        path[ulen] = '/';
+        memcpy(path + ulen + 1, suffix, slen + 1);
+    }
     if (fs_sys_file_exists(path)) return false;
-    snprintf(path, sizeof(path), "%s/sm64dsr_save_file_2.sav", userdir);
+    {
+        const char *suffix = "sm64dsr_save_file_1.sav";
+        const size_t ulen = strlen(userdir);
+        const size_t slen = strlen(suffix);
+        if (ulen + 1 + slen + 1 > sizeof(path)) return false;
+        memcpy(path, userdir, ulen);
+        path[ulen] = '/';
+        memcpy(path + ulen + 1, suffix, slen + 1);
+    }
     if (fs_sys_file_exists(path)) return false;
-    snprintf(path, sizeof(path), "%s/sm64dsr_save_file_3.sav", userdir);
+    {
+        const char *suffix = "sm64dsr_save_file_2.sav";
+        const size_t ulen = strlen(userdir);
+        const size_t slen = strlen(suffix);
+        if (ulen + 1 + slen + 1 > sizeof(path)) return false;
+        memcpy(path, userdir, ulen);
+        path[ulen] = '/';
+        memcpy(path + ulen + 1, suffix, slen + 1);
+    }
     if (fs_sys_file_exists(path)) return false;
-
-    // check if a save exists in the old folder
+    {
+        const char *suffix = "sm64dsr_save_file_3.sav";
+        const size_t ulen = strlen(userdir);
+        const size_t slen = strlen(suffix);
+        if (ulen + 1 + slen + 1 > sizeof(path)) return false;
+        memcpy(path, userdir, ulen);
+        path[ulen] = '/';
+        memcpy(path + ulen + 1, suffix, slen + 1);
+    }
+    if (fs_sys_file_exists(path)) return false;
     bool ret = false;
-    snprintf(oldpath, sizeof(oldpath), "%s/" SAVE_FILENAME, SDL_AndroidGetInternalStoragePath());
+    {
+        const char *ipath = SDL_AndroidGetInternalStoragePath();
+        const size_t ilen = strlen(ipath);
+        const size_t flen = sizeof(SAVE_FILENAME) - 1;
+        if (ilen + 1 + flen + 1 <= sizeof(oldpath)) {
+            memcpy(oldpath, ipath, ilen);
+            oldpath[ilen] = '/';
+            memcpy(oldpath + ilen + 1, SAVE_FILENAME, flen + 1);
+        } else {
+            oldpath[0] = '\0';
+        }
+    }
     if (fs_sys_file_exists(oldpath)) {
         fileFound = true;
-        snprintf(path, sizeof(path), "%s/" SAVE_FILENAME, userdir);
+        const size_t ulen = strlen(userdir);
+        const size_t flen = sizeof(SAVE_FILENAME) - 1;
+        if (ulen + 1 + flen + 1 <= sizeof(path)) {
+            memcpy(path, userdir, ulen);
+            path[ulen] = '/';
+            memcpy(path + ulen + 1, SAVE_FILENAME, flen + 1);
+        } else {
+            path[0] = '\0';
+        }
         ret = fs_sys_copy_file(oldpath, path);
     }
-    snprintf(oldpath, sizeof(oldpath), "%s/sm64dsr_save_file_0.sav", SDL_AndroidGetInternalStoragePath());
+    {
+        const char *ipath = SDL_AndroidGetInternalStoragePath();
+        const size_t ilen = strlen(ipath);
+        const size_t flen = sizeof(SAVE_FILENAME) - 1;
+        if (ilen + 1 + flen + 1 <= sizeof(oldpath)) {
+            memcpy(oldpath, ipath, ilen);
+            oldpath[ilen] = '/';
+            memcpy(oldpath + ilen + 1, SAVE_FILENAME, flen + 1);
+        } else {
+            oldpath[0] = '\0';
+        }
+    }
     if (fs_sys_file_exists(oldpath)) {
         fileFound = true;
-        snprintf(path, sizeof(path), "%s/sm64dsr_save_file_0.sav", userdir);
+        const size_t ulen = strlen(userdir);
+        const size_t flen = sizeof(SAVE_FILENAME) - 1;
+        if (ulen + 1 + flen + 1 <= sizeof(path)) {
+            memcpy(path, userdir, ulen);
+            path[ulen] = '/';
+            memcpy(path + ulen + 1, SAVE_FILENAME, flen + 1);
+        } else {
+            path[0] = '\0';
+        }
         ret = fs_sys_copy_file(oldpath, path);
     }
-    snprintf(oldpath, sizeof(oldpath), "%s/sm64dsr_save_file_1.sav", SDL_AndroidGetInternalStoragePath());
-    if (fs_sys_file_exists(oldpath)) {
-        fileFound = true;
-        snprintf(path, sizeof(path), "%s/sm64dsr_save_file_1.sav", userdir);
-        ret = fs_sys_copy_file(oldpath, path);
-    }
-    snprintf(oldpath, sizeof(oldpath), "%s/sm64dsr_save_file_2.sav", SDL_AndroidGetInternalStoragePath());
-    if (fs_sys_file_exists(oldpath)) {
-        fileFound = true;
-        snprintf(path, sizeof(path), "%s/sm64dsr_save_file_2.sav", userdir);
-        ret = fs_sys_copy_file(oldpath, path);
-    }
-    snprintf(oldpath, sizeof(oldpath), "%s/sm64dsr_save_file_3.sav", SDL_AndroidGetInternalStoragePath());
-    if (fs_sys_file_exists(oldpath)) {
-        fileFound = true;
-        snprintf(path, sizeof(path), "%s/sm64dsr_save_file_3.sav", userdir);
-        ret = fs_sys_copy_file(oldpath, path);
+
+    const char *suffixes[] = { "sm64dsr_save_file_0.sav", "sm64dsr_save_file_1.sav", "sm64dsr_save_file_2.sav", "sm64dsr_save_file_3.sav" };
+    for (int si = 0; si < 4; ++si) {
+        const char *suffix = suffixes[si];
+        const char *ipath = SDL_AndroidGetInternalStoragePath();
+        const size_t ilen = strlen(ipath);
+        const size_t slen = strlen(suffix);
+        if (ilen + 1 + slen + 1 <= sizeof(oldpath)) {
+            memcpy(oldpath, ipath, ilen);
+            oldpath[ilen] = '/';
+            memcpy(oldpath + ilen + 1, suffix, slen + 1);
+        } else {
+            oldpath[0] = '\0';
+        }
+        if (fs_sys_file_exists(oldpath)) {
+            fileFound = true;
+            const size_t ulen = strlen(userdir);
+            if (ulen + 1 + slen + 1 <= sizeof(path)) {
+                memcpy(path, userdir, ulen);
+                path[ulen] = '/';
+                memcpy(path + ulen + 1, suffix, slen + 1);
+            } else {
+                path[0] = '\0';
+            }
+            ret = fs_sys_copy_file(oldpath, path);
+        }
     }
     if (!fileFound) return false;
 
     // also try to copy the config
-    snprintf(path, sizeof(path), "%s/" CONFIGFILE_DEFAULT, userdir);
-    snprintf(oldpath, sizeof(oldpath), "%s/" CONFIGFILE_DEFAULT, SDL_AndroidGetInternalStoragePath());
+    {
+        const size_t ulen = strlen(userdir);
+        const size_t flen = sizeof(CONFIGFILE_DEFAULT) - 1;
+        if (ulen + 1 + flen + 1 <= sizeof(path)) {
+            memcpy(path, userdir, ulen);
+            path[ulen] = '/';
+            memcpy(path + ulen + 1, CONFIGFILE_DEFAULT, flen + 1);
+        } else {
+            path[0] = '\0';
+        }
+    }
+    {
+        const char *ipath = SDL_AndroidGetInternalStoragePath();
+        const size_t ilen = strlen(ipath);
+        const size_t flen = sizeof(CONFIGFILE_DEFAULT) - 1;
+        if (ilen + 1 + flen + 1 <= sizeof(oldpath)) {
+            memcpy(oldpath, ipath, ilen);
+            oldpath[ilen] = '/';
+            memcpy(oldpath + ilen + 1, CONFIGFILE_DEFAULT, flen + 1);
+        } else {
+            oldpath[0] = '\0';
+        }
+    }
     fs_sys_copy_file(oldpath, path);
 
     return ret;
@@ -215,7 +329,14 @@ static inline bool copy_userdata(const char *userdir) {
     char path[SYS_MAX_PATH] = { 0 };
 
     // check if a save already exists in the new folder
-    snprintf(path, sizeof(path), "%s/" SAVE_FILENAME, userdir);
+    {
+        const size_t ulen = strlen(userdir);
+        const size_t flen = sizeof(SAVE_FILENAME) - 1;
+        if (ulen + 1 + flen + 1 > sizeof(path)) return false;
+        memcpy(path, userdir, ulen);
+        path[ulen] = '/';
+        memcpy(path + ulen + 1, SAVE_FILENAME, flen + 1);
+    }
     if (fs_sys_file_exists(path)) return false;
 
     // check if a save exists in the old folder ('pc' instead of 'ex')

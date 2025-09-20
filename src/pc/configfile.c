@@ -159,7 +159,7 @@ static const struct ConfigOption options[] = {
     #endif
     {.name = "skip_intro",           .type = CONFIG_TYPE_BOOL, .boolValue = &configSkipIntro},
     {.name = "wallslide",            .type = CONFIG_TYPE_BOOL, .boolValue = &configWallslide},
-    {.name = "y_to_dash",            .type = CONFIG_TYPE_BOOL, .boolValue = &configDash},
+    {.name = "y_to_dash",            .type = CONFIG_TYPE_UINT, .uintValue = &configDash},
     {.name = "dive",                 .type = CONFIG_TYPE_BOOL, .boolValue = &configDive},
     {.name = "ds_jump_height",       .type = CONFIG_TYPE_BOOL, .boolValue = &configJHeight},
     {.name = "ds_nerfs",             .type = CONFIG_TYPE_BOOL, .boolValue = &configNerfs},
