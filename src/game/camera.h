@@ -655,7 +655,7 @@ void set_camera_mode(struct Camera *c, s16 mode, s16 frames);
 void update_camera(struct Camera *c);
 void reset_camera(struct Camera *c);
 void init_camera(struct Camera *c);
-void select_mario_cam_mode(void);
+void select_player_cam_mode(void);
 Gfx *geo_camera_main(s32 callContext, struct GraphNode *g, void *context);
 void stub_camera_2(UNUSED struct Camera *c);
 void stub_camera_3(UNUSED struct Camera *c);

@@ -341,10 +341,6 @@ void geo_process_perspective(struct GraphNodePerspective *node) {
         Mtx *mtx = alloc_display_list(sizeof(*mtx));
 
         sGeoAspectRatio = (f32) gCurGraphNodeRoot->width / (f32) gCurGraphNodeRoot->height;
-        // Only "adjust" aspect radio on N64, so on PC targets EU still looks fine.
-#if defined(VERSION_EU) && defined(TARGET_N64)
-        sGeoAspectRatio *= 1.1f;
-#endif
         // With low fovs, coordinate overflow can occur more easily. This slightly reduces precision only while zoomed in.
         f32 scale = node->fov < 28.0f ? remap(MAX(node->fov, 15), 15, 28, 0.5f, 1.0f): 1.0f;
 
@@ -384,12 +380,8 @@ void geo_process_perspective(struct GraphNodePerspective *node) {
  * range of this node.
  */
 void geo_process_level_of_detail(struct GraphNodeLevelOfDetail *node) {
-#ifdef TARGET_N64
-    f32 distanceFromCam = -gMatStack[gMatStackIndex][3][2]; // z-component of the translation column
-#else
     // We assume modern hardware is powerful enough to draw the most detailed variant
     f32 distanceFromCam = 0;
-#endif
 
     if ((f32)node->minDistance <= distanceFromCam && distanceFromCam < (f32)node->maxDistance) {
         if (node->node.children != 0) {
@@ -1008,11 +1000,7 @@ s32 obj_is_in_view(struct GraphNodeObject *node, Mat4 matrix) {
 
     // This multiplication should really be performed on 4:3 as well,
     // but the issue will be more apparent on widescreen.
-#ifdef TARGET_N64
-    hScreenEdge *= sGeoAspectRatio;
-#else
     hScreenEdge *= GFX_DIMENSIONS_ASPECT_RATIO;
-#endif
 
     if (geo != NULL && geo->type == GRAPH_NODE_TYPE_CULLING_RADIUS) {
         cullingRadius = ((struct GraphNodeCullingRadius *) geo)->cullingRadius;

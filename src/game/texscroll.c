@@ -6,11 +6,7 @@
 #include "tile_scroll.h"
 #include "texscroll.h"
 
-#ifdef TARGET_N64
-#define SCROLL_CONDITION(condition) condition
-#else
 #define SCROLL_CONDITION(condition) 1
-#endif
 
 #include "src/game/texscroll/castle_grounds_texscroll.inc.c"
 #include "src/game/texscroll/castle_courtyard_texscroll.inc.c"

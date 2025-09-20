@@ -16,9 +16,7 @@
 #define NUM_ACTS_PER_COURSE 7
 
 // Support both types of endianness on PC Port (little and big)
-#ifndef TARGET_N64
 #define SWAP_ENDIAN_SAVE_FILE
-#endif
 
 struct SaveBlockSignature {
     u16 magic;

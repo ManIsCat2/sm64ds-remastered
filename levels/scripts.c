@@ -85,11 +85,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_WATER_SPLASH,            water_splash_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WAVE_TRAIL,              wave_trail_geo),
     LOAD_MODEL_FROM_GEO(MODEL_YELLOW_COIN,             yellow_coin_geo),
-#ifndef TARGET_N64
     LOAD_MODEL_FROM_GEO(MODEL_POWER_FLOWER,            power_flower_geo),
-#else
-    LOAD_MODEL_FROM_GEO(MODEL_POWER_FLOWER,            yellow_coin_geo),
-#endif
     LOAD_MODEL_FROM_GEO(MODEL_STAR,                    star_geo),
     LOAD_MODEL_FROM_GEO(MODEL_TRANSPARENT_STAR,        transparent_star_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WOODEN_SIGNPOST,         wooden_signpost_geo),
@@ -116,13 +112,8 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_MARIOS_WING_CAP,         marios_wing_cap_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MARIOS_CAP,              marios_cap_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MARIOS_CAP,              marios_cap_geo), // repeated
-#ifndef TARGET_N64
     LOAD_MODEL_FROM_GEO(MODEL_LUIGIS_CAP,              luigis_cap_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WARIOS_CAP,              warios_cap_geo),
-#else
-    LOAD_MODEL_FROM_GEO(MODEL_LUIGIS_CAP,              marios_cap_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_WARIOS_CAP,              marios_cap_geo),
-#endif
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_KEY_CUTSCENE,     bowser_key_cutscene_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_KEY,              bowser_key_geo),
     LOAD_MODEL_FROM_GEO(MODEL_RED_FLAME_SHADOW,        red_flame_shadow_geo),

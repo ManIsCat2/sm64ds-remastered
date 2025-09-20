@@ -15,11 +15,7 @@
 #include "extras/cheats.h"
 #endif
 #ifdef EXT_OPTIONS_MENU
-#ifndef TARGET_N64
 #include "pc/configfile.h"
-#else
-extern int configWallslide;
-#endif
 #endif
 
 static s16 sMovingSandSpeeds[] = { 12, 8, 4, 0 };

@@ -22,13 +22,6 @@
 #include "include/tweaks.h"
 #endif
 
-#if defined(__GNUC__) && defined(TARGET_N64)
-void *memset(void *dest, int c, size_t n);
-int memcmp(const void *str1, const void *str2, size_t n);
-void *memmove(void *str1, const void *str2, size_t n);
-int strcmp(char *s, char *t);
-#endif
-
 // Crash handler enhancement
 #ifdef CRASH_SCREEN_INCLUDED
 #define DEBUG_ASSERT(exp) do { if (!(exp)) _n64_assert(__FILE__, __LINE__, #exp, 1); } while (0)

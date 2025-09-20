@@ -32,10 +32,8 @@ struct Controller {
 #ifdef RUMBLE_FEEDBACK
   /*0x1C*/ s32 port;
 #endif
-#ifndef TARGET_N64
   /*ext */ s16 extStickX;       // additional (right) stick values
   /*ext */ s16 extStickY;
-#endif
 };
 
 // -- Booleans --

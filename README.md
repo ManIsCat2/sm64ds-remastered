@@ -43,7 +43,7 @@ Fork of [AloXado320/sm64ex-alo](https://github.com/AloUltraExt/sm64ex-alo)
   #### Build:
   ```sh
   # if you have more cores available, you can increase the -j parameter
-  make -j4 TARGET_N64=1 
+  make -j4 =1 
   ```
  
   #### ROM location:

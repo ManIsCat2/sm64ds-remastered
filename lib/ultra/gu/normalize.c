@@ -13,8 +13,6 @@
 
 #include "guint.h"
 
-#if LIBULTRA_VERSION < OS_VER_K || !defined(TARGET_N64)
-
 void guNormalize(float *x, float *y, float *z)
 {
     float    m;
@@ -24,5 +22,3 @@ void guNormalize(float *x, float *y, float *z)
     *y *= m;
     *z *= m;
 }
-
-#endif

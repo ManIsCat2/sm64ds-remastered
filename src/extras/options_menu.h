@@ -1,11 +1,7 @@
 #ifndef OPTIONS_MENU_H
 #define OPTIONS_MENU_H
 
-#ifndef TARGET_N64
 #include <stdbool.h>
-#else
-#define bool int
-#endif
 
 /* helper macros */
 
@@ -18,7 +14,7 @@
 #define DEF_OPT_SUBMENU(lbl, nm) \
     { .type = OPT_SUBMENU, .label = lbl, .nextMenu = nm }
 
-#if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
+#if !defined(TARGET_PORT_CONSOLE)
 #define DEF_OPT_BIND(lbl, uv) \
     { .type = OPT_BIND, .label = lbl, .uval = uv }
 #endif

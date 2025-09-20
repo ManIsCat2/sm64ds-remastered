@@ -1,6 +1,4 @@
-#ifndef TARGET_N64
 #include <stdbool.h>
-#endif
 #include <PR/ultratypes.h>
 
 #include "sm64.h"
@@ -21,11 +19,7 @@
 #include "behavior_actions.h"
 
 #ifdef EXT_OPTIONS_MENU
-#ifndef TARGET_N64
 #include "pc/configfile.h"
-#else
-int configHUD = TRUE;
-#endif
 #endif
 
 /* @file hud.c

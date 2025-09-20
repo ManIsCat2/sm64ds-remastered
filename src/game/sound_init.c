@@ -35,13 +35,6 @@ static u8 sPlayingInfiniteStairs = FALSE;
 UNUSED static u8 unused8032C6D8[16] = { 0 };
 static s16 sSoundMenuModeToSoundMode[] = { SOUND_MODE_STEREO, SOUND_MODE_MONO, SOUND_MODE_HEADSET };
 
-#ifdef TARGET_N64
-unsigned int configMasterVolume = MAX_VOLUME; // 0 - MAX_VOLUME
-unsigned int configMusicVolume = MAX_VOLUME;
-unsigned int configSfxVolume = MAX_VOLUME;
-unsigned int configEnvVolume = MAX_VOLUME;
-#endif
-
 // Only the 20th array element is used.
 static u32 sMenuSoundsExtra[] = {
     SOUND_MOVING_TERRAIN_SLIDE + (0 << 16),
@@ -375,9 +368,5 @@ void thread4_sound(UNUSED void *arg) {
             }
             profiler_log_thread4_time();
         }
-        
-#ifdef TARGET_N64 // TODO: save to EEPROM
-        change_audio_volumes();
-#endif
     }
 }

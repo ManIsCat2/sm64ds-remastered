@@ -103,11 +103,6 @@ extern void     bzero(void *, size_t);
 
 /* Printf */
 
-#ifdef TARGET_N64
-extern int		sprintf(char *s, const char *fmt, ...);
-extern void		osSyncPrintf(const char *fmt, ...);
-#endif
-
 #endif  /* defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS) */
 
 #ifdef _LANGUAGE_C_PLUS_PLUS

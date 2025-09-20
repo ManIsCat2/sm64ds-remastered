@@ -2,12 +2,7 @@
 #define MAIN_H
 
 #include "config.h"
-
-#ifndef TARGET_N64
 #include <stdbool.h>
-#else
-#define bool int
-#endif
 
 extern OSThread D_80339210;
 extern OSThread gIdleThread;

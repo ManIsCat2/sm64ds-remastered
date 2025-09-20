@@ -37,11 +37,7 @@
 #endif
 
 #ifdef EXT_OPTIONS_MENU
-#ifndef TARGET_N64
 #include "pc/configfile.h"
-#else
-extern int configGlobalCapBlocks;
-#endif
 #endif
 
 static Vp sEndCutsceneVp = { { { 640, 480, 511, 0 }, { 640, 480, 511, 0 } } };
@@ -285,7 +281,7 @@ void handle_save_menu(struct PlayerState *m) {
     if (is_anim_past_end(m) && gSaveOptSelectIndex != MENU_OPT_NONE) {
         // save and continue / save and quit
         if (gSaveOptSelectIndex == MENU_OPT_SAVE_AND_CONTINUE
-#if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
+#if !defined(TARGET_PORT_CONSOLE)
         || gSaveOptSelectIndex == MENU_OPT_SAVE_AND_EXIT
 #endif
         || gSaveOptSelectIndex == MENU_OPT_SAVE_AND_QUIT) {
@@ -294,7 +290,7 @@ void handle_save_menu(struct PlayerState *m) {
             if (gSaveOptSelectIndex == MENU_OPT_SAVE_AND_QUIT) {
                 fade_into_special_warp(-2, 0); // reset game
             }
-#if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
+#if !defined(TARGET_PORT_CONSOLE)
             if (gSaveOptSelectIndex == MENU_OPT_SAVE_AND_EXIT) {
                 fade_into_special_warp(0, 0);
                 game_exit();

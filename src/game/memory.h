@@ -10,18 +10,12 @@
 #define MEMORY_POOL_RIGHT 1
 
 // Size of how large the master display list (gDisplayListHead) can be
-#ifdef TARGET_N64
-#define GFX_POOL_SIZE 0x2000 // originally 0x1900
-#else
-
 #define GFX_POOL_SIZE_FIXED DOUBLE_SIZE_ON_64_BIT(0x4000)
 
 #ifdef USE_SYSTEM_MALLOC
 #define GFX_POOL_SIZE 1
 #else
 #define GFX_POOL_SIZE GFX_POOL_SIZE_FIXED
-#endif
-
 #endif
 
 // Non-n64 only

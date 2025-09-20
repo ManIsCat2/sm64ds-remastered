@@ -73,7 +73,6 @@ while true; do
                 pacman -S devkitARM libctru --noconfirm
             fi
             BuildCommand="make TARGET_N3DS=1 -j16" ;;
-        5) BuildCommand="make TARGET_N64=1 -j16" ;;
         *) echo "Invalid selection."; continue ;;
     esac
 

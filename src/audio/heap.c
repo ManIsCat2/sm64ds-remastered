@@ -6,9 +6,6 @@
 #include "synthesis.h"
 #include "seqplayer.h"
 #include "effects.h"
-#ifdef TARGET_N64
-#include "boot/system_checks.h"
-#endif
 
 struct PoolSplit {
     u32 wantSeq;
@@ -1156,15 +1153,6 @@ void audio_reset_session(void)
         gAudioLoadLock = AUDIO_LOCK_LOADING;
         wait_for_audio_frames(3);
 
-#ifdef TARGET_N64
-        s32 remainingDmas = gCurrAudioFrameDmaCount;
-        while (remainingDmas > 0) {
-            for (i = 0; i < gCurrAudioFrameDmaCount; i++) {
-                if (osRecvMesg(&gCurrAudioFrameDmaQueue, NULL, OS_MESG_NOBLOCK) == 0)
-                    remainingDmas--;
-            }
-        }
-#endif
         gCurrAudioFrameDmaCount = 0;
 
         for (j = 0; j < NUMAIBUFFERS; j++) {
@@ -1208,15 +1196,7 @@ void audio_reset_session(void)
     gAudioBufferParameters.maxAiBufferLength *= gAudioBufferParameters.presetUnk4;
     gAudioBufferParameters.minAiBufferLength *= gAudioBufferParameters.presetUnk4;
     gAudioBufferParameters.updatesPerFrame *= gAudioBufferParameters.presetUnk4;
-
-#ifdef TARGET_N64
-    if (gIsConsole)
-        gMaxSimultaneousNotes = MAX_SIMULTANEOUS_NOTES_CONSOLE;
-    else
-        gMaxSimultaneousNotes = MAX_SIMULTANEOUS_NOTES_EXTERNAL;
-#else
     gMaxSimultaneousNotes = MAX_SIMULTANEOUS_NOTES_EXTERNAL;
-#endif
 
     if (gMaxSimultaneousNotes > MAX_SIMULTANEOUS_NOTES)
         gMaxSimultaneousNotes = MAX_SIMULTANEOUS_NOTES;
@@ -1242,15 +1222,7 @@ void audio_reset_session(void)
     gMinAiBufferLength = gSamplesPerFrameTarget - 0x10;
     updatesPerFrame = gSamplesPerFrameTarget / 160 + 1;
     gAudioUpdatesPerFrame = gSamplesPerFrameTarget / 160 + 1;
-
-#ifdef TARGET_N64
-    if (gIsConsole)
-        gMaxSimultaneousNotes = MAX_SIMULTANEOUS_NOTES_CONSOLE;
-    else
-        gMaxSimultaneousNotes = MAX_SIMULTANEOUS_NOTES_EXTERNAL;
-#else
     gMaxSimultaneousNotes = MAX_SIMULTANEOUS_NOTES_EXTERNAL;
-#endif
 
     if (gMaxSimultaneousNotes > MAX_SIMULTANEOUS_NOTES)
         gMaxSimultaneousNotes = MAX_SIMULTANEOUS_NOTES;

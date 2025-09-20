@@ -1,8 +1,6 @@
 #include "texscroll.h"
 #include <ultra64.h>
-#ifndef TARGET_N64
 #include <stdbool.h>
-#endif
 
 #include "sm64.h"
 #include "seq_ids.h"
@@ -34,19 +32,11 @@
 #include "course_table.h"
 #include "rumble_init.h"
 
-#ifndef TARGET_N64
 #include "pc/pc_main.h"
 #include "pc/configfile.h"
-#endif
 
 #ifdef COMMAND_LINE_OPTIONS
 #include "pc/cliopts.h"
-#endif
-
-#ifdef EXT_OPTIONS_MENU
-#ifdef TARGET_N64
-extern int configGlobalCapBlocks;
-#endif
 #endif
 
 // TODO: Make these ifdefs better
@@ -1142,11 +1132,7 @@ static s32 play_mode_unused(void) {
 // ex-alo change
 // Checks for peach intro skip
 u8 should_intro_be_skipped(void) {
-    return save_file_exists(gCurrSaveFileNum - 1) || gDebugLevelSelect || (gGlobalGameSkips & GAME_SKIP_INTRO_SCENE)
-#ifndef TARGET_N64
-    || configSkipIntro == TRUE
-#endif
-    ;
+    return save_file_exists(gCurrSaveFileNum - 1) || gDebugLevelSelect || (gGlobalGameSkips & GAME_SKIP_INTRO_SCENE) || configSkipIntro == TRUE;
 }
 
 // ex-alo change

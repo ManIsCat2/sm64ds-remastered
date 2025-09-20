@@ -18,13 +18,10 @@
 #include "draw_util.h"
 
 #include "pc/configfile.h"
-
-#ifndef TARGET_N64
 #include "pc/pc_main.h"
 #include "pc/controller/controller_api.h"
 
 #include <stdbool.h>
-#endif
 
 #ifdef CHEATS_ACTIONS
 #include "cheats.h"
@@ -36,7 +33,7 @@
 
 u8 optmenu_open = 0;
 
-#if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
+#if !defined(TARGET_PORT_CONSOLE)
 static u8 optmenu_binding = 0;
 static u8 optmenu_bind_idx = 0;
 #endif
@@ -81,7 +78,6 @@ const u8 optsCameraStr[][32] = {
     { TEXT_OPT_CAM_PARALLEL_COL },
 };
 
-#ifndef TARGET_N64
 static const u8 optsVideoStr[][32] = {
     { TEXT_OPT_FSCREEN },
     { TEXT_OPT_TEXMODE },
@@ -91,7 +87,6 @@ static const u8 optsVideoStr[][32] = {
     { TEXT_OPT_VSYNC },
     { TEXT_OPT_APPLY },
 };
-#endif
 
 static const u8 optsAudioStr[][32] = {
     { TEXT_OPT_MVOLUME },
@@ -116,7 +111,7 @@ static const u8 optsDsSettingsStr[][32] = {
     { TEXT_OPT_DS_SRUN },
 };
 
-#if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
+#if !defined(TARGET_PORT_CONSOLE)
 static const u8 optBindStr[][32] = {
     { TEXT_OPT_UNBOUND },
     { TEXT_OPT_PRESSKEY },
@@ -146,12 +141,10 @@ static const u8 optBindStr[][32] = {
 };
 #endif
 
-#ifndef TARGET_N64
 static const u8 *filterChoices[] = {
     optsVideoStr[2],
     optsVideoStr[3],
 };
-#endif
 
 static const u8 *movementChoices[] = {
     toggleStr[0],
@@ -160,8 +153,6 @@ static const u8 *movementChoices[] = {
 };
 
 /* button action functions */
-
-#ifndef TARGET_N64
 static void optmenu_act_exit(UNUSED struct Option *self, s32 arg) {
     if (!arg) game_exit(); // only exit on A press and not directions
 }
@@ -179,10 +170,9 @@ static void optvideo_reset_window(UNUSED struct Option *self, s32 arg) {
 static void optvideo_apply(UNUSED struct Option *self, s32 arg) {
     if (!arg) configWindow.settings_changed = true;
 }
-#endif
 
 /* submenu option lists */
-#if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
+#if !defined(TARGET_PORT_CONSOLE)
 static struct Option optsControls[] = {
     DEF_OPT_BIND( optBindStr[ 2], configKeyA ),
     DEF_OPT_BIND( optBindStr[ 3], configKeyB ),
@@ -214,7 +204,7 @@ static struct Option optsControls[] = {
 };
 #endif
 
-#if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
+#if !defined(TARGET_PORT_CONSOLE)
 static struct Option optsVideo[] = {
     DEF_OPT_TOGGLE( optsVideoStr[0], &configWindow.fullscreen ),
     DEF_OPT_TOGGLE( optsVideoStr[5], &configWindow.vsync ),
@@ -237,10 +227,8 @@ static struct Option optsSettings[] = {
 };
 
 static struct Option optsDsSettings[] = {
-#ifndef TARGET_N64
     DEF_OPT_CHOICE( optsVideoStr[1], &configFiltering, filterChoices ),
     DEF_OPT_CHOICE( optsDsSettingsStr[1], &configDash, movementChoices ),
-#endif
     DEF_OPT_TOGGLE( optsDsSettingsStr[0], &configWallslide ),
     DEF_OPT_TOGGLE( optsDsSettingsStr[2], &configDive ),
     DEF_OPT_TOGGLE( optsDsSettingsStr[3], &configGlobalCapBlocks ),
@@ -250,11 +238,11 @@ static struct Option optsDsSettings[] = {
 
 /* submenu definitions */
 
-#if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
+#if !defined(TARGET_PORT_CONSOLE)
 static struct SubMenu menuControls = DEF_SUBMENU( optMainStr[2], optsControls );
 #endif
 
-#if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
+#if !defined(TARGET_PORT_CONSOLE)
 static struct SubMenu menuVideo      = DEF_SUBMENU( optMainStr[3], optsVideo );
 #endif
 
@@ -265,11 +253,11 @@ static struct SubMenu menuDsSettings = DEF_SUBMENU( optMainStr[6], optsDsSetting
 /* main options menu definition */
 
 static struct Option optsMain[] = {
-#if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
+#if !defined(TARGET_PORT_CONSOLE)
     DEF_OPT_SUBMENU( optMainStr[2], &menuControls ),
 #endif
 
-#if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
+#if !defined(TARGET_PORT_CONSOLE)
     DEF_OPT_SUBMENU( optMainStr[3], &menuVideo ),
 #endif
 
@@ -367,7 +355,7 @@ static void optmenu_draw_opt(const struct Option *opt, s16 x, s16 y, u8 sel) {
             optmenu_draw_opt_scroll(opt, y-11);
             break;
 
-#if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
+#if !defined(TARGET_PORT_CONSOLE)
         case OPT_BIND:
             x = 112;
             for (u8 i = 0; i < MAX_BINDS; ++i, x += 48) {
@@ -414,7 +402,7 @@ static void optmenu_opt_change(struct Option *opt, s32 val) {
                 opt->actionFn(opt, val);
             break;
 
-#if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
+#if !defined(TARGET_PORT_CONSOLE)
         case OPT_BIND:
             if (val == 0xFF) {
                 // clear the bind
@@ -526,15 +514,13 @@ void optmenu_toggle(void) {
         play_sound(SOUND_MENU_HIGH_SCORE, gGlobalSoundSource);
         #endif
         optmenu_open = 0;
-#ifndef TARGET_N64
         controller_reconfigure(); // rebind using new config values
         configfile_save(configfile_name());
-#endif
     }
 }
 
 void optmenu_check_buttons(void) {
-#if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
+#if !defined(TARGET_PORT_CONSOLE)
     if (optmenu_binding) {
         u32 key = controller_get_raw_key();
         if (key != VK_INVALID) {
@@ -632,7 +618,7 @@ void optmenu_check_buttons(void) {
                 optmenu_toggle();
             }
         }
-#if !defined(TARGET_N64) && !defined(TARGET_PORT_CONSOLE)
+#if !defined(TARGET_PORT_CONSOLE)
     } else if (gPlayer1Controller->buttonPressed & (ZL_TRIG | ZR_TRIG)) {
         // HACK: clear binds with Z
         if (allowInput && currentMenu->opts[currentMenu->select].type == OPT_BIND)

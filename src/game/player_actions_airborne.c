@@ -17,14 +17,7 @@
 #include "extras/cheats.h"
 #endif
 #ifdef EXT_OPTIONS_MENU
-#ifndef TARGET_N64
 #include "pc/configfile.h"
-#else
-int configDive = TRUE;
-int configJHeight = TRUE;
-int configWallslide = TRUE;
-int configNerfs = TRUE;
-#endif
 #endif
 
 void play_flip_sounds(struct PlayerState *m, s16 frame1, s16 frame2, s16 frame3) {

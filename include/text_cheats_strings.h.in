@@ -6,11 +6,7 @@
 #define TEXT_OPT_CHEATS_BLJANY   _("BLJ ANYWHERE CHEAT")
 
 #define TEXT_OPT_CHEAT0    _("Enable cheats")
-#ifndef TARGET_N64
 #define TEXT_OPT_CHEAT1    _("Moon-jump (Press X)")
-#else
-#define TEXT_OPT_CHEAT1    _("Moon-jump (Press L)")
-#endif
 #define TEXT_OPT_CHEAT2    _("Infinite health")
 #define TEXT_OPT_CHEAT3    _("Infinite lives")
 #define TEXT_OPT_CHEAT4    _("Invincible player")

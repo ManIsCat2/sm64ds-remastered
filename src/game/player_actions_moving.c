@@ -18,11 +18,7 @@
 #include "extras/cheats.h"
 #endif
 #ifdef EXT_OPTIONS_MENU
-#ifndef TARGET_N64
 #include "pc/configfile.h"
-#else
-unsigned int configDash = 0;
-#endif
 #endif
 
 struct LandingAction {

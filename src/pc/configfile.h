@@ -1,11 +1,7 @@
 #ifndef CONFIGFILE_H
 #define CONFIGFILE_H
 
-#ifndef TARGET_N64
 #include <stdbool.h>
-#else
-#define bool int
-#endif
 
 #include "config.h"
 

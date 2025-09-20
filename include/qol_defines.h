@@ -7,9 +7,7 @@
 // You can also stub the defines if you don't want them to be applied
 
 // Framebuffer Detection
-#ifdef TARGET_N64
-#define HAS_FRAMEBUFFER 1
-#elif (defined(RAPI_GL) || defined(RAPI_D3D11)) && !defined(OSX_BUILD)
+#if (defined(RAPI_GL) || defined(RAPI_D3D11)) && !defined(OSX_BUILD)
 #define HAS_FRAMEBUFFER 1
 #else
 #define HAS_FRAMEBUFFER 0

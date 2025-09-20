@@ -17,7 +17,7 @@
 #endif
 
 /**
- * This entry point is only used in TARGET_N64.
+ * This entry point was only used in TARGET_N64.
  * In PC Port the new entry point is located in 'pc/pc_main.c'
  **/
 

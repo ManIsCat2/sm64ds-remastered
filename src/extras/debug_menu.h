@@ -16,12 +16,7 @@
 #include "game/save_file.h"
 
 #include "options_menu.h"
-
-#ifndef TARGET_N64
 #include <stdbool.h>
-#else
-#define bool int
-#endif
 
 extern const u8 optDebugMenuStr[][32];
 

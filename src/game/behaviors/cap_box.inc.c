@@ -1,11 +1,7 @@
 // cap_box.inc.c
 
 #ifdef EXT_OPTIONS_MENU
-#ifndef TARGET_N64
 #include "pc/configfile.h"
-#else
-int configGlobalCapBlocks = FALSE;
-#endif
 #endif
 
 struct ObjectHitbox sCapBoxHitbox = {

@@ -15,14 +15,3 @@ const LevelScript level_script_entry[] = {
     EXECUTE(/*seg*/ 0x14, /*script*/ _introSegmentRomStart, /*scriptEnd*/ _introSegmentRomEnd, /*entry*/ level_intro_splash_screen),
     JUMP(/*target*/ level_script_entry),
 };
-
-#if defined(TARGET_N64) && defined(USE_EXT_RAM)
-const LevelScript level_script_entry_error_screen[] = {
-    INIT_LEVEL(),
-    SLEEP(/*frames*/ 2),
-    BLACKOUT(/*active*/ FALSE),
-    SET_REG(/*value*/ 0),
-    EXECUTE(/*seg*/ 0x14, /*script*/ _introSegmentRomStart, /*scriptEnd*/ _introSegmentRomEnd, /*entry*/ level_intro_entry_error_screen),
-    JUMP(/*target*/ level_script_entry_error_screen),
-};
-#endif

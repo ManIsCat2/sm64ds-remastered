@@ -29,11 +29,7 @@
 #endif
 
 #ifdef EXT_OPTIONS_MENU
-#ifndef TARGET_N64
 #include "pc/configfile.h"
-#else
-extern int configGlobalCapBlocks;
-#endif
 #endif
 
 #define INT_GROUND_POUND_OR_TWIRL (1 << 0) // 0x01

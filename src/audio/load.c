@@ -877,10 +877,6 @@ void audio_init() {
     gAudioLoadLock = AUDIO_LOCK_UNINITIALIZED;
 
     bzero(&gAudioHeap, gAudioHeapSize);
-#ifdef TARGET_N64
-    // Audio bss is located differently, so clean it here
-    bzero((void *) _audioSegmentBssStart, (uintptr_t) _audioSegmentBssEnd - (uintptr_t) _audioSegmentBssStart);
-#endif
 
 #ifdef VERSION_EU
     D_EU_802298D0 = 20.03042f;
@@ -888,15 +884,6 @@ void audio_init() {
     port_eu_init();
     if (k) {
     }
-#endif
-
-#ifdef TARGET_N64
-    eu_stubbed_printf_3(
-        "Clear Workarea %x -%x size %x \n",
-        (uintptr_t) &gAudioGlobalsStartMarker,
-        (uintptr_t) &gAudioGlobalsEndMarker,
-        (uintptr_t) &gAudioGlobalsEndMarker - (uintptr_t) &gAudioGlobalsStartMarker
-    );
 #endif
 
     eu_stubbed_printf_1("AudioHeap is %x\n", gAudioHeapSize);

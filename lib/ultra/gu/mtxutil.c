@@ -16,7 +16,6 @@
 #include <string.h>
 #endif
 
-#if LIBULTRA_VERSION < OS_VER_K || !defined(TARGET_N64)
 #ifndef GBI_FLOATS
 void guMtxF2L(float mf[4][4], Mtx *m)
 {
@@ -86,5 +85,3 @@ void guMtxIdent(Mtx *m)
     guMtxIdentF(m->m);
 #endif
 }
-
-#endif

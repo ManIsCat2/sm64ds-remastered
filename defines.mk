@@ -53,8 +53,6 @@ COMMAND_LINE_OPTIONS ?= 1
 
 CUSTOM_C_DEFINES :=
 
-ifeq ($(TARGET_N64),0)
-
 # Check for PC Port Defines
 ifeq ($(PC_PORT_DEFINES),1)
   CUSTOM_C_DEFINES += -DNO_SEGMENTED_MEMORY -DWIDESCREEN -DUSE_SYSTEM_MALLOC
@@ -78,9 +76,6 @@ endif
 # Check for external data
 ifeq ($(EXTERNAL_DATA),1)
   CUSTOM_C_DEFINES += -DEXTERNAL_DATA
-  ifeq ($(TARGET_N64),1)
-    $(error External data is not usable on N64)
-  endif
 endif
 
 # Use PC-only exclusive defines
@@ -109,8 +104,6 @@ ifeq ($(TARGET_PORT_CONSOLE),0)
   endif
 
 endif # !TARGET_PORT_CONSOLE
-
-endif # !TARGET_N64
 
 # Check for Debug option
 ifneq ($(DEBUG),0)

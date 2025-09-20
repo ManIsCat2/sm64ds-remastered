@@ -1,11 +1,7 @@
 // capswitch.inc.c
 
 #ifdef EXT_OPTIONS_MENU
-#ifndef TARGET_N64
 #include "pc/configfile.h"
-#else
-extern int configGlobalCapBlocks;
-#endif
 #endif
 
 void cap_switch_act_0(void) {

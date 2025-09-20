@@ -172,29 +172,6 @@ void set_debug_cap_changer(void) {
     debug_update_player_cap(CONT_RIGHT, PLAYER_VANISH_CAP, 600, SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP));
 }
 
-#ifdef TARGET_N64
-#include "include/PR/os.h"
-
-#define FRAMETIME_COUNT 30
-
-OSTime frameTimes[FRAMETIME_COUNT];
-u8 curFrameTimeIndex = 0;
-
-void debug_calculate_and_print_fps(void) {
-    f32 fps;
-    OSTime newTime = osGetTime();
-    OSTime oldTime = frameTimes[curFrameTimeIndex];
-    frameTimes[curFrameTimeIndex] = newTime;
-
-    curFrameTimeIndex++;
-    if (curFrameTimeIndex >= FRAMETIME_COUNT)
-        curFrameTimeIndex = 0;
-
-    fps = ((f32)FRAMETIME_COUNT * 1000000.0f) / (s32)OS_CYCLES_TO_USEC(newTime - oldTime);
-
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22), 184, "FPS %d", (s16) fps);
-}
-#else
 static OSTime gLastOSTime = 0;
 
 void debug_calculate_and_print_fps(void) {
@@ -211,7 +188,6 @@ void debug_calculate_and_print_fps(void) {
     print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22), 184, "FPS %d", (s16) fps);
     gLastOSTime = newTime;
 }
-#endif
 
 void set_debug_player_action(struct PlayerState *m) {
     if (DebugOpt.FreeMoveAct) {

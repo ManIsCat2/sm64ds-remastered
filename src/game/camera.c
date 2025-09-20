@@ -80,15 +80,6 @@
  */
 
 #if MORE_VANILLA_CAM_STUFF
-#ifdef TARGET_N64
-ConfigVanillaCam configVanillaCam = {
-    .parallel = FALSE,
-    .srPlayer = FALSE,
-    .cUpSounds = TRUE,
-    .parallelCol = FALSE,
-};
-#endif
-
 s16 sParallelCamLOverride = FALSE;
 #endif
 

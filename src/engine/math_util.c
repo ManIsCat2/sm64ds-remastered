@@ -866,87 +866,6 @@ void mtxf_mul(Mat4 dest, Mat4 a, Mat4 b) {
     ((u32 *) dest)[15] = FLOAT_ONE;
 }
 
-#ifdef TARGET_N64 // Only compatible with N64 due to endian casting
-/**
- * Returns a float value from an index in a fixed point matrix.
- */
-f32 mtx_get_float(Mtx *mtx, u32 index) {
-    f32 ret = 0.0f;
-    if (index < 16) {
-        s16 *src = (s16 *)mtx;
-        s32 fixed_val = (src[index +  0] << 16)
-                    | (src[index + 16] & 0xFFFF);
-        f32 scale = (1.0f / (float)0x00010000);
-        ret = mul_without_nop((f32)fixed_val, scale);
-    }
-    return ret;
-}
-
-/**
- * Writes a float value to a fixed point matrix.
- */
-void mtx_set_float(Mtx *mtx, u32 index, f32 val) {
-    if (index < 16) {
-        f32 scale = ((float)0x00010000);
-        s32 fixed_val = mul_without_nop(val, scale);
-        s16 *dst = (s16 *)mtx;
-        dst[index +  0] = (fixed_val >> 16);
-        dst[index + 16] = (fixed_val & 0xFFFF);
-    }
-}
-#endif
-
-#ifdef TARGET_N64 // Optimized N64 function using MIPS optimized calls
-// Converts a floating point matrix to a fixed point matrix
-// Makes some assumptions about certain fields in the matrix, which will always be true for valid matrices.
-OPTIMIZE_OS ALIGNED32 void mtxf_to_mtx_n64(s16* dst, float* src) {
-    int i;
-#if WORLD_SCALE > 1
-    float scale = ((float)0x00010000 / WORLD_SCALE);
-#else
-    float scale = ((float)0x00010000);
-#endif
-    // Iterate over rows of values in the input matrix
-    for (i = 0; i < 4; i++) {
-        // Read the three input in the current row (assume the fourth is zero)
-        float a = src[(4 * i) + 0];
-        float b = src[(4 * i) + 1];
-        float c = src[(4 * i) + 2];
-        float a_scaled = mul_without_nop(a, scale);
-        float b_scaled = mul_without_nop(b, scale);
-        float c_scaled = mul_without_nop(c, scale);
-
-        // Convert the three inputs to fixed
-        s32 a_int = (s32)a_scaled;
-        s32 b_int = (s32)b_scaled;
-        s32 c_int = (s32)c_scaled;
-
-        s32 c_high = (c_int & 0xFFFF0000);
-        s32 c_low = (c_int << 16);
-
-        // Write the integer part of a, as well as garbage into the next two bytes.
-        // Those two bytes will get overwritten by the integer part of b.
-        // This prevents needing to shift or mask the integer value of a.
-        *(s32*)(&dst[(4 * i) +  0]) = a_int;
-        // Write the fractional part of a
-        dst[(4 * i) + 16] = (s16)a_int;
-
-        // Write the integer part of b using swl to avoid needing to shift.
-        swl(dst + (4 * i), b_int, 2);
-        // Write the fractional part of b.
-        dst[(4 * i) + 16 + 1] = (s16)b_int;
-
-        // Write the integer part of c and two zeroes for the 4th column.
-        *(s32*)(&dst[(4 * i) + 2]) = c_high;
-        // Write the fractional part of c and two zeroes for the 4th column
-        *(s32*)(&dst[(4 * i) + 16 + 2]) = c_low;
-    }
-    // Write 1.0 to the bottom right entry in the output matrix
-    // The low half was already set to zero in the loop, so we only need
-    //  to set the top half.
-    dst[15] = 1;
-}
-#else // Portable, any target, any endianness
 #if WORLD_SCALE > 1
 /**
  * Modified into a hybrid of the original function and the worldscale altered function.
@@ -967,7 +886,6 @@ void mtxf_to_mtx_scale(Mtx *dest, Mat4 src) {
 }
 #endif
 
-#endif
 /**
  * Convert float matrix 'src' to fixed point matrix 'dest'.
  * The float matrix may not contain entries larger than 65536 or the console
@@ -978,9 +896,6 @@ void mtxf_to_mtx_scale(Mtx *dest, Mat4 src) {
  * and no crashes occur.
  */
 void mtxf_to_mtx(Mtx *dest, Mat4 src) {
-#ifdef TARGET_N64 // Optimized N64 function
-    mtxf_to_mtx_n64((s16*)dest, (float*)src);
-#else // Portable, any target
 #if WORLD_SCALE > 1
     mtxf_to_mtx_scale(dest, src);
 #else
@@ -988,32 +903,11 @@ void mtxf_to_mtx(Mtx *dest, Mat4 src) {
     // guMtxF2L function. This helps little-endian systems, as well.
     guMtxF2L(src, dest);
 #endif
-#endif
 }
 
 /**
  * Set 'mtx' to a transformation matrix that rotates around the z axis.
  */
-#ifdef TARGET_N64 // Matrix optimized
-#define MATENTRY(a, b)                          \
-    ((s16 *) mtx)[a     ] = (((s32) b) >> 16);  \
-    ((s16 *) mtx)[a + 16] = (((s32) b) & 0xFFFF);
-void mtxf_rotate_xy(Mtx *mtx, s32 angle) {
-    s32 c = (coss(angle) * 0x10000);
-    s32 s = (sins(angle) * 0x10000);
-    f32 *mtxp = (f32 *)mtx;
-    s32 i;
-    for (i = 0; i < 16; i++) {
-        *mtxp++ = 0;
-    }
-    MATENTRY(0,  c)
-    MATENTRY(1,  s)
-    MATENTRY(4, -s)
-    MATENTRY(5,  c)
-    ((s16 *) mtx)[10] = 1;
-    ((s16 *) mtx)[15] = 1;
-}
-#else // Portable
 void mtxf_rotate_xy(Mtx *mtx, s32 angle) {
     Mat4 temp;
 
@@ -1024,7 +918,6 @@ void mtxf_rotate_xy(Mtx *mtx, s32 angle) {
     temp[1][1] = temp[0][0];
     guMtxF2L(temp, mtx);
 }
-#endif
 
 void create_transformation_from_matrices(Mat4 dst, Mat4 a1, Mat4 a2) {
     Vec3f medium;

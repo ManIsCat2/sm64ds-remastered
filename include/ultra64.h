@@ -21,10 +21,7 @@
  *
  **************************************************************************/
 
-#ifndef TARGET_N64
 #include <math.h>
-#endif
-
 #include <PR/ultratypes.h>
 #include <PR/rcp.h>
 #include <PR/os.h>

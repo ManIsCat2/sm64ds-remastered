@@ -2421,9 +2421,6 @@ void start_view_dl(struct ObjView *view) {
         uly = lry - 1.0f;
     }
 
-#ifdef TARGET_N64
-    gDPSetScissor(next_gfx(), G_SC_NON_INTERLACE, ulx, uly, lrx, lry);
-#endif
 #ifdef TARGET_N3DS
     gDPSetIod(next_gfx(), iodGoddard);
 #endif

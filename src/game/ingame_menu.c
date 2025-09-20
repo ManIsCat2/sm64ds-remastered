@@ -2865,12 +2865,8 @@ void render_course_complete_lvl_info_and_hud_str(void) {
     #define TXT_SAVEOPTIONS_X x + 10
     #define TXT_SAVECONT_Y +2-0
     #define TXT_SAVEQUIT_Y +2-20
-    #ifdef TARGET_N64
-        #define TXT_CONTNOSAVE_Y +2-40
-    #else
-        #define TXT_SAVE_EXIT_GAME_Y +2-40
-        #define TXT_CONTNOSAVE_Y +2-60
-    #endif
+    #define TXT_SAVE_EXIT_GAME_Y +2-40
+    #define TXT_CONTNOSAVE_Y +2-60
 #else
 #ifdef VERSION_EU
     #define X_VAL9 xOffset - 12
@@ -2881,19 +2877,11 @@ void render_course_complete_lvl_info_and_hud_str(void) {
 #endif
     #define TXT_SAVECONT_Y 0
     #define TXT_SAVEQUIT_Y 20
-    #ifdef TARGET_N64
-        #define TXT_CONTNOSAVE_Y 40
-    #else
-        #define TXT_SAVE_EXIT_GAME_Y 40
-        #define TXT_CONTNOSAVE_Y 60
-    #endif
+    #define TXT_SAVE_EXIT_GAME_Y 40
+    #define TXT_CONTNOSAVE_Y 60
 #endif
 
-#ifndef TARGET_N64
 #define SAVE_CONFIRM_INDEX 4 // Increased to '4' to handle Exit Game 
-#else
-#define SAVE_CONFIRM_INDEX 3
-#endif
 
 #ifdef VERSION_EU
 void render_save_confirmation(s16 y, s8 *index, s16 yOffset)
@@ -2913,13 +2901,11 @@ void render_save_confirmation(s16 x, s16 y, s8 *index, s16 yOffset)
         { TEXT_SAVE_AND_QUIT_DE }
     };
 
-#ifndef TARGET_N64
     u8 textSaveExitGame[][28] = { // New text to exit game
         { TEXT_SAVE_EXIT_GAME },
         { TEXT_SAVE_EXIT_GAME_FR },
         { TEXT_SAVE_EXIT_GAME_DE }
     };
-#endif
 
     u8 textContinueWithoutSave[][27] = {
         { TEXT_CONTINUE_WITHOUT_SAVING },
@@ -2930,7 +2916,7 @@ void render_save_confirmation(s16 x, s16 y, s8 *index, s16 yOffset)
 #else
     u8 textSaveAndContinue[] = { TEXT_SAVE_AND_CONTINUE };
     u8 textSaveAndQuit[] = { TEXT_SAVE_AND_QUIT };
-#if !defined(TARGET_N64) || !defined(TARGET_WII_U)
+#if !defined(TARGET_WII_U)
     u8 textSaveExitGame[] = { TEXT_SAVE_EXIT_GAME }; // New text to exit game
 #endif
     u8 textContinueWithoutSave[] = { TEXT_CONTINUE_WITHOUT_SAVING };
@@ -2943,9 +2929,7 @@ void render_save_confirmation(s16 x, s16 y, s8 *index, s16 yOffset)
 
     print_generic_string(TXT_SAVEOPTIONS_X, y + TXT_SAVECONT_Y, LANGUAGE_ARRAY(textSaveAndContinue));
     print_generic_string(TXT_SAVEOPTIONS_X, y - TXT_SAVEQUIT_Y, LANGUAGE_ARRAY(textSaveAndQuit));
-#ifndef TARGET_N64
     print_generic_string(TXT_SAVEOPTIONS_X, y - TXT_SAVE_EXIT_GAME_Y, LANGUAGE_ARRAY(textSaveExitGame));
-#endif
     print_generic_string(TXT_SAVEOPTIONS_X, y - TXT_CONTNOSAVE_Y, LANGUAGE_ARRAY(textContinueWithoutSave));
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);

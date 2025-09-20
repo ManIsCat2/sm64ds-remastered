@@ -21,10 +21,6 @@
 #include "segment_symbols.h"
 #include "rumble_init.h"
 
-#ifdef TARGET_N64
-#include "boot/system_checks.h"
-#endif
-
 #if defined(TARGET_N3DS) && !defined(DISABLE_N3DS_AUDIO)
 #include "pc/audio/audio_3ds_threading.h"
 #endif
@@ -267,13 +263,6 @@ void create_gfx_task_structure(void) {
     gGfxSPTask->msgqueue = &gGfxVblankQueue;
     gGfxSPTask->msg = (OSMesg) 2;
     gGfxSPTask->task.t.type = M_GFXTASK;
-#ifdef TARGET_N64
-    gGfxSPTask->task.t.ucode_boot = rspF3DBootStart;
-    gGfxSPTask->task.t.ucode_boot_size = ((u8 *) rspF3DBootEnd - (u8 *) rspF3DBootStart);
-    gGfxSPTask->task.t.flags = 0;
-    gGfxSPTask->task.t.ucode = rspF3DStart;
-    gGfxSPTask->task.t.ucode_data = rspF3DDataStart;
-#endif
     gGfxSPTask->task.t.ucode_size = SP_UCODE_SIZE; // (this size is ignored)
     gGfxSPTask->task.t.ucode_data_size = SP_UCODE_DATA_SIZE;
     gGfxSPTask->task.t.dram_stack = (u64 *) gGfxSPTaskStack;
@@ -343,31 +332,6 @@ void draw_reset_bars(void) {
     osRecvMesg(&gGameVblankQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
 }
 
-#ifdef TARGET_N64
-/**
- * Initial settings for the first rendered frame.
- */
-void render_init(void) {
-    gGfxPool = &gGfxPools[0];
-    set_segment_base_addr(1, gGfxPool->buffer);
-    gGfxSPTask = &gGfxPool->spTask;
-    gDisplayListHead = gGfxPool->buffer;
-    gGfxPoolEnd = (u8 *)(gGfxPool->buffer + GFX_POOL_SIZE);
-    init_rcp();
-    clear_framebuffer(0);
-    end_master_display_list();
-    exec_display_list(&gGfxPool->spTask);
-
-    // Skip incrementing the initial framebuffer index on emulators so that they display immediately as the Gfx task finishes
-    // VC probably emulates osViSwapBuffer accurately so instant patch breaks VC compatibility
-    // Currently, Ares passes the cache emulation test and has issues with single buffering so disable it there as well.
-    if (gIsConsole || gIsWiiVC || gCacheEmulated) {
-        sRenderingFramebuffer++;
-    }
-    gGlobalTimer++;
-}
-#endif
-
 #ifdef USE_SYSTEM_MALLOC
 Gfx **alloc_next_dl(void) {
     u32 size = GFX_POOL_SIZE_FIXED;
@@ -418,17 +382,6 @@ void display_and_vsync(void) {
     osViSwapBuffer((void *) PHYSICAL_TO_VIRTUAL(gPhysicalFramebuffers[sRenderedFramebuffer]));
     profiler_log_thread5_time(THREAD5_END);
     osRecvMesg(&gGameVblankQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
-#ifdef TARGET_N64
-    // Skip swapping buffers on inaccurate emulators other than VC so that they display immediately as the Gfx task finishes
-    if (gIsConsole || gIsWiiVC || gCacheEmulated) {
-        if (++sRenderedFramebuffer == 3) {
-            sRenderedFramebuffer = 0;
-        }
-        if (++sRenderingFramebuffer == 3) {
-            sRenderingFramebuffer = 0;
-        }
-    }
-#endif
     gGlobalTimer++;
 }
 
@@ -589,10 +542,8 @@ void read_controller_inputs(void) {
         if (controller->controllerData != NULL) {
             controller->rawStickX = controller->controllerData->stick_x;
             controller->rawStickY = controller->controllerData->stick_y;
-#ifndef TARGET_N64
             controller->extStickX = controller->controllerData->ext_stick_x;
             controller->extStickY = controller->controllerData->ext_stick_y;
-#endif
             controller->buttonPressed = controller->controllerData->button
                                         & (controller->controllerData->button ^ controller->buttonDown);
             // 0.5x A presses are a good meme
@@ -601,10 +552,8 @@ void read_controller_inputs(void) {
         } else { // otherwise, if the controllerData is NULL, 0 out all of the inputs.
             controller->rawStickX = 0;
             controller->rawStickY = 0;
-#ifndef TARGET_N64
             controller->extStickX = 0;
             controller->extStickY = 0;
-#endif
             controller->buttonPressed = 0;
             controller->buttonDown = 0;
             controller->stickX = 0;
@@ -695,18 +644,12 @@ void setup_game_memory(void) {
     load_segment_decompress(2, _segment2_mio0SegmentRomStart, _segment2_mio0SegmentRomEnd);
 }
 
-#ifndef TARGET_N64
 static struct LevelCommand *levelCommandAddr;
-#endif
 
 /**
  * Main game loop thread. Runs forever as long as the game continues.
  */
 void thread5_game_loop(UNUSED void *arg) {
-#ifdef TARGET_N64
-    struct LevelCommand *levelCommandAddr;
-#endif
-
     setup_game_memory();
 #ifdef RUMBLE_FEEDBACK
     init_rumble_pak_scheduler_queue();
@@ -725,24 +668,14 @@ void thread5_game_loop(UNUSED void *arg) {
     play_music(SEQ_PLAYER_SFX, SEQUENCE_ARGS(0, SEQ_SOUND_PLAYER), 0);
     set_sound_mode(save_file_get_sound_mode());
 
-#ifdef TARGET_N64
-    render_init();
-
-    while (TRUE) {
-#else
     gGlobalTimer++;
 }
 
 void game_loop_one_iteration(void) {
-#endif
         // If the reset timer is active, run the process to reset the game.
         if (gResetTimer != 0) {
             draw_reset_bars();
-#ifdef TARGET_N64
-            continue;
-#else
             return;
-#endif
         }
         profiler_log_thread5_time(THREAD5_START);
 
@@ -776,8 +709,5 @@ void game_loop_one_iteration(void) {
 #endif
 #ifdef EXT_DEBUG_MENU
         set_debug_main_action();
-#endif
-#ifdef TARGET_N64
-    }
 #endif
 }

@@ -454,74 +454,13 @@ extern f32 gSineTable[];
     ((u32 *)(mtx))[15] = FLOAT_ONE;             \
 }
 
-
 // Inline asm functions:
-// Inline asm functions:
-
-#ifdef TARGET_N64 // MIPS optimized functions
-/// Multiply two floats without a nop.
-ALWAYS_INLINE float mul_without_nop(float a, float b) {
-    float ret;
-    __asm__ ("mul.s %0, %1, %2"
-                         : "=f"(ret)
-                         : "f"(a), "f"(b));
-    return ret;
-}
-
-/// Write a 32 bit value into the low order bytes of a register.
-ALWAYS_INLINE void swr(void* addr, s32 val, const int offset) {
-    __asm__ ("swr %1, %2(%0)"
-                        :
-                        : "g"(addr), "g"(val), "I"(offset));
-}
-
-/// Write a 32 bit value into the high order bytes of a register.
-ALWAYS_INLINE void swl(void* addr, s32 val, const int offset) {
-    __asm__ ("swl %1, %2(%0)"
-                        :
-                        : "g"(addr), "g"(val), "I"(offset));
-}
-
-/// Rounds towards infinity
-ALWAYS_INLINE s32 ceilf(f32 in) {
-    f32 tmp;
-    s32 out;
-    __asm__("ceil.w.s  %0,%1" : "=f" (tmp) : "f" (in ));
-    __asm__("mfc1      %0,%1" : "=r" (out) : "f" (tmp));
-    return out;
-}
-/// Rounds towards negative infinity
-ALWAYS_INLINE s32 floorf(f32 in) {
-    f32 tmp;
-    s32 out;
-    __asm__("floor.w.s %0,%1" : "=f" (tmp) : "f" (in ));
-    __asm__("mfc1      %0,%1" : "=r" (out) : "f" (tmp));
-    return out;
-}
-/// Rounds towards the nearest integer
-ALWAYS_INLINE s32 roundf(f32 in) {
-    f32 tmp;
-    s32 out;
-    __asm__("round.w.s %0,%1" : "=f" (tmp) : "f" (in ));
-    __asm__("mfc1      %0,%1" : "=r" (out) : "f" (tmp));
-    return out;
-}
-#endif
-
-#ifdef TARGET_N64 // MIPS optimized
-ALWAYS_INLINE f32 absf(f32 in) {
-    f32 out;
-    __asm__("abs.s %0,%1" : "=f" (out) : "f" (in));
-    return out;
-}
-#else // Portable
 ALWAYS_INLINE f32 absf(f32 in) {
     if (in < 0) {
         in *= -1.0f;
     }
     return in;
 }
-#endif
 
 /// Absolute value of an integer value
 ALWAYS_INLINE s32 absi(s32 in) {
@@ -641,10 +580,6 @@ void linear_mtxf_mul_vec3f(Mat4 mtx, Vec3f dest, Vec3f src);
 void linear_mtxf_mul_vec3f_and_translate(Mat4 mtx, Vec3f dest, Vec3f src);
 void linear_mtxf_transpose_mul_vec3f(Mat4 mtx, Vec3f dest, Vec3f src);
 // Fixed point matrix conversions:
-#ifdef TARGET_N64
-f32 mtx_get_float(Mtx *mtx, u32 index);
-void mtx_set_float(Mtx *mtx, u32 index, f32 val);
-#endif
 
 void mtxf_to_mtx(Mtx *dest, Mat4 src);
 

@@ -13,8 +13,6 @@
 
 #include "guint.h"
 
-#if LIBULTRA_VERSION < OS_VER_K || !defined(TARGET_N64)
-
 void guTranslateF(float mf[4][4], float x, float y, float z)
 {
     guMtxIdentF(mf);
@@ -32,5 +30,3 @@ void guTranslate(Mtx *m, float x, float y, float z)
 
     guMtxF2L(mf, m);
 }
-
-#endif
