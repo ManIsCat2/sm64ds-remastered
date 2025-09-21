@@ -111,6 +111,7 @@ static void toad_message_opaque(void) {
         if (gCurrentObject->oInteractStatus & INT_STATUS_INTERACTED) {
             gCurrentObject->oInteractStatus = 0;
             gCurrentObject->oToadMessageState = TOAD_MESSAGE_TALKING;
+            cur_obj_init_animation(8);
             play_toads_jingle();
         }
     }
@@ -121,6 +122,7 @@ static void toad_message_talking(void) {
         DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, gCurrentObject->oToadMessageDialogID)) {
         gCurrentObject->oToadMessageRecentlyTalked = TRUE;
         gCurrentObject->oToadMessageState = TOAD_MESSAGE_FADING;
+        cur_obj_init_animation(6);
         switch (gCurrentObject->oToadMessageDialogID) {
             case TOAD_STAR_1_DIALOG:
                 gCurrentObject->oToadMessageDialogID = TOAD_STAR_1_DIALOG_AFTER;
@@ -141,6 +143,7 @@ static void toad_message_talking(void) {
 static void toad_message_opacifying(void) {
     if ((gCurrentObject->oOpacity += 6) == 255) {
         gCurrentObject->oToadMessageState = TOAD_MESSAGE_OPAQUE;
+        cur_obj_init_animation(6);
     }
 }
 
@@ -205,6 +208,7 @@ void bhv_toad_message_init(void) {
         gCurrentObject->oToadMessageRecentlyTalked = FALSE;
         gCurrentObject->oToadMessageState = TOAD_MESSAGE_FADED;
         gCurrentObject->oOpacity = 81;
+        cur_obj_init_animation(6);
     } else {
         obj_mark_for_deletion(gCurrentObject);
     }

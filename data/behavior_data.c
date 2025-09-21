@@ -1311,7 +1311,7 @@ const BehaviorScript bhvWind[] = {
 const BehaviorScript bhvEndToad[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    LOAD_ANIMATIONS(oAnimations, toad_seg6_anims_0600FB58),
+    LOAD_ANIMATIONS(oAnimations, toad_animations),
     ANIMATE(0),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_end_toad_loop),
@@ -3527,8 +3527,7 @@ const BehaviorScript bhvPlayer[] = {
 const BehaviorScript bhvToadMessage[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, toad_seg6_anims_0600FB58),
-    ANIMATE(6),
+    LOAD_ANIMATIONS(oAnimations, toad_animations),
     SET_INTERACT_TYPE(INTERACT_TEXT),
     SET_HITBOX(/*Radius*/ 80, /*Height*/ 100),
     SET_INT(oIntangibleTimer, 0),
