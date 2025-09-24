@@ -1173,7 +1173,6 @@
 0x3ae6bec9, textures/skybox_tiles/water.47.rgba16.png
 0x3aadb102, textures/skybox_tiles/water.16.rgba16.png
 0x3a9a3561, levels/lll/10.rgba16.png
-0x39f5a629, actors/toad/toad_face.rgba16.png
 0x39e90b67, textures/segment2/segment2.06700.rgba16.png
 0x39e470dd, levels/ttc/0.rgba16.png
 0x39d86d67, actors/thwomp/thwomp_surface.rgba16.png
@@ -1192,7 +1191,6 @@
 0x3867cbee, actors/wiggler/wiggler_segment_left_side.rgba16.png
 0x385055f4, textures/skybox_tiles/wdw.37.rgba16.png
 0x384e2a31, actors/goomba/goomba_face_blink.rgba16.png
-0x383bbd9b, actors/toad/toad_head.rgba16.png
 0x381ea750, levels/bbh/3.rgba16.png
 0x37f10a8c, actors/bookend/bookend_tooth.rgba16.png
 0x374e253a, actors/bowser/bowser_armband_spike.rgba16.png

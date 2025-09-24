@@ -337,8 +337,6 @@
 0x111d5500, actors/swoop/swoop_wing.rgba16.png
 0x09403c76, actors/thwomp/thwomp_face.rgba16.png
 0x7b9b0f38, actors/thwomp/thwomp_surface.rgba16.png
-0xfe36303d, actors/toad/toad_face.rgba16.png
-0x1011b465, actors/toad/toad_head.rgba16.png
 0x43c09930, actors/tornado/tornado.ia16.png
 0x95cd8673, actors/treasure_chest/treasure_chest_front.rgba16.png
 0xfd64803f, actors/treasure_chest/treasure_chest_lock.rgba16.png
