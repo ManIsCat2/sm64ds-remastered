@@ -128,6 +128,7 @@ struct VblankHandler {
 #define ANIM_FLAG_5          (1 << 5) // 0x20
 #define ANIM_FLAG_6          (1 << 6) // 0x40
 #define ANIM_FLAG_7          (1 << 7) // 0x80
+#define ANIM_FLAG_BONE_TRANS (1 << 8) // 0x100
 
 struct Animation {
     /*0x00*/ s16 flags;
