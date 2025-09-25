@@ -58,7 +58,6 @@
 0xf861446c, textures/skybox_tiles/wdw.35.rgba16.png
 0xf831589e, textures/snow/ccm_textures.05000.rgba16.png
 0xf8303731, textures/outside/castle_grounds_textures.01000.rgba16.png
-0xf7844a94, actors/king_bobomb/king_bob-omb_arm.rgba16.png
 0xf765d232, textures/skybox_tiles/ssl.16.rgba16.png
 0xf71bcbca, levels/lll/22.rgba16.png
 0xf6c53a3c, levels/ddd/0.rgba16.png
@@ -662,7 +661,6 @@
 0x8edc5be4, textures/skybox_tiles/bbh.32.rgba16.png
 0x8ecffabb, textures/title_screen_bg/title_screen_bg.04040.rgba16.png
 0x8e58d68a, textures/skybox_tiles/water.49.rgba16.png
-0x8e41ffcd, actors/king_bobomb/king_bob-omb_hand.rgba16.png
 0x8e41ffcd, actors/yellow_sphere/yellow_sphere.rgba16.png
 0x8e41ffcd, actors/yellow_sphere_small/small_yellow_sphere.rgba16.png
 0x8e28628b, levels/bitfs/2.rgba16.png
@@ -699,7 +697,6 @@
 0x88898880, levels/menu/main_menu_seg7_us.0B680.ia8.png
 0x8886887e, levels/menu/main_menu_seg7_us.0B180.ia8.png
 0x88788776, levels/menu/main_menu_seg7_us.0AFC0.ia8.png
-0x886b2ff9, actors/king_bobomb/king_bob-omb_left_side.rgba16.png
 0x88654139, textures/machine/ttc_textures.07000.rgba16.png
 0x8853b016, textures/skybox_tiles/wdw.12.rgba16.png
 0x88493238, levels/castle_inside/21.rgba16.png
@@ -757,7 +754,6 @@
 0x81175ed5, textures/skybox_tiles/bitfs.32.rgba16.png
 0x810a6136, textures/fire/lll_textures.08800.rgba16.png
 0x8093d98d, textures/skybox_tiles/bidw.12.rgba16.png
-0x808c10c2, actors/king_bobomb/king_bob-omb_right_side.rgba16.png
 0x80788486, levels/menu/main_menu_seg7_us.0B6C0.ia8.png
 0x8076d349, textures/skybox_tiles/ccm.24.rgba16.png
 0x8073de72, actors/bookend/bookend_cover.rgba16.png
@@ -1009,7 +1005,6 @@
 0x58c547bd, textures/skybox_tiles/bidw.19.rgba16.png
 0x58a11d1e, textures/skybox_tiles/bits.37.rgba16.png
 0x585285d7, actors/bobomb/bob-omb_buddy_left_side.rgba16.png
-0x585285d7, actors/king_bobomb/bob-omb_buddy_left_side_unused.rgba16.png
 0x57f55b58, actors/sparkle/sparkle_2.rgba16.png
 0x57dd4de0, textures/skybox_tiles/cloud_floor.34.rgba16.png
 0x57c29c7d, textures/machine/ttc_textures.02800.rgba16.png
@@ -1263,7 +1258,6 @@
 0x29f15a68, actors/piranha_plant/piranha_plant_stem.rgba16.png
 0x29c0c7d2, actors/koopa/koopa_eyes_closed.rgba16.png
 0x29904548, textures/skybox_tiles/water.63.rgba16.png
-0x292e5fd8, actors/king_bobomb/bob-omb_buddy_right_side_unused.rgba16.png
 0x292e5fd8, actors/bobomb/bob-omb_buddy_right_side.rgba16.png
 0x292c40a1, textures/skybox_tiles/cake.13.rgba16.png
 0x28df6c96, actors/flame/flame_1.ia16.png
@@ -1520,7 +1514,6 @@
 0x1f8b71ca, actors/hoot/hoot_wing_tip.rgba16.png
 0x3cf309e4, actors/impact_ring/impact_ring_left_side.ia16.png
 0x20655b3c, actors/impact_ring/impact_ring_right_side.ia16.png
-0x2996ca88, actors/king_bobomb/king_bob-omb_crown_rim.rgba16.png
 0xa7c43afc, levels/bitfs/0.rgba16.png
 0x1d6fcb73, levels/ddd/4.rgba16.png
 0x3c99819f, levels/menu/main_menu_seg7.00818.rgba16.png

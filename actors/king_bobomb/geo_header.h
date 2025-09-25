@@ -1,11 +1,6 @@
-#ifndef GROUP3_H
-#define GROUP3_H
-
-#include "types.h"
-
-// king_bobomb
 extern const GeoLayout king_bobomb_geo[];
 extern Lights1 king_bobomb_lights;
+extern Lights1 king_bobomb_king_bobomb_body_lights;
 extern u8 king_bobomb_rgba16[];
 extern u8 king_bobomb_body_rgba16[];
 extern Vtx king_bobomb_kbob_arm_l_mesh_layer_4_vtx_0[5];
@@ -68,12 +63,3 @@ extern Gfx king_bobomb_kbob_leg_r_mesh_layer_4[];
 extern Gfx king_bobomb_kbob_foot_r_skinned_mesh_layer_4[];
 extern Gfx king_bobomb_kbob_foot_r_mesh_layer_4[];
 extern Gfx king_bobomb_kbob_mustach_mesh_layer_4[];
-extern const struct Animation *const king_bobomb_seg5_anims_0500FE30[];
-
-// water_bubble
-extern const GeoLayout water_bomb_geo[];
-extern const GeoLayout water_bomb_shadow_geo[];
-extern const Gfx water_bubble_seg5_dl_05010D30[];
-extern const Gfx water_bubble_seg5_dl_05011000[];
-
-#endif

@@ -176,16 +176,6 @@
 0xe658e7ec, actors/impact_smoke/impact_smoke_1.ia16.png
 0x5e4d860f, actors/impact_smoke/impact_smoke_2.ia16.png
 0x66afde95, actors/impact_smoke/impact_smoke_3.ia16.png
-0x09f2a7d9, actors/king_bobomb/bob-omb_buddy_body_unused.rgba16.png
-0xbdfeb7e9, actors/king_bobomb/bob-omb_buddy_left_side_unused.rgba16.png
-0x0b1833a6, actors/king_bobomb/bob-omb_buddy_right_side_unused.rgba16.png
-0x13947d02, actors/king_bobomb/king_bob-omb_arm.rgba16.png
-0xbcb092cb, actors/king_bobomb/king_bob-omb_body_unused.rgba16.png
-0x9cb3f8a1, actors/king_bobomb/king_bob-omb_crown_rim.rgba16.png
-0xf9084721, actors/king_bobomb/king_bob-omb_eyes.rgba16.png
-0x89f3f5a0, actors/king_bobomb/king_bob-omb_hand.rgba16.png
-0x5741b6a5, actors/king_bobomb/king_bob-omb_left_side.rgba16.png
-0x625018c9, actors/king_bobomb/king_bob-omb_right_side.rgba16.png
 0xa5f8d058, actors/klepto/klepto_beak.rgba16.png
 0x7ccef531, actors/klepto/klepto_chest_tuft.rgba16.png
 0xab4f6226, actors/klepto/klepto_eye.rgba16.png
