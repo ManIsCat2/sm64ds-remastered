@@ -17,7 +17,6 @@
 0xfdb6de70, textures/skybox_tiles/clouds.4.rgba16.png
 0xfdb50546, textures/inside/inside_castle_textures.06000.rgba16.png
 0xfd9aa14e, actors/blue_fish/blue_fish.rgba16.png
-0xfd83b121, actors/goomba/goomba_body.rgba16.png
 0xfd820701, actors/door/polished_wooden_door.rgba16.png
 0xfd6af08f, actors/mad_piano/mad_piano_body.rgba16.png
 0xfd57ea27, actors/dorrie/dorrie_eye.rgba16.png
@@ -360,7 +359,6 @@
 0xc70e2879, textures/skybox_tiles/cloud_floor.23.rgba16.png
 0xc6d80baf, textures/skybox_tiles/ssl.47.rgba16.png
 0xc6b026aa, textures/fire/lll_textures.02800.rgba16.png
-0xc6a1c158, actors/goomba/goomba_face.rgba16.png
 0xc64ad046, levels/lll/25.rgba16.png
 0xc63f7abb, textures/skybox_tiles/clouds.19.rgba16.png
 0xc6028757, textures/generic/bob_textures.00800.rgba16.png
@@ -1190,7 +1188,6 @@
 0x386a9785, actors/bowser/bowser_shell.rgba16.png
 0x3867cbee, actors/wiggler/wiggler_segment_left_side.rgba16.png
 0x385055f4, textures/skybox_tiles/wdw.37.rgba16.png
-0x384e2a31, actors/goomba/goomba_face_blink.rgba16.png
 0x381ea750, levels/bbh/3.rgba16.png
 0x37f10a8c, actors/bookend/bookend_tooth.rgba16.png
 0x374e253a, actors/bowser/bowser_armband_spike.rgba16.png

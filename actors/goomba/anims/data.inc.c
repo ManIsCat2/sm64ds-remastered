@@ -1,1 +1,5 @@
-#include "anim_0801DA34.inc.c"
+#include "anim_waiting.inc.c"
+#include "anim_walking.inc.c"
+#include "anim_scaled_death.inc.c"
+#include "anim_running.inc.c"
+#include "anim_knockback.inc.c"

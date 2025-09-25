@@ -94,6 +94,7 @@ sm64dsr_config.txt
 !/actors/bobomb/bob-omb_right_side.rgba16.png
 !/actors/cannon_lid/cannon_lid.rgba16.png
 !/actors/toad/*.png
+!/actors/goomba/*.png
 
 # Android files
 !/textures/touchcontrols/*.png

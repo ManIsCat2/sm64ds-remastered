@@ -154,9 +154,6 @@
 0x519d3d8a, actors/flyguy/flyguy_face.rgba16.png
 0x1058cfe1, actors/flyguy/flyguy_propeller.ia16.png
 0x49f51e07, actors/fwoosh/fwoosh_face.ia16.png
-0xff8aa0d7, actors/goomba/goomba_body.rgba16.png
-0xa0f28d98, actors/goomba/goomba_face.rgba16.png
-0x029304d9, actors/goomba/goomba_face_blink.rgba16.png
 0xd1559bcc, actors/haunted_cage/bbh_cage_bars.rgba16.png
 0xa630c9ea, actors/haunted_cage/bbh_cage_double_ornament.rgba16.png
 0xab6318d0, actors/haunted_cage/bbh_cage_floor.rgba16.png
