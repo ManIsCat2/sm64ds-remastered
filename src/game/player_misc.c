@@ -374,7 +374,7 @@ Gfx *geo_switch_mario_eyes(s32 callContext, struct GraphNode *node, UNUSED Mat4 
 }
 
 /**
- * Makes Player's upper body tilt depending on the rotation stored in his bodyState
+ * Makes the player's upper body tilt depending on the rotation stored in his bodyState
  */
 Gfx *geo_mario_tilt_torso(s32 callContext, struct GraphNode *node, UNUSED Mat4 *c) {
     struct GraphNodeGenerated *asGenerated = (struct GraphNodeGenerated *) node;
