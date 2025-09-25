@@ -1,5 +1,5 @@
-#ifndef MARIO_ACTIONS_STATIONARY
-#define MARIO_ACTIONS_STATIONARY
+#ifndef PLAYER_ACTIONS_STATIONARY
+#define PLAYER_ACTIONS_STATIONARY
 
 #include <PR/ultratypes.h>
 
@@ -47,4 +47,4 @@ s32 act_first_person(struct PlayerState *m);
 s32 check_common_stationary_cancels(struct PlayerState *m);
 s32 player_execute_stationary_action(struct PlayerState *m);
 
-#endif // MARIO_ACTIONS_STATIONARY
+#endif // PLAYER_ACTIONS_STATIONARY

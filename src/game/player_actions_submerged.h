@@ -1,5 +1,5 @@
-#ifndef MARIO_ACTIONS_SUBMERGED_H
-#define MARIO_ACTIONS_SUBMERGED_H
+#ifndef PLAYER_ACTIONS_SUBMERGED_H
+#define PLAYER_ACTIONS_SUBMERGED_H
 
 #include <PR/ultratypes.h>
 
@@ -7,4 +7,4 @@
 
 s32 player_execute_submerged_action(struct PlayerState *m);
 
-#endif // MARIO_ACTIONS_SUBMERGED_H
+#endif // PLAYER_ACTIONS_SUBMERGED_H

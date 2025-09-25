@@ -317,7 +317,7 @@ static s32 perform_ground_quarter_step(struct PlayerState *m, Vec3f nextPos) {
     if ((m->action & ACT_FLAG_RIDING_SHELL) && floorHeight < waterLevel) {
         floorHeight = waterLevel;
         floor = &gWaterSurfacePseudoFloor;
-        // ex-alo change
+        // AloXado locked the frick in again :O
         // make floorHeight originOffset negative
         floor->originOffset = -floorHeight;
     }
@@ -352,7 +352,7 @@ static s32 perform_ground_quarter_step(struct PlayerState *m, Vec3f nextPos) {
     {
         if (nextPos[1] > floorHeight) {
             nextPos[1] = (ceilHeight - hitboxHeight);
-            // Set Player's position and floor
+            // Set the players position and floor
             vec3f_copy(m->pos, nextPos);
             m->ceil = ceil;
             m->ceilHeight = ceilHeight;
@@ -370,8 +370,8 @@ static s32 perform_ground_quarter_step(struct PlayerState *m, Vec3f nextPos) {
         }
     }
 #else
-    // ex-alo change
-    // Changed 160.0f to Player's hitboxHeight value
+    // If AloXado keeps cooking I think imma have to start to lock in
+    // Changed 160.0f to the players hitboxHeight value
     if (floorHeight + m->playerObj->hitboxHeight >= ceilHeight) {
         return GROUND_STEP_HIT_WALL_STOP_QSTEPS;
     }
@@ -403,7 +403,7 @@ static s32 perform_ground_quarter_step(struct PlayerState *m, Vec3f nextPos) {
     }
 #else
     if (upperWall != NULL) {
-        // ex-alo change
+        // Ight AloXado cooked again, I gotta lock in
         // Simplify angle changes using abs_angle_diff
         s16 wallDYaw = abs_angle_diff(atan2s(upperWall->normal.z, upperWall->normal.x), m->faceAngle[1]);
 
@@ -488,7 +488,7 @@ struct Surface *check_ledge_grab(struct PlayerState *m, struct WallCollisionData
         return NULL;
     }
 
-    // Only ledge grab if the wall displaced Player in the opposite direction of his velocity.
+    // Only ledge grab if the wall displaced the player in the opposite direction of their velocity.
     // hdot(displacement, vel).
     if ((displacementX * m->vel[0]) + (displacementZ * m->vel[2]) > 0.0f) {
         return NULL;
@@ -508,10 +508,10 @@ struct Surface *check_ledge_grab(struct PlayerState *m, struct WallCollisionData
         nx = wall->normal.x;
         nz = wall->normal.z;
 
-        // Get the difference between the wall's yaw' and Player's yaw.
+        // Get the difference between the wall's yaw' and the players yaw.
         wallDYaw = abs_angle_diff(atan2s(nz, nx), m->faceAngle[1]);
 
-        // Skip the wall if it is farther from the ideal yaw (opposite Player's yaw) than a previous wall.
+        // Skip the wall if it is farther from the ideal yaw (opposite of the players yaw) than a previous wall.
         if (wallDYaw < oldWallDYaw) {
             continue;
         }
@@ -526,7 +526,7 @@ struct Surface *check_ledge_grab(struct PlayerState *m, struct WallCollisionData
             continue;
         }
 
-        // Move the ledge grab position if there are walls above the floor where Player's hitbox would be after grabbing the ledge.
+        // Move the ledge grab position if there are walls above the floor where the players hitbox would be after grabbing the ledge.
         resolve_and_return_wall_collisions_data(nextPos, 30.0f, 24.0f, &lowerWall);
         resolve_and_return_wall_collisions_data(nextPos, 60.0f, 50.0f, &upperWall);
 
@@ -589,8 +589,8 @@ u32 check_ledge_grab(struct PlayerState *m, struct Surface *wall, Vec3f intended
         return FALSE;
     }
 
-    // Only ledge grab if the wall displaced Player in the opposite direction of
-    // his velocity.
+    // Only ledge grab if the wall displaced the player in the opposite direction of
+    // their velocity.
     if (displacementX * m->vel[0] + displacementZ * m->vel[2] > 0.0f) {
         return FALSE;
     }
@@ -676,14 +676,14 @@ s32 perform_air_quarter_step(struct PlayerState *m, Vec3f intendedPos, u32 stepA
     if ((m->action & ACT_FLAG_RIDING_SHELL) && floorHeight < waterLevel) {
         floorHeight = waterLevel;
         floor = &gWaterSurfacePseudoFloor;
-        // ex-alo change
+        // ALOXADO IS COOKING AGAIN
         // make floorHeight originOffset negative
         floor->originOffset = -floorHeight;
     }
 
     if (nextPos[1] <= floorHeight) {
-        // ex-alo change
-        // Changed 160.0f to Player's hitboxHeight value
+        // ALOXADO LOCKED IN THE FRICK INNNNNNNNNNNNNNNNN
+        // Changed 160.0f to the player's hitboxHeight value
         if (ceilHeight - floorHeight > m->playerObj->hitboxHeight) {
             m->pos[0] = nextPos[0];
             m->pos[2] = nextPos[2];
@@ -697,7 +697,7 @@ s32 perform_air_quarter_step(struct PlayerState *m, Vec3f intendedPos, u32 stepA
         m->floorHeight = floorHeight;
 #else
         //! When ceilHeight - floorHeight <= 160, the step result says that
-        // Player landed, but his movement is cancelled and his referenced floor
+        // The player landed, but their movement is cancelled and their referenced floor
         // isn't updated (pedro spots)
 #endif
         return AIR_STEP_LANDED;
@@ -781,7 +781,7 @@ s32 perform_air_quarter_step(struct PlayerState *m, Vec3f intendedPos, u32 stepA
 
     //! When the wall is not completely vertical or there is a slight wall
     // misalignment, you can activate these conditions in unexpected situations
-    // Check if Player can grab a wall.
+    // Check if the player can grab a wall.
 #if BETTER_RESOLVE_WALL_COLLISION
     if ((stepArg & AIR_STEP_CHECK_LEDGE_GRAB) && upperWall.numWalls == 0 && lowerWall.numWalls != 0) {
         // Check if any walls are grabbable.

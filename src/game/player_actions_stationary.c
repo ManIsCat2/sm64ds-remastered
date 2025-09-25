@@ -147,17 +147,17 @@ s32 act_idle(struct PlayerState *m) {
         if (is_anim_at_end(m)) {
             // Fall asleep after 10 head turning cycles.
             // act_start_sleeping is triggered earlier in the function
-            // when actionState == 3. This happens when Player's done
+            // when actionState == 3. This happens when the players done
             // turning his head back and forth. However, we do some checks
-            // here to make sure that Player would be able to sleep here,
-            // and that he's gone through 10 cycles before sleeping.
+            // here to make sure that the player would be able to sleep here,
+            // and that they have gone through 10 cycles before sleeping.
             // actionTimer is used to track how many cycles have passed.
             if (++m->actionState == 3) {
                 f32 deltaYOfFloorBehindPlayer = m->pos[1] - find_floor_height_relative_polar(m, -0x8000, 60.0f);
                 if (deltaYOfFloorBehindPlayer < -24.0f || 24.0f < deltaYOfFloorBehindPlayer || m->floor->flags & SURFACE_FLAG_DYNAMIC) {
                     m->actionState = 0;
                 } else {
-                    // If Player hasn't turned his head 10 times yet, stay idle instead of going to sleep.
+                    // If the player hasn't turned their head 10 times yet, stay idle instead of going to sleep.
                     m->actionTimer++;
                     if (m->actionTimer < 10) {
                         m->actionState = 0;

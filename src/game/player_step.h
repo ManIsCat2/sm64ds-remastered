@@ -1,5 +1,5 @@
-#ifndef MARIO_STEP_H
-#define MARIO_STEP_H
+#ifndef PLAYER_STEP_H
+#define PLAYER_STEP_H
 
 #include <PR/ultratypes.h>
 
@@ -33,4 +33,4 @@ s32 stationary_ground_step(struct PlayerState *);
 s32 perform_ground_step(struct PlayerState *);
 s32 perform_air_step(struct PlayerState *, u32);
 
-#endif // MARIO_STEP_H
+#endif // PLAYER_STEP_H

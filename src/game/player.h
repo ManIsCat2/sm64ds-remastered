@@ -1,5 +1,5 @@
-#ifndef MARIO_H
-#define MARIO_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include <PR/ultratypes.h>
 
@@ -58,4 +58,4 @@ void init_player_from_save_file(void);
 
 extern int curChar;
 
-#endif // MARIO_H
+#endif // PLAYER_H

@@ -216,7 +216,7 @@ s32 act_dive_picking_up(struct PlayerState *m) {
     }
 
     //! Hands-free holding. Landing on a slope or being pushed off a ledge while
-    // landing from a dive grab sets Player's action to a non-holding action
+    // landing from a dive grab sets the players action to a non-holding action
     // without dropping the object, causing the hands-free holding glitch.
     if (m->input & INPUT_OFF_FLOOR) {
         return set_player_action(m, ACT_FREEFALL, 0);

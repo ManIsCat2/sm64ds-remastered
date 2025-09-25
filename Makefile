@@ -701,7 +701,7 @@ ifeq ($(TARGET_SWITCH),1)
   NXARCH := -march=armv8-a+crc+crypto -mtune=cortex-a57 -mtp=soft -fPIE
   INCLUDE_DIRS += $(LIBNX)/include $(PORTLIBS)/include
 
-  NX_APP_TITLE := Super Mario 64
+  NX_APP_TITLE := Super Mario 64 DS Remastered
   NX_APP_AUTHOR := Nintendo - Port by Vatuu, fgsfdsfgs and KiritoDev
   NX_APP_VERSION := ver_$(VERSION)
   NX_APP_ICON := $(PLATFORM_DIR)/logo.jpg
@@ -754,8 +754,8 @@ else ifeq ($(TARGET_N3DS),1)
   LD := $(CXX)
   SDLCONFIG :=
 
-  SMDH_TITLE ?= Super Mario 64
-  SMDH_DESCRIPTION ?= Super Mario 64 3DS Port
+  SMDH_TITLE ?= Super Mario 64 DS Remastered
+  SMDH_DESCRIPTION ?= Super Mario 64 DS Remastered
   SMDH_AUTHOR ?= Nintendo - port by Fnouwt (Gericom) and mkst
   SMDH_ICON := $(PLATFORM_DIR)/icon.smdh
 else

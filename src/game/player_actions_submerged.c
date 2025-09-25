@@ -1511,7 +1511,7 @@ static s32 check_common_submerged_cancels(struct PlayerState *m) {
         if (waterHeight > m->floorHeight) {
 #if FIX_WATER_PLUNGE_UPWARP
             if (m->pos[1] - waterHeight < 50) {
-                m->pos[1] = waterHeight; // lock player to top if the falloff isn't big enough
+                m->pos[1] = waterHeight; // lock the player to top if the falloff isn't big enough
             } else {
                 return transition_submerged_to_airborne(m);
             }

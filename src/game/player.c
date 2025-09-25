@@ -408,7 +408,7 @@ void player_set_forward_vel(struct PlayerState *m, f32 forwardVel) {
 }
 
 /**
- * Returns the slipperiness class of Player's floor.
+ * Returns the slipperiness class of the player's floor.
  */
 s32 player_get_floor_class(struct PlayerState *m) {
     s32 floorClass;
@@ -450,7 +450,7 @@ s32 player_get_floor_class(struct PlayerState *m) {
         }
     }
 
-    // Crawling allows Player to not slide on certain steeper surfaces.
+    // Crawling allows the player to not slide on certain steeper surfaces.
     if (m->action == ACT_CRAWLING && m->floor->normal.y > 0.5f && floorClass == SURFACE_CLASS_DEFAULT) {
         floorClass = SURFACE_CLASS_NOT_SLIPPERY;
     }
@@ -779,7 +779,7 @@ s16 find_floor_slope(struct PlayerState *m, s16 yawOffset) {
         CHECK(if (floor == NULL) backwardFloorY = m->floorHeight); // handle OOB slopes
     }
 
-    //! If Player is near OOB, these floorY's can sometimes be -11000.
+    //! If the player is near OOB, these floorY's can sometimes be -11000.
     //  This will cause these to be off and give improper slopes.
     //  FIX_FLOOR_SLOPE_OOB fixes it
     forwardYDelta = forwardFloorY - m->pos[1];
@@ -1079,7 +1079,7 @@ u32 set_player_action(struct PlayerState *m, u32 action, u32 actionArg) {
             break;
     }
 
-    // Resets the sound played flags, meaning Player can play those sound types again.
+    // Resets the sound played flags, meaning the player can play those sound types again.
     m->flags &= ~(PLAYER_ACTION_SOUND_PLAYED | PLAYER_MARIO_SOUND_PLAYED);
 
     if (!(m->action & ACT_FLAG_AIR)) {
@@ -1128,7 +1128,7 @@ s32 set_jump_from_landing(struct PlayerState *m) {
                     break;
 
                 case ACT_DOUBLE_JUMP_LAND:
-                    // If Player has a wing cap, he ignores the typical speed
+                    // If the player has a wing cap, they ignore the typical speed
                     // requirement for a triple jump.
                     if (m->flags & PLAYER_WING_CAP) {
                         set_player_action(m, ACT_FLYING_TRIPLE_JUMP, 0);
@@ -1159,7 +1159,7 @@ s32 set_jumping_action(struct PlayerState *m, u32 action, u32 actionArg) {
     UNUSED u32 currAction = m->action;
 
     if (m->quicksandDepth >= 11.0f) {
-        // Checks whether Player is holding an object or not.
+        // Checks whether the player is holding an object or not.
         if (m->heldObj == NULL) {
             return set_player_action(m, ACT_QUICKSAND_JUMP_LAND, 0);
         } else {
@@ -1316,7 +1316,7 @@ void squish_player_model(struct PlayerState *m) {
         if (m->squishTimer == 0) {
             cheats_player_size(m);
         }
-        // If timer is less than 16, rubber-band Player's size scale up and down.
+        // If timer is less than 16, rubber-band the player's size scale up and down.
         else if (m->squishTimer <= 16) {
             m->squishTimer -= 1;
 
@@ -1447,10 +1447,10 @@ void update_mario_geometry_inputs(struct PlayerState *m) {
 
     m->floorHeight = find_floor(m->pos[0], m->pos[1], m->pos[2], &m->floor);
 
-    // If Player is OOB, move his position to his graphical position (which was not updated)
+    // If the player is OOB, move their position to their graphical position (which was not updated)
     // and check for the floor there.
     // This can cause errant behavior when combined with astral projection,
-    // since the graphical position was not Player's previous location.
+    // since the graphical position was not the players previous location.
     if (m->floor == NULL) {
         vec3f_copy(m->pos, m->playerObj->header.gfx.pos);
         m->floorHeight = find_floor(m->pos[0], m->pos[1], m->pos[2], &m->floor);
@@ -1572,8 +1572,8 @@ void set_submerged_cam_preset_and_spawn_bubbles(struct PlayerState *m) {
                 set_camera_mode(m->area->camera, CAMERA_MODE_WATER_SURFACE, 1);
             }
 
-            // As long as Player isn't drowning or at the top
-            // of the water with his head out, spawn bubbles.
+            // As long as the player isn't drowning or at the top
+            // of the water with their head out, spawn bubbles.
             if (!(m->action & ACT_FLAG_INTANGIBLE)) {
                 if ((m->pos[1] < (f32)(m->waterLevel - 160)) || (m->faceAngle[0] < -0x800)) {
                     m->particleFlags |= PARTICLE_BUBBLE;
@@ -1590,7 +1590,7 @@ void update_player_health(struct PlayerState *m) {
     s32 terrainIsSnow;
 
     if (m->health >= 0x100) {
-        // When already healing or hurting Player, Player's HP is not changed any more here.
+        // When already healing or hurting the player, the players HP is not changed any more here.
         if (((u32) m->healCounter | (u32) m->hurtCounter) == 0) {
             if ((m->input & INPUT_IN_POISON_GAS) && !(m->action & ACT_FLAG_INTANGIBLE)) {
                 if (!(m->flags & PLAYER_METAL_CAP) && !gDebugLevelSelect) {
@@ -1600,7 +1600,7 @@ void update_player_health(struct PlayerState *m) {
                 if ((m->action & ACT_FLAG_SWIMMING) && !(m->action & ACT_FLAG_INTANGIBLE)) {
                     terrainIsSnow = (m->area->terrainType & TERRAIN_MASK) == TERRAIN_SNOW;
 
-                    // When Player is near the water surface, recover health (unless in snow),
+                    // When the player is near the water surface, recover health (unless in snow),
                     // when in snow terrains lose 3 health.
                     // If using the debug level select, do not lose any HP to water.
                     if ((m->pos[1] >= (m->waterLevel - 140)) && !terrainIsSnow) {
@@ -1628,7 +1628,7 @@ void update_player_health(struct PlayerState *m) {
             m->health = 0xFF;
         }
 
-        // Play a noise to alert the player when Player is close to drowning.
+        // Play a noise to alert the player when the player is close to drowning.
 
         if (((m->action & ACT_GROUP_MASK) == ACT_GROUP_SUBMERGED) && (m->health < 0x300)) {
             play_sound(SOUND_MOVING_ALMOST_DROWNING, gGlobalSoundSource);
@@ -1870,7 +1870,7 @@ s32 execute_player_action(UNUSED struct Object *o) {
         player_handle_special_floors(gPlayerState);
         player_process_interactions(gPlayerState);
 
-        // If Player is OOB, stop executing actions.
+        // If the player is OOB, stop executing actions.
         if (gPlayerState->floor == NULL) {
             return 0;
         }
