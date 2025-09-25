@@ -388,7 +388,7 @@ void update_shell_speed(struct PlayerState *m) {
     if (m->floorHeight < m->waterLevel) {
         m->floorHeight = m->waterLevel;
         m->floor = &gWaterSurfacePseudoFloor;
-        // ex-alo change
+        // AloXado clocked in with this change
         // make waterLevel originOffset negative
         m->floor->originOffset = -m->waterLevel;
     }
@@ -516,8 +516,8 @@ void update_walking_speed(struct PlayerState *m) {
         m->forwardVel += 1.1f;
     } else if (m->forwardVel <= targetSpeed) {
 #if FIX_INITIAL_WALKING_SPEED
-        // When starting a walk, make a few checks and set Mario's speed to 8 on the first frame.
-        // This ensures Mario's speed is set consistently when starting a walk.
+        // When starting a walk, make a few checks and set the players speed to 8 on the first frame.
+        // This ensures the players speed is set consistently when starting a walk.
         // We use m->actionTimer since it's set to 0 on the first frame of walking.
         // Disable walking speed fix on vanilla demos to prevent major desyncs as well.
         if (gCurrDemoInput == NULL && m->forwardVel <= 8.0f && m->actionTimer == 0 && !mario_floor_is_steep(m)) {
@@ -618,7 +618,7 @@ void anim_and_audio_for_walk(struct PlayerState *m) {
                     if (val04 > 8.0f) {
                         m->actionTimer = 2;
                     } else {
-                        //! (Speed Crash) If Player's speed is more than 2^17.
+                        //! (Speed Crash) If the players speed is more than 2^17.
                         if ((val14 = (s32)(val04 / 4.0f * 0x10000)) < 0x1000) {
                             val14 = 0x1000;
                         }
@@ -636,7 +636,7 @@ void anim_and_audio_for_walk(struct PlayerState *m) {
                     if (val04 > 8.0f) {
                         m->actionTimer = 2;
                     } else {
-                        //! (Speed Crash) If Player's speed is more than 2^17.
+                        //! (Speed Crash) If the players speed is more than 2^17.
                         if ((val14 = (s32)(val04 * 0x10000)) < 0x1000) {
                             val14 = 0x1000;
                         }
@@ -655,7 +655,7 @@ void anim_and_audio_for_walk(struct PlayerState *m) {
                     } else if (!(gPlayer1Controller->buttonDown & Y_BUTTON) && (configDash == 1) || (val04 > 22.0f && (configDash == 0))) {
                         m->actionTimer = 3;
                     } else {
-                        //! (Speed Crash) If Player's speed is more than 2^17.
+                        //! (Speed Crash) If the players speed is more than 2^17.
                         val14 = (s32)(val04 / 4.0f * 0x10000);
                         val15 = (s32)(val04 / 4.0f * 0x08000);
 
@@ -684,7 +684,7 @@ void anim_and_audio_for_walk(struct PlayerState *m) {
                     } else if (((gPlayer1Controller->buttonDown & Y_BUTTON) && (configDash == 1)) || (val04 < 18.0f && (configDash == 0))) {
                         m->actionTimer = 2;
                     } else {
-                        //! (Speed Crash) If Player's speed is more than 2^17.
+                        //! (Speed Crash) If the players speed is more than 2^17.
                         val14 = (s32)(val04 / 4.0f * 0x10000);
                         if (curChar == 1) {
                             set_player_anim_with_accel(m, MARIO_ANIM_RUNNING, val14);
@@ -723,7 +723,7 @@ void anim_and_audio_for_hold_walk(struct PlayerState *m) {
                 if (val04 > 6.0f) {
                     m->actionTimer = 1;
                 } else {
-                    //! (Speed Crash) Crashes if Player's speed exceeds or equals 2^15.
+                    //! (Speed Crash) Crashes if the players speed exceeds or equals 2^15.
                     val0C = (s32)(val04 * 0x10000);
                     set_player_anim_with_accel(m, MARIO_ANIM_SLOW_WALK_WITH_LIGHT_OBJ, val0C);
                     play_step_sound(m, 12, 62);
@@ -738,7 +738,7 @@ void anim_and_audio_for_hold_walk(struct PlayerState *m) {
                 } else if (val04 > 11.0f) {
                     m->actionTimer = 2;
                 } else {
-                    //! (Speed Crash) Crashes if Player's speed exceeds or equals 2^15.
+                    //! (Speed Crash) Crashes if the players speed exceeds or equals 2^15.
                     val0C = (s32)(val04 * 0x10000);
                     set_player_anim_with_accel(m, MARIO_ANIM_WALK_WITH_LIGHT_OBJ, val0C);
                     play_step_sound(m, 12, 62);
@@ -751,7 +751,7 @@ void anim_and_audio_for_hold_walk(struct PlayerState *m) {
                 if (val04 < 8.0f) {
                     m->actionTimer = 1;
                 } else {
-                    //! (Speed Crash) Crashes if Player's speed exceeds or equals 2^16.
+                    //! (Speed Crash) Crashes if the players speed exceeds or equals 2^16.
                     val0C = (s32)(val04 / 2.0f * 0x10000);
                     set_player_anim_with_accel(m, MARIO_ANIM_RUN_WITH_LIGHT_OBJ, val0C);
                     play_step_sound(m, 10, 49);
@@ -1315,7 +1315,7 @@ s32 act_hold_decelerating(struct PlayerState *m) {
         adjust_sound_for_speed(m);
         m->particleFlags |= PARTICLE_DUST;
     } else {
-        //! (Speed Crash) This crashes if Player has more speed than 2^15 speed.
+        //! (Speed Crash) This crashes if the player has more speed than 2^15 speed.
         if ((val0C = (s32)(m->forwardVel * 0x10000)) < 0x1000) {
             val0C = 0x1000;
         }
@@ -1705,7 +1705,7 @@ s32 act_dive_slide(struct PlayerState *m) {
     play_player_landing_sound_once(m, SOUND_ACTION_TERRAIN_BODY_HIT_GROUND);
 
     //! If the dive slide ends on the same frame that we pick up on object,
-    // Player will not be in the dive slide action for the call to
+    // The player will not be in the dive slide action for the call to
     // player_check_object_grab, and so will end up in the regular picking action,
     // rather than the picking up after dive action.
 
@@ -1892,7 +1892,7 @@ s32 common_landing_cancels(struct PlayerState *m, struct LandingAction *landingA
                            s32 (*setAPressAction)(struct PlayerState *, u32, u32)) {
 
     //! Everything here, including floor steepness, is checked before checking
-    // if Player is actually on the floor. This leads to e.g. remote sliding.
+    // if the player is actually on the floor. This leads to e.g. remote sliding.
 
     if (m->floor->normal.y < 0.2923717f) {
         return player_push_off_steep_floor(m, landingAction->verySteepAction, 0);
