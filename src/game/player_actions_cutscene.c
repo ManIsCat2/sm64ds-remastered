@@ -48,11 +48,7 @@ static s8 D_8032CBE4 = 0;
 static s8 D_8032CBE8 = 0;
 static s8 D_8032CBEC[7] = { 2, 3, 2, 1, 2, 3, 2 };
 
-#ifdef RM2C
-static u8 sStarsNeededForDialog[] = { STAR_MILESTONES };
-#else
 static u8 sStarsNeededForDialog[] = { 1, 3, 8, 30, 50, 70 };
-#endif
 
 struct Object *sIntroWarpPipeMObj;
 struct Object *sIntroWarpPipeLObj;

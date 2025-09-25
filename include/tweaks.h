@@ -1,9 +1,6 @@
 // This is a series of defines to edit commonly changed parameters in romhacks
 // These are commonly referred to as tweaks
 
-// These values are from vanilla, they don't get used if RM2C=1 because
-// they use the ones in src/extras/rm2c/tweaks.h
-
 // Booleans
 #define DISABLE_LIVES 0
 #define FALL_DAMAGE 1

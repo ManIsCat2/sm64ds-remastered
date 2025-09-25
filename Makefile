@@ -596,9 +596,6 @@ include Makefile.split
 
 # Source code files
 LEVEL_C_FILES := $(wildcard levels/*/leveldata.c) $(wildcard levels/*/script.c) $(wildcard levels/*/geo.c)
-ifeq ($(RM2C),1)
-  LEVEL_C_FILES += $(wildcard levels/*/custom.leveldata.c) $(wildcard levels/*/custom.script.c) $(wildcard levels/*/custom.geo.c)
-endif
 C_FILES       := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) $(LEVEL_C_FILES)
 CXX_FILES     := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.cpp))
 S_FILES       := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.s))

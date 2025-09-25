@@ -7,12 +7,6 @@
 #include "macros.h"
 #include "types.h"
 #include "behavior_actions.h"
-#include "rm2c.h"
-
-#ifdef RM2C_HAS_TRAJECTORIES //#include "src/extras/rm2c/trajectories.inc.c"
-extern const Trajectory KoopaBoB_path[];
-extern const Trajectory KoopaTHI_path[]; 
-#endif
 
 s32 coin_step(s16 *collisionFlagsPtr);
 void moving_coin_flicker(void);

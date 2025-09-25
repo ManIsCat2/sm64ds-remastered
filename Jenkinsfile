@@ -38,20 +38,6 @@ pipeline {
         sh 'make -j4 VERSION=jp VERBOSE=1 COLOR=0'
       }
     }
-    stage('Test Enhancements') {
-      steps {
-        sh '''
-          set -e
-          for f in enhancements/*.patch
-          do
-            git clean -fd .
-            git checkout -- .
-            echo 'y' | tools/apply_patch.sh "$f"
-            make -j4 VERSION=us COMPARE=0 VERBOSE=1
-          done
-        '''
-      }
-    }
   }
   environment {
     QEMU_IRIX = credentials('qemu-irix')

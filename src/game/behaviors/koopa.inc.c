@@ -60,18 +60,10 @@ struct KoopaTheQuickProperties {
 /**
  * Properties for the BoB race and the THI race.
  */
-#ifdef RM2C_HAS_TRAJECTORIES
-//grab trajectory from Trajectories.inc.c and star pos from star_pos.inc.c
-static struct KoopaTheQuickProperties sKoopaTheQuickProperties[] = {
-    { DIALOG_005, DIALOG_007, KoopaBoB_path, KoopaBoBStarPos },
-    { DIALOG_009, DIALOG_031, KoopaTHI_path, KoopaTHIStarPos }
-};
-#else
 static struct KoopaTheQuickProperties sKoopaTheQuickProperties[] = {
     { DIALOG_005, DIALOG_007, bob_seg7_trajectory_koopa, { 3030, 4500, -4600 } },
     { DIALOG_009, DIALOG_031, thi_seg7_trajectory_koopa, { 7100, -1300, -6000 } },
 };
-#endif
 
 /**
  * Initialization function.

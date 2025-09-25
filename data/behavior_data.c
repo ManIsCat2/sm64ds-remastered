@@ -6187,14 +6187,3 @@ const BehaviorScript bhvLegacyScrollTexture[] = {
         CALL_NATIVE(uv_update_scroll),
     END_LOOP(),
 };
-
-#ifdef RM2C_HAS_SCROLLING_TEXTURES
-// Scrolling textures from RM and Editor need manual fixing to work on both PC and N64
-const BehaviorScript RM_Scroll_Texture[] = {
-    GOTO(bhvLegacyScrollTexture),
-};
-
-const BehaviorScript editor_Scroll_Texture[] = {
-    GOTO(bhvLegacyScrollTexture),
-};
-#endif

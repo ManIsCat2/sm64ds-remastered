@@ -12,13 +12,9 @@
 #define MODE_SCROLL_SINE 1
 #define MODE_SCROLL_JUMP 2
 
-#ifdef RM2C_HAS_SCROLLING_TEXTURES
-#include "src/extras/rm2c/scroll_texture.inc.c"
-#else
 Vtx *ScrollTargets[]={
     NULL,
 };
-#endif
 
 static void shift_UV_NORMAL(u32 vert, u16 vertcount, s16 speed, u16 bhv) {
     u16 overflownum = 0x1000;

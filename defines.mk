@@ -20,8 +20,6 @@ GODDARD_MFACE ?= 1
 VANILLA_CHECKS ?= 1
 # Enable extended bounds
 EXTENDED_BOUNDS ?= 0
-# Accept RM2C level folder output
-RM2C ?= 0
 
 # --------------------------------------
 # General QoL Defines (see include/qol_defines.h)
@@ -159,11 +157,6 @@ endif
 # Check for Extended bounds
 ifneq ($(EXTENDED_BOUNDS),0)
   CUSTOM_C_DEFINES += -DEXTENDED_BOUNDS=$(EXTENDED_BOUNDS) -DCOLLISION_FIXES
-endif
-
-# Add RM2C to flags, add var for internal name
-ifeq ($(RM2C),1)
-  CUSTOM_C_DEFINES += -DRM2C
 endif
 
 # Check for QoL fixes option

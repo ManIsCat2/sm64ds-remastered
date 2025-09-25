@@ -15,12 +15,7 @@
 #include "macros.h"
 
 // Misc tweaks defines usually changed in binary roms
-#ifdef RM2C
-#include "rm2c.h"
-#include "src/extras/rm2c/tweaks.h"
-#else
 #include "include/tweaks.h"
-#endif
 
 // Crash handler enhancement
 #ifdef CRASH_SCREEN_INCLUDED
