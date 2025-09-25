@@ -10,10 +10,8 @@
 #include "player_step.h"
 #include "object_helpers.h"
 #include "save_file.h"
-
-#ifdef CHEATS_ACTIONS
 #include "extras/cheats.h"
-#endif
+
 #ifdef EXT_OPTIONS_MENU
 #include "pc/configfile.h"
 #endif
@@ -124,12 +122,10 @@ void player_bonk_reflection(struct PlayerState *m, u32 negateSpeed) {
 }
 
 u32 player_update_quicksand(struct PlayerState *m, f32 sinkingSpeed) {
-#ifdef CHEATS_ACTIONS
     if (Cheats.EnableCheats && Cheats.WalkOn.Quicksand) {
         m->quicksandDepth = 0.0f;
         return FALSE;
     }
-#endif
 
     if (m->action & ACT_FLAG_RIDING_SHELL) {
         m->quicksandDepth = 0.0f;

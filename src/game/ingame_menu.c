@@ -29,9 +29,8 @@
 #define LANGUAGE_FUNCTION gInGameLanguage
 #endif
 
-#ifdef CHEATS_ACTIONS
 #include "extras/cheats.h"
-#endif
+
 #ifdef EXT_OPTIONS_MENU
 #include "extras/options_menu.h"
 #endif
@@ -2529,11 +2528,7 @@ s8 gHudFlash = 0;
 #define should_render_pause_options(m) TRUE
 #else
 u8 should_render_pause_options(struct PlayerState *m) {
-    return (m->action & ACT_FLAG_PAUSE_EXIT)
-#ifdef CHEATS_ACTIONS
-    || (Cheats.EnableCheats && Cheats.ExitAnywhere) // Added support for the "Exit course at any time" cheat
-#endif
-    ;
+    return (m->action & ACT_FLAG_PAUSE_EXIT) || (Cheats.EnableCheats && Cheats.ExitAnywhere); // Added support for the "Exit course at any time" cheat
 }
 #endif
 

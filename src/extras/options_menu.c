@@ -22,10 +22,7 @@
 #include "pc/controller/controller_api.h"
 
 #include <stdbool.h>
-
-#ifdef CHEATS_ACTIONS
 #include "cheats.h"
-#endif
 
 #ifdef EXT_DEBUG_MENU
 #include "debug_menu.h"
@@ -270,10 +267,8 @@ static struct Option optsMain[] = {
     DEF_OPT_SUBMENU( optDebugMenuStr[0], &menuDebug ),
 #endif
 
-#ifdef CHEATS_ACTIONS
     // NOTE: always keep cheats the last option here because of the half-assed way I toggle them
     DEF_OPT_SUBMENU( optCheatMenuStr[0], &menuCheats ),
-#endif
 };
 
 static struct SubMenu menuMain = DEF_SUBMENU( optMainStr[0], optsMain );
@@ -493,7 +488,6 @@ void optmenu_toggle(void) {
         play_sound(SOUND_MENU_CHANGE_SELECT, gGlobalSoundSource);
         #endif
 
-#ifdef CHEATS_ACTIONS
         // HACK: hide the last option in main if cheats are disabled
         menuMain.numOpts = sizeof(optsMain) / sizeof(optsMain[0]);
         if (!Cheats.EnableCheats) {
@@ -503,7 +497,6 @@ void optmenu_toggle(void) {
                 menuMain.scroll = 0;
             }
         }
-#endif
 
         currentMenu = &menuMain;
         optmenu_open = 1;
@@ -540,7 +533,6 @@ void optmenu_check_buttons(void) {
     }
 
     /* Enables cheats if the user press the L trigger 3 times while in the options menu. Also plays a sound. */
-#ifdef CHEATS_ACTIONS
     if ((gPlayer1Controller->buttonPressed & L_TRIG) && !Cheats.EnableCheats) {
         if (l_counter == 2) {
                 Cheats.EnableCheats = true;
@@ -550,7 +542,6 @@ void optmenu_check_buttons(void) {
             l_counter++;
         }
     }
-#endif
 
     if (!optmenu_open) return;
 

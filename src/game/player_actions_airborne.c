@@ -13,9 +13,7 @@
 #include "player_step.h"
 #include "rumble_init.h"
 #include "save_file.h"
-#ifdef CHEATS_ACTIONS
 #include "extras/cheats.h"
-#endif
 #ifdef EXT_OPTIONS_MENU
 #include "pc/configfile.h"
 #endif
@@ -28,9 +26,7 @@ void play_flip_sounds(struct PlayerState *m, s16 frame1, s16 frame2, s16 frame3)
 }
 
 void play_far_fall_sound(struct PlayerState *m) {
-#ifdef CHEATS_ACTIONS
 	if (Cheats.EnableCheats && Cheats.NoFallDamage) return;
-#endif
     if (m->flags & MARIO_NO_FALL_DAMAGE) {
         m->flags &= ~MARIO_NO_FALL_DAMAGE;
         return;
@@ -119,12 +115,10 @@ s32 check_fall_damage(struct PlayerState *m, u32 hardFallAction) {
     // Did they originally planned to make ground pound punishable?
     f32 damageHeight = 1150.0f;
 
-#ifdef CHEATS_ACTIONS
 	if (Cheats.EnableCheats && Cheats.NoFallDamage) return FALSE;
-#endif
 
     // ex-alo change
-    // New flag so Player doesn't get any damage, can be called by objects
+    // New flag so the player doesn't get any damage, can be called by objects
 	if (m->flags & MARIO_NO_FALL_DAMAGE) {
         m->flags &= ~MARIO_NO_FALL_DAMAGE;
         return FALSE;
@@ -1722,11 +1716,7 @@ s32 act_lava_boost(struct PlayerState *m) {
 
     switch (perform_air_step(m, 0)) {
         case AIR_STEP_LANDED:
-            if (m->floor->type == SURFACE_BURNING
-#ifdef CHEATS_ACTIONS
-            && (!Cheats.EnableCheats || !Cheats.WalkOn.Lava)
-#endif
-            ) {
+            if (m->floor->type == SURFACE_BURNING && (!Cheats.EnableCheats || !Cheats.WalkOn.Lava)) {
                 m->actionState = 0;
                 if (!(m->flags & PLAYER_METAL_CAP)) {
                     m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;

@@ -14,9 +14,7 @@
 #include "behavior_data.h"
 #include "rumble_init.h"
 #include "pc/configfile.h"
-#ifdef CHEATS_ACTIONS
 #include "extras/cheats.h"
-#endif
 #ifdef EXT_OPTIONS_MENU
 #include "pc/configfile.h"
 #endif
@@ -536,15 +534,11 @@ void update_walking_speed(struct PlayerState *m) {
         m->forwardVel = 48.0f;
     }
 
-#ifdef CHEATS_ACTIONS
     if (Cheats.EnableCheats && Cheats.Responsive) {
         m->faceAngle[1] = m->intendedYaw;
     } else {
-#endif
-    m->faceAngle[1] = m->intendedYaw - approach_s32((s16)(m->intendedYaw - m->faceAngle[1]), 0, 0x800, 0x800);
-#ifdef CHEATS_ACTIONS
+        m->faceAngle[1] = m->intendedYaw - approach_s32((s16)(m->intendedYaw - m->faceAngle[1]), 0, 0x800, 0x800);
     }
-#endif
 
     apply_slope_accel(m);
 }

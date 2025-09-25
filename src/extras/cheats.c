@@ -1,5 +1,3 @@
-#ifdef CHEATS_ACTIONS
-
 #include "sm64.h"
 #include "text_strings.h"
 #include "gfx_dimensions.h"
@@ -230,5 +228,3 @@ f32 cheats_walk_on_environment(f32 height, f32 x, f32 z) {
 
     return newHeight;
 }
-
-#endif // CHEATS_ACTIONS

@@ -8,8 +8,6 @@ DEBUG ?= 0
 EXT_OPTIONS_MENU ?= 1
 # Enable debug options menu (Enabled if DEBUG is not 0)
 EXT_DEBUG_MENU ?= 0
-# Enable cheats
-CHEATS_ACTIONS ?= 1
 # Enable rumble functions (Originally in Shindou)
 RUMBLE_FEEDBACK ?= 1
 # Disable no drawing distance by default
@@ -118,12 +116,6 @@ endif
 # Check for Debug Menu option
 ifeq ($(EXT_DEBUG_MENU),1)
   CUSTOM_C_DEFINES += -DEXT_DEBUG_MENU
-  EXT_OPTIONS_MENU := 1
-endif
-
-# Check for Cheats option
-ifeq ($(CHEATS_ACTIONS),1)
-  CUSTOM_C_DEFINES += -DCHEATS_ACTIONS
   EXT_OPTIONS_MENU := 1
 endif
 

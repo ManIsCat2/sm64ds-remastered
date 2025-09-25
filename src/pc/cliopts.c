@@ -8,9 +8,7 @@
 
 #include "game/area.h"
 #include "menu/title_screen.h"
-#ifdef CHEATS_ACTIONS
 #include "extras/cheats.h"
-#endif
 
 #include <strings.h>
 #include <stdlib.h>
@@ -36,9 +34,7 @@ static void print_cli_help(void) {
     printf("%-20s\tStart the game from a act number, requires a --level id to be set.\n", "--act ACTNUM");
 
     // Misc commands
-#ifdef CHEATS_ACTIONS
     printf("%-20s\tEnables the cheat menu.\n", "--cheats");
-#endif
     printf("%-20s\tSkips the Peach and Castle intro when starting a new game.\n", "--skip-intro");
     printf("%-20s\tStarts the game in full screen mode.\n", "--fullscreen");
     printf("%-20s\tStarts the game in windowed mode.\n", "--windowed");
@@ -112,10 +108,8 @@ void parse_cli_opts(int argc, char* argv[]) {
         else if (strcmp(argv[i], "--debug") == 0) // Enable simple debug info
             gCLIOpts.Debug = true;
 
-#ifdef CHEATS_ACTIONS
         else if (strcmp(argv[i], "--cheats") == 0) // Enable cheats menu
             Cheats.EnableCheats = true;
-#endif
 
 #ifndef USE_SYSTEM_MALLOC
         else if (strcmp(argv[i], "--poolsize") == 0) // Main pool size

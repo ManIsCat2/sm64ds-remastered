@@ -1219,9 +1219,7 @@ ifeq ($(EXT_OPTIONS_MENU),1)
   $(BUILD_DIR)/include/text_strings.h: $(BUILD_DIR)/include/text_options_strings.h
 endif
 
-ifeq ($(CHEATS_ACTIONS),1)
-  $(BUILD_DIR)/include/text_strings.h: $(BUILD_DIR)/include/text_cheats_strings.h
-endif
+$(BUILD_DIR)/include/text_strings.h: $(BUILD_DIR)/include/text_cheats_strings.h
 
 ifeq ($(EXT_DEBUG_MENU),1)
   $(BUILD_DIR)/include/text_strings.h: $(BUILD_DIR)/include/text_debug_strings.h
@@ -1238,10 +1236,7 @@ $(BUILD_DIR)/src/menu/star_select.o:    $(BUILD_DIR)/include/text_strings.h $(LA
 $(BUILD_DIR)/src/game/ingame_menu.o:    $(BUILD_DIR)/include/text_strings.h $(LANG_O_FILES)
 
 ifeq ($(EXT_OPTIONS_MENU),1)
-
-  ifeq ($(CHEATS_ACTIONS),1)
-    $(BUILD_DIR)/src/extras/cheats.o:       $(BUILD_DIR)/include/text_strings.h $(LANG_O_FILES)
-  endif
+  $(BUILD_DIR)/src/extras/cheats.o:       $(BUILD_DIR)/include/text_strings.h $(LANG_O_FILES)
 
   ifeq ($(EXT_DEBUG_MENU),1)
     $(BUILD_DIR)/src/extras/debug_menu.o:   $(BUILD_DIR)/include/text_strings.h $(LANG_O_FILES)
@@ -1393,11 +1388,9 @@ $(BUILD_DIR)/include/text_options_strings.h: include/text_options_strings.h.in
 	$(call print,Encoding:,$<,$@)
 	$(V)$(TEXTCONV) charmap.txt $< $@
 
-ifeq ($(CHEATS_ACTIONS),1)
 $(BUILD_DIR)/include/text_cheats_strings.h: include/text_cheats_strings.h.in
 	$(call print,Encoding:,$<,$@)
 	$(V)$(TEXTCONV) charmap.txt $< $@
-endif
 
 ifeq ($(EXT_DEBUG_MENU),1)
 $(BUILD_DIR)/include/text_debug_strings.h: include/text_debug_strings.h.in

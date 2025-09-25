@@ -24,9 +24,7 @@
 #include "sound_init.h"
 #include "rumble_init.h"
 
-#ifdef CHEATS_ACTIONS
 #include "extras/cheats.h"
-#endif
 
 #ifdef EXT_OPTIONS_MENU
 #include "pc/configfile.h"
@@ -1867,10 +1865,7 @@ void player_process_interactions(struct PlayerState *m) {
 }
 
 void check_death_barrier(struct PlayerState *m) {
-#ifdef CHEATS_ACTIONS
     if (Cheats.EnableCheats && Cheats.WalkOn.DeathBarrier) return;
-#endif
-
     if (m->pos[1] < m->floorHeight + 2048.0f) {
         if (level_trigger_warp(m, WARP_OP_WARP_FLOOR) == 20 && !(m->flags & MARIO_UNKNOWN_18)) {
             play_sound(SOUND_MARIO_WAAAOOOW, m->playerObj->header.gfx.cameraToObject);
@@ -1885,10 +1880,7 @@ void check_death_barrier(struct PlayerState *m) {
 #endif
 
 void check_lava_boost(struct PlayerState *m) {
-#ifdef CHEATS_ACTIONS
     if (Cheats.EnableCheats && Cheats.WalkOn.Lava) return;
-#endif
-
     if (!(m->action & ACT_FLAG_GROUP_NO_LAVA_BOOST) && m->pos[1] < m->floorHeight + 10.0f) {
         if (!(m->flags & PLAYER_METAL_CAP)) {
             m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
