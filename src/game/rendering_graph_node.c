@@ -61,6 +61,8 @@ f32 gCurrAnimTranslationMultiplier;
 u16 *gCurrAnimAttribute;
 s16 *gCurrAnimData;
 
+struct Animation *gCurAnim = NULL;
+
 struct AllocOnlyPool *gDisplayListHeap;
 
 /* Rendermode settings for cycle 1 for all layers. */
@@ -754,6 +756,9 @@ void process_animated_part_type(Vec3f translation, Vec3s rotation, u8 *animType,
         rotation[0] = gCurrAnimData[retrieve_animation_index(animFrame, animAttribute)];
         rotation[1] = gCurrAnimData[retrieve_animation_index(animFrame, animAttribute)];
         rotation[2] = gCurrAnimData[retrieve_animation_index(animFrame, animAttribute)];
+        if (gCurAnim->flags & ANIM_FLAG_BONE_TRANS) {
+            *animType = ANIM_TYPE_TRANSLATION;
+        }
     }
 }
 
@@ -837,6 +842,7 @@ void geo_set_animation_globals(struct AnimInfo *node, s32 hasAnimation) {
     gCurrAnimEnabled = (anim->flags & ANIM_FLAG_5) == 0;
     gCurrAnimAttribute = segmented_to_virtual((void *) anim->index);
     gCurrAnimData = segmented_to_virtual((void *) anim->values);
+    gCurAnim = anim;
 
     if (anim->animYTransDivisor == 0) {
         gCurrAnimTranslationMultiplier = 1.0f;
@@ -1250,6 +1256,7 @@ void geo_process_held_object(struct GraphNodeHeldObject *node) {
         f32 tempTranslationMultiplier = gCurrAnimTranslationMultiplier;
         u16 *tempAttribute = gCurrAnimAttribute;
         s16 *tempData = gCurrAnimData;
+        struct Animation *tempAnim = gCurAnim;
 #ifdef HIGH_FPS_PC
         s16 tempPrevFrame = gPrevAnimFrame;
 #endif
@@ -1267,6 +1274,7 @@ void geo_process_held_object(struct GraphNodeHeldObject *node) {
         gCurrAnimTranslationMultiplier = tempTranslationMultiplier;
         gCurrAnimAttribute = tempAttribute;
         gCurrAnimData = tempData;
+        gCurAnim = tempAnim;
 #ifdef HIGH_FPS_PC
         gPrevAnimFrame = tempPrevFrame;
 #endif
