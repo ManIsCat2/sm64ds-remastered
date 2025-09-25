@@ -1,0 +1,36 @@
+#ifndef PLAYER_GEO_SWITCH_CASE_IDS_H
+#define PLAYER_GEO_SWITCH_CASE_IDS_H
+
+/* Geo-Switch-Case IDs for the Players */
+
+enum PlayerEyesGSCId {
+    /*0x00*/ PLAYER_EYES_BLINK,
+    /*0x01*/ PLAYER_EYES_OPEN,
+    /*0x02*/ PLAYER_EYES_HALF_CLOSED,
+    /*0x03*/ PLAYER_EYES_CLOSED,
+    /*0x04*/ PLAYER_EYES_DEAD
+};
+
+enum PlayerHandGSCId {
+    /*0x00*/ PLAYER_HAND_FISTS,
+    /*0x01*/ PLAYER_HAND_OPEN,
+    /*0x02*/ PLAYER_HAND_PEACE_SIGN,
+    /*0x03*/ PLAYER_HAND_HOLDING_CAP,
+    /*0x04*/ PLAYER_HAND_HOLDING_WING_CAP,
+    /*0x05*/ PLAYER_HAND_RIGHT_OPEN
+};
+
+enum PlayerCapGSCId {
+    /*0x00*/ PLAYER_HAS_DEFAULT_CAP_ON,
+    /*0x01*/ PLAYER_HAS_DEFAULT_CAP_OFF,
+    /*0x02*/ PLAYER_HAS_WING_CAP_ON
+};
+
+enum PlayerGrabPosGSCId {
+    /*0x00*/ GRAB_POS_NULL,
+    /*0x01*/ GRAB_POS_LIGHT_OBJ,
+    /*0x02*/ GRAB_POS_HEAVY_OBJ,
+    /*0x03*/ GRAB_POS_BOWSER
+};
+
+#endif // PLAYER_GEO_SWITCH_CASE_IDS_H

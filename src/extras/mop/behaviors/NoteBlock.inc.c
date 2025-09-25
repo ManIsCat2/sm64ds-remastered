@@ -12,7 +12,7 @@ void bhv_noteblock_loop(void) {
 		Yspd = *(f32 *) &CarmackMeme;
 		gPlayerStates[0].vel[1] = Yspd;
 		o->oAction = 1;
-		gPlayerStates[0].flags |= MARIO_NO_FALL_DAMAGE;
+		gPlayerStates[0].flags |= PLAYER_NO_FALL_DAMAGE;
 	}
 	if (o->oAction == 1) {
 		if (o->oTimer == 4) {

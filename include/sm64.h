@@ -10,7 +10,7 @@
 #include "sounds.h"
 #include "model_ids.h"
 #include "player_animation_ids.h"
-#include "mario_geo_switch_case_ids.h"
+#include "player_geo_switch_case_ids.h"
 #include "surface_terrains.h"
 #include "macros.h"
 
@@ -131,25 +131,25 @@ enum RenderLayers {
 #define PLAYER_VANISH_CAP                0x00000002
 #define PLAYER_METAL_CAP                 0x00000004
 #define PLAYER_WING_CAP                  0x00000008
-#define MARIO_CAP_ON_HEAD               0x00000010
-#define MARIO_CAP_IN_HAND               0x00000020
-#define MARIO_METAL_SHOCK               0x00000040
-#define MARIO_TELEPORTING               0x00000080
-#define MARIO_UNKNOWN_08                0x00000100
-#define MARIO_NO_FALL_DAMAGE            0X00000200
-#define MARIO_UNKNOWN_13                0x00002000
-#define MARIO_ACTION_SOUND_PLAYED       0x00010000
-#define MARIO_MARIO_SOUND_PLAYED        0x00020000
-#define MARIO_UNKNOWN_18                0x00040000
-#define MARIO_PUNCHING                  0x00100000
-#define MARIO_KICKING                   0x00200000
-#define MARIO_TRIPPING                  0x00400000
-#define MARIO_UNKNOWN_25                0x02000000
-#define MARIO_AIR_HIT_WALL              0x40000000
-#define MARIO_UNKNOWN_31                0x80000000
+#define PLAYER_CAP_ON_HEAD               0x00000010
+#define PLAYER_CAP_IN_HAND               0x00000020
+#define PLAYER_METAL_SHOCK               0x00000040
+#define PLAYER_TELEPORTING               0x00000080
+#define PLAYER_UNKNOWN_08                0x00000100
+#define PLAYER_NO_FALL_DAMAGE            0X00000200
+#define PLAYER_UNKNOWN_13                0x00002000
+#define PLAYER_ACTION_SOUND_PLAYED       0x00010000
+#define PLAYER_MARIO_SOUND_PLAYED        0x00020000
+#define PLAYER_UNKNOWN_18                0x00040000
+#define PLAYER_PUNCHING                  0x00100000
+#define PLAYER_KICKING                   0x00200000
+#define PLAYER_TRIPPING                  0x00400000
+#define PLAYER_UNKNOWN_25                0x02000000
+#define PLAYER_AIR_HIT_WALL              0x40000000
+#define PLAYER_UNKNOWN_31                0x80000000
 
-#define MARIO_SPECIAL_CAPS (PLAYER_VANISH_CAP | PLAYER_METAL_CAP | PLAYER_WING_CAP)
-#define MARIO_CAPS (PLAYER_NORMAL_CAP | MARIO_SPECIAL_CAPS)
+#define PLAYER_SPECIAL_CAPS (PLAYER_VANISH_CAP | PLAYER_METAL_CAP | PLAYER_WING_CAP)
+#define PLAYER_CAPS (PLAYER_NORMAL_CAP | PLAYER_SPECIAL_CAPS)
 
 #define ACT_ID_MASK 0x000001FF
 

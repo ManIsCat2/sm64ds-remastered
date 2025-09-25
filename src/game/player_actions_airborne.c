@@ -14,6 +14,7 @@
 #include "rumble_init.h"
 #include "save_file.h"
 #include "extras/cheats.h"
+
 #ifdef EXT_OPTIONS_MENU
 #include "pc/configfile.h"
 #endif
@@ -27,27 +28,27 @@ void play_flip_sounds(struct PlayerState *m, s16 frame1, s16 frame2, s16 frame3)
 
 void play_far_fall_sound(struct PlayerState *m) {
 	if (Cheats.EnableCheats && Cheats.NoFallDamage) return;
-    if (m->flags & MARIO_NO_FALL_DAMAGE) {
-        m->flags &= ~MARIO_NO_FALL_DAMAGE;
+    if (m->flags & PLAYER_NO_FALL_DAMAGE) {
+        m->flags &= ~PLAYER_NO_FALL_DAMAGE;
         return;
     }
 
     u32 action = m->action;
 
     if (!(action & ACT_FLAG_INVULNERABLE) && action != ACT_TWIRLING && action != ACT_FLYING
-        && !(m->flags & MARIO_UNKNOWN_18)) {
+        && !(m->flags & PLAYER_UNKNOWN_18)) {
         if (m->peakHeight - m->pos[1] > 1150.0f) {
             play_sound(SOUND_MARIO_WAAAOOOW, m->playerObj->header.gfx.cameraToObject);
-            m->flags |= MARIO_UNKNOWN_18;
+            m->flags |= PLAYER_UNKNOWN_18;
         }
     }
 }
 
 void play_knockback_sound(struct PlayerState *m) {
     if (m->actionArg == 0 && (m->forwardVel <= -28.0f || m->forwardVel >= 28.0f)) {
-        play_sound_if_no_flag(m, SOUND_MARIO_DOH, MARIO_MARIO_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_MARIO_DOH, PLAYER_MARIO_SOUND_PLAYED);
     } else {
-        play_sound_if_no_flag(m, SOUND_MARIO_UH, MARIO_MARIO_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_MARIO_UH, PLAYER_MARIO_SOUND_PLAYED);
     }
 }
 
@@ -59,7 +60,7 @@ s32 lava_boost_on_wall(struct PlayerState *m) {
     }
 
     if (!(m->flags & PLAYER_METAL_CAP)) {
-        m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
+        m->hurtCounter += (m->flags & PLAYER_CAP_ON_HEAD) ? 12 : 18;
     }
 
     play_sound(SOUND_MARIO_ON_FIRE, m->playerObj->header.gfx.cameraToObject);
@@ -119,8 +120,8 @@ s32 check_fall_damage(struct PlayerState *m, u32 hardFallAction) {
 
     // ex-alo change
     // New flag so the player doesn't get any damage, can be called by objects
-	if (m->flags & MARIO_NO_FALL_DAMAGE) {
-        m->flags &= ~MARIO_NO_FALL_DAMAGE;
+	if (m->flags & PLAYER_NO_FALL_DAMAGE) {
+        m->flags &= ~PLAYER_NO_FALL_DAMAGE;
         return FALSE;
 	}
 
@@ -128,7 +129,7 @@ s32 check_fall_damage(struct PlayerState *m, u32 hardFallAction) {
     if (m->action != ACT_TWIRLING && m->floor->type != SURFACE_BURNING) {
         if (m->vel[1] < -55.0f) {
             if (fallHeight > 3000.0f) {
-                m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 16 : 24;
+                m->hurtCounter += (m->flags & PLAYER_CAP_ON_HEAD) ? 16 : 24;
 #ifdef RUMBLE_FEEDBACK
                 queue_rumble_data(5, 80);
 #endif
@@ -136,7 +137,7 @@ s32 check_fall_damage(struct PlayerState *m, u32 hardFallAction) {
                 play_sound(SOUND_MARIO_ATTACKED, m->playerObj->header.gfx.cameraToObject);
                 return drop_and_set_player_action(m, hardFallAction, 4);
             } else if (fallHeight > damageHeight && !player_floor_is_slippery(m)) {
-                m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 8 : 12;
+                m->hurtCounter += (m->flags & PLAYER_CAP_ON_HEAD) ? 8 : 12;
                 m->squishTimer = 30;
 #ifdef RUMBLE_FEEDBACK
                 queue_rumble_data(5, 80);
@@ -1000,7 +1001,7 @@ s32 act_air_throw(struct PlayerState *m) {
         player_throw_held_object(m);
     }
 
-    play_sound_if_no_flag(m, SOUND_MARIO_WAH2, MARIO_MARIO_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_MARIO_WAH2, PLAYER_MARIO_SOUND_PLAYED);
     set_player_animation(m, MARIO_ANIM_THROW_LIGHT_OBJECT);
     update_air_without_turn(m);
 
@@ -1119,7 +1120,7 @@ s32 act_ground_pound(struct PlayerState *m) {
     u32 stepResult;
     f32 yOffset;
 
-    play_sound_if_no_flag(m, SOUND_ACTION_THROW, MARIO_ACTION_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_ACTION_THROW, PLAYER_ACTION_SOUND_PLAYED);
 
     if (m->actionState == 0) {
         if (m->actionTimer < 10) {
@@ -1389,7 +1390,7 @@ s32 act_thrown_backward(struct PlayerState *m) {
         landAction = ACT_BACKWARD_GROUND_KB;
     }
 
-    play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_MARIO_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, PLAYER_MARIO_SOUND_PLAYED);
 
     common_air_knockback_step(m, landAction, ACT_HARD_BACKWARD_GROUND_KB, 0x0002, m->forwardVel);
 
@@ -1407,7 +1408,7 @@ s32 act_thrown_forward(struct PlayerState *m) {
         landAction = ACT_FORWARD_GROUND_KB;
     }
 
-    play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_MARIO_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, PLAYER_MARIO_SOUND_PLAYED);
 
     if (common_air_knockback_step(m, landAction, ACT_HARD_FORWARD_GROUND_KB, 0x002D, m->forwardVel)
         == AIR_STEP_NONE) {
@@ -1700,9 +1701,9 @@ s32 act_hold_butt_slide_air(struct PlayerState *m) {
 
 s32 act_lava_boost(struct PlayerState *m) {
 #ifdef RUMBLE_FEEDBACK
-    if (!(m->flags & MARIO_MARIO_SOUND_PLAYED)) {
+    if (!(m->flags & PLAYER_MARIO_SOUND_PLAYED)) {
 #endif
-        play_sound_if_no_flag(m, SOUND_MARIO_ON_FIRE, MARIO_MARIO_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_MARIO_ON_FIRE, PLAYER_MARIO_SOUND_PLAYED);
 #ifdef RUMBLE_FEEDBACK
         queue_rumble_data(5, 80);
     }
@@ -1719,7 +1720,7 @@ s32 act_lava_boost(struct PlayerState *m) {
             if (m->floor->type == SURFACE_BURNING && (!Cheats.EnableCheats || !Cheats.WalkOn.Lava)) {
                 m->actionState = 0;
                 if (!(m->flags & PLAYER_METAL_CAP)) {
-                    m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
+                    m->hurtCounter += (m->flags & PLAYER_CAP_ON_HEAD) ? 12 : 18;
                 }
                 m->vel[1] = 84.0f;
                 play_sound(SOUND_MARIO_ON_FIRE, m->playerObj->header.gfx.cameraToObject);
@@ -1760,7 +1761,7 @@ s32 act_lava_boost(struct PlayerState *m) {
         level_trigger_warp(m, WARP_OP_DEATH);
     }
 
-    m->playerBodyState->eyeState = MARIO_EYES_DEAD;
+    m->playerBodyState->eyeState = PLAYER_EYES_DEAD;
 #ifdef RUMBLE_FEEDBACK
     reset_rumble_timers_slip();
 #endif
@@ -1822,7 +1823,7 @@ s32 act_jump_kick(struct PlayerState *m) {
     s32 animFrame;
 
     if (m->actionState == 0) {
-        play_sound_if_no_flag(m, SOUND_MARIO_PUNCH_HOO, MARIO_ACTION_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_MARIO_PUNCH_HOO, PLAYER_ACTION_SOUND_PLAYED);
         m->playerObj->header.gfx.animInfo.animID = -1;
         set_player_animation(m, MARIO_ANIM_AIR_KICK);
         m->actionState = 1;
@@ -1833,7 +1834,7 @@ s32 act_jump_kick(struct PlayerState *m) {
         m->playerBodyState->punchState = (2 << 6) | 6;
     }
     if (animFrame >= 0 && animFrame < 8) {
-        m->flags |= MARIO_KICKING;
+        m->flags |= PLAYER_KICKING;
     }
 
     if (!configNerfs) {
@@ -1862,7 +1863,7 @@ s32 act_shot_from_cannon(struct PlayerState *m) {
 
     player_set_forward_vel(m, m->forwardVel);
 
-    play_sound_if_no_flag(m, SOUND_MARIO_YAHOO, MARIO_MARIO_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_MARIO_YAHOO, PLAYER_MARIO_SOUND_PLAYED);
 
     switch (perform_air_step(m, 0)) {
         case AIR_STEP_NONE:
@@ -2042,7 +2043,7 @@ s32 act_riding_hoot(struct PlayerState *m) {
         m->usedObj->oInteractStatus = 0;
         m->usedObj->oHootPlayerReleaseTime = gGlobalTimer;
 
-        play_sound_if_no_flag(m, SOUND_MARIO_UH, MARIO_MARIO_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_MARIO_UH, PLAYER_MARIO_SOUND_PLAYED);
 #ifdef RUMBLE_FEEDBACK
         queue_rumble_data(4, 40);
 #endif
@@ -2149,7 +2150,7 @@ s32 act_vertical_wind(struct PlayerState *m) {
     s16 intendedDYaw = m->intendedYaw - m->faceAngle[1];
     f32 intendedMag = m->intendedMag / 32.0f;
 
-    play_sound_if_no_flag(m, SOUND_MARIO_HERE_WE_GO, MARIO_MARIO_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_MARIO_HERE_WE_GO, PLAYER_MARIO_SOUND_PLAYED);
     if (m->actionState == 0) {
         set_player_animation(m, MARIO_ANIM_FORWARD_SPINNING_FLIP);
         if (m->playerObj->header.gfx.animInfo.animFrame == 1) {

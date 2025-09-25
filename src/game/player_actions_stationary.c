@@ -207,12 +207,12 @@ s32 act_start_sleeping(struct PlayerState *m) {
         case 2:
             animFrame =
             set_player_animation(m, MARIO_ANIM_START_SLEEP_YAWN);
-            m->playerBodyState->eyeState = MARIO_EYES_HALF_CLOSED;
+            m->playerBodyState->eyeState = PLAYER_EYES_HALF_CLOSED;
             break;
 
         case 3:
             animFrame = set_player_animation(m, MARIO_ANIM_START_SLEEP_SITTING);
-            m->playerBodyState->eyeState = MARIO_EYES_HALF_CLOSED;
+            m->playerBodyState->eyeState = PLAYER_EYES_HALF_CLOSED;
             break;
     }
 
@@ -252,7 +252,7 @@ s32 act_sleeping(struct PlayerState *m) {
         return set_player_action(m, ACT_WAKING_UP, m->actionState);
     }
 
-    m->playerBodyState->eyeState = MARIO_EYES_CLOSED;
+    m->playerBodyState->eyeState = PLAYER_EYES_CLOSED;
     stationary_ground_step(m);
     switch (m->actionState) {
         case 0:
@@ -290,7 +290,7 @@ s32 act_sleeping(struct PlayerState *m) {
 
         case 2:
             animFrame = set_player_animation(m, MARIO_ANIM_SLEEP_LYING);
-            play_sound_if_no_flag(m, SOUND_MARIO_SNORING3, MARIO_ACTION_SOUND_PLAYED);
+            play_sound_if_no_flag(m, SOUND_MARIO_SNORING3, PLAYER_ACTION_SOUND_PLAYED);
             break;
     }
     return FALSE;
@@ -553,7 +553,7 @@ s32 act_panting(struct PlayerState *m) {
     }
 
     stationary_ground_step(m);
-    m->playerBodyState->eyeState = MARIO_EYES_HALF_CLOSED;
+    m->playerBodyState->eyeState = PLAYER_EYES_HALF_CLOSED;
     return FALSE;
 }
 
@@ -576,7 +576,7 @@ s32 act_hold_panting_unused(struct PlayerState *m) {
 
     set_player_animation(m, MARIO_ANIM_WALK_PANTING);
     stationary_ground_step(m);
-    m->playerBodyState->eyeState = MARIO_EYES_HALF_CLOSED;
+    m->playerBodyState->eyeState = PLAYER_EYES_HALF_CLOSED;
     return FALSE;
 }
 

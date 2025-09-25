@@ -244,7 +244,7 @@ s32 act_climbing_pole(struct PlayerState *m) {
 }
 
 s32 act_grab_pole_slow(struct PlayerState *m) {
-    play_sound_if_no_flag(m, SOUND_MARIO_WHOA, MARIO_MARIO_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_MARIO_WHOA, PLAYER_MARIO_SOUND_PLAYED);
 
     if (set_pole_position(m, 0.0f) == POLE_NONE) {
         set_player_animation(m, MARIO_ANIM_GRAB_POLE_SHORT);
@@ -260,7 +260,7 @@ s32 act_grab_pole_slow(struct PlayerState *m) {
 s32 act_grab_pole_fast(struct PlayerState *m) {
     struct Object *playerObj = m->playerObj;
 
-    play_sound_if_no_flag(m, SOUND_MARIO_WHOA, MARIO_MARIO_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_MARIO_WHOA, PLAYER_MARIO_SOUND_PLAYED);
     m->faceAngle[1] += playerObj->oPlayerPoleYawVel;
     playerObj->oPlayerPoleYawVel = playerObj->oPlayerPoleYawVel * 8 / 10;
 
@@ -463,7 +463,7 @@ s32 act_start_hanging(struct PlayerState *m) {
     }
 
     set_player_animation(m, MARIO_ANIM_HANG_ON_CEILING);
-    play_sound_if_no_flag(m, SOUND_ACTION_HANGING_STEP, MARIO_ACTION_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_ACTION_HANGING_STEP, PLAYER_ACTION_SOUND_PLAYED);
     update_hang_stationary(m);
 
     if (is_anim_at_end(m)) {
@@ -614,7 +614,7 @@ void update_ledge_climb_camera(struct PlayerState *m) {
     m->statusForCamera->pos[2] = m->pos[2] + sp4 * coss(m->faceAngle[1]);
     m->statusForCamera->pos[1] = m->pos[1];
     m->actionTimer++;
-    m->flags |= MARIO_UNKNOWN_25;
+    m->flags |= PLAYER_UNKNOWN_25;
 }
 
 void update_ledge_climb(struct PlayerState *m, s32 animation, u32 endAction) {
@@ -654,7 +654,7 @@ s32 act_ledge_grab(struct PlayerState *m) {
 
     if (m->input & INPUT_STOMPED) {
         if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_KNOCKBACK_DMG) {
-            m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
+            m->hurtCounter += (m->flags & PLAYER_CAP_ON_HEAD) ? 12 : 18;
         }
         return let_go_of_ledge(m);
     }
@@ -679,7 +679,7 @@ s32 act_ledge_grab(struct PlayerState *m) {
     }
 
     if (m->actionArg == 0) {
-        play_sound_if_no_flag(m, SOUND_MARIO_WHOA, MARIO_MARIO_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_MARIO_WHOA, PLAYER_MARIO_SOUND_PLAYED);
     }
 
     stop_and_set_height_to_floor(m);
@@ -701,7 +701,7 @@ s32 act_ledge_climb_slow(struct PlayerState *m) {
     }
 
     if (m->actionTimer == 10) {
-        play_sound_if_no_flag(m, SOUND_MARIO_EEUH, MARIO_MARIO_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_MARIO_EEUH, PLAYER_MARIO_SOUND_PLAYED);
     }
 
     update_ledge_climb(m, MARIO_ANIM_SLOW_LEDGE_GRAB, ACT_IDLE);
@@ -719,7 +719,7 @@ s32 act_ledge_climb_down(struct PlayerState *m) {
         return let_go_of_ledge(m);
     }
 
-    play_sound_if_no_flag(m, SOUND_MARIO_WHOA, MARIO_MARIO_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_MARIO_WHOA, PLAYER_MARIO_SOUND_PLAYED);
 
     update_ledge_climb(m, MARIO_ANIM_CLIMB_DOWN_LEDGE, ACT_LEDGE_GRAB);
     m->actionArg = 1;
@@ -732,7 +732,7 @@ s32 act_ledge_climb_fast(struct PlayerState *m) {
         return let_go_of_ledge(m);
     }
 
-    play_sound_if_no_flag(m, SOUND_MARIO_UH_LEDGE_CLIMB_FAST, MARIO_MARIO_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_MARIO_UH_LEDGE_CLIMB_FAST, PLAYER_MARIO_SOUND_PLAYED);
 
     update_ledge_climb(m, MARIO_ANIM_FAST_LEDGE_GRAB, ACT_IDLE);
 

@@ -278,17 +278,17 @@ void set_player_initial_cap_powerup(struct PlayerState *m) {
 
     switch (capCourseIndex) {
         case COURSE_COTMC - COURSE_CAP_COURSES:
-            m->flags |= PLAYER_METAL_CAP | MARIO_CAP_ON_HEAD;
+            m->flags |= PLAYER_METAL_CAP | PLAYER_CAP_ON_HEAD;
             m->capTimer = MC_LEVEL_TIME;
             break;
 
         case COURSE_TOTWC - COURSE_CAP_COURSES:
-            m->flags |= PLAYER_WING_CAP | MARIO_CAP_ON_HEAD;
+            m->flags |= PLAYER_WING_CAP | PLAYER_CAP_ON_HEAD;
             m->capTimer = WC_LEVEL_TIME;
             break;
 
         case COURSE_VCUTM - COURSE_CAP_COURSES:
-            m->flags |= PLAYER_VANISH_CAP | MARIO_CAP_ON_HEAD;
+            m->flags |= PLAYER_VANISH_CAP | PLAYER_CAP_ON_HEAD;
             m->capTimer = VC_LEVEL_TIME;
             break;
     }

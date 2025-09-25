@@ -51,7 +51,7 @@ s32 player_update_punch_sequence(struct PlayerState *m) {
                     return TRUE;
                 }
 
-                m->flags |= MARIO_PUNCHING;
+                m->flags |= PLAYER_PUNCHING;
             }
 
             if (m->actionArg == 2) {
@@ -63,7 +63,7 @@ s32 player_update_punch_sequence(struct PlayerState *m) {
             set_player_animation(m, MARIO_ANIM_FIRST_PUNCH_FAST);
 
             if (m->playerObj->header.gfx.animInfo.animFrame <= 0) {
-                m->flags |= MARIO_PUNCHING;
+                m->flags |= PLAYER_PUNCHING;
             }
 
             if (m->input & INPUT_B_PRESSED) {
@@ -87,7 +87,7 @@ s32 player_update_punch_sequence(struct PlayerState *m) {
             }
 
             if (m->playerObj->header.gfx.animInfo.animFrame > 0) {
-                m->flags |= MARIO_PUNCHING;
+                m->flags |= PLAYER_PUNCHING;
             }
 
             if (m->actionArg == 5) {
@@ -98,7 +98,7 @@ s32 player_update_punch_sequence(struct PlayerState *m) {
         case 5:
             set_player_animation(m, MARIO_ANIM_SECOND_PUNCH_FAST);
             if (m->playerObj->header.gfx.animInfo.animFrame <= 0) {
-                m->flags |= MARIO_PUNCHING;
+                m->flags |= PLAYER_PUNCHING;
             }
 
             if (m->input & INPUT_B_PRESSED) {
@@ -118,7 +118,7 @@ s32 player_update_punch_sequence(struct PlayerState *m) {
             }
 
             if (animFrame >= 0 && animFrame < 8) {
-                m->flags |= MARIO_KICKING;
+                m->flags |= PLAYER_KICKING;
             }
 
             if (is_anim_at_end(m)) {
@@ -132,7 +132,7 @@ s32 player_update_punch_sequence(struct PlayerState *m) {
             animFrame = m->playerObj->header.gfx.animInfo.animFrame;
 
             if (animFrame >= 2 && animFrame < 8) {
-                m->flags |= MARIO_TRIPPING;
+                m->flags |= PLAYER_TRIPPING;
             }
 
             if (is_anim_at_end(m)) {
@@ -186,7 +186,7 @@ s32 act_picking_up(struct PlayerState *m) {
         // to unload. This allows you to pick up a vacant or newly loaded object
         // slot (cloning via fake object).
         player_grab_used_object(m);
-        play_sound_if_no_flag(m, SOUND_MARIO_HRMM, MARIO_MARIO_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_MARIO_HRMM, PLAYER_MARIO_SOUND_PLAYED);
         m->actionState = 1;
     }
 
@@ -262,8 +262,8 @@ s32 act_throwing(struct PlayerState *m) {
 
     if (++m->actionTimer == 7) {
         player_throw_held_object(m);
-        play_sound_if_no_flag(m, SOUND_MARIO_WAH2, MARIO_MARIO_SOUND_PLAYED);
-        play_sound_if_no_flag(m, SOUND_ACTION_THROW, MARIO_ACTION_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_MARIO_WAH2, PLAYER_MARIO_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_ACTION_THROW, PLAYER_ACTION_SOUND_PLAYED);
 #ifdef RUMBLE_FEEDBACK
         queue_rumble_data(3, 50);
 #endif
@@ -284,8 +284,8 @@ s32 act_heavy_throw(struct PlayerState *m) {
 
     if (++m->actionTimer == 13) {
         player_drop_held_object(m);
-        play_sound_if_no_flag(m, SOUND_MARIO_WAH2, MARIO_MARIO_SOUND_PLAYED);
-        play_sound_if_no_flag(m, SOUND_ACTION_THROW, MARIO_ACTION_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_MARIO_WAH2, PLAYER_MARIO_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_ACTION_THROW, PLAYER_ACTION_SOUND_PLAYED);
 #ifdef RUMBLE_FEEDBACK
         queue_rumble_data(3, 50);
 #endif

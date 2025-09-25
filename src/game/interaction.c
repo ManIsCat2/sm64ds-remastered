@@ -209,19 +209,19 @@ u32 determine_interaction(struct PlayerState *m, struct Object *o) {
         if (action == ACT_PUNCHING || action == ACT_MOVE_PUNCHING || action == ACT_JUMP_KICK) {
             s16 dYawToObject = player_obj_angle_to_object(m, o) - m->faceAngle[1];
 
-            if (m->flags & MARIO_PUNCHING) {
+            if (m->flags & PLAYER_PUNCHING) {
                 // 120 degrees total, or 60 each way
                 if (-0x2AAA <= dYawToObject && dYawToObject <= 0x2AAA) {
                     interaction = INT_PUNCH;
                 }
             }
-            if (m->flags & MARIO_KICKING) {
+            if (m->flags & PLAYER_KICKING) {
                 // 120 degrees total, or 60 each way
                 if (-0x2AAA <= dYawToObject && dYawToObject <= 0x2AAA) {
                     interaction = INT_KICK;
                 }
             }
-            if (m->flags & MARIO_TRIPPING) {
+            if (m->flags & PLAYER_TRIPPING) {
                 // 180 degrees total, or 90 each way
                 if (-0x4000 <= dYawToObject && dYawToObject <= 0x4000) {
                     interaction = INT_TRIP;
@@ -364,7 +364,7 @@ void player_stop_riding_and_holding(struct PlayerState *m) {
 }
 
 u32 does_player_have_normal_cap_on_head(struct PlayerState *m) {
-    return (m->flags & (MARIO_CAPS | MARIO_CAP_ON_HEAD)) == (PLAYER_NORMAL_CAP | MARIO_CAP_ON_HEAD);
+    return (m->flags & (PLAYER_CAPS | PLAYER_CAP_ON_HEAD)) == (PLAYER_NORMAL_CAP | PLAYER_CAP_ON_HEAD);
 }
 
 void player_blow_off_cap(struct PlayerState *m, f32 capSpeed) {
@@ -373,7 +373,7 @@ void player_blow_off_cap(struct PlayerState *m, f32 capSpeed) {
     if (does_player_have_normal_cap_on_head(m)) {
         save_file_set_cap_pos(m->pos[0], m->pos[1], m->pos[2]);
 
-        m->flags &= ~(PLAYER_NORMAL_CAP | MARIO_CAP_ON_HEAD);
+        m->flags &= ~(PLAYER_NORMAL_CAP | PLAYER_CAP_ON_HEAD);
 
         capObject = spawn_object(m->playerObj, MODEL_MARIOS_CAP, bhvNormalCap);
 
@@ -392,7 +392,7 @@ u32 player_lose_cap_to_enemy(u32 arg) {
 
     if (does_player_have_normal_cap_on_head(gPlayerState)) {
         save_file_set_flags(arg == 1 ? SAVE_FLAG_CAP_ON_KLEPTO : SAVE_FLAG_CAP_ON_UKIKI);
-        gPlayerState->flags &= ~(PLAYER_NORMAL_CAP | MARIO_CAP_ON_HEAD);
+        gPlayerState->flags &= ~(PLAYER_NORMAL_CAP | PLAYER_CAP_ON_HEAD);
         wasWearingCap = TRUE;
     }
 
@@ -402,8 +402,8 @@ u32 player_lose_cap_to_enemy(u32 arg) {
 void player_retrieve_cap(void) {
     player_drop_held_object(gPlayerState);
     save_file_clear_flags(SAVE_FLAG_CAP_ON_KLEPTO | SAVE_FLAG_CAP_ON_UKIKI);
-    gPlayerState->flags &= ~MARIO_CAP_ON_HEAD;
-    gPlayerState->flags |= PLAYER_NORMAL_CAP | MARIO_CAP_IN_HAND;
+    gPlayerState->flags &= ~PLAYER_CAP_ON_HEAD;
+    gPlayerState->flags |= PLAYER_NORMAL_CAP | PLAYER_CAP_IN_HAND;
 }
 
 u32 able_to_grab_object(struct PlayerState *m, UNUSED struct Object *o) {
@@ -538,7 +538,7 @@ void bounce_off_object(struct PlayerState *m, struct Object *o, f32 velY) {
     m->pos[1] = o->oPosY + o->hitboxHeight;
     m->vel[1] = velY;
 
-    m->flags &= ~MARIO_UNKNOWN_08;
+    m->flags &= ~PLAYER_UNKNOWN_08;
 
     play_sound(SOUND_ACTION_BOUNCE_OFF_OBJECT, m->playerObj->header.gfx.cameraToObject);
 }
@@ -718,7 +718,7 @@ u32 take_damage_from_interact_object(struct PlayerState *m) {
         shake = SHAKE_SMALL_DAMAGE;
     }
 
-    if (!(m->flags & MARIO_CAP_ON_HEAD)) {
+    if (!(m->flags & PLAYER_CAP_ON_HEAD)) {
         damage += (damage + 1) / 2;
     }
 
@@ -1637,7 +1637,7 @@ u32 interact_cap(struct PlayerState *m, UNUSED u32 interactType, struct Object *
         m->interactObj = o;
         o->oInteractStatus = INT_STATUS_INTERACTED;
 
-        m->flags &= ~MARIO_CAP_ON_HEAD & ~MARIO_CAP_IN_HAND;
+        m->flags &= ~PLAYER_CAP_ON_HEAD & ~PLAYER_CAP_IN_HAND;
         m->flags |= capFlag;
 
         switch (capFlag) {
@@ -1662,14 +1662,14 @@ u32 interact_cap(struct PlayerState *m, UNUSED u32 interactType, struct Object *
         }
 
         if ((m->action & ACT_FLAG_IDLE) || m->action == ACT_WALKING) {
-            m->flags |= MARIO_CAP_IN_HAND;
+            m->flags |= PLAYER_CAP_IN_HAND;
             if (configGlobalCapBlocks) {
                 set_player_action(m, ACT_PUTTING_ON_CAP, 0);
             } else {
                 cutscene_put_cap_on(m);
             }
         } else {
-            m->flags |= MARIO_CAP_ON_HEAD;
+            m->flags |= PLAYER_CAP_ON_HEAD;
         }
 
         play_sound(SOUND_MENU_STAR_SOUND, m->playerObj->header.gfx.cameraToObject);
@@ -1801,7 +1801,7 @@ u32 interact_text(struct PlayerState *m, UNUSED u32 interactType, struct Object 
 }
 
 void check_kick_or_punch_wall(struct PlayerState *m) {
-    if (m->flags & (MARIO_PUNCHING | MARIO_KICKING | MARIO_TRIPPING)) {
+    if (m->flags & (PLAYER_PUNCHING | PLAYER_KICKING | PLAYER_TRIPPING)) {
         Vec3f detector;
         detector[0] = m->pos[0] + 50.0f * sins(m->faceAngle[1]);
         detector[2] = m->pos[2] + 50.0f * coss(m->faceAngle[1]);
@@ -1854,7 +1854,7 @@ void player_process_interactions(struct PlayerState *m) {
     //! If the kick/punch flags are set and an object collision changes Player's
     // action, he will get the kick/punch wall speed anyway.
     check_kick_or_punch_wall(m);
-    m->flags &= ~MARIO_PUNCHING & ~MARIO_KICKING & ~MARIO_TRIPPING;
+    m->flags &= ~PLAYER_PUNCHING & ~PLAYER_KICKING & ~PLAYER_TRIPPING;
 
     if (!(m->playerObj->collidedObjInteractTypes & (INTERACT_WARP_DOOR | INTERACT_DOOR))) {
         sDisplayingDoorText = FALSE;
@@ -1867,7 +1867,7 @@ void player_process_interactions(struct PlayerState *m) {
 void check_death_barrier(struct PlayerState *m) {
     if (Cheats.EnableCheats && Cheats.WalkOn.DeathBarrier) return;
     if (m->pos[1] < m->floorHeight + 2048.0f) {
-        if (level_trigger_warp(m, WARP_OP_WARP_FLOOR) == 20 && !(m->flags & MARIO_UNKNOWN_18)) {
+        if (level_trigger_warp(m, WARP_OP_WARP_FLOOR) == 20 && !(m->flags & PLAYER_UNKNOWN_18)) {
             play_sound(SOUND_MARIO_WAAAOOOW, m->playerObj->header.gfx.cameraToObject);
         }
     }
@@ -1883,7 +1883,7 @@ void check_lava_boost(struct PlayerState *m) {
     if (Cheats.EnableCheats && Cheats.WalkOn.Lava) return;
     if (!(m->action & ACT_FLAG_GROUP_NO_LAVA_BOOST) && m->pos[1] < m->floorHeight + 10.0f) {
         if (!(m->flags & PLAYER_METAL_CAP)) {
-            m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
+            m->hurtCounter += (m->flags & PLAYER_CAP_ON_HEAD) ? 12 : 18;
         }
         
         update_player_sound_and_camera(m);

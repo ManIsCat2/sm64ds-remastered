@@ -34,7 +34,7 @@ void bhv_pushable_loop(void) {
     o->oForwardVel = 0.0f;
 
     if (obj_check_if_collided_with_object(o, gPlayerObject)
-        && (gPlayerStates[0].flags & MARIO_UNKNOWN_31)) {
+        && (gPlayerStates[0].flags & PLAYER_UNKNOWN_31)) {
         s16 sp1C = obj_angle_to_object(o, gPlayerObject);
         if (abs_angle_diff(sp1C, gPlayerObject->oMoveAngleYaw) > 0x4000) {
             o->oMoveAngleYaw = (s16)((gPlayerObject->oMoveAngleYaw + 0x2000) & 0xC000);

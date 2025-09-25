@@ -569,7 +569,7 @@ s32 check_wall_air_steps(struct PlayerState *m, struct WallCollisionData *wallDa
                 m->wall     = wallData->walls[i];
 
                 if (wallDYaw > DEGREES(180 - 45)) {
-                    m->flags |= MARIO_AIR_HIT_WALL;
+                    m->flags |= PLAYER_AIR_HIT_WALL;
                     result = AIR_STEP_HIT_WALL;
                 }
             }
@@ -845,7 +845,7 @@ s32 perform_air_quarter_step(struct PlayerState *m, Vec3f intendedPos, u32 stepA
         }
 
         if (wallDYaw > DEGREES(180 - 45)) {
-            m->flags |= MARIO_AIR_HIT_WALL;
+            m->flags |= PLAYER_AIR_HIT_WALL;
             return AIR_STEP_HIT_WALL;
         }
     }
@@ -873,7 +873,7 @@ void apply_twirl_gravity(struct PlayerState *m) {
 }
 
 u32 should_strengthen_gravity_for_jump_ascent(struct PlayerState *m) {
-    if (!(m->flags & MARIO_UNKNOWN_08)) {
+    if (!(m->flags & PLAYER_UNKNOWN_08)) {
         return FALSE;
     }
 

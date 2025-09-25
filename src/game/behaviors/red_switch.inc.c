@@ -16,7 +16,7 @@ void bhv_red_switch_loop(void) {
         case SWITCH_ACT_IDLE:
             cur_obj_set_model(MODEL_RED_SWITCH);
             cur_obj_scale(1.5f);
-            if (gPlayerObject->platform == o && !(gPlayerStates[0].action & MARIO_UNKNOWN_13)) {
+            if (gPlayerObject->platform == o && !(gPlayerStates[0].action & PLAYER_UNKNOWN_13)) {
                 if (lateral_dist_between_objects(o, gPlayerObject) < 127.5) {
                     o->oAction = SWITCH_ACT_PRESSED;
                 }

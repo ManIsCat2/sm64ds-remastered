@@ -788,7 +788,7 @@ void push_or_sidle_wall(struct PlayerState *m, Vec3f startPos) {
     }
 
     if (m->wall == NULL || dWallAngle <= -0x71C8 || dWallAngle >= 0x71C8) {
-        m->flags |= MARIO_UNKNOWN_31;
+        m->flags |= PLAYER_UNKNOWN_31;
         set_player_animation(m, MARIO_ANIM_PUSHING);
         play_step_sound(m, 6, 18);
     } else {
@@ -1478,7 +1478,7 @@ s32 act_burning_ground(struct PlayerState *m) {
         set_player_action(m, ACT_STANDING_DEATH, 0);
     }
 
-    m->playerBodyState->eyeState = MARIO_EYES_DEAD;
+    m->playerBodyState->eyeState = PLAYER_EYES_DEAD;
 #ifdef RUMBLE_FEEDBACK
     reset_rumble_timers_slip();
 #endif
@@ -1732,9 +1732,9 @@ s32 common_ground_knockback_action(struct PlayerState *m, s32 animation, s32 arg
     }
 
     if (arg4 > 0) {
-        play_sound_if_no_flag(m, SOUND_MARIO_ATTACKED, MARIO_MARIO_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_MARIO_ATTACKED, PLAYER_MARIO_SOUND_PLAYED);
     } else {
-        play_sound_if_no_flag(m, SOUND_MARIO_OOOF2, MARIO_MARIO_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_MARIO_OOOF2, PLAYER_MARIO_SOUND_PLAYED);
     }
 
     if (m->forwardVel > 32.0f) {
@@ -1996,7 +1996,7 @@ s32 act_long_jump_land(struct PlayerState *m) {
     }
 
     if (!(m->input & INPUT_NONZERO_ANALOG)) {
-        play_sound_if_no_flag(m, SOUND_MARIO_UH_LONG_JUMP_LAND, MARIO_MARIO_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_MARIO_UH_LONG_JUMP_LAND, PLAYER_MARIO_SOUND_PLAYED);
     }
 
     common_landing_action(m,
@@ -2024,7 +2024,7 @@ s32 act_triple_jump_land(struct PlayerState *m) {
     }
 
     if (!(m->input & INPUT_NONZERO_ANALOG)) {
-        play_sound_if_no_flag(m, SOUND_MARIO_HAHA, MARIO_MARIO_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_MARIO_HAHA, PLAYER_MARIO_SOUND_PLAYED);
     }
 
     common_landing_action(m, MARIO_ANIM_TRIPLE_JUMP_LAND, ACT_FREEFALL);
@@ -2045,7 +2045,7 @@ s32 act_backflip_land(struct PlayerState *m) {
     }
 
     if (!(m->input & INPUT_NONZERO_ANALOG)) {
-        play_sound_if_no_flag(m, SOUND_MARIO_HAHA, MARIO_MARIO_SOUND_PLAYED);
+        play_sound_if_no_flag(m, SOUND_MARIO_HAHA, PLAYER_MARIO_SOUND_PLAYED);
     }
 
     common_landing_action(m, MARIO_ANIM_TRIPLE_JUMP_LAND, ACT_FREEFALL);

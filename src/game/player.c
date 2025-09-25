@@ -265,7 +265,7 @@ int yahooOrYippe;
  * Plays a jump sound if one has not been played since the last action change.
  */
 void play_player_jump_sound(struct PlayerState *m) {
-    if (!(m->flags & MARIO_MARIO_SOUND_PLAYED)) {
+    if (!(m->flags & PLAYER_MARIO_SOUND_PLAYED)) {
         if (m->action == ACT_TRIPLE_JUMP) {
             if (yahOrWah == 0) {
                 play_sound(SOUND_MARIO_YAHOO, m->playerObj->header.gfx.cameraToObject);
@@ -286,7 +286,7 @@ void play_player_jump_sound(struct PlayerState *m) {
             play_sound(SOUND_MARIO_YAH + ((gAudioRandom % 3) << 16),
                        m->playerObj->header.gfx.cameraToObject);
         }
-        m->flags |= MARIO_MARIO_SOUND_PLAYED;
+        m->flags |= PLAYER_MARIO_SOUND_PLAYED;
     }
 }
 
@@ -328,9 +328,9 @@ void play_sound_and_spawn_particles(struct PlayerState *m, u32 soundBits, u32 wa
  * Plays an environmental sound if one has not been played since the last action change.
  */
 void play_player_action_sound(struct PlayerState *m, u32 soundBits, u32 waveParticleType) {
-    if (!(m->flags & MARIO_ACTION_SOUND_PLAYED)) {
+    if (!(m->flags & PLAYER_ACTION_SOUND_PLAYED)) {
         play_sound_and_spawn_particles(m, soundBits, waveParticleType);
-        m->flags |= MARIO_ACTION_SOUND_PLAYED;
+        m->flags |= PLAYER_ACTION_SOUND_PLAYED;
     }
 }
 
@@ -378,7 +378,7 @@ void play_player_sound(struct PlayerState *m, s32 actionSound, s32 playerSound) 
         play_player_action_sound(m, (m->flags & PLAYER_METAL_CAP) ? (s32) SOUND_ACTION_METAL_JUMP
                                                                 : (s32) SOUND_ACTION_TERRAIN_JUMP, 1);
     } else {
-        play_sound_if_no_flag(m, actionSound, MARIO_ACTION_SOUND_PLAYED);
+        play_sound_if_no_flag(m, actionSound, PLAYER_ACTION_SOUND_PLAYED);
     }
 
     if (playerSound == 0) {
@@ -386,7 +386,7 @@ void play_player_sound(struct PlayerState *m, s32 actionSound, s32 playerSound) 
     }
 
     if (playerSound != -1) {
-        play_sound_if_no_flag(m, playerSound, MARIO_MARIO_SOUND_PLAYED);
+        play_sound_if_no_flag(m, playerSound, PLAYER_MARIO_SOUND_PLAYED);
     }
 }
 
@@ -969,7 +969,7 @@ static u32 set_player_action_airborne(struct PlayerState *m, u32 action, u32 act
     }
 
     m->peakHeight = m->pos[1];
-    m->flags |= MARIO_UNKNOWN_08;
+    m->flags |= PLAYER_UNKNOWN_08;
 
     return action;
 }
@@ -1080,10 +1080,10 @@ u32 set_player_action(struct PlayerState *m, u32 action, u32 actionArg) {
     }
 
     // Resets the sound played flags, meaning Player can play those sound types again.
-    m->flags &= ~(MARIO_ACTION_SOUND_PLAYED | MARIO_MARIO_SOUND_PLAYED);
+    m->flags &= ~(PLAYER_ACTION_SOUND_PLAYED | PLAYER_MARIO_SOUND_PLAYED);
 
     if (!(m->action & ACT_FLAG_AIR)) {
-        m->flags &= ~MARIO_UNKNOWN_18;
+        m->flags &= ~PLAYER_UNKNOWN_18;
     }
 
     // Initialize the action information.
@@ -1656,7 +1656,7 @@ void update_player_info_for_cam(struct PlayerState *m) {
 
     vec3s_copy(m->statusForCamera->faceAngle, m->faceAngle);
 
-    if (!(m->flags & MARIO_UNKNOWN_25)) {
+    if (!(m->flags & PLAYER_UNKNOWN_25)) {
         vec3f_copy(m->statusForCamera->pos, m->pos);
     }
 }
@@ -1667,13 +1667,13 @@ void update_player_info_for_cam(struct PlayerState *m) {
 void player_reset_bodystate(struct PlayerState *m) {
     struct PlayerBodyState *bodyState = m->playerBodyState;
 
-    bodyState->capState = MARIO_HAS_DEFAULT_CAP_OFF;
-    bodyState->eyeState = MARIO_EYES_BLINK;
-    bodyState->handState = MARIO_HAND_FISTS;
+    bodyState->capState = PLAYER_HAS_DEFAULT_CAP_OFF;
+    bodyState->eyeState = PLAYER_EYES_BLINK;
+    bodyState->handState = PLAYER_HAND_FISTS;
     bodyState->modelState = 0;
     bodyState->wingFlutter = FALSE;
 
-    m->flags &= ~MARIO_METAL_SHOCK;
+    m->flags &= ~PLAYER_METAL_SHOCK;
 }
 
 /**
@@ -1717,9 +1717,9 @@ u32 update_and_return_cap_flags(struct PlayerState *m) {
         if (m->capTimer == 0) {
             stop_cap_music();
 
-            m->flags &= ~MARIO_SPECIAL_CAPS;
-            if (!(m->flags & MARIO_CAPS)) {
-                m->flags &= ~MARIO_CAP_ON_HEAD;
+            m->flags &= ~PLAYER_SPECIAL_CAPS;
+            if (!(m->flags & PLAYER_CAPS)) {
+                m->flags &= ~PLAYER_CAP_ON_HEAD;
             }
         }
 
@@ -1730,9 +1730,9 @@ u32 update_and_return_cap_flags(struct PlayerState *m) {
         // This code flickers the cap through a long binary string, increasing in how
         // common it flickers near the end.
         if ((m->capTimer < 64) && ((1ULL << m->capTimer) & sCapFlickerFrames)) {
-            flags &= ~MARIO_SPECIAL_CAPS;
-            if (!(flags & MARIO_CAPS)) {
-                flags &= ~MARIO_CAP_ON_HEAD;
+            flags &= ~PLAYER_SPECIAL_CAPS;
+            if (!(flags & PLAYER_CAPS)) {
+                flags &= ~PLAYER_CAP_ON_HEAD;
             }
         }
     }
@@ -1761,7 +1761,7 @@ void player_update_hitbox_and_cap_model(struct PlayerState *m) {
         bodyState->modelState |= MODEL_STATE_METAL;
     }
 
-    if (flags & MARIO_METAL_SHOCK) {
+    if (flags & PLAYER_METAL_SHOCK) {
         bodyState->modelState |= MODEL_STATE_METAL;
     }
 
@@ -1772,19 +1772,19 @@ void player_update_hitbox_and_cap_model(struct PlayerState *m) {
         gPlayerState->playerObj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
     }
 
-    if (flags & MARIO_CAP_IN_HAND) {
+    if (flags & PLAYER_CAP_IN_HAND) {
         if (flags & PLAYER_WING_CAP) {
-            bodyState->handState = MARIO_HAND_HOLDING_WING_CAP;
+            bodyState->handState = PLAYER_HAND_HOLDING_WING_CAP;
         } else {
-            bodyState->handState = MARIO_HAND_HOLDING_CAP;
+            bodyState->handState = PLAYER_HAND_HOLDING_CAP;
         }
     }
 
-    if (flags & MARIO_CAP_ON_HEAD) {
+    if (flags & PLAYER_CAP_ON_HEAD) {
         if (flags & PLAYER_WING_CAP) {
-            bodyState->capState = MARIO_HAS_WING_CAP_ON;
+            bodyState->capState = PLAYER_HAS_WING_CAP_ON;
         } else {
-            bodyState->capState = MARIO_HAS_DEFAULT_CAP_ON;
+            bodyState->capState = PLAYER_HAS_DEFAULT_CAP_ON;
         }
     }
 
@@ -1795,7 +1795,7 @@ void player_update_hitbox_and_cap_model(struct PlayerState *m) {
         m->playerObj->hitboxHeight = 160.0f;
     }
 
-    if ((m->flags & MARIO_TELEPORTING) && (m->fadeWarpOpacity != 0xFF)) {
+    if ((m->flags & PLAYER_TELEPORTING) && (m->fadeWarpOpacity != 0xFF)) {
         bodyState->modelState &= ~0xFF;
         bodyState->modelState |= (0x100 | m->fadeWarpOpacity);
     }
@@ -1827,7 +1827,7 @@ void set_wind_floor_properties(struct PlayerState *m) {
 void debug_update_player_cap(u16 button, s32 flags, u16 capTimer, u16 capMusic) {
     if ((gPlayer1Controller->buttonDown & (ZL_TRIG | ZR_TRIG)) && (gPlayer1Controller->buttonPressed & button)
         && !(gPlayerState->flags & flags)) {
-        gPlayerState->flags |= (flags + MARIO_CAP_ON_HEAD);
+        gPlayerState->flags |= (flags + PLAYER_CAP_ON_HEAD);
 
         if (capTimer > gPlayerState->capTimer) {
             gPlayerState->capTimer = capTimer;
@@ -1947,7 +1947,7 @@ void init_player(void) {
            | SAVE_FLAG_CAP_ON_MR_BLIZZARD)) {
         gPlayerState->flags = 0;
     } else {
-        gPlayerState->flags = (PLAYER_NORMAL_CAP | MARIO_CAP_ON_HEAD);
+        gPlayerState->flags = (PLAYER_NORMAL_CAP | PLAYER_CAP_ON_HEAD);
     }
 
     gPlayerState->forwardVel = 0.0f;

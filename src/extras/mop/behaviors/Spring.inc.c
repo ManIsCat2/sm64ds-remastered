@@ -15,7 +15,7 @@ void bhv_Spring_loop(void) {
 			bounce_off_object(gPlayerState, o, *(f32 *) &CarmackMeme);
 			gPlayerStates[0].vel[1] = *(f32 *) &CarmackMeme; //?? Redundant but somehow necessary??
 			o->oAction = 1;
-			gPlayerStates[0].flags |= MARIO_NO_FALL_DAMAGE;
+			gPlayerStates[0].flags |= PLAYER_NO_FALL_DAMAGE;
 		}
 	} else {
 		if (o->oTimer == 15) {

@@ -803,7 +803,7 @@ static s32 act_water_throw(struct PlayerState *m) {
     update_water_pitch(m);
 
     set_player_animation(m, MARIO_ANIM_WATER_THROW_OBJ);
-    play_sound_if_no_flag(m, SOUND_ACTION_SWIM, MARIO_ACTION_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_ACTION_SWIM, PLAYER_ACTION_SOUND_PLAYED);
 
     m->playerBodyState->headAngle[0] = approach_s32(m->playerBodyState->headAngle[0], 0, 0x200, 0x200);
 
@@ -834,7 +834,7 @@ static s32 act_water_punch(struct PlayerState *m) {
 
     m->playerBodyState->headAngle[0] = approach_s32(m->playerBodyState->headAngle[0], 0, 0x200, 0x200);
 
-    play_sound_if_no_flag(m, SOUND_ACTION_SWIM, MARIO_ACTION_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_ACTION_SWIM, PLAYER_ACTION_SOUND_PLAYED);
 
     switch (m->actionState) {
         case 0:
@@ -894,13 +894,13 @@ static s32 act_forward_water_kb(struct PlayerState *m) {
 }
 
 static s32 act_water_shocked(struct PlayerState *m) {
-    play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_ACTION_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, PLAYER_ACTION_SOUND_PLAYED);
     play_sound(SOUND_MOVING_SHOCKED, m->playerObj->header.gfx.cameraToObject);
     set_camera_shake_from_hit(SHAKE_SHOCK);
 
     if (set_player_animation(m, MARIO_ANIM_SHOCKED) == 0) {
         m->actionTimer++;
-        m->flags |= MARIO_METAL_SHOCK;
+        m->flags |= PLAYER_METAL_SHOCK;
     }
 
     if (m->actionTimer >= 6) {
@@ -918,7 +918,7 @@ static s32 act_drowning(struct PlayerState *m) {
     switch (m->actionState) {
         case 0:
             set_player_animation(m, MARIO_ANIM_DROWNING_PART1);
-            m->playerBodyState->eyeState = MARIO_EYES_HALF_CLOSED;
+            m->playerBodyState->eyeState = PLAYER_EYES_HALF_CLOSED;
             if (is_anim_at_end(m)) {
                 m->actionState = 1;
             }
@@ -926,14 +926,14 @@ static s32 act_drowning(struct PlayerState *m) {
 
         case 1:
             set_player_animation(m, MARIO_ANIM_DROWNING_PART2);
-            m->playerBodyState->eyeState = MARIO_EYES_DEAD;
+            m->playerBodyState->eyeState = PLAYER_EYES_DEAD;
             if (m->playerObj->header.gfx.animInfo.animFrame == 30) {
                 level_trigger_warp(m, WARP_OP_DEATH);
             }
             break;
     }
 
-    play_sound_if_no_flag(m, SOUND_MARIO_DROWNING, MARIO_ACTION_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_MARIO_DROWNING, PLAYER_ACTION_SOUND_PLAYED);
     stationary_slow_down(m);
     perform_water_step(m);
 
@@ -944,7 +944,7 @@ static s32 act_water_death(struct PlayerState *m) {
     stationary_slow_down(m);
     perform_water_step(m);
 
-    m->playerBodyState->eyeState = MARIO_EYES_DEAD;
+    m->playerBodyState->eyeState = PLAYER_EYES_DEAD;
 
     set_player_animation(m, MARIO_ANIM_WATER_DYING);
     if (set_player_animation(m, MARIO_ANIM_WATER_DYING) == 35) {
@@ -1101,12 +1101,12 @@ static s32 act_caught_in_whirlpool(struct PlayerState *m) {
 }
 
 static void play_metal_water_jumping_sound(struct PlayerState *m, u32 landing) {
-    if (!(m->flags & MARIO_ACTION_SOUND_PLAYED)) {
+    if (!(m->flags & PLAYER_ACTION_SOUND_PLAYED)) {
         m->particleFlags |= PARTICLE_MIST_CIRCLE;
     }
 
     play_sound_if_no_flag(m, landing ? SOUND_ACTION_METAL_LAND_WATER : SOUND_ACTION_METAL_JUMP_WATER,
-                          MARIO_ACTION_SOUND_PLAYED);
+                          PLAYER_ACTION_SOUND_PLAYED);
 }
 
 static void play_metal_water_walking_sound(struct PlayerState *m) {
