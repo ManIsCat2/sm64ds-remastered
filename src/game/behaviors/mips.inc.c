@@ -221,13 +221,13 @@ void bhv_mips_held(void) {
             dialogID = DIALOG_162;
         }
 
-        if (set_player_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
+        if (set_player_npc_dialog(PLAYER_DIALOG_LOOK_FRONT) == PLAYER_DIALOG_STATUS_SPEAK) {
             o->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
             if (cutscene_object_with_dialog(CUTSCENE_DIALOG, o, dialogID) != 0) {
                 o->oInteractionSubtype |= INT_SUBTYPE_DROP_IMMEDIATELY;
                 o->activeFlags &= ~ACTIVE_FLAG_INITIATED_TIME_STOP;
                 o->oMipsStarStatus = MIPS_STAR_STATUS_SHOULD_SPAWN_STAR;
-                set_player_npc_dialog(MARIO_DIALOG_STOP);
+                set_player_npc_dialog(PLAYER_DIALOG_STOP);
             }
         }
     }

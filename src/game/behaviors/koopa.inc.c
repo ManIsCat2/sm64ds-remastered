@@ -483,7 +483,7 @@ s32 obj_begin_race(s32 noTimer) {
         }
 
         // Unfreeze player and disable time stop to begin the race
-        set_player_npc_dialog(MARIO_DIALOG_STOP);
+        set_player_npc_dialog(PLAYER_DIALOG_STOP);
         disable_time_stop_including_player();
     } else if (o->oTimer > 50) {
         return TRUE;
@@ -731,7 +731,7 @@ static void koopa_the_quick_act_after_race(void) {
             o->oFlags &= ~OBJ_FLAG_ACTIVE_FROM_AFAR;
         }
     } else if (o->parentObj->oKoopaRaceEndpointDialog > 0) {
-        s32 dialogResponse = cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP,
+        s32 dialogResponse = cur_obj_update_dialog_with_cutscene(PLAYER_DIALOG_LOOK_UP,
             DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, o->parentObj->oKoopaRaceEndpointDialog);
         if (dialogResponse != 0) {
             o->parentObj->oKoopaRaceEndpointDialog = DIALOG_NONE;

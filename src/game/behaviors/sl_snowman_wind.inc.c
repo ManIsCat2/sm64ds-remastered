@@ -23,7 +23,7 @@ void bhv_sl_snowman_wind_loop(void) {
 
     // Player has come close, begin dialog.
     } else if (o->oSubAction == SL_SNOWMAN_WIND_ACT_TALKING) {
-        if (cur_obj_update_dialog(MARIO_DIALOG_LOOK_UP, DIALOG_FLAG_TEXT_DEFAULT, DIALOG_153, 0)) {
+        if (cur_obj_update_dialog(PLAYER_DIALOG_LOOK_UP, DIALOG_FLAG_TEXT_DEFAULT, DIALOG_153, 0)) {
             o->oSubAction++;
         }
 

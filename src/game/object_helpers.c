@@ -2381,7 +2381,7 @@ static void cur_obj_end_dialog(s32 dialogFlags, s32 dialogResult) {
     o->oDialogState++;
 
     if (!(dialogFlags & DIALOG_FLAG_TIME_STOP_ENABLED)) {
-        set_player_npc_dialog(MARIO_DIALOG_STOP);
+        set_player_npc_dialog(PLAYER_DIALOG_STOP);
     }
 }
 
@@ -2417,7 +2417,7 @@ s32 cur_obj_update_dialog(s32 actionArg, s32 dialogFlags, s32 dialogID, UNUSED s
 #endif
         case DIALOG_STATUS_INTERRUPT:
             // Interrupt until Player is actually speaking with the NPC
-            if (set_player_npc_dialog(actionArg) == MARIO_DIALOG_STATUS_SPEAK) {
+            if (set_player_npc_dialog(actionArg) == PLAYER_DIALOG_STATUS_SPEAK) {
                 o->oDialogState++;
             }
             break;
@@ -2512,7 +2512,7 @@ s32 cur_obj_update_dialog_with_cutscene(s32 actionArg, s32 dialogFlags, s32 cuts
             }
             // Interrupt status until Player is actually speaking with the NPC and if the
             // object is done turning to Player
-            if (set_player_npc_dialog(actionArg) == MARIO_DIALOG_STATUS_SPEAK && doneTurning) {
+            if (set_player_npc_dialog(actionArg) == PLAYER_DIALOG_STATUS_SPEAK && doneTurning) {
                 o->oDialogResponse = 0;
                 o->oDialogState++;
             } else {
@@ -2551,7 +2551,7 @@ s32 cur_obj_update_dialog_with_cutscene(s32 actionArg, s32 dialogFlags, s32 cuts
                 o->oDialogState = DIALOG_STATUS_ENABLE_TIME_STOP;
             } else {
                 // And finally stop Player dialog status
-                set_player_npc_dialog(MARIO_DIALOG_STOP);
+                set_player_npc_dialog(PLAYER_DIALOG_STOP);
             }
             break;
     }

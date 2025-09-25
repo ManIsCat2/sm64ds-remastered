@@ -1,5 +1,5 @@
-#ifndef MARIO_ACTIONS_CUTSCENE_H
-#define MARIO_ACTIONS_CUTSCENE_H
+#ifndef PLAYER_ACTIONS_CUTSCENE_H
+#define PLAYER_ACTIONS_CUTSCENE_H
 
 #include <PR/ultratypes.h>
 
@@ -8,14 +8,15 @@
 
 // set_player_npc_dialog
 // actionArg
-#define MARIO_DIALOG_STOP       0
-#define MARIO_DIALOG_LOOK_FRONT 1 // no head turn
-#define MARIO_DIALOG_LOOK_UP    2
-#define MARIO_DIALOG_LOOK_DOWN  3
+#define PLAYER_DIALOG_STOP       0
+#define PLAYER_DIALOG_LOOK_FRONT 1 // no head turn
+#define PLAYER_DIALOG_LOOK_UP    2
+#define PLAYER_DIALOG_LOOK_DOWN  3
+
 // dialogState
-#define MARIO_DIALOG_STATUS_NONE  0
-#define MARIO_DIALOG_STATUS_START 1
-#define MARIO_DIALOG_STATUS_SPEAK 2
+#define PLAYER_DIALOG_STATUS_NONE  0
+#define PLAYER_DIALOG_STATUS_START 1
+#define PLAYER_DIALOG_STATUS_SPEAK 2
 
 void print_displaying_credits_entry(void);
 void bhv_end_peach_loop(void);
@@ -25,4 +26,4 @@ s32 player_ready_to_speak(void);
 s32 set_player_npc_dialog(s32 actionArg);
 s32 player_execute_cutscene_action(struct PlayerState *m);
 
-#endif // MARIO_ACTIONS_CUTSCENE_H
+#endif // PLAYER_ACTIONS_CUTSCENE_H

@@ -99,11 +99,11 @@ static s16 obj_get_pitch_from_vel(void) {
  */
 static s32 obj_update_race_proposition_dialog(s16 dialogID) {
     s32 dialogResponse =
-        cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP,
+        cur_obj_update_dialog_with_cutscene(PLAYER_DIALOG_LOOK_UP,
         (DIALOG_FLAG_TURN_TO_MARIO | DIALOG_FLAG_TIME_STOP_ENABLED), CUTSCENE_RACE_DIALOG, dialogID);
 
     if (dialogResponse == DIALOG_RESPONSE_NO) {
-        set_player_npc_dialog(MARIO_DIALOG_STOP);
+        set_player_npc_dialog(PLAYER_DIALOG_STOP);
         disable_time_stop_including_player();
     }
 

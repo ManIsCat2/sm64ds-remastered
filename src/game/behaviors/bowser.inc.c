@@ -1278,7 +1278,7 @@ s32 bowser_dead_default_stage_ending(void) {
             o->oBowserTimer++;
         }
         // Play Bowser defeated dialog
-        if (cur_obj_update_dialog(MARIO_DIALOG_LOOK_UP,
+        if (cur_obj_update_dialog(PLAYER_DIALOG_LOOK_UP,
             (DIALOG_FLAG_TEXT_DEFAULT | DIALOG_FLAG_TIME_STOP_ENABLED),
             sBowserDefeatedDialogText[o->oBhvParams2ndByte], 0)) {
             // Dialog is done, fade out music and play explode sound effect
@@ -1292,7 +1292,7 @@ s32 bowser_dead_default_stage_ending(void) {
         bowser_dead_hide();
         spawn_triangle_break_particles(20, MODEL_YELLOW_COIN, 1.0f, 0);
         bowser_spawn_collectable();
-        set_player_npc_dialog(MARIO_DIALOG_STOP);
+        set_player_npc_dialog(PLAYER_DIALOG_STOP);
         ret = TRUE;
     }
 
@@ -1321,7 +1321,7 @@ s32 bowser_dead_final_stage_ending(void) {
             o->oBowserTimer++;
         }
         // Play Bowser defeated dialog
-        if (cur_obj_update_dialog(MARIO_DIALOG_LOOK_UP,
+        if (cur_obj_update_dialog(PLAYER_DIALOG_LOOK_UP,
             (DIALOG_FLAG_TEXT_DEFAULT | DIALOG_FLAG_TIME_STOP_ENABLED), dialogID, 0)) {
             // Dialog is done, fade out music and spawn grand star
             cur_obj_set_model(MODEL_BOWSER_NO_SHADOW);

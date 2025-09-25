@@ -377,24 +377,24 @@ s32 player_ready_to_speak(void) {
 // 1 = starting dialog
 // 2 = speaking
 s32 set_player_npc_dialog(s32 actionArg) {
-    s32 dialogState = MARIO_DIALOG_STATUS_NONE;
+    s32 dialogState = PLAYER_DIALOG_STATUS_NONE;
 
     // in dialog
     if (gPlayerState->action == ACT_READING_NPC_DIALOG) {
         if (gPlayerState->actionState < 8) {
-            dialogState = MARIO_DIALOG_STATUS_START; // starting dialog
+            dialogState = PLAYER_DIALOG_STATUS_START; // starting dialog
         }
         if (gPlayerState->actionState == 8) {
-            if (actionArg == MARIO_DIALOG_STOP) {
+            if (actionArg == PLAYER_DIALOG_STOP) {
                 gPlayerState->actionState++; // exit dialog
             } else {
-                dialogState = MARIO_DIALOG_STATUS_SPEAK;
+                dialogState = PLAYER_DIALOG_STATUS_SPEAK;
             }
         }
     } else if (actionArg != 0 && player_ready_to_speak()) {
         gPlayerState->usedObj = gCurrentObject;
         set_player_action(gPlayerState, ACT_READING_NPC_DIALOG, actionArg);
-        dialogState = MARIO_DIALOG_STATUS_START; // starting dialog
+        dialogState = PLAYER_DIALOG_STATUS_START; // starting dialog
     }
 
     return dialogState;
@@ -413,10 +413,10 @@ s32 act_reading_npc_dialog(struct PlayerState *m) {
     s32 headTurnAmount = 0;
     s16 angleToNPC;
 
-    if (m->actionArg == MARIO_DIALOG_LOOK_UP) {
+    if (m->actionArg == PLAYER_DIALOG_LOOK_UP) {
         headTurnAmount = -1024;
     }
-    if (m->actionArg == MARIO_DIALOG_LOOK_DOWN) {
+    if (m->actionArg == PLAYER_DIALOG_LOOK_DOWN) {
         headTurnAmount = 384;
     }
 
@@ -1635,7 +1635,7 @@ s32 act_squished(struct PlayerState *m) {
             m->squishTimer = 0xFF;
 
             if (spaceUnderCeil >= 10.1f) {
-                // Player becomes a pancake
+                // The player becomes a pancake xD
                 squishAmount = spaceUnderCeil / 160.0f;
 #if SMOOTH_SQUISH
                 vec3f_set(nextScale, (2.0f - squishAmount), squishAmount, (2.0f - squishAmount));
@@ -1940,7 +1940,7 @@ static s32 act_intro_cutscene(struct PlayerState *m) {
     return FALSE;
 }
 
-// jumbo star cutscene: Player lands after grabbing the jumbo star
+// jumbo star cutscene: The player lands after grabbing the jumbo star
 static void jumbo_star_cutscene_falling(struct PlayerState *m) {
     if (m->actionState == 0) {
         m->input |= INPUT_A_DOWN;
@@ -1967,7 +1967,7 @@ static void jumbo_star_cutscene_falling(struct PlayerState *m) {
     }
 }
 
-// jumbo star cutscene: Player takes off
+// jumbo star cutscene: The player takes off
 static s32 jumbo_star_cutscene_taking_off(struct PlayerState *m) {
     struct Object *playerObj = m->playerObj;
     s32 animFrame;
@@ -2020,7 +2020,7 @@ static s32 jumbo_star_cutscene_taking_off(struct PlayerState *m) {
     return FALSE;
 }
 
-// jumbo star cutscene: Player flying
+// jumbo star cutscene: The player flying
 static s32 jumbo_star_cutscene_flying(struct PlayerState *m) {
     Vec3f targetPos;
     UNUSED struct Object *playerObj = m->playerObj;
@@ -2099,7 +2099,7 @@ void generate_yellow_sparkles(s16 x, s16 y, s16 z, f32 radius) {
     spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_NONE, bhvSparkleSpawn, x + offsetX, y + offsetY,
                               z + offsetZ, 0, 0, 0);
 
-    // ex-alo change
+    // AloXFreakingAlo thank you so freaking much for this fix
     // corrects copypaste error with offsetX
     offsetX = offsetX * 4 / 3;
     offsetY = offsetY * 4 / 3;
@@ -2130,7 +2130,7 @@ static f32 end_obj_set_visual_pos(struct Object *o) {
     return find_floor(sp20, sp1C, sp18, &surf);
 }
 
-// make Player fall and soften wing cap gravity
+// make the player fall and soften wing cap gravity
 static void end_peach_cutscene_player_falling(struct PlayerState *m) {
     if (m->actionTimer == 1) {
         m->statusForCamera->cameraEvent = CAM_EVENT_START_ENDING;
@@ -2148,7 +2148,7 @@ static void end_peach_cutscene_player_falling(struct PlayerState *m) {
     }
 }
 
-// set Player on the ground, wait and spawn the jumbo star outside the castle.
+// set the player on the ground, wait and spawn the jumbo star outside the castle.
 static void end_peach_cutscene_player_landing(struct PlayerState *m) {
     set_player_animation(m, MARIO_ANIM_GENERAL_LAND);
     stop_and_set_height_to_floor(m);
@@ -2280,7 +2280,7 @@ static void end_peach_cutscene_descend_peach(struct PlayerState *m) {
 
 #undef TIMER_RUN_TO_PEACH
 
-// Player runs to peach
+// The player runs to peach
 static void end_peach_cutscene_run_to_peach(struct PlayerState *m) {
     if (m->actionTimer == 22) {
         sEndPeachAnimation = 5;
@@ -2305,7 +2305,7 @@ static void end_peach_cutscene_run_to_peach(struct PlayerState *m) {
 }
 
 // dialog 1
-// "Player!"
+// "Mario!"
 // "The power of the Stars is restored to the castle..."
 static void end_peach_cutscene_dialog_1(struct PlayerState *m) {
     s32 animFrame = set_player_animation(m, m->actionState == 0 ? MARIO_ANIM_CREDITS_TAKE_OFF_CAP
@@ -2406,7 +2406,7 @@ static void end_peach_cutscene_dialog_1(struct PlayerState *m) {
 
 // dialog 2
 // "...and it's all thanks to you!"
-// "Thank you Player!"
+// "Thank you Mario!"
 // "We have to do something special for you..."
 static void end_peach_cutscene_dialog_2(struct PlayerState *m) {
     sEndPeachAnimation = 9;
@@ -2552,7 +2552,7 @@ static void end_peach_cutscene_star_dance(struct PlayerState *m) {
 // dialog 3
 // "Listen everybody"
 // "let's bake a delicious cake..."
-// "...for Player..."
+// "...for Mario..."
 static void end_peach_cutscene_dialog_3(struct PlayerState *m) {
     set_player_animation(m, MARIO_ANIM_FIRST_PERSON);
 
@@ -2585,7 +2585,7 @@ static void end_peach_cutscene_dialog_3(struct PlayerState *m) {
     }
 }
 
-// "Player!"
+// "Mario!"
 static void end_peach_cutscene_run_to_castle(struct PlayerState *m) {
     set_player_animation(m, m->actionState == 0 ? MARIO_ANIM_CREDITS_START_WALK_LOOK_UP
                                                : MARIO_ANIM_CREDITS_LOOK_BACK_THEN_RUN);
@@ -2702,7 +2702,7 @@ static s32 act_credits_cutscene(struct PlayerState *m) {
     s32 height;
 
     m->statusForCamera->cameraEvent = CAM_EVENT_START_CREDITS;
-    // checks if Player is underwater (JRB, DDD, SA, etc.)
+    // checks if the player is underwater (JRB, DDD, SA, etc.)
     if (m->pos[1] < m->waterLevel - 100) {
         if (m->area->camera->mode != CAMERA_MODE_BEHIND_MARIO) {
             set_camera_mode(m->area->camera, CAMERA_MODE_BEHIND_MARIO, 1);

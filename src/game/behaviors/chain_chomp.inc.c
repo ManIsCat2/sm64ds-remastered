@@ -260,7 +260,7 @@ static void chain_chomp_released_trigger_cutscene(void) {
 
     //! Can delay this if we get into a cutscene-unfriendly action after the
     //  last post ground pound and before this
-    if (set_player_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_SPEAK
+    if (set_player_npc_dialog(PLAYER_DIALOG_LOOK_UP) == PLAYER_DIALOG_STATUS_SPEAK
         && (o->oMoveFlags & OBJ_MOVE_MASK_ON_GROUND) && cutscene_object(CUTSCENE_STAR_SPAWN, o) == 1) {
         o->oChainChompReleaseStatus = CHAIN_CHOMP_RELEASED_LUNGE_AROUND;
         o->oTimer = 0;
@@ -346,7 +346,7 @@ static void chain_chomp_released_jump_away(void) {
  */
 static void chain_chomp_released_end_cutscene(void) {
     if (cutscene_object(CUTSCENE_STAR_SPAWN, o) == -1) {
-        set_player_npc_dialog(MARIO_DIALOG_STOP);
+        set_player_npc_dialog(PLAYER_DIALOG_STOP);
         o->oAction = CHAIN_CHOMP_ACT_UNLOAD_CHAIN;
     }
 }

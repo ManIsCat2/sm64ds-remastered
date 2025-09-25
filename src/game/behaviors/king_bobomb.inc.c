@@ -50,7 +50,7 @@ void king_bobomb_act_idle(void) {
             o->oSubAction++;
             seq_player_lower_volume(SEQ_PLAYER_LEVEL, 60, 40);
         }
-    } else if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP,
+    } else if (cur_obj_update_dialog_with_cutscene(PLAYER_DIALOG_LOOK_UP,
         DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, dialogID)) {
         o->oAction = 2;
         o->oFlags |= OBJ_FLAG_HOLDABLE;
@@ -218,9 +218,9 @@ void king_bobomb_act_getup(void) {
 }
 
 #if FIX_MARIO_LOOK_HEAD_BOSSES
-#define MARIO_DIALOG_LOOK_BOSS MARIO_DIALOG_LOOK_FRONT
+#define MARIO_DIALOG_LOOK_BOSS PLAYER_DIALOG_LOOK_FRONT
 #else
-#define MARIO_DIALOG_LOOK_BOSS MARIO_DIALOG_LOOK_UP
+#define MARIO_DIALOG_LOOK_BOSS PLAYER_DIALOG_LOOK_UP
 #endif
 
 void king_bobomb_act_death_dialog(void) {
@@ -378,7 +378,7 @@ void king_bobomb_act_jump_up(void) { // bobomb returns home
             break;
 
         case 4:
-            if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP,
+            if (cur_obj_update_dialog_with_cutscene(PLAYER_DIALOG_LOOK_UP,
                 DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, DIALOG_128)) {
                 o->oAction = 2;
             }

@@ -6896,7 +6896,7 @@ void copy_spline_segment(struct CutsceneSplinePoint *dst, struct CutsceneSplineP
 s16 cutscene_common_set_dialog_state(s32 state) {
     s16 timer = gCutsceneTimer;
     // If the dialog ended, return CUTSCENE_LOOP, which would end the cutscene shot
-    if (set_player_npc_dialog(state) == MARIO_DIALOG_STATUS_SPEAK) {
+    if (set_player_npc_dialog(state) == PLAYER_DIALOG_STATUS_SPEAK) {
         timer = CUTSCENE_LOOP;
     }
     return timer;
@@ -6904,19 +6904,19 @@ s16 cutscene_common_set_dialog_state(s32 state) {
 
 /// Unused SSL cutscene?
 static UNUSED void unused_cutscene_player_dialog_looking_down(UNUSED struct Camera *c) {
-    gCutsceneTimer = cutscene_common_set_dialog_state(MARIO_DIALOG_LOOK_DOWN);
+    gCutsceneTimer = cutscene_common_set_dialog_state(PLAYER_DIALOG_LOOK_DOWN);
 }
 
 /**
  * Cause Player to enter the normal dialog state.
  */
 static BAD_RETURN(s32) cutscene_player_dialog(UNUSED struct Camera *c) {
-    gCutsceneTimer = cutscene_common_set_dialog_state(MARIO_DIALOG_LOOK_FRONT);
+    gCutsceneTimer = cutscene_common_set_dialog_state(PLAYER_DIALOG_LOOK_FRONT);
 }
 
 /// Unused SSL cutscene?
 static UNUSED void unused_cutscene_player_dialog_looking_up(UNUSED struct Camera *c) {
-    gCutsceneTimer = cutscene_common_set_dialog_state(MARIO_DIALOG_LOOK_UP);
+    gCutsceneTimer = cutscene_common_set_dialog_state(PLAYER_DIALOG_LOOK_UP);
 }
 
 /**
@@ -7996,11 +7996,11 @@ BAD_RETURN(s32) cutscene_bowser_arena_pan_left(UNUSED struct Camera *c) {
  * Duplicate of cutscene_player_dialog().
  */
 BAD_RETURN(s32) cutscene_bowser_arena_player_dialog(UNUSED struct Camera *c) {
-    cutscene_common_set_dialog_state(MARIO_DIALOG_LOOK_FRONT);
+    cutscene_common_set_dialog_state(PLAYER_DIALOG_LOOK_FRONT);
 }
 
 void cutscene_stop_dialog(UNUSED struct Camera *c) {
-    cutscene_common_set_dialog_state(MARIO_DIALOG_STOP);
+    cutscene_common_set_dialog_state(PLAYER_DIALOG_STOP);
 }
 
 /**

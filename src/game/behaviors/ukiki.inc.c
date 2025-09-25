@@ -375,7 +375,7 @@ void ukiki_act_go_to_cage(void) {
         case UKIKI_SUB_ACT_CAGE_TALK_TO_MARIO:
             cur_obj_init_animation_with_sound(UKIKI_ANIM_HANDSTAND);
 
-            if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_DOWN,
+            if (cur_obj_update_dialog_with_cutscene(PLAYER_DIALOG_LOOK_DOWN,
                 DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, DIALOG_080)) {
                 o->oSubAction++;
             }
@@ -510,7 +510,7 @@ void cage_ukiki_held_loop(void) {
     if (o->oPosY - o->oHomeY > -100.0f) {
         switch (o->oUkikiTextState) {
             case UKIKI_TEXT_DEFAULT:
-                if (set_player_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_SPEAK) {
+                if (set_player_npc_dialog(PLAYER_DIALOG_LOOK_UP) == PLAYER_DIALOG_STATUS_SPEAK) {
                     create_dialog_box_with_response(DIALOG_079);
                     o->oUkikiTextState = UKIKI_TEXT_CAGE_TEXTBOX;
                 }
@@ -518,7 +518,7 @@ void cage_ukiki_held_loop(void) {
 
             case UKIKI_TEXT_CAGE_TEXTBOX:
                 if (gDialogResponse != DIALOG_RESPONSE_NONE) {
-                    set_player_npc_dialog(MARIO_DIALOG_STOP);
+                    set_player_npc_dialog(PLAYER_DIALOG_STOP);
                     if (gDialogResponse == DIALOG_RESPONSE_YES) {
                         o->oInteractionSubtype |= INT_SUBTYPE_DROP_IMMEDIATELY;
                         o->oUkikiTextState = UKIKI_TEXT_GO_TO_CAGE;
@@ -562,7 +562,7 @@ void cap_ukiki_held_loop(void) {
             break;
 
         case UKIKI_TEXT_STEAL_CAP:
-            if (cur_obj_update_dialog(MARIO_DIALOG_LOOK_UP, DIALOG_FLAG_TEXT_DEFAULT, DIALOG_100, 0)) {
+            if (cur_obj_update_dialog(PLAYER_DIALOG_LOOK_UP, DIALOG_FLAG_TEXT_DEFAULT, DIALOG_100, 0)) {
                 o->oInteractionSubtype |= INT_SUBTYPE_DROP_IMMEDIATELY;
                 o->oUkikiTextState = UKIKI_TEXT_STOLE_CAP;
             }
@@ -572,10 +572,10 @@ void cap_ukiki_held_loop(void) {
             break;
 
         case UKIKI_TEXT_HAS_CAP:
-            if (cur_obj_update_dialog(MARIO_DIALOG_LOOK_UP,
+            if (cur_obj_update_dialog(PLAYER_DIALOG_LOOK_UP,
                 (DIALOG_FLAG_TEXT_DEFAULT | DIALOG_FLAG_TIME_STOP_ENABLED), DIALOG_101, 0)) {
                 player_retrieve_cap();
-                set_player_npc_dialog(MARIO_DIALOG_STOP);
+                set_player_npc_dialog(PLAYER_DIALOG_STOP);
                 o->oUkikiHasCap = FALSE;
                 o->oUkikiTextState = UKIKI_TEXT_GAVE_CAP_BACK;
             }

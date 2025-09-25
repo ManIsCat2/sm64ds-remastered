@@ -120,12 +120,12 @@ void bhv_snowmans_bottom_loop(void) {
     switch (o->oAction) {
         case 0:
             if (is_point_within_radius_of_player(o->oPosX, o->oPosY, o->oPosZ, 400) == 1
-                && set_player_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
+                && set_player_npc_dialog(PLAYER_DIALOG_LOOK_FRONT) == PLAYER_DIALOG_STATUS_SPEAK) {
                 s16 response = cutscene_object_with_dialog(CUTSCENE_DIALOG, o, DIALOG_110);
                 if (response != DIALOG_RESPONSE_NONE) {
                     o->oForwardVel = 10.0f;
                     o->oAction = 1;
-                    set_player_npc_dialog(MARIO_DIALOG_STOP);
+                    set_player_npc_dialog(PLAYER_DIALOG_STOP);
                 }
             }
             break;
@@ -183,7 +183,7 @@ void bhv_snowmans_head_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (trigger_obj_dialog_when_facing(&o->oSnowmansHeadDialogActive, DIALOG_109, 400.0f, MARIO_DIALOG_LOOK_FRONT)) {
+            if (trigger_obj_dialog_when_facing(&o->oSnowmansHeadDialogActive, DIALOG_109, 400.0f, PLAYER_DIALOG_LOOK_FRONT)) {
                 o->oAction = 1;
             }
             break;
@@ -209,7 +209,7 @@ void bhv_snowmans_head_loop(void) {
             break;
 
         case 4:
-            if (trigger_obj_dialog_when_facing(&o->oSnowmansHeadDialogActive, DIALOG_111, 700.0f, MARIO_DIALOG_LOOK_UP)) {
+            if (trigger_obj_dialog_when_facing(&o->oSnowmansHeadDialogActive, DIALOG_111, 700.0f, PLAYER_DIALOG_LOOK_UP)) {
                 spawn_mist_particles();
                 spawn_default_star(-4700.0f, -1024.0f, 1890.0f);
                 o->oAction = 1;

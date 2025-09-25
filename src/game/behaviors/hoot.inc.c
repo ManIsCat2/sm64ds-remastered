@@ -270,9 +270,9 @@ void bhv_hoot_loop(void) {
         case HOOT_AVAIL_WANTS_TO_TALK:
             hoot_awake_loop();
 
-            if (set_player_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_SPEAK
+            if (set_player_npc_dialog(PLAYER_DIALOG_LOOK_UP) == PLAYER_DIALOG_STATUS_SPEAK
                 && cutscene_object_with_dialog(CUTSCENE_DIALOG, o, DIALOG_044)) {
-                set_player_npc_dialog(MARIO_DIALOG_STOP);
+                set_player_npc_dialog(PLAYER_DIALOG_STOP);
 
                 cur_obj_become_tangible();
 

@@ -32,7 +32,7 @@ void whomp_init(void) {
                 cur_obj_set_pos_to_home();
                 o->oHealth = KING_WHOMP_HEALTH;
             }
-        } else if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP,
+        } else if (cur_obj_update_dialog_with_cutscene(PLAYER_DIALOG_LOOK_UP,
             DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, DIALOG_114)) {
             o->oAction = 2;
         }
@@ -236,9 +236,9 @@ void whomp_on_ground_general(void) {
 }
 
 #if FIX_MARIO_LOOK_HEAD_BOSSES
-#define MARIO_DIALOG_LOOK_BOSS MARIO_DIALOG_LOOK_DOWN
+#define MARIO_DIALOG_LOOK_BOSS PLAYER_DIALOG_LOOK_DOWN
 #else
-#define MARIO_DIALOG_LOOK_BOSS MARIO_DIALOG_LOOK_UP
+#define MARIO_DIALOG_LOOK_BOSS PLAYER_DIALOG_LOOK_UP
 #endif
 
 void whomp_die(void) {

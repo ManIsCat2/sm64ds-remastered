@@ -670,10 +670,10 @@ s16 trigger_obj_dialog_when_facing(s32 *inDialog, s16 dialogID, f32 dist, s32 ac
         || (*inDialog == TRUE)) {
         *inDialog = TRUE;
 
-        if (set_player_npc_dialog(actionArg) == MARIO_DIALOG_STATUS_SPEAK) { //If Player is speaking.
+        if (set_player_npc_dialog(actionArg) == PLAYER_DIALOG_STATUS_SPEAK) { //If Player is speaking.
             s16 dialogResponse = cutscene_object_with_dialog(CUTSCENE_DIALOG, o, dialogID);
             if (dialogResponse != DIALOG_RESPONSE_NONE) {
-                set_player_npc_dialog(MARIO_DIALOG_STOP);
+                set_player_npc_dialog(PLAYER_DIALOG_STOP);
                 *inDialog = FALSE;
                 return dialogResponse;
             }
