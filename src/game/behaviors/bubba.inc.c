@@ -98,13 +98,13 @@ void bubba_act_1(void) {
 void bhv_bubba_loop(void) {
     UNUSED u8 filler[4];
 
-    o->oInteractionSubtype &= ~INT_SUBTYPE_EATS_MARIO;
+    o->oInteractionSubtype &= ~INT_SUBTYPE_EATS_PLAYER;
     o->oBubbaUnk104 = obj_turn_pitch_toward_player(120.0f, 0);
 
     if (abs_angle_diff(o->oAngleToPlayer, o->oMoveAngleYaw) < 0x1000
         && abs_angle_diff(o->oBubbaUnk104 + 0x800, o->oMoveAnglePitch) < 0x2000) {
         if (o->oAnimState != 0 && o->oDistanceToPlayer < 250.0f) {
-            o->oInteractionSubtype |= INT_SUBTYPE_EATS_MARIO;
+            o->oInteractionSubtype |= INT_SUBTYPE_EATS_PLAYER;
         }
 
         o->hurtboxRadius = 100.0f;

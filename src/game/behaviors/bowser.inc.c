@@ -696,9 +696,9 @@ s32 bowser_land(void) {
         // have different attacks defined
         if (o->oBhvParams2ndByte == BOWSER_BP_BITDW) {
             if (o->oDistanceToPlayer < 850.0f) {
-                gPlayerObject->oInteractStatus |= INT_STATUS_MARIO_KNOCKBACK_DMG;
+                gPlayerObject->oInteractStatus |= INT_STATUS_PLAYER_KNOCKBACK_DMG;
             } else {
-                gPlayerObject->oInteractStatus |= INT_STATUS_MARIO_STUNNED;
+                gPlayerObject->oInteractStatus |= INT_STATUS_PLAYER_STUNNED;
             }
         }
         return TRUE;

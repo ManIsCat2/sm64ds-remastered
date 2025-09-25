@@ -410,7 +410,7 @@ u32 able_to_grab_object(struct PlayerState *m, UNUSED struct Object *o) {
     u32 action = m->action;
 
     if (action == ACT_DIVE_SLIDE || action == ACT_DIVE) {
-        if (!(o->oInteractionSubtype & INT_SUBTYPE_GRABS_MARIO)) {
+        if (!(o->oInteractionSubtype & INT_SUBTYPE_GRABS_PLAYER)) {
             return TRUE;
         }
     } else if (action == ACT_PUNCHING || action == ACT_MOVE_PUNCHING) {
@@ -740,7 +740,7 @@ u32 take_damage_and_knock_back(struct PlayerState *m, struct Object *o) {
 
     if (!sInvulnerable && !(m->flags & PLAYER_VANISH_CAP)
         && !(o->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
-        o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_ATTACKED_MARIO;
+        o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_ATTACKED_PLAYER;
         m->interactObj = o;
 
         damage = take_damage_from_interact_object(m);
@@ -1223,7 +1223,7 @@ u32 interact_snufit_bullet(struct PlayerState *m, UNUSED u32 interactType, struc
             o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_WAS_ATTACKED;
             play_sound(SOUND_ACTION_SNUFFIT_BULLET_HIT_METAL, m->playerObj->header.gfx.cameraToObject);
         } else {
-            o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_ATTACKED_MARIO;
+            o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_ATTACKED_PLAYER;
             m->interactObj = o;
             take_damage_from_interact_object(m);
 
@@ -1243,7 +1243,7 @@ u32 interact_snufit_bullet(struct PlayerState *m, UNUSED u32 interactType, struc
 }
 
 u32 interact_clam_or_bubba(struct PlayerState *m, UNUSED u32 interactType, struct Object *o) {
-    if (o->oInteractionSubtype & INT_SUBTYPE_EATS_MARIO) {
+    if (o->oInteractionSubtype & INT_SUBTYPE_EATS_PLAYER) {
         o->oInteractStatus = INT_STATUS_INTERACTED;
         m->interactObj = o;
         return set_player_action(m, ACT_EATEN_BY_BUBBA, 0);
@@ -1310,7 +1310,7 @@ u32 interact_shock(struct PlayerState *m, UNUSED u32 interactType, struct Object
         && !(o->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
         u32 actionArg = (m->action & (ACT_FLAG_AIR | ACT_FLAG_ON_POLE | ACT_FLAG_HANGING)) == 0;
 
-        o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_ATTACKED_MARIO;
+        o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_ATTACKED_PLAYER;
         m->interactObj = o;
 
         take_damage_from_interact_object(m);
@@ -1527,10 +1527,10 @@ u32 interact_koopa_shell(struct PlayerState *m, UNUSED u32 interactType, struct 
 
 u32 check_object_grab_player(struct PlayerState *m, UNUSED u32 interactType, struct Object *o) {
     if ((!(m->action & (ACT_FLAG_AIR | ACT_FLAG_INVULNERABLE | ACT_FLAG_ATTACKING)) || !sInvulnerable)
-        && (o->oInteractionSubtype & INT_SUBTYPE_GRABS_MARIO)) {
+        && (o->oInteractionSubtype & INT_SUBTYPE_GRABS_PLAYER)) {
         if (object_facing_player(m, o, 0x2AAA)) {
             player_stop_riding_and_holding(m);
-            o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_GRABBED_MARIO;
+            o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_GRABBED_PLAYER;
 
             m->faceAngle[1] = o->oMoveAngleYaw;
             m->interactObj = o;
@@ -1697,7 +1697,7 @@ u32 interact_grabbable(struct PlayerState *m, u32 interactType, struct Object *o
         }
     }
 
-    if ((o->oInteractionSubtype & INT_SUBTYPE_GRABS_MARIO)) {
+    if ((o->oInteractionSubtype & INT_SUBTYPE_GRABS_PLAYER)) {
         if (check_object_grab_player(m, interactType, o)) {
             return TRUE;
         }

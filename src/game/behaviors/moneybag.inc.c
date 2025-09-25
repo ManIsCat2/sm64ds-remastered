@@ -36,7 +36,7 @@ void moneybag_check_player_collision(void) {
     obj_set_hitbox(o, &sMoneybagHitbox);
 
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
-        if (o->oInteractStatus & INT_STATUS_ATTACKED_MARIO) {
+        if (o->oInteractStatus & INT_STATUS_ATTACKED_PLAYER) {
             o->oMoveAngleYaw = o->oAngleToPlayer + 0x8000;
             o->oVelY = 30.0f;
         }

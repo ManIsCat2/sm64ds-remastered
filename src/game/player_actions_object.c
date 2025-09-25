@@ -191,7 +191,7 @@ s32 act_picking_up(struct PlayerState *m) {
     }
 
     if (m->actionState == 1) {
-        if (m->heldObj->oInteractionSubtype & INT_SUBTYPE_GRABS_MARIO) {
+        if (m->heldObj->oInteractionSubtype & INT_SUBTYPE_GRABS_PLAYER) {
             m->playerBodyState->grabPos = GRAB_POS_HEAVY_OBJ;
             set_player_animation(m, MARIO_ANIM_GRAB_HEAVY_OBJECT);
             if (is_anim_at_end(m)) {

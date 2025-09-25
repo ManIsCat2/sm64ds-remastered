@@ -19,7 +19,7 @@ void bhv_heave_ho_throw_player_loop(void) {
             break;
         case 2:
             cur_obj_play_sound_2(SOUND_OBJ_HEAVEHO_TOSSED);
-            gPlayerObject->oInteractStatus |= INT_STATUS_MARIO_UNK2;
+            gPlayerObject->oInteractStatus |= INT_STATUS_PLAYER_UNK2;
             gPlayerStates[0].forwardVel = -45.0f;
             gPlayerStates[0].vel[1] = 95.0f;
             o->parentObj->oHeaveHoUnk88 = 0;
@@ -132,7 +132,7 @@ void heave_ho_move(void) {
         o->oAction = 0;
     }
 
-    if (o->oInteractStatus & INT_STATUS_GRABBED_MARIO) {
+    if (o->oInteractStatus & INT_STATUS_GRABBED_PLAYER) {
         o->oInteractStatus = 0;
         o->oHeaveHoUnk88 = 1;
         o->oAction = 3;

@@ -737,7 +737,7 @@ static s32 obj_handle_attacks(struct ObjectHitbox *hitbox, s32 attackedPlayerAct
     if (obj_die_if_above_lava_and_health_non_positive()) {
         return 1;
     } else if (o->oInteractStatus & INT_STATUS_INTERACTED) {
-        if (o->oInteractStatus & INT_STATUS_ATTACKED_MARIO) {
+        if (o->oInteractStatus & INT_STATUS_ATTACKED_PLAYER) {
             if (o->oAction != attackedPlayerAction) {
                 o->oAction = attackedPlayerAction;
                 o->oTimer = 0;
@@ -860,7 +860,7 @@ static s32 obj_check_attacks(struct ObjectHitbox *hitbox, s32 attackedPlayerActi
     if (obj_die_if_above_lava_and_health_non_positive()) {
         return 1;
     } else if (o->oInteractStatus & INT_STATUS_INTERACTED) {
-        if (o->oInteractStatus & INT_STATUS_ATTACKED_MARIO) {
+        if (o->oInteractStatus & INT_STATUS_ATTACKED_PLAYER) {
             if (o->oAction != attackedPlayerAction) {
                 o->oAction = attackedPlayerAction;
                 o->oTimer = 0;

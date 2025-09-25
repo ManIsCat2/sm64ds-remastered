@@ -986,7 +986,7 @@ s32 act_hold_walking(struct PlayerState *m) {
         return set_player_action(m, ACT_CRAZY_BOX_BOUNCE, 0);
     }
 
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_WALKING, 0);
     }
 
@@ -1265,7 +1265,7 @@ s32 act_hold_decelerating(struct PlayerState *m) {
     s32 val0C;
     s16 slopeClass = player_get_floor_class(m);
 
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_WALKING, 0);
     }
 
@@ -1570,7 +1570,7 @@ s32 act_butt_slide(struct PlayerState *m) {
 s32 act_hold_butt_slide(struct PlayerState *m) {
     s32 cancel;
 
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_BUTT_SLIDE, 0);
     }
 
@@ -1684,7 +1684,7 @@ s32 act_stomach_slide(struct PlayerState *m) {
 s32 act_hold_stomach_slide(struct PlayerState *m) {
     s32 cancel;
 
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_STOMACH_SLIDE, 0);
     }
 
@@ -1953,7 +1953,7 @@ s32 act_side_flip_land(struct PlayerState *m) {
 }
 
 s32 act_hold_jump_land(struct PlayerState *m) {
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_JUMP_LAND_STOP, 0);
     }
 
@@ -1966,7 +1966,7 @@ s32 act_hold_jump_land(struct PlayerState *m) {
 }
 
 s32 act_hold_freefall_land(struct PlayerState *m) {
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_FREEFALL_LAND_STOP, 0);
     }
 

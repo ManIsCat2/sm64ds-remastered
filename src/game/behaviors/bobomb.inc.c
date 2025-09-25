@@ -44,7 +44,7 @@ void bobomb_check_interactions(void) {
     obj_set_hitbox(o, &sBobombHitbox);
 
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
-        if (o->oInteractStatus & INT_STATUS_MARIO_KNOCKBACK_DMG) {
+        if (o->oInteractStatus & INT_STATUS_PLAYER_KNOCKBACK_DMG) {
             o->oMoveAngleYaw = gPlayerObject->header.gfx.angle[1];
             o->oForwardVel = 25.0f;
             o->oVelY = 30.0f;
@@ -188,7 +188,7 @@ void bobomb_held_loop(void) {
         //! Although the Bob-omb's action is set to explode when the fuse timer expires,
         //  bobomb_act_explode() will not execute until the bob-omb's held state changes.
         //  This allows the Bob-omb to be regrabbed indefinitely.
-        gPlayerObject->oInteractStatus |= INT_STATUS_MARIO_DROP_OBJECT;
+        gPlayerObject->oInteractStatus |= INT_STATUS_PLAYER_DROP_OBJECT;
         o->oAction = BOBOMB_ACT_EXPLODE;
     }
 }

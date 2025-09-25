@@ -47,7 +47,7 @@
 #define INT_SUBTYPE_BIG_KNOCKBACK 0x00000008 /* Used by Bowser, sets Player's forward velocity to 40 on hit */
 
 // INTERACT_GRABBABLE
-#define INT_SUBTYPE_GRABS_MARIO 0x00000004 /* Also makes the object heavy */
+#define INT_SUBTYPE_GRABS_PLAYER 0x00000004 /* Also makes the object heavy */
 #define INT_SUBTYPE_HOLDABLE_NPC 0x00000010 /* Allows the object to be gently dropped, and sets vertical speed to 0 when dropped with no forwards velocity */
 #define INT_SUBTYPE_DROP_IMMEDIATELY 0x00000040 /* This gets set by grabbable NPCs that talk to Player to make him drop them after the dialog is finished */
 #define INT_SUBTYPE_KICKABLE 0x00000100
@@ -68,7 +68,7 @@
 #define INT_SUBTYPE_NPC 0x00004000
 
 // INTERACT_CLAM_OR_BUBBA
-#define INT_SUBTYPE_EATS_MARIO 0x00002000
+#define INT_SUBTYPE_EATS_PLAYER 0x00002000
 
 
 #define ATTACK_PUNCH                 1
@@ -81,18 +81,18 @@
 #define INT_STATUS_ATTACK_MASK 0x000000FF
 
 // Player Interaction Status
-#define INT_STATUS_MARIO_STUNNED         (1 <<  0) /* 0x00000001 */
-#define INT_STATUS_MARIO_KNOCKBACK_DMG   (1 <<  1) /* 0x00000002 */
-#define INT_STATUS_MARIO_UNK2            (1 <<  2) /* 0x00000004 */
-#define INT_STATUS_MARIO_DROP_OBJECT     (1 <<  3) /* 0x00000008 */
-#define INT_STATUS_MARIO_SHOCKWAVE       (1 <<  4) /* 0x00000010 */
-#define INT_STATUS_MARIO_UNK5            (1 <<  5) /* 0x00000020 */
-#define INT_STATUS_MARIO_UNK6            (1 <<  6) /* 0x00000040 */
-#define INT_STATUS_MARIO_UNK7            (1 <<  7) /* 0x00000080 */
+#define INT_STATUS_PLAYER_STUNNED        (1 <<  0) /* 0x00000001 */
+#define INT_STATUS_PLAYER_KNOCKBACK_DMG  (1 <<  1) /* 0x00000002 */
+#define INT_STATUS_PLAYER_UNK2           (1 <<  2) /* 0x00000004 */
+#define INT_STATUS_PLAYER_DROP_OBJECT    (1 <<  3) /* 0x00000008 */
+#define INT_STATUS_PLAYER_SHOCKWAVE      (1 <<  4) /* 0x00000010 */
+#define INT_STATUS_PLAYER_UNK5           (1 <<  5) /* 0x00000020 */
+#define INT_STATUS_PLAYER_UNK6           (1 <<  6) /* 0x00000040 */
+#define INT_STATUS_PLAYER_UNK7           (1 <<  7) /* 0x00000080 */
 
 // Object Interaction Status
-#define INT_STATUS_GRABBED_MARIO         (1 << 11) /* 0x00000800 */
-#define INT_STATUS_ATTACKED_MARIO        (1 << 13) /* 0x00002000 */
+#define INT_STATUS_GRABBED_PLAYER        (1 << 11) /* 0x00000800 */
+#define INT_STATUS_ATTACKED_PLAYER       (1 << 13) /* 0x00002000 */
 #define INT_STATUS_WAS_ATTACKED          (1 << 14) /* 0x00004000 */
 #define INT_STATUS_INTERACTED            (1 << 15) /* 0x00008000 */
 #define INT_STATUS_UNK16                 (1 << 16) /* 0x00010000 */

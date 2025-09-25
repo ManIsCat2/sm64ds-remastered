@@ -1531,7 +1531,7 @@ void update_player_inputs(struct PlayerState *m) {
 
     // These 3 flags are defined by Bowser stomping attacks
     if (m->playerObj->oInteractStatus
-        & (INT_STATUS_MARIO_STUNNED | INT_STATUS_MARIO_KNOCKBACK_DMG | INT_STATUS_MARIO_SHOCKWAVE)) {
+        & (INT_STATUS_PLAYER_STUNNED | INT_STATUS_PLAYER_KNOCKBACK_DMG | INT_STATUS_PLAYER_SHOCKWAVE)) {
         m->input |= INPUT_STOMPED;
     }
 

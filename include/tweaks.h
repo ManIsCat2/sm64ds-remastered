@@ -3,7 +3,6 @@
 
 // Booleans
 #define DISABLE_LIVES 0
-#define FALL_DAMAGE 1
 #define SHOW_STAR_MILESTONES 1
 #define CAMERA_MOVE_WHEN_PAUSE 1
 #define EXIT_COURSE_ANYWHERE 0

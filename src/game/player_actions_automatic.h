@@ -1,5 +1,5 @@
-#ifndef MARIO_ACTIONS_AUTOMATIC_H
-#define MARIO_ACTIONS_AUTOMATIC_H
+#ifndef PLAYER_ACTIONS_AUTOMATIC_H
+#define PLAYER_ACTIONS_AUTOMATIC_H
 
 #include <PR/ultratypes.h>
 
@@ -7,4 +7,4 @@
 
 s32 player_execute_automatic_action(struct PlayerState *m);
 
-#endif // MARIO_ACTIONS_AUTOMATIC_H
+#endif // PLAYER_ACTIONS_AUTOMATIC_H

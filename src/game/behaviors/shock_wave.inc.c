@@ -38,7 +38,7 @@ void bhv_bowser_shock_wave_loop(void) {
         // If Player is in between distMin and distMax values, shock him
         if ((distMin1 < o->oDistanceToPlayer && o->oDistanceToPlayer < distMax1)
             || (distMin2 < o->oDistanceToPlayer && o->oDistanceToPlayer < distMax2)) {
-            gPlayerObject->oInteractStatus |= INT_STATUS_MARIO_SHOCKWAVE;
+            gPlayerObject->oInteractStatus |= INT_STATUS_PLAYER_SHOCKWAVE;
         }
     }
 }

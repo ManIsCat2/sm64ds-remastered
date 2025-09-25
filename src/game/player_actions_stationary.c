@@ -412,7 +412,7 @@ s32 act_hold_idle(struct PlayerState *m) {
         return set_player_action(m, ACT_CRAZY_BOX_BOUNCE, 0);
     }
 
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_IDLE, 0);
     }
 
@@ -558,7 +558,7 @@ s32 act_panting(struct PlayerState *m) {
 }
 
 s32 act_hold_panting_unused(struct PlayerState *m) {
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_PANTING, 0);
     }
 
@@ -628,7 +628,7 @@ s32 act_butt_slide_stop(struct PlayerState *m) {
 }
 
 s32 act_hold_butt_slide_stop(struct PlayerState *m) {
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_IDLE, 0);
     }
 
@@ -762,7 +762,7 @@ s32 act_shockwave_bounce(struct PlayerState *m) {
     s16 sp1E;
     f32 sp18;
 
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_SHOCKWAVE) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_SHOCKWAVE) {
 #ifdef RUMBLE_FEEDBACK
         queue_rumble_data(70, 40);
 #endif
@@ -773,7 +773,7 @@ s32 act_shockwave_bounce(struct PlayerState *m) {
 #ifdef RUMBLE_FEEDBACK
         queue_rumble_data(70, 40);
 #endif
-        if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_KNOCKBACK_DMG) {
+        if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_KNOCKBACK_DMG) {
             return hurt_and_set_player_action(m, ACT_BACKWARD_GROUND_KB, 0, 0xc);
         }
     }
@@ -922,7 +922,7 @@ s32 act_long_jump_land_stop(struct PlayerState *m) {
 }
 
 s32 act_hold_jump_land_stop(struct PlayerState *m) {
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_IDLE, 0);
     }
 
@@ -943,7 +943,7 @@ s32 act_hold_jump_land_stop(struct PlayerState *m) {
 }
 
 s32 act_hold_freefall_land_stop(struct PlayerState *m) {
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_IDLE, 0);
     }
 

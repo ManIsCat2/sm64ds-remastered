@@ -130,7 +130,7 @@ void hoot_surface_collision(f32 xPrev, UNUSED f32 yPrev, f32 zPrev) {
         o->oPosX = hitbox.x;
         o->oPosY = hitbox.y;
         o->oPosZ = hitbox.z;
-        gPlayerObject->oInteractStatus |= INT_STATUS_MARIO_UNK7;
+        gPlayerObject->oInteractStatus |= INT_STATUS_PLAYER_UNK7;
     }
 
     floorY = find_floor(o->oPosX, o->oPosY, o->oPosZ, &floor);
@@ -208,7 +208,7 @@ void hoot_action_loop(void) {
             hoot_carry_step(20, xPrev, zPrev);
 
             if (o->oTimer > 60) {
-                gPlayerObject->oInteractStatus |= INT_STATUS_MARIO_UNK7;
+                gPlayerObject->oInteractStatus |= INT_STATUS_PLAYER_UNK7;
             }
             break;
     }

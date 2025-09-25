@@ -355,7 +355,7 @@ static s32 act_hold_water_idle(struct PlayerState *m) {
         return set_player_action(m, ACT_HOLD_METAL_WATER_FALLING, 0);
     }
 
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_WATER_IDLE, 0);
     }
 
@@ -396,7 +396,7 @@ static s32 act_hold_water_action_end(struct PlayerState *m) {
         return set_player_action(m, ACT_HOLD_METAL_WATER_FALLING, 0);
     }
 
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_WATER_IDLE, 0);
     }
 
@@ -643,7 +643,7 @@ static s32 act_hold_breaststroke(struct PlayerState *m) {
         return set_player_action(m, ACT_HOLD_METAL_WATER_FALLING, 0);
     }
 
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_WATER_IDLE, 0);
     }
 
@@ -694,7 +694,7 @@ static s32 act_hold_swimming_end(struct PlayerState *m) {
         return set_player_action(m, ACT_HOLD_METAL_WATER_FALLING, 0);
     }
 
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_WATER_IDLE, 0);
     }
 
@@ -727,7 +727,7 @@ static s32 act_hold_flutter_kick(struct PlayerState *m) {
         return set_player_action(m, ACT_HOLD_METAL_WATER_FALLING, 0);
     }
 
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_WATER_IDLE, 0);
     }
 
@@ -749,7 +749,7 @@ static s32 act_hold_flutter_kick(struct PlayerState *m) {
 }
 
 static s32 act_water_shell_swimming(struct PlayerState *m) {
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_WATER_IDLE, 0);
     }
 
@@ -1209,7 +1209,7 @@ static s32 act_metal_water_standing(struct PlayerState *m) {
 }
 
 static s32 act_hold_metal_water_standing(struct PlayerState *m) {
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_METAL_WATER_STANDING, 0);
     }
 
@@ -1278,7 +1278,7 @@ static s32 act_metal_water_walking(struct PlayerState *m) {
 static s32 act_hold_metal_water_walking(struct PlayerState *m) {
     s32 val04;
 
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_METAL_WATER_WALKING, 0);
     }
 
@@ -1343,7 +1343,7 @@ static s32 act_metal_water_jump(struct PlayerState *m) {
 }
 
 static s32 act_hold_metal_water_jump(struct PlayerState *m) {
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_METAL_WATER_FALLING, 0);
     }
 
@@ -1391,7 +1391,7 @@ static s32 act_metal_water_falling(struct PlayerState *m) {
 }
 
 static s32 act_hold_metal_water_falling(struct PlayerState *m) {
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_METAL_WATER_FALLING, 0);
     }
 
@@ -1437,7 +1437,7 @@ static s32 act_metal_water_jump_land(struct PlayerState *m) {
 static s32 act_hold_metal_water_jump_land(struct PlayerState *m) {
     play_metal_water_jumping_sound(m, TRUE);
 
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_METAL_WATER_STANDING, 0);
     }
 
@@ -1483,7 +1483,7 @@ static s32 act_metal_water_fall_land(struct PlayerState *m) {
 static s32 act_hold_metal_water_fall_land(struct PlayerState *m) {
     play_metal_water_jumping_sound(m, TRUE);
 
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_METAL_WATER_STANDING, 0);
     }
 

@@ -73,7 +73,7 @@ s32 set_pole_position(struct PlayerState *m, f32 offsetY) {
     s32 result = POLE_NONE;
 
     if (poleObj == NULL) {
-        // If Player is no longer interacting with the pole, stop the pole holding action.
+        // If the player is no longer interacting with the pole, stop the pole holding action.
         set_player_action(m, ACT_FREEFALL, 0);
         return POLE_FELL_OFF;
     }
@@ -86,12 +86,12 @@ s32 set_pole_position(struct PlayerState *m, f32 offsetY) {
     f32 poleBottom = -poleObj->hitboxDownOffset;
 #endif
 
-    // Keep Player on the pole if he reaches the top.
+    // Keep the player on the pole if they reach the top.
     if (playerObj->oPlayerPolePos > poleTop) {
         playerObj->oPlayerPolePos = poleTop;
     }
 
-    // Set Player's position to the pole + oPlayerPolePos.
+    // Set the player's position to the pole + oPlayerPolePos.
     m->pos[0] = poleObj->oPosX;
     m->pos[2] = poleObj->oPosZ;
     m->pos[1] = poleObj->oPosY + playerObj->oPlayerPolePos + offsetY;
@@ -100,7 +100,7 @@ s32 set_pole_position(struct PlayerState *m, f32 offsetY) {
     s32 collided = f32_find_wall_collision(&m->pos[0], &m->pos[1], &m->pos[2], 60.0f, 50.0f)
                  + f32_find_wall_collision(&m->pos[0], &m->pos[1], &m->pos[2], 30.0f, 24.0f);
 
-    // Prevent Player from climbing into a ceiling.
+    // Prevent the player from climbing into a ceiling.
     struct Surface *ceil;
     f32 ceilHeight = vec3f_find_ceil(m->pos, m->pos[1], &ceil);
     if (m->pos[1] > ceilHeight - 160.0f) {
@@ -112,27 +112,27 @@ s32 set_pole_position(struct PlayerState *m, f32 offsetY) {
     struct Surface *floor;
     f32 floorHeight = find_floor(m->pos[0], m->pos[1], m->pos[2], &floor);
     if (floor == NULL) {
-        // Player doesn't have a floor below the pole.
+        // The player doesn't have a floor below the pole.
         set_player_action(m, ACT_FREEFALL, 0);
         return POLE_FELL_OFF;
     } else if (m->pos[1] < floorHeight) {
-        // Player touched the floor.
+        // The player touched the floor.
         m->pos[1] = floorHeight;
         set_player_action(m, ACT_IDLE, 0);
         result = POLE_TOUCHED_FLOOR;
     } else if (playerObj->oPlayerPolePos < poleBottom) {
-        // Player left the pole via the bottom.
+        // The player left the pole via the bottom.
         m->pos[1] = poleObj->oPosY + poleBottom;
         set_player_action(m, ACT_FREEFALL, 0);
         result = POLE_FELL_OFF;
     } else if (collided > 0) {
         if (m->pos[1] > floorHeight + 20.0f) {
-            // Player touched a wall.
+            // The player has touched a wall.
             m->forwardVel = -2.0f;
             set_player_action(m, ACT_SOFT_BONK, 0);
             result = POLE_FELL_OFF;
         } else {
-            // Player touched a wall and the floor.
+            // The player has touched a wall and the floor.
             set_player_action(m, ACT_IDLE, 0);
             result = POLE_TOUCHED_FLOOR;
         }
@@ -378,11 +378,11 @@ s32 update_hang_moving(struct PlayerState *m) {
 #if BETTER_HANGING
     s16 turnRange = 0x800;
     s16 dYaw = abs_angle_diff(m->faceAngle[1], m->intendedYaw); // 0x0 is turning forwards, 0x8000 is turning backwards
-    if (m->forwardVel < 0.0f) { // Don't modify Player's speed and turn radius if Player is moving backwards
-        // Flip controls when moving backwards so Player still moves towards intendedYaw
+    if (m->forwardVel < 0.0f) { // Don't modify the player's speed and turn radius if the player is moving backwards
+        // Flip controls when moving backwards so the player still moves towards intendedYaw
         m->intendedYaw += 0x8000;
-    } else if (dYaw > 0x4000) { // Only modify Player's speed and turn radius if Player is turning around
-        // Reduce Player's forward speed by the turn amount, so Player won't move off sideward from the intended angle when turning around.
+    } else if (dYaw > 0x4000) { // Only modify the player's speed and turn radius if the player is turning around
+        // Reduce the player's forward speed by the turn amount, so the player won't move off sideward from the intended angle when turning around.
         m->forwardVel *= ((coss(dYaw) + 1.0f) / 2.0f); // 1.0f is turning forwards, 0.0f is turning backwards
         // Increase turn speed if forwardVel is lower and intendedMag is higher
         turnRange     *= (2.0f - (ABS(m->forwardVel) / MAX(m->intendedMag, NEAR_ZERO))); // 1.0f front, 2.0f back
@@ -473,7 +473,7 @@ s32 act_start_hanging(struct PlayerState *m) {
     return FALSE;
 }
 
-// ex-alo change
+// YOOOOOOOOOOO AloXado nice change here :O
 // added ceil null check on all hanging actions to avoid crashes
 s32 act_hanging(struct PlayerState *m) {
     if (m->input & INPUT_NONZERO_ANALOG) {
@@ -638,7 +638,7 @@ s32 act_ledge_grab(struct PlayerState *m) {
         m->actionTimer++;
     }
 
-    // ex-alo change
+    // AloXado cooked over here
     // added floor null check to avoid crashes
     if ((m->floor == NULL) || (m->floor->normal.y < 0.9063078f)) {
         return let_go_of_ledge(m);
@@ -653,7 +653,7 @@ s32 act_ledge_grab(struct PlayerState *m) {
     }
 
     if (m->input & INPUT_STOMPED) {
-        if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_KNOCKBACK_DMG) {
+        if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_KNOCKBACK_DMG) {
             m->hurtCounter += (m->flags & PLAYER_CAP_ON_HEAD) ? 12 : 18;
         }
         return let_go_of_ledge(m);
@@ -745,8 +745,8 @@ s32 act_ledge_climb_fast(struct PlayerState *m) {
 }
 
 s32 act_grabbed(struct PlayerState *m) {
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_UNK2) {
-        s32 thrown = (m->playerObj->oInteractStatus & INT_STATUS_MARIO_UNK6) == 0;
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_UNK2) {
+        s32 thrown = (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_UNK6) == 0;
 
         m->faceAngle[1] = m->usedObj->oMoveAngleYaw;
         vec3f_copy(m->pos, m->playerObj->header.gfx.pos);

@@ -2655,7 +2655,7 @@ void cur_obj_init_animation_and_extend_if_at_end(s32 animIndex) {
 }
 
 s32 cur_obj_check_grabbed_player(void) {
-    if (o->oInteractStatus & INT_STATUS_GRABBED_MARIO) {
+    if (o->oInteractStatus & INT_STATUS_GRABBED_PLAYER) {
         o->oKingBobombUnk88 = 1;
         cur_obj_become_intangible();
         return TRUE;

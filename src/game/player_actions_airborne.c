@@ -35,8 +35,7 @@ void play_far_fall_sound(struct PlayerState *m) {
 
     u32 action = m->action;
 
-    if (!(action & ACT_FLAG_INVULNERABLE) && action != ACT_TWIRLING && action != ACT_FLYING
-        && !(m->flags & PLAYER_UNKNOWN_18)) {
+    if (!(action & ACT_FLAG_INVULNERABLE) && action != ACT_TWIRLING && action != ACT_FLYING && !(m->flags & PLAYER_UNKNOWN_18)) {
         if (m->peakHeight - m->pos[1] > 1150.0f) {
             play_sound(SOUND_MARIO_WAAAOOOW, m->playerObj->header.gfx.cameraToObject);
             m->flags |= PLAYER_UNKNOWN_18;
@@ -83,15 +82,7 @@ s32 hit_or_wall_kick_on_wall(struct PlayerState *m, f32 minVel) {
                 m->vel[1] = 0.0f;
             }
 
-            //! Hands-free holding. Bonking while no wall is referenced
-            // sets Player's action to a non-holding action without
-            // dropping the object, causing the hands-free holding
-            // glitch. This can be achieved using an exposed ceiling,
-            // out of bounds, grazing the bottom of a wall while
-            // falling such that the final quarter step does not find a
-            // wall collision, or by rising into the top of a wall such
-            // that the final quarter step detects a ledge, but you are
-            // not able to ledge grab it.
+            // Removed huge yapping about a bug here xD
             if (m->forwardVel >= 38.0f) {
                 m->particleFlags |= PARTICLE_VERTICAL_STAR;
                 set_player_action(m, ACT_BACKWARD_AIR_KB, 0);
@@ -105,27 +96,22 @@ s32 hit_or_wall_kick_on_wall(struct PlayerState *m, f32 minVel) {
     } else {
         player_set_forward_vel(m, 0.0f);
     }
-    
     return FALSE;
 }
 
 s32 check_fall_damage(struct PlayerState *m, u32 hardFallAction) {
     f32 fallHeight = m->peakHeight - m->pos[1];
-    // This used to have an incorrect groundpound check (actionState instead of action)
-    // that decreased it's damage height to 600.
-    // Did they originally planned to make ground pound punishable?
     f32 damageHeight = 1150.0f;
 
 	if (Cheats.EnableCheats && Cheats.NoFallDamage) return FALSE;
 
-    // ex-alo change
+    // AloXado did this :O
     // New flag so the player doesn't get any damage, can be called by objects
 	if (m->flags & PLAYER_NO_FALL_DAMAGE) {
         m->flags &= ~PLAYER_NO_FALL_DAMAGE;
         return FALSE;
 	}
 
-#if FALL_DAMAGE
     if (m->action != ACT_TWIRLING && m->floor->type != SURFACE_BURNING) {
         if (m->vel[1] < -55.0f) {
             if (fallHeight > 3000.0f) {
@@ -147,25 +133,22 @@ s32 check_fall_damage(struct PlayerState *m, u32 hardFallAction) {
             }
         }
     }
-#endif
-
     return FALSE;
 }
 
 s32 check_kick_or_dive_in_air(struct PlayerState *m) {
     float velocityThreshhold = 28.0f;
     if (m->input & INPUT_B_PRESSED) {
+        // Credits to Keeberghrh for programming the DS Dive
         if (configDive) {
             if (m->forwardVel >= 28.0f) {
                 m->vel[1] = 30.0f;
                 m->forwardVel += 2.0f;
                 return set_player_action(m, ACT_DIVE, 0);
-            }
-            else if (m->forwardVel < 28.0f) {
+            } else if (m->forwardVel < 28.0f) {
                 return set_player_action(m, ACT_JUMP_KICK, 0);
             }
-        }
-        else if (!configDive) {
+        } else if (!configDive) {
             return set_player_action(m, m->forwardVel > velocityThreshhold ? ACT_DIVE : ACT_JUMP_KICK, 0);
         }
     }
@@ -198,7 +181,6 @@ s32 check_fall_damage_or_get_stuck(struct PlayerState *m, u32 hardFallAction) {
 #endif
         return TRUE;
     }
-
     return check_fall_damage(m, hardFallAction);
 }
 
@@ -220,8 +202,8 @@ s32 check_horizontal_wind(struct PlayerState *m) {
         if (speed > 48.0f) {
             m->slideVelX = m->slideVelX * 48.0f / speed;
             m->slideVelZ = m->slideVelZ * 48.0f / speed;
-            // ex-alo change
-            // properly set this to 48 instead of 32
+            // AloXado also did this :O
+            // Properly set this to 48 instead of 32
             speed = 48.0f;
         } else if (speed > 32.0f) {
             speed = 32.0f;
@@ -233,7 +215,6 @@ s32 check_horizontal_wind(struct PlayerState *m) {
         m->forwardVel = speed * coss(m->faceAngle[1] - m->slideYaw);
         return TRUE;
     }
-
     return FALSE;
 }
 
@@ -455,7 +436,7 @@ static s32 player_check_wall_slide(struct PlayerState *m) {
         return FALSE;
     }
 
-    // Player must not be holding something
+    // The player must not be holding something
     if (m->heldObj != NULL) {
         return FALSE;
     }
@@ -485,7 +466,7 @@ static s32 act_wall_slide(struct PlayerState *m) {
         return set_player_action(m, ACT_FREEFALL, 0);
     }
 
-    // Cling Player to the wall before performing the air step,
+    // Cling the player to the wall before performing the air step,
     // to avoid missing slightly slanted walls (normal.y near 0, but not 0)
     if (m->wall) {
         m->pos[0] -= m->wall->normal.x * 4.f;
@@ -508,7 +489,7 @@ static s32 act_wall_slide(struct PlayerState *m) {
             break;
     }
 
-    // Turn Player away from the wall
+    // Turn the player away from the wall
     m->playerObj->header.gfx.angle[1] = m->faceAngle[1] + 0x8000;
     return FALSE;
 }
@@ -548,7 +529,7 @@ u32 common_air_action_step(struct PlayerState *m, u32 landAction, s32 animation,
         if (configWallslide) {
             if (player_check_wall_slide(m)) {
 
-                // Player starts wall-sliding only if he's falling
+                // The player starts wall-sliding only if they are falling
                 // and moving towards the wall
                 if (m->forwardVel > 16.0f && m->vel[1] < 0.f) {
                     set_player_action(m, ACT_WALL_SLIDE, 0);
@@ -736,7 +717,7 @@ s32 act_freefall(struct PlayerState *m) {
 }
 
 s32 act_hold_jump(struct PlayerState *m) {
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_FREEFALL, 0);
     }
 
@@ -764,7 +745,7 @@ s32 act_hold_freefall(struct PlayerState *m) {
         animation = MARIO_ANIM_FALL_FROM_SLIDING_WITH_LIGHT_OBJ;
     }
 
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_FREEFALL, 0);
     }
 
@@ -780,7 +761,7 @@ s32 act_hold_freefall(struct PlayerState *m) {
     return FALSE;
 }
 
-// ex-alo change
+// Thanks AloXado for doing this change :O
 // add missing += 0x8000 angle changes on these first 2 checks
 
 s32 act_side_flip(struct PlayerState *m) {
@@ -1057,7 +1038,7 @@ s32 act_water_jump(struct PlayerState *m) {
 }
 
 s32 act_hold_water_jump(struct PlayerState *m) {
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_FREEFALL, 0);
     }
 
@@ -1659,7 +1640,7 @@ s32 act_butt_slide_air(struct PlayerState *m) {
 }
 
 s32 act_hold_butt_slide_air(struct PlayerState *m) {
-    if (m->playerObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
+    if (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_DROP_OBJECT) {
         return drop_and_set_player_action(m, ACT_HOLD_FREEFALL, 1);
     }
 
@@ -2039,7 +2020,7 @@ s32 act_flying(struct PlayerState *m) {
 }
 
 s32 act_riding_hoot(struct PlayerState *m) {
-    if (!(m->input & INPUT_A_DOWN) || (m->playerObj->oInteractStatus & INT_STATUS_MARIO_UNK7)) {
+    if (!(m->input & INPUT_A_DOWN) || (m->playerObj->oInteractStatus & INT_STATUS_PLAYER_UNK7)) {
         m->usedObj->oInteractStatus = 0;
         m->usedObj->oHootPlayerReleaseTime = gGlobalTimer;
 
@@ -2266,9 +2247,7 @@ s32 player_execute_airborne_action(struct PlayerState *m) {
         return TRUE;
     }
 
-#if FALL_DAMAGE
     play_far_fall_sound(m);
-#endif
 
     /* clang-format off */
     switch (m->action) {

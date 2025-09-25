@@ -24,7 +24,7 @@ Gfx *geo_update_held_player_pos(s32 run, UNUSED struct GraphNode *node, Mat4 mtx
 }
 
 void bhv_bobomb_anchor_player_loop(void) {
-    common_anchor_player_behavior(50.0f, 50.0f, INT_STATUS_MARIO_UNK6);
+    common_anchor_player_behavior(50.0f, 50.0f, INT_STATUS_PLAYER_UNK6);
 }
 
 void king_bobomb_act_idle(void) {
@@ -137,7 +137,7 @@ void king_bobomb_act_holding(void) {
             o->oKingBobombUnk88 = 3;
             o->oAction = 2;
             o->oKingBobombUnk108 = 35;
-            o->oInteractStatus &= ~INT_STATUS_GRABBED_MARIO;
+            o->oInteractStatus &= ~INT_STATUS_GRABBED_PLAYER;
         } else {
             o->oForwardVel = 3.0f;
 
@@ -156,7 +156,7 @@ void king_bobomb_act_holding(void) {
             cur_obj_play_sound_2(SOUND_OBJ_RELEASE_MARIO);
         } else if (cur_obj_check_if_near_animation_end()) {
             o->oAction = 1;
-            o->oInteractStatus &= ~INT_STATUS_GRABBED_MARIO;
+            o->oInteractStatus &= ~INT_STATUS_GRABBED_PLAYER;
         }
     }
 }
@@ -439,7 +439,7 @@ void bhv_king_bobomb_loop(void) {
     f32 sp30 = 50.0f;
     UNUSED u8 filler[8];
 
-    o->oInteractionSubtype |= INT_SUBTYPE_GRABS_MARIO;
+    o->oInteractionSubtype |= INT_SUBTYPE_GRABS_PLAYER;
 
     // Set bobombInteracted = 1 if a Bob-omb touches King Bob-omb
     s32 i;
